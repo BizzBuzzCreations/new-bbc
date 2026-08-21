@@ -2,18 +2,20 @@ import React from "react";
 import Link from "next/link";
 import { Search, PenTool, Rocket, BarChart3, ArrowRight } from "lucide-react";
 
-// Same 4 steps, same copy — laid out as a staggered zigzag flowchart
-// (boxes at alternating heights, connected by curved arrows) instead of
-// the earlier rounded track. First and last steps get the solid accent
-// "bookend" treatment, the two in between stay neutral — same idea as the
-// reference's blue-first/orange-last pattern, using the site's own blues.
+// Same 4 steps, same copy — laid out as a plain horizontal stepper (each
+// step in its own grid column, connected by a static arrow between
+// columns) instead of the old absolutely-positioned zigzag, which let the
+// curved connector lines drift into and overlap the description text
+// below neighboring cards on real screen sizes. A grid can't do that —
+// every step's text stays fully inside its own column, arrows stay in
+// theirs. First and last steps keep the solid accent "bookend" treatment,
+// the two in between stay neutral.
 const steps = [
   {
     icon: Search,
     title: "Free Consultation & Business Audit",
     description:
       "We study your business, competitors, and current online presence to spot quick wins and growth gaps.",
-    pos: { x: 11, y: 68 },
     accent: true,
   },
   {
@@ -21,7 +23,6 @@ const steps = [
     title: "Custom Strategy Design",
     description:
       "We build a data-backed digital marketing plan — SEO, ads, content, or all three — matched to your goals and budget.",
-    pos: { x: 38, y: 20 },
     accent: false,
   },
   {
@@ -29,7 +30,6 @@ const steps = [
     title: "Campaign Execution",
     description:
       "Our team launches and manages your campaigns across Google, Meta, and search, optimized for real results, not vanity metrics.",
-    pos: { x: 65, y: 68 },
     accent: false,
   },
   {
@@ -37,17 +37,8 @@ const steps = [
     title: "Reporting & Continuous Optimization",
     description:
       "You get clear monthly reports, and we refine every campaign using performance data to keep growth compounding.",
-    pos: { x: 91, y: 20 },
     accent: true,
   },
-];
-
-// Curved connector between each consecutive pair, plus where to drop a
-// small arrow chevron and which way it should point.
-const CONNECTORS = [
-  { from: steps[0].pos, to: steps[1].pos, rotate: -45 },
-  { from: steps[1].pos, to: steps[2].pos, rotate: 45 },
-  { from: steps[2].pos, to: steps[3].pos, rotate: -45 },
 ];
 
 export default function WhatMAkesUs() {
@@ -73,77 +64,51 @@ export default function WhatMAkesUs() {
         </p>
       </div>
 
-      {/* Desktop: staggered zigzag flowchart — boxes at alternating
-          heights, connected by curved arrows, matching the reference. */}
-      <div
-        className="relative hidden md:block w-full max-w-5xl"
-        style={{ height: "clamp(360px, 34vw, 420px)" }}
-      >
-        <svg
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-          className="absolute inset-0 h-full w-full"
-          aria-hidden="true"
-        >
-          {CONNECTORS.map((c, i) => {
-            const midX = (c.from.x + c.to.x) / 2;
-            const d = `M ${c.from.x} ${c.from.y} C ${midX} ${c.from.y}, ${midX} ${c.to.y}, ${c.to.x} ${c.to.y}`;
-            return (
-              <path
-                key={i}
-                d={d}
-                fill="none"
-                stroke="#40A2D8"
-                strokeOpacity="0.6"
-                strokeWidth="0.6"
-                strokeDasharray="3 2"
-              />
-            );
-          })}
-        </svg>
-
-        {/* Arrow chevrons at each connector's midpoint */}
-        {CONNECTORS.map((c, i) => (
-          <div
-            key={i}
-            className="absolute z-10 flex items-center justify-center w-7 h-7 rounded-full bg-black border border-[#40A2D8]/50 text-[#40A2D8]"
-            style={{
-              left: `${(c.from.x + c.to.x) / 2}%`,
-              top: `${(c.from.y + c.to.y) / 2}%`,
-              transform: `translate(-50%, -50%) rotate(${c.rotate}deg)`,
-            }}
-          >
-            <ArrowRight size={14} />
-          </div>
-        ))}
-
-        {steps.map((step) => {
+      {/* Desktop: horizontal stepper — every step lives in its own grid
+          column (icon, title card, description, all stacked normally),
+          so nothing can ever drift over neighboring text. A slight
+          alternating vertical offset on the card keeps some of the
+          zigzag energy without resorting to absolute positioning. */}
+      <div className="hidden md:grid w-full max-w-6xl grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-start gap-x-2">
+        {steps.map((step, i) => {
           const Icon = step.icon;
+          const isLast = i === steps.length - 1;
+          const offsetDown = i % 2 === 1; // steps 2 & 4 sit a bit lower
+
           return (
-            <div
-              key={step.title}
-              className="absolute z-20 flex flex-col items-center text-center"
-              style={{
-                left: `${step.pos.x}%`,
-                top: `${step.pos.y}%`,
-                transform: "translate(-50%, -50%)",
-                width: "190px",
-              }}
-            >
-              <Icon size={22} className="mb-2 text-[#40A2D8]" />
+            <React.Fragment key={step.title}>
               <div
-                className={`w-full rounded-xl px-4 py-3 shadow-lg ${
-                  step.accent
-                    ? "bg-[#0B60B0] text-white shadow-[#0B60B0]/40"
-                    : "bg-white/8 border border-white/15 text-white shadow-black/40"
-                }`}
+                className={`flex flex-col items-center text-center px-2 ${offsetDown ? "mt-10" : ""}`}
               >
-                <h3 className="font-bold text-sm">{step.title}</h3>
+                <div
+                  className={`flex items-center justify-center w-11 h-11 rounded-full mb-3 ${
+                    step.accent ? "bg-[#0B60B0] text-white" : "bg-white/10 text-[#40A2D8]"
+                  }`}
+                >
+                  <Icon size={20} />
+                </div>
+                <div
+                  className={`w-full rounded-xl px-4 py-3 shadow-lg mb-3 ${
+                    step.accent
+                      ? "bg-[#0B60B0] text-white shadow-[#0B60B0]/40"
+                      : "bg-white/8 border border-white/15 text-white shadow-black/40"
+                  }`}
+                >
+                  <h3 className="font-bold text-sm leading-snug">{step.title}</h3>
+                </div>
+                <p className="text-xs text-white/50 leading-relaxed">
+                  {step.description}
+                </p>
               </div>
-              <p className="text-xs text-white/50 leading-relaxed mt-3">
-                {step.description}
-              </p>
-            </div>
+
+              {!isLast && (
+                <div className={`flex justify-center pt-5 ${offsetDown ? "" : "mt-10"}`}>
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-black border border-[#40A2D8]/50 text-[#40A2D8] shrink-0">
+                    <ArrowRight size={14} />
+                  </div>
+                </div>
+              )}
+            </React.Fragment>
           );
         })}
       </div>

@@ -51,7 +51,7 @@ export default function IndustriesIndexPage() {
         </div>
       </section>
 
-      <div className="bg-white pb-20">
+      <div className="bg-white">
         <CTA />
       </div>
     </>

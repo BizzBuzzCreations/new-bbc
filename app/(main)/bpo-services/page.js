@@ -252,7 +252,7 @@ export default function BPO() {
       <DarkFAQSection faqs={FAQS} heading="Frequently Asked Question" />
 
       <BpoWhyChooseDark />
-      <div className="bg-black py-10">
+      <div className="bg-black pt-10">
         <CTA />
       </div>
     </>

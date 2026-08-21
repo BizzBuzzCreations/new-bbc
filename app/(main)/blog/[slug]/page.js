@@ -213,7 +213,7 @@ export default async function SingleBlog({ params }) {
     </div>
 
       {/* CTA — just above the footer */}
-      <div className="bg-black pt-4 pb-16">
+      <div className="bg-black pt-4">
         <CTA />
       </div>
     </>

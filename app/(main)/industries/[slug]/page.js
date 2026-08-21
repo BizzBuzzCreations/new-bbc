@@ -140,7 +140,7 @@ export default async function IndustryPage({ params }) {
         </div>
       </section>
 
-      <div className="bg-white pb-20">
+      <div className="bg-white">
         <CTA />
       </div>
     </>

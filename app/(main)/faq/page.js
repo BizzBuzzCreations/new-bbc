@@ -16,7 +16,7 @@ export default function FAQPage() {
     <>
       <FaqHero />
       <FaqTopics />
-      <div className="bg-black pt-4 pb-20">
+      <div className="bg-black pt-4">
         <CTA />
       </div>
     </>

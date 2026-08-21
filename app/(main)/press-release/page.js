@@ -131,7 +131,7 @@ export default function PressReleasePage() {
       <LatestBlogs dark />
 
       {/* CTA — just above the footer */}
-      <div className="bg-black pt-4 pb-16">
+      <div className="bg-black pt-4">
         <CTA />
       </div>
     </>

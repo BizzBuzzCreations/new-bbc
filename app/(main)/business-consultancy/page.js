@@ -245,7 +245,7 @@ export default function BusinessConsultancy() {
       <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
 
       <BpoWhyChooseDark />
-      <div className="bg-black py-10">
+      <div className="bg-black pt-10">
         <CTA />
       </div>
     </>

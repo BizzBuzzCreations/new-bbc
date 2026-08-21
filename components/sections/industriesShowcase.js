@@ -49,7 +49,7 @@ export default function IndustriesShowcase() {
         aria-hidden="true"
       />
 
-      <div className="relative max-w-5xl mx-auto">
+      <div className="relative max-w-6xl mx-auto">
         <div className="text-center mb-14">
           <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">
             Industries We Serve
@@ -59,9 +59,9 @@ export default function IndustriesShowcase() {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-[200px_1fr_1fr_1fr] lg:grid-cols-[200px_1fr_1fr_1fr_1.2fr] gap-x-8 lg:gap-x-10 gap-y-10 items-start">
+        <div className="grid md:grid-cols-[260px_1fr_1fr_1fr] lg:grid-cols-[280px_140px_140px_140px_minmax(300px,1fr)] gap-x-8 lg:gap-x-10 gap-y-10 items-start">
           {/* Active industry visual */}
-          <div className="relative h-56 md:h-[380px] rounded-2xl overflow-hidden border border-white/10 bg-linear-to-br from-[#0B60B0]/20 to-[#40A2D8]/10 flex items-center justify-center">
+          <div className="relative w-full h-56 md:h-[380px] rounded-2xl overflow-hidden border border-white/10 bg-linear-to-br from-[#0B60B0]/20 to-[#40A2D8]/10 flex items-center justify-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={current.label}
@@ -92,13 +92,12 @@ export default function IndustriesShowcase() {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               >
-                <h3 className="font-bold text-white mb-1.5">{current.label}</h3>
-                <p className="text-white/60 text-sm leading-relaxed mb-6">
+                <p className="text-white text-sm leading-relaxed mb-6">
                   {current.description}
                 </p>
                 <Link
                   href={`/industries/${current.slug}`}
-                  className="inline-flex items-center gap-1.5 bg-[#0B60B0] hover:bg-[#0d72cf] text-white rounded-full px-5 py-2.5 text-sm font-semibold shadow-lg shadow-[#0B60B0]/30 transition w-fit"
+                  className="inline-flex items-center gap-1.5 border border-white text-white hover:bg-white hover:text-black rounded-full px-5 py-2.5 text-sm font-semibold transition w-fit"
                 >
                   Know More
                   <ArrowUpRight size={16} />

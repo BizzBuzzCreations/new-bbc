@@ -109,7 +109,7 @@ export default function page() {
     </div>
 
       {/* CTA — just above the footer */}
-      <div className="bg-black pt-16 pb-16">
+      <div className="bg-black pt-16">
         <CTA />
       </div>
     </>

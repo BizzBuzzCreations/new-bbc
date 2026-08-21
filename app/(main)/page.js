@@ -91,7 +91,7 @@ export default function Home() {
 
       <LatestBlogs dark />
 
-      <div className="bg-black py-10">
+      <div className="bg-black pt-10">
         {/* FAQ section */}
         <FAQ />
 

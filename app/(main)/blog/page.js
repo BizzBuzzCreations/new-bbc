@@ -32,7 +32,7 @@ export default async function Blogs() {
   }
 
   return (
-    <section className="relative overflow-hidden bg-black md:py-16 py-10">
+    <section className="relative overflow-hidden bg-black md:pt-16 pt-10">
       {/* Soft brand-blue glows — decorative only, sit behind everything. */}
       <div
         className="absolute -top-24 -left-20 w-96 h-96 rounded-full blur-3xl opacity-20 pointer-events-none"
