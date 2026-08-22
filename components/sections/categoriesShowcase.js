@@ -26,12 +26,12 @@ export default function CategoriesShowcase() {
 
   return (
     <div>
-      <div className="flex flex-wrap gap-3 mb-10">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
         {services.map(({ key, label }) => (
           <button
             key={key}
             onClick={() => setActive(key)}
-            className={`text-sm font-medium rounded-full px-4 py-2 transition-all duration-300 border ${
+            className={`text-sm font-medium rounded-full px-4 py-2.5 text-center transition-all duration-300 border ${
               active === key
                 ? "bg-[#0B60B0] border-[#0B60B0] text-white shadow-lg shadow-[#0B60B0]/30"
                 : "border-white/15 text-white/70 hover:border-white/40 hover:text-white hover:bg-white/5"

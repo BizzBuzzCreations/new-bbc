@@ -1,7 +1,6 @@
 import Link from "next/link";
 
-// Same colorful gradient treatment as the Press Release page's hero —
-// kept visually identical across the two "resource" pages.
+// Colorful gradient treatment for the Guides resource page.
 export default function GuidesHero() {
   return (
     <section className="relative overflow-hidden py-24 md:py-28 px-6 text-center text-white">

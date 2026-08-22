@@ -20,8 +20,7 @@ export const metadata = {
   },
 };
 
-// Same structure as the Press Release page's "Recent Announcements" —
-// short, real, actionable takeaways instead of gated PDFs.
+// Short, real, actionable takeaways instead of gated PDFs.
 const GUIDES = [
   {
     icon: Search,
@@ -66,7 +65,7 @@ export default function GuidesPage() {
     <>
       <GuidesHero />
 
-      {/* Guides — list + sidebar, dark theme (same layout as Press Release) */}
+      {/* Guides — list + sidebar, dark theme */}
       <section className="bg-black text-white py-16 px-6 md:px-12 lg:px-24">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-[1fr_320px] gap-12">
           <div>

@@ -48,15 +48,14 @@ export default function RootLayout({ children }) {
       >
         <Whatsapp />
         <FlowbiteInit />
+        <main>{children}</main>
         <ClickSpark
           sparkColor="#40A2D8"
           sparkSize={10}
           sparkRadius={18}
           sparkCount={8}
           duration={450}
-        >
-          <main>{children}</main>
-        </ClickSpark>
+        />
         <Script src="/js/flowbite.min.js" strategy="afterInteractive" />
         <ToastContainer
           position="top-right"

@@ -9,24 +9,18 @@ import {
   Stethoscope,
   Watch,
   Dumbbell,
-  LayoutGrid,
   ShoppingCart,
   HardHat,
-  Landmark,
   PiggyBank,
   Film,
   GraduationCap,
   CalendarDays,
   Factory,
-  Zap,
-  Tv,
   UtensilsCrossed,
   Plane,
   Home as HomeIcon,
-  Newspaper,
   ThumbsUp,
-  PlaneTakeoff,
-  HeartHandshake,
+  Gamepad2,
 } from "lucide-react";
 
 const ABOUT_LINKS = [
@@ -77,10 +71,8 @@ const INDUSTRY_COLUMNS = [
     { label: "Healthcare", href: "/industries/healthcare", icon: Stethoscope },
     { label: "Wearables", href: "/industries/wearables", icon: Watch },
     { label: "Fitness", href: "/industries/fitness", icon: Dumbbell },
-    { label: "On-Demand", href: "/industries/on-demand", icon: LayoutGrid },
     { label: "ECommerce", href: "/industries/ecommerce", icon: ShoppingCart },
     { label: "Construction", href: "/industries/construction", icon: HardHat },
-    { label: "Politics", href: "/industries/politics", icon: Landmark },
   ],
   [
     { label: "Finance", href: "/industries/finance", icon: PiggyBank },
@@ -92,8 +84,6 @@ const INDUSTRY_COLUMNS = [
       href: "/industries/manufacturing",
       icon: Factory,
     },
-    { label: "Energy", href: "/industries/energy", icon: Zap },
-    { label: "OTT", href: "/industries/ott", icon: Tv },
   ],
   [
     {
@@ -103,24 +93,17 @@ const INDUSTRY_COLUMNS = [
     },
     { label: "Travel", href: "/industries/travel", icon: Plane },
     { label: "Real Estate", href: "/industries/real-estate", icon: HomeIcon },
-    {
-      label: "Magazine & Newspaper",
-      href: "/industries/magazine-newspaper",
-      icon: Newspaper,
-    },
     { label: "Social Media", href: "/industries/social-media", icon: ThumbsUp },
-    { label: "Aviation", href: "/industries/aviation", icon: PlaneTakeoff },
-    { label: "CSR", href: "/industries/csr", icon: HeartHandshake },
+    { label: "Gaming", href: "/industries/gaming", icon: Gamepad2 },
   ],
 ];
 
 const RESOURCE_LINKS = [
   { label: "Blogs", href: "/blog" },
   { label: "Guides", href: "/guides" },
-  { label: "Press Release", href: "/press-release" },
 ];
 
-function DesktopDropdown({ label, items, width = "w-72" }) {
+function DesktopDropdown({ label, items, width = "w-72", href }) {
   return (
     <div className="group relative">
       {/* py-4 -my-4 turns the trigger's own hit-area into the bridge down
@@ -128,14 +111,29 @@ function DesktopDropdown({ label, items, width = "w-72" }) {
           on its way from the label to the menu (that gap was the bug:
           top-8 left a dead zone with no hoverable element under it, so
           group-hover switched off before the pointer ever reached the
-          panel, closing it instantly). */}
-      <div className="text-white flex justify-center items-center gap-1 cursor-pointer hover:text-[#40A2D8] transition py-4 -my-4">
-        {label}
-        <ChevronDown
-          size={18}
-          className="transition-transform duration-300 group-hover:rotate-180"
-        />
-      </div>
+          panel, closing it instantly). When `href` is given, the label
+          itself is a real link to that section's index page — the
+          dropdown still opens on hover regardless. */}
+      {href ? (
+        <Link
+          href={href}
+          className="text-white flex justify-center items-center gap-1 cursor-pointer hover:text-[#40A2D8] transition py-4 -my-4"
+        >
+          {label}
+          <ChevronDown
+            size={18}
+            className="transition-transform duration-300 group-hover:rotate-180"
+          />
+        </Link>
+      ) : (
+        <div className="text-white flex justify-center items-center gap-1 cursor-pointer hover:text-[#40A2D8] transition py-4 -my-4">
+          {label}
+          <ChevronDown
+            size={18}
+            className="transition-transform duration-300 group-hover:rotate-180"
+          />
+        </div>
+      )}
       <div
         className={`z-10 absolute left-1/2 -translate-x-1/2 top-full hidden group-hover:block bg-white border border-gray-200 rounded-xl shadow-lg ${width}`}
       >
@@ -186,13 +184,16 @@ function DesktopDropdown({ label, items, width = "w-72" }) {
 function IndustriesMegaMenu() {
   return (
     <div className="group relative">
-      <div className="text-white flex justify-center items-center gap-1 cursor-pointer hover:text-[#40A2D8] transition py-4 -my-4">
+      <Link
+        href="/industries"
+        className="text-white flex justify-center items-center gap-1 cursor-pointer hover:text-[#40A2D8] transition py-4 -my-4"
+      >
         Industries
         <ChevronDown
           size={18}
           className="transition-transform duration-300 group-hover:rotate-180"
         />
-      </div>
+      </Link>
       <div className="z-10 absolute left-1/2 -translate-x-1/2 top-full hidden group-hover:block bg-white border border-gray-200 rounded-xl shadow-lg w-[820px] max-w-[90vw] p-6">
         <div className="grid grid-cols-3 gap-x-8">
           {INDUSTRY_COLUMNS.map((column, i) => (
@@ -230,19 +231,29 @@ function MobileAccordion({
   onToggle,
   onNavigate,
   columns = 1,
+  href,
 }) {
   const [subOpen, setSubOpen] = useState(null);
 
   return (
     <div>
-      <div
-        onClick={() => onToggle(id)}
-        className="text-white flex items-center justify-between cursor-pointer transition py-1"
-      >
-        {label}
+      <div className="text-white flex items-center justify-between transition py-1">
+        {href ? (
+          <Link href={href} onClick={onNavigate} className="flex-1">
+            {label}
+          </Link>
+        ) : (
+          <span
+            onClick={() => onToggle(id)}
+            className="flex-1 cursor-pointer"
+          >
+            {label}
+          </span>
+        )}
         <ChevronDown
           size={20}
-          className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+          onClick={() => onToggle(id)}
+          className={`cursor-pointer shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
         />
       </div>
       {open && (
@@ -366,6 +377,7 @@ export default function Navbar() {
             label="Services"
             items={SERVICE_LINKS}
             width="w-72"
+            href="/services"
           />
           <IndustriesMegaMenu />
           <DesktopDropdown
@@ -427,6 +439,7 @@ export default function Navbar() {
               open={openSection === "services"}
               onToggle={toggleSection}
               onNavigate={closeAll}
+              href="/services"
             />
             <MobileAccordion
               id="industries"
@@ -436,6 +449,7 @@ export default function Navbar() {
               onToggle={toggleSection}
               onNavigate={closeAll}
               columns={2}
+              href="/industries"
             />
             <MobileAccordion
               id="resources"

@@ -65,10 +65,11 @@ export default function WhatMAkesUs() {
       </div>
 
       {/* Desktop: horizontal stepper — every step lives in its own grid
-          column (icon, title card, description, all stacked normally),
+          column (icon, card, description all inside one bordered panel),
           so nothing can ever drift over neighboring text. A slight
-          alternating vertical offset on the card keeps some of the
-          zigzag energy without resorting to absolute positioning. */}
+          alternating vertical offset keeps some zigzag energy without
+          resorting to absolute positioning. Whole card lights up blue
+          on hover — not just the title bar. */}
       <div className="hidden md:grid w-full max-w-6xl grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-start gap-x-2">
         {steps.map((step, i) => {
           const Icon = step.icon;
@@ -78,25 +79,24 @@ export default function WhatMAkesUs() {
           return (
             <React.Fragment key={step.title}>
               <div
-                className={`flex flex-col items-center text-center px-2 ${offsetDown ? "mt-10" : ""}`}
+                className={`group relative flex flex-col items-center text-center rounded-2xl border border-white/10 bg-white/[0.03] px-4 pt-6 pb-5 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0B60B0] hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/30 ${offsetDown ? "mt-10" : ""}`}
               >
-                <div
-                  className={`flex items-center justify-center w-11 h-11 rounded-full mb-3 ${
-                    step.accent ? "bg-[#0B60B0] text-white" : "bg-white/10 text-[#40A2D8]"
+                <span
+                  className={`absolute -top-4 right-4 flex items-center justify-center w-7 h-7 rounded-full text-[11px] font-bold transition-colors duration-300 ${
+                    step.accent
+                      ? "bg-[#40A2D8] text-white"
+                      : "bg-white/10 text-white/60 group-hover:bg-white group-hover:text-[#0B60B0]"
                   }`}
                 >
+                  {i + 1}
+                </span>
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 text-[#40A2D8] mb-4 transition-all duration-300 group-hover:bg-white group-hover:text-[#0B60B0] group-hover:scale-110">
                   <Icon size={20} />
                 </div>
-                <div
-                  className={`w-full rounded-xl px-4 py-3 shadow-lg mb-3 ${
-                    step.accent
-                      ? "bg-[#0B60B0] text-white shadow-[#0B60B0]/40"
-                      : "bg-white/8 border border-white/15 text-white shadow-black/40"
-                  }`}
-                >
-                  <h3 className="font-bold text-sm leading-snug">{step.title}</h3>
-                </div>
-                <p className="text-xs text-white/50 leading-relaxed">
+                <h3 className="font-bold text-sm leading-snug text-white mb-2">
+                  {step.title}
+                </h3>
+                <p className="text-xs text-white/50 leading-relaxed transition-colors duration-300 group-hover:text-white/85">
                   {step.description}
                 </p>
               </div>
@@ -113,17 +113,25 @@ export default function WhatMAkesUs() {
         })}
       </div>
 
-      {/* Mobile / tablet: simple stacked list */}
-      <div className="relative w-full max-w-sm grid grid-cols-1 gap-10 md:hidden">
-        {steps.map((step) => {
+      {/* Mobile / tablet: simple stacked list — same card + hover treatment */}
+      <div className="relative w-full max-w-sm grid grid-cols-1 gap-6 md:hidden">
+        {steps.map((step, i) => {
           const Icon = step.icon;
           return (
-            <div key={step.title} className="flex flex-col items-center text-center px-2">
-              <div className="w-14 h-14 rounded-full flex items-center justify-center mb-4 bg-white text-[#0B60B0] shadow-lg shadow-black/50">
+            <div
+              key={step.title}
+              className="group relative flex flex-col items-center text-center rounded-2xl border border-white/10 bg-white/[0.03] px-5 pt-7 pb-6 transition-all duration-300 hover:border-[#0B60B0] hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/30"
+            >
+              <span className="absolute -top-3 right-4 flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-[11px] font-bold text-white/60">
+                {i + 1}
+              </span>
+              <div className="w-14 h-14 rounded-full flex items-center justify-center mb-4 bg-white/10 text-[#40A2D8] transition-all duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
                 <Icon size={22} />
               </div>
               <h3 className="font-semibold text-lg mb-2 text-white">{step.title}</h3>
-              <p className="text-sm text-white/60 max-w-xs">{step.description}</p>
+              <p className="text-sm text-white/50 max-w-xs transition-colors duration-300 group-hover:text-white/85">
+                {step.description}
+              </p>
             </div>
           );
         })}

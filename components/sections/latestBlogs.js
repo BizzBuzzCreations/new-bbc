@@ -4,8 +4,7 @@ import Link from "next/link";
 import he from "he";
 import { ImageOff, ArrowUpRight, CalendarDays } from "lucide-react";
 
-// `dark` is opt-in — /guides and /press-release keep the original light
-// theme, only the homepage passes dark for its all-black section run.
+// `dark` is opt-in, passed by pages that want the all-black section run.
 export default async function LatestBlogs({ dark = false }) {
   const res = await getLatestThreeBlogsMongo();
   const blogs = res.data || [];

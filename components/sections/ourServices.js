@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Particles from "@/components/ui/Particles";
 import {
   MoveRight,
   Rocket,
@@ -99,17 +100,30 @@ export default function OurServices() {
         `,
           backgroundSize: "40px 40px",
         }}
-        className="py-20"
+        className="relative py-20 overflow-hidden"
         id="services"
       >
-        <h2 className="md:text-4xl text-3xl font-bold mb-10 text-center text-white">Our Digital Marketing Services</h2>
-        <p className="text-lg text-white/60 text-center mb-20 max-w-2xl mx-auto px-4">
+        {/* Same animated particle backdrop used on the contact page */}
+        <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+          <Particles
+            particleColors={["#40A2D8", "#0B60B0", "#8fd0f2", "#ffffff"]}
+            particleCount={200}
+            particleSpread={14}
+            speed={0.08}
+            particleBaseSize={110}
+            alphaParticles={false}
+            disableRotation={false}
+          />
+        </div>
+
+        <h2 className="relative z-10 md:text-4xl text-3xl font-bold mb-10 text-center text-white">Our Digital Marketing Services</h2>
+        <p className="relative z-10 text-lg text-white/60 text-center mb-20 max-w-2xl mx-auto px-4">
           We don&apos;t believe in one-size-fits-all marketing. Our customized
           digital strategies help businesses attract qualified customers,
           increase conversions, and grow sustainably.
         </p>
 
-        <div className="flex flex-wrap sm:p-0 p-2 max-w-6xl mx-auto gap-10 items-center justify-center">
+        <div className="relative z-10 flex flex-wrap sm:p-0 p-2 max-w-6xl mx-auto gap-10 items-center justify-center">
           {services.map((service) => {
             const Icon = service.icon;
             return (

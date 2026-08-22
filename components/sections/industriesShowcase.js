@@ -21,7 +21,7 @@ export default function IndustriesShowcase() {
   const Icon = current.icon;
 
   const renderColumn = (items, offset) => (
-    <ul className="space-y-1.5">
+    <ul className="space-y-2">
       {items.map((industry, i) => {
         const index = offset + i;
         return (
@@ -29,7 +29,7 @@ export default function IndustriesShowcase() {
             <button
               onMouseEnter={() => setActive(index)}
               onFocus={() => setActive(index)}
-              className={`block w-full text-left py-1.5 text-[15px] font-medium transition-colors cursor-pointer ${
+              className={`block w-full text-left py-1.5 text-lg font-medium transition-colors cursor-pointer ${
                 index === active ? "text-[#40A2D8]" : "text-white/40 hover:text-white/70"
               }`}
             >
@@ -59,7 +59,7 @@ export default function IndustriesShowcase() {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-[260px_1fr_1fr_1fr] lg:grid-cols-[280px_140px_140px_140px_minmax(300px,1fr)] gap-x-8 lg:gap-x-10 gap-y-10 items-start">
+        <div className="grid md:grid-cols-[260px_1fr_1fr_1fr] lg:grid-cols-[280px_140px_140px_140px_minmax(300px,1fr)] gap-x-8 lg:gap-x-10 gap-y-10 items-center">
           {/* Active industry visual */}
           <div className="relative w-full h-56 md:h-[380px] rounded-2xl overflow-hidden border border-white/10 bg-linear-to-br from-[#0B60B0]/20 to-[#40A2D8]/10 flex items-center justify-center">
             <AnimatePresence mode="wait">
@@ -76,7 +76,7 @@ export default function IndustriesShowcase() {
             </AnimatePresence>
           </div>
 
-          {/* Three name columns, 7 each */}
+          {/* Three name columns, 5 each */}
           {renderColumn(COLUMN_ONE, 0)}
           {renderColumn(COLUMN_TWO, COL_SIZE)}
           {renderColumn(COLUMN_THREE, COL_SIZE * 2)}

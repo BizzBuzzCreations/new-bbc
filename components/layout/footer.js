@@ -24,21 +24,20 @@ const SERVICE_LINKS = [
   { label: "Google Ads & Paid Marketing", href: "/paid-marketing" },
 ];
 
-// First 5 of the full 21-industry list (same set the navbar's mega-menu
+// First 5 of the full 15-industry list (same set the navbar's mega-menu
 // and the homepage's Industries showcase use) — "View More" sends people
-// to the full scrolling showcase instead of listing all 21 here.
+// to the full scrolling showcase instead of listing all 15 here.
 const INDUSTRY_LINKS = [
   { label: "Healthcare", href: "/industries/healthcare" },
   { label: "Wearables", href: "/industries/wearables" },
   { label: "Fitness", href: "/industries/fitness" },
-  { label: "On-Demand", href: "/industries/on-demand" },
   { label: "ECommerce", href: "/industries/ecommerce" },
+  { label: "Construction", href: "/industries/construction" },
 ];
 
 const RESOURCE_LINKS = [
   { label: "Blogs", href: "/blog" },
   { label: "Guides", href: "/guides" },
-  { label: "Press Release", href: "/press-release" },
 ];
 
 // Emoji flags (🇮🇳/🇬🇧) render as plain two-letter codes on systems whose
@@ -293,8 +292,8 @@ export default function Footer() {
         {/* Link columns + CTA */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-8 items-start">
           <FooterColumn title="Our Category" links={CATEGORY_LINKS} viewMoreHref="/about" />
-          <FooterColumn title="Services" links={SERVICE_LINKS} viewMoreHref="/#services" />
-          <FooterColumn title="Industries" links={INDUSTRY_LINKS} viewMoreHref="/#industries" />
+          <FooterColumn title="Services" links={SERVICE_LINKS} viewMoreHref="/services" />
+          <FooterColumn title="Industries" links={INDUSTRY_LINKS} viewMoreHref="/industries" />
           <div>
             <FooterColumn title="Resources" links={RESOURCE_LINKS} />
             <Link
