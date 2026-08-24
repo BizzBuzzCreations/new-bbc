@@ -17,12 +17,13 @@ import CTA from "@/components/sections/CTA";
 import Particles from "@/components/ui/Particles";
 import ServiceScenariosCarousel from "@/components/sections/serviceScenariosCarousel";
 import { SERVICES } from "@/lib/industriesData";
+import { getPageContent } from "@/actions/pageContentActions";
 
 // Real, short descriptions already used elsewhere on the site (the
 // homepage's Categories showcase) — reused here rather than invented,
 // so this index and that widget never say different things about the
 // same service.
-const SERVICE_DETAILS = {
+const DEFAULT_SERVICE_DETAILS = {
   seo: "On-page fixes, technical audits, content, and link building focused on rankings that actually convert — not just traffic for the sake of it.",
   smm: "Content calendars, community management, and paid social campaigns across Instagram, Facebook, and LinkedIn built around your brand voice.",
   paidAds: "Google Ads and paid social campaigns built for ROAS, with transparent budgets and reporting — never a black box.",
@@ -36,7 +37,7 @@ const SERVICE_DETAILS = {
 // Same 4-step process already established on the homepage ("Our Process")
 // — reused verbatim rather than inventing a different process for this
 // page, so the two never contradict each other.
-const PROCESS_STEPS = [
+const DEFAULT_PROCESS_STEPS = [
   {
     icon: Search,
     title: "Free Consultation & Business Audit",
@@ -66,66 +67,32 @@ const PROCESS_STEPS = [
 // Real, company-wide facts about how an engagement actually works —
 // already established elsewhere on the site (industry pages, how-we-work)
 // — reused here instead of a fabricated testimonial/stat block.
-const ENGAGEMENT_FEATURES = [
-  {
-    icon: Users,
-    title: "Free Consultation First",
-    desc: "Every engagement starts with a free consultation — no fixed package, just what your business actually needs.",
-  },
-  {
-    icon: Unlock,
-    title: "No Vendor Lock-In",
-    desc: "Your Google Ads, Analytics, and website accounts stay owned by you, always.",
-  },
-  {
-    icon: FileSignature,
-    title: "NDA Available",
-    desc: "An NDA is available before any project details or account access are shared.",
-  },
-  {
-    icon: BarChart2,
-    title: "Transparent Reporting",
-    desc: "Clear, regular reporting — you always know what's happening and why.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Scoped, Careful Access",
-    desc: "Access to your accounts is scoped to only what's needed for the work, nothing more.",
-  },
-  {
-    icon: Layers,
-    title: "Combined or Standalone",
-    desc: "Take one service or several — every engagement is built around your actual goals, not a fixed bundle.",
-  },
+// Icons stay code-driven (design), matched positionally to whichever
+// engagement features are saved.
+const ENGAGEMENT_ICONS = [Users, Unlock, FileSignature, BarChart2, ShieldCheck, Layers];
+
+const DEFAULT_ENGAGEMENT_FEATURES = [
+  { title: "Free Consultation First", desc: "Every engagement starts with a free consultation — no fixed package, just what your business actually needs." },
+  { title: "No Vendor Lock-In", desc: "Your Google Ads, Analytics, and website accounts stay owned by you, always." },
+  { title: "NDA Available", desc: "An NDA is available before any project details or account access are shared." },
+  { title: "Transparent Reporting", desc: "Clear, regular reporting — you always know what's happening and why." },
+  { title: "Scoped, Careful Access", desc: "Access to your accounts is scoped to only what's needed for the work, nothing more." },
+  { title: "Combined or Standalone", desc: "Take one service or several — every engagement is built around your actual goals, not a fixed bundle." },
 ];
 
 // Helps a visitor self-select a service based on their actual problem,
-// rather than making them guess from a list of 8 labels.
-const SERVICE_SCENARIOS = [
-  {
-    question: "Not showing up when people search for you?",
-    service: "seo",
-  },
-  {
-    question: "Getting traffic, but not enough leads or sales?",
-    service: "paidAds",
-  },
-  {
-    question: "Need a website that actually converts visitors?",
-    service: "webDev",
-  },
-  {
-    question: "Drowning in customer calls and queries?",
-    service: "bpo",
-  },
-  {
-    question: "Repeating the same manual work every week?",
-    service: "automation",
-  },
-  {
-    question: "Need a clear strategy before spending on execution?",
-    service: "consultancy",
-  },
+// rather than making them guess from a list of 8 labels. `service` keys
+// stay code-driven (they drive routing), matched positionally to
+// whichever questions are saved.
+const SCENARIO_SERVICE_KEYS = ["seo", "paidAds", "webDev", "bpo", "automation", "consultancy"];
+
+const DEFAULT_SERVICE_SCENARIOS = [
+  { question: "Not showing up when people search for you?" },
+  { question: "Getting traffic, but not enough leads or sales?" },
+  { question: "Need a website that actually converts visitors?" },
+  { question: "Drowning in customer calls and queries?" },
+  { question: "Repeating the same manual work every week?" },
+  { question: "Need a clear strategy before spending on execution?" },
 ];
 
 export const metadata = {
@@ -137,7 +104,7 @@ export const metadata = {
   },
 };
 
-function ServiceCard({ service }) {
+function ServiceCard({ service, description }) {
   const Icon = service.icon;
   return (
     <Link
@@ -155,14 +122,55 @@ function ServiceCard({ service }) {
       </div>
       <h3 className="font-bold text-white mb-2">{service.label}</h3>
       <p className="text-sm text-white/60 leading-relaxed line-clamp-3 transition-colors duration-300 group-hover:text-white/85">
-        {SERVICE_DETAILS[service.key]}
+        {description}
       </p>
     </Link>
   );
 }
 
-export default function ServicesIndexPage() {
+export default async function ServicesIndexPage() {
+  const content = await getPageContent("services");
   const services = Object.values(SERVICES);
+
+  const heroHeading = content?.servicesHeroHeading || "Everything You Need to Grow, Under One Roof";
+  const heroParagraph =
+    content?.servicesHeroParagraph ||
+    "From getting found in search to handling the calls that come from it — BizzBuzz Creations covers the full stack of digital growth, so you're not juggling five different vendors.";
+  const heroButtonText = content?.servicesHeroButtonText || "Get Started";
+
+  const gridHeading = content?.servicesGridHeading || "See Our All Services";
+  const gridSubtext = content?.servicesGridSubtext || "Pick a service below to see how we approach it — or combine a few for a full-funnel engagement.";
+  const serviceDetailsList =
+    content?.serviceDescriptions?.length > 0
+      ? content.serviceDescriptions.map((d) => d.description)
+      : Object.values(DEFAULT_SERVICE_DETAILS);
+  const serviceDetailsByKey = {};
+  Object.keys(SERVICES).forEach((key, i) => {
+    serviceDetailsByKey[key] = serviceDetailsList[i] ?? DEFAULT_SERVICE_DETAILS[key];
+  });
+
+  const engagementEyebrow = content?.engagementEyebrow || "How We Work";
+  const engagementHeading = content?.engagementHeading || "What Every Engagement Includes";
+  const engagementSubtext =
+    content?.engagementSubtext || "The same standards we hold ourselves to, no matter which service or combination of services you pick.";
+  const engagementFeaturesRaw = content?.engagementFeatures?.length > 0 ? content.engagementFeatures : DEFAULT_ENGAGEMENT_FEATURES;
+  const engagementFeatures = engagementFeaturesRaw.map((f, i) => ({ ...f, icon: ENGAGEMENT_ICONS[i % ENGAGEMENT_ICONS.length] }));
+
+  const scenariosEyebrow = content?.scenariosEyebrow || "Not Sure Where to Start?";
+  const scenariosHeading = content?.scenariosHeading || "Find the Right Service for Your Problem";
+  const scenariosSubtext =
+    content?.scenariosSubtext ||
+    `Most businesses don't walk in asking for "SEO" or "marketing automation" — they walk in with a problem. Skip the guesswork: pick whichever sounds like you, and we'll point you to the service actually built for it.`;
+  const scenarioQuestionsRaw = content?.scenarioQuestions?.length > 0 ? content.scenarioQuestions : DEFAULT_SERVICE_SCENARIOS;
+  const serviceScenarios = scenarioQuestionsRaw.map((s, i) => ({
+    question: s.question,
+    service: SCENARIO_SERVICE_KEYS[i % SCENARIO_SERVICE_KEYS.length],
+  }));
+
+  const processHeading = content?.servicesProcessHeading || "Proven Process for Smarter Growth";
+  const processSubtext = content?.servicesProcessSubtext || "We simplify your growth journey, so you can focus on your business, not the process.";
+  const processStepsRaw = content?.servicesProcessSteps?.length > 0 ? content.servicesProcessSteps : DEFAULT_PROCESS_STEPS;
+  const processSteps = processStepsRaw.map((s, i) => ({ ...s, icon: DEFAULT_PROCESS_STEPS[i % DEFAULT_PROCESS_STEPS.length].icon }));
 
   return (
     <>
@@ -192,18 +200,16 @@ export default function ServicesIndexPage() {
               <span className="font-semibold text-[#40A2D8]">Services</span>
             </div>
             <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
-              Everything You Need to Grow, Under One Roof
+              {heroHeading}
             </h1>
             <p className="text-white/70 leading-relaxed mb-9 max-w-lg">
-              From getting found in search to handling the calls that come
-              from it — BizzBuzz Creations covers the full stack of digital
-              growth, so you're not juggling five different vendors.
+              {heroParagraph}
             </p>
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 bg-[#0B60B0] hover:bg-[#0d72cf] text-white text-sm font-semibold px-7 py-3.5 rounded-full shadow-lg shadow-[#0B60B0]/30 transition"
             >
-              Get Started
+              {heroButtonText}
               <ArrowUpRight size={16} />
             </Link>
           </div>
@@ -246,11 +252,10 @@ export default function ServicesIndexPage() {
 
         <div className="relative z-10 max-w-6xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-3">
-            See Our All Services
+            {gridHeading}
           </h2>
           <p className="text-center text-white/60 max-w-xl mx-auto mb-14">
-            Pick a service below to see how we approach it — or combine a few
-            for a full-funnel engagement.
+            {gridSubtext}
           </p>
 
           {/* 3 / 2 / 3 layout — the middle row's 2 cards sit centered
@@ -258,17 +263,17 @@ export default function ServicesIndexPage() {
           <div className="space-y-6">
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {services.slice(0, 3).map((service) => (
-                <ServiceCard key={service.key} service={service} />
+                <ServiceCard key={service.key} service={service} description={serviceDetailsByKey[service.key]} />
               ))}
             </div>
             <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
               {services.slice(3, 5).map((service) => (
-                <ServiceCard key={service.key} service={service} />
+                <ServiceCard key={service.key} service={service} description={serviceDetailsByKey[service.key]} />
               ))}
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {services.slice(5, 8).map((service) => (
-                <ServiceCard key={service.key} service={service} />
+                <ServiceCard key={service.key} service={service} description={serviceDetailsByKey[service.key]} />
               ))}
             </div>
           </div>
@@ -279,20 +284,19 @@ export default function ServicesIndexPage() {
       <section className="bg-[#050505] py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
         <div className="max-w-6xl mx-auto">
           <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] text-center mb-3">
-            How We Work
+            {engagementEyebrow}
           </p>
           <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-4">
-            What Every Engagement Includes
+            {engagementHeading}
           </h2>
           <p className="text-white/60 text-center max-w-xl mx-auto mb-14 leading-relaxed">
-            The same standards we hold ourselves to, no matter which service
-            or combination of services you pick.
+            {engagementSubtext}
           </p>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {ENGAGEMENT_FEATURES.map(({ icon: Icon, title, desc }) => (
+            {engagementFeatures.map(({ icon: Icon, title, desc }, i) => (
               <div
-                key={title}
+                key={i}
                 className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/20"
               >
                 <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-white/10 text-[#40A2D8] mb-4 transition-all duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
@@ -312,24 +316,21 @@ export default function ServicesIndexPage() {
       <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
         <div className="max-w-6xl mx-auto mb-14 text-center">
           <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">
-            Not Sure Where to Start?
+            {scenariosEyebrow}
           </p>
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-            Find the Right Service for Your Problem
+            {scenariosHeading}
           </h2>
           <p className="text-white/60 max-w-xl mx-auto leading-relaxed">
-            Most businesses don't walk in asking for "SEO" or "marketing
-            automation" — they walk in with a problem. Skip the guesswork:
-            pick whichever sounds like you, and we'll point you to the
-            service actually built for it.
+            {scenariosSubtext}
           </p>
         </div>
 
         <ServiceScenariosCarousel
-          items={SERVICE_SCENARIOS.map(({ question, service: key }) => ({
+          items={serviceScenarios.map(({ question, service: key }) => ({
             question,
             service: key,
-            detail: SERVICE_DETAILS[key],
+            detail: serviceDetailsByKey[key],
           }))}
         />
       </section>
@@ -338,17 +339,16 @@ export default function ServicesIndexPage() {
       <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-3">
-            Proven Process for Smarter Growth
+            {processHeading}
           </h2>
           <p className="text-center text-white/60 max-w-xl mx-auto mb-14">
-            We simplify your growth journey, so you can focus on your
-            business, not the process.
+            {processSubtext}
           </p>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {PROCESS_STEPS.map(({ icon: Icon, title, description }) => (
+            {processSteps.map(({ icon: Icon, title, description }, i) => (
               <div
-                key={title}
+                key={i}
                 className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/20"
               >
                 <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-white/10 text-[#40A2D8] mb-4 transition-colors duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">

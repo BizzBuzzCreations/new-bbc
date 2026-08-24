@@ -6,24 +6,25 @@ import { toast, Bounce } from "react-toastify";
 import { Eye, Users, FileText, Paperclip } from "lucide-react";
 import Particles from "@/components/ui/Particles";
 
-const STEPS = [
+// Icons stay code-driven (design), matched positionally to whichever
+// steps are saved.
+const STEP_ICONS = [Eye, Users, FileText];
+
+const DEFAULT_STEPS = [
   {
-    icon: Eye,
-    title: "Tell Us Your Vision",
+    title: "Tell Us Your Challenge",
     description:
-      "Fill out the form with your project details. Everything you share stays confidential.",
+      "Share your goals, challenges, and what you want to achieve. We'll take the time to understand your business.",
   },
   {
-    icon: Users,
     title: "Get a Free Consultation",
     description:
-      "Our team reaches out to walk through your requirements, goals, and budget.",
+      "Talk to our team about your goals, requirements, and priorities. We'll explore the right opportunities for your business.",
   },
   {
-    icon: FileText,
-    title: "Receive a Clear Proposal",
+    title: "Get a Clear Growth Roadmap",
     description:
-      "We send back a straightforward plan — scope, timeline, and transparent pricing.",
+      "Get a practical direction for your next steps, priorities, and opportunities. We'll help you move forward with confidence.",
   },
 ];
 
@@ -41,7 +42,16 @@ const toastOptions = {
 const inputClasses =
   "w-full border border-gray-300 focus:border-[#0B60B0] rounded-lg outline-none px-4 py-2.5 text-sm transition";
 
-export default function ContactSection() {
+export default function ContactSection({ content }) {
+  const heading = content?.contactHeroHeading || "Let’s Turn Your Digital Goals Into a Growth Plan";
+  const paragraph =
+    content?.contactHeroParagraph ||
+    "You bring the goals. We bring the strategy, execution, and ongoing support. From the first idea to measurable results, our team handles the heavy lifting, so you can focus on growing your business.";
+  const formHeading = content?.contactFormHeading || "Send Us a Message";
+  const formButtonText = content?.contactFormButtonText || "Send Message";
+  const stepsRaw = content?.contactSteps?.length > 0 ? content.contactSteps : DEFAULT_STEPS;
+  const steps = stepsRaw.map((s, i) => ({ ...s, icon: STEP_ICONS[i % STEP_ICONS.length] }));
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -92,7 +102,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="relative overflow-hidden px-4 md:px-12 lg:px-24 py-20 bg-black">
+    <section id="contact-form" className="relative overflow-hidden px-4 md:px-12 lg:px-24 py-20 bg-black">
       {/* Animated backdrop — sits behind the whole card, not inside it.
           Bigger than the card itself so it's visible around its edges
           (in the section's own padding), while the card sits fully
@@ -128,9 +138,9 @@ export default function ContactSection() {
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10 rounded-3xl overflow-hidden shadow-xl grid lg:grid-cols-2 border border-gray-200">
-        {/* Left: dark info panel — fully opaque, sits on top of the
-            animated backdrop rather than showing it through. */}
-        <div className="relative bg-black text-white p-8 sm:p-10 lg:p-12 overflow-hidden">
+        {/* Left: dark info panel — semi-transparent so the animated
+            particle backdrop stays faintly visible through it. */}
+        <div className="relative bg-black/60 backdrop-blur-sm text-white p-8 sm:p-10 lg:p-12 overflow-hidden">
           <div
             className="absolute inset-0 opacity-70"
             style={{
@@ -140,18 +150,16 @@ export default function ContactSection() {
           />
           <div className="relative">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
-              We&rsquo;re Your One-Stop Digital Growth Partner
+              {heading}
             </h2>
             <p className="text-white/70 mb-10 max-w-md">
-              From strategy to execution and ongoing support, we handle it
-              all — so you don&rsquo;t have to juggle multiple vendors.
-              Here&rsquo;s how we get started.
+              {paragraph}
             </p>
 
             <div className="grid sm:grid-cols-3 gap-4">
-              {STEPS.map(({ icon: Icon, title, description }) => (
+              {steps.map(({ icon: Icon, title, description }, i) => (
                 <div
-                  key={title}
+                  key={i}
                   className="rounded-2xl border border-white/10 bg-white/5 p-4"
                 >
                   <Icon size={18} className="text-[#40A2D8] mb-3" />
@@ -169,7 +177,7 @@ export default function ContactSection() {
             the card instead of inside it. */}
         <div className="relative bg-white p-8 lg:p-10">
           <h3 className="font-semibold text-lg text-black mb-6">
-            Send Us a Message
+            {formHeading}
           </h3>
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="grid sm:grid-cols-2 gap-5">
@@ -291,7 +299,7 @@ export default function ContactSection() {
               disabled={submitting}
               className="w-full bg-black hover:bg-black/85 disabled:opacity-60 text-white text-sm font-semibold py-3.5 rounded-lg transition cursor-pointer"
             >
-              {submitting ? "Sending…" : "Send Message"}
+              {submitting ? "Sending…" : formButtonText}
             </button>
           </form>
         </div>

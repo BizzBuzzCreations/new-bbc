@@ -15,7 +15,9 @@ const COLUMN_ONE = INDUSTRIES.slice(0, COL_SIZE);
 const COLUMN_TWO = INDUSTRIES.slice(COL_SIZE, COL_SIZE * 2);
 const COLUMN_THREE = INDUSTRIES.slice(COL_SIZE * 2);
 
-export default function IndustriesShowcase() {
+export default function IndustriesShowcase({ content }) {
+  const eyebrow = content?.industriesEyebrow || "Industries We Serve";
+  const heading = content?.industriesHeading || "Solving Real Challenges Across Every Major Industry";
   const [active, setActive] = useState(0);
   const current = INDUSTRIES[active];
   const Icon = current.icon;
@@ -52,10 +54,10 @@ export default function IndustriesShowcase() {
       <div className="relative max-w-6xl mx-auto">
         <div className="text-center mb-14">
           <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">
-            Industries We Serve
+            {eyebrow}
           </p>
           <h2 className="text-3xl md:text-4xl font-bold text-white max-w-2xl mx-auto">
-            Solving Real Challenges Across Every Major Industry
+            {heading}
           </h2>
         </div>
 

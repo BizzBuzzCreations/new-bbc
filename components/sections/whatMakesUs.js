@@ -41,7 +41,17 @@ const steps = [
   },
 ];
 
-export default function WhatMAkesUs() {
+export default function WhatMAkesUs({ content }) {
+  const heading = content?.processHeading || "Our Process";
+  const subtext = content?.processSubtext || "A Proven Framework for Measurable Digital Growth.";
+
+  // Icon + accent stay fixed (structural); title/description come from
+  // the saved override, matched by position.
+  const displaySteps = steps.map((step, i) => {
+    const override = content?.processSteps?.[i];
+    return override ? { ...step, ...override } : step;
+  });
+
   return (
     <div className="relative overflow-hidden bg-black container py-20 mx-auto p-4 flex flex-col justify-center gap-5 items-center max-w-none">
       <div
@@ -57,10 +67,10 @@ export default function WhatMAkesUs() {
 
       <div className="relative text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-2 max-w-4xl text-white">
-          Our Process
+          {heading}
         </h2>
         <p className="text-lg text-white/60 max-w-2xl mb-10">
-          <b className="text-[#40A2D8]">A Proven Framework for Measurable Digital Growth.</b>
+          <b className="text-[#40A2D8]">{subtext}</b>
         </p>
       </div>
 
@@ -71,7 +81,7 @@ export default function WhatMAkesUs() {
           resorting to absolute positioning. Whole card lights up blue
           on hover — not just the title bar. */}
       <div className="hidden md:grid w-full max-w-6xl grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-start gap-x-2">
-        {steps.map((step, i) => {
+        {displaySteps.map((step, i) => {
           const Icon = step.icon;
           const isLast = i === steps.length - 1;
           const offsetDown = i % 2 === 1; // steps 2 & 4 sit a bit lower
@@ -115,7 +125,7 @@ export default function WhatMAkesUs() {
 
       {/* Mobile / tablet: simple stacked list — same card + hover treatment */}
       <div className="relative w-full max-w-sm grid grid-cols-1 gap-6 md:hidden">
-        {steps.map((step, i) => {
+        {displaySteps.map((step, i) => {
           const Icon = step.icon;
           return (
             <div

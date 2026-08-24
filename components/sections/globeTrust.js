@@ -8,7 +8,13 @@ const OFFICE_MARKERS = [
   { lat: 51.5072, lng: -0.1276 }, // London, UK
 ];
 
-export default function GlobeTrust() {
+export default function GlobeTrust({ content }) {
+  const eyebrow = content?.globeEyebrow || "Trusted by Growing Businesses";
+  const heading = content?.globeHeading || "In Prayagraj, Across India & Worldwide";
+  const paragraph =
+    content?.globeParagraph ||
+    "From local businesses to growing enterprises, we help brands across Prayagraj, India, and global markets build a digital presence that drives leads and sales — real results, not vanity metrics. Whether you're a small business just getting started online or an established company looking to expand into new markets, our team combines local market understanding with strategies that work across borders, so your growth never stays confined to one city or one country.";
+
   return (
     <section className="relative bg-black text-white pt-2 md:pt-3 pb-3 md:pb-4 px-6 md:px-12 lg:px-24 overflow-hidden">
       {/* Same animated particle backdrop as the contact form above —
@@ -31,18 +37,15 @@ export default function GlobeTrust() {
           much taller box. */}
       <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-6">
         {/* Text — vertically centered against the globe. */}
-        <div className="max-w-xs sm:max-w-sm">
+        <div className="max-w-sm sm:max-w-md md:max-w-lg">
           <p className="text-lg sm:text-xl text-white/70 font-light mb-1">
-            We&rsquo;re Trusted by Businesses
+            {eyebrow}
           </p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            Across Prayagraj &amp; Beyond
+            {heading}
           </h2>
           <p className="text-sm text-white/60 leading-relaxed">
-            From local shops to growing enterprises, we&rsquo;ve helped
-            businesses across Prayagraj and India build a digital presence
-            that actually drives leads and sales — real results, not vanity
-            metrics.
+            {paragraph}
           </p>
         </div>
 

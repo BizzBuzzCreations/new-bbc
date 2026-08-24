@@ -241,13 +241,22 @@ export default function Footer() {
                 Get In Touch
               </h4>
               <div className="flex flex-col gap-4 text-sm">
-                <a
-                  href="tel:+918115585285"
-                  className="flex items-center gap-2 text-gray-300 hover:text-[#40A2D8] transition-colors"
-                >
-                  <Phone size={15} className="text-[#40A2D8] shrink-0" />
-                  +91 8115585285
-                </a>
+                <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+                  <a
+                    href="tel:+918115585285"
+                    className="flex items-center gap-2 text-gray-300 hover:text-[#40A2D8] transition-colors"
+                  >
+                    <Phone size={15} className="text-[#40A2D8] shrink-0" />
+                    +91 8115585285,
+                  </a>
+                  <a
+                    href="tel:+4407862608652"
+                    className="flex items-center gap-2 text-gray-300 hover:text-[#40A2D8] transition-colors"
+                  >
+                    <Phone size={15} className="text-[#40A2D8] shrink-0" />
+                    +44 07862 608652
+                  </a>
+                </div>
                 <a
                   href="mailto:info@bizzbuzzcreations.com"
                   className="flex items-center gap-2 text-gray-300 hover:text-[#40A2D8] transition-colors"
@@ -307,12 +316,30 @@ export default function Footer() {
 
         <div className="mt-16 pt-6 border-t border-zinc-800">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-            <div className="flex space-x-6 mb-4 md:mb-0">
+            <div className="flex flex-wrap gap-x-6 gap-y-2 mb-4 md:mb-0">
               <Link
                 href="/privacy-policy"
                 className="text-xs text-gray-300 hover:text-gray-200"
               >
                 Privacy Policy
+              </Link>
+              <Link
+                href="/cookie-policy"
+                className="text-xs text-gray-300 hover:text-gray-200"
+              >
+                Cookie Policy
+              </Link>
+              <Link
+                href="/disclaimer"
+                className="text-xs text-gray-300 hover:text-gray-200"
+              >
+                Disclaimer
+              </Link>
+              <Link
+                href="/terms-and-conditions"
+                className="text-xs text-gray-300 hover:text-gray-200"
+              >
+                Terms &amp; Conditions
               </Link>
             </div>
             <div className="text-xs text-gray-300">

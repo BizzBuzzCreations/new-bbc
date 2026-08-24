@@ -39,15 +39,33 @@ const RECOGNITIONS = [
   },
 ];
 
-export default function Recognitions() {
+const DEFAULT_HEADING = "Proven Expertise. Real Recognition.";
+
+export default function Recognitions({ content }) {
   const [active, setActive] = useState(0);
-  const current = RECOGNITIONS[active];
+
+  const recognitions = RECOGNITIONS.map((item) => {
+    if (item.org === "Clutch")
+      return { ...item, badge: content?.clutchBadgeImage || item.badge, title: content?.clutchTitle || item.title };
+    if (item.org === "Google Partner")
+      return { ...item, badge: content?.googleAdsBadgeImage || item.badge, title: content?.googleAdsTitle || item.title };
+    if (item.org === "Google Analytics")
+      return { ...item, badge: content?.googleAnalyticsBadgeImage || item.badge, title: content?.googleAnalyticsTitle || item.title };
+    if (item.org === "ISO")
+      return { ...item, badge: content?.isoBadgeImage || item.badge, title: content?.isoTitle || item.title };
+    return item;
+  });
+
+  const current = recognitions[active];
+  const eyebrow = content?.recognitionsEyebrow || "Certifications & Trust";
+  const heading = content?.recognitionsHeading || DEFAULT_HEADING;
+  const isDefaultHeading = heading === DEFAULT_HEADING;
 
   return (
     <section className="relative bg-black text-white py-24 px-6 md:px-12 overflow-hidden">
       <div
         className="absolute top-1/3 -left-24 w-96 h-96 rounded-full blur-3xl opacity-20 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #FBBF24, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
         aria-hidden="true"
       />
       <div
@@ -58,33 +76,39 @@ export default function Recognitions() {
 
       <div className="relative max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
         <div>
-          <p className="text-xs font-bold uppercase tracking-widest text-yellow-400 mb-4 text-center lg:text-left">
-            Certifications &amp; Trust
+          <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-4 text-center lg:text-left">
+            {eyebrow}
           </p>
           <div className="flex items-center justify-center lg:justify-start gap-4 mb-12">
-            <Award className="text-yellow-400 shrink-0" size={44} />
+            <Award className="text-[#40A2D8] shrink-0" size={44} />
             <h2 className="text-4xl md:text-5xl font-bold text-center lg:text-left leading-tight">
-              Proven Expertise. <br className="hidden sm:block" />
-              Real Recognition.
+              {isDefaultHeading ? (
+                <>
+                  Proven Expertise. <br className="hidden sm:block" />
+                  Real Recognition.
+                </>
+              ) : (
+                heading
+              )}
             </h2>
-            <Award className="text-yellow-400 shrink-0 scale-x-[-1]" size={44} />
+            <Award className="text-[#40A2D8] shrink-0 scale-x-[-1]" size={44} />
           </div>
 
           <ul className="space-y-3">
-            {RECOGNITIONS.map((item, i) => (
+            {recognitions.map((item, i) => (
               <li
                 key={item.org}
                 onMouseEnter={() => setActive(i)}
                 className={`group flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-6 rounded-2xl border px-6 py-5 cursor-default transition-all duration-300 ${
                   active === i
-                    ? "border-yellow-400/50 bg-yellow-400/[0.06] shadow-lg shadow-yellow-400/10"
+                    ? "border-[#40A2D8]/50 bg-[#0B60B0]/[0.08] shadow-lg shadow-[#0B60B0]/10"
                     : "border-white/10 bg-white/[0.02] hover:border-white/20 hover:bg-white/[0.04]"
                 }`}
               >
                 <span className="flex items-center gap-3 font-bold text-lg shrink-0">
                   <span
                     className={`flex items-center justify-center w-8 h-8 rounded-full shrink-0 transition-colors duration-300 ${
-                      active === i ? "bg-yellow-400 text-black" : "bg-white/10 text-white/40"
+                      active === i ? "bg-[#0B60B0] text-white" : "bg-white/10 text-white/40"
                     }`}
                   >
                     <Trophy size={16} />
@@ -115,7 +139,7 @@ export default function Recognitions() {
                 className="absolute inset-0 rounded-3xl opacity-40"
                 style={{
                   background:
-                    "radial-gradient(circle at 30% 20%, rgba(251,191,36,0.25), transparent 60%)",
+                    "radial-gradient(circle at 30% 20%, rgba(64,162,216,0.3), transparent 60%)",
                 }}
                 aria-hidden="true"
               />
@@ -132,7 +156,7 @@ export default function Recognitions() {
                 initial={{ opacity: 0, scale: 0.4, y: 10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.15, type: "spring", stiffness: 260, damping: 18 }}
-                className="absolute -top-7 -right-7 bg-yellow-400 text-black rounded-full p-4 shadow-xl"
+                className="absolute -top-7 -right-7 bg-[#0B60B0] text-white rounded-full p-4 shadow-xl"
               >
                 <Trophy size={30} />
               </motion.div>

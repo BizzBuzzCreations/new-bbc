@@ -9,63 +9,64 @@ import Image from "next/image";
 // 50+ clients, 20+ industries, real Clutch/Google certifications) rather
 // than inventing precise per-year numbers, award names, or hiring counts
 // that aren't verified.
-const YEARS = [
+const DEFAULT_YEARS = [
   {
     year: "2022",
     title: "Our Beginning",
     body: "BizzBuzz Creations started in Prayagraj as a small team of marketers, designers, and strategists, taking on our first local projects with one rule: build for outcomes, not vanity metrics.",
     img: "/image-7.jpg",
-    alt: "Early BizzBuzz Creations team strategy session",
   },
   {
     year: "2023",
     title: "Building the Core Team",
     body: "We built out dedicated SEO, paid media, web development, and BPO capabilities, training every new hire on the same standards we held ourselves to from day one.",
     img: "/image-2.jpg",
-    alt: "BizzBuzz Creations team working in the office",
   },
   {
     year: "2024",
     title: "Growing Beyond Prayagraj",
     body: "Referrals started coming in from across India, and our client roster grew to span multiple industries — from D2C startups to established enterprises.",
     img: "/image-5.webp",
-    alt: "BizzBuzz Creations team celebrating together",
   },
   {
     year: "2025",
     title: "A Wider Reach",
     body: "Our footprint expanded to include clients across the UK and US, alongside continued growth of our team and services here in India.",
     img: "/image-4.webp",
-    alt: "BizzBuzz Creations team celebrating a milestone",
   },
   {
     year: "2026",
     title: "Where We Are Today",
     body: "With 90+ projects delivered for 50+ clients across 20+ industries, and real certifications from Clutch and Google, we keep building the same way we started: hands-on, transparent, and outcome-focused.",
     img: "/teamPic.webp",
-    alt: "The BizzBuzz Creations team",
   },
 ];
 
 const SLIDE_DURATION = 2800;
 
-export default function OurJourney() {
+export default function OurJourney({ content }) {
   const [active, setActive] = useState(0);
+  const heading = content?.journeyHeading || "Our Journey So Far";
+  const YEARS = content?.journeyYears?.length > 0 ? content.journeyYears : DEFAULT_YEARS;
 
   useEffect(() => {
     const id = setInterval(() => {
       setActive((prev) => (prev + 1) % YEARS.length);
     }, SLIDE_DURATION);
     return () => clearInterval(id);
-  }, []);
+  }, [YEARS.length]);
 
-  const current = YEARS[active];
+  useEffect(() => {
+    if (active >= YEARS.length) setActive(0);
+  }, [YEARS.length, active]);
+
+  const current = YEARS[active] || YEARS[0];
 
   return (
     <section className="bg-black py-20 px-5 overflow-hidden">
       <div className="max-w-5xl mx-auto">
         <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-16">
-          Our Journey So Far
+          {heading}
         </h2>
 
         {/* Year showcase */}
@@ -75,7 +76,7 @@ export default function OurJourney() {
             <Image
               key={current.img}
               src={current.img}
-              alt={current.alt}
+              alt={current.title || "BizzBuzz Creations"}
               fill
               sizes="320px"
               className="object-cover"
@@ -106,7 +107,7 @@ export default function OurJourney() {
           <div className="relative flex justify-between">
             {YEARS.map((y, i) => (
               <button
-                key={y.year}
+                key={i}
                 onClick={() => setActive(i)}
                 className="flex flex-col items-center gap-3 group"
               >

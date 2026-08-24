@@ -4,54 +4,65 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import {
+  ArrowUpRight,
+  Headset,
+  Bot,
+  Workflow,
+  Server,
+  Globe,
+  GitBranch,
+  BarChart3,
+} from "lucide-react";
 
-// Real BizzBuzz clients. Swap in the actual result/stat for each once you
-// have it — these taglines are intentionally generic placeholders.
+// Real, in-house products and infrastructure BizzBuzz builds and runs
+// itself — not client work — shown as proof of the same engineering we
+// offer clients. Each card falls back to one of these icons (matched
+// positionally) whenever no logo image is set.
+const CARD_ICONS = [Headset, Bot, Workflow, Server, Globe, GitBranch, BarChart3];
+
 const CLIENTS = [
   {
-    name: "Avondale Finance",
-    logo: "/avondale-1.png",
+    name: "BizzBuzz CRM — Built for Call Centers",
+    logo: "",
     tagline:
-      "Digital marketing partnership focused on stronger lead generation and online visibility.",
+      "A custom CRM & customer management portal built for BPO and call center teams — lead tracking, agent workflows, and reporting, all in one platform.",
   },
   {
-    name: "Fibernet",
-    logo: "/fibernet.png",
+    name: "AI Voice Calling System",
+    logo: "",
     tagline:
-      "A modern web presence built to handle a growing volume of customer inquiries.",
+      "An in-house AI voice agent that qualifies leads, answers FAQs, and transfers calls to humans — built for real outbound call volume, not a demo.",
   },
   {
-    name: "William",
-    logo: "/WILLIAM.png",
+    name: "WhatsApp & n8n Sales Automation",
+    logo: "",
     tagline:
-      "Ongoing SEO and social media management to strengthen organic reach.",
+      "A self-hosted automation engine that runs our own cold-calling and lead pipeline — WhatsApp, workflows, and outreach, fully connected.",
   },
   {
-    name: "Grand WeddinZ",
-    logo: "/GRAND WEDDINZ1.png",
+    name: "Self-Hosted Cloud Infrastructure",
+    logo: "",
     tagline:
-      "Brand identity and social media strategy built for a growing events business.",
+      "Our own servers, our own rules, and a self-managed Proxmox infrastructure powering every product we build, with zero third-party hosting dependency.",
   },
   {
-    name: "La Pristine",
-    logo: "/LA PRISTINE1.png",
-    tagline: "Website design and digital marketing to elevate the brand online.",
+    name: "This Website Built In-House",
+    logo: "",
+    tagline:
+      "Designed, developed, and deployed end-to-end by our own team — proof of the same web development we offer clients.",
   },
   {
-    name: "Parivartan",
-    logo: "/PARIVARTAN1.png",
-    tagline: "Digital marketing support to expand outreach and visibility.",
+    name: "Production-Grade DevOps Pipeline",
+    logo: "",
+    tagline:
+      "Automated CI/CD deployment, monitoring, and uptime management running our own products in production — the same discipline we bring to client projects.",
   },
   {
-    name: "Red Eagle",
-    logo: "/RED EAGLE1.png",
-    tagline: "Brand visibility and social media management for a growing local business.",
-  },
-  {
-    name: "Neeel Kanth",
-    logo: "/NEEEL KANTH.png",
-    tagline: "Digital marketing and online presence built to reach more travelers.",
+    name: "Custom Analytics & Reporting Dashboard",
+    logo: "",
+    tagline:
+      "An in-house dashboard that pulls campaign, CRM, and infrastructure data into one place — real numbers our team acts on, not scattered spreadsheets.",
   },
 ];
 
@@ -69,9 +80,16 @@ const OFFSET_STYLE = {
   4: { x: 770, rotate: 24, scale: 0.5, opacity: 0.15, zIndex: 2 },
 };
 
-export default function CaseStudies() {
+export default function CaseStudies({ content }) {
+  const heading = content?.caseStudiesHeading || "Powered by What We Build";
+  const subtext =
+    content?.caseStudiesSubtext ||
+    "A closer look at the CRM systems, AI tools, and infrastructure driving real business operations, day in and day out.";
+  const clients =
+    content?.caseStudyClients?.length > 0 ? content.caseStudyClients : CLIENTS;
+
   const [active, setActive] = useState(0);
-  const count = CLIENTS.length;
+  const count = clients.length;
 
   // Shortest signed distance from `active` to `index`, wrapping around,
   // so the carousel always spins the short way. For an even `count`, the
@@ -92,7 +110,7 @@ export default function CaseStudies() {
   // Auto-play: keep drifting left-to-right on its own, but pause the moment
   // the user takes over (hover, drag, or touch), and resume once they let go.
   const [paused, setPaused] = useState(false);
-  const AUTOPLAY_DELAY = 3000;
+  const AUTOPLAY_DELAY = 1600;
 
   useEffect(() => {
     if (paused) return;
@@ -135,13 +153,12 @@ export default function CaseStudies() {
   };
 
   return (
-    <section className="bg-black text-white pt-20 pb-10 overflow-hidden">
+    <section id="case-studies" className="bg-black text-white pt-20 pb-10 overflow-hidden">
       <h2 className="md:text-4xl text-3xl font-bold text-center mb-3">
-        Real Growth, Powered by BizzBuzz Creations
+        {heading}
       </h2>
       <p className="text-center text-white/60 max-w-xl mx-auto mb-16 px-4">
-        A few of the brands we&rsquo;ve partnered with to build, market, and grow
-        their online presence.
+        {subtext}
       </p>
 
       {/* Card carousel */}
@@ -156,7 +173,7 @@ export default function CaseStudies() {
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        {CLIENTS.map((client, index) => {
+        {clients.map((client, index) => {
           const offset = offsetOf(index);
           const style = OFFSET_STYLE[offset];
           const isActive = offset === 0;
@@ -182,13 +199,20 @@ export default function CaseStudies() {
               }`}
             >
               <div className="w-11 h-11 rounded-full bg-white flex items-center justify-center overflow-hidden shrink-0 mb-4">
-                <Image
-                  src={client.logo}
-                  alt={client.name}
-                  width={40}
-                  height={40}
-                  className="object-contain w-9 h-9"
-                />
+                {client.logo ? (
+                  <Image
+                    src={client.logo}
+                    alt={client.name}
+                    width={40}
+                    height={40}
+                    className="object-contain w-9 h-9"
+                  />
+                ) : (
+                  (() => {
+                    const CardIcon = CARD_ICONS[index % CARD_ICONS.length];
+                    return <CardIcon size={20} className="text-[#0B60B0]" />;
+                  })()
+                )}
               </div>
 
               <h3 className="text-lg font-semibold mb-2">{client.name}</h3>

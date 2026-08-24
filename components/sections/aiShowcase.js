@@ -21,7 +21,31 @@ const FEATURES = [
   },
 ];
 
-export default function AiShowcase() {
+export default function AiShowcase({ content }) {
+  const headingTop = content?.aiHeadingTop || "Building AI Systems";
+  const headingMain = content?.aiHeadingMain || "That Actually Grow Your Business";
+  const paragraph =
+    content?.aiParagraph ||
+    "BizzBuzzAI is our dedicated AI practice, helping businesses move beyond the hype into practical, revenue-generating AI implementation — from custom chatbots to automated workflows and generative content engines.";
+  const posterImage = content?.aiPosterImage || "/aiservice.webp";
+  const videoSrc = content?.aiVideo || "/Sequence 01 1.mp4";
+
+  // Icon stays fixed (structural); title + points come from the saved
+  // override, matched by position. `points` is stored as newline-
+  // separated text in the dashboard and split back into a list here.
+  const features = FEATURES.map((feature, i) => {
+    const override = content?.aiFeatures?.[i];
+    if (!override) return feature;
+    return {
+      ...feature,
+      title: override.title || feature.title,
+      points:
+        typeof override.points === "string"
+          ? override.points.split("\n").map((p) => p.trim()).filter(Boolean)
+          : feature.points,
+    };
+  });
+
   return (
     <section className="bg-black overflow-hidden">
       <div className="grid lg:grid-cols-2">
@@ -32,14 +56,14 @@ export default function AiShowcase() {
             muted
             loop
             playsInline
-            poster="/aiservice.webp"
+            poster={posterImage}
             className="absolute inset-0 w-full h-full object-cover"
             style={{
               clipPath:
                 "polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 55%, 8% 50%, 0 45%)",
             }}
           >
-            <source src="/Sequence 01 1.mp4" type="video/mp4" />
+            <source src={videoSrc} type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-linear-to-r from-transparent via-transparent to-black/40 lg:to-black/10" />
         </div>
@@ -52,20 +76,15 @@ export default function AiShowcase() {
 
           <h2 className="text-3xl md:text-4xl font-bold leading-tight">
             <span className="block font-normal text-white/80">
-              Building AI Systems
+              {headingTop}
             </span>
-            That Actually Grow Your Business
+            {headingMain}
           </h2>
 
-          <p className="text-white/60 max-w-xl">
-            <strong className="text-white">BizzBuzzAI</strong> is our dedicated
-            AI practice, helping businesses move beyond the hype into
-            practical, revenue-generating AI implementation — from custom
-            chatbots to automated workflows and generative content engines.
-          </p>
+          <p className="text-white/60 max-w-xl">{paragraph}</p>
 
           <div className="grid sm:grid-cols-3 gap-4">
-            {FEATURES.map(({ icon: Icon, title, points }) => (
+            {features.map(({ icon: Icon, title, points }) => (
               <div
                 key={title}
                 className="rounded-2xl border border-white/10 bg-white/[0.03] p-5"

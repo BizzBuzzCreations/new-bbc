@@ -1,6 +1,6 @@
 import DarkFAQSection from "@/components/sections/darkFAQSection";
 
-const faqs = [
+const DEFAULT_FAQS = [
   {
     question: "What does Bizzbuzz Creations do?",
     answer:
@@ -27,6 +27,8 @@ const faqs = [
   },
 ];
 
-export default function AboutFAQ() {
-  return <DarkFAQSection faqs={faqs} heading="FAQs" />;
+export default function AboutFAQ({ content }) {
+  const heading = content?.aboutFaqHeading || "FAQs";
+  const faqs = content?.aboutFaqItems?.length > 0 ? content.aboutFaqItems : DEFAULT_FAQS;
+  return <DarkFAQSection faqs={faqs} heading={heading} />;
 }

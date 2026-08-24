@@ -37,11 +37,14 @@ const testimonials = [
   },
 ];
 
-const firstColumn = testimonials.slice(0, 2);
-const secondColumn = testimonials.slice(2, 4);
-const thirdColumn = testimonials.slice(4, 6);
+export default function Reviews({ content }) {
+  const heading = content?.reviewsHeading || "Customer Reviews";
+  const subtext = content?.reviewsSubtext || "See what our customers have to say about us.";
+  const items = content?.testimonials?.length > 0 ? content.testimonials : testimonials;
+  const firstColumn = items.slice(0, 2);
+  const secondColumn = items.slice(2, 4);
+  const thirdColumn = items.slice(4, 6);
 
-export default function Reviews() {
   return (
     <section className="relative overflow-hidden bg-black py-20">
       <div
@@ -61,10 +64,10 @@ export default function Reviews() {
           </div>
 
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tighter mt-5 text-white">
-            Customer Reviews
+            {heading}
           </h2>
           <p className="text-center mt-5 text-white/60">
-            See what our customers have to say about us.
+            {subtext}
           </p>
         </motion.div>
 

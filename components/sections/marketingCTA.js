@@ -1,61 +1,47 @@
 import Link from "next/link";
 import {
-  Target,
-  Sparkles,
-  TrendingUp,
+  Search,
   Globe,
-  Headset,
+  Share2,
+  MonitorSmartphone,
+  Sparkles,
   BarChart3,
   ArrowUpRight,
 } from "lucide-react";
 import Particles from "@/components/ui/Particles";
 
-const STAGES = [
-  {
-    icon: Target,
-    title: "Own the Market",
-    description:
-      "Already have visibility? We sharpen it further with data-backed SEO and paid strategies built to outpace local competitors.",
-  },
-  {
-    icon: Sparkles,
-    title: "Brand as You Build",
-    description:
-      "Starting from scratch? We build your digital identity — website, social presence, and messaging — so you launch strong.",
-  },
-  {
-    icon: TrendingUp,
-    title: "The Growth Pivot",
-    description:
-      "Hit a plateau? We ignite the marketing engine needed to turn steady business into a dominant local presence.",
-  },
-  {
-    icon: Globe,
-    title: "Web Presence That Converts",
-    description:
-      "Need a site that actually sells? We design and build fast, SEO-ready websites engineered to turn visitors into leads.",
-  },
-  {
-    icon: Headset,
-    title: "Round-the-Clock Support",
-    description:
-      "Can't keep up with customer queries? Our BPO team handles calls and chats so you never miss a lead.",
-  },
-  {
-    icon: BarChart3,
-    title: "Smarter With Data",
-    description:
-      "Guessing what works? We track, measure, and optimize every campaign so your budget goes where it performs best.",
-  },
+// Icons and hrefs stay code-driven (design/routing), matched positionally
+// to whichever cards are saved.
+const STAGE_LAYOUT = [
+  { icon: Search, href: "/search-engine-optimization" },
+  { icon: Globe, href: "/services" },
+  { icon: Share2, href: "/social-media-marketing" },
+  { icon: MonitorSmartphone, href: "/web-development" },
+  { icon: Sparkles, href: "/business-consultancy" },
+  { icon: BarChart3, href: "/#case-studies" },
 ];
 
-const TRUST_STATS = [
-  { value: "90+", label: "Projects Delivered" },
-  { value: "50+", label: "Happy Clients" },
-  { value: "20+", label: "Industries Served" },
+const DEFAULT_STAGES = [
+  { title: "Get Found on Google", description: "Boost visibility and attract the right audience with smarter SEO.", ctaText: "Explore SEO Services" },
+  { title: "Own Your Digital Space", description: "Build a stronger online presence with strategies made for growth.", ctaText: "Explore Digital Marketing Services" },
+  { title: "Make Social Work Harder", description: "Turn attention and engagement into meaningful business growth.", ctaText: "Explore Social Media Marketing" },
+  { title: "Build a Website That Sells", description: "Create a website that engages visitors and drives conversions.", ctaText: "Explore Web Development Services" },
+  { title: "Make Your Brand Stand Out", description: "Build a memorable identity that makes your business impossible to ignore.", ctaText: "Explore Branding Services" },
+  { title: "See Growth in Action", description: "Explore our work, strategies, and results for growing businesses.", ctaText: "View Our Case Studies" },
 ];
 
-export default function MarketingCTA() {
+export default function MarketingCTA({ content }) {
+  const eyebrow = content?.marketingCtaEyebrow || "BizzBuzz Creations";
+  const heading = content?.marketingCtaHeading || "Let’s Put Your Brand on the Map";
+  const paragraph =
+    content?.marketingCtaParagraph ||
+    "Whether you're launching, scaling, or ready for a fresh marketing direction, tell us what you're working on. We'll show you the smartest way forward.";
+  const buttonText = content?.marketingCtaButtonText || "Get Free Consultation Now";
+  const backgroundImage = content?.marketingCtaBackgroundImage || "/building.jpg";
+  const stagesEyebrow = content?.stagesEyebrow || "Wherever You Are, We Have a Path";
+  const stagesRaw = content?.stages?.length > 0 ? content.stages : DEFAULT_STAGES;
+  const STAGES = stagesRaw.map((s, i) => ({ ...s, ...STAGE_LAYOUT[i % STAGE_LAYOUT.length] }));
+
   return (
     <section className="w-full overflow-hidden bg-black">
       <div className="grid lg:grid-cols-2 items-stretch">
@@ -63,8 +49,7 @@ export default function MarketingCTA() {
         <div
           className="relative p-10 sm:p-14 lg:p-20 text-white flex flex-col justify-center overflow-hidden"
           style={{
-            backgroundImage:
-              "linear-gradient(150deg, rgba(5,13,28,0.94) 0%, rgba(11,96,176,0.9) 75%, rgba(64,162,216,0.85) 130%), url('/building.jpg')",
+            backgroundImage: `linear-gradient(150deg, rgba(5,13,28,0.94) 0%, rgba(11,96,176,0.9) 75%, rgba(64,162,216,0.85) 130%), url('${backgroundImage}')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -75,37 +60,21 @@ export default function MarketingCTA() {
           />
           <div className="relative">
             <p className="text-xs font-bold uppercase tracking-widest text-[#8fd0f2] mb-4">
-              BizzBuzz Creations
+              {eyebrow}
             </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-              Get Groundbreaking
-              <br />
-              Marketing Services
+              {heading}
             </h2>
             <p className="text-white/70 mb-10 max-w-md leading-relaxed">
-              Leverage our marketing expertise to turn your business into a
-              market-leading brand. No matter where you are in your growth
-              journey, we have a specialized solution for you:
+              {paragraph}
             </p>
             <Link
-              href="/#services"
+              href="#contact-form"
               className="inline-flex items-center gap-2 bg-white hover:bg-[#0B60B0] hover:text-white text-[#0B60B0] text-sm font-semibold px-6 py-3.5 rounded-full transition-all duration-300 self-start w-fit shadow-lg mb-12"
             >
-              Explore Our Services
+              {buttonText}
               <ArrowUpRight size={16} />
             </Link>
-
-            {/* Real numbers, not vanity metrics — same figures used
-                elsewhere on the site — for extra credibility right where
-                the pitch is made. */}
-            <div className="flex flex-wrap gap-x-10 gap-y-4 pt-8 border-t border-white/15">
-              {TRUST_STATS.map((stat) => (
-                <div key={stat.label}>
-                  <p className="text-2xl sm:text-3xl font-bold text-white">{stat.value}</p>
-                  <p className="text-xs text-white/60 uppercase tracking-wide">{stat.label}</p>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
 
@@ -130,12 +99,13 @@ export default function MarketingCTA() {
             />
           </div>
           <p className="relative z-10 text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-6">
-            Wherever You Are, We Have a Path
+            {stagesEyebrow}
           </p>
           <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {STAGES.map(({ icon: Icon, title, description }) => (
-              <div
+            {STAGES.map(({ icon: Icon, title, description, ctaText, href }) => (
+              <Link
                 key={title}
+                href={href}
                 className="group relative rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/20"
               >
                 <div className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center text-[#40A2D8] mb-4 transition-all duration-300 group-hover:bg-white group-hover:text-[#0B60B0] group-hover:scale-110">
@@ -144,10 +114,14 @@ export default function MarketingCTA() {
                 <h3 className="font-bold text-white mb-2 transition-colors duration-300">
                   {title}
                 </h3>
-                <p className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85">
+                <p className="text-sm text-white/60 leading-relaxed mb-4 transition-colors duration-300 group-hover:text-white/85">
                   {description}
                 </p>
-              </div>
+                <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#40A2D8] transition-colors duration-300 group-hover:text-white">
+                  {ctaText}
+                  <ArrowUpRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
+              </Link>
             ))}
           </div>
         </div>

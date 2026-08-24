@@ -3,7 +3,7 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 import "@splidejs/react-splide/css";
 
-const differentiators = [
+const DEFAULT_DIFFERENTIATORS = [
   {
     title: "Data Over Guesswork",
     desc: `Every decision is backed by real performance data, not assumptions or industry "best guesses."`,
@@ -30,7 +30,9 @@ const differentiators = [
   },
 ];
 
-const DifferentiatorsCarousel = () => {
+const DifferentiatorsCarousel = ({ items }) => {
+  const differentiators = items?.length > 0 ? items : DEFAULT_DIFFERENTIATORS;
+
   return (
     <Splide
       options={{

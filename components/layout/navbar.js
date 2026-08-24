@@ -19,8 +19,8 @@ import {
   UtensilsCrossed,
   Plane,
   Home as HomeIcon,
-  ThumbsUp,
   Gamepad2,
+  Shirt,
 } from "lucide-react";
 
 const ABOUT_LINKS = [
@@ -93,7 +93,7 @@ const INDUSTRY_COLUMNS = [
     },
     { label: "Travel", href: "/industries/travel", icon: Plane },
     { label: "Real Estate", href: "/industries/real-estate", icon: HomeIcon },
-    { label: "Social Media", href: "/industries/social-media", icon: ThumbsUp },
+    { label: "Fashion & Apparel", href: "/industries/fashion-apparel", icon: Shirt },
     { label: "Gaming", href: "/industries/gaming", icon: Gamepad2 },
   ],
 ];

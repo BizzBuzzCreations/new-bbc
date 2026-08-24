@@ -6,20 +6,23 @@ import ContactFAQ from "@/components/sections/contactFAQ";
 import WavyDivider from "@/components/ui/wavy-divider";
 import Particles from "@/components/ui/Particles";
 import React from "react";
+import { getPageContent } from "@/actions/pageContentActions";
 
 export const metadata = {
   title: "Contact BizzBuzz Creations | Free SEO & Marketing Consultation",
   description:
-    "Need more leads & sales? Contact our experts today for SEO, social media & website services in Prayagraj. Free consultation available.",
+    "Need more leads and sales? Contact BizzBuzz Creations for SEO, social media, and website services in Prayagraj. Get a free consultation today.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/contact",
   },
 };
 
-export default function Contact() {
+export default async function Contact() {
+  const content = await getPageContent("contact");
+
   return (
     <>
-      <ContactSection />
+      <ContactSection content={content} />
 
       {/* Wavy divider — ContactSection and GlobeTrust are both black, so
           without this the two sections just blend into one another. */}
@@ -27,9 +30,9 @@ export default function Contact() {
         <WavyDivider />
       </div>
 
-      <GlobeTrust />
+      <GlobeTrust content={content} />
 
-      <MarketingCTA />
+      <MarketingCTA content={content} />
 
       {/* FAQs — sits between the marketing-services CTA and Join Our Team,
           5 questions specific to reaching out/working with us.
@@ -50,11 +53,11 @@ export default function Contact() {
           />
         </div>
         <div className="relative z-10">
-          <ContactFAQ />
+          <ContactFAQ content={content} />
         </div>
       </div>
 
-      <JoinTeamCTA />
+      <JoinTeamCTA content={content} />
     </>
   );
 }

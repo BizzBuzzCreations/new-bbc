@@ -189,7 +189,15 @@ function wrap(value, width) {
   return v;
 }
 
-export default function StatsShowcase() {
+export default function StatsShowcase({ content }) {
+  // Visuals (image/logos/icons) stay fixed — structural — only the
+  // tag/number/label/description text comes from the saved override,
+  // matched by position.
+  const stats = STATS.map((stat, i) => {
+    const override = content?.statCards?.[i];
+    return override ? { ...stat, ...override } : stat;
+  });
+
   const trackRef = useRef(null);
   const offsetRef = useRef(0);
   const hoveringRef = useRef(false);
@@ -257,7 +265,7 @@ export default function StatsShowcase() {
           {/* The set is repeated 3x so there's always a full extra set of
               cards on either side of the visible window to scroll into,
               regardless of drag distance or viewport width. */}
-          {[...STATS, ...STATS, ...STATS].map((stat, i) => (
+          {[...stats, ...stats, ...stats].map((stat, i) => (
             <div
               key={`${stat.label}-${i}`}
               className="flex flex-col h-[460px] shrink-0 rounded-2xl overflow-hidden bg-white shadow-xl"

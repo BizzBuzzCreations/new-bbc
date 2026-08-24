@@ -1,5 +1,4 @@
 import React from "react";
-import CTA from "@/components/sections/CTA";
 
 export const metadata = {
   title: "Privacy Policy of Bizzbuzz Creations",
@@ -17,7 +16,7 @@ export default function page() {
         <h1 className="text-3xl font-bold mb-2 text-gray-900">
           Privacy Policy
         </h1>
-        <p className="text-sm text-gray-500 mb-6">Last updated: 10 Feb 2026</p>
+        <p className="text-sm text-gray-500 mb-6">Last Updated: 24 August 2026</p>
 
         <p className="mb-6">
           At <span className="font-semibold">BizzBuzz Creations</span>, we
@@ -107,11 +106,6 @@ export default function page() {
         </p>
       </div>
     </div>
-
-      {/* CTA — just above the footer */}
-      <div className="bg-black pt-16">
-        <CTA />
-      </div>
     </>
   );
 }

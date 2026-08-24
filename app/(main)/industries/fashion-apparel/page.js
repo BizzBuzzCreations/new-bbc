@@ -2,18 +2,18 @@ import IndustryDetailPage from "@/components/sections/industryDetailPage";
 import { getIndustryBySlug } from "@/lib/industriesData";
 import { getIndustryPageContent } from "@/lib/industryPageContent";
 
-const industry = getIndustryBySlug("social-media");
-const content = getIndustryPageContent("social-media");
+const industry = getIndustryBySlug("fashion-apparel");
+const content = getIndustryPageContent("fashion-apparel");
 
 export const metadata = {
-  title: `${industry.label} Digital Marketing Services | BizzBuzz Creations`,
+  title: "Fashion & Apparel Digital Marketing Services | BizzBuzz Creations",
   description: industry.description,
   alternates: {
-    canonical: "https://bizzbuzzcreations.com/industries/social-media",
+    canonical: "https://bizzbuzzcreations.com/industries/fashion-apparel",
   },
 };
 
-export default function IndustryPage() {
+export default function FashionApparelIndustryPage() {
   return (
     <IndustryDetailPage
       label={industry.label}

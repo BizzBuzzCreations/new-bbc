@@ -14,12 +14,12 @@ import IndustriesShowcase from "@/components/sections/industriesShowcase";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import ConsultationPopup from "@/components/sections/popupForm";
 import LatestBlogs from "@/components/sections/latestBlogs";
+import { getPageContent } from "@/actions/pageContentActions";
 
 export const metadata = {
-  title:
-    "Digital Marketing Agency in Prayagraj | AI-Driven Growth | BizzBuzz Creations",
+  title: "Digital Marketing Agency in Prayagraj | BizzBuzz Creations",
   description:
-    "AI-driven digital marketing agency offering SEO, paid ads, social media, web development & automation services in Prayagraj and across India.",
+    "Grow your business with BizzBuzz Creations, a trusted digital marketing agency in Prayagraj offering SEO, Google Ads, web development & social media.",
   keywords:
     "best digital marketing agency in allahabad, best digital marketing agency in prayagraj, best digital marketing company in prayagraj, professional digital marketing, Best SEO Service in prayagraj, Expert SEO service, SMM services in prayagraj, Best SMM agency in prayagraj, local SEO services in prayagraj, Best Paid Ads services in prayagraj, Professional SEO Services in Prayagraj",
   alternates: {
@@ -46,20 +46,22 @@ export const metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
+  const content = await getPageContent("home");
+
   return (
     <>
       {/* Home Hero Section */}
-      <HomeHero />
+      <HomeHero content={content} />
 
       {/* About section */}
-      <HomeAbout />
+      <HomeAbout content={content} />
 
       {/* Our Services */}
-      <OurServices />
+      <OurServices content={content} />
 
       {/* Case Studies — client work carousel */}
-      <CaseStudies />
+      <CaseStudies content={content} />
 
       {/* Wavy divider — visually splits the two back-to-back dark sections.
           Padding on both sides keeps it floating in the middle of the gap
@@ -69,37 +71,37 @@ export default function Home() {
       </div>
 
       {/* Stats showcase — auto-scrolling numbers/logos/services carousel */}
-      <StatsShowcase />
+      <StatsShowcase content={content} />
 
       {/* AI showcase — video + AI services split section */}
-      <AiShowcase />
+      <AiShowcase content={content} />
 
       {/* What Makes Us Different section */}
-      <WhatMAkesUs />
+      <WhatMAkesUs content={content} />
 
       {/* Why choose us */}
-      <WhyChooseUs dark />
+      <WhyChooseUs dark content={content} />
 
       {/* Proven Expertise — real certifications & partnerships */}
-      <Recognitions />
+      <Recognitions content={content} />
 
       {/* Industries we work with — same list as the navbar's mega-menu */}
-      <IndustriesShowcase />
+      <IndustriesShowcase content={content} />
 
       {/* Reviews section */}
-      <Reviews />
+      <Reviews content={content} />
 
       <LatestBlogs dark />
 
       <div className="bg-black pt-10">
         {/* FAQ section */}
-        <FAQ />
+        <FAQ content={content} />
 
         {/* CTA section */}
         <CTA />
       </div>
       {/* Popup form */}
-      <ConsultationPopup />
+      <ConsultationPopup content={content} />
     </>
   );
 }

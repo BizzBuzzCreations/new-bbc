@@ -3,12 +3,11 @@ import Image from "next/image";
 // Zig-zag culture section — real BizzBuzz facts and real office/team
 // photos already used elsewhere on the site (career page, homepage
 // shuffle grid), not stock photography or another company's people/awards.
-const ROWS = [
+const DEFAULT_ROWS = [
   {
     title: "We Build With Real Ownership",
     body: "BizzBuzz Creations runs on flat hierarchies, clear communication, and real ownership — you're not waiting on five layers of sign-off to get things done. Good ideas win regardless of title, and every account runs like an extension of the client's own team.",
     img: "/image-2.jpg",
-    alt: "The BizzBuzz Creations team working in the office",
     imageSide: "right",
     imageSize: "large",
   },
@@ -16,7 +15,6 @@ const ROWS = [
     title: "We Work As One Team",
     body: "We're a growing agency working out of Prayagraj, India and London, UK — and it shows in how we work. No walled-off departments, no siloed specialists; strategy, design, and execution happen together, in the same room.",
     img: "/image-4.webp",
-    alt: "The BizzBuzz Creations team celebrating together",
     imageSide: "left",
     imageSize: "small",
   },
@@ -24,7 +22,6 @@ const ROWS = [
     title: "We Grow Together",
     body: "Everyone works on real client campaigns from day one, learns from a hands-on team, and takes on as much responsibility as they're ready for. We're always looking for people who want to level up their own skills, not just tick boxes on someone else's roadmap.",
     img: "/teamPic.webp",
-    alt: "The BizzBuzz Creations team",
     imageSide: "right",
     imageSize: "small",
   },
@@ -53,21 +50,31 @@ function Photo({ img, alt, size }) {
   );
 }
 
-export default function AboutCulture() {
+export default function AboutCulture({ content }) {
+  // imageSide/imageSize control layout, not content — kept in code and
+  // matched positionally to whichever rows are saved.
+  const LAYOUT = [
+    { imageSide: "right", imageSize: "large" },
+    { imageSide: "left", imageSize: "small" },
+    { imageSide: "right", imageSize: "small" },
+  ];
+  const savedRows = content?.cultureRows?.length > 0 ? content.cultureRows : DEFAULT_ROWS;
+  const ROWS = savedRows.map((row, i) => ({ ...row, ...LAYOUT[i % LAYOUT.length] }));
+
   return (
     <section className="bg-black py-20 px-5">
       <div className="max-w-6xl mx-auto space-y-10">
-        {ROWS.map((row) => (
-          <div key={row.title} className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-center">
+        {ROWS.map((row, i) => (
+          <div key={i} className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-center">
             {row.imageSide === "left" ? (
               <>
-                <Photo img={row.img} alt={row.alt} size={row.imageSize} />
+                <Photo img={row.img} alt={row.title} size={row.imageSize} />
                 <TextPanel title={row.title} body={row.body} />
               </>
             ) : (
               <>
                 <TextPanel title={row.title} body={row.body} />
-                <Photo img={row.img} alt={row.alt} size={row.imageSize} />
+                <Photo img={row.img} alt={row.title} size={row.imageSize} />
               </>
             )}
           </div>

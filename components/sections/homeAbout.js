@@ -1,7 +1,15 @@
 import React from "react";
 import Link from "next/link";
 
-export default function HomeAbout() {
+export default function HomeAbout({ content }) {
+  const eyebrow = content?.aboutEyebrow || "About Us";
+  const heading = content?.aboutHeading || "We Are BizzBuzz Creations";
+  const paragraph =
+    content?.aboutParagraph ||
+    "We're not just another agency running the same playbook for every client. BizzBuzz Creations is built on the idea that real growth comes from understanding a business first and marketing it second. That's why local businesses trust us as one of the best digital marketing companies in Prayagraj and why brands from Allahabad to Lucknow to Delhi rely on us as they expand their digital footprint across India. Our team blends SEO expertise, AI-assisted campaign optimization, paid advertising know-how, and sharp creative work to deliver digital marketing solutions that actually move the needle — more visibility, more leads, and more revenue, no matter which city or state your customers are searching from.";
+  const buttonText = content?.aboutButtonText || "Learn More";
+  const backgroundImage = content?.aboutBackgroundImage || "/building.jpg";
+
   return (
     <section className="relative overflow-hidden min-h-[460px] sm:min-h-[500px] md:min-h-[560px] flex items-center">
       {/* Background photo — fades from solid white behind the text (left)
@@ -9,7 +17,7 @@ export default function HomeAbout() {
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: "url('/building.jpg')",
+          backgroundImage: `url('${backgroundImage}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -25,14 +33,11 @@ export default function HomeAbout() {
 
       <div className="relative w-full px-6 md:px-12 lg:px-24 py-16">
         <div className="max-w-xl md:text-start text-center mx-auto md:mx-0">
-          <p className="text-gray-900">About Us</p>
+          <p className="text-gray-900">{eyebrow}</p>
           <h2 className="md:text-4xl text-3xl font-bold mb-4">
-            We Are BizzBuzz Creations
+            {heading}
           </h2>
-          <p className="max-w-lg mb-6 text-gray-900">
-            We're not just another agency running the same playbook for every client. <b>BizzBuzz Creations</b> is built on the idea that real growth comes from understanding a business first and marketing it second. That's why local businesses trust us as one of the <b>best digital marketing companies</b> in Prayagraj  and why brands from Allahabad to Lucknow to Delhi rely on us as they expand their digital footprint across India.
-            Our team blends SEO expertise, AI-assisted campaign optimization, paid advertising know-how, and sharp creative work to deliver digital marketing solutions that actually move the needle  more visibility, more leads, and more revenue, no matter which city or state your customers are searching from.
-          </p>
+          <p className="max-w-lg mb-6 text-gray-900">{paragraph}</p>
           <Link
             href="/about"
             aria-label="Learn more about BizzBuzz Creations"
@@ -41,7 +46,7 @@ export default function HomeAbout() {
             <button className="relative cursor-pointer border-2 border-gray-900 text-gray-900 px-6 py-3 rounded-lg overflow-hidden group">
               <span className="absolute inset-0 bg-gray-900 transform -translate-x-full group-hover:translate-x-0 transition duration-300"></span>
               <span className="relative z-10 group-hover:text-white">
-                Learn More
+                {buttonText}
               </span>
             </button>
           </Link>

@@ -1,62 +1,135 @@
 import Link from "next/link";
 import {
-  Search,
-  Share2,
   Megaphone,
-  MonitorSmartphone,
-  Headset,
+  Search,
   Bot,
+  Share2,
+  MonitorSmartphone,
+  Handshake,
+  MousePointerClick,
+  Link2,
+  FileText,
+  Compass,
+  Rocket,
+  ArrowUpRight,
 } from "lucide-react";
 import GuidesHero from "@/components/sections/guidesHero";
 import CTA from "@/components/sections/CTA";
 import LatestBlogs from "@/components/sections/latestBlogs";
+import DarkFAQSection from "@/components/sections/darkFAQSection";
 
 export const metadata = {
-  title: "Marketing Guides | BizzBuzz Creations",
+  title: "Digital Marketing Guides & Resources | BizzBuzz Creations",
   description:
-    "Practical, no-fluff guides on SEO, social media, Google Ads, website conversion, customer support, and AI-driven marketing — from BizzBuzz Creations.",
+    "Explore practical digital marketing guides on SEO, AI, social media, Google Ads, websites, content marketing, and more.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/guides",
   },
 };
 
-// Short, real, actionable takeaways instead of gated PDFs.
+// Guide categories — index, category, and description as provided.
 const GUIDES = [
   {
-    icon: Search,
-    tag: "SEO",
-    title: "SEO Fundamentals for Local Businesses",
-    body: "Complete your Google Business Profile fully, keep your name/address/phone consistent everywhere, and write real service pages for each city you serve — thin pages don't rank.",
-  },
-  {
-    icon: Share2,
-    tag: "Social Media",
-    title: "Social Media Marketing 101",
-    body: "Pick 3–4 content pillars instead of posting whatever comes to mind, keep a realistic schedule you can actually sustain, and pair your best organic posts with a small ad budget.",
-  },
-  {
     icon: Megaphone,
-    tag: "Paid Ads",
-    title: "Getting Started with Google Ads",
-    body: "Set up conversion tracking before spending a rupee, separate campaigns by intent, and review search term reports weekly to catch wasted spend early.",
+    tag: "01",
+    title: "Digital Marketing Services",
+    body: "Explore practical strategies, trends, and insights to strengthen your digital presence and accelerate business growth.",
   },
   {
-    icon: MonitorSmartphone,
-    tag: "Website",
-    title: "Website Conversion Checklist",
-    body: "Aim for under 3-second mobile load times, one clear call-to-action per page, and visible trust signals — real contact info, testimonials, and certifications.",
-  },
-  {
-    icon: Headset,
-    tag: "Support",
-    title: "Customer Support & BPO Basics",
-    body: "Set a clear response-time target and track it, give your team scripts that still sound human, and build a clear escalation path for issues agents can't resolve alone.",
+    icon: Search,
+    tag: "02",
+    title: "SEO Services",
+    body: "Discover proven SEO strategies, techniques, and insights to improve rankings, visibility, and organic traffic.",
   },
   {
     icon: Bot,
-    tag: "AI & Automation",
-    title: "AI & Automation for Small Business Marketing",
-    body: "Automate the follow-up (not the first conversation), use AI for first drafts with a human edit before publishing, and start with one workflow instead of automating everything at once.",
+    tag: "03",
+    title: "AI Marketing",
+    body: "Explore AI-powered marketing strategies, tools, trends, and practical ideas for smarter digital growth.",
+  },
+  {
+    icon: Share2,
+    tag: "04",
+    title: "Social Media Marketing",
+    body: "Learn social media strategies, content ideas, trends, and techniques to build engagement and grow your brand.",
+  },
+  {
+    icon: MonitorSmartphone,
+    tag: "05",
+    title: "Website Development Services",
+    body: "Discover website development insights, technologies, strategies, and tips for creating better digital experiences.",
+  },
+  {
+    icon: Handshake,
+    tag: "06",
+    title: "Business Development",
+    body: "Explore practical strategies, opportunities, and insights to build partnerships, attract customers, and drive growth.",
+  },
+  {
+    icon: MousePointerClick,
+    tag: "07",
+    title: "Google Ads Services",
+    body: "Learn Google Ads strategies, optimization techniques, campaign insights, and tips for improving advertising results.",
+  },
+  {
+    icon: Link2,
+    tag: "08",
+    title: "Backlink Strategy",
+    body: "Discover effective backlink strategies, link-building insights, and techniques for building stronger search authority.",
+  },
+  {
+    icon: FileText,
+    tag: "09",
+    title: "Content Marketing & SEO",
+    body: "Learn how content and SEO work together to attract audiences, improve visibility, and generate organic growth.",
+  },
+  {
+    icon: Compass,
+    tag: "10",
+    title: "SEO, AEO & GEO",
+    body: "Explore modern search strategies for traditional search, answer engines, and AI-powered generative search experiences.",
+  },
+];
+
+// Guides page FAQs — questions specific to the guides/resources library.
+const GUIDES_FAQS = [
+  {
+    question: "What topics are covered in the BizzBuzz Creations guides?",
+    answer:
+      "Our guides cover digital marketing, SEO, AI marketing, social media marketing, website development, Google Ads, content marketing, backlink strategies, business development, and SEO, AEO & GEO.",
+  },
+  {
+    question: "Are these digital marketing guides suitable for beginners?",
+    answer:
+      "Yes. Our guides are created for beginners, marketers, business owners, and professionals looking for practical insights, strategies, and actionable digital marketing knowledge.",
+  },
+  {
+    question: "How can these guides help my business?",
+    answer:
+      "Our guides provide practical strategies and insights to help you improve online visibility, attract the right audience, generate leads, and make better digital marketing decisions.",
+  },
+  {
+    question: "How often are new guides and insights published?",
+    answer:
+      "We regularly publish new guides covering emerging trends, proven strategies, industry updates, tools, and important developments across digital marketing and technology.",
+  },
+  {
+    question: "Do your guides cover the latest SEO and AI search trends?",
+    answer:
+      "Yes. We cover evolving SEO practices along with AEO, GEO, AI search, Google updates, and other changes shaping how businesses are discovered online.",
+  },
+  {
+    question: "Can I get professional help if I need help implementing these strategies?",
+    answer: (
+      <>
+        Yes. If you need help applying the strategies covered in our guides,
+        you can explore our{" "}
+        <Link href="/services" className="text-[#40A2D8] font-semibold hover:underline">
+          digital marketing services
+        </Link>{" "}
+        or contact BizzBuzz Creations for a consultation.
+      </>
+    ),
   },
 ];
 
@@ -66,7 +139,7 @@ export default function GuidesPage() {
       <GuidesHero />
 
       {/* Guides — list + sidebar, dark theme */}
-      <section className="bg-black text-white py-16 px-6 md:px-12 lg:px-24">
+      <section id="all-guides" className="bg-black text-white py-16 px-6 md:px-12 lg:px-24">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-[1fr_320px] gap-12">
           <div>
             <h2 className="text-2xl md:text-3xl font-bold mb-1">
@@ -77,53 +150,75 @@ export default function GuidesPage() {
             </p>
 
             <div className="divide-y divide-white/10">
+              {/* Each guide links to its matching category on the blog, so
+                  readers land straight on that category's posts. */}
               {GUIDES.map(({ icon: Icon, tag, title, body }) => (
-                <div key={title} className="flex gap-5 py-6 first:pt-0">
-                  <span className="shrink-0 w-14 h-14 rounded-xl bg-[#0B60B0]/15 border border-[#40A2D8]/25 flex items-center justify-center text-[#40A2D8]">
+                <Link
+                  key={title}
+                  href={`/blog?category=${encodeURIComponent(title)}`}
+                  className="group flex gap-5 py-6 first:pt-0"
+                >
+                  <span className="shrink-0 w-14 h-14 rounded-xl bg-[#0B60B0]/15 border border-[#40A2D8]/25 flex items-center justify-center text-[#40A2D8] transition-colors duration-300 group-hover:bg-[#0B60B0] group-hover:text-white">
                     <Icon size={24} />
                   </span>
                   <div>
                     <span className="text-xs font-bold uppercase tracking-widest text-[#40A2D8]">
                       {tag}
                     </span>
-                    <h3 className="font-bold text-white mt-1 mb-1.5 leading-snug">
+                    <h3 className="font-bold text-white mt-1 mb-1.5 leading-snug transition-colors duration-300 group-hover:text-[#40A2D8]">
                       {title}
                     </h3>
                     <p className="text-sm text-white/60 leading-relaxed">
                       {body}
                     </p>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
 
-          <aside>
+          <aside className="lg:sticky lg:top-28 lg:self-start">
             <div
-              className="rounded-2xl p-6"
+              className="flex flex-col rounded-2xl p-7"
               style={{
                 background: "linear-gradient(160deg, #0B60B0, #40A2D8)",
               }}
             >
-              <h3 className="font-bold text-lg mb-5 leading-snug">
+              <span className="flex items-center justify-center w-12 h-12 rounded-xl bg-white/15 text-white mb-5">
+                <Rocket size={22} />
+              </span>
+
+              <h3 className="font-bold text-xl leading-snug mb-3">
                 Want Hands-On Help With Any of This?
               </h3>
-              <Link
-                href="/contact"
-                className="block text-center bg-white text-[#0B60B0] font-semibold rounded-lg py-2.5 mb-3 hover:bg-gray-100 transition"
-              >
-                Schedule a Call
-              </Link>
-              <Link
-                href="/#services"
-                className="block text-center border border-white/50 text-white rounded-lg py-2.5 hover:bg-white/10 transition"
-              >
-                View Our Services
-              </Link>
+              <p className="text-sm text-white/80 leading-relaxed mb-7">
+                Reading is a great start — but a strategy built for your
+                specific business moves faster. Talk to our team and we&rsquo;ll
+                turn these guides into a clear, actionable plan.
+              </p>
+
+              <div className="flex flex-col gap-3">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center gap-1.5 bg-white text-[#0B60B0] font-semibold rounded-lg py-3 hover:bg-gray-100 transition"
+                >
+                  Schedule a Call
+                  <ArrowUpRight size={16} />
+                </Link>
+                <Link
+                  href="/services"
+                  className="block text-center border border-white/50 text-white rounded-lg py-3 hover:bg-white/10 transition"
+                >
+                  View Our Services
+                </Link>
+              </div>
             </div>
           </aside>
         </div>
       </section>
+
+      {/* FAQs — questions specific to the guides/resources library */}
+      <DarkFAQSection faqs={GUIDES_FAQS} heading="Frequently Asked Questions" />
 
       {/* Latest blogs — real, live content from the blog */}
       <LatestBlogs dark />

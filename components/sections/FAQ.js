@@ -1,7 +1,7 @@
 import React from "react";
 import DarkFAQSection from "@/components/sections/darkFAQSection";
 
-const faqs = [
+const DEFAULT_FAQS = [
   {
     question: "How much does digital marketing cost in India?",
     answer: "Depends on your goals and city. Get a free custom quote.",
@@ -26,6 +26,9 @@ const faqs = [
   },
 ];
 
-export default function FAQ() {
-  return <DarkFAQSection faqs={faqs} heading="FAQs" />;
+export default function FAQ({ content }) {
+  const heading = content?.faqHeading || "FAQs";
+  const faqs = content?.faqItems?.length > 0 ? content.faqItems : DEFAULT_FAQS;
+
+  return <DarkFAQSection faqs={faqs} heading={heading} />;
 }

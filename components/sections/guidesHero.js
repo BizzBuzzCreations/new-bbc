@@ -30,18 +30,28 @@ export default function GuidesHero() {
 
       <div className="relative max-w-3xl mx-auto">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-5">
-          Guides &amp; Resources
+          Digital Marketing Guides &amp; Resources
         </h1>
         <p className="text-white/80 max-w-xl mx-auto mb-8 leading-relaxed">
-          Practical, no-fluff guides drawn from the work we actually do for
-          clients — SEO, paid ads, social, websites, support, and AI.
+          Practical, no-fluff guides and insights on SEO, paid ads, social
+          media, websites, content, AI, and digital growth.
         </p>
-        <Link
-          href="/contact"
-          className="inline-flex items-center bg-white hover:bg-gray-100 text-black text-sm font-semibold px-7 py-3.5 rounded-lg transition"
-        >
-          Get in Touch
-        </Link>
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <Link
+            href="#all-guides"
+            className="inline-flex items-center gap-1.5 bg-white hover:bg-gray-100 text-black text-sm font-semibold px-7 py-3.5 rounded-lg transition"
+          >
+            Explore Our Guides
+            <span aria-hidden="true">→</span>
+          </Link>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-1.5 border border-white/50 hover:bg-white/10 text-white text-sm font-semibold px-7 py-3.5 rounded-lg transition"
+          >
+            Need Help With Marketing?
+            <span aria-hidden="true">→</span>
+          </Link>
+        </div>
       </div>
     </section>
   );

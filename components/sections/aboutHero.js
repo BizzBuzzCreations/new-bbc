@@ -7,7 +7,7 @@ import { ShuffleGrid } from "@/components/ui/shuffle-grid";
 
 const reveal = { duration: 0.8, ease: [0.16, 1, 0.3, 1] };
 
-const GRID_IMAGES = [
+const DEFAULT_GRID_IMAGES = [
   { id: 1, src: "/image-1.jpg" },
   { id: 2, src: "/image-2.jpg" },
   { id: 3, src: "/image-3.jpg" },
@@ -19,7 +19,20 @@ const GRID_IMAGES = [
   { id: 9, src: "/image-9.jpg" },
 ];
 
-export default function AboutHero() {
+export default function AboutHero({ content }) {
+  const heading = content?.aboutHeroHeading || "Digital Marketing Agency in India — Bizzbuzz Creations";
+  const subheading = content?.aboutHeroSubheading || "Turning Bold Ideas Into Digital Success Stories";
+  const paragraph =
+    content?.aboutHeroParagraph ||
+    "We don't just run campaigns — we build brands that people remember, trust, and search for. From strategy to execution, Bizzbuzz Creations helps Indian businesses grow online with data-driven digital marketing solutions designed for real results in 2026 and beyond.";
+  const stat1 = content?.aboutHeroStat1 || "90+ Projects Delivered";
+  const stat2 = content?.aboutHeroStat2 || "50+ Happy Clients Across India";
+  const buttonText = content?.aboutHeroButtonText || "Free Audit";
+  const gridImages =
+    content?.aboutHeroImages?.length > 0
+      ? content.aboutHeroImages.map((item, i) => ({ id: i + 1, src: item.src }))
+      : DEFAULT_GRID_IMAGES;
+
   return (
     <div
       className="min-h-[90vh] pt-28 md:pt-32 -mt-14 md:-mt-[72px] lg:text-left text-center text-white gap-10 flex 2xl:px-15 px-5 lg:flex-row flex-col justify-center items-center bg-gray-100 pb-20"
@@ -34,7 +47,7 @@ export default function AboutHero() {
           transition={reveal}
           className="md:text-3xl xl:text-4xl text-xl font-bold mb-4"
         >
-          Digital Marketing Agency in India — Bizzbuzz Creations
+          {heading}
         </motion.h1>
         <motion.h2
           initial={{ opacity: 0, y: 24 }}
@@ -42,7 +55,7 @@ export default function AboutHero() {
           transition={{ ...reveal, delay: 0.15 }}
           className="md:text-3xl xl:text-2xl text-xl font-bold mb-4"
         >
-          Turning Bold Ideas Into Digital Success Stories
+          {subheading}
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 24 }}
@@ -50,8 +63,7 @@ export default function AboutHero() {
           transition={{ ...reveal, delay: 0.3 }}
           className="max-w-xl mb-10"
         >
-          We don't just run campaigns — we build brands that people remember, trust, and search for. From strategy to execution,
-          Bizzbuzz Creations helps Indian businesses grow online with data-driven digital marketing solutions designed for real results in 2026 and beyond.
+          {paragraph}
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -61,11 +73,11 @@ export default function AboutHero() {
         >
           <div className="flex items-center gap-2">
             <CheckCircle className="text-green-500" size={18} />
-            <span>90+ Projects Delivered</span>
+            <span>{stat1}</span>
           </div>
           <div className="flex items-center gap-2">
             <CheckCircle className="text-green-500" size={18} />
-            <span>50+ Happy Clients Across India</span>
+            <span>{stat2}</span>
           </div>
         </motion.div>
         <br></br>
@@ -83,7 +95,7 @@ export default function AboutHero() {
               >
                 <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
               </svg>
-              <span className="text">Free Audit</span>
+              <span className="text">{buttonText}</span>
               <span className="circle"></span>
               <svg
                 viewBox="0 0 24 24"
@@ -102,7 +114,7 @@ export default function AboutHero() {
         transition={{ ...reveal, delay: 0.2 }}
         className="w-full max-w-2xl"
       >
-        <ShuffleGrid images={GRID_IMAGES} className="h-[420px] md:h-[620px]" />
+        <ShuffleGrid images={gridImages} className="h-[420px] md:h-[620px]" />
       </motion.div>
     </div>
   );

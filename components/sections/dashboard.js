@@ -12,6 +12,7 @@ import {
 } from "@/actions/serverActions";
 import { logout } from "@/actions/authActions";
 import DashboardBlogs from "@/components/sections/dashboardBlogs";
+import DashboardContent from "@/components/sections/dashboardContent";
 
 const NAV_ITEMS = [
   { id: "overview", label: "Overview", icon: GridIcon },
@@ -19,6 +20,7 @@ const NAV_ITEMS = [
   { id: "jobs", label: "Posted Jobs", icon: BriefcaseIcon },
   { id: "comments", label: "Comments", icon: ChatIcon },
   { id: "submissions", label: "Submissions", icon: InboxIcon },
+  { id: "content", label: "Website Content", icon: PageIcon },
 ];
 
 function timeAgo(dateString) {
@@ -440,6 +442,8 @@ export default function Dashboard({ role = "user", name = "" }) {
           </section>
         )}
 
+        {activeTab === "content" && <DashboardContent />}
+
         {showAddJob && (
           <div
             className="fixed inset-0 z-100 flex items-center justify-center bg-slate-900/55 backdrop-blur-sm"
@@ -615,6 +619,23 @@ function InboxIcon({ size = 18 }) {
     >
       <polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
       <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
+    </svg>
+  );
+}
+function PageIcon({ size = 18 }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <path d="M14 2v6h6" />
+      <line x1="8" y1="13" x2="16" y2="13" />
+      <line x1="8" y1="17" x2="16" y2="17" />
     </svg>
   );
 }

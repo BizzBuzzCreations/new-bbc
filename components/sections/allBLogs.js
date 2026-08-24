@@ -4,10 +4,13 @@ import { getBlogCategoriesMongo, getPublishedBlogsMongo } from "@/actions/blogAc
 import { getFeaturedImage } from "@/lib/getFeaturedImage";
 import { ArrowLeft, ArrowRight, ImageOff } from "lucide-react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import Cookies from "js-cookie";
 import he from "he";
 
 export default function AllBLogs() {
+  const searchParams = useSearchParams();
+  const categoryFromUrl = searchParams.get("category");
   const [blogs, setBlogs] = useState([]);
   // Both start "on" now — the All Blogs grid (with its category filter and
   // pagination) shows immediately below the latest-blogs section instead
@@ -48,11 +51,31 @@ export default function AllBLogs() {
           id: "all",
         });
         setCategories(res?.data);
+
+        // A guide/other page can deep-link here with ?category=<name> to
+        // jump straight into that category's blogs — takes priority over
+        // any cookie-restored selection. Matched case-insensitively since
+        // the linking page's label casing may differ slightly from the
+        // category as stored in the CMS.
+        if (categoryFromUrl) {
+          const match = res.data.find(
+            (cat) => cat.name?.toLowerCase() === categoryFromUrl.toLowerCase(),
+          );
+          setSelected(
+            match || { name: categoryFromUrl, count: 0, id: categoryFromUrl },
+          );
+          setShowAll(true);
+          setCurrPage(1);
+        }
       }
     });
-  }, []);
+  }, [categoryFromUrl]);
 
   useEffect(() => {
+    // Skip the cookie-restored selection when a category came in via the
+    // URL — that deep link should win over whatever was browsed last time.
+    if (categoryFromUrl) return;
+
     const savedPage = Cookies.get("blogPage");
     const savedPosts = Cookies.get("blogPosts");
     const savedShowAll = Cookies.get("blogShowAll");
@@ -62,7 +85,7 @@ export default function AllBLogs() {
     if (savedPosts) setPosts(Number(savedPosts));
     if (savedShowAll) setShowAll(savedShowAll === "true");
     if (savedSelectedCat) setSelected(JSON.parse(savedSelectedCat));
-  }, []);
+  }, [categoryFromUrl]);
 
   useEffect(() => {
     if (posts === 0) return;

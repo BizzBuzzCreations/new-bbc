@@ -7,7 +7,11 @@ import { toast, Bounce } from "react-toastify";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
-export default function ConsultationPopup() {
+export default function ConsultationPopup({ content }) {
+  const headerTitle = content?.popupHeaderTitle || "Book Your Consultation Now";
+  const title = content?.popupTitle || "BizzBuzz Creations";
+  const tagline = content?.popupTagline || "Innovate and Integrate Everyday";
+
   const [open, setOpen] = useState(false);
   const [wobble, setWobble] = useState(false);
   const ref = useRef(null);
@@ -99,7 +103,7 @@ export default function ConsultationPopup() {
         {/* Header */}
         <div className="relative bg-black py-4 text-center">
           <h2 className="text-white text-sm  sm:text-lg font-semibold">
-            Book Your Consultation Now
+            {headerTitle}
           </h2>
           <button
             onClick={() => setOpen(false)}
@@ -114,9 +118,9 @@ export default function ConsultationPopup() {
         <div className="grid md:grid-cols-2 gap-8 p-4 md:p-8">
           {/* LEFT SECTION (Hidden on Mobile) */}
           <div className="hidden md:block">
-            <h3 className="text-2xl font-bold mb-1">BizzBuzz Creations</h3>
+            <h3 className="text-2xl font-bold mb-1">{title}</h3>
             <p className="text-sm text-gray-600 mb-6">
-              Innovate and Integrate Everyday
+              {tagline}
             </p>
 
             <h4 className="font-semibold mb-2">Why Choose Us</h4>
