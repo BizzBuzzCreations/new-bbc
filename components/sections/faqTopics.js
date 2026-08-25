@@ -4,14 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Building2,
-  Layers,
-  Award,
+  Search,
+  Megaphone,
+  Share2,
+  Globe,
   Cpu,
-  ShieldCheck,
-  Workflow,
-  Wallet,
-  Rocket,
+  FileText,
   Headset,
+  Briefcase,
+  Handshake,
 } from "lucide-react";
 import { FAQSection } from "@/components/ui/faq-accordion";
 
@@ -25,261 +26,379 @@ const TOPICS = [
     id: "about",
     label: "About BizzBuzz Creations",
     icon: Building2,
-    description: "Who we are, where we work, and what we've delivered.",
+    description: "Who we are, where we work, and how we work with clients.",
     faqs: [
       {
         question: "What does BizzBuzz Creations do?",
         answer:
-          "We're a digital marketing and BPO agency — SEO, paid ads, social media marketing, website development, AI solutions, marketing automation, and business consultancy, all under one roof, so you're not juggling five different vendors.",
+          "BizzBuzz Creations is a full-stack digital marketing and business solutions agency offering SEO, Google Ads, social media marketing, website development, AI automation, and business consultancy under one team, serving clients in India and worldwide.",
       },
       {
-        question: "How experienced is the BizzBuzz Creations team?",
+        question: "Does BizzBuzz Creations work with international clients?",
         answer:
-          "We've delivered 90+ projects for 50+ clients across India, working with everyone from local shops to growing enterprises expanding across the country.",
+          "Yes, BizzBuzz Creations works with businesses across India and internationally, using the same team, process, and communication standards regardless of location.",
       },
       {
-        question: "Where is BizzBuzz Creations based? Do you have offices outside India?",
+        question: "Can I hire BizzBuzz Creations for just one service?",
         answer:
-          "Our main office is in Prayagraj, Uttar Pradesh, India, and we also have an office in London, United Kingdom — so we work with clients in both regions.",
+          "Yes, you can start with a single service such as SEO, Google Ads, or web development, and add more services later as your business needs grow; nothing is bundled or forced.",
+      },
+      {
+        question: "How much does digital marketing cost with BizzBuzz Creations?",
+        answer:
+          "Pricing depends on the services and scope required. Every engagement starts with a free consultation so you receive a clear quote before committing to anything.",
+      },
+      {
+        question: "How do I get started with BizzBuzz Creations?",
+        answer:
+          "Book a free consultation. The team reviews your business, current online presence, and goals, then recommends a starting point with no obligation.",
       },
       {
         question: "What makes BizzBuzz Creations different from other agencies?",
         answer:
-          "We build for both traditional search and AI-driven search — not just Google rankings, but how AI tools and voice assistants recommend brands too. We also treat every engagement like a long-term partnership, not a one-off project.",
-      },
-      {
-        question: "Who are your typical clients?",
-        answer:
-          "Local businesses, growing enterprises, and brands expanding their digital footprint — from finance and healthcare to e-commerce, real estate, and hospitality. See our Client Portfolio for real examples.",
+          "BizzBuzz Creations offers one team, one point of contact, and full ownership of your accounts and data — avoiding vendor lock-in or juggling multiple agencies for one strategy.",
       },
     ],
   },
   {
-    id: "services",
-    label: "Services & Industries We Serve",
-    icon: Layers,
-    description: "What we do, and who we do it for.",
+    id: "seo",
+    label: "SEO FAQs",
+    icon: Search,
+    description: "Rankings, local search, and how SEO fits with AI search.",
     faqs: [
       {
-        question: "What services does BizzBuzz Creations offer?",
+        question: "How long does SEO take to show results?",
         answer:
-          "BPO & customer support, website development, SEO, social media marketing, Google Ads & paid marketing, AI solutions, marketing automation, and business consultancy.",
+          "SEO typically takes 3 to 6 months to show measurable ranking and traffic improvements, depending on competition, website history, and consistency of execution.",
       },
       {
-        question: "Do you offer BPO and customer support services alongside marketing?",
+        question: "What is local SEO and do I need it?",
         answer:
-          "Yes — our BPO team can handle calls, chats, and customer support so you never miss a lead, running alongside whatever marketing services you have with us.",
+          "Local SEO helps businesses rank in location-based searches like \"near me\" queries. It's essential for businesses serving a specific city or region alongside national or global reach.",
       },
       {
-        question: "Which industries do you work with?",
+        question: "Does SEO still work with AI search and Google AI Overviews?",
         answer:
-          "We work across 20+ industries including healthcare, finance, e-commerce, real estate, education, construction, travel, and more — see the Industries section on our homepage for the full list.",
+          "Yes. SEO remains essential — AI Overviews pull from well-structured, authoritative web content, so strong technical SEO and content quality directly influence AI search visibility.",
       },
       {
-        question: "Can you handle multiple services together, like SEO + paid ads + a new website?",
+        question: "What's the difference between SEO and Google Ads?",
         answer:
-          "That's exactly how most of our clients work with us — a combined strategy tends to perform better than running each channel in isolation, and it's simpler for you to manage with a single point of contact.",
+          "SEO builds long-term organic visibility without ongoing ad spend, while Google Ads delivers immediate visibility through paid placements. Most businesses benefit from combining both.",
       },
       {
-        question: "Do you offer one-off projects or only long-term retainers?",
+        question: "How much does SEO cost in India?",
         answer:
-          "Both. Website development and one-time consultancy work well as standalone projects; SEO, paid ads, and social media marketing are typically ongoing since they compound over time.",
+          "SEO pricing varies based on website size, competition, and goals. BizzBuzz Creations provides a custom quote after a free audit rather than fixed package pricing.",
+      },
+      {
+        question: "Can SEO help a business rank internationally, not just in India?",
+        answer:
+          "Yes. International SEO involves targeting specific countries or regions through content, technical setup, and local relevance signals tailored to each target market.",
       },
     ],
   },
   {
-    id: "portfolio",
-    label: "Portfolio, Certifications & Recognition",
-    icon: Award,
-    description: "Proof of work — client results, badges, and references.",
+    id: "paid-ads",
+    label: "Google Ads & Paid Advertising FAQs",
+    icon: Megaphone,
+    description: "Budgets, timelines, and getting paid campaigns to convert.",
     faqs: [
       {
-        question: "Can I see examples of your past work?",
+        question: "How much budget do I need to start Google Ads?",
         answer:
-          "Yes — check the Client Portfolio and Client Testimonials pages linked from our About section for real client work and results.",
+          "Google Ads budgets vary by industry and competition, but most businesses see meaningful data within a monthly spend that allows at least 15 to 20 conversions to gather performance insights.",
       },
       {
-        question: "Are you a certified Google Ads / Google Analytics partner?",
+        question: "How fast do Google Ads generate leads?",
         answer:
-          "Yes, we hold both — certified Google Ads & Marketing Partner status and certified Google Analytics Partner status.",
+          "Google Ads can generate leads within days of launching, unlike SEO, which takes months — making it effective for immediate visibility and lead flow.",
       },
       {
-        question: "Do you have any other certifications?",
+        question: "What's the difference between Google Ads and Meta Ads?",
         answer:
-          "We're a verified partner on Clutch, and our business processes are ISO certified for quality.",
+          "Google Ads target active search intent (people actively searching), while Meta Ads target audiences based on interests and behavior — both serve different stages of the buyer journey.",
       },
       {
-        question: "Can you share client references or testimonials?",
+        question: "Why isn't my Google Ads campaign converting?",
         answer:
-          "Absolutely — real client feedback is on our Client Testimonials page, and we're happy to share direct references during your free consultation.",
+          "Common causes include poor audience targeting, weak landing pages, incorrect keyword match types, or insufficient conversion tracking setup.",
+      },
+      {
+        question: "Do I need a separate landing page for Google Ads?",
+        answer:
+          "Yes. A dedicated, conversion-focused landing page typically performs significantly better than sending ad traffic to a general homepage.",
+      },
+      {
+        question: "Can Google Ads work for international or global campaigns?",
+        answer:
+          "Yes. Google Ads campaigns can be geo-targeted to specific countries, regions, or worldwide audiences, with budgets and bidding adjusted per market.",
       },
     ],
   },
   {
-    id: "technology",
-    label: "Technology, Tools & AI",
+    id: "social-media",
+    label: "Social Media Marketing FAQs",
+    icon: Share2,
+    description: "Platforms, posting frequency, and measuring what matters.",
+    faqs: [
+      {
+        question: "Which social media platform is best for business growth?",
+        answer:
+          "The best platform depends on your audience and industry. Instagram and YouTube Shorts work well for visual/consumer brands, while LinkedIn suits B2B businesses.",
+      },
+      {
+        question: "How often should a business post on social media?",
+        answer:
+          "Most businesses see steady engagement posting 3 to 5 times per week, prioritizing consistency and content quality over frequency alone.",
+      },
+      {
+        question: "Does social media marketing help with SEO?",
+        answer:
+          "Social media doesn't directly impact search rankings, but it increases brand visibility, traffic, and content distribution — indirect signals that support SEO efforts.",
+      },
+      {
+        question: "What is social commerce, and why does it matter?",
+        answer:
+          "Social commerce refers to selling products directly through social platforms like Instagram and Facebook Shops, reducing friction between discovery and purchase.",
+      },
+      {
+        question: "How do you measure social media marketing success?",
+        answer:
+          "Success is measured through engagement rate, follower growth, website traffic from social channels, and conversions — not just likes or follower count.",
+      },
+      {
+        question: "Can social media marketing work for global audiences?",
+        answer:
+          "Yes. Campaigns can be tailored by language, region, and platform preference to reach both local and international audiences effectively.",
+      },
+    ],
+  },
+  {
+    id: "web-development",
+    label: "Website Development FAQs",
+    icon: Globe,
+    description: "Speed, timelines, and choosing the right platform.",
+    faqs: [
+      {
+        question: "Why does website speed matter for conversions?",
+        answer:
+          "A slow website increases bounce rates and lowers conversions; even a 1-second delay in load time can significantly reduce user engagement and sales.",
+      },
+      {
+        question: "How long does it take to build a business website?",
+        answer:
+          "A standard business website typically takes 2 to 6 weeks to design, develop, and launch, depending on complexity and content readiness.",
+      },
+      {
+        question: "Do I need a custom website or is a template enough?",
+        answer:
+          "Templates work for simple sites, but custom development offers better performance, scalability, and brand differentiation for growing businesses.",
+      },
+      {
+        question: "Is my website's mobile-friendliness important for SEO?",
+        answer:
+          "Yes. Google uses mobile-first indexing, meaning your site's mobile version directly affects search rankings, not just the desktop version.",
+      },
+      {
+        question: "What platform is best for building a business website?",
+        answer:
+          "The right platform depends on business needs — WordPress suits content-heavy sites, Shopify suits e-commerce, and custom-coded sites suit unique functionality requirements.",
+      },
+      {
+        question: "Can a website be built for both local and global audiences?",
+        answer:
+          "Yes. Multi-region websites use geo-targeting, localized content, and technical setup like hreflang tags to serve both local and international visitors effectively.",
+      },
+    ],
+  },
+  {
+    id: "ai-automation",
+    label: "AI & Automation FAQs",
     icon: Cpu,
-    description: "The stack, automation, and AI behind the work.",
+    description: "Chatbots, workflow automation, and where AI actually helps.",
     faqs: [
       {
-        question: "Do you use AI in your marketing campaigns?",
+        question: "What is AI search optimization?",
         answer:
-          "Yes — AI-assisted campaign optimization is built into how we run paid ads and SEO, and we also offer AI Solutions as a standalone service for businesses that want AI-driven tools of their own.",
+          "AI search optimization improves how a business appears in AI-powered search results and tools like Google AI Overviews, ChatGPT, and Perplexity, alongside traditional SEO.",
       },
       {
-        question: "What marketing automation tools do you use?",
+        question: "How do AI chatbots help a business?",
         answer:
-          "We set up and manage automation workflows for email, lead nurturing, and CRM follow-ups as part of our Marketing Automation service — the exact stack is tailored to what your business already uses.",
+          "AI chatbots automate conversations, answer common questions, qualify leads, and provide 24/7 customer support without increasing staffing costs.",
       },
       {
-        question: "What technologies do you build websites with?",
+        question: "What is marketing automation and how does it help?",
         answer:
-          "Our web development team builds fast, SEO-ready sites using modern frameworks — the specific stack depends on your project's needs, from simple business sites to more complex web apps.",
+          "Marketing automation uses software to handle repetitive tasks like email sequences, lead follow-ups, and workflows, saving time and improving response consistency.",
       },
       {
-        question: "Do you offer custom AI solutions for businesses?",
+        question: "Can AI replace a full marketing team?",
         answer:
-          "Yes — beyond using AI in our own campaigns, we build AI-driven tools and chatbots for clients who want to bring automation into their own customer-facing operations.",
+          "No. AI tools improve efficiency and speed but work best alongside human strategy, creativity, and oversight rather than replacing a team entirely.",
+      },
+      {
+        question: "Is AI automation expensive to implement?",
+        answer:
+          "Costs vary based on complexity — simple chatbot or workflow automation is relatively affordable, while custom AI systems require larger investment.",
+      },
+      {
+        question: "How is BizzBuzz Creations different in AI implementation?",
+        answer:
+          "BizzBuzz Creations builds and runs its own in-house AI voice calling system and automation tools in production — not just theoretical recommendations.",
       },
     ],
   },
   {
-    id: "security",
-    label: "Data Security & Compliance",
-    icon: ShieldCheck,
-    description: "How we handle access, ownership, and your data.",
+    id: "content-marketing",
+    label: "Content Marketing FAQs",
+    icon: FileText,
+    description: "Blogging cadence, strategy, and content built for AI search.",
     faqs: [
       {
-        question: "How do you handle our business data and login credentials?",
+        question: "What is content marketing and how does it help a business?",
         answer:
-          "Access to your ad accounts, analytics, and website is granted through proper user-level permissions wherever the platform supports it, rather than shared master logins, and is limited to the team members actively working on your account.",
+          "Content marketing involves creating valuable content — blogs, guides, videos — that attracts, educates, and converts potential customers, while also improving SEO visibility.",
       },
       {
-        question: "Will our marketing account ownership stay with us?",
+        question: "How often should a business publish blog content?",
         answer:
-          "Yes — your Google Ads, Analytics, Meta Business Manager, and website accounts remain owned by you. We work as authorized users, not owners.",
+          "Most businesses benefit from publishing 2 to 4 quality blog posts per month, prioritizing depth and search intent over frequency alone.",
       },
       {
-        question: "Do you sign an NDA before starting work?",
+        question: "Does content marketing work faster than SEO?",
         answer:
-          "Yes, we're happy to sign an NDA before any project details or account access are shared, if your business requires one.",
+          "Content marketing supports SEO rather than replacing it — results typically build over months as content gains authority, backlinks, and search rankings.",
       },
       {
-        question: "What happens to our data if we stop working together?",
+        question: "What type of content ranks best in AI search results?",
         answer:
-          "Access is revoked from your accounts, and any reports, creative files, or documentation we've produced for you are handed over — the work product is yours.",
+          "Clear, well-structured content that directly answers specific questions using headers, concise answers, and factual accuracy performs best in AI-powered search results.",
+      },
+      {
+        question: "Can one piece of content target multiple keywords?",
+        answer:
+          "Yes. A well-structured page can rank for multiple related keywords if it comprehensively covers a topic without keyword stuffing.",
+      },
+      {
+        question: "Do I need a content strategy or just occasional blog posts?",
+        answer:
+          "A structured content strategy — mapped to customer journey stages and search intent — consistently outperforms random, unplanned blog posting.",
       },
     ],
   },
   {
-    id: "process",
-    label: "Our Process & Methodology",
-    icon: Workflow,
-    description: "How an engagement actually runs, start to finish.",
-    faqs: [
-      {
-        question: "What does the onboarding process look like?",
-        answer:
-          "Three steps: you tell us your vision through our contact form, our team reaches out for a free consultation to walk through your requirements and budget, then we send back a clear, straightforward proposal with scope, timeline, and pricing.",
-      },
-      {
-        question: "How do you decide which strategy is right for our business?",
-        answer:
-          "We start by understanding your business first and marketing it second — auditing your current digital presence, competitors, and goals before recommending a specific mix of services.",
-      },
-      {
-        question: "How often will we get updates or reports?",
-        answer:
-          "Reporting frequency is agreed during onboarding based on the service — typically monthly performance reports, with more frequent check-ins during the first weeks of a new campaign or project.",
-      },
-      {
-        question: "Who will be our point of contact?",
-        answer:
-          "You're assigned a dedicated point of contact from our team who coordinates across whichever services (SEO, ads, dev, BPO) you're using, so you're not chasing different specialists yourself.",
-      },
-    ],
-  },
-  {
-    id: "pricing",
-    label: "Pricing, Timelines & Deliverables",
-    icon: Wallet,
-    description: "What things cost, and how long they take.",
-    faqs: [
-      {
-        question: "How much do your services cost?",
-        answer:
-          "Pricing depends on the service, scope, and your goals — there's no one-size-fits-all number. Book a free consultation and we'll send back transparent, itemized pricing before any work begins.",
-      },
-      {
-        question: "How long before we see results?",
-        answer:
-          "Paid ads typically show results within weeks; SEO and content marketing build momentum over roughly 3–6 months, since organic growth compounds rather than spikes instantly.",
-      },
-      {
-        question: "What's included in a typical monthly report?",
-        answer:
-          "Performance against your key metrics (traffic, leads, rankings, or ad spend/ROI depending on the service), what we worked on that month, and what's planned next.",
-      },
-      {
-        question: "Do you offer custom packages for specific budgets?",
-        answer:
-          "Yes — we scope proposals around your budget and priorities rather than pushing a fixed package, so smaller businesses and larger enterprises both get a plan that fits.",
-      },
-    ],
-  },
-  {
-    id: "engagement",
-    label: "Getting Started & Engagement",
-    icon: Rocket,
-    description: "The easiest way to kick things off with us.",
-    faqs: [
-      {
-        question: "How do I get started with BizzBuzz Creations?",
-        answer:
-          "Fill out the form on our Contact page or drop us an email — we typically respond within 24 business hours to schedule your free consultation.",
-      },
-      {
-        question: "Is the initial consultation free?",
-        answer:
-          "Yes, completely free with no obligation. We'll go over your goals and share a plan before you commit to anything.",
-      },
-      {
-        question: "What information do you need from us to begin?",
-        answer:
-          "Just your business name, current website (if you have one), and what you're hoping to achieve — more visibility, leads, sales, or support. We'll take it from there.",
-      },
-      {
-        question: "Can we start with a small project before committing long-term?",
-        answer:
-          "Yes — a lot of clients start with a single service like a website build or an SEO audit, and expand into a broader retainer once they've seen how we work.",
-      },
-    ],
-  },
-  {
-    id: "support",
-    label: "Support & Ongoing Services",
+    id: "crm-bpo",
+    label: "CRM, BPO & Call Center Solutions FAQs",
     icon: Headset,
-    description: "What happens after launch, and how to reach us.",
+    description: "Custom CRMs, outbound calling, and call center automation.",
     faqs: [
       {
-        question: "Do you provide ongoing support after a website launches?",
+        question: "What is a CRM and why does a call center need one?",
         answer:
-          "Yes — we offer post-launch support for updates, fixes, and improvements, and can continue managing hosting-related needs depending on your plan.",
+          "A CRM (Customer Relationship Management) system organizes leads, tracks agent workflows, and centralizes reporting, helping call centers manage customer interactions efficiently.",
       },
       {
-        question: "What if we need urgent help outside business hours?",
+        question: "Can BizzBuzz Creations build a custom CRM for my business?",
         answer:
-          "Our standard business hours are Mon–Sat, 12:00 PM–8:00 PM, but urgent issues on active campaigns or live sites are flagged to your dedicated contact as a priority.",
+          "Yes. BizzBuzz Creations builds and operates its own custom CRM for BPO and call center teams, and offers similar custom-built systems for client businesses.",
       },
       {
-        question: "Can we scale services up or down as our business grows?",
+        question: "What's the difference between a generic CRM and a custom-built one?",
         answer:
-          "Yes — plans are reviewed regularly, and you can add services like BPO support or paid ads, or scale back, as your business needs change.",
+          "Generic CRMs offer standard features for broad use cases, while a custom CRM is built around a business's specific workflows, reducing unnecessary complexity.",
       },
       {
-        question: "How do we reach the support team?",
+        question: "Does BizzBuzz Creations support outbound calling operations?",
         answer:
-          "Through your dedicated point of contact, or via the phone, email, and office details on our Contact page.",
+          "Yes. BizzBuzz Creations has in-house experience running outbound calling operations, including debt casework and lead qualification workflows.",
+      },
+      {
+        question: "What is WhatsApp and workflow automation used for in a call center?",
+        answer:
+          "It automates lead outreach, follow-ups, and customer communication through connected workflows, reducing manual work for sales and support teams.",
+      },
+      {
+        question: "Is a custom CRM expensive to build and maintain?",
+        answer:
+          "Costs depend on complexity and required integrations. A phased build — starting with core features and expanding later — keeps initial investment manageable.",
+      },
+    ],
+  },
+  {
+    id: "consultancy",
+    label: "Business Consultancy FAQs",
+    icon: Briefcase,
+    description: "Strategy, prioritization, and where consultancy fits in.",
+    faqs: [
+      {
+        question: "What does a digital business consultant actually do?",
+        answer:
+          "A digital business consultant reviews your current operations, market position, and growth goals, then recommends a practical roadmap combining strategy, technology, and marketing.",
+      },
+      {
+        question: "Do I need consultancy if I already have a marketing team?",
+        answer:
+          "Consultancy can complement an existing team by identifying gaps, aligning strategy across departments, and recommending tools or processes the team may not have considered.",
+      },
+      {
+        question: "How is business consultancy different from hiring an agency?",
+        answer:
+          "Consultancy focuses on strategy and planning, while an agency typically executes campaigns — many businesses benefit from combining both under one team.",
+      },
+      {
+        question: "Can a consultant help decide which digital services to prioritize?",
+        answer:
+          "Yes. A consultant assesses your budget, goals, and current gaps to recommend which services — SEO, ads, automation, or website — deliver the fastest impact.",
+      },
+      {
+        question: "Is business consultancy only for large companies?",
+        answer:
+          "No. Small and mid-sized businesses often benefit most from consultancy, since it helps prioritize limited budgets toward the highest-impact actions.",
+      },
+      {
+        question: "How long does a typical consultancy engagement last?",
+        answer:
+          "It varies — some businesses need a one-time strategic roadmap, while others prefer ongoing advisory support as their operations scale.",
+      },
+    ],
+  },
+  {
+    id: "working-with-us",
+    label: "Working With BizzBuzz Creations",
+    icon: Handshake,
+    description: "Contracts, reporting, ownership, and switching services.",
+    faqs: [
+      {
+        question: "Does BizzBuzz Creations offer month-to-month contracts?",
+        answer:
+          "Engagement terms depend on the service and scope discussed during the free consultation — flexibility is assessed case by case rather than fixed upfront.",
+      },
+      {
+        question: "Will I have one point of contact or multiple account managers?",
+        answer:
+          "BizzBuzz Creations assigns one connected team and point of contact per client, avoiding the fragmentation of juggling multiple vendors.",
+      },
+      {
+        question: "How does BizzBuzz Creations report on campaign performance?",
+        answer:
+          "Clients receive clear monthly reports covering key metrics, along with ongoing optimization based on real performance data rather than vanity metrics.",
+      },
+      {
+        question: "Who owns my website, ad accounts, and data?",
+        answer:
+          "Clients retain full ownership of their accounts, website, and data at all times — there is no vendor lock-in.",
+      },
+      {
+        question: "Can I switch services later if my business needs change?",
+        answer:
+          "Yes. Services can be added, adjusted, or scaled as business needs evolve — nothing is locked into a rigid, fixed package.",
+      },
+      {
+        question: "Does BizzBuzz Creations work with businesses outside India?",
+        answer:
+          "Yes. BizzBuzz Creations works with international clients using the same team, tools, and communication process as domestic clients.",
       },
     ],
   },
@@ -391,16 +510,6 @@ export default function FaqTopics() {
               transition={{ duration: 0.4, ease: "easeOut" }}
               className="relative scroll-mt-28 bg-white rounded-2xl border border-gray-200 shadow-sm p-6 md:p-10"
             >
-              <div className="flex items-center gap-3 mb-2">
-                <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-[#0B60B0] text-white shrink-0">
-                  <topic.icon size={18} />
-                </span>
-                <p className="text-xs font-semibold uppercase tracking-widest text-[#0B60B0]">
-                  {topic.faqs.length} Questions
-                </p>
-              </div>
-              <p className="text-gray-500 mb-8 max-w-lg">{topic.description}</p>
-
               <FAQSection
                 heading={topic.label}
                 faqs={topic.faqs}

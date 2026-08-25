@@ -11,19 +11,17 @@ export function CareerWhyUs() {
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center">
         <div>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
-            Why Work with BizzBuzz Creations?
+            Roots in Prayagraj, India. An International Outlook.
           </h2>
-          <p className="text-white/60 leading-relaxed mb-5">
-            BizzBuzz Creations runs on flat hierarchies, clear
-            communication, and real ownership — you&rsquo;re not waiting on
-            five layers of sign-off to actually do your job. Good ideas win
-            regardless of title.
-          </p>
           <p className="text-white/60 leading-relaxed">
-            We&rsquo;re a growing agency working out of Prayagraj, India
-            and London, UK, and we&rsquo;re always looking for people who
-            want to level up their own skills, not just tick boxes on
-            someone else&rsquo;s roadmap.
+            We&rsquo;re a growing agency with roots in Prayagraj, India, and
+            clients across the world. From day one, you&rsquo;ll work on
+            real challenges across digital marketing, technology, design,
+            and strategy — building practical skills instead of simply
+            following a checklist. We value people who stay curious, take
+            initiative, share ideas, and want to keep getting better. Your
+            growth matters here, because when our people grow, BizzBuzz
+            Creations grows too.
           </p>
         </div>
 
@@ -41,19 +39,39 @@ export function CareerWhyUs() {
   );
 }
 
+const JOIN_TEAM_POINTS = [
+  { title: "Learn by Doing", desc: "Work on real campaigns and business challenges." },
+  { title: "Take Ownership", desc: "Bring ideas forward and take responsibility for your work." },
+  { title: "Keep Growing", desc: "Develop skills through hands-on experience and collaboration." },
+];
+
 export function CareerJoinTeam() {
   return (
     <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center">
         <div>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
-            Join the BizzBuzz Creations Team!
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 leading-tight">
+            Grow Beyond Your Job Description
           </h2>
-          <p className="text-white/60 leading-relaxed mb-8">
-            Work on real client campaigns from day one, learn from a
-            hands-on team, and take on as much responsibility as
-            you&rsquo;re ready for.
+          <p className="text-[#40A2D8] font-semibold mb-4">
+            Your role here is a starting point, not a ceiling.
           </p>
+          <p className="text-white/60 leading-relaxed mb-8">
+            At BizzBuzz Creations, growth isn&rsquo;t limited to a job
+            title. You&rsquo;ll have opportunities to explore new skills,
+            work across disciplines, take on responsibility, and discover
+            where your strengths can take you.
+          </p>
+
+          <div className="space-y-5 mb-8">
+            {JOIN_TEAM_POINTS.map(({ title, desc }) => (
+              <div key={title}>
+                <h3 className="font-semibold text-white mb-1">{title}</h3>
+                <p className="text-sm text-white/60 leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </div>
+
           <a
             href="#open-positions"
             className="inline-flex items-center bg-[#0B60B0] hover:bg-[#0B60B0]/90 text-white text-sm font-semibold px-6 py-3 rounded-full transition w-fit"

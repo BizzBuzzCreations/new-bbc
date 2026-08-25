@@ -15,31 +15,32 @@ import {
   Handshake,
 } from "lucide-react";
 
-// Same real numbers already used in the Counter / TrustBar sections —
-// kept consistent site-wide rather than inventing new stats.
+// What makes working with BizzBuzz Creations different — kept as 4 cards
+// so the existing marquee/visual layout below (photos, client logos,
+// icon grid) stays exactly as designed, just with new copy.
 const STATS = [
   {
-    tag: "Our Work",
-    value: "50+",
-    label: "Projects Delivered",
+    tag: "Why It's Different",
+    value: "01.",
+    label: "One Team, Multiple Capabilities",
     description:
-      "Website builds, SEO campaigns, and full-funnel marketing programs delivered for businesses across Prayagraj and India.",
+      "Get SEO, Google Ads, social media marketing, web development, AI, automation, and BPO support from one connected digital team.",
     visual: { type: "image", src: "/teamPic.webp", alt: "BizzBuzz Creations team at work" },
   },
   {
-    tag: "Real Results",
-    value: "10,000+",
-    label: "Leads Generated",
+    tag: "Why It's Different",
+    value: "02.",
+    label: "Solutions Built Around You",
     description:
-      "Qualified leads generated for our clients through targeted SEO, paid ads, and social media campaigns.",
+      "We consider your industry, audience, market, and business needs to recommend digital solutions that fit your objectives.",
     visual: { type: "logos" },
   },
   {
-    tag: "Client Trust",
-    value: "4.9",
-    label: "Google Rating",
+    tag: "Why It's Different",
+    value: "03.",
+    label: "Clear From Day One",
     description:
-      "Average client rating on Google, built on transparent reporting and consistent, measurable results.",
+      "Know what's included, what we're working on, and what to expect through straightforward communication and practical recommendations.",
     visual: {
       type: "image",
       src: "/About-Us-Collage-scaled.webp",
@@ -47,11 +48,11 @@ const STATS = [
     },
   },
   {
-    tag: "Our Journey",
-    value: "3+",
-    label: "Years of Experience",
+    tag: "Why It's Different",
+    value: "04.",
+    label: "Built to Adapt With You",
     description:
-      "Years spent helping Indian businesses grow online across digital marketing, web development, and BPO services.",
+      "Start with the services you need today and expand into SEO, advertising, technology, automation, or business support as your needs evolve.",
     visual: { type: "icons" },
   },
 ];
@@ -190,6 +191,8 @@ function wrap(value, width) {
 }
 
 export default function StatsShowcase({ content }) {
+  const heading = content?.statsHeading || "Here’s Why Our Way of Working Is Different";
+
   // Visuals (image/logos/icons) stay fixed — structural — only the
   // tag/number/label/description text comes from the saved override,
   // matched by position.
@@ -239,7 +242,7 @@ export default function StatsShowcase({ content }) {
 
   return (
     <section
-      className="bg-black pb-20 overflow-hidden"
+      className="bg-black pt-16 pb-20 overflow-hidden"
       aria-label="BizzBuzz Creations by the numbers"
       onMouseEnter={() => {
         hoveringRef.current = true;
@@ -249,6 +252,10 @@ export default function StatsShowcase({ content }) {
         endDrag();
       }}
     >
+      <h2 className="text-3xl md:text-4xl font-bold text-white text-center max-w-3xl mx-auto mb-10 px-5">
+        {heading}
+      </h2>
+
       <div
         className="overflow-hidden cursor-grab active:cursor-grabbing select-none"
         style={{ touchAction: "pan-y" }}

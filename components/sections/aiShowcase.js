@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Bot, Sparkles, Radar, ArrowUpRight, Check } from "lucide-react";
+import { Bot, Workflow, Sparkles, Radar, ArrowUpRight } from "lucide-react";
 
 // Real categories from the /ai-solutions service page — kept consistent
 // with what BizzBuzz Creations actually offers instead of inventing claims.
@@ -7,43 +7,39 @@ const FEATURES = [
   {
     icon: Bot,
     title: "AI Agents & Chatbots",
-    points: ["Lead qualification", "24/7 customer support"],
+    description: "Automate conversations, qualify leads, answer questions, and support customers 24/7.",
+  },
+  {
+    icon: Workflow,
+    title: "Smart Business Automation",
+    description: "Reduce repetitive work with AI-powered workflows, integrations, and process automation.",
   },
   {
     icon: Sparkles,
-    title: "Content & Automation",
-    points: ["Generative content engines", "Workflow automation"],
+    title: "AI-Powered Content",
+    description: "Create and manage content faster with intelligent systems built around your brand and marketing needs.",
   },
   {
     icon: Radar,
-    title: "GEO Optimization",
-    points: ["AI search visibility", "ChatGPT & Perplexity citations"],
+    title: "AI Search Optimization",
+    description: "Improve your visibility across AI-powered search and emerging discovery platforms.",
   },
 ];
 
 export default function AiShowcase({ content }) {
-  const headingTop = content?.aiHeadingTop || "Building AI Systems";
-  const headingMain = content?.aiHeadingMain || "That Actually Grow Your Business";
+  const heading = content?.aiHeadingMain || "Make AI Work for Your Business";
   const paragraph =
     content?.aiParagraph ||
-    "BizzBuzzAI is our dedicated AI practice, helping businesses move beyond the hype into practical, revenue-generating AI implementation — from custom chatbots to automated workflows and generative content engines.";
+    "From AI chatbots and intelligent agents to workflow automation, AI-powered content, and AI search optimization, we help businesses in Prayagraj, across India, and worldwide put practical AI solutions to work.";
   const posterImage = content?.aiPosterImage || "/aiservice.webp";
   const videoSrc = content?.aiVideo || "/Sequence 01 1.mp4";
+  const buttonText = content?.aiButtonText || "Explore AI Solutions";
 
-  // Icon stays fixed (structural); title + points come from the saved
-  // override, matched by position. `points` is stored as newline-
-  // separated text in the dashboard and split back into a list here.
+  // Icon stays fixed (structural); title + description come from the
+  // saved override, matched by position.
   const features = FEATURES.map((feature, i) => {
     const override = content?.aiFeatures?.[i];
-    if (!override) return feature;
-    return {
-      ...feature,
-      title: override.title || feature.title,
-      points:
-        typeof override.points === "string"
-          ? override.points.split("\n").map((p) => p.trim()).filter(Boolean)
-          : feature.points,
-    };
+    return override ? { ...feature, ...override } : feature;
   });
 
   return (
@@ -70,56 +66,35 @@ export default function AiShowcase({ content }) {
 
         {/* Content side */}
         <div className="p-8 sm:p-12 lg:p-16 flex flex-col justify-center gap-6 text-white">
-          <p className="text-2xl font-bold">
-            BizzBuzz<span className="italic font-light text-[#40A2D8]">AI</span>
-          </p>
-
           <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-            <span className="block font-normal text-white/80">
-              {headingTop}
-            </span>
-            {headingMain}
+            {heading}
           </h2>
 
           <p className="text-white/60 max-w-xl">{paragraph}</p>
 
-          <div className="grid sm:grid-cols-3 gap-4">
-            {features.map(({ icon: Icon, title, points }) => (
+          <div className="grid sm:grid-cols-2 gap-4">
+            {features.map(({ icon: Icon, title, description }, i) => (
               <div
-                key={title}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] p-5"
+                key={i}
+                className="group rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/20"
               >
-                <div className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center mb-4 text-[#40A2D8]">
+                <div className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center mb-4 text-[#40A2D8] transition-colors duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
                   <Icon size={18} />
                 </div>
-                <h3 className="font-semibold mb-3">{title}</h3>
-                <ul className="space-y-2">
-                  {points.map((point) => (
-                    <li
-                      key={point}
-                      className="flex items-start gap-2 text-sm text-white/70"
-                    >
-                      <Check size={14} className="text-[#40A2D8] mt-0.5 shrink-0" />
-                      {point}
-                    </li>
-                  ))}
-                </ul>
+                <h3 className="font-semibold mb-2 transition-colors duration-300">{title}</h3>
+                <p className="text-sm text-white/70 leading-relaxed transition-colors duration-300 group-hover:text-white/85">
+                  {description}
+                </p>
               </div>
             ))}
           </div>
 
           <div className="flex flex-wrap gap-3 mt-2">
             <Link
-              href="/contact"
-              className="inline-flex items-center justify-center border border-white/30 hover:bg-white/10 text-white text-sm font-semibold px-6 py-3 rounded-full transition"
-            >
-              Book Your AI Advisory Session
-            </Link>
-            <Link
               href="/ai-solutions"
               className="inline-flex items-center justify-center gap-1.5 bg-white text-black hover:bg-white/90 text-sm font-semibold px-6 py-3 rounded-full transition"
             >
-              Discover BizzBuzzAI
+              {buttonText}
               <ArrowUpRight size={16} />
             </Link>
           </div>

@@ -9,20 +9,45 @@ import { SERVICES } from "@/lib/industriesData";
 // lib/industriesData.js so this stays a thin presentation layer, not a
 // second source of truth for service names/links/icons.
 const SERVICE_DETAILS = {
-  seo: "On-page fixes, technical audits, content, and link building focused on rankings that actually convert — not just traffic for the sake of it.",
-  smm: "Content calendars, community management, and paid social campaigns across Instagram, Facebook, and LinkedIn built around your brand voice.",
-  paidAds: "Google Ads and paid social campaigns built for ROAS, with transparent budgets and reporting — never a black box.",
-  webDev: "Fast, responsive websites and web apps built on modern stacks, handed over with full ownership — no vendor lock-in.",
-  bpo: "Trained support teams handling customer queries, order support, and back-office work so your core team can focus on growth.",
-  ai: "AI chatbots, workflow copilots, and custom automations that cut manual work without replacing the judgment calls that need a human.",
-  automation: "Email sequences, CRM workflows, and lifecycle automations that keep leads warm and follow-ups consistent, on autopilot.",
-  consultancy: "Workshops, audits, and roadmaps for teams that need a clear strategic direction before committing budget to execution.",
+  bpo: {
+    tagline: "Support That Keeps Business Moving",
+    desc: "Reliable customer support, lead management, and operational assistance designed around your business needs.",
+  },
+  webDev: {
+    tagline: "Websites Built for Growth",
+    desc: "Fast, responsive, and conversion-focused websites designed to create better digital experiences.",
+  },
+  seo: {
+    tagline: "Get Found by the Right Audience",
+    desc: "Strategic SEO that improves search visibility, attracts qualified traffic, and builds long-term organic growth.",
+  },
+  smm: {
+    tagline: "Turn Attention Into Connection",
+    desc: "Strategic social media management and content designed to build brand presence and meaningful audience engagement.",
+  },
+  paidAds: {
+    tagline: "Reach Customers Ready to Act",
+    desc: "Targeted paid campaigns designed to drive qualified traffic, generate leads, and improve advertising performance.",
+  },
+  ai: {
+    tagline: "Put AI to Work for Your Business",
+    desc: "Practical AI solutions that improve efficiency, automate tasks, and create smarter digital workflows.",
+  },
+  automation: {
+    tagline: "Automate the Work That Slows You Down",
+    desc: "Connected marketing workflows that streamline repetitive tasks, nurture leads, and improve operational efficiency.",
+  },
+  consultancy: {
+    tagline: "Turn Business Challenges Into Direction",
+    desc: "Practical consulting that helps businesses identify opportunities, solve challenges, and make smarter growth decisions.",
+  },
 };
 
 export default function CategoriesShowcase() {
   const services = Object.values(SERVICES);
   const [active, setActive] = useState(services[0]?.key);
   const activeService = services.find((s) => s.key === active) || services[0];
+  const activeDetail = SERVICE_DETAILS[activeService.key];
 
   return (
     <div>
@@ -49,9 +74,14 @@ export default function CategoriesShowcase() {
               <activeService.icon size={26} />
             </span>
             <div className="flex-1">
-              <h3 className="font-bold text-xl mb-2">{activeService.label}</h3>
+              <h3 className="font-bold text-xl mb-1">{activeService.label}</h3>
+              {activeDetail?.tagline && (
+                <p className="text-sm font-semibold text-[#40A2D8] mb-2">
+                  {activeDetail.tagline}
+                </p>
+              )}
               <p className="text-white/70 text-sm leading-relaxed max-w-2xl">
-                {SERVICE_DETAILS[activeService.key]}
+                {activeDetail?.desc}
               </p>
             </div>
             <a

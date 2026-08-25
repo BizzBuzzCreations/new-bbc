@@ -2,20 +2,20 @@ import Link from "next/link";
 import {
   ArrowUpRight,
   ChevronRight,
-  Search,
-  PenTool,
-  Rocket,
-  BarChart3,
   Users,
   ShieldCheck,
   FileSignature,
-  BarChart2,
   Layers,
   Unlock,
+  LifeBuoy,
+  Target,
+  TrendingUp,
+  CheckCircle2,
 } from "lucide-react";
 import CTA from "@/components/sections/CTA";
 import Particles from "@/components/ui/Particles";
 import ServiceScenariosCarousel from "@/components/sections/serviceScenariosCarousel";
+import DarkFAQSection from "@/components/sections/darkFAQSection";
 import { SERVICES } from "@/lib/industriesData";
 import { getPageContent } from "@/actions/pageContentActions";
 
@@ -24,43 +24,75 @@ import { getPageContent } from "@/actions/pageContentActions";
 // so this index and that widget never say different things about the
 // same service.
 const DEFAULT_SERVICE_DETAILS = {
-  seo: "On-page fixes, technical audits, content, and link building focused on rankings that actually convert — not just traffic for the sake of it.",
-  smm: "Content calendars, community management, and paid social campaigns across Instagram, Facebook, and LinkedIn built around your brand voice.",
-  paidAds: "Google Ads and paid social campaigns built for ROAS, with transparent budgets and reporting — never a black box.",
-  webDev: "Fast, responsive websites and web apps built on modern stacks, handed over with full ownership — no vendor lock-in.",
-  bpo: "Trained support teams handling customer queries, order support, and back-office work so your core team can focus on growth.",
-  ai: "AI chatbots, workflow copilots, and custom automations that cut manual work without replacing the judgment calls that need a human.",
-  automation: "Email sequences, CRM workflows, and lifecycle automations that keep leads warm and follow-ups consistent, on autopilot.",
-  consultancy: "Workshops, audits, and roadmaps for teams that need a clear strategic direction before committing budget to execution.",
+  seo: { description: "Improve search visibility, attract qualified organic traffic, and build sustainable growth with technical SEO, content, on-page optimization, and link-building strategies.", buttonText: "Explore SEO Services" },
+  smm: { description: "Build your brand presence and engage the right audience with strategic content, social media management, paid campaigns, and platform-specific marketing strategies.", buttonText: "Explore Social Media Marketing" },
+  paidAds: { description: "Reach high-intent customers faster with targeted Google Ads and paid campaigns designed to increase qualified traffic, generate leads, and maximize marketing performance.", buttonText: "Explore Paid Marketing" },
+  webDev: { description: "Build fast, responsive, SEO-friendly websites that strengthen your online presence, deliver better user experiences, and turn visitors into meaningful business opportunities.", buttonText: "Explore Website Development" },
+  bpo: { description: "Improve operational efficiency with reliable BPO and customer support solutions covering customer queries, order support, back-office operations, and business processes.", buttonText: "Explore BPO Services" },
+  ai: { description: "Use AI-powered solutions, intelligent chatbots, workflow automation, and custom systems to reduce repetitive work, improve efficiency, and support smarter business operations.", buttonText: "Explore AI Solutions" },
+  automation: { description: "Streamline lead nurturing and follow-ups with CRM workflows, email automation, customer journeys, and marketing systems that keep your sales process moving consistently.", buttonText: "Explore Marketing Automation" },
+  consultancy: { description: "Get practical business guidance through strategic audits, workshops, market insights, and growth roadmaps designed to help you make better decisions with confidence.", buttonText: "Explore Business Consultancy" },
 };
 
-// Same 4-step process already established on the homepage ("Our Process")
-// — reused verbatim rather than inventing a different process for this
-// page, so the two never contradict each other.
-const DEFAULT_PROCESS_STEPS = [
+// Icons stay code-driven (design), matched positionally to whichever
+// "Why Choose Us" cards are saved.
+const WHY_CHOOSE_ICONS = [Layers, Target, TrendingUp, CheckCircle2];
+
+// Services page FAQs — questions specific to choosing/working with our
+// service lineup.
+const SERVICES_FAQS = [
   {
-    icon: Search,
-    title: "Free Consultation & Business Audit",
-    description:
-      "We study your business, competitors, and current online presence to spot quick wins and growth gaps.",
+    question: "What services does BizzBuzz Creations offer?",
+    answer:
+      "BizzBuzz Creations provides SEO, social media marketing, Google Ads and paid marketing, website development, BPO and customer support, AI solutions, marketing automation, and business consultancy.",
   },
   {
-    icon: PenTool,
-    title: "Custom Strategy Design",
-    description:
-      "We build a data-backed digital marketing plan — SEO, ads, content, or all three — matched to your goals and budget.",
+    question: "How much do digital marketing services cost?",
+    answer:
+      "Pricing depends on the services and scope you choose; there's no fixed package. A free consultation gets you a clear, upfront quote before any work begins.",
   },
   {
-    icon: Rocket,
-    title: "Campaign Execution",
-    description:
-      "Our team launches and manages your campaigns across Google, Meta, and search, optimized for real results, not vanity metrics.",
+    question: "How do I know which service is right for my business?",
+    answer:
+      "The right service depends on your goals, industry, audience, competition, budget, and current digital presence. Our team can evaluate your needs and recommend the most suitable services and priorities.",
   },
   {
-    icon: BarChart3,
-    title: "Reporting & Continuous Optimization",
+    question: "How long does it take to see results from SEO or paid ads?",
+    answer:
+      "Paid ads typically show measurable traffic and leads within days to a few weeks. SEO is a longer-term investment; most businesses see meaningful ranking improvements in 3 to 6 months, depending on competition.",
+  },
+  {
+    question: "Can BizzBuzz Creations handle both marketing and website development?",
+    answer:
+      "Yes. We provide digital marketing and website development under one team, allowing businesses to coordinate their online visibility, marketing campaigns, content, and website experience more efficiently.",
+  },
+  {
+    question: "Do you provide services to businesses outside Prayagraj?",
+    answer:
+      "Yes. BizzBuzz Creations works with businesses in Prayagraj, across India, and worldwide, providing digital marketing, web development, BPO, AI, automation, and other business solutions.",
+  },
+];
+
+const DEFAULT_WHY_CHOOSE_ITEMS = [
+  {
+    title: "Everything Under One Roof",
     description:
-      "You get clear monthly reports, and we refine every campaign using performance data to keep growth compounding.",
+      "SEO, paid advertising, social media, websites, AI, automation, BPO, and consultancy without coordinating multiple agencies.",
+  },
+  {
+    title: "Built Around Your Business",
+    description:
+      "We consider your industry, audience, market, and requirements instead of forcing your business into a standard package.",
+  },
+  {
+    title: "Flexible as You Grow",
+    description:
+      "Start with what you need today and add services as new opportunities, challenges, and business requirements emerge.",
+  },
+  {
+    title: "Focused on Business Outcomes",
+    description:
+      "Our work is designed to support meaningful outcomes such as visibility, enquiries, customers, efficiency, and stronger digital operations.",
   },
 ];
 
@@ -69,42 +101,44 @@ const DEFAULT_PROCESS_STEPS = [
 // — reused here instead of a fabricated testimonial/stat block.
 // Icons stay code-driven (design), matched positionally to whichever
 // engagement features are saved.
-const ENGAGEMENT_ICONS = [Users, Unlock, FileSignature, BarChart2, ShieldCheck, Layers];
+const ENGAGEMENT_ICONS = [Users, Unlock, FileSignature, Layers, ShieldCheck, LifeBuoy];
 
 const DEFAULT_ENGAGEMENT_FEATURES = [
-  { title: "Free Consultation First", desc: "Every engagement starts with a free consultation — no fixed package, just what your business actually needs." },
-  { title: "No Vendor Lock-In", desc: "Your Google Ads, Analytics, and website accounts stay owned by you, always." },
-  { title: "NDA Available", desc: "An NDA is available before any project details or account access are shared." },
-  { title: "Transparent Reporting", desc: "Clear, regular reporting — you always know what's happening and why." },
-  { title: "Scoped, Careful Access", desc: "Access to your accounts is scoped to only what's needed for the work, nothing more." },
-  { title: "Combined or Standalone", desc: "Take one service or several — every engagement is built around your actual goals, not a fixed bundle." },
+  { title: "One Point of Contact", desc: "Keep communication simple with a dedicated team that understands your business and ongoing requirements." },
+  { title: "You Own Your Accounts", desc: "Your website, advertising accounts, analytics, data, and digital assets remain under your ownership." },
+  { title: "Clear Scope & Pricing", desc: "Know what's included, what's being delivered, and where your budget is going before work begins." },
+  { title: "No Long-Term Lock-In", desc: "Choose the services you need without being pushed into unnecessary packages or complicated commitments." },
+  { title: "Secure Information Handling", desc: "Your business information, account access, and project details are handled with appropriate confidentiality and care." },
+  { title: "Support When You Need It", desc: "Get help when questions, changes, or new requirements come up instead of being left to figure them out alone." },
 ];
 
 // Helps a visitor self-select a service based on their actual problem,
 // rather than making them guess from a list of 8 labels. `service` keys
-// stay code-driven (they drive routing), matched positionally to
-// whichever questions are saved.
-const SCENARIO_SERVICE_KEYS = ["seo", "paidAds", "webDev", "bpo", "automation", "consultancy"];
+// stay code-driven (they drive routing/icon/label), matched positionally
+// to whichever questions are saved.
+const SCENARIO_SERVICE_KEYS = ["seo", "webDev", "paidAds", "smm", "ai", "bpo", "consultancy", "webDev"];
 
 const DEFAULT_SERVICE_SCENARIOS = [
-  { question: "Not showing up when people search for you?" },
-  { question: "Getting traffic, but not enough leads or sales?" },
-  { question: "Need a website that actually converts visitors?" },
-  { question: "Drowning in customer calls and queries?" },
-  { question: "Repeating the same manual work every week?" },
-  { question: "Need a clear strategy before spending on execution?" },
+  { question: "Not Getting Enough Traffic?", detail: "Improve your online visibility and attract more qualified visitors through SEO and search-focused content." },
+  { question: "Getting Traffic but Few Enquiries?", detail: "Strengthen your website experience, messaging, and conversion paths to turn more visitors into potential customers." },
+  { question: "Need More Leads Quickly?", detail: "Reach customers with high purchase intent through targeted Google Ads and paid digital campaigns." },
+  { question: "Struggling to Stay Consistent on Social Media?", detail: "Build a stronger presence with content planning, social media management, and audience-focused campaigns." },
+  { question: "Too Many Repetitive Tasks?", detail: "Reduce manual work with AI-powered tools, automated workflows, and connected marketing systems." },
+  { question: "Customer Support Taking Too Much Time?", detail: "Delegate customer queries and routine business operations to reliable BPO and support teams." },
+  { question: "Not Sure What Your Business Needs Next?", detail: "Get an outside perspective on your digital presence, opportunities, and priorities before investing further." },
+  { question: "Need a Better Online Foundation?", detail: "Create a fast, responsive website that gives your brand a stronger digital presence and supports customer acquisition." },
 ];
 
 export const metadata = {
-  title: "Our Services | BizzBuzz Creations",
+  title: "Digital Marketing & Business Services | BizzBuzz Creations",
   description:
-    "Digital marketing, BPO, web development, AI solutions, marketing automation, and business consultancy — explore every service BizzBuzz Creations offers.",
+    "Explore SEO, social media, Google Ads, web development, BPO, AI, automation, and business consultancy services built for business growth.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/services",
   },
 };
 
-function ServiceCard({ service, description }) {
+function ServiceCard({ service, description, buttonText }) {
   const Icon = service.icon;
   return (
     <Link
@@ -121,9 +155,15 @@ function ServiceCard({ service, description }) {
         />
       </div>
       <h3 className="font-bold text-white mb-2">{service.label}</h3>
-      <p className="text-sm text-white/60 leading-relaxed line-clamp-3 transition-colors duration-300 group-hover:text-white/85">
+      <p className="text-sm text-white/60 leading-relaxed line-clamp-3 mb-4 transition-colors duration-300 group-hover:text-white/85">
         {description}
       </p>
+      {buttonText && (
+        <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#40A2D8] transition-colors duration-300 group-hover:text-white">
+          {buttonText}
+          <ArrowUpRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        </span>
+      )}
     </Link>
   );
 }
@@ -132,17 +172,18 @@ export default async function ServicesIndexPage() {
   const content = await getPageContent("services");
   const services = Object.values(SERVICES);
 
-  const heroHeading = content?.servicesHeroHeading || "Everything You Need to Grow, Under One Roof";
+  const heroHeading = content?.servicesHeroHeading || "Stop Juggling Agencies. Start Growing.";
   const heroParagraph =
     content?.servicesHeroParagraph ||
-    "From getting found in search to handling the calls that come from it — BizzBuzz Creations covers the full stack of digital growth, so you're not juggling five different vendors.";
-  const heroButtonText = content?.servicesHeroButtonText || "Get Started";
+    "SEO, ads, web development and automation — one roof, one team, wherever your customers are.";
+  const heroButtonText = content?.servicesHeroButtonText || "Explore Our Services";
+  const heroSecondaryButtonText = content?.servicesHeroSecondaryButtonText || "Get a Free Consultation";
 
-  const gridHeading = content?.servicesGridHeading || "See Our All Services";
-  const gridSubtext = content?.servicesGridSubtext || "Pick a service below to see how we approach it — or combine a few for a full-funnel engagement.";
+  const gridHeading = content?.servicesGridHeading || "Explore Our Digital Growth Services";
+  const gridSubtext = content?.servicesGridSubtext || "Choose the services that match your goals, or combine multiple solutions to support different areas of your business.";
   const serviceDetailsList =
     content?.serviceDescriptions?.length > 0
-      ? content.serviceDescriptions.map((d) => d.description)
+      ? content.serviceDescriptions
       : Object.values(DEFAULT_SERVICE_DETAILS);
   const serviceDetailsByKey = {};
   Object.keys(SERVICES).forEach((key, i) => {
@@ -150,27 +191,29 @@ export default async function ServicesIndexPage() {
   });
 
   const engagementEyebrow = content?.engagementEyebrow || "How We Work";
-  const engagementHeading = content?.engagementHeading || "What Every Engagement Includes";
+  const engagementHeading = content?.engagementHeading || "A Better Experience From Start to Finish";
   const engagementSubtext =
-    content?.engagementSubtext || "The same standards we hold ourselves to, no matter which service or combination of services you pick.";
+    content?.engagementSubtext || "Simple communication, clear ownership, and a straightforward experience without the usual agency complications.";
   const engagementFeaturesRaw = content?.engagementFeatures?.length > 0 ? content.engagementFeatures : DEFAULT_ENGAGEMENT_FEATURES;
   const engagementFeatures = engagementFeaturesRaw.map((f, i) => ({ ...f, icon: ENGAGEMENT_ICONS[i % ENGAGEMENT_ICONS.length] }));
 
   const scenariosEyebrow = content?.scenariosEyebrow || "Not Sure Where to Start?";
-  const scenariosHeading = content?.scenariosHeading || "Find the Right Service for Your Problem";
+  const scenariosHeading = content?.scenariosHeading || "What Are You Trying to Fix?";
   const scenariosSubtext =
     content?.scenariosSubtext ||
-    `Most businesses don't walk in asking for "SEO" or "marketing automation" — they walk in with a problem. Skip the guesswork: pick whichever sounds like you, and we'll point you to the service actually built for it.`;
+    "Start with the challenge, not the service. We'll help you find the right digital solution.";
   const scenarioQuestionsRaw = content?.scenarioQuestions?.length > 0 ? content.scenarioQuestions : DEFAULT_SERVICE_SCENARIOS;
   const serviceScenarios = scenarioQuestionsRaw.map((s, i) => ({
     question: s.question,
+    detail: s.detail,
     service: SCENARIO_SERVICE_KEYS[i % SCENARIO_SERVICE_KEYS.length],
   }));
 
-  const processHeading = content?.servicesProcessHeading || "Proven Process for Smarter Growth";
-  const processSubtext = content?.servicesProcessSubtext || "We simplify your growth journey, so you can focus on your business, not the process.";
-  const processStepsRaw = content?.servicesProcessSteps?.length > 0 ? content.servicesProcessSteps : DEFAULT_PROCESS_STEPS;
-  const processSteps = processStepsRaw.map((s, i) => ({ ...s, icon: DEFAULT_PROCESS_STEPS[i % DEFAULT_PROCESS_STEPS.length].icon }));
+  const whyChooseEyebrow = content?.servicesProcessEyebrow || "Why Choose Us?";
+  const whyChooseHeading = content?.servicesProcessHeading || "Why Businesses Choose BizzBuzz Creations";
+  const whyChooseSubtext = content?.servicesProcessSubtext || "More than individual services, you get one team that understands the bigger picture of your digital presence.";
+  const whyChooseItemsRaw = content?.servicesProcessSteps?.length > 0 ? content.servicesProcessSteps : DEFAULT_WHY_CHOOSE_ITEMS;
+  const whyChooseItems = whyChooseItemsRaw.map((s, i) => ({ ...s, icon: WHY_CHOOSE_ICONS[i % WHY_CHOOSE_ICONS.length] }));
 
   return (
     <>
@@ -205,13 +248,22 @@ export default async function ServicesIndexPage() {
             <p className="text-white/70 leading-relaxed mb-9 max-w-lg">
               {heroParagraph}
             </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 bg-[#0B60B0] hover:bg-[#0d72cf] text-white text-sm font-semibold px-7 py-3.5 rounded-full shadow-lg shadow-[#0B60B0]/30 transition"
-            >
-              {heroButtonText}
-              <ArrowUpRight size={16} />
-            </Link>
+            <div className="flex flex-wrap items-center gap-4">
+              <Link
+                href="#services-grid"
+                className="inline-flex items-center gap-2 bg-[#0B60B0] hover:bg-[#0d72cf] text-white text-sm font-semibold px-7 py-3.5 rounded-full shadow-lg shadow-[#0B60B0]/30 transition"
+              >
+                {heroButtonText}
+                <ArrowUpRight size={16} />
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 border border-white/30 hover:bg-white/10 text-white text-sm font-semibold px-7 py-3.5 rounded-full transition"
+              >
+                {heroSecondaryButtonText}
+                <ArrowUpRight size={16} />
+              </Link>
+            </div>
           </div>
 
           {/* Real services, laid out as a small floating grid instead of a
@@ -236,7 +288,7 @@ export default async function ServicesIndexPage() {
       </section>
 
       {/* Services grid */}
-      <section className="relative bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10 overflow-hidden">
+      <section id="services-grid" className="relative bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10 overflow-hidden">
         {/* Same animated particle backdrop used on the contact page */}
         <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
           <Particles
@@ -263,17 +315,17 @@ export default async function ServicesIndexPage() {
           <div className="space-y-6">
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {services.slice(0, 3).map((service) => (
-                <ServiceCard key={service.key} service={service} description={serviceDetailsByKey[service.key]} />
+                <ServiceCard key={service.key} service={service} description={serviceDetailsByKey[service.key]?.description} buttonText={serviceDetailsByKey[service.key]?.buttonText} />
               ))}
             </div>
             <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
               {services.slice(3, 5).map((service) => (
-                <ServiceCard key={service.key} service={service} description={serviceDetailsByKey[service.key]} />
+                <ServiceCard key={service.key} service={service} description={serviceDetailsByKey[service.key]?.description} buttonText={serviceDetailsByKey[service.key]?.buttonText} />
               ))}
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {services.slice(5, 8).map((service) => (
-                <ServiceCard key={service.key} service={service} description={serviceDetailsByKey[service.key]} />
+                <ServiceCard key={service.key} service={service} description={serviceDetailsByKey[service.key]?.description} buttonText={serviceDetailsByKey[service.key]?.buttonText} />
               ))}
             </div>
           </div>
@@ -327,26 +379,29 @@ export default async function ServicesIndexPage() {
         </div>
 
         <ServiceScenariosCarousel
-          items={serviceScenarios.map(({ question, service: key }) => ({
+          items={serviceScenarios.map(({ question, service: key, detail }) => ({
             question,
             service: key,
-            detail: serviceDetailsByKey[key],
+            detail: detail || serviceDetailsByKey[key]?.description,
           }))}
         />
       </section>
 
-      {/* Process */}
+      {/* Why Choose Us */}
       <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
         <div className="max-w-6xl mx-auto">
+          <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] text-center mb-3">
+            {whyChooseEyebrow}
+          </p>
           <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-3">
-            {processHeading}
+            {whyChooseHeading}
           </h2>
           <p className="text-center text-white/60 max-w-xl mx-auto mb-14">
-            {processSubtext}
+            {whyChooseSubtext}
           </p>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {processSteps.map(({ icon: Icon, title, description }, i) => (
+            {whyChooseItems.map(({ icon: Icon, title, description }, i) => (
               <div
                 key={i}
                 className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/20"
@@ -363,6 +418,9 @@ export default async function ServicesIndexPage() {
           </div>
         </div>
       </section>
+
+      {/* FAQs — questions specific to choosing/working with our services */}
+      <DarkFAQSection faqs={SERVICES_FAQS} heading="Frequently Asked Questions" />
 
       <CTA />
     </>

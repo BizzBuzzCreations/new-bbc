@@ -12,32 +12,32 @@ import Image from "next/image";
 const DEFAULT_YEARS = [
   {
     year: "2022",
-    title: "Our Beginning",
-    body: "BizzBuzz Creations started in Prayagraj as a small team of marketers, designers, and strategists, taking on our first local projects with one rule: build for outcomes, not vanity metrics.",
+    title: "Building the Foundation",
+    body: "We began our journey with a focus on digital marketing, creative branding, and online business growth, helping brands establish a stronger and more meaningful digital presence.",
     img: "/image-7.jpg",
   },
   {
     year: "2023",
-    title: "Building the Core Team",
-    body: "We built out dedicated SEO, paid media, web development, and BPO capabilities, training every new hire on the same standards we held ourselves to from day one.",
+    title: "Expanding Digital Expertise",
+    body: "We continued developing our expertise in SEO, social media marketing, content marketing, website solutions, and digital branding to create stronger online experiences for growing businesses.",
     img: "/image-2.jpg",
   },
   {
     year: "2024",
-    title: "Growing Beyond Prayagraj",
-    body: "Referrals started coming in from across India, and our client roster grew to span multiple industries — from D2C startups to established enterprises.",
+    title: "Strengthening Our Approach",
+    body: "Our focus evolved toward result-driven digital marketing strategies, combining SEO, content, social media, branding, and web solutions to help businesses build visibility and connect with their audiences.",
     img: "/image-5.webp",
   },
   {
     year: "2025",
-    title: "A Wider Reach",
-    body: "Our footprint expanded to include clients across the UK and US, alongside continued growth of our team and services here in India.",
+    title: "Growing Digital Possibilities",
+    body: "We continued refining our digital marketing and SEO strategies, focusing on stronger brand visibility, engaging content, effective online campaigns, and sustainable digital growth across different business needs.",
     img: "/image-4.webp",
   },
   {
     year: "2026",
     title: "Where We Are Today",
-    body: "With 90+ projects delivered for 50+ clients across 20+ industries, and real certifications from Clutch and Google, we keep building the same way we started: hands-on, transparent, and outcome-focused.",
+    body: "Today, we continue building smarter digital marketing, SEO, branding, content, social media, and web strategies, helping businesses strengthen their online presence and grow with confidence.",
     img: "/teamPic.webp",
   },
 ];

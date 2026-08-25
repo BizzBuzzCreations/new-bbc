@@ -42,11 +42,11 @@ export default function ServiceScenariosCarousel({ items }) {
       extensions={{ AutoScroll }}
       className="max-w-6xl mx-auto"
     >
-      {items.map(({ question, service: key, detail }) => {
+      {items.map(({ question, service: key, detail }, i) => {
         const service = SERVICES[key];
         const Icon = service.icon;
         return (
-          <SplideSlide key={service.key} className="h-auto py-2">
+          <SplideSlide key={i} className="h-auto py-2">
             <Link
               href={service.href}
               className="group flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-black/40"

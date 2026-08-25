@@ -7,6 +7,7 @@ import {
   Sparkles,
   BarChart3,
   ArrowUpRight,
+  ShieldCheck,
 } from "lucide-react";
 import Particles from "@/components/ui/Particles";
 
@@ -19,6 +20,12 @@ const STAGE_LAYOUT = [
   { icon: MonitorSmartphone, href: "/web-development" },
   { icon: Sparkles, href: "/business-consultancy" },
   { icon: BarChart3, href: "/#case-studies" },
+];
+
+const DEFAULT_TRUST_LINES = [
+  { text: "Trusted by growing businesses across Prayagraj, India, and the UK — no long-term lock-in, just a team focused on measurable results." },
+  { text: "Every engagement starts with a free consultation — no fixed package, just what your business actually needs." },
+  { text: "Transparent reporting and clear communication, so you always know exactly what's happening and why." },
 ];
 
 const DEFAULT_STAGES = [
@@ -37,6 +44,8 @@ export default function MarketingCTA({ content }) {
     content?.marketingCtaParagraph ||
     "Whether you're launching, scaling, or ready for a fresh marketing direction, tell us what you're working on. We'll show you the smartest way forward.";
   const buttonText = content?.marketingCtaButtonText || "Get Free Consultation Now";
+  const trustLinesRaw = content?.marketingCtaTrustLines?.length > 0 ? content.marketingCtaTrustLines : DEFAULT_TRUST_LINES;
+  const trustLines = trustLinesRaw.map((t) => t.text);
   const backgroundImage = content?.marketingCtaBackgroundImage || "/building.jpg";
   const stagesEyebrow = content?.stagesEyebrow || "Wherever You Are, We Have a Path";
   const stagesRaw = content?.stages?.length > 0 ? content.stages : DEFAULT_STAGES;
@@ -75,6 +84,17 @@ export default function MarketingCTA({ content }) {
               {buttonText}
               <ArrowUpRight size={16} />
             </Link>
+
+            <div className="flex flex-col gap-4 max-w-sm pt-8 border-t border-white/15">
+              {trustLines.map((line, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <ShieldCheck size={18} className="text-[#8fd0f2] shrink-0 mt-0.5" />
+                  <p className="text-sm text-white/70 leading-relaxed">
+                    {line}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

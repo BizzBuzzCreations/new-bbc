@@ -2,28 +2,34 @@ import DarkFAQSection from "@/components/sections/darkFAQSection";
 
 const DEFAULT_FAQS = [
   {
-    question: "What does Bizzbuzz Creations do?",
+    question: "Who is BizzBuzz Creations?",
     answer:
-      "We're a digital marketing agency in India offering SEO, paid ads, social media, content, and web design — all under one roof.",
+      "BizzBuzz Creations is a digital marketing agency based in Prayagraj (Allahabad), India, helping businesses grow through SEO, digital marketing, paid advertising, social media, web development, and digital strategy.",
   },
   {
-    question: "How is Bizzbuzz Creations different from other agencies?",
+    question: "Where is BizzBuzz Creations based?",
     answer:
-      "We build for both traditional search and AI-driven search — not just Google rankings, but how AI tools and voice assistants recommend brands too.",
+      "BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, India, and works with businesses across India as well as clients in international markets, including the UK and US.",
   },
   {
-    question: "How many clients has Bizzbuzz Creations worked with?",
-    answer: "We've delivered 90+ projects for 50+ clients across India.",
+    question: "What digital marketing services does BizzBuzz Creations offer?",
+    answer:
+      "BizzBuzz Creations provides SEO, digital marketing, social media marketing, paid advertising, content marketing, web design and development, and digital strategy. Services can be combined based on your business goals.",
   },
   {
-    question: "How long does it take to see results?",
+    question: "Does BizzBuzz Creations work with businesses outside Prayagraj?",
     answer:
-      "Paid ads show results in weeks; SEO and content typically build momentum in 3–6 months.",
+      "Yes. While we work with businesses in Prayagraj and across India, we also help businesses in international markets build their online presence, generate leads, and achieve sustainable digital growth.",
   },
   {
-    question: "How do I get started with Bizzbuzz Creations?",
+    question: "Why choose BizzBuzz Creations as your digital marketing agency?",
     answer:
-      "Book a free strategy call — we'll audit your digital presence and share a custom growth plan.",
+      "We focus on strategy before campaigns, measurable growth over vanity metrics, and long-term digital performance. Every strategy is tailored to the business, audience, competition, and goals rather than using a one-size-fits-all approach.",
+  },
+  {
+    question: "How can I get started with BizzBuzz Creations?",
+    answer:
+      "Contact our team to discuss your business, current digital presence, and growth goals. We'll identify the right opportunities and help you build a practical digital marketing strategy designed around your business.",
   },
 ];
 

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 // Real BizzBuzz office/team photos (same assets already used elsewhere on
 // the site) auto-advancing behind the hero text, instead of one static
@@ -57,17 +58,24 @@ export default function CareerHero() {
         <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-4">
           We&rsquo;re Hiring
         </p>
-        <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">
-          We Seek
-          <br />
-          Innovators
+        <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4">
+          Work Where Your Ideas Matter
         </h1>
-        <a
-          href="#open-positions"
+        <h2 className="text-white/90 text-lg sm:text-xl font-semibold mb-4">
+          Learn by Doing. Grow by Owning.
+        </h2>
+        <p className="text-white/70 max-w-lg leading-relaxed mb-8">
+          At BizzBuzz Creations, we believe great work comes from trust,
+          ownership, and collaboration. Our flat structure means fewer
+          layers, faster decisions, and more room to turn your ideas into
+          real outcomes.
+        </p>
+        <Link
+          href="/contact"
           className="inline-flex items-center bg-[#0B60B0] hover:bg-[#0B60B0]/90 text-white text-sm font-semibold px-7 py-3.5 rounded-lg transition"
         >
-          Your Success Starts Here
-        </a>
+          Apply Now
+        </Link>
       </div>
 
       {/* Slide indicators */}

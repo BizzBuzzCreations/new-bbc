@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+
 // FAQ page hero — same full-bleed-photo treatment as HomeAbout's building
 // shot: the question-mark graphic spans the whole section as a background
 // image, fading from solid black (behind the text) into the photo on the
@@ -34,12 +37,22 @@ export default function FaqHero() {
               Questions
             </span>
           </h1>
+          <h2 className="mt-4 text-lg sm:text-xl font-semibold text-[#40A2D8]">
+            Answers to What Businesses Ask Before They Grow With Us
+          </h2>
           <p className="mt-6 text-white/60 max-w-lg leading-relaxed">
-            Choosing a growth partner raises a lot of questions, and that's
-            fair. This page offers clear, transparent answers to business
-            questions around BizzBuzz Creations' services, process,
-            pricing, and more.
+            Have questions about SEO, Google Ads, social media, web
+            development, AI automation, or working with BizzBuzz Creations?
+            Find clear answers below — and if you don't see what you're
+            looking for, our team is one message away.
           </p>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 bg-[#0B60B0] hover:bg-[#0d72cf] text-white text-sm font-semibold px-7 py-3.5 rounded-full shadow-lg shadow-[#0B60B0]/30 transition mt-8"
+          >
+            Ask Us Directly
+            <ArrowUpRight size={16} />
+          </Link>
         </div>
       </div>
     </section>

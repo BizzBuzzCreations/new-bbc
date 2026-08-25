@@ -1,13 +1,13 @@
-import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import TeamHero from "@/components/sections/teamHero";
 import TeamGrids from "@/components/sections/teamGrids";
 import ContactSection from "@/components/sections/contactSection";
-import CTA from "@/components/sections/CTA";
 
 export const metadata = {
-  title: "Our Core Team | BizzBuzz Creations",
+  title: "Our Team | BizzBuzz Creations Digital Marketing Agency",
   description:
-    "Meet the team behind BizzBuzz Creations — strategists, marketers, designers, and developers driving growth for clients across India and the UK.",
+    "Meet the team behind BizzBuzz Creations: SEO, ads, development, and AI specialists building digital growth for businesses across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/our-team",
   },
@@ -22,74 +22,63 @@ export default function OurTeamPage() {
           staggered one-by-one reveal as they scroll into view. */}
       <TeamGrids />
 
-      {/* Measurable impact — real numbers and certifications only */}
-      <section className="bg-black text-white py-20 px-6 md:px-12 lg:px-24">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold mb-3">
-            Measurable Impact
-          </h2>
-          <p className="text-white/60 max-w-2xl mb-12 leading-relaxed">
-            Real numbers, not vanity metrics — and the certifications behind
-            the work.
-          </p>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            <div
-              className="rounded-2xl p-6 flex flex-col justify-end min-h-[180px]"
-              style={{ background: "linear-gradient(160deg, #0B60B0, #050b16)" }}
-            >
-              <p className="text-4xl font-bold mb-1">90+</p>
-              <p className="text-white/70 text-sm">Projects Delivered</p>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col justify-end min-h-[180px]">
-              <p className="text-4xl font-bold mb-1">50+</p>
-              <p className="text-white/70 text-sm">Clients Across India &amp; the UK</p>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col justify-end min-h-[180px]">
-              <p className="text-4xl font-bold mb-1">2</p>
-              <p className="text-white/70 text-sm">Offices — Prayagraj &amp; London</p>
-            </div>
-            <div
-              className="rounded-2xl p-6 flex flex-col justify-end min-h-[180px]"
-              style={{ background: "linear-gradient(160deg, #4c2f91, #050b16)" }}
-            >
-              <p className="text-4xl font-bold mb-1">20+</p>
-              <p className="text-white/70 text-sm">Industries Served</p>
-            </div>
-          </div>
-
-          {/* Real certifications, not fabricated press coverage */}
-          <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8">
-            <p className="text-sm font-semibold text-white/70 mb-6">
-              Certified &amp; Recognized By
-            </p>
-            <div className="flex flex-wrap items-center gap-8 sm:gap-12">
-              {[
-                { src: "/clutch.png", alt: "Clutch" },
-                { src: "/CDL.png", alt: "Google Ads Partner" },
-                { src: "/GA.png", alt: "Google Analytics Partner" },
-                { src: "/ISO.png", alt: "ISO Certified" },
-              ].map((badge) => (
-                <Image
-                  key={badge.alt}
-                  src={badge.src}
-                  alt={badge.alt}
-                  width={80}
-                  height={80}
-                  className="object-contain h-14 w-auto opacity-90"
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Contact — same working form as the Contact page */}
       <ContactSection />
 
-      {/* CTA — just above the footer */}
-      <div className="bg-black pt-4">
-        <CTA />
+      {/* CTA — page-specific (not the shared site-wide CTA), same visual
+          treatment as it, with two audiences instead of an email form. */}
+      <div className="bg-black px-5 py-10 scroll-mt-34">
+        <div
+          className="rounded-3xl border-2 border-[#0B60B0] shadow-lg shadow-black md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto container"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(120, 180, 255, 0.25), transparent 70%), #000000",
+          }}
+        >
+          <div className="py-8 md:py-10 px-10 z-10 text-white">
+            <h2 className="md:text-3xl text-2xl font-bold mb-5">
+              Want to Work With the People Behind the Work?
+            </h2>
+            <p className="max-w-3xl mb-8 text-white/70">
+              Whether you&rsquo;re looking for a digital marketing partner or
+              interested in joining our growing team, we&rsquo;d love to
+              hear from you.
+            </p>
+
+            <div className="flex flex-wrap gap-8">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">
+                  For Businesses
+                </p>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 bg-[#0B60B0] hover:bg-[#0d72cf] text-white text-sm font-semibold px-6 py-3 rounded-full transition"
+                >
+                  Work With Our Team
+                  <ArrowUpRight size={16} />
+                </Link>
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">
+                  For Candidates
+                </p>
+                <Link
+                  href="/career"
+                  className="inline-flex items-center gap-2 border border-white/50 hover:bg-white/10 text-white text-sm font-semibold px-6 py-3 rounded-full transition"
+                >
+                  Explore Careers
+                  <ArrowUpRight size={16} />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Full-width white divider before the footer — same as the shared
+          CTA's divider, so this page still ends the same way. */}
+      <div className="w-full bg-black pt-8 md:pt-10">
+        <div className="w-full border-t border-white" />
       </div>
     </>
   );

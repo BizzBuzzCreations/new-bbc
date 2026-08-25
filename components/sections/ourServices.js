@@ -89,7 +89,8 @@ const services = [
 ];
 
 export default function OurServices({ content }) {
-  const heading = content?.servicesHeading || "Our Digital Marketing Services";
+  const heading =
+    content?.servicesHeading || "Digital Marketing & Business Solutions";
   const subtext =
     content?.servicesSubtext ||
     "We don't believe in one-size-fits-all marketing. Our customized digital strategies help businesses attract qualified customers, increase conversions, and grow sustainably.";
@@ -116,7 +117,10 @@ export default function OurServices({ content }) {
         id="services"
       >
         {/* Same animated particle backdrop used on the contact page */}
-        <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+        <div
+          className="absolute inset-0 z-0 pointer-events-none"
+          aria-hidden="true"
+        >
           <Particles
             particleColors={["#40A2D8", "#0B60B0", "#8fd0f2", "#ffffff"]}
             particleCount={200}
@@ -128,7 +132,9 @@ export default function OurServices({ content }) {
           />
         </div>
 
-        <h2 className="relative z-10 md:text-4xl text-3xl font-bold mb-10 text-center text-white">{heading}</h2>
+        <h2 className="relative z-10 md:text-4xl text-3xl font-bold mb-10 text-center text-white">
+          {heading}
+        </h2>
         <p className="relative z-10 text-lg text-white/60 text-center mb-20 max-w-2xl mx-auto px-4">
           {subtext}
         </p>

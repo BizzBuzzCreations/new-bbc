@@ -6,21 +6,21 @@ import Image from "next/image";
 const DEFAULT_ROWS = [
   {
     title: "We Build With Real Ownership",
-    body: "BizzBuzz Creations runs on flat hierarchies, clear communication, and real ownership — you're not waiting on five layers of sign-off to get things done. Good ideas win regardless of title, and every account runs like an extension of the client's own team.",
+    body: "At BizzBuzz Creations, clear communication and accountability drive everything we do. Our digital marketing team in Prayagraj takes ownership from strategy to execution, turning ideas into marketing that creates real business impact.",
     img: "/image-2.jpg",
     imageSide: "right",
     imageSize: "large",
   },
   {
     title: "We Work As One Team",
-    body: "We're a growing agency working out of Prayagraj, India and London, UK — and it shows in how we work. No walled-off departments, no siloed specialists; strategy, design, and execution happen together, in the same room.",
+    body: "Our teams work together across strategy, design, technology, SEO, and digital marketing. Based in Prayagraj, India, with an international outlook, we bring different skills together to build smarter digital solutions for businesses.",
     img: "/image-4.webp",
     imageSide: "left",
     imageSize: "small",
   },
   {
     title: "We Grow Together",
-    body: "Everyone works on real client campaigns from day one, learns from a hands-on team, and takes on as much responsibility as they're ready for. We're always looking for people who want to level up their own skills, not just tick boxes on someone else's roadmap.",
+    body: "We believe great work comes from continuous learning and shared growth. Our team works on real campaigns, explores new digital strategies, and keeps developing the skills needed to deliver better marketing results for businesses in India and worldwide.",
     img: "/teamPic.webp",
     imageSide: "right",
     imageSize: "small",

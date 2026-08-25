@@ -3,6 +3,7 @@ import CTA from "@/components/sections/CTA";
 import Reviews from "@/components/sections/reviews";
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Target,
   Rocket,
@@ -44,7 +45,7 @@ const DEFAULT_ROADMAP_STEPS = [
 export const metadata = {
   title: "About BizzBuzz Creations | Digital Marketing Agency in Prayagraj",
   description:
-    "Learn about BizzBuzz Creations, a digital marketing agency in Prayagraj helping businesses across India grow with SEO, ads, social media & AI strategies.",
+    "Meet BizzBuzz Creations, a digital marketing agency in Prayagraj helping businesses across India and worldwide grow through SEO, paid ads, social media, web and digital strategy.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/about",
   },
@@ -54,14 +55,25 @@ export default async function About() {
   const content = await getPageContent("about");
 
   const storyHeading = content?.storyHeading || "Our Story";
-  const storySubheading = content?.storySubheading || "How Bizzbuzz Creations Began";
+  const storySubheading = content?.storySubheading || "From Local Projects to Global Ambition";
   const storyImage = content?.storyImage || "/banner.png";
   const storyParagraphOne =
     content?.storyParagraphOne ||
-    "Every big brand starts with a small idea — ours was simple: marketing shouldn't feel like guesswork.\n\nBizzbuzz Creations was founded by a small team of marketers, designers, and strategists who were tired of watching businesses waste money on campaigns that looked good but didn't perform. We wanted to build a digital marketing agency that actually cared about outcomes — not vanity metrics.\n\nWhat started as a handful of local projects in India quickly grew into something bigger. Word spread. Clients returned. Referrals came in from the UK and the US. Today, we've delivered 90+ successful projects for 50+ clients spanning multiple industries — from D2C startups to established enterprises — and our footprint continues to grow across India, the UK, and the United States.";
+    "Every big journey starts somewhere. Ours began in Prayagraj (Allahabad), India, with a simple belief: marketing shouldn't feel like guesswork.";
   const storyParagraphTwo =
     content?.storyParagraphTwo ||
-    "We're still the same team at heart: hands-on, curious, and obsessed with results. The only thing that's changed is scale.";
+    "BizzBuzz Creations started with a small team of marketers, designers, and strategists determined to help businesses get more from their digital presence. What began locally in Prayagraj has grown into a digital marketing agency serving businesses across India, the UK, the US, and beyond.";
+  const storyParagraphThree =
+    content?.storyParagraphThree ||
+    "Today, we bring together strategy, creativity, technology, SEO, and performance marketing to help businesses build stronger brands, reach the right audiences, and achieve meaningful digital growth.";
+  const storyParagraphFour =
+    content?.storyParagraphFour ||
+    "Our ambition is global, but our approach remains personal: understand the business, build the right strategy, and focus on results that actually matter.";
+  // Links inside paragraphs two and three only render on the real,
+  // un-edited default copy — an admin override falls back to plain text
+  // since a textarea can't carry embedded links.
+  const storyParagraphTwoIsDefault = !content?.storyParagraphTwo;
+  const storyParagraphThreeIsDefault = !content?.storyParagraphThree;
 
   const missionVisionHeading = content?.missionVisionHeading || "Our Mission, Vision & Core Values";
   const missionTitle = content?.missionTitle || "Our Mission";
@@ -81,7 +93,7 @@ export default async function About() {
     content?.differentiatorsSubtext ||
     `In a market flooded with agencies promising "guaranteed rankings," we chose a different path — building sustainable digital growth systems instead of chasing quick wins.`;
 
-  const roadmapHeading = content?.roadmapHeading || "The Roadmap Behind Every Digital Success";
+  const roadmapHeading = content?.roadmapHeading || "How Our Digital Marketing Process Works";
   const roadmapSubheading = content?.roadmapSubheading || "The Bizzbuzz Growth Blueprint";
   const roadmapIntro =
     content?.roadmapIntro ||
@@ -92,7 +104,7 @@ export default async function About() {
     content?.roadmapClosing ||
     "This roadmap is the reason our clients don't just get short-term spikes — they get compounding, long-term digital growth.";
 
-  const trustHeading = content?.trustHeading || "Why Businesses Across India Trust Us";
+  const trustHeading = content?.trustHeading || "Why Businesses Choose BizzBuzz Creations";
   const trustIntro =
     content?.trustIntro ||
     "If you're looking for a digital marketing agency that treats your business like a long-term partnership — not a one-off project — Bizzbuzz Creations is built for that.";
@@ -115,7 +127,40 @@ export default async function About() {
               {storyParagraphOne}
             </p>
             <p className="leading-relaxed lg:text-left text-center max-w-xl mx-auto mb-4 text-white/70 whitespace-pre-line">
-              {storyParagraphTwo}
+              {storyParagraphTwoIsDefault ? (
+                <>
+                  BizzBuzz Creations started with a small team of marketers, designers, and
+                  strategists determined to help businesses get more from their digital
+                  presence. What began locally in Prayagraj has grown into a{" "}
+                  <Link href="/services" className="text-[#40A2D8] hover:underline">
+                    digital marketing agency
+                  </Link>{" "}
+                  serving businesses across India, the UK, the US, and beyond.
+                </>
+              ) : (
+                storyParagraphTwo
+              )}
+            </p>
+            <p className="leading-relaxed lg:text-left text-center max-w-xl mx-auto mb-4 text-white/70 whitespace-pre-line">
+              {storyParagraphThreeIsDefault ? (
+                <>
+                  Today, we bring together strategy, creativity, technology,{" "}
+                  <Link href="/search-engine-optimization" className="text-[#40A2D8] hover:underline">
+                    SEO
+                  </Link>
+                  , and{" "}
+                  <Link href="/paid-marketing" className="text-[#40A2D8] hover:underline">
+                    performance marketing
+                  </Link>{" "}
+                  to help businesses build stronger brands, reach the right audiences, and
+                  achieve meaningful digital growth.
+                </>
+              ) : (
+                storyParagraphThree
+              )}
+            </p>
+            <p className="leading-relaxed lg:text-left text-center max-w-xl mx-auto mb-4 text-white/70 whitespace-pre-line">
+              {storyParagraphFour}
             </p>
           </div>
         </div>

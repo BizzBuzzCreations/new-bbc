@@ -15,12 +15,37 @@ const COLUMN_ONE = INDUSTRIES.slice(0, COL_SIZE);
 const COLUMN_TWO = INDUSTRIES.slice(COL_SIZE, COL_SIZE * 2);
 const COLUMN_THREE = INDUSTRIES.slice(COL_SIZE * 2);
 
+// Short hover descriptions specific to this homepage showcase — kept
+// separate from each industry's own page description (industriesData.js),
+// which also drives the hero paragraph on /industries/<slug>.
+const HOVER_DESCRIPTIONS = {
+  healthcare: "Build a stronger healthcare presence with digital marketing, SEO, and websites designed to connect with patients.",
+  finance: "Strengthen your finance brand with digital strategies that build visibility, trust, engagement, and qualified customer opportunities.",
+  restaurant: "Attract more diners with local SEO, social media, and digital marketing strategies built for restaurant growth.",
+  wearables: "Grow your wearable technology brand with digital strategies that improve visibility, engagement, and online customer discovery.",
+  entertainment: "Reach wider audiences with creative digital marketing, social media, and content strategies built for entertainment brands.",
+  travel: "Increase bookings and brand visibility with SEO, digital marketing, and engaging online experiences for travel businesses.",
+  fitness: "Build a stronger fitness brand with digital marketing strategies that attract members, increase visibility, and drive growth.",
+  education: "Connect with students and learners through SEO, digital marketing, and websites designed for educational businesses.",
+  "real-estate": "Generate more property leads with SEO, digital marketing, and conversion-focused websites built for real estate businesses.",
+  ecommerce: "Grow your online store with SEO, digital marketing, and conversion-focused strategies designed for e-commerce success.",
+  events: "Build event awareness and increase registrations with social media, digital marketing, and engaging online campaigns.",
+  manufacturing: "Strengthen your manufacturing business with digital strategies that improve visibility, reach buyers, and generate qualified leads.",
+  "fashion-apparel": "Build a stronger fashion brand with social media, digital marketing, and e-commerce strategies that turn attention into growth.",
+  gaming: "Reach gaming audiences with engaging digital marketing, social media, and content strategies built around player communities.",
+  construction: "Generate qualified leads and strengthen your online presence with SEO, digital marketing, and conversion-focused web solutions.",
+};
+
 export default function IndustriesShowcase({ content }) {
   const eyebrow = content?.industriesEyebrow || "Industries We Serve";
-  const heading = content?.industriesHeading || "Solving Real Challenges Across Every Major Industry";
+  const heading = content?.industriesHeading || "Digital Solutions for Businesses Across Industries";
+  const subtext =
+    content?.industriesSubtext ||
+    "From healthcare and finance to e-commerce, travel, education, and manufacturing, we deliver digital marketing, SEO, web development, and technology solutions tailored to how your industry works.";
   const [active, setActive] = useState(0);
   const current = INDUSTRIES[active];
   const Icon = current.icon;
+  const currentDescription = HOVER_DESCRIPTIONS[current.slug] || current.description;
 
   const renderColumn = (items, offset) => (
     <ul className="space-y-2">
@@ -59,6 +84,9 @@ export default function IndustriesShowcase({ content }) {
           <h2 className="text-3xl md:text-4xl font-bold text-white max-w-2xl mx-auto">
             {heading}
           </h2>
+          <p className="text-white/60 max-w-2xl mx-auto mt-4">
+            {subtext}
+          </p>
         </div>
 
         <div className="grid md:grid-cols-[260px_1fr_1fr_1fr] lg:grid-cols-[280px_140px_140px_140px_minmax(300px,1fr)] gap-x-8 lg:gap-x-10 gap-y-10 items-center">
@@ -95,7 +123,7 @@ export default function IndustriesShowcase({ content }) {
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               >
                 <p className="text-white text-sm leading-relaxed mb-6">
-                  {current.description}
+                  {currentDescription}
                 </p>
                 <Link
                   href={`/industries/${current.slug}`}

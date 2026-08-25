@@ -20,14 +20,14 @@ const DEFAULT_GRID_IMAGES = [
 ];
 
 export default function AboutHero({ content }) {
-  const heading = content?.aboutHeroHeading || "Digital Marketing Agency in India — Bizzbuzz Creations";
-  const subheading = content?.aboutHeroSubheading || "Turning Bold Ideas Into Digital Success Stories";
+  const heading = content?.aboutHeroHeading || "India’s Digital Marketing Agency, Trusted Worldwide";
+  const subheading = content?.aboutHeroSubheading || "Systems first. Campaigns second.";
   const paragraph =
     content?.aboutHeroParagraph ||
-    "We don't just run campaigns — we build brands that people remember, trust, and search for. From strategy to execution, Bizzbuzz Creations helps Indian businesses grow online with data-driven digital marketing solutions designed for real results in 2026 and beyond.";
-  const stat1 = content?.aboutHeroStat1 || "90+ Projects Delivered";
-  const stat2 = content?.aboutHeroStat2 || "50+ Happy Clients Across India";
-  const buttonText = content?.aboutHeroButtonText || "Free Audit";
+    "Built and based in India, BizzBuzz Creations helps businesses across India and worldwide grow through data-driven strategy, design, and technology, not just ads.";
+  const stat1 = content?.aboutHeroStat1 || "Data-Driven Strategy, Not Guesswork";
+  const stat2 = content?.aboutHeroStat2 || "Serving Businesses Across India & Worldwide";
+  const buttonText = content?.aboutHeroButtonText || "Build Your Digital Growth Strategy";
   const gridImages =
     content?.aboutHeroImages?.length > 0
       ? content.aboutHeroImages.map((item, i) => ({ id: i + 1, src: item.src }))
@@ -86,7 +86,7 @@ export default function AboutHero({ content }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...reveal, delay: 0.6 }}
         >
-          <Link href="/contact" className="inline-block">
+          <Link href="/services" className="inline-block">
             <button className="animated-button mx-auto">
               <svg
                 viewBox="0 0 24 24"

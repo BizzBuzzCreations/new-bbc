@@ -1,9 +1,9 @@
-import Image from "next/image";
+import Link from "next/link";
 import RoadmapTimeline from "@/components/sections/roadmapTimeline";
-import CTA from "@/components/sections/CTA";
 import { FAQSection } from "@/components/ui/faq-accordion";
 import OnboardingCarousel from "@/components/sections/onboardingCarousel";
 import CategoriesShowcase from "@/components/sections/categoriesShowcase";
+import { INDUSTRIES } from "@/lib/industriesData";
 import {
   Eye,
   Users,
@@ -12,19 +12,18 @@ import {
   ShieldCheck,
   Lightbulb,
   FileSignature,
-  Lock,
-  KeyRound,
-  FileX,
-  Wallet,
-  Clock,
-  Layers,
-  ArrowUpRight,
+  BarChart3,
+  Megaphone,
+  Workflow,
+  Bot,
+  MessageCircle,
+  RefreshCw,
 } from "lucide-react";
 
 export const metadata = {
-  title: "How We Work | BizzBuzz Creations",
+  title: "How We Work | Our Process | BizzBuzz Creations",
   description:
-    "See how BizzBuzz Creations runs an engagement — from onboarding and consultation to execution, reporting, security, and flexible engagement models.",
+    "No guesswork, just a structured process. See how BizzBuzz Creations plans, executes, and optimizes every campaign step by step.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/how-we-work",
   },
@@ -34,32 +33,38 @@ const PRINCIPLES = [
   {
     icon: Eye,
     title: "Transparency",
-    desc: "You'll always know what's happening, why it's happening, and what comes next.",
+    tagline: "Clear From Start to Finish",
+    desc: "You'll always know what we're doing, why we're doing it, and what comes next through clear communication and honest reporting.",
   },
   {
     icon: Users,
     title: "Collaboration",
-    desc: "We build with you, not just for you. Every decision is shaped together.",
+    tagline: "Better Work, Built Together",
+    desc: "We combine your business knowledge with our digital expertise, keeping communication open and every important decision collaborative.",
   },
   {
     icon: Zap,
     title: "Speed",
-    desc: "Focused sprints and clear priorities keep momentum high without cutting corners.",
+    tagline: "Momentum Without Compromise",
+    desc: "Focused priorities and efficient workflows help us move quickly, stay organised, and keep progress moving without sacrificing quality.",
   },
   {
     icon: Unlock,
-    title: "No Lock-In",
-    desc: "Your Google Ads, Analytics, and website accounts stay owned by you — always.",
+    title: "Ownership",
+    tagline: "Your Business Stays Yours",
+    desc: "Your website, advertising accounts, analytics, data, and digital assets remain under your control, giving you complete ownership at every stage.",
   },
   {
     icon: ShieldCheck,
-    title: "Data Security",
-    desc: "Access is scoped to what's needed, and an NDA is available before any details are shared.",
+    title: "Security",
+    tagline: "Your Data, Handled Responsibly",
+    desc: "We use controlled access and responsible data practices to protect sensitive information, with NDAs available when additional confidentiality is required.",
   },
   {
     icon: Lightbulb,
     title: "Innovation",
-    desc: "We build for AI-driven search, not just today's algorithm — so strategies hold up.",
+    tagline: "Ready for What Comes Next",
+    desc: "We continuously explore SEO, AI search, automation, and emerging digital trends to build strategies that adapt as technology evolves.",
   },
 ];
 
@@ -91,82 +96,106 @@ const roadmapSteps = [
   },
 ];
 
-const CONSULTING_ITEMS = [
+const TOOLS = [
   {
-    title: "Workshops That Unlock Clarity",
-    body: "A focused working session with your team to align on goals, constraints, and what a win actually looks like.",
+    icon: BarChart3,
+    title: "Research & Analytics",
+    desc: "Google Analytics, Google Search Console, SEMrush, and Ahrefs power our audits, keyword research, and performance tracking.",
   },
   {
-    title: "Market & Audience Research",
-    body: "We study your industry, competitors, and target audience so strategy is grounded in real data, not guesswork.",
+    icon: Megaphone,
+    title: "Advertising & Campaigns",
+    desc: "Google Ads, Meta Ads Manager, and conversion tracking tools help us run and optimise every paid campaign with real data.",
   },
   {
-    title: "Technical & SEO Audits",
-    body: "A full audit of your current site and digital presence — what's working, what's costing you visibility, and why.",
+    icon: Workflow,
+    title: "Automation & CRM",
+    desc: "We build and use our own CRM and workflow automation systems — the same infrastructure that runs our clients' campaigns and our own operations.",
   },
   {
-    title: "A Roadmap You Can Trust",
-    body: "Everything above rolls into one clear, sequenced plan — so you know exactly what happens, and when.",
+    icon: Bot,
+    title: "AI & Emerging Tech",
+    desc: "We work with AI-powered content, chatbot, and search optimisation tools to keep strategies ahead of how search and customer behaviour are evolving.",
   },
 ];
 
-const SECURITY_PRACTICES = [
-  { icon: KeyRound, text: "Account access scoped to user-level permissions — never shared master logins" },
-  { icon: Unlock, text: "Your Google Ads, Analytics, Meta Business Manager, and website accounts stay in your name" },
-  { icon: FileSignature, text: "NDA available before any project details or access are shared, on request" },
-  { icon: FileX, text: "Access revoked and your files/reports handed over if an engagement ends" },
-  { icon: Lock, text: "Data handling practices built around India's DPDP Act, 2023" },
-  { icon: ShieldCheck, text: "Only team members actively working on your account get access" },
-];
-
-const ENGAGEMENT_MODELS = [
+const EXPECTATIONS = [
   {
-    icon: Wallet,
-    title: "Fixed Price Model",
-    desc: "Best for clearly scoped projects with specific deliverables and timelines — a set budget and complete clarity from the start.",
+    icon: MessageCircle,
+    title: "Clear Communication",
+    desc: "Regular updates, accessible communication, and straightforward explanations keep everyone aligned.",
+  },
+  {
+    icon: BarChart3,
+    title: "Transparent Reporting",
+    desc: "Understand your performance, progress, priorities, and opportunities without confusing marketing jargon.",
   },
   {
     icon: Users,
-    title: "Dedicated Team Model",
-    desc: "For long-term or evolving needs — a team works exclusively on your account, with faster iterations and deeper context over time.",
+    title: "Dedicated Expertise",
+    desc: "Your work is supported by specialists across strategy, marketing, creative, technology, and performance.",
   },
   {
-    icon: Clock,
-    title: "Time & Material Model",
-    desc: "Ideal for dynamic scopes — you pay for actual time and effort spent, keeping things adaptable as priorities shift.",
-  },
-  {
-    icon: Layers,
-    title: "Hybrid Model",
-    desc: "A mix of fixed and flexible, suited to businesses that want structure with room to scale as the project grows.",
+    icon: RefreshCw,
+    title: "Continuous Optimisation",
+    desc: "We keep analysing, testing, learning, and improving as your business and digital landscape evolve.",
   },
 ];
 
+// Same industry list as lib/industriesData.js, just reordered to match the
+// display order requested for this section — icons/slugs stay sourced from
+// that single data file so this isn't a second source of truth.
+const INDUSTRY_ORDER = [
+  "healthcare",
+  "finance",
+  "real-estate",
+  "ecommerce",
+  "education",
+  "restaurant",
+  "travel",
+  "fitness",
+  "fashion-apparel",
+  "manufacturing",
+  "construction",
+  "gaming",
+  "events",
+  "entertainment",
+  "wearables",
+];
+const INDUSTRY_LINKS = INDUSTRY_ORDER.map((slug) =>
+  INDUSTRIES.find((industry) => industry.slug === slug)
+).filter(Boolean);
+
 const FAQS = [
   {
-    question: "How long does onboarding take before work actually starts?",
+    question: "How long does it take to see results with BizzBuzz Creations?",
     answer:
-      "Typically a few days — a free consultation call, then a proposal back within 2-3 business days of that call. Work starts once you approve the scope.",
+      "Timelines vary by service — paid campaigns can show results within days, while SEO typically takes 3 to 6 months for measurable ranking growth.",
   },
   {
-    question: "Do you sign an NDA before discussing our project?",
+    question: "Do I get reports on how my campaigns are performing?",
     answer:
-      "Yes, we're happy to sign an NDA before any project details or account access are shared, if your business requires one.",
+      "Yes. Every client receives transparent monthly reporting along with regular strategy calls to review progress and next steps.",
   },
   {
-    question: "Will we own our own ad accounts and analytics?",
+    question: "Will I own my website, ad accounts, and data?",
     answer:
-      "Yes — your Google Ads, Analytics, Meta Business Manager, and website accounts remain owned by you. We work as authorized users, not owners.",
+      "Yes. Your website, advertising accounts, analytics, and digital assets remain fully under your ownership and control at every stage.",
   },
   {
-    question: "Can we switch engagement models later?",
+    question: "What happens after the strategy is created?",
     answer:
-      "Yes — plans are reviewed regularly, and you can move between fixed-price, dedicated-team, or time-and-material models as your needs change.",
+      "Our specialists execute the strategy across the relevant channels — SEO, content, paid ads, or website — then continuously optimise based on real performance data.",
   },
   {
-    question: "What happens if we want to pause or end the engagement?",
+    question: "Do you follow this same process for every industry?",
     answer:
-      "Access to your accounts is revoked, and any reports, creative files, or documentation we've produced for you are handed over — the work product is yours.",
+      "Yes. The core process stays consistent, but strategy, channels, and priorities are adapted to fit each industry's audience and goals.",
+  },
+  {
+    question: "What if my business needs change halfway through?",
+    answer:
+      "Our process is built to adapt — strategy, priorities, and services can be adjusted at any stage as your goals or market conditions evolve.",
   },
 ];
 
@@ -196,20 +225,24 @@ export default function HowWeWorkPage() {
         />
 
         <div className="relative max-w-3xl">
-          <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">
-            The Architecture of <span className="italic text-[#8fd0f2]">Execution</span>
+          <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4">
+            We Don&rsquo;t Wing It. Here&rsquo;s Our Process
           </h1>
+          <h2 className="text-lg sm:text-xl font-semibold text-[#8fd0f2] mb-6">
+            A Clear, Repeatable System Behind Every Campaign We Run
+          </h2>
           <p className="text-white/70 leading-relaxed mb-8 max-w-xl">
-            Real growth isn&rsquo;t a matter of chance — it&rsquo;s a matter
-            of process. Ours is a repeatable system that combines clear
-            communication, honest reporting, and a relentless focus on
-            outcomes over vanity metrics.
+            No vague promises, no &ldquo;we&rsquo;ll figure it out as we
+            go.&rdquo; Every project at BizzBuzz Creations follows the same
+            structured process of audit, strategy, execution, and reporting
+            — so you always know what&rsquo;s happening, why it&rsquo;s
+            happening, and what results to expect.
           </p>
           <a
             href="/contact"
             className="inline-flex items-center bg-white hover:bg-gray-100 text-black text-sm font-semibold px-7 py-3.5 rounded-lg transition"
           >
-            Consult Our Experts
+            See How It Works
           </a>
         </div>
       </section>
@@ -221,12 +254,13 @@ export default function HowWeWorkPage() {
             The Principles That Power Every Client Partnership
           </h2>
           <p className="text-white/70 max-w-2xl mb-14">
-            No complicated playbooks or hidden processes — a handful of
-            principles we don&rsquo;t compromise on, no matter the project.
+            No complicated playbooks or hidden processes. Just six
+            principles that shape how we communicate, collaborate, execute,
+            and grow with every client.
           </p>
 
           <div className="grid sm:grid-cols-2 gap-5">
-            {PRINCIPLES.map(({ icon: Icon, title, desc }) => (
+            {PRINCIPLES.map(({ icon: Icon, title, tagline, desc }) => (
               <div
                 key={title}
                 className="group flex items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-white hover:shadow-xl hover:shadow-black/20"
@@ -235,8 +269,11 @@ export default function HowWeWorkPage() {
                   <Icon size={20} />
                 </span>
                 <div>
-                  <h3 className="font-bold text-lg mb-1.5 transition-colors duration-300 group-hover:text-black">
+                  <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-1.5 transition-colors duration-300 group-hover:text-[#0B60B0]">
                     {title}
+                  </p>
+                  <h3 className="font-bold text-lg mb-1.5 transition-colors duration-300 group-hover:text-black">
+                    {tagline}
                   </h3>
                   <p className="text-white/70 text-sm leading-relaxed transition-colors duration-300 group-hover:text-gray-600">
                     {desc}
@@ -248,84 +285,7 @@ export default function HowWeWorkPage() {
         </div>
       </section>
 
-      {/* Measurable impact — real numbers and certifications only */}
-      <section className="bg-black text-white py-20 px-6 md:px-12 lg:px-24">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold mb-3">
-            Real Numbers Behind the Process
-          </h2>
-          <p className="text-white/60 max-w-2xl mb-12 leading-relaxed">
-            Not vanity metrics — the actual scale of work behind how we
-            operate.
-          </p>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            <div
-              className="rounded-2xl p-6 flex flex-col justify-end min-h-[170px]"
-              style={{ background: "linear-gradient(160deg, #0B60B0, #050b16)" }}
-            >
-              <p className="text-4xl font-bold mb-1">90+</p>
-              <p className="text-white/70 text-sm">Projects Delivered</p>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col justify-end min-h-[170px]">
-              <p className="text-4xl font-bold mb-1">50+</p>
-              <p className="text-white/70 text-sm">Clients Across India &amp; the UK</p>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col justify-end min-h-[170px]">
-              <p className="text-4xl font-bold mb-1">2</p>
-              <p className="text-white/70 text-sm">Offices — Prayagraj &amp; London</p>
-            </div>
-            <div
-              className="rounded-2xl p-6 flex flex-col justify-end min-h-[170px]"
-              style={{ background: "linear-gradient(160deg, #4c2f91, #050b16)" }}
-            >
-              <p className="text-4xl font-bold mb-1">20+</p>
-              <p className="text-white/70 text-sm">Industries Served</p>
-            </div>
-          </div>
-
-          <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8">
-            <p className="text-sm font-semibold text-white/70 mb-6">
-              Certified &amp; Recognized By
-            </p>
-            <div className="flex flex-wrap items-center gap-8 sm:gap-12">
-              {[
-                { src: "/clutch.png", alt: "Clutch" },
-                { src: "/CDL.png", alt: "Google Ads Partner" },
-                { src: "/GA.png", alt: "Google Analytics Partner" },
-                { src: "/ISO.png", alt: "ISO Certified" },
-              ].map((badge) => (
-                <Image
-                  key={badge.alt}
-                  src={badge.src}
-                  alt={badge.alt}
-                  width={80}
-                  height={80}
-                  className="object-contain h-14 w-auto opacity-90"
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* How we onboard new clients */}
-      <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 max-w-2xl">
-            Building Trust from Day One: How We Onboard New Clients
-          </h2>
-          <p className="text-white/60 max-w-2xl mb-14 leading-relaxed">
-            Every great partnership starts with alignment. That&rsquo;s why
-            onboarding focuses on clarity and trust from the very
-            beginning.
-          </p>
-
-          <OnboardingCarousel />
-        </div>
-      </section>
-
-      {/* Engagement roadmap (existing component) */}
+      {/* Engagement roadmap */}
       <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-16">
@@ -335,40 +295,119 @@ export default function HowWeWorkPage() {
         </div>
       </section>
 
-      {/* Consulting-first approach */}
-      <section className="bg-black py-20 px-6 md:px-12 lg:px-24 text-white border-t border-white/10">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-bold mb-5">
-              Our Consulting-First Approach
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-8 max-w-md">
-              Every successful project starts with understanding — asking
-              the right questions before a single ad is launched or a line
-              of copy is written. By the time execution starts, the
-              direction is already validated.
-            </p>
-            <a
-              href="/business-consultancy"
-              className="inline-flex items-center gap-1.5 border border-white/50 hover:bg-white/10 text-white text-sm font-semibold rounded-full px-6 py-3 transition"
-            >
-              View Our Consulting Services
-              <ArrowUpRight size={16} />
-            </a>
-          </div>
+      {/* The Tools Behind Every Strategy */}
+      <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10 text-white">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">
+            The Tools Behind Every Strategy
+          </h2>
+          <p className="text-white/70 leading-relaxed max-w-2xl mb-14">
+            We combine industry-leading platforms with our own in-house
+            systems to plan, execute, and track every campaign with
+            precision.
+          </p>
 
-          <div className="divide-y divide-white/15">
-            {CONSULTING_ITEMS.map((item) => (
-              <details key={item.title} className="group py-5" open={item.title === CONSULTING_ITEMS[1].title}>
-                <summary className="flex items-center justify-between cursor-pointer font-semibold list-none">
-                  {item.title}
-                  <span className="text-xl text-white/50 group-open:hidden">+</span>
-                  <span className="text-xl text-white/50 hidden group-open:inline">−</span>
-                </summary>
-                <p className="text-white/70 text-sm leading-relaxed mt-3">
-                  {item.body}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {TOOLS.map(({ icon: Icon, title, desc }) => (
+              <div
+                key={title}
+                className="group rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-black/40"
+              >
+                <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-white/10 text-[#40A2D8] mb-4 transition-all duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
+                  <Icon size={20} />
+                </span>
+                <h3 className="font-bold text-white mb-2">{title}</h3>
+                <p className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85">
+                  {desc}
                 </p>
-              </details>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How we onboard new clients */}
+      <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 max-w-2xl">
+            What to Expect, and When
+          </h2>
+          <p className="text-white/60 max-w-2xl mb-14 leading-relaxed">
+            Every business is different, but here&rsquo;s a realistic
+            timeline for how our process typically unfolds.
+          </p>
+
+          <OnboardingCarousel />
+        </div>
+      </section>
+
+      {/* What You Can Expect */}
+      <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10 text-white">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-2xl md:text-3xl font-bold mb-2">
+            What You Can Expect
+          </h2>
+          <h3 className="text-lg font-semibold text-[#40A2D8] mb-4">
+            Clear Communication. Accountable Execution. Continuous
+            Improvement.
+          </h3>
+          <p className="text-white/60 max-w-2xl mx-auto mb-14 leading-relaxed">
+            Working with BizzBuzz Creations means knowing where your project
+            stands, what we&rsquo;re working toward, and how we&rsquo;re
+            improving it along the way.
+          </p>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+            {EXPECTATIONS.map(({ icon: Icon, title, desc }) => (
+              <div
+                key={title}
+                className="group rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-black/40"
+              >
+                <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-white/10 text-[#40A2D8] mb-4 transition-all duration-300 group-hover:bg-white group-hover:text-[#0B60B0] group-hover:scale-110">
+                  <Icon size={20} />
+                </span>
+                <h4 className="font-bold text-white mb-2">{title}</h4>
+                <p className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85">
+                  {desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Industries we apply this process to */}
+      <section className="bg-black py-20 px-6 md:px-12 lg:px-24 text-white border-t border-white/10">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-2xl md:text-3xl font-bold mb-2">
+            Industries We Apply This Process To
+          </h2>
+          <h3 className="text-lg font-semibold text-[#40A2D8] mb-4">
+            One Process. Every Industry.
+          </h3>
+          <p className="text-white/60 max-w-2xl mx-auto mb-2 leading-relaxed">
+            This same structured process — discover, strategize, execute,
+            optimize, and report — powers digital growth across every
+            industry we work with, from healthcare and real estate to
+            e-commerce, education, and beyond.
+          </p>
+          <p className="text-white/50 text-sm mb-10">
+            Explore how it applies to your industry:
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-3">
+            {INDUSTRY_LINKS.map(({ slug, label, icon: Icon }) => (
+              <Link
+                key={slug}
+                href={`/industries/${slug}`}
+                className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-white/80 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:text-white hover:shadow-lg hover:shadow-black/40"
+              >
+                <Icon
+                  size={15}
+                  className="text-[#40A2D8] transition-colors duration-300 group-hover:text-white"
+                />
+                {label}
+              </Link>
             ))}
           </div>
         </div>
@@ -378,75 +417,14 @@ export default function HowWeWorkPage() {
       <section className="bg-black text-white py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold mb-4 max-w-2xl">
-            Categories We Work Across
+            Everything Your Business Needs to Grow Digitally
           </h2>
           <p className="text-white/60 max-w-2xl mb-10 leading-relaxed">
-            Every choice — channel, platform, or tool — is made to fit your
-            business goals, not the other way around.
+            One connected team across marketing, technology, automation, and
+            business growth.
           </p>
 
           <CategoriesShowcase />
-        </div>
-      </section>
-
-      {/* Data security & privacy — real practices, no unverified certification claims */}
-      <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 max-w-2xl">
-            Data Security &amp; Privacy
-          </h2>
-          <p className="text-white/60 max-w-2xl mb-12 leading-relaxed">
-            When trust is on the line, shortcuts aren&rsquo;t an option —
-            here&rsquo;s exactly how account access and data are handled.
-          </p>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {SECURITY_PRACTICES.map(({ icon: Icon, text }, i) => (
-              <div
-                key={i}
-                className="group flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:-translate-y-1 hover:bg-[#0B60B0] hover:border-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/20"
-              >
-                <span className="shrink-0 flex items-center justify-center w-9 h-9 rounded-full bg-white/10 text-[#40A2D8] transition-colors duration-300 group-hover:bg-white">
-                  <Icon size={16} />
-                </span>
-                <p className="text-sm text-white/70 leading-relaxed transition-colors duration-300 group-hover:text-white">
-                  {text}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Flexible engagement models */}
-      <section className="bg-black py-20 px-6 md:px-12 lg:px-24 text-white border-t border-white/10">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4 max-w-2xl">
-            Flexible Engagement Models Built Around Your Needs
-          </h2>
-          <p className="text-white/70 max-w-2xl mb-14 leading-relaxed">
-            Every project is different, and so are the ways we work — pick
-            whichever fits your goals, timeline, and budget.
-          </p>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {ENGAGEMENT_MODELS.map(({ icon: Icon, title, desc }) => (
-              <div
-                key={title}
-                className="group rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-white hover:shadow-xl hover:shadow-black/20"
-              >
-                <span className="flex items-center justify-center w-14 h-14 rounded-full bg-white/15 mb-5 transition-colors duration-300 group-hover:bg-[#0B60B0] group-hover:text-white">
-                  <Icon size={24} />
-                </span>
-                <h3 className="font-bold text-lg mb-3 transition-colors duration-300 group-hover:text-black">
-                  {title}
-                </h3>
-                <p className="text-white/70 text-sm leading-relaxed transition-colors duration-300 group-hover:text-gray-600">
-                  {desc}
-                </p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -470,9 +448,40 @@ export default function HowWeWorkPage() {
         />
       </section>
 
-      {/* CTA — just above the footer */}
-      <div className="bg-black pt-4">
-        <CTA />
+      {/* CTA — page-specific content (not the shared site-wide CTA), same
+          visual treatment as it, with a button instead of an email form. */}
+      <div className="bg-black px-5 pt-4 pb-10 scroll-mt-34" id="CTA">
+        <div
+          className="rounded-3xl border-2 border-[#0B60B0] shadow-lg shadow-black md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto container"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(120, 180, 255, 0.25), transparent 70%), #000000",
+          }}
+        >
+          <div className="py-8 md:py-10 px-10 z-10 text-white">
+            <h3 className="md:text-3xl text-2xl font-bold mb-5">
+              Ready to See This Process Work for Your Business?
+            </h3>
+            <p className="max-w-3xl text-white/70 mb-8">
+              No guesswork, no vague timelines — just a clear process built
+              to turn strategy into measurable growth. Book a free
+              consultation and see exactly how we&rsquo;d approach your
+              business.
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center bg-white hover:bg-gray-100 text-black text-sm font-semibold px-7 py-3.5 rounded-lg transition"
+            >
+              Book Your Free Consultation
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Full-width white divider before the footer — same as the shared
+          CTA's divider, so this page still ends the same way. */}
+      <div className="w-full bg-black pt-8 md:pt-10">
+        <div className="w-full border-t border-white" />
       </div>
     </>
   );

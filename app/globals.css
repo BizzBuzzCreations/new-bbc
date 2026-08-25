@@ -26,6 +26,17 @@
 }
 
 /* Slow-drifting blobs for the contact form's animated backdrop. */
+/* Right-to-left infinite marquee — content is duplicated once by the
+   component using it, so this loops seamlessly at exactly -50%. */
+@keyframes marquee-rtl {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @keyframes blob-float-a {
   0%,
   100% {
