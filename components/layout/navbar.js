@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import {
   ChevronDown,
-  Plus,
+  ArrowRight,
   Phone,
   Stethoscope,
   Watch,
@@ -32,14 +32,66 @@ const ABOUT_LINKS = [
 ];
 
 const SERVICE_LINKS = [
-  { label: "BPO Service", href: "/bpo-services" },
-  { label: "Website Development", href: "/web-development" },
+  {
+    label: "BPO Service",
+    href: "/bpo-services",
+    subItems: [
+      { label: "AI-Powered BPO & Call Center Solutions", href: "/bpo-services" },
+      { label: "Inbound & Outbound Call Center Services", href: "/bpo-services" },
+      { label: "Business Process Automation Services", href: "/bpo-services" },
+      { label: "Data Entry & Back Office Outsourcing", href: "/bpo-services" },
+      { label: "Virtual Assistant & Startup Outsourcing", href: "/bpo-services" },
+      { label: "24/7 & E-commerce Customer Support", href: "/bpo-services" },
+    ],
+  },
+  {
+    label: "Website Development",
+    href: "/web-development",
+    subItems: [
+      { label: "Custom Web Development & Design", href: "/web-development" },
+      { label: "Shopify & Ecommerce Development", href: "/web-development" },
+      { label: "PHP Web Application Development", href: "/web-development" },
+      { label: "React & Next.js Development", href: "/web-development" },
+      { label: "Website Redesign & Management", href: "/web-development" },
+      { label: "WordPress Development", href: "/web-development" },
+    ],
+  },
   {
     label: "Search Engine Optimization (SEO)",
     href: "/search-engine-optimization",
+    subItems: [
+      { label: "AI Search Optimization", href: "/search-engine-optimization" },
+      { label: "Generative Engine Optimization (GEO)", href: "/search-engine-optimization" },
+      { label: "Answer Engine Optimization (AEO)", href: "/search-engine-optimization" },
+      { label: "Semantic SEO & Topical Authority", href: "/search-engine-optimization" },
+      { label: "AI Content Optimization", href: "/search-engine-optimization" },
+      { label: "High-Intent & Local SEO", href: "/search-engine-optimization" },
+    ],
   },
-  { label: "Social Media Marketing (SMM)", href: "/social-media-marketing" },
-  { label: "Google Ads & Paid Marketing", href: "/paid-marketing" },
+  {
+    label: "Social Media Marketing (SMM)",
+    href: "/social-media-marketing",
+    subItems: [
+      { label: "Social Media Management Services", href: "/social-media-marketing" },
+      { label: "Instagram Marketing Agency", href: "/social-media-marketing" },
+      { label: "Facebook & Meta Ads Agency", href: "/social-media-marketing" },
+      { label: "LinkedIn Marketing for B2B Growth", href: "/social-media-marketing" },
+      { label: "AI Social Media Marketing", href: "/social-media-marketing" },
+      { label: "Reels & Short Video Marketing", href: "/social-media-marketing" },
+    ],
+  },
+  {
+    label: "Google Ads & Paid Marketing",
+    href: "/paid-marketing",
+    subItems: [
+      { label: "Google & Search Ads Management", href: "/paid-marketing" },
+      { label: "Meta & Social Ads Management", href: "/paid-marketing" },
+      { label: "Performance Marketing & ROI Campaigns", href: "/paid-marketing" },
+      { label: "Lead Generation Campaigns", href: "/paid-marketing" },
+      { label: "E-commerce & Retargeting Ads", href: "/paid-marketing" },
+      { label: "Local & City-Based Ad Campaigns", href: "/paid-marketing" },
+    ],
+  },
   {
     label: "AI Solutions",
     href: "/ai-solutions",
@@ -63,7 +115,18 @@ const SERVICE_LINKS = [
       { label: "Lead Nurturing Automation", href: "/marketing-automation" },
     ],
   },
-  { label: "Business Consultancy", href: "/business-consultancy" },
+  {
+    label: "Business Consultancy",
+    href: "/business-consultancy",
+    subItems: [
+      { label: "Business Strategy Consulting", href: "/business-consultancy" },
+      { label: "Startup & New Business Consulting", href: "/business-consultancy" },
+      { label: "Business Growth & Scaling Consulting", href: "/business-consultancy" },
+      { label: "Operations & Process Consulting", href: "/business-consultancy" },
+      { label: "Business Development & Marketing Consulting", href: "/business-consultancy" },
+      { label: "Local & City-Based Business Advisory", href: "/business-consultancy" },
+    ],
+  },
 ];
 
 const INDUSTRY_COLUMNS = [
@@ -105,19 +168,17 @@ const RESOURCE_LINKS = [
 
 function DesktopDropdown({ label, items, width = "w-72", href }) {
   return (
-    <div className="group relative">
-      {/* py-4 -my-4 turns the trigger's own hit-area into the bridge down
-          to the panel — no gap in between for the cursor to fall through
-          on its way from the label to the menu (that gap was the bug:
-          top-8 left a dead zone with no hoverable element under it, so
-          group-hover switched off before the pointer ever reached the
-          panel, closing it instantly). When `href` is given, the label
-          itself is a real link to that section's index page — the
-          dropdown still opens on hover regardless. */}
+    // h-[72px] matches the navbar's own desktop height exactly, so this
+    // wrapper's box spans the full navbar row instead of shrinking to
+    // just the trigger text's line-height. That was the actual bug: a
+    // shrunk wrapper made `top-full` land partway up the navbar instead
+    // of at its true bottom edge, so the panel opened overlapping into
+    // the navbar rather than sitting flush below it.
+    <div className="group relative h-[72px] flex items-center">
       {href ? (
         <Link
           href={href}
-          className="text-white flex justify-center items-center gap-1 cursor-pointer hover:text-[#40A2D8] transition py-4 -my-4"
+          className="text-white flex justify-center items-center gap-1 cursor-pointer hover:text-[#40A2D8] transition"
         >
           {label}
           <ChevronDown
@@ -126,7 +187,7 @@ function DesktopDropdown({ label, items, width = "w-72", href }) {
           />
         </Link>
       ) : (
-        <div className="text-white flex justify-center items-center gap-1 cursor-pointer hover:text-[#40A2D8] transition py-4 -my-4">
+        <div className="text-white flex justify-center items-center gap-1 cursor-pointer hover:text-[#40A2D8] transition">
           {label}
           <ChevronDown
             size={18}
@@ -134,37 +195,14 @@ function DesktopDropdown({ label, items, width = "w-72", href }) {
           />
         </div>
       )}
-      <div
-        className={`z-10 absolute left-1/2 -translate-x-1/2 top-full hidden group-hover:block bg-white border border-gray-200 rounded-xl shadow-lg ${width}`}
-      >
-        <ul className="p-2 text-sm text-black font-medium">
-          {items.map((item) =>
-            item.subItems ? (
-              <li key={item.href} className="group/sub relative">
-                <div className="flex items-center justify-between w-full p-2.5 rounded transition-colors duration-150 hover:bg-[#0B60B0] hover:text-white cursor-default">
-                  <Link href={item.href} className="flex-1">
-                    {item.label}
-                  </Link>
-                  <Plus size={14} className="shrink-0 ml-2" />
-                </div>
-                {/* Flyout — bridged with -ml-1/pl-1 so the cursor doesn't
-                    fall through the gap between the row and the panel. */}
-                <div className="hidden group-hover/sub:block absolute left-full top-0 -ml-1 pl-1 z-20">
-                  <ul className="w-64 bg-white border border-gray-200 rounded-xl shadow-lg p-2 text-sm text-black font-medium">
-                    {item.subItems.map((sub) => (
-                      <li key={sub.label}>
-                        <Link
-                          href={sub.href}
-                          className="block w-full p-2.5 rounded transition-colors duration-150 hover:bg-[#0B60B0] hover:text-white"
-                        >
-                          {sub.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </li>
-            ) : (
+      {/* top-full now sits the panel flush against the navbar's true
+          bottom edge — no gap, no overlap. */}
+      <div className="z-20 absolute left-1/2 -translate-x-1/2 top-full hidden group-hover:block">
+        <div
+          className={`bg-white border border-gray-200 rounded-xl shadow-xl ${width}`}
+        >
+          <ul className="p-2 text-sm text-black font-medium">
+            {items.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
@@ -173,17 +211,158 @@ function DesktopDropdown({ label, items, width = "w-72", href }) {
                   {item.label}
                 </Link>
               </li>
-            ),
-          )}
-        </ul>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
 }
 
-function IndustriesMegaMenu() {
+function ServicesMegaMenu() {
+  // Left sidebar lists all 8 service categories; hovering (or clicking)
+  // one shows its sub-services on the right, IBM-menu style. Defaults to
+  // the first service so the panel is never empty on open.
+  const [active, setActive] = useState(SERVICE_LINKS[0]);
+
+  // The panel is `fixed` (see below) so it's no longer inside the
+  // trigger's own layout box — plain CSS group-hover briefly loses
+  // "hover" the instant the cursor leaves the small trigger link on its
+  // way down to the panel, closing the menu before it ever gets there.
+  // Tracking open state in JS with a short close-delay (cleared if the
+  // cursor lands on the panel in time) bridges that gap reliably.
+  const [open, setOpen] = useState(false);
+  const closeTimer = useRef(null);
+
+  const openMenu = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setOpen(true);
+  };
+  const scheduleClose = () => {
+    closeTimer.current = setTimeout(() => {
+      setOpen(false);
+      setActive(SERVICE_LINKS[0]);
+    }, 250);
+  };
+
   return (
-    <div className="group relative">
+    <div
+      className="relative"
+      onMouseEnter={openMenu}
+      onMouseLeave={scheduleClose}
+    >
+      <Link
+        href="/services"
+        className="text-white flex justify-center items-center gap-1 cursor-pointer hover:text-[#40A2D8] transition py-4 -my-4"
+      >
+        Services
+        <ChevronDown
+          size={18}
+          className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+        />
+      </Link>
+      {/* Outer wrapper: `fixed` (not `absolute`) so this wide panel centers
+          on the header's full width — the header's own transform makes it
+          the containing block for fixed children — instead of centering
+          under this one trigger, which is what was pushing it past the
+          right edge of the screen and getting it clipped. top-full sits
+          it flush against the navbar's bottom edge — no gap. Shifted a
+          bit right of dead-center (translate-x-[calc(50%-110px)]) since
+          the Services trigger itself sits right of the nav's center. */}
+      {open && (
+        <div
+          className="z-20 fixed left-1/2 -translate-x-[calc(50%-110px)] top-full"
+          onMouseEnter={openMenu}
+          onMouseLeave={scheduleClose}
+        >
+          <div className="flex bg-white border border-gray-200 rounded-xl shadow-xl w-[960px] max-w-[95vw] overflow-hidden">
+          {/* Left column — the 8 categories */}
+          <ul className="w-56 shrink-0 border-r border-gray-200 p-2 text-sm font-medium text-black">
+            {SERVICE_LINKS.map((service) => (
+              <li key={service.href}>
+                <Link
+                  href={service.href}
+                  onMouseEnter={() => setActive(service)}
+                  className={`flex items-center w-full p-2.5 rounded transition-colors duration-150 ${
+                    active.href === service.href
+                      ? "bg-[#0B60B0] text-white"
+                      : "hover:bg-gray-100"
+                  }`}
+                >
+                  {service.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          {/* Right panel — the active category's sub-services, spans the
+              full remaining width. Sub-services are split into two columns
+              with a vertical divider between them and a horizontal divider
+              between each row, so every service's flyout reads as one
+              connected grid rather than floating text. */}
+          <div className="flex-1 min-w-0 w-full p-6">
+            <Link
+              href={active.href}
+              className="inline-flex items-center gap-1.5 text-lg font-semibold text-[#0B60B0] hover:underline mb-5"
+            >
+              {active.label}
+              <ArrowRight size={17} />
+            </Link>
+            {active.subItems && (
+              <div className="flex divide-x divide-gray-200 w-full">
+                {[0, 1].map((col) => (
+                  <ul
+                    key={col}
+                    className={`flex-1 min-w-0 divide-y divide-gray-200 ${
+                      col === 0 ? "pr-6" : "pl-6"
+                    }`}
+                  >
+                    {active.subItems
+                      .filter((_, i) => i % 2 === col)
+                      .map((sub) => (
+                        <li key={sub.label} className="py-3 first:pt-0">
+                          <Link
+                            href={sub.href}
+                            className="block text-sm font-medium text-black hover:text-[#0B60B0] transition-colors duration-150 leading-snug"
+                          >
+                            {sub.label}
+                          </Link>
+                        </li>
+                      ))}
+                  </ul>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+      )}
+    </div>
+  );
+}
+
+function IndustriesMegaMenu() {
+  // Same fixed-panel + JS-driven hover-bridge fix as ServicesMegaMenu —
+  // see the comment there for why plain CSS group-hover isn't enough
+  // once the panel is `fixed` and no longer sits inside the trigger's own
+  // layout box.
+  const [open, setOpen] = useState(false);
+  const closeTimer = useRef(null);
+
+  const openMenu = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setOpen(true);
+  };
+  const scheduleClose = () => {
+    closeTimer.current = setTimeout(() => setOpen(false), 250);
+  };
+
+  return (
+    <div
+      className="relative"
+      onMouseEnter={openMenu}
+      onMouseLeave={scheduleClose}
+    >
       <Link
         href="/industries"
         className="text-white flex justify-center items-center gap-1 cursor-pointer hover:text-[#40A2D8] transition py-4 -my-4"
@@ -191,34 +370,66 @@ function IndustriesMegaMenu() {
         Industries
         <ChevronDown
           size={18}
-          className="transition-transform duration-300 group-hover:rotate-180"
+          className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`}
         />
       </Link>
-      <div className="z-10 absolute left-1/2 -translate-x-1/2 top-full hidden group-hover:block bg-white border border-gray-200 rounded-xl shadow-lg w-[820px] max-w-[90vw] p-6">
-        <div className="grid grid-cols-3 gap-x-8">
-          {INDUSTRY_COLUMNS.map((column, i) => (
-            <ul key={i} className="space-y-1 text-sm text-black font-medium">
-              {column.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className="group/item flex items-center gap-3 w-full p-2.5 rounded transition-colors duration-150 hover:bg-[#0B60B0] hover:text-white"
-                    >
-                      <Icon
-                        size={18}
-                        className="text-[#40A2D8] shrink-0 group-hover/item:text-white"
-                      />
-                      {item.label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          ))}
+      {/* Outer wrapper: `fixed` (not `absolute`) so this wide panel centers
+          on the header's full width — the header's own transform makes it
+          the containing block for fixed children — instead of centering
+          under this one trigger, which is what was pushing it past the
+          right edge of the screen and getting it clipped. top-full sits
+          it flush against the navbar's bottom edge — no gap. Shifted a
+          bit right of dead-center (translate-x-[calc(50%-110px)]) since
+          the Industries trigger itself sits right of the nav's center. */}
+      {open && (
+        <div
+          className="z-20 fixed left-1/2 -translate-x-[calc(50%-110px)] top-full"
+          onMouseEnter={openMenu}
+          onMouseLeave={scheduleClose}
+        >
+          <div className="bg-white border border-gray-200 rounded-xl shadow-xl w-[960px] max-w-[95vw] overflow-hidden">
+            <div className="grid grid-cols-3 gap-x-8 p-6">
+              {INDUSTRY_COLUMNS.map((column, i) => (
+                <ul key={i} className="space-y-1 text-sm text-black font-medium">
+                  {column.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          className="group/item flex items-center gap-3 w-full p-2.5 rounded transition-colors duration-150 hover:bg-[#0B60B0] hover:text-white"
+                        >
+                          <Icon
+                            size={18}
+                            className="text-[#40A2D8] shrink-0 group-hover/item:text-white"
+                          />
+                          {item.label}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              ))}
+            </div>
+
+            {/* Bottom CTA strip — doesn't touch the 15 industries above,
+                just a way out for visitors whose industry isn't listed. */}
+            <div className="flex items-center justify-between gap-4 bg-amber-50 px-6 py-4 border-t border-amber-100">
+              <p className="text-sm text-black/70 max-w-md">
+                Didn&rsquo;t find what you&rsquo;re looking for? Let us
+                know your needs, and we&rsquo;ll tailor a solution just
+                for you.
+              </p>
+              <Link
+                href="/contact"
+                className="shrink-0 inline-flex items-center bg-[#0B60B0] hover:bg-[#0B60B0]/90 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition"
+              >
+                Schedule Free Consultation
+              </Link>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
@@ -373,12 +584,7 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center space-x-8 font-medium">
           <DesktopDropdown label="About" items={ABOUT_LINKS} width="w-72" />
-          <DesktopDropdown
-            label="Services"
-            items={SERVICE_LINKS}
-            width="w-72"
-            href="/services"
-          />
+          <ServicesMegaMenu />
           <IndustriesMegaMenu />
           <DesktopDropdown
             label="Resources"

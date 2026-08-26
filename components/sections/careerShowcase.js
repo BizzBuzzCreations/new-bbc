@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { GraduationCap, Target, TrendingUp } from "lucide-react";
 
 // "Why Work With Us" + "Join The Team" — real BizzBuzz office/team photos
 // throughout (same assets already used in the homepage's shuffle grid and
@@ -40,9 +41,21 @@ export function CareerWhyUs() {
 }
 
 const JOIN_TEAM_POINTS = [
-  { title: "Learn by Doing", desc: "Work on real campaigns and business challenges." },
-  { title: "Take Ownership", desc: "Bring ideas forward and take responsibility for your work." },
-  { title: "Keep Growing", desc: "Develop skills through hands-on experience and collaboration." },
+  {
+    icon: GraduationCap,
+    title: "Learn by Doing",
+    desc: "Work on real campaigns and business challenges.",
+  },
+  {
+    icon: Target,
+    title: "Take Ownership",
+    desc: "Bring ideas forward and take responsibility for your work.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Keep Growing",
+    desc: "Develop skills through hands-on experience and collaboration.",
+  },
 ];
 
 export function CareerJoinTeam() {
@@ -64,10 +77,17 @@ export function CareerJoinTeam() {
           </p>
 
           <div className="space-y-5 mb-8">
-            {JOIN_TEAM_POINTS.map(({ title, desc }) => (
-              <div key={title}>
-                <h3 className="font-semibold text-white mb-1">{title}</h3>
-                <p className="text-sm text-white/60 leading-relaxed">{desc}</p>
+            {JOIN_TEAM_POINTS.map(({ icon: Icon, title, desc }) => (
+              <div key={title} className="group flex items-start gap-3">
+                <span className="shrink-0 flex items-center justify-center w-9 h-9 rounded-lg bg-[#0B60B0]/15 text-[#40A2D8] transition-all duration-300 group-hover:bg-[#0B60B0] group-hover:text-white group-hover:scale-110">
+                  <Icon size={18} />
+                </span>
+                <div>
+                  <h3 className="font-semibold text-white mb-1">{title}</h3>
+                  <p className="text-sm text-white/60 leading-relaxed">
+                    {desc}
+                  </p>
+                </div>
               </div>
             ))}
           </div>

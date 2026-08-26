@@ -6,8 +6,9 @@ const industry = getIndustryBySlug("healthcare");
 const content = getIndustryPageContent("healthcare");
 
 export const metadata = {
-  title: "Healthcare Digital Marketing Services | BizzBuzz Creations",
-  description: industry.description,
+  title: "Healthcare Digital Marketing Agency | BizzBuzz Creations",
+  description:
+    "BizzBuzz Creations helps hospitals, clinics and doctors grow with healthcare SEO, PPC, content and social media marketing across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/industries/healthcare",
   },

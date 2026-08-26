@@ -163,7 +163,7 @@ const INDUSTRY_ORDER = [
   "wearables",
 ];
 const INDUSTRY_LINKS = INDUSTRY_ORDER.map((slug) =>
-  INDUSTRIES.find((industry) => industry.slug === slug)
+  INDUSTRIES.find((industry) => industry.slug === slug),
 ).filter(Boolean);
 
 const FAQS = [
@@ -234,9 +234,9 @@ export default function HowWeWorkPage() {
           <p className="text-white/70 leading-relaxed mb-8 max-w-xl">
             No vague promises, no &ldquo;we&rsquo;ll figure it out as we
             go.&rdquo; Every project at BizzBuzz Creations follows the same
-            structured process of audit, strategy, execution, and reporting
-            — so you always know what&rsquo;s happening, why it&rsquo;s
-            happening, and what results to expect.
+            structured process of audit, strategy, execution, and reporting — so
+            you always know what&rsquo;s happening, why it&rsquo;s happening,
+            and what results to expect.
           </p>
           <a
             href="/contact"
@@ -254,9 +254,9 @@ export default function HowWeWorkPage() {
             The Principles That Power Every Client Partnership
           </h2>
           <p className="text-white/70 max-w-2xl mb-14">
-            No complicated playbooks or hidden processes. Just six
-            principles that shape how we communicate, collaborate, execute,
-            and grow with every client.
+            No complicated playbooks or hidden processes. Just six principles
+            that shape how we communicate, collaborate, execute, and grow with
+            every client.
           </p>
 
           <div className="grid sm:grid-cols-2 gap-5">
@@ -302,9 +302,8 @@ export default function HowWeWorkPage() {
             The Tools Behind Every Strategy
           </h2>
           <p className="text-white/70 leading-relaxed max-w-2xl mb-14">
-            We combine industry-leading platforms with our own in-house
-            systems to plan, execute, and track every campaign with
-            precision.
+            We combine industry-leading platforms with our own in-house systems
+            to plan, execute, and track every campaign with precision.
           </p>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -333,8 +332,8 @@ export default function HowWeWorkPage() {
             What to Expect, and When
           </h2>
           <p className="text-white/60 max-w-2xl mb-14 leading-relaxed">
-            Every business is different, but here&rsquo;s a realistic
-            timeline for how our process typically unfolds.
+            Every business is different, but here&rsquo;s a realistic timeline
+            for how our process typically unfolds.
           </p>
 
           <OnboardingCarousel />
@@ -348,8 +347,7 @@ export default function HowWeWorkPage() {
             What You Can Expect
           </h2>
           <h3 className="text-lg font-semibold text-[#40A2D8] mb-4">
-            Clear Communication. Accountable Execution. Continuous
-            Improvement.
+            Clear Communication. Accountable Execution. Continuous Improvement.
           </h3>
           <p className="text-white/60 max-w-2xl mx-auto mb-14 leading-relaxed">
             Working with BizzBuzz Creations means knowing where your project
@@ -387,13 +385,11 @@ export default function HowWeWorkPage() {
           </h3>
           <p className="text-white/60 max-w-2xl mx-auto mb-2 leading-relaxed">
             This same structured process — discover, strategize, execute,
-            optimize, and report — powers digital growth across every
-            industry we work with, from healthcare and real estate to
-            e-commerce, education, and beyond.
+            optimize, and report — powers digital growth across every industry
+            we work with, from healthcare and real estate to e-commerce,
+            education, and beyond.
           </p>
-          <p className="text-white/50 text-sm mb-10">
-            Explore how it applies to your industry:
-          </p>
+          <p className="text-white/50 text-sm mb-10"></p>
 
           <div className="flex flex-wrap justify-center gap-3">
             {INDUSTRY_LINKS.map(({ slug, label, icon: Icon }) => (
@@ -463,10 +459,9 @@ export default function HowWeWorkPage() {
               Ready to See This Process Work for Your Business?
             </h3>
             <p className="max-w-3xl text-white/70 mb-8">
-              No guesswork, no vague timelines — just a clear process built
-              to turn strategy into measurable growth. Book a free
-              consultation and see exactly how we&rsquo;d approach your
-              business.
+              No guesswork, no vague timelines — just a clear process built to
+              turn strategy into measurable growth. Book a free consultation and
+              see exactly how we&rsquo;d approach your business.
             </p>
             <Link
               href="/contact"
