@@ -6,8 +6,9 @@ const industry = getIndustryBySlug("restaurant");
 const content = getIndustryPageContent("restaurant");
 
 export const metadata = {
-  title: `${industry.label} Digital Marketing Services | BizzBuzz Creations`,
-  description: industry.description,
+  title: "Restaurant Digital Marketing Agency | BizzBuzz Creations",
+  description:
+    "BizzBuzz Creations is a restaurant digital marketing agency helping restaurants, cafes, and cloud kitchens grow across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/industries/restaurant",
   },

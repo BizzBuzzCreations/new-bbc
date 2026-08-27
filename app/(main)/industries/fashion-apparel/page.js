@@ -6,8 +6,9 @@ const industry = getIndustryBySlug("fashion-apparel");
 const content = getIndustryPageContent("fashion-apparel");
 
 export const metadata = {
-  title: "Fashion & Apparel Digital Marketing Services | BizzBuzz Creations",
-  description: industry.description,
+  title: "Fashion Digital Marketing Agency | BizzBuzz Creations",
+  description:
+    "BizzBuzz Creations is a fashion digital marketing agency helping D2C, apparel and clothing brands grow across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/industries/fashion-apparel",
   },

@@ -6,8 +6,9 @@ const industry = getIndustryBySlug("wearables");
 const content = getIndustryPageContent("wearables");
 
 export const metadata = {
-  title: `${industry.label} Digital Marketing Services | BizzBuzz Creations`,
-  description: industry.description,
+  title: "Digital Marketing for Wearable Brands | BizzBuzz Creations",
+  description:
+    "BizzBuzz Creations helps wearable brands grow with SEO, performance marketing, influencer campaigns and e-commerce strategies across India, the UK, and the USA.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/industries/wearables",
   },

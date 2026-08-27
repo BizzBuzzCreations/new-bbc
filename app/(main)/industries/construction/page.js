@@ -6,8 +6,9 @@ const industry = getIndustryBySlug("construction");
 const content = getIndustryPageContent("construction");
 
 export const metadata = {
-  title: `${industry.label} Digital Marketing Services | BizzBuzz Creations`,
-  description: industry.description,
+  title: "Construction Digital Marketing Agency | BizzBuzz Creations",
+  description:
+    "BizzBuzz Creations is a construction digital marketing agency helping contractors and builders get more leads across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/industries/construction",
   },

@@ -6,8 +6,9 @@ const industry = getIndustryBySlug("ecommerce");
 const content = getIndustryPageContent("ecommerce");
 
 export const metadata = {
-  title: `${industry.label} Digital Marketing Services | BizzBuzz Creations`,
-  description: industry.description,
+  title: "E-commerce Digital Marketing Agency | BizzBuzz Creations",
+  description:
+    "BizzBuzz Creations is an e-commerce digital marketing agency helping D2C brands, Shopify and Amazon sellers grow sales across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/industries/ecommerce",
   },

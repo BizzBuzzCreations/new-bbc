@@ -6,8 +6,9 @@ const industry = getIndustryBySlug("finance");
 const content = getIndustryPageContent("finance");
 
 export const metadata = {
-  title: `${industry.label} Digital Marketing Services | BizzBuzz Creations`,
-  description: industry.description,
+  title: "Finance Digital Marketing Agency | BizzBuzz Creations",
+  description:
+    "BizzBuzz Creations is a fintech and financial services digital marketing agency helping NBFCs, insurers and lenders grow across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/industries/finance",
   },

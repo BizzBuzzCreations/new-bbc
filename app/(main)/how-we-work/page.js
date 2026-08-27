@@ -9,7 +9,7 @@ import {
   Users,
   Zap,
   Unlock,
-  ShieldCheck,
+  ShieldCheck,                 
   Lightbulb,
   FileSignature,
   BarChart3,

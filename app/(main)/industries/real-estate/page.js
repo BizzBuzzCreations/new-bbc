@@ -6,8 +6,9 @@ const industry = getIndustryBySlug("real-estate");
 const content = getIndustryPageContent("real-estate");
 
 export const metadata = {
-  title: `${industry.label} Digital Marketing Services | BizzBuzz Creations`,
-  description: industry.description,
+  title: "Real Estate Digital Marketing Agency | BizzBuzz Creations",
+  description:
+    "BizzBuzz Creations is a real estate digital marketing agency helping builders, realtors, and developers generate leads across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/industries/real-estate",
   },

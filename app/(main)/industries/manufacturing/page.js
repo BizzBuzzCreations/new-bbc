@@ -6,8 +6,9 @@ const industry = getIndustryBySlug("manufacturing");
 const content = getIndustryPageContent("manufacturing");
 
 export const metadata = {
-  title: `${industry.label} Digital Marketing Services | BizzBuzz Creations`,
-  description: industry.description,
+  title: "B2B Manufacturing Marketing Agency | BizzBuzz Creations",
+  description:
+    "BizzBuzz Creations is a B2B digital marketing agency helping manufacturers and industrial companies generate leads across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/industries/manufacturing",
   },

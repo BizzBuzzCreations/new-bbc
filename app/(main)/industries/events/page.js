@@ -6,8 +6,9 @@ const industry = getIndustryBySlug("events");
 const content = getIndustryPageContent("events");
 
 export const metadata = {
-  title: `${industry.label} Digital Marketing Services | BizzBuzz Creations`,
-  description: industry.description,
+  title: "Event Marketing Agency India | BizzBuzz Creations",
+  description:
+    "BizzBuzz Creations is an event marketing agency helping event companies, concerts, and exhibitions grow ticket sales across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/industries/events",
   },

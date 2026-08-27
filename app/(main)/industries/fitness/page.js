@@ -6,8 +6,9 @@ const industry = getIndustryBySlug("fitness");
 const content = getIndustryPageContent("fitness");
 
 export const metadata = {
-  title: `${industry.label} Digital Marketing Services | BizzBuzz Creations`,
-  description: industry.description,
+  title: "Fitness Digital Marketing Agency | BizzBuzz Creations",
+  description:
+    "BizzBuzz Creations is a fitness digital marketing agency helping gyms, studios, and personal trainers get more leads and members across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/industries/fitness",
   },

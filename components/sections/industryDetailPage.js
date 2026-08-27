@@ -31,6 +31,9 @@ export default function IndustryDetailPage({
   heroDescription,
   heroCtaText,
   capabilities,
+  // Optional override for the capabilities section's small eyebrow
+  // heading — defaults to "Built for Every Corner of {label}".
+  capabilitiesHeading,
   // When true, each capability card shows only its title by default and
   // reveals the description on hover (with the usual color change) —
   // used for Healthcare's 12-card grid so it doesn't read as a wall of
@@ -129,7 +132,7 @@ export default function IndustryDetailPage({
           <div className="flex items-center justify-center gap-4 mb-14">
             <span className="h-px w-10 bg-white/20" />
             <p className="text-xs font-bold uppercase tracking-widest text-white">
-              Built for Every Corner of {label}
+              {capabilitiesHeading || `Built for Every Corner of ${label}`}
             </p>
             <span className="h-px w-10 bg-white/20" />
           </div>

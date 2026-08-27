@@ -6,8 +6,9 @@ const industry = getIndustryBySlug("travel");
 const content = getIndustryPageContent("travel");
 
 export const metadata = {
-  title: `${industry.label} Digital Marketing Services | BizzBuzz Creations`,
-  description: industry.description,
+  title: "Travel Digital Marketing Agency | BizzBuzz Creations",
+  description:
+    "BizzBuzz Creations is a travel digital marketing agency helping travel agencies, hotels and tour operators grow across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/industries/travel",
   },

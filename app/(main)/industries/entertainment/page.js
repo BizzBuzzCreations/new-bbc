@@ -6,8 +6,9 @@ const industry = getIndustryBySlug("entertainment");
 const content = getIndustryPageContent("entertainment");
 
 export const metadata = {
-  title: `${industry.label} Digital Marketing Services | BizzBuzz Creations`,
-  description: industry.description,
+  title: "Entertainment Marketing Agency | BizzBuzz Creations",
+  description:
+    "BizzBuzz Creations is an entertainment digital marketing agency helping artists, OTT platforms, and creators grow audiences across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/industries/entertainment",
   },

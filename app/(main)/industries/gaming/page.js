@@ -6,8 +6,9 @@ const industry = getIndustryBySlug("gaming");
 const content = getIndustryPageContent("gaming");
 
 export const metadata = {
-  title: `${industry.label} Digital Marketing Services | BizzBuzz Creations`,
-  description: industry.description,
+  title: "Gaming Digital Marketing Agency | BizzBuzz Creations",
+  description:
+    "BizzBuzz Creations is a gaming digital marketing agency helping mobile games, esports and gaming brands grow across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/industries/gaming",
   },
