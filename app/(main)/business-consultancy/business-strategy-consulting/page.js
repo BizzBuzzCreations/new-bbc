@@ -6,59 +6,61 @@ import BpoWeAre from "@/components/sections/bpoWeAre";
 import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
 import CTA from "@/components/sections/CTA";
 import DarkFAQSection from "@/components/sections/darkFAQSection";
-import { Target, Rocket, TrendingUp, Settings, Users, MapPin } from "lucide-react";
+import {
+  Target,
+  Compass,
+  Map,
+  Users,
+  BarChart3,
+  ClipboardCheck,
+} from "lucide-react";
 
 export const metadata = {
-  title: "Business Consulting India | Strategy | BizzBuzz Creations",
+  title: "Business Strategy Consulting | BizzBuzz Creations",
   description:
-    "Expert business consulting services in India for startups and companies. Get strategy, growth, and operations support by BizzBuzz Creations across India.",
+    "Business strategy consulting in India — define your goals, map your market, and build a roadmap that turns big ambitions into practical, executable steps, by BizzBuzz Creations.",
   alternates: {
-    canonical: "https://bizzbuzzcreations.com/business-consultancy",
+    canonical:
+      "https://bizzbuzzcreations.com/business-consultancy/business-strategy-consulting",
   },
 };
 
 const SERVICE_ITEMS = [
   {
+    icon: Compass,
+    heading: "Goal & Vision Clarification",
+    description:
+      "We help translate a broad ambition into specific, measurable goals, so your team knows exactly what success actually looks like.",
+  },
+  {
+    icon: Map,
+    heading: "Market & Competitor Mapping",
+    description:
+      "We map your market position and competitors clearly, so strategy is built on where you actually stand, not assumptions.",
+  },
+  {
     icon: Target,
-    heading: "Business Strategy Consulting",
+    heading: "Strategic Roadmap Development",
     description:
-      "Every strong business runs on a clear plan, not guesswork. As a dedicated strategy consulting partner, we help you define your goals, map your market, and build a roadmap that turns big ambitions into practical, executable steps.",
-    href: "/business-consultancy/business-strategy-consulting",
-  },
-  {
-    icon: Rocket,
-    heading: "Startup & New Business Consulting",
-    description:
-      "Starting up is exciting and overwhelming. Our startup consulting guides first-time founders through everything from business models to go-to-market strategy, from a partner who's done it before.",
-    href: "/business-consultancy/startup-new-business-consulting",
-  },
-  {
-    icon: TrendingUp,
-    heading: "Business Growth & Scaling Consulting",
-    description:
-      "Ready to grow but not sure how to scale without breaking what's working? Our growth consulting builds systems and processes designed to help you expand sustainably, not just quickly.",
-    href: "/business-consultancy/business-growth-scaling-consulting",
-  },
-  {
-    icon: Settings,
-    heading: "Operations & Process Consulting",
-    description:
-      "Inefficiency quietly eats into profit every single day. Through focused operations consulting, we identify the bottlenecks in your day-to-day running and streamline them.",
-    href: "/business-consultancy/operations-process-consulting",
+      "Big ambitions get broken down into a practical, sequenced roadmap of executable steps, not a vague vision statement.",
   },
   {
     icon: Users,
-    heading: "Business Development & Marketing Consulting",
+    heading: "Stakeholder Alignment",
     description:
-      "Growth isn't just about strategy on paper — it's about winning customers too. Our combined business development and marketing consulting helps you build pipeline and brand visibility.",
-    href: "/business-consultancy/business-development-marketing-consulting",
+      "We help align leadership and teams around the strategy, so execution doesn't stall on internal disagreement.",
   },
   {
-    icon: MapPin,
-    heading: "Local & City-Based Business Advisory",
+    icon: BarChart3,
+    heading: "KPI & Milestone Setting",
     description:
-      "Looking for guidance that understands your local market? As a trusted business consultant in Prayagraj and Allahabad, we offer hands-on advisory grounded in the local landscape.",
-    href: "/business-consultancy/local-city-based-business-advisory",
+      "Clear KPIs and milestones get set so progress is measurable, not just a feeling that things are moving forward.",
+  },
+  {
+    icon: ClipboardCheck,
+    heading: "Strategy Review & Adjustment",
+    description:
+      "We revisit the strategy periodically and adjust it as real market conditions and results come in, not once and forget.",
   },
 ];
 
@@ -122,38 +124,38 @@ const WE_ARE_POINTS = [
 
 const FAQS = [
   {
-    question: "What does a business consultant do?",
+    question: "What does business strategy consulting actually involve?",
     answer:
-      "A business consultant helps you understand what's working in your business and what's not. They guide you with simple, practical strategies to improve growth, save costs, and run things more efficiently.",
+      "It involves clarifying your goals, mapping your market position, and building a practical roadmap of executable steps to get there, not just a theoretical plan.",
   },
   {
-    question: "How is this different from hiring staff?",
+    question: "How long does a strategy engagement typically take?",
     answer:
-      "Instead of hiring full-time employees, a consultant gives expert advice when you need it without long-term costs. They also bring a fresh, unbiased perspective to solve problems faster.",
+      "Initial strategy development typically takes a few weeks, though we often stay involved through implementation and review over a longer period.",
   },
   {
-    question: "Is it useful for small businesses or startups?",
+    question: "Do you help implement the strategy, or just create it?",
     answer:
-      "Absolutely. A consultant helps you avoid common mistakes, plan better, and grow faster especially when you're just starting out or trying to scale.",
+      "We stay involved through hands-on implementation, not just handing over a strategy deck and disappearing after the first meeting.",
   },
   {
-    question: "How much does it cost in India?",
+    question: "Is business strategy consulting only for large companies?",
     answer:
-      "It depends on what you need. Some businesses need a one-time strategy, while others need ongoing support. Good consultants usually offer flexible pricing based on your goals and budget.",
+      "No, strategy consulting is valuable for founders and small businesses too — clarity on goals and roadmap matters at any size.",
   },
   {
-    question: "Can I find a consultant in Prayagraj/Allahabad?",
+    question: "How do you measure if a strategy is working?",
     answer:
-      "Yes, there are local options like BizzBuzz Creations that understand the market well and can even work with you in person when needed.",
+      "We set clear KPIs and milestones upfront, then review progress against them regularly, adjusting the plan as real results come in.",
   },
 ];
 
-export default function BusinessConsultancy() {
+export default function BusinessStrategyConsulting() {
   return (
     <>
       <BpoHero
-        heading="Turn Your Business Potential Into Real Profit Growth"
-        description="Most businesses don't fail — they get stuck. We identify what's holding you back and build actionable strategies that drive real results, not just reports."
+        heading="Business Strategy Consulting in India"
+        description="Every strong business runs on a clear plan, not guesswork. As a dedicated strategy consulting partner, we help you define your goals, map your market, and build a roadmap that turns big ambitions into practical, executable steps."
         img="/businesscons.webp"
       />
 
@@ -173,8 +175,8 @@ export default function BusinessConsultancy() {
         <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
           <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
             <Image
-              src="/bc-img.png"
-              alt="BizzBuzz Creations business consultants at work"
+              src="/pie%20chart%20showing%20financial%20growth.png"
+              alt="Business strategy consulting at BizzBuzz Creations"
               fill
               sizes="(max-width: 1024px) 100vw, 440px"
               className="object-cover"
@@ -199,36 +201,39 @@ export default function BusinessConsultancy() {
           </div>
           <div className="max-w-xl text-center lg:text-left">
             <h2 className="text-3xl font-bold mb-3 text-white">
-              Business Consulting Services Across India
+              A Clear Plan, Not Guesswork
             </h2>
             <p className="text-white/70 leading-relaxed mb-4">
-              BizzBuzz Creations is a full-service business consulting firm
-              offering business consulting services to founders, small
-              business owners, and growing companies right across India.
+              Every strong business runs on a clear plan, not guesswork. As
+              a dedicated strategy consulting partner, we help you define
+              your goals, map your market, and build a roadmap that turns
+              big ambitions into practical, executable steps.
             </p>
             <p className="text-white/70 leading-relaxed">
-              Whether you&rsquo;re scaling a manufacturing unit in
-              Ahmedabad, launching a D2C brand in Delhi, or fixing
-              operations for a family business in Chennai, our team steps
-              in as your management consultant, bringing structure,
-              strategy, and clarity to every decision.
+              We&rsquo;re a business consulting firm based in Prayagraj,
+              helping founders and growing companies locally across
+              Allahabad and Uttar Pradesh, as well as across India, turn
+              strategy into real, measurable results.
             </p>
           </div>
         </div>
       </section>
 
-      {/* "Our Core Business Consulting Services" */}
+      {/* What's included */}
       <section className="bg-black py-20">
         <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid title="Our Core Business Consulting Services" items={SERVICE_ITEMS} />
+          <BpoServicesGrid
+            title="What's Included in Our Business Strategy Consulting"
+            items={SERVICE_ITEMS}
+          />
         </div>
       </section>
 
-      {/* "Our Consulting Process" */}
+      {/* Process */}
       <section className="bg-black py-20 px-5">
         <div className="max-w-5xl mx-auto">
           <BpoProcess
-            title="Our Consulting Process"
+            title="Our Business Strategy Process"
             description="Anyone can hand you a strategy deck. Not everyone will sit with you and make sure it actually works. Our four-step process stays involved from the first audit to final execution."
             steps={PROCESS_STEPS}
           />
@@ -239,11 +244,11 @@ export default function BusinessConsultancy() {
         <div className="max-w-5xl mx-auto border-t border-white" />
       </div>
 
-      {/* "Business Consulting Firm" */}
+      {/* We are */}
       <section className="bg-black pt-20 pb-20 px-5">
         <BpoWeAre
-          title="Business Consulting Firm"
-          description="BizzBuzz Creations is a business consulting firm based in Prayagraj, helping founders and growing companies across India turn strategy into real, measurable results — not just reports."
+          title="Business Strategy Consulting Firm"
+          description="BizzBuzz Creations is a business strategy consulting firm helping founders and growing companies across India turn ambition into a practical, executable roadmap."
           points={WE_ARE_POINTS}
         />
       </section>

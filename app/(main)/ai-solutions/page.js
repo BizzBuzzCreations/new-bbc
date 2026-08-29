@@ -23,24 +23,28 @@ const SERVICE_ITEMS = [
     heading: "Custom AI Agents & Chatbots",
     description:
       "We design AI agents that do more than answer FAQs — they qualify leads, book calls, and resolve real customer queries, trained on your actual business so every chat feels like talking to your team.",
+    href: "/ai-solutions/custom-ai-agents-chatbots",
   },
   {
     icon: Sparkles,
     heading: "AI Content & Generative Engines",
     description:
       "Our generative AI content engines draft, structure, and personalize copy at scale, including blog posts, product descriptions, and ad variations, trained on your brand voice.",
+    href: "/ai-solutions/ai-content-generative-engines",
   },
   {
     icon: Workflow,
     heading: "Workflow & Process Automation",
     description:
       "Our AI workflow automation connects your tools together, so approvals, reports, follow-ups, and data entry run without anyone chasing them manually.",
+    href: "/ai-solutions/workflow-process-automation",
   },
   {
     icon: Radar,
     heading: "GEO (Generative Engine Optimization)",
     description:
       "Our GEO service structures your content and website so AI engines like ChatGPT, Perplexity, and Google AI Overviews actually cite and recommend your business.",
+    href: "/ai-solutions/generative-engine-optimization",
   },
 ];
 

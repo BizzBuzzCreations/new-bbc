@@ -1,8 +1,14 @@
+import Link from "next/link";
+
 // Horizontal cards — icon left, content right, solid blue gradient card
 // with a small decorative outline icon in the top-right corner that moves
 // on hover (same flourish as ServiceCard.js), and a color-swap hover on
 // the whole card. Generic: pass your own title + items so every service
-// page can reuse this exact structure with its own real content.
+// page can reuse this exact structure with its own real content. Pass an
+// `href` on an item to make that card a link to its own dedicated page
+// (used on the Website Development hub to point at each of the 6
+// individual service pages); cards without one stay plain, non-clickable
+// divs exactly as before.
 export default function BpoServicesGrid({ title = "What We Handle", items = [] }) {
   return (
     <div>
@@ -10,12 +16,17 @@ export default function BpoServicesGrid({ title = "What We Handle", items = [] }
         {title}
       </h2>
       <div className="grid sm:grid-cols-2 gap-6">
-        {items.map(({ icon: Icon, heading, description }) => (
-          <div
+        {items.map(({ icon: Icon, heading, description, href }) => {
+          const Wrapper = href ? Link : "div";
+          const wrapperProps = href ? { href } : {};
+          return (
+          <Wrapper
             key={heading}
+            {...wrapperProps}
             className="group relative flex gap-4 overflow-hidden rounded-2xl p-6 shadow-xl transition-transform duration-300 hover:-translate-y-1"
             style={{ background: "linear-gradient(155deg, #1a5da3 0%, #0B2F52 60%, #08152b 100%)" }}
           >
+
             {/* Hover color swap — crossfades to a brighter blue */}
             <div
               className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -33,6 +44,11 @@ export default function BpoServicesGrid({ title = "What We Handle", items = [] }
               <p className="text-sm text-white/70 leading-relaxed">
                 {description}
               </p>
+              {href && (
+                <span className="inline-block mt-3 text-sm font-semibold text-[#40A2D8] group-hover:text-white transition-colors duration-300">
+                  Learn more →
+                </span>
+              )}
             </div>
             {/* Same corner-icon flourish used on the service pages'
                 ServiceCard component */}
@@ -41,8 +57,9 @@ export default function BpoServicesGrid({ title = "What We Handle", items = [] }
               className="absolute z-10 top-5 right-5 text-white/25 transition duration-1000 group-hover:scale-[2] group-hover:rotate-[410deg] group-hover:-translate-y-3 group-hover:translate-x-3"
               aria-hidden="true"
             />
-          </div>
-        ))}
+          </Wrapper>
+          );
+        })}
       </div>
     </div>
   );

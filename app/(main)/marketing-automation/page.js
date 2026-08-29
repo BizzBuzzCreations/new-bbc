@@ -23,24 +23,28 @@ const SERVICE_ITEMS = [
     heading: "Email Marketing Automation",
     description:
       "We set up email automation that sends the right message at the right moment: welcome sequences, abandoned cart reminders, and re-engagement campaigns, every email timed, tested, and tracked.",
+    href: "/marketing-automation/email-marketing-automation",
   },
   {
     icon: Filter,
     heading: "Lead Nurturing Automation",
     description:
       "A lead that isn't ready to buy today doesn't mean a lost sale. Our lead nurturing automation keeps prospects warm with timed content, reminders, and offers until they're ready to talk to your team.",
+    href: "/marketing-automation/lead-nurturing-automation",
   },
   {
     icon: Contact,
     heading: "CRM Marketing Automation",
     description:
       "Your CRM shouldn't be a place where leads go to be forgotten. We connect automation directly to your campaigns, so every call, form fill, or reply automatically updates lead status and triggers the next action.",
+    href: "/marketing-automation/crm-marketing-automation",
   },
   {
     icon: MessageCircle,
     heading: "WhatsApp Marketing Automation",
     description:
       "With open rates far higher than email, WhatsApp automation lets you send order updates, offers, and reminders where your customers already are, plus chatbot replies for common questions.",
+    href: "/marketing-automation/whatsapp-marketing-automation",
   },
 ];
 

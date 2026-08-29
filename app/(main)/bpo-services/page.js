@@ -24,36 +24,42 @@ const SERVICE_ITEMS = [
     heading: "AI-Powered BPO & Call Center Solutions",
     description:
       "We layer AI call center solutions on top of real agents' smart call routing, live transcription, and chatbot customer support services that pick up repetitive questions instantly. Your team only steps in for calls that truly need a human touch, so nothing slips through and nothing feels robotic.",
+    href: "/bpo-services/ai-powered-bpo-call-center-solutions",
   },
   {
     icon: PhoneCall,
     heading: "Inbound & Outbound Call Center Services",
     description:
       "From answering customer queries to running outbound sales and collection calls, our inbound call center services and outbound call center services are staffed by agents trained on your scripts, tone, and product, not a generic script read out from a random floor.",
+    href: "/bpo-services/inbound-outbound-call-center-services",
   },
   {
     icon: Workflow,
     heading: "Business Process Automation Services",
     description:
       "Manual, repetitive processes are where most companies quietly lose hours every week. Our business process automation services map your workflow first, then automate the boring middle, freeing your in-house team to focus on decisions, not data-copying.",
+    href: "/bpo-services/business-process-automation-services",
   },
   {
     icon: FileText,
     heading: "Data Entry & Back Office Outsourcing",
     description:
       "Invoices, records, CRM updates, reconciliations — our data entry outsourcing and back office outsourcing desks work with the same accuracy checks a large enterprise would demand, at a cost a small business can actually plan around, including finance and accounting outsourcing support.",
+    href: "/bpo-services/data-entry-back-office-outsourcing",
   },
   {
     icon: UserCheck,
     heading: "Virtual Assistant & Startup Outsourcing",
     description:
       "Not every business needs a 50-seat floor. Our virtual assistant services and startup outsourcing services let founders and small teams hand off scheduling, support and admin work through flexible remote team outsourcing, scaling up only when the workload genuinely demands it.",
+    href: "/bpo-services/virtual-assistant-startup-outsourcing",
   },
   {
     icon: Clock,
     heading: "24/7 & E-commerce Customer Support",
     description:
       "Online stores and growing brands can't afford support that sleeps. Our 24/7 support outsourcing services and e-commerce customer support outsourcing cover order queries, returns, and chat support round the clock, with chatbot support services handling the late-night rush.",
+    href: "/bpo-services/24-7-ecommerce-customer-support",
   },
 ];
 

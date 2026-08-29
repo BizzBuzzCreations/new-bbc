@@ -23,36 +23,42 @@ const SERVICE_ITEMS = [
     heading: "AI Search Optimization",
     description:
       "AI is transforming how people search, and your business needs to adapt to stay visible. We optimize your website for AI-driven platforms so your content gets understood, trusted, and recommended.",
+    href: "/search-engine-optimization/ai-search-optimization",
   },
   {
     icon: Sparkles,
     heading: "Generative Engine Optimization (GEO)",
     description:
       "Search engines are evolving into answer engines, where users get instant responses. Our GEO strategy ensures your business becomes part of those AI-generated answers.",
+    href: "/search-engine-optimization/generative-engine-optimization",
   },
   {
     icon: MessageCircleQuestion,
     heading: "Answer Engine Optimization (AEO)",
     description:
       "Modern users want quick answers without scrolling through pages. We optimize your content so it becomes the direct answer across search engines and AI tools.",
+    href: "/search-engine-optimization/answer-engine-optimization",
   },
   {
     icon: Network,
     heading: "Semantic SEO & Topical Authority",
     description:
       "Search engines now focus on meaning and expertise rather than just keywords. We build your website into a trusted authority within your niche.",
+    href: "/search-engine-optimization/semantic-seo-topical-authority",
   },
   {
     icon: PenTool,
     heading: "AI Content Optimization",
     description:
       "Content must now work for both humans and AI systems. We create and refine content that ranks, gets cited, and drives real engagement.",
+    href: "/search-engine-optimization/ai-content-optimization",
   },
   {
     icon: MapPin,
     heading: "High-Intent & Local SEO",
     description:
       "Driving traffic is not enough; you need customers ready to take action. We target high-intent and location-based searches to generate real business results.",
+    href: "/search-engine-optimization/high-intent-local-seo",
   },
 ];
 

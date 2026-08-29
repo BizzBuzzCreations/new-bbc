@@ -24,36 +24,42 @@ const SERVICE_ITEMS = [
     heading: "Google & Search Ads Management",
     description:
       "Get found the moment someone is ready to buy. Our digital ads management services cover search, display, and shopping campaigns built around real buyer intent, so your business shows up when it matters most, not just when budgets allow.",
+    href: "/paid-marketing/google-search-ads-management",
   },
   {
     icon: MessageCircle,
     heading: "Meta & Social Ads Management",
     description:
       "From Facebook to Instagram, our paid media services are designed to stop the scroll and start conversations. We craft ad creatives and targeting strategies that turn casual scrollers into genuine leads for your brand.",
+    href: "/paid-marketing/meta-social-ads-management",
   },
   {
     icon: TrendingUp,
     heading: "Performance Marketing & ROI Campaigns",
     description:
       "As a dedicated performance marketing agency, every campaign we run is tracked against one metric that matters: return on investment. No vanity numbers, no fluff, just campaigns built to hit your revenue targets.",
+    href: "/paid-marketing/performance-marketing-roi-campaigns",
   },
   {
     icon: Users,
     heading: "Lead Generation Campaigns",
     description:
       "Our lead generation marketing services are engineered to fill your calendar, not just your inbox. We combine smart targeting, landing pages, and offers that convert visitors into genuine, sales-ready leads.",
+    href: "/paid-marketing/lead-generation-campaigns",
   },
   {
     icon: ShoppingCart,
     heading: "E-commerce & Retargeting Ads",
     description:
       "Running an online store? Our team specializes in performance marketing for e-commerce needs, from product ads to retargeting shoppers who almost bought, helping you recover lost sales and boost repeat purchases.",
+    href: "/paid-marketing/ecommerce-retargeting-ads",
   },
   {
     icon: MapPin,
     heading: "Local & City-Based Ad Campaigns",
     description:
       "Need customers walking through your door? As a trusted paid marketing agency in Allahabad, we run hyper-local campaigns that put your business in front of nearby customers actively searching for what you offer.",
+    href: "/paid-marketing/local-city-based-ad-campaigns",
   },
 ];
 

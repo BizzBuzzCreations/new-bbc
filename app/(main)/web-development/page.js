@@ -30,36 +30,42 @@ const SERVICE_ITEMS = [
     heading: "Custom Web Development & Design",
     description:
       "Off-the-shelf templates only get you so far. Our custom web development team builds mobile-first, responsive websites around your specific goals — lead generation, bookings, or online sales — combining clean design with solid, maintainable code.",
+    href: "/web-development/custom-web-development",
   },
   {
     icon: ShoppingCart,
     heading: "Shopify & Ecommerce Development",
     description:
       "As specialist Shopify website developers, we build fast-loading, conversion-focused online stores with smooth checkout experiences, designed for speed, mobile shoppers, and global scalability — from 20 products to 20,000.",
+    href: "/web-development/shopify-ecommerce-development",
   },
   {
     icon: Server,
     heading: "PHP Web Application Development",
     description:
       "For businesses with complex backend needs, our full-stack PHP developers build and modernize custom web applications, from internal tools to customer-facing platforms, updating legacy systems for better security and speed.",
+    href: "/web-development/php-web-application-development",
   },
   {
     icon: Atom,
     heading: "React & Next.js Development",
     description:
       "Our React and Next.js developers build high-performing, AI-integrated frontends using server-side rendering to boost load speed and Google ranking, integrating seamlessly with your existing backend and team.",
+    href: "/web-development/react-nextjs-development",
   },
   {
     icon: RefreshCw,
     heading: "Website Redesign & Management",
     description:
       "An outdated website quietly costs you customers every day. Our redesign services modernize UI/UX for higher conversions and fix Core Web Vitals, followed by ongoing monitoring, security updates, and backups.",
+    href: "/web-development/website-redesign-management",
   },
   {
     icon: Newspaper,
     heading: "WordPress Development",
     description:
       "Our WordPress developers build high-performance, SEO-ready websites with strong security, including protection against common vulnerabilities and AI-assisted threat monitoring.",
+    href: "/web-development/wordpress-development",
   },
 ];
 

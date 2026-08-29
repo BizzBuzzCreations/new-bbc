@@ -23,36 +23,42 @@ const SERVICE_ITEMS = [
     heading: "Social Media Management Services",
     description:
       "We handle your daily posting, content calendar, and audience engagement so your brand stays active and consistent — professional, on-brand, and always ready to convert visitors into loyal followers.",
+    href: "/social-media-marketing/social-media-management-services",
   },
   {
     icon: Camera,
     heading: "Instagram Marketing Agency",
     description:
       "From reels to story strategy, our Instagram marketing team builds real engagement, not just likes. We create scroll-stopping content and run targeted Instagram ads that turn followers into genuine paying customers.",
+    href: "/social-media-marketing/instagram-marketing-agency",
   },
   {
     icon: Users,
     heading: "Facebook & Meta Ads Agency",
     description:
       "As a performance-focused Facebook and Meta ads agency, we run high-converting campaigns backed by data. Every rupee you spend is tracked and optimized for real leads, not just clicks and impressions.",
+    href: "/social-media-marketing/facebook-meta-ads-agency",
   },
   {
     icon: Linkedin,
     heading: "LinkedIn Marketing for B2B Growth",
     description:
       "Our LinkedIn marketing strategy is built for B2B lead generation. We help you connect with decision-makers, build authority in your industry, and turn LinkedIn into a steady source of business leads.",
+    href: "/social-media-marketing/linkedin-marketing-b2b-growth",
   },
   {
     icon: Sparkles,
     heading: "AI Social Media Marketing",
     description:
       "We use AI marketing tools and social media automation to plan smarter content, predict trends early, and post at the best time for engagement — faster results, lower cost per lead.",
+    href: "/social-media-marketing/ai-social-media-marketing",
   },
   {
     icon: Video,
     heading: "Reels & Short Video Marketing",
     description:
       "Short-form video drives the most reach in 2026. Our reels and video marketing team scripts, shoots, and edits scroll-stopping reels that bring your brand in front of new audiences daily.",
+    href: "/social-media-marketing/reels-short-video-marketing",
   },
 ];
 
