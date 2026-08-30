@@ -1,18 +1,12 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
-  Palette,
-  CreditCard,
+  ShoppingCart,
+  Rocket,
+  Building2,
+  Building,
   Package,
-  Gauge,
-  Puzzle,
-  Search,
+  Handshake,
+  RefreshCw,
 } from "lucide-react";
 
 export const metadata = {
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: Palette,
-    heading: "Custom Shopify Theme Development",
-    description:
-      "We design and build Shopify themes around your brand instead of relying on stock templates, so your store looks distinct and matches how you actually sell.",
+    icon: Rocket,
+    title: "Startups & New Store Launches",
+    desc: "New brands need a store that looks credible and converts from day one without a bloated build timeline. We build launch-ready Shopify stores around a lean product catalog, letting startups get to market fast without cutting corners on checkout or speed.",
   },
   {
-    icon: CreditCard,
-    heading: "Secure Checkout & Payment Integration",
-    description:
-      "Smooth, trustworthy checkout experiences with the payment gateways your customers actually use, tuned to reduce cart abandonment at the final step.",
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMB stores often outgrow generic themes once they need specific workflows or a distinct brand look. We build custom Shopify stores sized for SMB budgets, giving growing catalogs a design and structure that actually fits how they sell.",
+  },
+  {
+    icon: Building,
+    title: "Enterprises & High-Volume Retailers",
+    desc: "Large catalogs need store architecture that handles high traffic and complex inventory reliably. We build enterprise-grade Shopify Plus stores structured for high SKU counts, multi-region selling, and integration with existing ERP systems.",
   },
   {
     icon: Package,
-    heading: "Product Catalog & Inventory Setup",
-    description:
-      "From 20 SKUs to 20,000, we structure collections, variants, and inventory so your catalog stays manageable as it grows, not chaotic.",
+    title: "D2C & Product Brands",
+    desc: "D2C brands live and die on checkout conversion and mobile shopping experience. We build stores optimized for mobile shoppers and smooth checkout flows, designed specifically to turn browsers into repeat buyers.",
   },
   {
-    icon: Gauge,
-    heading: "Store Speed & Mobile Optimization",
-    description:
-      "Most ecommerce traffic is mobile. We optimize page speed and mobile UX so shoppers don't bounce before they even see your products.",
+    icon: Handshake,
+    title: "Agencies Needing a Shopify Partner",
+    desc: "Marketing and design agencies often need a technical Shopify partner to execute builds for clients. We work as a white-label or direct Shopify development partner, handling the technical build so agencies can focus on strategy and creative.",
   },
   {
-    icon: Puzzle,
-    heading: "App Integrations & Automation",
-    description:
-      "We connect the apps you need — reviews, email marketing, shipping, inventory sync — and automate the repetitive parts of running a store.",
-  },
-  {
-    icon: Search,
-    heading: "Ecommerce SEO & Migration",
-    description:
-      "Whether you're launching fresh or migrating from another platform, we handle SEO-safe migrations and structure your store to actually rank.",
+    icon: RefreshCw,
+    title: "Businesses Migrating to Shopify",
+    desc: "Stores stuck on WooCommerce, Magento, or another platform need a careful, SEO-safe migration. We handle structured migrations to Shopify, preserving products, orders, and rankings while upgrading the underlying store.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
-    title: "Store Strategy & Platform Setup",
-    body: "We map out your catalog, customer journey, and growth plans before choosing the right Shopify plan and structure for your store.",
+    number: "01",
+    title: "Custom Shopify Theme Development",
+    desc: "We design and build Shopify themes around your brand instead of relying on stock templates, so your store looks distinct and matches how you actually sell.",
+    ctaText: "Know Our Services",
+    services: [
+      "Custom Theme Design",
+      "Custom Theme Development",
+      "Shopify 2.0 Section Builds",
+      "Brand-Led Store Design",
+      "Homepage & Collection Design",
+      "Product Page Customization",
+      "Theme Speed Optimization",
+      "Theme Documentation",
+    ],
   },
   {
+    number: "02",
+    title: "Secure Checkout & Payment Integration",
+    desc: "Smooth, trustworthy checkout experiences with the payment gateways your customers actually use, tuned to reduce cart abandonment at the final step.",
+    ctaText: "Know Our Services",
+    services: [
+      "Checkout Customization",
+      "Payment Gateway Integration",
+      "Multi-Currency Setup",
+      "Cart Abandonment Reduction",
+      "One-Click Checkout Setup",
+      "Local Payment Method Support",
+      "Fraud Prevention Setup",
+      "Checkout Testing",
+    ],
+  },
+  {
+    number: "03",
+    title: "Product Catalog & Inventory Setup",
+    desc: "From 20 SKUs to 20,000, we structure collections, variants, and inventory so your catalog stays manageable as it grows, not chaotic.",
+    ctaText: "Know Our Services",
+    services: [
+      "Product Catalog Structuring",
+      "Collection Setup",
+      "Variant Configuration",
+      "Bulk Product Upload",
+      "Inventory Sync Setup",
+      "Product Data Migration",
+      "SKU Management",
+      "Catalog Taxonomy Planning",
+    ],
+  },
+  {
+    number: "04",
+    title: "Store Speed & Mobile Optimization",
+    desc: "Most ecommerce traffic is mobile. We optimize page speed and mobile UX so shoppers don't bounce before they even see your products.",
+    ctaText: "Know Our Services",
+    services: [
+      "Page Speed Optimization",
+      "Mobile UX Optimization",
+      "Image Optimization",
+      "Core Web Vitals Fixes",
+      "App Bloat Reduction",
+      "Lazy Loading Setup",
+      "Mobile Checkout Testing",
+      "Performance Monitoring",
+    ],
+  },
+  {
+    number: "05",
+    title: "App Integrations & Automation",
+    desc: "We connect the apps you need — reviews, email marketing, shipping, inventory sync — and automate the repetitive parts of running a store.",
+    ctaText: "Know Our Services",
+    services: [
+      "Review App Integration",
+      "Email Marketing Integration",
+      "Shipping App Setup",
+      "Inventory Sync Automation",
+      "Subscription App Setup",
+      "Loyalty Program Integration",
+      "Third-Party API Integration",
+      "Workflow Automation",
+    ],
+  },
+  {
+    number: "06",
+    title: "Ecommerce SEO & Migration",
+    desc: "Whether you're launching fresh or migrating from another platform, we handle SEO-safe migrations and structure your store to actually rank.",
+    ctaText: "Know Our Services",
+    services: [
+      "Ecommerce SEO Setup",
+      "Platform Migration",
+      "URL Redirect Mapping",
+      "Product Schema Markup",
+      "Collection Page SEO",
+      "Technical SEO Audits",
+      "Search Ranking Preservation",
+      "Post-Migration QA",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
+    title: "Discovery & Catalog Assessment",
+    desc: "We map out your catalog, customer journey, and growth plans before choosing the right Shopify plan and structure for your store.",
+  },
+  {
+    number: "02",
+    title: "Architecture & Platform Setup",
+    desc: "We plan the store's structure, apps, and Shopify plan upfront, so the foundation supports your catalog size and growth plans.",
+  },
+  {
+    number: "03",
     title: "Design & Theme Development",
-    body: "A custom or heavily customized theme gets built around your brand and products, designed mobile-first for real shoppers.",
+    desc: "A custom or heavily customized theme gets built around your brand and products, designed mobile-first for real shoppers.",
   },
   {
+    number: "04",
     title: "Apps, Payments & Shipping Setup",
-    body: "We configure payment gateways, shipping rules, taxes, and the apps your store needs to actually run day-to-day.",
+    desc: "We configure payment gateways, shipping rules, taxes, and the apps your store needs to actually run day-to-day.",
   },
   {
+    number: "05",
+    title: "Testing & Quality Assurance",
+    desc: "We test checkout flows, mobile experience, and app integrations thoroughly across devices before launch.",
+  },
+  {
+    number: "06",
     title: "Launch, Testing & Growth Support",
-    body: "We test checkout flows end-to-end before launch, then stick around for performance monitoring and ongoing store improvements.",
+    desc: "We test checkout flows end-to-end before launch, then stick around for performance monitoring and ongoing store improvements.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "Specialist Shopify Developers",
-    description:
-      "We focus on Shopify and ecommerce builds specifically, not general websites, so we know the platform's quirks and workarounds inside out.",
+    desc: "We focus on Shopify and ecommerce builds specifically, not general websites, so we know the platform's quirks and workarounds inside out.",
   },
   {
-    number: "002",
+    number: "02",
     title: "Built for Conversions",
-    description:
-      "Every store is designed around smooth checkout flows and clear product pages that turn browsers into buyers.",
+    desc: "Every store is designed around smooth checkout flows and clear product pages that turn browsers into buyers.",
   },
   {
-    number: "003",
+    number: "03",
     title: "Mobile Shopper Ready",
-    description:
-      "Fast-loading, mobile-first storefronts designed for how people actually shop today — on their phones, in short sessions.",
+    desc: "Fast-loading, mobile-first storefronts designed for how people actually shop today — on their phones, in short sessions.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Scales From 20 to 20,000 Products",
-    description:
-      "Whether you're launching a small catalog or migrating an established store, we structure it to handle growth without a rebuild.",
+    desc: "Whether you're launching a small catalog or migrating an established store, we structure it to handle growth without a rebuild.",
   },
   {
-    number: "005",
+    number: "05",
     title: "Secure Payments, Global Reach",
-    description:
-      "Trusted payment integrations and store architecture built to serve customers reliably across India and international markets.",
+    desc: "Trusted payment integrations and store architecture built to serve customers reliably across India and international markets.",
   },
   {
-    number: "006",
+    number: "06",
     title: "Ongoing Store Support",
-    description:
-      "Apps break, platforms update, and traffic grows — we provide ongoing support so your store keeps running smoothly after launch.",
+    desc: "Apps break, platforms update, and traffic grows — we provide ongoing support so your store keeps running smoothly after launch.",
   },
 ];
 
@@ -152,113 +247,30 @@ const FAQS = [
 
 export default function ShopifyEcommerceDevelopment() {
   return (
-    <>
-      <BpoHero
-        heading="Shopify & Ecommerce Development Company in India"
-        description="Fast-loading, conversion-focused online stores with smooth checkout experiences — built for speed, mobile shoppers, and global scalability, from a team in Prayagraj serving all of India."
-        img="/web-dev.webp"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/website.jpg"
-              alt="Shopify and ecommerce store development at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Online Stores Built to Sell, Not Just Look Good
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              As specialist Shopify website developers, we build fast-loading,
-              conversion-focused online stores with smooth checkout
-              experiences, designed for speed, mobile shoppers, and global
-              scalability — from 20 products to 20,000.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re a full-service ecommerce development team in
-              Prayagraj, proudly serving clients locally across Allahabad
-              and Uttar Pradesh, as well as businesses across the UK, USA,
-              and India, from launch to ongoing store management.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our Shopify & Ecommerce Development"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our Shopify & Ecommerce Development Process"
-            description="From strategy to launch, we build stores that convert, not just stores that exist. Our four-step process keeps checkout, speed, and scalability front and center."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="Shopify & Ecommerce Development Company"
-          description="BizzBuzz Creations is an ecommerce development company in Prayagraj, building fast, secure, and scalable Shopify stores for businesses across India and beyond."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="Website Development"
+      label="Shopify & Ecommerce Development"
+      icon={ShoppingCart}
+      description="Fast-loading, conversion-focused online stores with smooth checkout experiences — built for speed, mobile shoppers, and global scalability, from a team in Prayagraj serving all of India."
+      heroTitle="Shopify & Ecommerce Development Company in India"
+      heroDescription="Fast-loading, conversion-focused online stores with smooth checkout experiences — built for speed, mobile shoppers, and global scalability, from a team in Prayagraj serving all of India."
+      capabilitiesHeading="Built for Stores Ready to Turn Browsers Into Buyers"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into a Store Built to Sell"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Brands Trust Us to Build Their Shopify Store"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Your Catalog Into a Converting Store"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Building Shopify Stores Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every Shopify build, with the same care whether a client is nearby or overseas. We work with startups, SMBs, and enterprise retailers across India, providing Shopify and ecommerce development sized to each brand's actual catalog and traffic. For brands looking to hire Shopify developers beyond India, we support clients worldwide remotely, working across time zones to deliver the same store quality standard regardless of location. Whether you're launching your first 20 products or migrating an established catalog of 20,000, our approach starts with the same question: what does your store actually need to do to convert."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready for a Store That Actually Converts?"
+      ctaText="Whether you need a new Shopify store built from scratch, a custom theme for an existing catalog, or a careful migration from another platform, a generic theme was never going to get you there. Let's talk through your catalog and scope what a custom Shopify build would actually involve."
+      ctaPrimaryText="Talk to a Shopify Development Specialist"
+      ctaSecondaryText="Get Your Free Shopify Consultation"
+    />
   );
 }

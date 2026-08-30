@@ -1,18 +1,12 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Bot,
-  MessageSquareText,
-  UserCheck,
-  CalendarClock,
-  Plug,
-  ShieldCheck,
+  Rocket,
+  Building2,
+  Building,
+  ShoppingCart,
+  Handshake,
+  RefreshCw,
 } from "lucide-react";
 
 export const metadata = {
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: Bot,
-    heading: "Business-Trained AI Agents",
-    description:
-      "Agents are trained on your actual products, policies, and tone, so every chat feels like talking to your team, not a generic bot.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups need to answer customer questions instantly without hiring support staff before revenue justifies it. We build lean AI agents trained on your product, letting startups handle inbound interest without a support team yet.",
   },
   {
-    icon: MessageSquareText,
-    heading: "Customer Query Resolution",
-    description:
-      "Beyond FAQs, agents resolve real customer questions about orders, services, and policies, reducing load on your support team.",
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs often lose leads to slow response times outside business hours. We build AI agents sized for SMB budgets, qualifying leads and answering questions around the clock without a full support hire.",
   },
   {
-    icon: UserCheck,
-    heading: "Lead Qualification",
-    description:
-      "Chatbots ask the right questions to qualify leads automatically, so your sales team only spends time on genuinely promising prospects.",
+    icon: Building,
+    title: "Enterprises & Large Organizations",
+    desc: "Enterprises need AI agents that integrate with existing CRM and support systems reliably at scale. We build enterprise AI agents structured for high conversation volume and integration with existing internal tools.",
   },
   {
-    icon: CalendarClock,
-    heading: "Appointment & Call Booking",
-    description:
-      "Agents can book calls and appointments directly within the conversation, removing friction between interest and a scheduled meeting.",
+    icon: ShoppingCart,
+    title: "Ecommerce & Retail Brands",
+    desc: "Ecommerce brands get repetitive order and product questions that eat into support time. We build AI agents trained on your catalog and policies to resolve routine queries instantly, day or night.",
   },
   {
-    icon: Plug,
-    heading: "CRM & Tool Integration",
-    description:
-      "We connect your AI agent to your CRM, calendar, and other tools, so conversations translate directly into actionable records.",
+    icon: Handshake,
+    title: "Agencies Needing an AI Development Partner",
+    desc: "Agencies need a technical partner to build AI agents for clients without hiring in-house AI talent. We work as a white-label AI agent development partner, delivering builds agencies can present as their own.",
   },
   {
-    icon: ShieldCheck,
-    heading: "Human Handoff & Oversight",
-    description:
-      "When a conversation needs real judgment, it hands off to your team smoothly, with full context so nothing gets repeated.",
+    icon: RefreshCw,
+    title: "Businesses Replacing a Generic Chatbot",
+    desc: "Businesses running an off-the-shelf chatbot that feels robotic need a genuine upgrade. We replace generic chatbots with agents trained specifically on your business, tone, and actual customer questions.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
+    number: "01",
+    title: "Business-Trained AI Agents",
+    desc: "Agents are trained on your actual products, policies, and tone, so every chat feels like talking to your team, not a generic bot.",
+    ctaText: "Know Our Services",
+    services: [
+      "AI Agent Training",
+      "Knowledge Base Development",
+      "Tone & Voice Calibration",
+      "Product & Policy Training",
+      "Conversation Flow Design",
+      "Prompt Engineering",
+      "Agent Testing & Refinement",
+      "Ongoing Retraining",
+    ],
+  },
+  {
+    number: "02",
+    title: "Customer Query Resolution",
+    desc: "Beyond FAQs, agents resolve real customer questions about orders, services, and policies, reducing load on your support team.",
+    ctaText: "Know Our Services",
+    services: [
+      "Order Query Resolution",
+      "Policy Question Handling",
+      "Troubleshooting Automation",
+      "FAQ Automation",
+      "Multi-Turn Conversation Handling",
+      "Query Categorization",
+      "Response Accuracy Testing",
+      "Support Load Reduction Tracking",
+    ],
+  },
+  {
+    number: "03",
+    title: "Lead Qualification",
+    desc: "Chatbots ask the right questions to qualify leads automatically, so your sales team only spends time on genuinely promising prospects.",
+    ctaText: "Know Our Services",
+    services: [
+      "Qualification Question Design",
+      "Lead Scoring Logic",
+      "Lead Routing Automation",
+      "Sales-Ready Flagging",
+      "Qualification Flow Testing",
+      "CRM Lead Sync",
+      "Qualification Analytics",
+      "Sales Handoff Setup",
+    ],
+  },
+  {
+    number: "04",
+    title: "Appointment & Call Booking",
+    desc: "Agents can book calls and appointments directly within the conversation, removing friction between interest and a scheduled meeting.",
+    ctaText: "Know Our Services",
+    services: [
+      "Calendar Integration",
+      "In-Chat Booking Flow",
+      "Appointment Reminder Automation",
+      "Rescheduling Handling",
+      "Time Zone Handling",
+      "Booking Confirmation Automation",
+      "No-Show Follow-Up Automation",
+      "Booking Analytics",
+    ],
+  },
+  {
+    number: "05",
+    title: "CRM & Tool Integration",
+    desc: "We connect your AI agent to your CRM, calendar, and other tools, so conversations translate directly into actionable records.",
+    ctaText: "Know Our Services",
+    services: [
+      "CRM Integration",
+      "Calendar Tool Integration",
+      "Helpdesk Integration",
+      "API-Based Integrations",
+      "Data Sync Automation",
+      "Third-Party Tool Connections",
+      "Integration Testing",
+      "Integration Documentation",
+    ],
+  },
+  {
+    number: "06",
+    title: "Human Handoff & Oversight",
+    desc: "When a conversation needs real judgment, it hands off to your team smoothly, with full context so nothing gets repeated.",
+    ctaText: "Know Our Services",
+    services: [
+      "Handoff Trigger Design",
+      "Context Transfer Setup",
+      "Escalation Rules",
+      "Live Agent Notification",
+      "Handoff Testing",
+      "Supervisor Oversight Tools",
+      "Conversation Review Dashboards",
+      "Handoff Performance Reporting",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
     title: "Understanding Your Conversations",
-    body: "We study the questions your customers actually ask and where your team spends the most repetitive time responding.",
+    desc: "We study the questions your customers actually ask and where your team spends the most repetitive time responding.",
   },
   {
+    number: "02",
     title: "Building & Training the Agent",
-    body: "The agent is built and trained on your actual business content, tone, and common scenarios, not a generic script.",
+    desc: "The agent is built and trained on your actual business content, tone, and common scenarios, not a generic script.",
   },
   {
+    number: "03",
+    title: "Integration Setup",
+    desc: "We connect the agent to your CRM, calendar, and support tools, so conversations translate into real, actionable data.",
+  },
+  {
+    number: "04",
     title: "Testing With Your Team",
-    body: "Before launch, your team tests the agent against real scenarios to confirm it handles conversations the way you'd want.",
+    desc: "Before launch, your team tests the agent against real scenarios to confirm it handles conversations the way you'd want.",
   },
   {
+    number: "05",
+    title: "Launch & Live Monitoring",
+    desc: "The agent goes live with close monitoring in the first weeks, so gaps in its responses get caught and fixed quickly.",
+  },
+  {
+    number: "06",
     title: "Launch, Refine & Monitor",
-    body: "We stay involved after launch, refining responses based on real conversations instead of leaving the agent running blind.",
+    desc: "We stay involved after launch, refining responses based on real conversations instead of leaving the agent running blind.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "Trained on Your Business",
-    description:
-      "Agents are built around your actual products, policies, and tone, not a generic chatbot template.",
+    desc: "Agents are built around your actual products, policies, and tone, not a generic chatbot template.",
   },
   {
-    number: "002",
+    number: "02",
     title: "More Than FAQs",
-    description:
-      "Our agents qualify leads, book calls, and resolve real queries, not just repeat answers from a knowledge base.",
+    desc: "Our agents qualify leads, book calls, and resolve real queries, not just repeat answers from a knowledge base.",
   },
   {
-    number: "003",
+    number: "03",
     title: "Tested Before Launch",
-    description:
-      "Every agent is tested with your team against real scenarios before it ever talks to a customer.",
+    desc: "Every agent is tested with your team against real scenarios before it ever talks to a customer.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Integrated With Your Tools",
-    description:
-      "We connect agents to your CRM and calendar, so conversations turn into real, actionable business data.",
+    desc: "We connect agents to your CRM and calendar, so conversations turn into real, actionable business data.",
   },
   {
-    number: "005",
+    number: "05",
     title: "Smooth Human Handoff",
-    description:
-      "When a conversation needs real judgment, it hands off to your team with full context, not a frustrating restart.",
+    desc: "When a conversation needs real judgment, it hands off to your team with full context, not a frustrating restart.",
   },
   {
-    number: "006",
+    number: "06",
     title: "Refined After Launch",
-    description:
-      "We don't disappear after handoff — every agent is refined based on real usage, not left running blind.",
+    desc: "We don't disappear after handoff — every agent is refined based on real usage, not left running blind.",
   },
 ];
 
@@ -152,113 +247,30 @@ const FAQS = [
 
 export default function CustomAiAgentsChatbots() {
   return (
-    <>
-      <BpoHero
-        heading="Custom AI Agents & Chatbots in India"
-        description="We design AI agents that do more than answer FAQs — they qualify leads, book calls, and resolve real customer queries, trained on your actual business so every chat feels like talking to your team."
-        img="/aiservice.webp"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/aiImg.webp"
-              alt="Custom AI agents and chatbots at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              A Chat That Feels Like Talking to Your Team
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              We design AI agents that do more than answer FAQs — they
-              qualify leads, book calls, and resolve real customer queries,
-              trained on your actual business so every chat feels like
-              talking to your team.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re an AI solutions company based in Prayagraj,
-              helping businesses locally across Allahabad and Uttar
-              Pradesh, as well as across India, put practical AI agents to
-              work without the generic, off-the-shelf feel.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our AI Agents & Chatbots"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our AI Agent Development Process"
-            description="We're not a company that hands you a demo and disappears. Every agent is built around your real conversations, tested with your team, and refined after launch."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="Custom AI Agents & Chatbots Company"
-          description="BizzBuzz Creations builds custom AI agents and chatbots for businesses across India, trained on real business content so conversations feel genuinely helpful, not generic."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="AI Solutions"
+      label="Custom AI Agents & Chatbots"
+      icon={Bot}
+      description="We design AI agents that do more than answer FAQs — they qualify leads, book calls, and resolve real customer queries, trained on your actual business so every chat feels like talking to your team."
+      heroTitle="Custom AI Agents & Chatbots in India"
+      heroDescription="We design AI agents that do more than answer FAQs — they qualify leads, book calls, and resolve real customer queries, trained on your actual business so every chat feels like talking to your team."
+      capabilitiesHeading="Built for Businesses Ready for AI That Actually Sounds Like Them"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our AI Agents & Chatbots"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Businesses Trust Us to Build Their AI Agents"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Your Conversations Into a Working AI Agent"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Building AI Agents Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we build every AI agent project, with the same care whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, building agents sized to each business's actual conversation volume and tools. For businesses looking to build AI agents beyond India, we support clients worldwide remotely, working across time zones to deliver the same quality standard regardless of location. Whether you're a startup deploying your first chatbot or an enterprise integrating AI agents across multiple support channels, our approach starts with the same question: what does your business actually need this agent to do."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready for AI That Actually Sounds Like Your Business?"
+      ctaText="Whether you need a chatbot for common questions, an AI agent that qualifies leads and books calls, or a full replacement for a generic bot that isn't working, a template was never going to get you there. Let's talk through your conversations and scope what a custom AI agent would actually involve."
+      ctaPrimaryText="Talk to an AI Solutions Specialist"
+      ctaSecondaryText="Get Your Free AI Consultation"
+    />
   );
 }

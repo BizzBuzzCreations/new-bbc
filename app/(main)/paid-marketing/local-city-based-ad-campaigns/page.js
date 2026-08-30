@@ -1,18 +1,12 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   MapPin,
-  Navigation,
-  PhoneCall,
+  Rocket,
   Building2,
-  BarChart3,
-  Target,
+  Building,
+  ShoppingCart,
+  Handshake,
+  RefreshCw,
 } from "lucide-react";
 
 export const metadata = {
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: MapPin,
-    heading: "Hyper-Local Geo-Targeting",
-    description:
-      "Ads are targeted to specific neighborhoods, cities, or radius zones, so your budget reaches customers genuinely close enough to visit.",
-  },
-  {
-    icon: Navigation,
-    heading: "Local Search & Map Ads",
-    description:
-      "We run ads designed to show up when nearby customers search for your product or service on Google and Maps.",
-  },
-  {
-    icon: PhoneCall,
-    heading: "Click-to-Call Campaigns",
-    description:
-      "Call-focused ad formats make it effortless for local customers to ring your business directly from the ad itself.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Local startups need customers walking through the door fast, without wasting spend on distant audiences. We build hyper-local campaigns tightly geo-targeted from launch, so early budget only reaches genuinely nearby customers.",
   },
   {
     icon: Building2,
-    heading: "Multi-Location Campaign Management",
-    description:
-      "For businesses with more than one location, we run separate, properly targeted campaigns for each city or branch.",
+    title: "Small & Medium Businesses",
+    desc: "SMBs with a physical location often run ads that reach people too far away to ever visit. We size local ad campaigns for SMB budgets, targeting the specific radius customers actually travel from.",
   },
   {
-    icon: Target,
-    heading: "Local Audience Targeting",
-    description:
-      "We combine location targeting with audience data relevant to your specific city or region, not a generic national approach.",
+    icon: Building,
+    title: "Enterprises & Multi-Location Brands",
+    desc: "Enterprises with multiple locations need separate, properly targeted campaigns for each branch. We run local ad campaigns at enterprise scale, managing geo-targeting consistently across every location.",
   },
   {
-    icon: BarChart3,
-    heading: "Foot Traffic & Call Tracking",
-    description:
-      "We track calls, direction requests, and store visits generated from local campaigns, not just clicks and impressions.",
+    icon: ShoppingCart,
+    title: "Retail & Service Businesses",
+    desc: "Retail and service businesses depend on nearby customers finding them at the exact moment of need. We run click-to-call and local search ads structured around the specific services you offer nearby.",
+  },
+  {
+    icon: Handshake,
+    title: "Agencies Needing a Local Ads Partner",
+    desc: "Agencies managing local clients need a specialist partner for hyper-local campaign execution. We work as a white-label local ads partner, handling geo-targeted execution agencies can present as their own.",
+  },
+  {
+    icon: RefreshCw,
+    title: "Businesses Losing Local Customers to Competitors",
+    desc: "Businesses watching nearby competitors win local customers need a targeting fix, not just more spend. We audit your current local targeting and rebuild it around where your actual customers physically are.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
+    number: "01",
+    title: "Hyper-Local Geo-Targeting",
+    desc: "Ads are targeted to specific neighborhoods, cities, or radius zones, so your budget reaches customers genuinely close enough to visit.",
+    ctaText: "Know Our Services",
+    services: [
+      "Radius Targeting Setup",
+      "Neighborhood-Level Targeting",
+      "City-Specific Targeting",
+      "Geo-Fencing",
+      "Location Exclusion Setup",
+      "Multi-Zone Targeting",
+      "Location Performance Analysis",
+      "Geo-Targeting Refinement",
+    ],
+  },
+  {
+    number: "02",
+    title: "Local Search & Map Ads",
+    desc: "We run ads designed to show up when nearby customers search for your product or service on Google and Maps.",
+    ctaText: "Know Our Services",
+    services: [
+      "Local Search Ads",
+      "Google Maps Ads",
+      "Local Inventory Ads",
+      "Local Service Ads",
+      "Near-Me Search Targeting",
+      "Map Pack Ad Optimization",
+      "Local Search Keyword Research",
+      "Location Extension Setup",
+    ],
+  },
+  {
+    number: "03",
+    title: "Click-to-Call Campaigns",
+    desc: "Call-focused ad formats make it effortless for local customers to ring your business directly from the ad itself.",
+    ctaText: "Know Our Services",
+    services: [
+      "Click-to-Call Ad Setup",
+      "Call Extension Configuration",
+      "Call-Only Campaigns",
+      "Call Tracking Setup",
+      "Call Scheduling by Hours",
+      "Call Ad Copywriting",
+      "Call Conversion Tracking",
+      "Call Volume Reporting",
+    ],
+  },
+  {
+    number: "04",
+    title: "Multi-Location Campaign Management",
+    desc: "For businesses with more than one location, we run separate, properly targeted campaigns for each city or branch.",
+    ctaText: "Know Our Services",
+    services: [
+      "Multi-Location Campaign Setup",
+      "Location-Specific Ad Copy",
+      "Branch-Level Budget Allocation",
+      "Location Group Management",
+      "Franchise Ad Management",
+      "Location Performance Comparison",
+      "Centralized Multi-Location Reporting",
+      "Location Rollout Planning",
+    ],
+  },
+  {
+    number: "05",
+    title: "Local Audience Targeting",
+    desc: "We combine location targeting with audience data relevant to your specific city or region, not a generic national approach.",
+    ctaText: "Know Our Services",
+    services: [
+      "Local Demographic Targeting",
+      "Regional Interest Targeting",
+      "City-Specific Audience Building",
+      "Local Language Targeting",
+      "Local Event-Based Targeting",
+      "Local Competitor Conquesting",
+      "Local Audience Testing",
+      "Regional Trend Analysis",
+    ],
+  },
+  {
+    number: "06",
+    title: "Foot Traffic & Call Tracking",
+    desc: "We track calls, direction requests, and store visits generated from local campaigns, not just clicks and impressions.",
+    ctaText: "Know Our Services",
+    services: [
+      "Foot Traffic Tracking",
+      "Direction Request Tracking",
+      "Call Tracking",
+      "Store Visit Reporting",
+      "Local Conversion Attribution",
+      "Location-Based ROI Reporting",
+      "Monthly Local Performance Reports",
+      "Offline Conversion Tracking",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
     title: "Location & Audience Mapping",
-    body: "We map out your service area and the local customer profile most likely to walk through your door or call.",
+    desc: "We map out your service area and the local customer profile most likely to walk through your door or call.",
   },
   {
+    number: "02",
     title: "Local Campaign Setup",
-    body: "Geo-targeted search, map, and call campaigns get built specifically for your city or neighborhood.",
+    desc: "Geo-targeted search, map, and call campaigns get built specifically for your city or neighborhood.",
   },
   {
+    number: "03",
+    title: "Tracking Setup",
+    desc: "We set up call and direction tracking before launch, so every local result is measured accurately from day one.",
+  },
+  {
+    number: "04",
     title: "Launch & Real-Time Optimization",
-    body: "Campaigns launch with close monitoring, adjusting targeting and budget as real local performance data comes in.",
+    desc: "Campaigns launch with close monitoring, adjusting targeting and budget as real local performance data comes in.",
   },
   {
+    number: "05",
+    title: "Location Testing & Refinement",
+    desc: "We test different radius zones and neighborhoods, narrowing in on the areas actually generating calls and visits.",
+  },
+  {
+    number: "06",
     title: "Scale & Report on Local Impact",
-    body: "We scale what's driving calls and visits and report transparently on local business impact every month.",
+    desc: "We scale what's driving calls and visits and report transparently on local business impact every month.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "Hyper-Local Expertise",
-    description:
-      "As a trusted paid marketing agency in Allahabad, we run hyper-local campaigns built for how nearby customers actually search.",
+    desc: "As a trusted paid marketing agency in Allahabad, we run hyper-local campaigns built for how nearby customers actually search.",
   },
   {
-    number: "002",
+    number: "02",
     title: "Foot Traffic Focused",
-    description:
-      "Campaigns are built to put your business in front of nearby customers actively searching for what you offer, not just online browsers.",
+    desc: "Campaigns are built to put your business in front of nearby customers actively searching for what you offer, not just online browsers.",
   },
   {
-    number: "003",
+    number: "03",
     title: "Multi-Location Ready",
-    description:
-      "We manage separate, properly targeted campaigns for businesses with more than one location or service city.",
+    desc: "We manage separate, properly targeted campaigns for businesses with more than one location or service city.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Call & Visit Tracking",
-    description:
-      "We track calls, direction requests, and store visits, giving you visibility into real local business impact.",
+    desc: "We track calls, direction requests, and store visits, giving you visibility into real local business impact.",
   },
   {
-    number: "005",
+    number: "05",
     title: "Transparent Numbers",
-    description:
-      "We're honest about what's working and what isn't, obsessed with getting you a better cost per lead every month.",
+    desc: "We're honest about what's working and what isn't, obsessed with getting you a better cost per lead every month.",
   },
   {
-    number: "006",
+    number: "06",
     title: "A Team, Not a Vendor",
-    description:
-      "Think of us less like a vendor and more like a hired paid marketing team pushing for your growth every day.",
+    desc: "Think of us less like a vendor and more like a hired paid marketing team pushing for your growth every day.",
   },
 ];
 
@@ -152,112 +247,30 @@ const FAQS = [
 
 export default function LocalCityBasedAdCampaigns() {
   return (
-    <>
-      <BpoHero
-        heading="Local & City-Based Ad Campaigns in India"
-        description="Need customers walking through your door? As a trusted paid marketing agency in Allahabad, we run hyper-local campaigns that put your business in front of nearby customers actively searching for what you offer."
-        img="/ads.webp"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/digital.webp"
-              alt="Local and city-based ad campaigns at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Get Customers Walking Through Your Door
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              Need customers walking through your door? As a trusted paid
-              marketing agency in Allahabad, we run hyper-local campaigns
-              that put your business in front of nearby customers actively
-              searching for what you offer.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re a paid marketing agency based in Prayagraj,
-              proudly serving local businesses across Allahabad and Uttar
-              Pradesh, as well as multi-location brands across India.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our Local & City-Based Ad Campaigns"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our Local & City-Based Ads Process"
-            description="We map your service area and local customer profile first, then build and optimize geo-targeted campaigns designed to drive calls and visits."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="Local & City-Based Ad Campaign Company"
-          description="BizzBuzz Creations runs hyper-local ad campaigns for businesses across India, built to bring nearby customers through the door, not just clicks online."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="Paid Marketing"
+      label="Local & City-Based Ad Campaigns"
+      icon={MapPin}
+      description="Need customers walking through your door? As a trusted paid marketing agency in Allahabad, we run hyper-local campaigns that put your business in front of nearby customers actively searching for what you offer."
+      heroTitle="Local & City-Based Ad Campaigns in India"
+      heroDescription="Need customers walking through your door? As a trusted paid marketing agency in Allahabad, we run hyper-local campaigns that put your business in front of nearby customers actively searching for what you offer."
+      capabilitiesHeading="Built for Businesses Ready for Customers Nearby"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our Local Ad Campaigns"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Businesses Trust Us to Run Their Local Campaigns"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Nearby Searches Into Customers Through the Door"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Running Local Campaigns Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we build every local ad campaign, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and multi-location enterprises across India, sizing local campaigns to each business's actual service area and foot traffic goals. For businesses looking to run local ad campaigns beyond India, we manage geo-targeting remotely, tracking calls and visits across regions and time zones to the same standard regardless of location. Whether you're a startup targeting your first neighborhood or an enterprise running campaigns across dozens of branches, our approach starts with mapping exactly where your customers actually are."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready for Customers Walking Through Your Door?"
+      ctaText="Whether you need a single-location campaign built from scratch, a multi-branch local ad program, or a fix to targeting that's currently reaching the wrong audience, the right approach depends on your actual service area. Let's talk through your locations and scope what local ad campaigns would actually involve."
+      ctaPrimaryText="Talk to a Local Ads Specialist"
+      ctaSecondaryText="Get Your Free Local Ads Consultation"
+    />
   );
 }

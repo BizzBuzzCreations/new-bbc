@@ -1,18 +1,12 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Server,
-  Database,
-  Lock,
-  Plug,
+  Rocket,
+  Building2,
+  Building,
+  Layers,
+  Handshake,
   RefreshCw,
-  Wrench,
 } from "lucide-react";
 
 export const metadata = {
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: Server,
-    heading: "Custom PHP Application Development",
-    description:
-      "From internal tools to customer-facing platforms, our full-stack PHP developers build applications tailored to your exact workflow instead of forcing you into off-the-shelf software.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups need a backend that can evolve fast as the product finds its shape. We build PHP applications on a flexible architecture, letting startups add features without a full rebuild every time requirements change.",
+  },
+  {
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs often need internal tools or customer platforms off-the-shelf software can't quite fit. We build custom PHP applications sized for SMB budgets, matching your exact workflow instead of forcing you to adapt to generic software.",
+  },
+  {
+    icon: Building,
+    title: "Enterprises & Large Organizations",
+    desc: "Enterprises need backend systems that handle scale, security, and integration with existing internal tools reliably. We provide enterprise PHP development built for high traffic, strict security requirements, and integration with existing CRMs and ERPs.",
+  },
+  {
+    icon: Layers,
+    title: "SaaS & Platform Companies",
+    desc: "SaaS companies need a backend that supports multi-user access, billing, and ongoing feature development. We build custom PHP applications covering everything from authentication to billing as one connected, maintainable system.",
+  },
+  {
+    icon: Handshake,
+    title: "Agencies Needing a Development Partner",
+    desc: "Agencies often need a reliable backend development partner to execute what they've scoped for clients. We work as a white-label or direct PHP development partner, helping agencies deliver custom builds without adding permanent headcount.",
   },
   {
     icon: RefreshCw,
-    heading: "Legacy System Modernization",
-    description:
-      "Running an old PHP codebase that's become a liability? We modernize legacy systems for better security, speed, and maintainability without disrupting your business.",
-  },
-  {
-    icon: Database,
-    heading: "Database Design & Integration",
-    description:
-      "Well-structured databases underpin every reliable application. We design schemas and integrations that stay fast and consistent as your data grows.",
-  },
-  {
-    icon: Plug,
-    heading: "API Development & Integration",
-    description:
-      "We build and integrate APIs so your PHP application talks cleanly to other systems — payment gateways, CRMs, third-party tools, or your own internal services.",
-  },
-  {
-    icon: Lock,
-    heading: "Security Hardening",
-    description:
-      "Custom applications are a common attack target. We follow secure coding practices and harden deployments against common vulnerabilities.",
-  },
-  {
-    icon: Wrench,
-    heading: "Ongoing Maintenance & Support",
-    description:
-      "Applications need upkeep long after launch. We provide ongoing bug fixes, updates, and performance monitoring to keep things running smoothly.",
+    title: "Businesses Modernizing Legacy PHP Systems",
+    desc: "Businesses running old, unmaintainable PHP codebases need a careful, planned modernization rather than a risky rebuild. We handle migration from legacy PHP systems to modern, maintainable applications, preserving what works while fixing what doesn't.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
+    number: "01",
+    title: "Custom PHP Application Development",
+    desc: "From internal tools to customer-facing platforms, our full-stack PHP developers build applications tailored to your exact workflow instead of forcing you into off-the-shelf software.",
+    ctaText: "Know Our Services",
+    services: [
+      "Custom PHP Development",
+      "Internal Business Tools",
+      "Customer-Facing Platforms",
+      "Laravel Application Development",
+      "Multi-User Systems",
+      "Admin Panel Development",
+      "Workflow-Specific Applications",
+      "Application Documentation",
+    ],
+  },
+  {
+    number: "02",
+    title: "Legacy System Modernization",
+    desc: "Running an old PHP codebase that's become a liability? We modernize legacy systems for better security, speed, and maintainability without disrupting your business.",
+    ctaText: "Know Our Services",
+    services: [
+      "Legacy Code Audits",
+      "Framework Migration",
+      "Codebase Refactoring",
+      "Security Hardening for Legacy Systems",
+      "Performance Modernization",
+      "Incremental Migration Planning",
+      "Legacy Data Migration",
+      "Downtime-Minimized Rollouts",
+    ],
+  },
+  {
+    number: "03",
+    title: "Database Design & Integration",
+    desc: "Well-structured databases underpin every reliable application. We design schemas and integrations that stay fast and consistent as your data grows.",
+    ctaText: "Know Our Services",
+    services: [
+      "Database Schema Design",
+      "MySQL/PostgreSQL Development",
+      "Database Optimization",
+      "Data Migration Support",
+      "Query Performance Tuning",
+      "Database Integration",
+      "Backup & Recovery Setup",
+      "Data Integrity Checks",
+    ],
+  },
+  {
+    number: "04",
+    title: "API Development & Integration",
+    desc: "We build and integrate APIs so your PHP application talks cleanly to other systems — payment gateways, CRMs, third-party tools, or your own internal services.",
+    ctaText: "Know Our Services",
+    services: [
+      "REST API Development",
+      "Third-Party API Integration",
+      "Payment Gateway Integration",
+      "CRM & ERP Integration",
+      "Webhook Development",
+      "API Documentation",
+      "API Security & Authentication",
+      "Rate Limiting & Throttling",
+    ],
+  },
+  {
+    number: "05",
+    title: "Security Hardening",
+    desc: "Custom applications are a common attack target. We follow secure coding practices and harden deployments against common vulnerabilities.",
+    ctaText: "Know Our Services",
+    services: [
+      "Secure Coding Practices",
+      "Vulnerability Assessments",
+      "Authentication & Authorization Systems",
+      "Input Validation & Sanitization",
+      "SQL Injection Prevention",
+      "Server Hardening",
+      "Security Patch Management",
+      "Penetration Test Support",
+    ],
+  },
+  {
+    number: "06",
+    title: "Ongoing Maintenance & Support",
+    desc: "Applications need upkeep long after launch. We provide ongoing bug fixes, updates, and performance monitoring to keep things running smoothly.",
+    ctaText: "Know Our Services",
+    services: [
+      "Ongoing Bug Fixes",
+      "Feature Enhancements",
+      "Performance Monitoring",
+      "Security Patching",
+      "Server & Hosting Support",
+      "Version Upgrades",
+      "Technical Documentation",
+      "SLA-Based Support Plans",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
     title: "Requirement Analysis",
-    body: "We dig into your actual workflow and technical constraints before proposing an architecture, so the build matches how your business really operates.",
+    desc: "We dig into your actual workflow and technical constraints before proposing an architecture, so the build matches how your business really operates.",
   },
   {
+    number: "02",
     title: "Architecture & Database Design",
-    body: "We plan the application structure and database schema upfront, avoiding the shortcuts that turn into expensive rewrites later.",
+    desc: "We plan the application structure and database schema upfront, avoiding the shortcuts that turn into expensive rewrites later.",
   },
   {
+    number: "03",
+    title: "Design & Prototyping",
+    desc: "We design the interface and key workflows, creating prototypes you can review before full development begins.",
+  },
+  {
+    number: "04",
     title: "Development & Testing",
-    body: "Features get built and tested iteratively, with regular check-ins so you see progress and can course-correct early.",
+    desc: "Features get built and tested iteratively, with regular check-ins so you see progress and can course-correct early.",
   },
   {
+    number: "05",
+    title: "Security & Quality Assurance",
+    desc: "We test functionality, performance, and security thoroughly before launch, catching issues while they're still easy to fix.",
+  },
+  {
+    number: "06",
     title: "Deployment & Support",
-    body: "We handle deployment and stay on for maintenance, security patches, and feature updates as your needs evolve.",
+    desc: "We handle deployment and stay on for maintenance, security patches, and feature updates as your needs evolve.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "Full-Stack PHP Team",
-    description:
-      "From frontend to database, our developers handle the complete stack, so you're not coordinating between multiple vendors.",
+    desc: "From frontend to database, our developers handle the complete stack, so you're not coordinating between multiple vendors.",
   },
   {
-    number: "002",
+    number: "02",
     title: "Legacy Modernization Experts",
-    description:
-      "We specialize in updating aging PHP systems for better security and performance without a risky full rebuild.",
+    desc: "We specialize in updating aging PHP systems for better security and performance without a risky full rebuild.",
   },
   {
-    number: "003",
+    number: "03",
     title: "Secure by Design",
-    description:
-      "Security isn't bolted on at the end — we build with secure coding practices from the first line of code.",
+    desc: "Security isn't bolted on at the end — we build with secure coding practices from the first line of code.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Scalable Architecture",
-    description:
-      "We design applications to handle growth in users and data, not just the demo you saw in the pitch.",
+    desc: "We design applications to handle growth in users and data, not just the demo you saw in the pitch.",
   },
   {
-    number: "005",
+    number: "05",
     title: "Transparent Communication",
-    description:
-      "Regular updates and clear technical explanations, so you always know where your project stands.",
+    desc: "Regular updates and clear technical explanations, so you always know where your project stands.",
   },
   {
-    number: "006",
+    number: "06",
     title: "Prayagraj-Based, Globally Trusted",
-    description:
-      "A full-service PHP development team in Prayagraj, serving clients locally across Uttar Pradesh as well as businesses across the UK, USA, and India.",
+    desc: "A full-service PHP development team in Prayagraj, serving clients locally across Uttar Pradesh as well as businesses across the UK, USA, and India.",
   },
 ];
 
@@ -152,113 +247,30 @@ const FAQS = [
 
 export default function PhpWebApplicationDevelopment() {
   return (
-    <>
-      <BpoHero
-        heading="PHP Web Application Development Company in India"
-        description="Custom PHP applications and legacy system modernization for businesses with complex backend needs — built for security, speed, and long-term maintainability."
-        img="/web-dev.webp"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/Dev%20(1).webp"
-              alt="PHP web application development at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Backend Applications Built for Complex Needs
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              For businesses with complex backend needs, our full-stack PHP
-              developers build and modernize custom web applications, from
-              internal tools to customer-facing platforms, updating legacy
-              systems for better security and speed.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re a full-service development team in Prayagraj,
-              proudly serving clients locally across Allahabad and Uttar
-              Pradesh, as well as businesses across the UK, USA, and India,
-              handling everything from architecture to ongoing support.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our PHP Web Application Development"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our PHP Application Development Process"
-            description="We plan thoroughly before we build, so your application is architected for security and scale from day one, not patched together under deadline pressure."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="PHP Web Application Development Company"
-          description="BizzBuzz Creations is a PHP web application development company in Prayagraj, building secure, scalable backend systems for businesses across India and beyond."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="Website Development"
+      label="PHP Web Application Development"
+      icon={Server}
+      description="Custom PHP applications and legacy system modernization for businesses with complex backend needs — built for security, speed, and long-term maintainability."
+      heroTitle="PHP Web Application Development Company in India"
+      heroDescription="Custom PHP applications and legacy system modernization for businesses with complex backend needs — built for security, speed, and long-term maintainability."
+      capabilitiesHeading="Built for Businesses With Backend Needs a Template Can't Solve"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our PHP Application Development"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Businesses Trust Us to Build Their PHP Applications"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Your Requirements Into a Working Application"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Building PHP Applications Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every PHP application project, with the same care whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, building backend systems sized to each business's actual complexity and scale. For businesses looking to hire PHP developers beyond India, we support clients worldwide remotely, working across time zones to deliver the same engineering standard regardless of location. Whether you're a startup building your first internal tool or an enterprise modernizing a legacy system, our approach starts with the same question: what does your business actually need this application to do."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready for a Backend That Actually Fits How You Work?"
+      ctaText="Whether you need a custom internal tool, a customer-facing platform, or a careful modernization of an aging PHP system, off-the-shelf software was never going to get you there. Let's talk through your requirements and scope what a custom PHP build would actually involve."
+      ctaPrimaryText="Talk to a PHP Development Specialist"
+      ctaSecondaryText="Get Your Free Development Consultation"
+    />
   );
 }

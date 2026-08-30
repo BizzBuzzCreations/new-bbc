@@ -2,10 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  ArrowUpRight,
   Headset,
   Bot,
   Workflow,
@@ -217,23 +215,12 @@ export default function CaseStudies({ content }) {
 
               <h3 className="text-lg font-semibold mb-2">{client.name}</h3>
               <p
-                className={`text-sm mb-6 ${
+                className={`text-sm ${
                   isActive ? "text-white/90" : "text-white/50"
                 }`}
               >
                 {client.tagline}
               </p>
-
-              {isActive && (
-                <Link
-                  href="/contact"
-                  onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-1.5 bg-black/80 hover:bg-black text-white text-sm font-semibold px-4 py-2 rounded-full transition"
-                >
-                  View Case Study
-                  <ArrowUpRight size={15} />
-                </Link>
-              )}
             </motion.div>
           );
         })}

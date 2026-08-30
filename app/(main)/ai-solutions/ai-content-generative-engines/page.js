@@ -1,18 +1,12 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Sparkles,
-  PenTool,
-  Layers,
-  Wand2,
-  FileCheck2,
-  BarChart3,
+  Rocket,
+  Building2,
+  Building,
+  ShoppingCart,
+  Handshake,
+  RefreshCw,
 } from "lucide-react";
 
 export const metadata = {
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: PenTool,
-    heading: "Brand-Voice Trained Content Engines",
-    description:
-      "Generative content engines are trained on your brand voice, tone, and past content, so output actually sounds like you, not a generic AI.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups need to publish content consistently without a large writing team. We build lean content engines trained on brand basics early, so startups can scale output without scaling headcount right away.",
   },
   {
-    icon: Layers,
-    heading: "Blog & Long-Form Content Generation",
-    description:
-      "We build systems that draft and structure blog posts and long-form content at scale, keeping quality consistent across volume.",
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs often can't sustain a regular content schedule with a small team. We build content engines sized for SMB budgets, keeping output consistent without needing to hire additional writers.",
   },
   {
-    icon: Wand2,
-    heading: "Product Description & Ad Copy Variations",
-    description:
-      "Generate multiple product description and ad copy variations quickly, letting you test messaging without a full manual rewrite each time.",
+    icon: Building,
+    title: "Enterprises & Large Organizations",
+    desc: "Enterprises need content consistency across multiple writers, brands, or regions at volume. We build enterprise content engines structured to maintain brand voice consistently at scale.",
   },
   {
-    icon: FileCheck2,
-    heading: "Human Review Workflow",
-    description:
-      "Every generated draft flows through a review step before publishing, keeping accuracy and quality intact, not fully automated blind output.",
+    icon: ShoppingCart,
+    title: "Ecommerce & Retail Brands",
+    desc: "Ecommerce catalogs need product descriptions and ad copy at a volume manual writing can't sustain. We build content engines that generate and personalize product copy at scale, reviewed before publishing.",
   },
   {
-    icon: Sparkles,
-    heading: "Personalization at Scale",
-    description:
-      "Content gets personalized for different audience segments automatically, something manual content production can't keep up with.",
+    icon: Handshake,
+    title: "Agencies Needing a Content Engine Partner",
+    desc: "Content agencies need a technical partner to build generative systems for clients. We work as a white-label content engine partner, delivering systems agencies can present as their own.",
   },
   {
-    icon: BarChart3,
-    heading: "Content Performance Tracking",
-    description:
-      "We track how AI-generated content performs, feeding results back into the engine to keep improving output quality over time.",
+    icon: RefreshCw,
+    title: "Businesses Replacing Inconsistent AI Content",
+    desc: "Businesses already using generic AI writing tools often get inconsistent, off-brand output. We replace ad-hoc AI writing with a properly trained content engine that actually sounds like your brand.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
-    title: "Brand Voice & Content Audit",
-    body: "We study your existing content and brand voice so the generative engine has a genuine foundation to work from.",
+    number: "01",
+    title: "Brand-Voice Trained Content Engines",
+    desc: "Generative content engines are trained on your brand voice, tone, and past content, so output actually sounds like you, not a generic AI.",
+    ctaText: "Know Our Services",
+    services: [
+      "Brand Voice Training",
+      "Tone Calibration",
+      "Style Guide Development",
+      "Content Engine Configuration",
+      "Prompt Engineering",
+      "Sample Content Review",
+      "Voice Consistency Testing",
+      "Ongoing Voice Refinement",
+    ],
   },
   {
-    title: "Engine Setup & Training",
-    body: "The content engine is configured and trained on your specific brand guidelines, tone, and past high-performing content.",
+    number: "02",
+    title: "Blog & Long-Form Content Generation",
+    desc: "We build systems that draft and structure blog posts and long-form content at scale, keeping quality consistent across volume.",
+    ctaText: "Know Our Services",
+    services: [
+      "Blog Content Generation",
+      "Long-Form Article Drafting",
+      "Content Structuring",
+      "Topic-to-Draft Workflows",
+      "SEO-Aligned Drafting",
+      "Content Calendar Integration",
+      "Draft Quality Scoring",
+      "Volume Scaling Support",
+    ],
   },
   {
-    title: "Review Workflow Integration",
-    body: "We build in a human review step so every piece of generated content gets checked before it goes live.",
+    number: "03",
+    title: "Product Description & Ad Copy Variations",
+    desc: "Generate multiple product description and ad copy variations quickly, letting you test messaging without a full manual rewrite each time.",
+    ctaText: "Know Our Services",
+    services: [
+      "Product Description Generation",
+      "Ad Copy Variation Generation",
+      "A/B Testing Copy Sets",
+      "Bulk Catalog Copywriting",
+      "Platform-Specific Copy Formats",
+      "Copy Variation Testing",
+      "Messaging Consistency Checks",
+      "Copy Refresh Cycles",
+    ],
   },
   {
-    title: "Scale & Refine",
-    body: "We track content performance and refine the engine's output over time based on what's genuinely working.",
-  },
-];
-
-const WE_ARE_POINTS = [
-  {
-    number: "001",
-    title: "Trained on Your Brand Voice",
-    description:
-      "Content engines are trained on your actual brand voice and past content, not a generic AI writing style.",
-  },
-  {
-    number: "002",
-    title: "Scale Without Losing Quality",
-    description:
-      "We build in review workflows so scaling content production doesn't mean sacrificing accuracy or brand fit.",
+    number: "04",
+    title: "Human Review Workflow",
+    desc: "Every generated draft flows through a review step before publishing, keeping accuracy and quality intact, not fully automated blind output.",
+    ctaText: "Know Our Services",
+    services: [
+      "Editorial Review Workflow",
+      "Fact-Checking Process",
+      "Quality Control Checklists",
+      "Approval Workflow Setup",
+      "Editor Assignment System",
+      "Revision Tracking",
+      "Publishing Sign-Off Process",
+      "Review Turnaround Reporting",
+    ],
   },
   {
-    number: "003",
-    title: "Multiple Content Types Covered",
-    description:
-      "From blog posts to product descriptions and ad copy, engines are built for the specific content types your business needs.",
-  },
-  {
-    number: "004",
+    number: "05",
     title: "Personalization at Scale",
-    description:
-      "Content can be personalized for different audience segments automatically, something manual production can't match.",
+    desc: "Content gets personalized for different audience segments automatically, something manual content production can't keep up with.",
+    ctaText: "Know Our Services",
+    services: [
+      "Audience Segment Personalization",
+      "Dynamic Content Variation",
+      "Segment-Specific Messaging",
+      "Personalization Rule Setup",
+      "Behavioral Content Triggers",
+      "Personalization Testing",
+      "Segment Performance Tracking",
+      "Personalization Scaling",
+    ],
   },
   {
-    number: "005",
+    number: "06",
+    title: "Content Performance Tracking",
+    desc: "We track how AI-generated content performs, feeding results back into the engine to keep improving output quality over time.",
+    ctaText: "Know Our Services",
+    services: [
+      "Content Performance Dashboards",
+      "Engagement Tracking",
+      "Conversion Tracking",
+      "Content Quality Scoring",
+      "Feedback Loop Integration",
+      "Performance-Based Retraining",
+      "Monthly Content Reports",
+      "Engine Improvement Cycles",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
+    title: "Brand Voice & Content Audit",
+    desc: "We study your existing content and brand voice so the generative engine has a genuine foundation to work from.",
+  },
+  {
+    number: "02",
+    title: "Engine Setup & Training",
+    desc: "The content engine is configured and trained on your specific brand guidelines, tone, and past high-performing content.",
+  },
+  {
+    number: "03",
+    title: "Review Workflow Integration",
+    desc: "We build in a human review step so every piece of generated content gets checked before it goes live.",
+  },
+  {
+    number: "04",
+    title: "Pilot Content Run",
+    desc: "We run a small batch of content through the engine first, refining prompts and training based on the actual output quality.",
+  },
+  {
+    number: "05",
+    title: "Testing With Your Team",
+    desc: "Your team reviews sample output against real use cases, confirming the engine's voice and quality before scaling volume.",
+  },
+  {
+    number: "06",
+    title: "Scale & Refine",
+    desc: "We track content performance and refine the engine's output over time based on what's genuinely working.",
+  },
+];
+
+const DIFFERENTIATORS = [
+  {
+    number: "01",
+    title: "Trained on Your Brand Voice",
+    desc: "Content engines are trained on your actual brand voice and past content, not a generic AI writing style.",
+  },
+  {
+    number: "02",
+    title: "Scale Without Losing Quality",
+    desc: "We build in review workflows so scaling content production doesn't mean sacrificing accuracy or brand fit.",
+  },
+  {
+    number: "03",
+    title: "Multiple Content Types Covered",
+    desc: "From blog posts to product descriptions and ad copy, engines are built for the specific content types your business needs.",
+  },
+  {
+    number: "04",
+    title: "Personalization at Scale",
+    desc: "Content can be personalized for different audience segments automatically, something manual production can't match.",
+  },
+  {
+    number: "05",
     title: "Tested With Your Team",
-    description:
-      "Every content engine is tested with your team before going live, not handed over as an untested demo.",
+    desc: "Every content engine is tested with your team before going live, not handed over as an untested demo.",
   },
   {
-    number: "006",
+    number: "06",
     title: "Refined After Launch",
-    description:
-      "We track performance and keep refining the engine's output, not leaving it running blind after handoff.",
+    desc: "We track performance and keep refining the engine's output, not leaving it running blind after handoff.",
   },
 ];
 
@@ -152,113 +247,30 @@ const FAQS = [
 
 export default function AiContentGenerativeEngines() {
   return (
-    <>
-      <BpoHero
-        heading="AI Content & Generative Engines in India"
-        description="Our generative AI content engines draft, structure, and personalize copy at scale, including blog posts, product descriptions, and ad variations, trained on your brand voice."
-        img="/aiservice.webp"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/image-5.webp"
-              alt="AI content and generative engines at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Content That Scales Without Losing Your Voice
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              Our generative AI content engines draft, structure, and
-              personalize copy at scale, including blog posts, product
-              descriptions, and ad variations, trained on your brand voice
-              so output actually sounds like you.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re an AI solutions company based in Prayagraj,
-              helping businesses locally across Allahabad and Uttar
-              Pradesh, as well as across India, produce content at scale
-              without sacrificing quality.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our AI Content Engines"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our AI Content Engine Process"
-            description="We train every content engine on your actual brand voice first, then build in a review workflow so scale never comes at the cost of quality."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="AI Content & Generative Engines Company"
-          description="BizzBuzz Creations builds AI content engines for businesses across India, trained on real brand voice and reviewed by humans before anything goes live."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="AI Solutions"
+      label="AI Content & Generative Engines"
+      icon={Sparkles}
+      description="Our generative AI content engines draft, structure, and personalize copy at scale, including blog posts, product descriptions, and ad variations, trained on your brand voice."
+      heroTitle="AI Content & Generative Engines in India"
+      heroDescription="Our generative AI content engines draft, structure, and personalize copy at scale, including blog posts, product descriptions, and ad variations, trained on your brand voice."
+      capabilitiesHeading="Built for Businesses Ready to Scale Content Without Losing Their Voice"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our AI Content Engines"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Businesses Trust Us to Build Their Content Engines"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Your Brand Voice Into a Scalable Content Engine"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Building Content Engines Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we build every content engine project, with the same care whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, building engines sized to each business's actual content volume and brand complexity. For businesses looking to build content engines beyond India, we support clients worldwide remotely, working across time zones to deliver the same quality standard regardless of location. Whether you're a startup automating your first blog cadence or an enterprise scaling copy across multiple product lines, our approach starts with training the engine on your actual brand voice first."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready for Content That Scales Without Losing Your Voice?"
+      ctaText="Whether you need a content engine for blog production, a system for generating product copy at scale, or a replacement for inconsistent AI writing you're already using, a generic tool was never going to get you there. Let's talk through your content needs and scope what a custom content engine would actually involve."
+      ctaPrimaryText="Talk to an AI Content Specialist"
+      ctaSecondaryText="Get Your Free AI Content Consultation"
+    />
   );
 }

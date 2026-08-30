@@ -1,17 +1,11 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Radar,
-  FileSearch,
-  Quote,
-  Layers,
-  BarChart3,
+  Rocket,
+  Building2,
+  Building,
+  ShoppingCart,
+  Handshake,
   RefreshCw,
 } from "lucide-react";
 
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: FileSearch,
-    heading: "Answer-Ready Content Structuring",
-    description:
-      "We restructure key pages into clear, citable chunks — definitions, comparisons, step-by-step answers — the format generative engines pull from most.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups building content from scratch have a rare chance to structure it for AI citation from day one. We build GEO into the content plan early, so startups get cited in AI answers before competitors catch up.",
   },
   {
-    icon: Quote,
-    heading: "Citation & Source Optimization",
-    description:
-      "We strengthen the facts, data, and sourcing on your pages so AI engines have clean, quotable material to draw from.",
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs often have thin, disconnected content that AI engines skip over for citations. We rework existing content into citable, connected material sized for SMB budgets and content volume.",
   },
   {
-    icon: Layers,
-    heading: "Entity & Topic Authority Building",
-    description:
-      "We build interconnected content around your core topics and entities, giving AI systems a fuller picture of your expertise.",
+    icon: Building,
+    title: "Enterprises & Large Organizations",
+    desc: "Enterprises need consistent citation across product lines and markets inside AI engines. We run GEO programs at enterprise scale, covering multiple content hubs and maintaining consistency across them.",
   },
   {
-    icon: Radar,
-    heading: "Multi-Platform AI Visibility",
-    description:
-      "We optimize for how your business appears across multiple AI engines — ChatGPT, Perplexity, Google AI Overviews, and more.",
+    icon: ShoppingCart,
+    title: "Ecommerce & Retail Brands",
+    desc: "Shoppers increasingly ask AI engines to compare products before visiting a store directly. We structure product and comparison content so AI engines can accurately cite your offerings.",
   },
   {
-    icon: BarChart3,
-    heading: "AI Citation Tracking",
-    description:
-      "We track when and how your brand gets cited or recommended in AI-generated answers, beyond traditional search rankings.",
+    icon: Handshake,
+    title: "Agencies Needing a GEO Partner",
+    desc: "Content and marketing agencies need a specialist partner as AI engines reshape content strategy. We work as a white-label GEO partner, handling the restructuring work agencies can present as their own.",
   },
   {
     icon: RefreshCw,
-    heading: "Continuous Model Adaptation",
-    description:
-      "Generative engines update constantly. We continuously adjust content and structure as these systems change how they select sources.",
+    title: "Businesses With Content That Never Gets Cited",
+    desc: "Businesses publishing regularly but never appearing in AI-generated answers need a structural fix, not more volume. We audit why your content isn't being cited and rebuild it into a format AI engines can actually use.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
+    number: "01",
+    title: "Answer-Ready Content Structuring",
+    desc: "We restructure key pages into clear, citable chunks — definitions, comparisons, step-by-step answers — the format generative engines pull from most.",
+    ctaText: "Know Our Services",
+    services: [
+      "Content Chunking",
+      "Definition Block Formatting",
+      "Comparison Table Structuring",
+      "Step-by-Step Formatting",
+      "Answer-First Rewriting",
+      "Heading Structure Optimization",
+      "Citable Format Auditing",
+      "Content Restructuring Reports",
+    ],
+  },
+  {
+    number: "02",
+    title: "Citation & Source Optimization",
+    desc: "We strengthen the facts, data, and sourcing on your pages so AI engines have clean, quotable material to draw from.",
+    ctaText: "Know Our Services",
+    services: [
+      "Fact Verification",
+      "Data Sourcing Improvements",
+      "Quotable Statement Writing",
+      "Statistic & Data Formatting",
+      "Source Attribution Cleanup",
+      "Original Research Development",
+      "Citation-Ready Summaries",
+      "Fact Consistency Audits",
+    ],
+  },
+  {
+    number: "03",
+    title: "Entity & Topic Authority Building",
+    desc: "We build interconnected content around your core topics and entities, giving AI systems a fuller picture of your expertise.",
+    ctaText: "Know Our Services",
+    services: [
+      "Entity Research",
+      "Topic Cluster Mapping",
+      "Entity-Rich Content Writing",
+      "Pillar Content Development",
+      "Entity Relationship Building",
+      "Knowledge Graph Alignment",
+      "Entity Schema Markup",
+      "Authority Depth Auditing",
+    ],
+  },
+  {
+    number: "04",
+    title: "Multi-Platform AI Visibility",
+    desc: "We optimize for how your business appears across multiple AI engines — ChatGPT, Perplexity, Google AI Overviews, and more.",
+    ctaText: "Know Our Services",
+    services: [
+      "Multi-Platform Optimization",
+      "Google AI Overviews Optimization",
+      "ChatGPT Citation Building",
+      "Perplexity Optimization",
+      "Platform-Specific Testing",
+      "Coverage Gap Analysis",
+      "Emerging Platform Monitoring",
+      "Cross-Platform Reporting",
+    ],
+  },
+  {
+    number: "05",
+    title: "AI Citation Tracking",
+    desc: "We track when and how your brand gets cited or recommended in AI-generated answers, beyond traditional search rankings.",
+    ctaText: "Know Our Services",
+    services: [
+      "Citation Tracking",
+      "Prompt Testing",
+      "Visibility Dashboards",
+      "Competitor Citation Tracking",
+      "Monthly Visibility Reports",
+      "Trend Analysis",
+      "Alert-Based Monitoring",
+      "Citation Attribution Analysis",
+    ],
+  },
+  {
+    number: "06",
+    title: "Continuous Model Adaptation",
+    desc: "Generative engines update constantly. We continuously adjust content and structure as these systems change how they select sources.",
+    ctaText: "Know Our Services",
+    services: [
+      "Algorithm Update Monitoring",
+      "Content Refresh Cycles",
+      "Structure Adaptation",
+      "Testing New Formats",
+      "Model Behavior Tracking",
+      "Strategy Adjustment Reviews",
+      "Quarterly GEO Audits",
+      "Emerging Model Coverage",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
     title: "GEO Readiness Audit",
-    body: "We assess how citable your current content actually is, and where the gaps are compared to what generative engines favor.",
+    desc: "We assess how citable your current content actually is, and where the gaps are compared to what generative engines favor.",
   },
   {
+    number: "02",
     title: "Content Restructuring",
-    body: "We rework key pages into clear, well-sourced, citable formats that AI engines can pull from directly.",
+    desc: "We rework key pages into clear, well-sourced, citable formats that AI engines can pull from directly.",
   },
   {
+    number: "03",
     title: "Authority & Entity Building",
-    body: "We strengthen entity signals and topic depth, which AI systems weigh heavily before recommending a source.",
+    desc: "We strengthen entity signals and topic depth, which AI systems weigh heavily before recommending a source.",
   },
   {
+    number: "04",
+    title: "Publishing & Rollout",
+    desc: "Restructured content gets published in priority order, focusing first on pages with the highest citation potential.",
+  },
+  {
+    number: "05",
+    title: "Cross-Platform Testing",
+    desc: "We test real prompts across multiple AI platforms to see where your content is being cited and where it's still missing.",
+  },
+  {
+    number: "06",
     title: "Track & Iterate",
-    body: "We monitor citations across AI platforms and refine the approach as models and their sourcing behavior evolve.",
+    desc: "We monitor citations across AI platforms and refine the approach as models and their sourcing behavior evolve.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "GEO From Day One",
-    description:
-      "We combine AI integration with GEO from the start, so you're visible wherever customers search, including inside AI answers.",
+    desc: "We combine AI integration with GEO from the start, so you're visible wherever customers search, including inside AI answers.",
   },
   {
-    number: "002",
+    number: "02",
     title: "Answer-First Content",
-    description:
-      "Content is structured specifically to be the source AI systems pull from, not just content that ranks traditionally.",
+    desc: "Content is structured specifically to be the source AI systems pull from, not just content that ranks traditionally.",
   },
   {
-    number: "003",
+    number: "03",
     title: "Multi-Platform Coverage",
-    description:
-      "We optimize for visibility across multiple generative engines, not a single AI platform.",
+    desc: "We optimize for visibility across multiple generative engines, not a single AI platform.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Entity-First Approach",
-    description:
-      "We make sure AI systems can clearly identify your business as a credible entity in your space, not just a page of text.",
+    desc: "We make sure AI systems can clearly identify your business as a credible entity in your space, not just a page of text.",
   },
   {
-    number: "005",
+    number: "05",
     title: "Citation Tracking",
-    description:
-      "We measure actual citations and mentions in AI-generated answers, not just proxy metrics.",
+    desc: "We measure actual citations and mentions in AI-generated answers, not just proxy metrics.",
   },
   {
-    number: "006",
+    number: "06",
     title: "Honest Reporting",
-    description:
-      "No agency can guarantee citations in every AI answer, and we won't pretend otherwise — you get transparent, honest progress reports instead.",
+    desc: "No agency can guarantee citations in every AI answer, and we won't pretend otherwise — you get transparent, honest progress reports instead.",
   },
 ];
 
@@ -152,113 +247,30 @@ const FAQS = [
 
 export default function GenerativeEngineOptimization() {
   return (
-    <>
-      <BpoHero
-        heading="GEO (Generative Engine Optimization) in India"
-        description="Our GEO service structures your content and website so AI engines like ChatGPT, Perplexity, and Google AI Overviews actually cite and recommend your business."
-        img="/aiservice.webp"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/blue-bg.webp"
-              alt="GEO Generative Engine Optimization at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Be the Source AI Recommends, Not Just Ranks
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              Our GEO service structures your content and website so AI
-              engines like ChatGPT, Perplexity, and Google AI Overviews
-              actually cite and recommend your business, not just crawl it
-              and move on.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re an AI solutions company based in Prayagraj,
-              helping businesses locally across Allahabad and Uttar
-              Pradesh, as well as across India, get discovered wherever
-              customers search, including inside AI answers.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our GEO Services"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our GEO Process"
-            description="We audit how citable your content currently is, then restructure and strengthen it so generative engines have real reason to reference you."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="Generative Engine Optimization Company"
-          description="BizzBuzz Creations helps businesses across India get cited inside AI-generated answers, not just ranked on a traditional results page."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="AI Solutions"
+      label="GEO (Generative Engine Optimization)"
+      icon={Radar}
+      description="Our GEO service structures your content and website so AI engines like ChatGPT, Perplexity, and Google AI Overviews actually cite and recommend your business."
+      heroTitle="GEO (Generative Engine Optimization) in India"
+      heroDescription="Our GEO service structures your content and website so AI engines like ChatGPT, Perplexity, and Google AI Overviews actually cite and recommend your business."
+      capabilitiesHeading="Built for Businesses Ready to Be Cited by AI, Not Just Ranked"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our GEO Services"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Businesses Trust Us to Build Their GEO Strategy"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Your Content Into an AI-Cited Source"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Building GEO Visibility Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every GEO engagement, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, restructuring content sized to each business's actual topic depth and competition. For businesses looking to improve AI engine visibility beyond India, we deliver GEO remotely, testing citations across platforms and time zones to the same standard regardless of location. Whether you're a startup structuring your first content cluster or an enterprise protecting citations across multiple product lines, our approach starts with auditing how citable your content actually is today."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready to Be the Source AI Actually Recommends?"
+      ctaText="Whether you need a GEO readiness audit, a full content restructuring project, or ongoing citation tracking across multiple AI platforms, the right approach depends on how citable your content is today. Let's talk through your content and scope what GEO would actually involve."
+      ctaPrimaryText="Talk to a GEO Specialist"
+      ctaSecondaryText="Get Your Free GEO Audit"
+    />
   );
 }

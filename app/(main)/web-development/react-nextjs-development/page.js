@@ -1,18 +1,12 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Atom,
-  Server,
-  Plug,
-  Gauge,
-  Bot,
+  Rocket,
+  Building2,
+  Building,
   Layers,
+  Handshake,
+  RefreshCw,
 } from "lucide-react";
 
 export const metadata = {
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: Atom,
-    heading: "Custom React & Next.js Frontends",
-    description:
-      "We build interactive, component-based frontends tailored to your product, moving beyond static pages into fast, app-like user experiences.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups need a frontend that can iterate fast as the product changes direction. We build on React and Next.js's component architecture, letting startups ship new features and pages without a rebuild every time the roadmap shifts.",
   },
   {
-    icon: Server,
-    heading: "Server-Side Rendering & SEO",
-    description:
-      "Next.js's server-side rendering boosts load speed and Google ranking, so your React application doesn't sacrifice SEO for interactivity.",
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs often need a fast, SEO-friendly site that a template can't quite deliver. We build custom React and Next.js frontends sized for SMB budgets, giving growing businesses speed and search visibility without enterprise overhead.",
   },
   {
-    icon: Plug,
-    heading: "Headless CMS & API Integration",
-    description:
-      "We connect your frontend to a headless CMS or existing backend and APIs, integrating seamlessly with your current team and systems.",
-  },
-  {
-    icon: Gauge,
-    heading: "Performance Optimization",
-    description:
-      "Code-splitting, image optimization, and caching strategies keep your React and Next.js app fast even as features and traffic grow.",
-  },
-  {
-    icon: Bot,
-    heading: "AI-Integrated Features",
-    description:
-      "From chat interfaces to smart recommendations, we build AI-integrated frontends that add real functionality, not just novelty.",
+    icon: Building,
+    title: "Enterprises & Large Organizations",
+    desc: "Enterprises need frontends that handle high traffic and integrate with existing backend systems reliably. We build Next.js applications structured for enterprise-scale traffic, strict performance requirements, and integration with existing APIs.",
   },
   {
     icon: Layers,
-    heading: "Scalable Component Architecture",
-    description:
-      "We structure components and state management so your application stays maintainable as your product and team grow.",
+    title: "SaaS & Product Companies",
+    desc: "SaaS companies need a marketing site and product app that work together seamlessly. We build React and Next.js frontends covering both the public-facing site and the authenticated product experience as one connected system.",
+  },
+  {
+    icon: Handshake,
+    title: "Agencies Needing a Frontend Partner",
+    desc: "Design and marketing agencies often need a technical frontend partner to build what they've designed. We work as a white-label or direct React and Next.js development partner, delivering builds agencies can present as their own.",
+  },
+  {
+    icon: RefreshCw,
+    title: "Businesses Migrating From Older Frontends",
+    desc: "Businesses on outdated frontend stacks or slow-loading sites need a careful, SEO-safe migration to React or Next.js. We handle structured migrations, preserving rankings and content while upgrading the underlying technology.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
+    number: "01",
+    title: "Custom React & Next.js Frontends",
+    desc: "We build interactive, component-based frontends tailored to your product, moving beyond static pages into fast, app-like user experiences.",
+    ctaText: "Know Our Services",
+    services: [
+      "Custom Frontend Development",
+      "Component-Based Architecture",
+      "React Application Development",
+      "Next.js Application Development",
+      "Interactive UI Development",
+      "Single Page Application Builds",
+      "Progressive Web App Development",
+      "Frontend Documentation",
+    ],
+  },
+  {
+    number: "02",
+    title: "Server-Side Rendering & SEO",
+    desc: "Next.js's server-side rendering boosts load speed and Google ranking, so your React application doesn't sacrifice SEO for interactivity.",
+    ctaText: "Know Our Services",
+    services: [
+      "Server-Side Rendering Setup",
+      "Static Site Generation",
+      "Incremental Static Regeneration",
+      "Technical SEO for React Apps",
+      "Metadata & Schema Setup",
+      "Core Web Vitals Optimization",
+      "Sitemap & Indexing Setup",
+      "SEO Migration Support",
+    ],
+  },
+  {
+    number: "03",
+    title: "Headless CMS & API Integration",
+    desc: "We connect your frontend to a headless CMS or existing backend and APIs, integrating seamlessly with your current team and systems.",
+    ctaText: "Know Our Services",
+    services: [
+      "Headless CMS Integration",
+      "REST & GraphQL API Integration",
+      "Backend Integration",
+      "Content Modeling",
+      "Third-Party Service Integration",
+      "Authentication Integration",
+      "Data Fetching Strategy",
+      "API Documentation Support",
+    ],
+  },
+  {
+    number: "04",
+    title: "Performance Optimization",
+    desc: "Code-splitting, image optimization, and caching strategies keep your React and Next.js app fast even as features and traffic grow.",
+    ctaText: "Know Our Services",
+    services: [
+      "Code Splitting",
+      "Image Optimization",
+      "Caching Strategy Setup",
+      "Bundle Size Optimization",
+      "Lazy Loading Implementation",
+      "Performance Auditing",
+      "Core Web Vitals Monitoring",
+      "Load Testing",
+    ],
+  },
+  {
+    number: "05",
+    title: "AI-Integrated Features",
+    desc: "From chat interfaces to smart recommendations, we build AI-integrated frontends that add real functionality, not just novelty.",
+    ctaText: "Know Our Services",
+    services: [
+      "AI Chat Interface Development",
+      "Recommendation Engine Integration",
+      "AI API Integration",
+      "Personalization Features",
+      "Smart Search Implementation",
+      "AI-Assisted Content Rendering",
+      "Voice & NLP Feature Integration",
+      "AI Feature Testing",
+    ],
+  },
+  {
+    number: "06",
+    title: "Scalable Component Architecture",
+    desc: "We structure components and state management so your application stays maintainable as your product and team grow.",
+    ctaText: "Know Our Services",
+    services: [
+      "Component Library Development",
+      "Design System Implementation",
+      "State Management Setup",
+      "Code Architecture Planning",
+      "Reusable Component Patterns",
+      "Type Safety with TypeScript",
+      "Testing Infrastructure Setup",
+      "Team Onboarding Documentation",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
     title: "Technical Discovery",
-    body: "We assess your existing backend, team, and goals to decide the right rendering strategy and architecture for your Next.js build.",
+    desc: "We assess your existing backend, team, and goals to decide the right rendering strategy and architecture for your Next.js build.",
   },
   {
+    number: "02",
     title: "Architecture & Component Planning",
-    body: "Component structure, state management, and data-fetching strategy get planned upfront to avoid a tangled codebase later.",
+    desc: "Component structure, state management, and data-fetching strategy get planned upfront to avoid a tangled codebase later.",
   },
   {
+    number: "03",
+    title: "Design & Prototyping",
+    desc: "We design key screens and interactions, creating prototypes you can review before full frontend development begins.",
+  },
+  {
+    number: "04",
     title: "Development & Integration",
-    body: "We build and integrate with your APIs or CMS iteratively, with regular reviews so the product evolves the way you expect.",
+    desc: "We build and integrate with your APIs or CMS iteratively, with regular reviews so the product evolves the way you expect.",
   },
   {
+    number: "05",
+    title: "Performance Testing & QA",
+    desc: "We test performance, responsiveness, and functionality across devices, catching issues before they reach real users.",
+  },
+  {
+    number: "06",
     title: "Launch & Performance Tuning",
-    body: "Before and after launch, we tune performance and Core Web Vitals so the app stays fast as real users and traffic arrive.",
+    desc: "Before and after launch, we tune performance and Core Web Vitals so the app stays fast as real users and traffic arrive.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "React & Next.js Specialists",
-    description:
-      "We focus on modern JavaScript frameworks, keeping up with the ecosystem so your build uses current best practices, not outdated patterns.",
+    desc: "We focus on modern JavaScript frameworks, keeping up with the ecosystem so your build uses current best practices, not outdated patterns.",
   },
   {
-    number: "002",
+    number: "02",
     title: "SEO-First Rendering",
-    description:
-      "Server-side rendering and static generation are used deliberately to protect your search visibility, not just for speed alone.",
+    desc: "Server-side rendering and static generation are used deliberately to protect your search visibility, not just for speed alone.",
   },
   {
-    number: "003",
+    number: "03",
     title: "Seamless Backend Integration",
-    description:
-      "We integrate cleanly with your existing backend, APIs, or team's workflow instead of demanding a full-stack rebuild.",
+    desc: "We integrate cleanly with your existing backend, APIs, or team's workflow instead of demanding a full-stack rebuild.",
   },
   {
-    number: "004",
+    number: "04",
     title: "AI-Ready Builds",
-    description:
-      "Our frontends are built to accommodate AI features — chatbots, recommendations, and automation — as your product needs them.",
+    desc: "Our frontends are built to accommodate AI features — chatbots, recommendations, and automation — as your product needs them.",
   },
   {
-    number: "005",
+    number: "05",
     title: "Component-Based Scalability",
-    description:
-      "Clean component architecture means new features get added without destabilizing what's already working.",
+    desc: "Clean component architecture means new features get added without destabilizing what's already working.",
   },
   {
-    number: "006",
+    number: "06",
     title: "Prayagraj-Based, Globally Trusted",
-    description:
-      "A full-service development team in Prayagraj, serving clients locally across Uttar Pradesh as well as businesses across the UK, USA, and India.",
+    desc: "A full-service development team in Prayagraj, serving clients locally across Uttar Pradesh as well as businesses across the UK, USA, and India.",
   },
 ];
 
@@ -152,113 +247,30 @@ const FAQS = [
 
 export default function ReactNextjsDevelopment() {
   return (
-    <>
-      <BpoHero
-        heading="React & Next.js Development Company in India"
-        description="High-performing, AI-integrated frontends using server-side rendering to boost load speed and Google ranking, integrating seamlessly with your existing backend and team."
-        img="/web-dev.webp"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/web%20graphic.png"
-              alt="React and Next.js development at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Modern Frontends That Load Fast and Rank Well
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              Our React and Next.js developers build high-performing,
-              AI-integrated frontends using server-side rendering to boost
-              load speed and Google ranking, integrating seamlessly with
-              your existing backend and team.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re a full-service development team in Prayagraj,
-              proudly serving clients locally across Allahabad and Uttar
-              Pradesh, as well as businesses across the UK, USA, and India,
-              from your first component to a fully launched product.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our React & Next.js Development"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our React & Next.js Development Process"
-            description="We plan the architecture and rendering strategy before writing code, so speed, SEO, and scalability are built in, not retrofitted later."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="React & Next.js Development Company"
-          description="BizzBuzz Creations is a React and Next.js development company in Prayagraj, building fast, SEO-ready, AI-integrated frontends for businesses across India and beyond."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="Website Development"
+      label="React & Next.js Development"
+      icon={Atom}
+      description="High-performing, AI-integrated frontends using server-side rendering to boost load speed and Google ranking, integrating seamlessly with your existing backend and team."
+      heroTitle="React & Next.js Development Company in India"
+      heroDescription="High-performing, AI-integrated frontends using server-side rendering to boost load speed and Google ranking, integrating seamlessly with your existing backend and team."
+      capabilitiesHeading="Built for Products Ready to Load Fast and Rank Well"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into a Frontend Built to Perform"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Teams Trust Us to Build Their React & Next.js Frontend"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Your Requirements Into a Fast, Working Frontend"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Building Frontends Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every React and Next.js project, with the same care whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, building frontends sized to each product's actual traffic and feature needs. For teams looking to hire React and Next.js developers beyond India, we support clients worldwide remotely, working across time zones to deliver the same performance standard regardless of location. Whether you're a startup shipping your first component or an enterprise scaling a high-traffic application, our approach starts with the same question: what does your product actually need this frontend to do."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready for a Frontend That Actually Performs?"
+      ctaText="Whether you need a new React or Next.js frontend built from scratch, a migration from an older stack, or an AI-integrated product experience, an off-the-shelf template was never going to get you there. Let's talk through your requirements and scope what a custom frontend build would actually involve."
+      ctaPrimaryText="Talk to a React & Next.js Specialist"
+      ctaSecondaryText="Get Your Free Development Consultation"
+    />
   );
 }

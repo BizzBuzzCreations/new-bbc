@@ -5,7 +5,7 @@ import Link from "next/link";
 // (large background photo, dotted texture overlay, dark-to-transparent
 // gradient so the headline stays legible on the left). Uses the same
 // /bpo.jpg photo already in the repo; no new image, no changed copy.
-export default function BpoHero({ heading, description, img }) {
+export default function BpoHero({ heading, description, img, ctaText = "Start Now" }) {
   return (
     <section className="relative min-h-[85vh] flex items-center overflow-hidden -mt-14 md:-mt-[72px] pt-36 md:pt-44 pb-20 px-6 md:px-12 lg:px-24">
       <Image
@@ -50,7 +50,7 @@ export default function BpoHero({ heading, description, img }) {
             href="/contact"
             className="inline-flex items-center gap-2 bg-[#0B60B0] hover:bg-[#0B60B0]/90 text-white text-sm font-semibold px-7 py-3.5 rounded-full transition"
           >
-            Start Now
+            {ctaText}
             <svg
               viewBox="0 0 24 24"
               className="w-4 h-4"

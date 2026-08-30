@@ -1,18 +1,12 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Workflow,
-  Bot,
+  Rocket,
+  Building2,
+  Building,
+  ShoppingCart,
+  Handshake,
   RefreshCw,
-  Puzzle,
-  LineChart,
-  ShieldCheck,
 } from "lucide-react";
 
 export const metadata = {
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: Workflow,
-    heading: "Workflow Mapping & Analysis",
-    description:
-      "We start by mapping your actual workflow end-to-end, so automation targets the real bottlenecks instead of guesswork.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups often run on manual spreadsheets and repeated copy-paste work in the early days. We build lightweight automation that removes the busywork early, so founders and small teams spend time on decisions, not data entry.",
+  },
+  {
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs frequently have processes that grew organically and now waste real hours every week. We build business process automation sized for SMB budgets, targeting the specific repetitive tasks costing your team the most time.",
+  },
+  {
+    icon: Building,
+    title: "Enterprises & Large Organizations",
+    desc: "Enterprises need automation that integrates cleanly with existing systems across departments without disrupting operations. We design automation for enterprise-scale workflows, built to work alongside your current tools, not replace them wholesale.",
+  },
+  {
+    icon: ShoppingCart,
+    title: "Ecommerce & Retail Brands",
+    desc: "Ecommerce operations involve constant order, inventory, and customer data handling that's ripe for automation. We automate order processing, inventory sync, and customer follow-ups so your team isn't manually managing every transaction.",
+  },
+  {
+    icon: Handshake,
+    title: "Agencies & Operations Partners",
+    desc: "Agencies managing repetitive client deliverables need internal efficiency to stay profitable. We build automation for agency operations — reporting, onboarding, and internal workflows — so billable time isn't lost to admin work.",
   },
   {
     icon: RefreshCw,
-    heading: "Repetitive Task Automation",
-    description:
-      "Data copying, status updates, and routine approvals get automated, freeing your in-house team to focus on decisions, not repetitive clicks.",
-  },
-  {
-    icon: Bot,
-    heading: "Custom Automation Tools",
-    description:
-      "Where off-the-shelf automation tools don't fit, we build custom scripts and workflows tailored to how your business actually operates.",
-  },
-  {
-    icon: Puzzle,
-    heading: "Third-Party System Integration",
-    description:
-      "We connect your CRM, spreadsheets, and other tools so data flows automatically between systems instead of being re-entered manually.",
-  },
-  {
-    icon: ShieldCheck,
-    heading: "Error Reduction & Accuracy",
-    description:
-      "Automated processes cut down the human error that creeps into manual, repetitive work, especially at high volume.",
-  },
-  {
-    icon: LineChart,
-    heading: "Ongoing Process Optimization",
-    description:
-      "As your business changes, we refine and extend the automation, keeping it aligned with how your workflow actually evolves.",
+    title: "Businesses Replacing Manual Legacy Processes",
+    desc: "Businesses running critical processes manually or through outdated spreadsheets need a careful, planned automation rollout. We map existing manual processes first, then automate incrementally so nothing breaks during the transition.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
-    title: "Map Current Workflow",
-    body: "We document how the process actually runs today — every handoff, tool, and manual step — before proposing any changes.",
+    number: "01",
+    title: "Workflow Mapping & Analysis",
+    desc: "We start by mapping your actual workflow end-to-end, so automation targets the real bottlenecks instead of guesswork.",
+    ctaText: "Know Our Services",
+    services: [
+      "Workflow Mapping",
+      "Process Documentation",
+      "Bottleneck Identification",
+      "Time & Motion Analysis",
+      "Stakeholder Interviews",
+      "Current-State Assessment",
+      "Automation Opportunity Scoring",
+      "Process Prioritization",
+    ],
   },
   {
+    number: "02",
+    title: "Repetitive Task Automation",
+    desc: "Data copying, status updates, and routine approvals get automated, freeing your in-house team to focus on decisions, not repetitive clicks.",
+    ctaText: "Know Our Services",
+    services: [
+      "Data Entry Automation",
+      "Status Update Automation",
+      "Approval Workflow Automation",
+      "Report Generation Automation",
+      "Email & Notification Automation",
+      "File & Document Automation",
+      "Scheduling Automation",
+      "Task Handoff Automation",
+    ],
+  },
+  {
+    number: "03",
+    title: "Custom Automation Tools",
+    desc: "Where off-the-shelf automation tools don't fit, we build custom scripts and workflows tailored to how your business actually operates.",
+    ctaText: "Know Our Services",
+    services: [
+      "Custom Script Development",
+      "Internal Tool Development",
+      "Workflow Builder Configuration",
+      "Business Rule Engines",
+      "Custom Dashboards",
+      "No-Code/Low-Code Automation",
+      "Automation Testing",
+      "Tool Documentation",
+    ],
+  },
+  {
+    number: "04",
+    title: "Third-Party System Integration",
+    desc: "We connect your CRM, spreadsheets, and other tools so data flows automatically between systems instead of being re-entered manually.",
+    ctaText: "Know Our Services",
+    services: [
+      "CRM Integration",
+      "Spreadsheet Integration",
+      "API-Based Integration",
+      "Third-Party Tool Connectors",
+      "Zapier/Make Workflow Setup",
+      "Database Synchronization",
+      "Cross-Platform Data Sync",
+      "Integration Monitoring",
+    ],
+  },
+  {
+    number: "05",
+    title: "Error Reduction & Accuracy",
+    desc: "Automated processes cut down the human error that creeps into manual, repetitive work, especially at high volume.",
+    ctaText: "Know Our Services",
+    services: [
+      "Data Validation Rules",
+      "Duplicate Detection",
+      "Error Alerting",
+      "Exception Handling",
+      "Accuracy Audits",
+      "Reconciliation Automation",
+      "Quality Control Checks",
+      "Audit Trail Logging",
+    ],
+  },
+  {
+    number: "06",
+    title: "Ongoing Process Optimization",
+    desc: "As your business changes, we refine and extend the automation, keeping it aligned with how your workflow actually evolves.",
+    ctaText: "Know Our Services",
+    services: [
+      "Performance Monitoring",
+      "Process Refinement",
+      "Automation Expansion",
+      "Time Savings Tracking",
+      "Workflow Reviews",
+      "Change Management Support",
+      "Automation Roadmapping",
+      "Continuous Improvement Reviews",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
+    title: "Discovery & Workflow Audit",
+    desc: "We document how the process actually runs today — every handoff, tool, and manual step — before proposing any changes.",
+  },
+  {
+    number: "02",
     title: "Identify Automation Opportunities",
-    body: "We flag exactly which steps are safe and valuable to automate, and which still need human judgment.",
+    desc: "We flag exactly which steps are safe and valuable to automate, and which still need human judgment.",
   },
   {
+    number: "03",
+    title: "Automation Design & Planning",
+    desc: "We design the automation approach and tools needed, planning how it fits into your existing systems before building anything.",
+  },
+  {
+    number: "04",
     title: "Build & Integrate Automation",
-    body: "We build and connect the automation to your existing tools, testing it against real scenarios before rollout.",
+    desc: "We build and connect the automation to your existing tools, testing it against real scenarios before rollout.",
   },
   {
+    number: "05",
+    title: "Team Training & Rollout",
+    desc: "We train your team on the new automated workflow, so adoption is smooth and nothing falls back into manual habits.",
+  },
+  {
+    number: "06",
     title: "Monitor & Refine",
-    body: "We track performance after launch and adjust the automation as your process or volume changes over time.",
+    desc: "We track performance after launch and adjust the automation as your process or volume changes over time.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "Process-First Approach",
-    description:
-      "We understand your workflow before recommending any tool, so automation solves the actual bottleneck, not a symptom of it.",
+    desc: "We understand your workflow before recommending any tool, so automation solves the actual bottleneck, not a symptom of it.",
   },
   {
-    number: "002",
+    number: "02",
     title: "No One-Size-Fits-All Tools",
-    description:
-      "We pick or build the right automation approach for your specific process instead of forcing a generic platform on everything.",
+    desc: "We pick or build the right automation approach for your specific process instead of forcing a generic platform on everything.",
   },
   {
-    number: "003",
+    number: "03",
     title: "Integrates With Your Stack",
-    description:
-      "Automation connects with the CRM, spreadsheets, and tools you already use, instead of requiring you to switch systems.",
+    desc: "Automation connects with the CRM, spreadsheets, and tools you already use, instead of requiring you to switch systems.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Faster Turnaround",
-    description:
-      "Automated steps complete in a fraction of the time manual processing takes, especially at scale.",
+    desc: "Automated steps complete in a fraction of the time manual processing takes, especially at scale.",
   },
   {
-    number: "005",
+    number: "05",
     title: "Measurable Time Savings",
-    description:
-      "We track hours saved and errors reduced, so the value of automation is visible, not just assumed.",
+    desc: "We track hours saved and errors reduced, so the value of automation is visible, not just assumed.",
   },
   {
-    number: "006",
+    number: "06",
     title: "Ongoing Support",
-    description:
-      "We stay on to refine and extend automation as your business processes evolve, not just deliver and disappear.",
+    desc: "We stay on to refine and extend automation as your business processes evolve, not just deliver and disappear.",
   },
 ];
 
@@ -152,114 +247,30 @@ const FAQS = [
 
 export default function BusinessProcessAutomationServices() {
   return (
-    <>
-      <BpoHero
-        heading="Business Process Automation Services in India"
-        description="We map your workflow first, then automate the boring middle, freeing your in-house team to focus on decisions, not data-copying."
-        img="/BPO%20service.png"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/BPO.webp"
-              alt="Business process automation at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Stop Losing Hours to Manual, Repetitive Work
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              Manual, repetitive processes are where most companies quietly
-              lose hours every week. Our business process automation services
-              map your workflow first, then automate the boring middle,
-              freeing your in-house team to focus on decisions, not
-              data-copying.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re a BPO and process automation partner based in
-              Prayagraj, serving clients locally across Allahabad and Uttar
-              Pradesh, as well as businesses across India, tailored to your
-              specific workflows and goals.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our Automation Services"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our Business Process Automation Process"
-            description="We map before we automate, so every change targets a real bottleneck in your workflow — not a guess at what might help."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="Business Process Automation Company"
-          description="BizzBuzz Creations helps businesses across India automate repetitive workflows without losing visibility or control over how the process actually runs."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="BPO Services"
+      label="Business Process Automation Services"
+      icon={Workflow}
+      description="We map your workflow first, then automate the boring middle, freeing your in-house team to focus on decisions, not data-copying."
+      heroTitle="Business Process Automation Services in India"
+      heroDescription="We map your workflow first, then automate the boring middle, freeing your in-house team to focus on decisions, not data-copying."
+      capabilitiesHeading="Built for Businesses Ready to Stop Doing Repetitive Work Manually"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our Business Process Automation"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Businesses Trust Us to Automate Their Operations"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Manual Workflows Into Automated Processes"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Automating Operations Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we build every automation engagement, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, automating workflows sized to each business's actual volume and tools. For businesses looking to automate operations beyond India, we deliver business process automation remotely, working across time zones to reach the same standard of reliability regardless of location. Whether you're a startup removing your first spreadsheet bottleneck or an enterprise automating a cross-department process, our approach starts with mapping what actually happens today before changing anything."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready to Stop Losing Hours to Manual Work?"
+      ctaText="Whether you need a single repetitive task automated, a full workflow rebuilt around automation, or integration between systems that currently don't talk to each other, the right approach depends on how your process actually runs today. Let's talk through your workflow and scope what automation would actually involve."
+      ctaPrimaryText="Talk to an Automation Specialist"
+      ctaSecondaryText="Get Your Free Automation Consultation"
+    />
   );
 }

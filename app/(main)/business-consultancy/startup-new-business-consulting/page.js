@@ -1,18 +1,12 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Rocket,
   Lightbulb,
-  Wallet,
-  Megaphone,
-  FileText,
-  Users,
+  Building2,
+  Building,
+  ShoppingCart,
+  Handshake,
+  RefreshCw,
 } from "lucide-react";
 
 export const metadata = {
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
     icon: Lightbulb,
-    heading: "Business Model Validation",
-    description:
-      "We help first-time founders pressure-test their business model against real market signals, before too much time and money go in.",
+    title: "First-Time Founders",
+    desc: "First-time founders often have an idea but no structured way to validate or launch it. We guide first-time founders through business model validation and launch planning, from a partner who's done it before.",
   },
   {
-    icon: Megaphone,
-    heading: "Go-to-Market Strategy",
-    description:
-      "We build a practical go-to-market plan — who you're selling to, how you'll reach them, and what launch actually looks like.",
+    icon: Building2,
+    title: "Small Teams Building Their First Product",
+    desc: "Small founding teams need structure around go-to-market and early operations without a large advisory budget. We size startup consulting for small teams, focused on the decisions that matter most before launch.",
   },
   {
-    icon: FileText,
-    heading: "Business Plan & Documentation",
-    description:
-      "We help structure a clear business plan and supporting documentation, useful for both internal clarity and external conversations.",
+    icon: Building,
+    title: "Funded Startups Scaling Fast",
+    desc: "Funded startups need to move quickly without skipping foundational business planning. We provide startup consulting built for post-funding pace, covering structure and go-to-market without slowing momentum.",
   },
   {
-    icon: Wallet,
-    heading: "Funding Readiness Guidance",
-    description:
-      "We help founders get pitch-ready and understand what investors or lenders typically expect before approaching them.",
+    icon: ShoppingCart,
+    title: "New Product & Ecommerce Launches",
+    desc: "New product and ecommerce launches need a go-to-market plan grounded in real customer demand. We help new brands validate demand and plan launch strategy before significant inventory or marketing spend goes in.",
   },
   {
-    icon: Users,
-    heading: "Founding Team Structure Advice",
-    description:
-      "We advise on roles, equity, and structure for founding teams, helping avoid disputes that derail promising startups later.",
+    icon: Handshake,
+    title: "Co-Founding Teams",
+    desc: "Co-founding teams often avoid difficult conversations about roles and equity until it's a problem. We facilitate founding team structure conversations early, helping avoid disputes that derail promising startups.",
   },
   {
-    icon: Rocket,
-    heading: "Early-Stage Growth Planning",
-    description:
-      "Beyond launch, we help plan the first stages of growth, so early traction gets built on rather than squandered.",
+    icon: RefreshCw,
+    title: "Founders Pivoting Their Original Idea",
+    desc: "Founders realizing their original idea needs to change need a structured way to reassess. We help founders validate a pivot against real market signals before committing further time and money.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
+    number: "01",
+    title: "Business Model Validation",
+    desc: "We help first-time founders pressure-test their business model against real market signals, before too much time and money go in.",
+    ctaText: "Know Our Services",
+    services: [
+      "Business Model Testing",
+      "Market Signal Validation",
+      "Customer Discovery Support",
+      "Revenue Model Assessment",
+      "Assumption Testing",
+      "Pricing Model Validation",
+      "Competitive Positioning Check",
+      "Validation Reporting",
+    ],
+  },
+  {
+    number: "02",
+    title: "Go-to-Market Strategy",
+    desc: "We build a practical go-to-market plan — who you're selling to, how you'll reach them, and what launch actually looks like.",
+    ctaText: "Know Our Services",
+    services: [
+      "Go-to-Market Planning",
+      "Target Customer Definition",
+      "Channel Strategy Development",
+      "Launch Planning",
+      "Pricing Strategy",
+      "Positioning Development",
+      "Launch Timeline Development",
+      "GTM Documentation",
+    ],
+  },
+  {
+    number: "03",
+    title: "Business Plan & Documentation",
+    desc: "We help structure a clear business plan and supporting documentation, useful for both internal clarity and external conversations.",
+    ctaText: "Know Our Services",
+    services: [
+      "Business Plan Development",
+      "Financial Projection Support",
+      "Pitch Deck Structuring",
+      "Executive Summary Writing",
+      "Operations Plan Documentation",
+      "Market Analysis Documentation",
+      "Investor-Ready Documentation",
+      "Plan Review & Refinement",
+    ],
+  },
+  {
+    number: "04",
+    title: "Funding Readiness Guidance",
+    desc: "We help founders get pitch-ready and understand what investors or lenders typically expect before approaching them.",
+    ctaText: "Know Our Services",
+    services: [
+      "Pitch Deck Review",
+      "Investor Readiness Assessment",
+      "Financial Story Development",
+      "Due Diligence Preparation",
+      "Pitch Practice Sessions",
+      "Funding Strategy Guidance",
+      "Investor Question Preparation",
+      "Term Sheet Education",
+    ],
+  },
+  {
+    number: "05",
+    title: "Founding Team Structure Advice",
+    desc: "We advise on roles, equity, and structure for founding teams, helping avoid disputes that derail promising startups later.",
+    ctaText: "Know Our Services",
+    services: [
+      "Role Definition",
+      "Equity Structure Guidance",
+      "Founder Agreement Facilitation",
+      "Vesting Schedule Guidance",
+      "Decision-Making Framework Setup",
+      "Conflict Prevention Planning",
+      "Advisory Board Structuring",
+      "Team Structure Documentation",
+    ],
+  },
+  {
+    number: "06",
+    title: "Early-Stage Growth Planning",
+    desc: "Beyond launch, we help plan the first stages of growth, so early traction gets built on rather than squandered.",
+    ctaText: "Know Our Services",
+    services: [
+      "Growth Milestone Planning",
+      "Early Traction Strategy",
+      "Customer Retention Planning",
+      "Hiring Roadmap Development",
+      "Growth Metric Definition",
+      "Scaling Readiness Assessment",
+      "Next-Stage Planning",
+      "Ongoing Growth Advisory",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
     title: "Idea & Model Discovery",
-    body: "We understand your idea, target customer, and business model before offering any direction, grounded in your actual market.",
+    desc: "We understand your idea, target customer, and business model before offering any direction, grounded in your actual market.",
   },
   {
+    number: "02",
     title: "Validation & Planning",
-    body: "We pressure-test the model and build a practical plan covering go-to-market, structure, and early milestones.",
+    desc: "We pressure-test the model and build a practical plan covering go-to-market, structure, and early milestones.",
   },
   {
+    number: "03",
+    title: "Team Structure & Documentation",
+    desc: "We help formalize founding team roles and equity, and structure a business plan you can use internally and externally.",
+  },
+  {
+    number: "04",
+    title: "Funding Readiness",
+    desc: "If relevant, we prepare you to approach investors or lenders, making sure your pitch and documentation are genuinely ready.",
+  },
+  {
+    number: "05",
     title: "Hands-On Launch Support",
-    body: "We stay involved through your launch, not just handing over a plan and disappearing after the first meeting.",
+    desc: "We stay involved through your launch, not just handing over a plan and disappearing after the first meeting.",
   },
   {
+    number: "06",
     title: "Ongoing Review & Course Correction",
-    body: "We're direct about what's working and honest about what isn't, adjusting the plan as real early-stage results come in.",
+    desc: "We're direct about what's working and honest about what isn't, adjusting the plan as real early-stage results come in.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "A Partner Who's Done It Before",
-    description:
-      "Our startup consulting guides first-time founders from a partner who's genuinely done it before, not a textbook consultant.",
+    desc: "Our startup consulting guides first-time founders from a partner who's genuinely done it before, not a textbook consultant.",
   },
   {
-    number: "002",
+    number: "02",
     title: "No Generic Playbooks",
-    description:
-      "Every recommendation is built around your specific idea and market, not a template pulled off a shelf.",
+    desc: "Every recommendation is built around your specific idea and market, not a template pulled off a shelf.",
   },
   {
-    number: "003",
+    number: "03",
     title: "We Stay Involved",
-    description:
-      "From the first idea discussion to launch, we stay by your side, not just handing over a plan.",
+    desc: "From the first idea discussion to launch, we stay by your side, not just handing over a plan.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Direct & Honest",
-    description:
-      "We're direct about what's working, honest about what isn't, and focused on outcomes you can actually measure.",
+    desc: "We're direct about what's working, honest about what isn't, and focused on outcomes you can actually measure.",
   },
   {
-    number: "005",
+    number: "05",
     title: "A Team, Not Outside Consultants",
-    description:
-      "Think of us less like outside consultants and more like a hired team that's genuinely invested in your startup's success.",
+    desc: "Think of us less like outside consultants and more like a hired team that's genuinely invested in your startup's success.",
   },
   {
-    number: "006",
+    number: "06",
     title: "Local Roots, India-Wide Reach",
-    description:
-      "Born and based in Prayagraj, we understand what it takes to launch a business here as well as in the metros.",
+    desc: "Born and based in Prayagraj, we understand what it takes to launch a business here as well as in the metros.",
   },
 ];
 
@@ -152,113 +247,30 @@ const FAQS = [
 
 export default function StartupNewBusinessConsulting() {
   return (
-    <>
-      <BpoHero
-        heading="Startup & New Business Consulting in India"
-        description="Starting up is exciting and overwhelming. Our startup consulting guides first-time founders through everything from business models to go-to-market strategy, from a partner who's done it before."
-        img="/businesscons.webp"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/teamPic.webp"
-              alt="Startup and new business consulting at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Guidance From a Partner Who's Done It Before
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              Starting up is exciting and overwhelming. Our startup
-              consulting guides first-time founders through everything from
-              business models to go-to-market strategy, from a partner
-              who's done it before.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re a business consulting firm based in Prayagraj,
-              helping first-time founders locally across Allahabad and
-              Uttar Pradesh, as well as startups across India, launch with
-              real structure and clarity.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our Startup Consulting"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our Startup Consulting Process"
-            description="Anyone can hand you a plan. Not everyone will sit with you through launch and make sure it actually works. Our four-step process stays involved from idea to execution."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="Startup & New Business Consulting Firm"
-          description="BizzBuzz Creations guides first-time founders and new businesses across India through validation, planning, and launch, from a partner who's done it before."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="Business Consultancy"
+      label="Startup & New Business Consulting"
+      icon={Rocket}
+      description="Starting up is exciting and overwhelming. Our startup consulting guides first-time founders through everything from business models to go-to-market strategy, from a partner who's done it before."
+      heroTitle="Startup & New Business Consulting in India"
+      heroDescription="Starting up is exciting and overwhelming. Our startup consulting guides first-time founders through everything from business models to go-to-market strategy, from a partner who's done it before."
+      capabilitiesHeading="Built for Founders Ready to Launch With Real Structure"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our Startup Consulting"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Founders Trust Us to Guide Their Launch"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Your Idea Into a Structured Launch"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Guiding Founders Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we guide every startup engagement, with the same care whether a founder is nearby or overseas. We work with first-time founders, funded startups, and new business launches across India, sizing support to each founder's actual stage and needs. For founders looking to work with us beyond India, we deliver startup consulting remotely, working across time zones to the same standard regardless of location. Whether you're validating your first idea or planning a funded startup's next stage, our approach starts with the same question: what does your business actually need to launch successfully."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready to Launch With a Plan, Not Just an Idea?"
+      ctaText="Whether you need help validating your business model, a full go-to-market strategy, or guidance on founding team structure before things get complicated, a generic startup guide was never going to get you there. Let's talk through your idea and scope what startup consulting would actually involve."
+      ctaPrimaryText="Talk to a Startup Consulting Specialist"
+      ctaSecondaryText="Get Your Free Startup Consultation"
+    />
   );
 }

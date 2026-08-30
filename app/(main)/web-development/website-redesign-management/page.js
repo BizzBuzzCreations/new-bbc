@@ -1,18 +1,12 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
-  Search,
-  Gauge,
-  Paintbrush,
-  ShieldCheck,
+  RefreshCw,
+  Rocket,
+  Building2,
+  Building,
+  ShoppingCart,
+  Handshake,
   Database,
-  LineChart,
 } from "lucide-react";
 
 export const metadata = {
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: Search,
-    heading: "UI/UX Redesign Audit",
-    description:
-      "We start by auditing what's actually holding your current site back — confusing navigation, dated design, or friction in the conversion path.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups that launched fast on a basic site often outgrow it once traction picks up. We redesign early-stage sites around actual usage data, upgrading the parts holding back conversions without a costly full rebuild.",
   },
   {
-    icon: Gauge,
-    heading: "Core Web Vitals Fixes",
-    description:
-      "Slow load times and poor Core Web Vitals quietly hurt both rankings and conversions. We diagnose and fix them as part of every redesign.",
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs frequently sit on sites that were never updated after the initial launch. We redesign and manage sites sized for SMB budgets, fixing what's actually broken instead of a generic visual refresh.",
   },
   {
-    icon: Paintbrush,
-    heading: "Content & Structure Overhaul",
-    description:
-      "We restructure navigation, page layout, and content so visitors find what they need and take action, not bounce in confusion.",
+    icon: Building,
+    title: "Enterprises & Large Organizations",
+    desc: "Enterprises need redesigns that preserve SEO equity and integrate with existing systems across departments. We handle enterprise-scale redesigns built around careful migration planning, security requirements, and long-term management.",
   },
   {
-    icon: ShieldCheck,
-    heading: "Security Updates & Backups",
-    description:
-      "Outdated plugins and platforms are a common breach point. We patch vulnerabilities and set up reliable, scheduled backups.",
+    icon: ShoppingCart,
+    title: "Ecommerce & Retail Brands",
+    desc: "Ecommerce sites lose sales quietly to slow load times and dated checkout flows. We redesign stores around conversion data, fixing Core Web Vitals and UX friction points that are actually costing you sales.",
   },
   {
-    icon: LineChart,
-    heading: "Performance Monitoring",
-    description:
-      "After redesign, we keep an eye on uptime, speed, and errors, catching problems before your customers notice them.",
+    icon: Handshake,
+    title: "Agencies Needing a Redesign Partner",
+    desc: "Agencies managing client sites sometimes need a technical partner for redesign and ongoing management work. We work as a white-label redesign and management partner, handling the technical execution behind the scenes.",
   },
   {
     icon: Database,
-    heading: "Ongoing Website Management",
-    description:
-      "A redesigned site still needs upkeep. We provide ongoing content updates, technical maintenance, and support after launch.",
+    title: "Businesses Needing Ongoing Site Management",
+    desc: "Businesses without an in-house developer need someone reliable handling updates, security, and backups long-term. We provide ongoing website management for sites we redesign or take over, keeping them fast and secure year after year.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
+    number: "01",
+    title: "UI/UX Redesign Audit",
+    desc: "We start by auditing what's actually holding your current site back — confusing navigation, dated design, or friction in the conversion path.",
+    ctaText: "Know Our Services",
+    services: [
+      "UX Audit",
+      "Conversion Funnel Analysis",
+      "Navigation Review",
+      "Visual Design Audit",
+      "Analytics Review",
+      "Heatmap & Behavior Analysis",
+      "Competitor Benchmarking",
+      "Redesign Recommendations Report",
+    ],
+  },
+  {
+    number: "02",
+    title: "Core Web Vitals Fixes",
+    desc: "Slow load times and poor Core Web Vitals quietly hurt both rankings and conversions. We diagnose and fix them as part of every redesign.",
+    ctaText: "Know Our Services",
+    services: [
+      "Core Web Vitals Audit",
+      "Page Speed Optimization",
+      "Image Optimization",
+      "Code Minification",
+      "Server Response Optimization",
+      "Caching Setup",
+      "Mobile Performance Fixes",
+      "Ongoing Speed Monitoring",
+    ],
+  },
+  {
+    number: "03",
+    title: "Content & Structure Overhaul",
+    desc: "We restructure navigation, page layout, and content so visitors find what they need and take action, not bounce in confusion.",
+    ctaText: "Know Our Services",
+    services: [
+      "Information Architecture Redesign",
+      "Navigation Restructuring",
+      "Content Rewriting",
+      "Page Layout Redesign",
+      "Call-to-Action Optimization",
+      "Content Migration",
+      "Sitemap Restructuring",
+      "User Flow Redesign",
+    ],
+  },
+  {
+    number: "04",
+    title: "Security Updates & Backups",
+    desc: "Outdated plugins and platforms are a common breach point. We patch vulnerabilities and set up reliable, scheduled backups.",
+    ctaText: "Know Our Services",
+    services: [
+      "Security Vulnerability Patching",
+      "Plugin & Platform Updates",
+      "Scheduled Backup Setup",
+      "Malware Scanning",
+      "SSL Configuration",
+      "Firewall Setup",
+      "Access Control Review",
+      "Disaster Recovery Planning",
+    ],
+  },
+  {
+    number: "05",
+    title: "Performance Monitoring",
+    desc: "After redesign, we keep an eye on uptime, speed, and errors, catching problems before your customers notice them.",
+    ctaText: "Know Our Services",
+    services: [
+      "Uptime Monitoring",
+      "Speed Monitoring",
+      "Error Tracking",
+      "Alert Configuration",
+      "Monthly Performance Reports",
+      "Downtime Response",
+      "Server Health Checks",
+      "Analytics Dashboard Setup",
+    ],
+  },
+  {
+    number: "06",
+    title: "Ongoing Website Management",
+    desc: "A redesigned site still needs upkeep. We provide ongoing content updates, technical maintenance, and support after launch.",
+    ctaText: "Know Our Services",
+    services: [
+      "Content Update Support",
+      "Technical Maintenance",
+      "Plugin & Software Updates",
+      "Hosting Support",
+      "Minor Feature Additions",
+      "Monthly Health Checks",
+      "Priority Support Access",
+      "Long-Term Management Plans",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
     title: "Website Audit",
-    body: "We review your current site's design, speed, SEO, and analytics to pinpoint exactly what's costing you visitors and conversions.",
+    desc: "We review your current site's design, speed, SEO, and analytics to pinpoint exactly what's costing you visitors and conversions.",
   },
   {
+    number: "02",
     title: "Redesign Planning",
-    body: "Based on the audit, we plan the new structure, design direction, and technical fixes needed, prioritized by impact.",
+    desc: "Based on the audit, we plan the new structure, design direction, and technical fixes needed, prioritized by impact.",
   },
   {
+    number: "03",
+    title: "Design & Prototyping",
+    desc: "We design key pages and interactions around the audit findings, sharing prototypes for your review before development starts.",
+  },
+  {
+    number: "04",
     title: "Redesign & Migration",
-    body: "We rebuild the site with modern UI/UX and Core Web Vitals fixes, migrating content carefully to protect your existing SEO rankings.",
+    desc: "We rebuild the site with modern UI/UX and Core Web Vitals fixes, migrating content carefully to protect your existing SEO rankings.",
   },
   {
+    number: "05",
+    title: "Testing & Pre-Launch QA",
+    desc: "We test the redesigned site across devices and browsers, checking that rankings, forms, and functionality all carry over correctly.",
+  },
+  {
+    number: "06",
     title: "Ongoing Management",
-    body: "After launch, we monitor performance and security, handling updates and backups so the site stays fast and online.",
+    desc: "After launch, we monitor performance and security, handling updates and backups so the site stays fast and online.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "Data-Backed Redesigns",
-    description:
-      "We redesign based on what your analytics and audit actually show is broken, not guesswork or trends for their own sake.",
+    desc: "We redesign based on what your analytics and audit actually show is broken, not guesswork or trends for their own sake.",
   },
   {
-    number: "002",
+    number: "02",
     title: "Core Web Vitals Focused",
-    description:
-      "Speed and technical health are treated as core redesign goals, not an afterthought bolted on at the end.",
+    desc: "Speed and technical health are treated as core redesign goals, not an afterthought bolted on at the end.",
   },
   {
-    number: "003",
+    number: "03",
     title: "SEO-Safe Migration",
-    description:
-      "We plan redesigns carefully to protect your existing search rankings instead of accidentally resetting years of SEO progress.",
+    desc: "We plan redesigns carefully to protect your existing search rankings instead of accidentally resetting years of SEO progress.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Proactive Security",
-    description:
-      "Regular patching and hardening reduce the risk of your site being compromised through outdated software.",
+    desc: "Regular patching and hardening reduce the risk of your site being compromised through outdated software.",
   },
   {
-    number: "005",
+    number: "05",
     title: "24/7 Monitoring",
-    description:
-      "We keep watch on uptime and performance so issues get caught and fixed before they cost you customers.",
+    desc: "We keep watch on uptime and performance so issues get caught and fixed before they cost you customers.",
   },
   {
-    number: "006",
+    number: "06",
     title: "Long-Term Care",
-    description:
-      "Redesign is the start, not the end — we stay on for ongoing management so your site keeps performing for years.",
+    desc: "Redesign is the start, not the end — we stay on for ongoing management so your site keeps performing for years.",
   },
 ];
 
@@ -152,113 +247,30 @@ const FAQS = [
 
 export default function WebsiteRedesignManagement() {
   return (
-    <>
-      <BpoHero
-        heading="Website Redesign & Management Services in India"
-        description="Modernize your site's UI/UX for higher conversions, fix Core Web Vitals, and keep it secure and online with ongoing monitoring, updates, and backups."
-        img="/web-dev.webp"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/Web-Development-Promotion-Instagram-Post-4.webp"
-              alt="Website redesign and management at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              An Outdated Website Quietly Costs You Customers
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              Our redesign services modernize UI/UX for higher conversions
-              and fix Core Web Vitals, followed by ongoing monitoring,
-              security updates, and backups — so the improvements actually
-              stick.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re a full-service web development team in Prayagraj,
-              proudly serving clients locally across Allahabad and Uttar
-              Pradesh, as well as businesses across the UK, USA, and India,
-              from the redesign audit to years of ongoing management.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our Redesign & Management Services"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our Website Redesign Process"
-            description="We audit before we redesign, so every change is based on what's actually broken, not guesswork — and we stay on to keep it running afterward."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="Website Redesign & Management Company"
-          description="BizzBuzz Creations is a website redesign and management company in Prayagraj, modernizing outdated sites and keeping them fast, secure, and online for businesses across India and beyond."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="Website Development"
+      label="Website Redesign & Management"
+      icon={RefreshCw}
+      description="Modernize your site's UI/UX for higher conversions, fix Core Web Vitals, and keep it secure and online with ongoing monitoring, updates, and backups."
+      heroTitle="Website Redesign & Management Services in India"
+      heroDescription="Modernize your site's UI/UX for higher conversions, fix Core Web Vitals, and keep it secure and online with ongoing monitoring, updates, and backups."
+      capabilitiesHeading="Built for Sites Ready to Stop Losing Customers Quietly"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into a Redesign Built to Convert"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Businesses Trust Us to Redesign and Manage Their Site"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn an Underperforming Site Into One That Converts"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Redesigning Websites Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every redesign engagement, with the same care whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, redesigning and managing sites sized to each business's actual traffic and technical debt. For businesses looking to redesign a site beyond India, we support clients worldwide remotely, working across time zones to deliver the same standard of care regardless of location. Whether you're a startup refreshing your first site or an enterprise migrating a high-traffic platform, our approach starts with auditing what's actually broken before changing anything."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready for a Site That Stops Losing You Customers?"
+      ctaText="Whether you need a full redesign, targeted Core Web Vitals fixes, or ongoing management for a site that's currently unmaintained, the right approach depends on what your audit actually reveals. Let's talk through your site and scope what a redesign would actually involve."
+      ctaPrimaryText="Talk to a Redesign Specialist"
+      ctaSecondaryText="Get Your Free Website Audit"
+    />
   );
 }

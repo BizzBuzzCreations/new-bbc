@@ -1,18 +1,12 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   TrendingUp,
-  Wallet,
-  BarChart3,
-  Target,
+  Rocket,
+  Building2,
+  Building,
+  ShoppingCart,
+  Handshake,
   RefreshCw,
-  LineChart,
 } from "lucide-react";
 
 export const metadata = {
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: Target,
-    heading: "ROI-Focused Campaign Strategy",
-    description:
-      "Every campaign is planned around a target return on investment from day one, not built around impressions or reach for their own sake.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups need every rupee of limited budget proving itself. We build performance marketing around a clear ROI target from campaign one, so startups know exactly what's working before scaling spend.",
   },
   {
-    icon: Wallet,
-    heading: "Cross-Platform Budget Allocation",
-    description:
-      "We shift budget across Google, Meta, and other channels based on where it's actually generating the best return.",
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs often run ads across channels without a unified view of what's actually returning money. We manage performance marketing sized for SMB budgets, tracking ROI across every channel in one place.",
   },
   {
-    icon: LineChart,
-    heading: "Conversion Tracking Setup",
-    description:
-      "Proper conversion tracking and attribution get set up first, so every decision after that is based on real data, not guesses.",
+    icon: Building,
+    title: "Enterprises & Large Organizations",
+    desc: "Enterprises need ROI tracking that holds up across multiple campaigns, channels, and business units. We run performance marketing at enterprise scale, with attribution built to survive complex, multi-touch buying journeys.",
+  },
+  {
+    icon: ShoppingCart,
+    title: "Ecommerce & D2C Brands",
+    desc: "Ecommerce brands live and die by return on ad spend across every channel they run. We manage performance marketing tied directly to revenue and margin, not just clicks and impressions.",
+  },
+  {
+    icon: Handshake,
+    title: "Agencies Needing a Performance Partner",
+    desc: "Agencies need a specialist partner for the tracking and optimization side of performance marketing. We work as a white-label performance marketing partner, handling the ROI-focused execution agencies can present as their own.",
   },
   {
     icon: RefreshCw,
-    heading: "Continuous Testing & Iteration",
-    description:
-      "We continuously test creatives, audiences, and landing pages, keeping what performs and cutting what doesn't.",
-  },
-  {
-    icon: BarChart3,
-    heading: "Revenue & ROI Reporting",
-    description:
-      "Reports focus on revenue and return on ad spend, not vanity numbers like impressions or generic engagement.",
-  },
-  {
-    icon: TrendingUp,
-    heading: "Scaling What Works",
-    description:
-      "Once a campaign proves its ROI, we scale spend into it methodically, rather than spreading budget thin across untested ideas.",
+    title: "Businesses Without Reliable Tracking Today",
+    desc: "Businesses running ads without proper conversion tracking are essentially flying blind. We set up accurate tracking and attribution first, so every future decision is based on real data.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
+    number: "01",
+    title: "ROI-Focused Campaign Strategy",
+    desc: "Every campaign is planned around a target return on investment from day one, not built around impressions or reach for their own sake.",
+    ctaText: "Know Our Services",
+    services: [
+      "ROI Target Setting",
+      "Campaign Strategy Development",
+      "Channel Selection Planning",
+      "Budget-to-ROI Modeling",
+      "Goal Alignment Workshops",
+      "Success Metric Definition",
+      "Baseline Performance Analysis",
+      "Strategy Documentation",
+    ],
+  },
+  {
+    number: "02",
+    title: "Cross-Platform Budget Allocation",
+    desc: "We shift budget across Google, Meta, and other channels based on where it's actually generating the best return.",
+    ctaText: "Know Our Services",
+    services: [
+      "Cross-Channel Budget Planning",
+      "Channel Performance Comparison",
+      "Dynamic Budget Reallocation",
+      "Multi-Platform Campaign Management",
+      "Channel Mix Optimization",
+      "Spend Forecasting",
+      "Platform ROI Benchmarking",
+      "Budget Governance Reporting",
+    ],
+  },
+  {
+    number: "03",
+    title: "Conversion Tracking Setup",
+    desc: "Proper conversion tracking and attribution get set up first, so every decision after that is based on real data, not guesses.",
+    ctaText: "Know Our Services",
+    services: [
+      "Conversion Tracking Setup",
+      "Pixel & Tag Implementation",
+      "Attribution Model Setup",
+      "CRM Integration",
+      "Server-Side Tracking Setup",
+      "Multi-Touch Attribution",
+      "Tracking Audit & QA",
+      "Analytics Configuration",
+    ],
+  },
+  {
+    number: "04",
+    title: "Continuous Testing & Iteration",
+    desc: "We continuously test creatives, audiences, and landing pages, keeping what performs and cutting what doesn't.",
+    ctaText: "Know Our Services",
+    services: [
+      "A/B Testing Programs",
+      "Creative Testing",
+      "Audience Testing",
+      "Landing Page Testing",
+      "Bid Strategy Testing",
+      "Test Result Analysis",
+      "Iterative Optimization Cycles",
+      "Testing Roadmap Planning",
+    ],
+  },
+  {
+    number: "05",
+    title: "Revenue & ROI Reporting",
+    desc: "Reports focus on revenue and return on ad spend, not vanity numbers like impressions or generic engagement.",
+    ctaText: "Know Our Services",
+    services: [
+      "Revenue Reporting",
+      "ROAS Dashboards",
+      "Cost-Per-Acquisition Reporting",
+      "Custom ROI Dashboards",
+      "Weekly Performance Reviews",
+      "Monthly Business Reviews",
+      "Channel-Level ROI Breakdown",
+      "Executive Summary Reporting",
+    ],
+  },
+  {
+    number: "06",
+    title: "Scaling What Works",
+    desc: "Once a campaign proves its ROI, we scale spend into it methodically, rather than spreading budget thin across untested ideas.",
+    ctaText: "Know Our Services",
+    services: [
+      "Scaling Strategy Development",
+      "Incremental Budget Scaling",
+      "Diminishing Returns Monitoring",
+      "New Channel Expansion",
+      "Scaled Campaign Structuring",
+      "Growth Forecasting",
+      "Risk-Managed Scaling",
+      "Long-Term Growth Planning",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
     title: "Define Success Metrics",
-    body: "We agree on what a genuinely good result looks like for your business — revenue, cost per acquisition, or a specific ROI target.",
+    desc: "We agree on what a genuinely good result looks like for your business — revenue, cost per acquisition, or a specific ROI target.",
   },
   {
+    number: "02",
     title: "Tracking & Attribution Setup",
-    body: "We set up proper conversion tracking so every campaign decision after this point is based on real data, not assumptions.",
+    desc: "We set up proper conversion tracking so every campaign decision after this point is based on real data, not assumptions.",
   },
   {
+    number: "03",
+    title: "Channel & Budget Strategy",
+    desc: "We decide which channels to run and how to split budget across them, based on where your specific audience actually converts.",
+  },
+  {
+    number: "04",
     title: "Launch & Continuous Testing",
-    body: "Campaigns launch across the right channels with ongoing testing of creatives, audiences, and landing pages.",
+    desc: "Campaigns launch across the right channels with ongoing testing of creatives, audiences, and landing pages.",
   },
   {
+    number: "05",
+    title: "Cross-Channel Optimization",
+    desc: "We shift budget between channels based on real ROI data, moving spend toward what's actually generating returns.",
+  },
+  {
+    number: "06",
     title: "Scale & Report on ROI",
-    body: "We scale spend into what's proving its return and report transparently on revenue and ROI, not vanity metrics.",
+    desc: "We scale spend into what's proving its return and report transparently on revenue and ROI, not vanity metrics.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "Performance-First Campaigns",
-    description:
-      "Every campaign we run is tracked against one metric that matters: return on investment — no vanity numbers, no fluff.",
+    desc: "Every campaign we run is tracked against one metric that matters: return on investment — no vanity numbers, no fluff.",
   },
   {
-    number: "002",
+    number: "02",
     title: "Cross-Platform Optimization",
-    description:
-      "We move budget across Google, Meta, and other channels based on real performance data, not a fixed split.",
+    desc: "We move budget across Google, Meta, and other channels based on real performance data, not a fixed split.",
   },
   {
-    number: "003",
+    number: "03",
     title: "Tracking Done Right",
-    description:
-      "Proper conversion tracking and attribution are set up first, so every later decision is based on accurate data.",
+    desc: "Proper conversion tracking and attribution are set up first, so every later decision is based on accurate data.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Continuous Testing",
-    description:
-      "We test creatives, audiences, and landing pages continuously, rather than launching once and leaving campaigns untouched.",
+    desc: "We test creatives, audiences, and landing pages continuously, rather than launching once and leaving campaigns untouched.",
   },
   {
-    number: "005",
+    number: "05",
     title: "Transparent ROI Reporting",
-    description:
-      "We're honest about what's working and what isn't, reporting on revenue and return, not just clicks and impressions.",
+    desc: "We're honest about what's working and what isn't, reporting on revenue and return, not just clicks and impressions.",
   },
   {
-    number: "006",
+    number: "06",
     title: "A Team, Not a Vendor",
-    description:
-      "Think of us less like a vendor and more like a hired performance marketing team pushing for your growth every day.",
+    desc: "Think of us less like a vendor and more like a hired performance marketing team pushing for your growth every day.",
   },
 ];
 
@@ -152,113 +247,30 @@ const FAQS = [
 
 export default function PerformanceMarketingRoiCampaigns() {
   return (
-    <>
-      <BpoHero
-        heading="Performance Marketing & ROI Campaigns in India"
-        description="As a dedicated performance marketing agency, every campaign we run is tracked against one metric that matters: return on investment. No vanity numbers, no fluff, just campaigns built to hit your revenue targets."
-        img="/ads.webp"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/digitalmarketing.webp"
-              alt="Performance marketing and ROI campaigns at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              No Vanity Numbers, Just Return on Investment
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              As a dedicated performance marketing agency, every campaign we
-              run is tracked against one metric that matters: return on
-              investment. No vanity numbers, no fluff, just campaigns built
-              to hit your revenue targets.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re a paid marketing agency based in Prayagraj,
-              proudly serving businesses locally across Allahabad and Uttar
-              Pradesh, as well as brands across India, focused on outcomes
-              that actually move your business forward.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our Performance Marketing"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our Performance Marketing Process"
-            description="We define what success actually means for your business first, then track, test, and scale campaigns specifically around that outcome."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="Performance Marketing Agency"
-          description="BizzBuzz Creations runs ROI-focused performance marketing campaigns for businesses across India, tracked against revenue, not vanity metrics."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="Paid Marketing"
+      label="Performance Marketing & ROI Campaigns"
+      icon={TrendingUp}
+      description="As a dedicated performance marketing agency, every campaign we run is tracked against one metric that matters: return on investment. No vanity numbers, no fluff, just campaigns built to hit your revenue targets."
+      heroTitle="Performance Marketing & ROI Campaigns in India"
+      heroDescription="As a dedicated performance marketing agency, every campaign we run is tracked against one metric that matters: return on investment. No vanity numbers, no fluff, just campaigns built to hit your revenue targets."
+      capabilitiesHeading="Built for Businesses Ready to Track Revenue, Not Vanity Metrics"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our Performance Marketing"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Businesses Trust Us to Run Their Performance Marketing"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Ad Spend Into Tracked Return on Investment"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Running Performance Marketing Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we run every performance marketing engagement, with the same discipline whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, tracking ROI sized to each business's actual revenue goals and channel mix. For businesses looking to run performance marketing beyond India, we manage campaigns remotely, tracking ROI across markets and time zones to the same standard regardless of location. Whether you're a startup proving your first campaign or an enterprise scaling spend across multiple business units, our approach starts with defining what a genuinely good result looks like for your business."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready for Campaigns That Prove Their Own Value?"
+      ctaText="Whether you need proper conversion tracking set up for the first time, a cross-channel budget strategy built around ROI, or a full performance marketing program managing spend across platforms, the right approach depends on where your tracking currently stands. Let's talk through your goals and scope what performance marketing would actually involve."
+      ctaPrimaryText="Talk to a Performance Marketing Specialist"
+      ctaSecondaryText="Get Your Free ROI Audit"
+    />
   );
 }

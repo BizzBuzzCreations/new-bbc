@@ -1,18 +1,12 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   TrendingUp,
-  Layers,
-  Users,
-  Wallet,
-  BarChart3,
-  ShieldCheck,
+  Rocket,
+  Building2,
+  Building,
+  ShoppingCart,
+  Handshake,
+  RefreshCw,
 } from "lucide-react";
 
 export const metadata = {
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: Layers,
-    heading: "Scalable Systems & Process Design",
-    description:
-      "We design systems and processes that can handle growing volume without breaking what's currently working.",
+    icon: Rocket,
+    title: "Startups Past Product-Market Fit",
+    desc: "Startups that have found traction need systems to scale it without breaking what's working. We help post-fit startups build the operational foundation needed to grow demand into sustainable revenue.",
   },
   {
-    icon: Users,
-    heading: "Team Structure for Growth",
-    description:
-      "We advise on hiring priorities and team structure as you scale, so growth doesn't outpace your ability to manage it.",
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs ready to grow often lack the systems to handle increased volume reliably. We size growth consulting for SMB budgets, focused on the specific bottlenecks that would break first under growth.",
   },
   {
-    icon: Wallet,
-    heading: "Financial Planning for Scale",
-    description:
-      "We help plan the financial side of scaling — cash flow, margins, and investment needs — so growth stays sustainable.",
+    icon: Building,
+    title: "Enterprises Entering New Markets",
+    desc: "Enterprises expanding into new markets or segments need a structured approach to avoid costly missteps. We run growth consulting at enterprise scale, built around market entry and expansion planning.",
   },
   {
-    icon: TrendingUp,
-    heading: "New Market & Channel Expansion",
-    description:
-      "We assess and plan expansion into new markets or sales channels, grounded in real demand signals, not just ambition.",
+    icon: ShoppingCart,
+    title: "Ecommerce & Retail Brands Scaling Fast",
+    desc: "Ecommerce brands scaling order volume fast often strain fulfillment, support, and cash flow simultaneously. We help fast-growing retail brands build the operational systems that keep pace with demand.",
   },
   {
-    icon: BarChart3,
-    heading: "Growth Metrics & Tracking",
-    description:
-      "We set up the right metrics to track as you scale, so you know growth is genuinely healthy, not masking underlying problems.",
+    icon: Handshake,
+    title: "Franchises & Multi-Location Businesses",
+    desc: "Businesses expanding into multiple locations need repeatable systems, not one-off solutions each time. We help build standardized processes that make expansion into new locations genuinely repeatable.",
   },
   {
-    icon: ShieldCheck,
-    heading: "Risk & Bottleneck Identification",
-    description:
-      "We identify the risks and bottlenecks most likely to break under growing pressure, before they actually do.",
+    icon: RefreshCw,
+    title: "Businesses That Scaled Too Fast Already",
+    desc: "Businesses that grew faster than their systems could handle need a course correction, not more growth yet. We help stabilize operations first, then build the foundation for sustainable growth going forward.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
+    number: "01",
+    title: "Scalable Systems & Process Design",
+    desc: "We design systems and processes that can handle growing volume without breaking what's currently working.",
+    ctaText: "Know Our Services",
+    services: [
+      "Process Scalability Assessment",
+      "System Design",
+      "Standard Operating Procedure Development",
+      "Capacity Planning",
+      "Bottleneck Elimination",
+      "Process Documentation",
+      "Scalability Testing",
+      "Systems Implementation Support",
+    ],
+  },
+  {
+    number: "02",
+    title: "Team Structure for Growth",
+    desc: "We advise on hiring priorities and team structure as you scale, so growth doesn't outpace your ability to manage it.",
+    ctaText: "Know Our Services",
+    services: [
+      "Org Structure Design",
+      "Hiring Priority Planning",
+      "Role Definition",
+      "Management Layer Planning",
+      "Team Capacity Assessment",
+      "Delegation Framework Design",
+      "Leadership Development Planning",
+      "Team Structure Documentation",
+    ],
+  },
+  {
+    number: "03",
+    title: "Financial Planning for Scale",
+    desc: "We help plan the financial side of scaling — cash flow, margins, and investment needs — so growth stays sustainable.",
+    ctaText: "Know Our Services",
+    services: [
+      "Cash Flow Planning",
+      "Margin Analysis",
+      "Growth Capital Planning",
+      "Financial Forecasting",
+      "Unit Economics Review",
+      "Investment Needs Assessment",
+      "Budget Planning for Scale",
+      "Financial Risk Assessment",
+    ],
+  },
+  {
+    number: "04",
+    title: "New Market & Channel Expansion",
+    desc: "We assess and plan expansion into new markets or sales channels, grounded in real demand signals, not just ambition.",
+    ctaText: "Know Our Services",
+    services: [
+      "Market Entry Assessment",
+      "Channel Expansion Planning",
+      "Demand Validation",
+      "Expansion Risk Analysis",
+      "Go-to-Market Planning for New Markets",
+      "Regional Expansion Strategy",
+      "Channel Partner Strategy",
+      "Expansion Roadmapping",
+    ],
+  },
+  {
+    number: "05",
+    title: "Growth Metrics & Tracking",
+    desc: "We set up the right metrics to track as you scale, so you know growth is genuinely healthy, not masking underlying problems.",
+    ctaText: "Know Our Services",
+    services: [
+      "Growth KPI Development",
+      "Health Metric Definition",
+      "Dashboard Setup",
+      "Cohort Analysis Setup",
+      "Retention Metric Tracking",
+      "Growth Reporting Cadence",
+      "Metric Review Sessions",
+      "Early Warning Indicator Setup",
+    ],
+  },
+  {
+    number: "06",
+    title: "Risk & Bottleneck Identification",
+    desc: "We identify the risks and bottlenecks most likely to break under growing pressure, before they actually do.",
+    ctaText: "Know Our Services",
+    services: [
+      "Risk Assessment",
+      "Bottleneck Stress Testing",
+      "Operational Risk Mapping",
+      "Contingency Planning",
+      "Scaling Risk Reviews",
+      "Vendor & Supplier Risk Review",
+      "Risk Mitigation Planning",
+      "Ongoing Risk Monitoring",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
     title: "Current State Assessment",
-    body: "We assess what's currently working and where the cracks are most likely to show as volume grows.",
+    desc: "We assess what's currently working and where the cracks are most likely to show as volume grows.",
   },
   {
+    number: "02",
+    title: "Risk & Bottleneck Identification",
+    desc: "We identify the specific risks and bottlenecks most likely to break first under growing pressure.",
+  },
+  {
+    number: "03",
     title: "Scaling Strategy & Systems",
-    body: "We design the systems, processes, and team structure needed to support sustainable growth, not just faster growth.",
+    desc: "We design the systems, processes, and team structure needed to support sustainable growth, not just faster growth.",
   },
   {
+    number: "04",
+    title: "Financial & Team Planning",
+    desc: "We plan the financial and hiring implications of scaling, so resources are in place before growth outpaces capacity.",
+  },
+  {
+    number: "05",
     title: "Hands-On Implementation",
-    body: "We stay involved through execution, not just handing over a growth plan and disappearing after the first meeting.",
+    desc: "We stay involved through execution, not just handing over a growth plan and disappearing after the first meeting.",
   },
   {
+    number: "06",
     title: "Ongoing Review & Course Correction",
-    body: "We're direct about what's working and honest about what isn't, adjusting the plan as real growth data comes in.",
+    desc: "We're direct about what's working and honest about what isn't, adjusting the plan as real growth data comes in.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "Sustainable, Not Just Fast",
-    description:
-      "Our growth consulting builds systems and processes designed to help you expand sustainably, not just quickly.",
+    desc: "Our growth consulting builds systems and processes designed to help you expand sustainably, not just quickly.",
   },
   {
-    number: "002",
+    number: "02",
     title: "No Generic Playbooks",
-    description:
-      "Every recommendation is built around your industry, your team, and your real numbers — not a template pulled off a shelf.",
+    desc: "Every recommendation is built around your industry, your team, and your real numbers — not a template pulled off a shelf.",
   },
   {
-    number: "003",
+    number: "03",
     title: "We Stay Involved",
-    description:
-      "From the first assessment to final execution, we stay by your side long after the first meeting.",
+    desc: "From the first assessment to final execution, we stay by your side long after the first meeting.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Outcomes You Can Measure",
-    description:
-      "Every engagement is focused on results you can point to, not just reports and recommendations that sit unread.",
+    desc: "Every engagement is focused on results you can point to, not just reports and recommendations that sit unread.",
   },
   {
-    number: "005",
+    number: "05",
     title: "A Team, Not Outside Consultants",
-    description:
-      "Think of us less like outside consultants and more like a hired team that's genuinely invested in your growth.",
+    desc: "Think of us less like outside consultants and more like a hired team that's genuinely invested in your growth.",
   },
   {
-    number: "006",
+    number: "06",
     title: "Local Roots, India-Wide Reach",
-    description:
-      "Born and based in Prayagraj, we understand what it takes to scale a business here as well as in the metros.",
+    desc: "Born and based in Prayagraj, we understand what it takes to scale a business here as well as in the metros.",
   },
 ];
 
@@ -152,113 +247,30 @@ const FAQS = [
 
 export default function BusinessGrowthScalingConsulting() {
   return (
-    <>
-      <BpoHero
-        heading="Business Growth & Scaling Consulting in India"
-        description="Ready to grow but not sure how to scale without breaking what's working? Our growth consulting builds systems and processes designed to help you expand sustainably, not just quickly."
-        img="/businesscons.webp"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/About-Us-Collage-scaled.webp"
-              alt="Business growth and scaling consulting at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Expand Sustainably, Not Just Quickly
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              Ready to grow but not sure how to scale without breaking
-              what's working? Our growth consulting builds systems and
-              processes designed to help you expand sustainably, not just
-              quickly.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re a business consulting firm based in Prayagraj,
-              helping growing companies locally across Allahabad and Uttar
-              Pradesh, as well as across India, scale without losing
-              control of what made them work in the first place.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our Growth & Scaling Consulting"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our Growth & Scaling Process"
-            description="Anyone can tell you to grow faster. Not everyone will help you build the systems to do it without breaking. Our four-step process stays involved from assessment to execution."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="Business Growth & Scaling Consulting Firm"
-          description="BizzBuzz Creations helps growing companies across India scale sustainably, with systems and processes built to handle growth without breaking what's working."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="Business Consultancy"
+      label="Business Growth & Scaling Consulting"
+      icon={TrendingUp}
+      description="Ready to grow but not sure how to scale without breaking what's working? Our growth consulting builds systems and processes designed to help you expand sustainably, not just quickly."
+      heroTitle="Business Growth & Scaling Consulting in India"
+      heroDescription="Ready to grow but not sure how to scale without breaking what's working? Our growth consulting builds systems and processes designed to help you expand sustainably, not just quickly."
+      capabilitiesHeading="Built for Businesses Ready to Scale Without Breaking"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our Growth & Scaling Consulting"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Businesses Trust Us to Guide Their Growth"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Growth Ambition Into Sustainable Scale"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Guiding Growth Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we guide every growth engagement, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, sizing growth consulting to each business's actual scaling stage and risk points. For businesses looking to work with us beyond India, we deliver growth consulting remotely, working across time zones to the same standard regardless of location. Whether you're a startup scaling past product-market fit or an enterprise entering a new market, our approach starts with identifying what would actually break first under growth."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready to Scale Without Breaking What's Working?"
+      ctaText="Whether you need systems built for your next stage of growth, a risk assessment before you scale further, or hands-on support implementing a growth plan, guessing was never going to get you there sustainably. Let's talk through your growth and scope what scaling consulting would actually involve."
+      ctaPrimaryText="Talk to a Growth Consulting Specialist"
+      ctaSecondaryText="Get Your Free Growth Consultation"
+    />
   );
 }

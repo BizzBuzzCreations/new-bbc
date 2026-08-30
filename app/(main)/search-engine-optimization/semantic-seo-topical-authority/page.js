@@ -1,17 +1,11 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Network,
-  Layers,
-  Link2,
-  BookOpen,
-  BarChart3,
+  Rocket,
+  Building2,
+  Building,
+  ShoppingCart,
+  Handshake,
   RefreshCw,
 } from "lucide-react";
 
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: Network,
-    heading: "Topic Cluster Architecture",
-    description:
-      "We map out core topics and supporting subtopics into a connected content structure, instead of isolated pages competing with each other.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups building a content library from scratch have a chance to structure it around real topical authority early. We plan topic clusters from day one, so startups build genuine authority instead of scattered, disconnected posts.",
   },
   {
-    icon: Link2,
-    heading: "Internal Linking Strategy",
-    description:
-      "Strategic internal links connect related content, helping both users and search engines understand how your topics relate to each other.",
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs often publish content reactively without a connected topic structure behind it. We build topical authority sized for SMB budgets, closing the specific gaps holding your niche rankings back.",
   },
   {
-    icon: BookOpen,
-    heading: "Entity-Based Content",
-    description:
-      "Content is built around real-world entities and concepts your niche cares about, not just keyword variations.",
+    icon: Building,
+    title: "Enterprises & Large Organizations",
+    desc: "Enterprises need topical authority across multiple product lines and markets without content fragmenting. We run semantic SEO programs at enterprise scale, maintaining consistent topic architecture across the site.",
   },
   {
-    icon: Layers,
-    heading: "Content Gap Analysis",
-    description:
-      "We identify the subtopics competitors and search engines expect to see but that your site is currently missing.",
+    icon: ShoppingCart,
+    title: "Ecommerce & Retail Brands",
+    desc: "Ecommerce sites often have product pages with no supporting content around them. We build category and buying-guide content clusters that establish real authority around what you sell.",
   },
   {
-    icon: BarChart3,
-    heading: "Authority & Ranking Tracking",
-    description:
-      "We track how your topical authority builds over time through rankings across your entire content cluster, not just one page.",
+    icon: Handshake,
+    title: "Agencies Needing an SEO Partner",
+    desc: "Content agencies need a specialist partner for structuring genuine topical authority, not just publishing volume. We work as a white-label semantic SEO partner, handling the cluster architecture agencies can present as their own.",
   },
   {
     icon: RefreshCw,
-    heading: "Ongoing Cluster Expansion",
-    description:
-      "We keep expanding and refreshing your topic clusters as your niche and search demand evolve.",
+    title: "Businesses Stuck Below Niche Competitors",
+    desc: "Businesses that publish regularly but still rank behind niche authorities need a structural fix. We audit the gap between your content and genuine topical authority, then close it systematically.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
-    title: "Topic & Entity Mapping",
-    body: "We map the core topics and entities that define real authority in your niche, based on what search engines already associate with expertise there.",
+    number: "01",
+    title: "Topic Cluster Architecture",
+    desc: "We map out core topics and supporting subtopics into a connected content structure, instead of isolated pages competing with each other.",
+    ctaText: "Know Our Services",
+    services: [
+      "Topic Cluster Mapping",
+      "Pillar Page Planning",
+      "Subtopic Identification",
+      "Content Architecture Design",
+      "Cluster Prioritization",
+      "Topic Hierarchy Planning",
+      "Content Calendar Alignment",
+      "Cluster Documentation",
+    ],
   },
   {
+    number: "02",
+    title: "Internal Linking Strategy",
+    desc: "Strategic internal links connect related content, helping both users and search engines understand how your topics relate to each other.",
+    ctaText: "Know Our Services",
+    services: [
+      "Internal Linking Audits",
+      "Link Structure Planning",
+      "Anchor Text Optimization",
+      "Orphan Page Fixing",
+      "Link Equity Distribution",
+      "Navigation Structure Review",
+      "Contextual Linking",
+      "Link Tracking",
+    ],
+  },
+  {
+    number: "03",
+    title: "Entity-Based Content",
+    desc: "Content is built around real-world entities and concepts your niche cares about, not just keyword variations.",
+    ctaText: "Know Our Services",
+    services: [
+      "Entity Research",
+      "Entity-Based Content Planning",
+      "Concept Mapping",
+      "Entity Relationship Building",
+      "Knowledge Graph Alignment",
+      "Entity-Rich Content Writing",
+      "Entity Consistency Checks",
+      "Entity Schema Markup",
+    ],
+  },
+  {
+    number: "04",
     title: "Content Gap Analysis",
-    body: "We identify the subtopics your site is missing compared to what a genuine authority in your space would cover.",
+    desc: "We identify the subtopics competitors and search engines expect to see but that your site is currently missing.",
+    ctaText: "Know Our Services",
+    services: [
+      "Competitor Content Analysis",
+      "Content Gap Identification",
+      "SERP Coverage Analysis",
+      "Missing Subtopic Mapping",
+      "Content Depth Auditing",
+      "Gap Prioritization",
+      "Content Briefs for Gaps",
+      "Gap-Filling Roadmap",
+    ],
   },
   {
-    title: "Cluster Build-Out",
-    body: "We create and interlink supporting content around each core topic, building a structure search engines can clearly map to expertise.",
+    number: "05",
+    title: "Authority & Ranking Tracking",
+    desc: "We track how your topical authority builds over time through rankings across your entire content cluster, not just one page.",
+    ctaText: "Know Our Services",
+    services: [
+      "Cluster Ranking Tracking",
+      "Authority Growth Reporting",
+      "Keyword Position Monitoring",
+      "Topic Visibility Dashboards",
+      "Competitor Authority Benchmarking",
+      "Monthly SEO Reports",
+      "Ranking Trend Analysis",
+      "Cluster Performance Reviews",
+    ],
   },
   {
-    title: "Track & Expand",
-    body: "We monitor rankings across the full cluster and keep expanding coverage as your niche and search demand evolve.",
+    number: "06",
+    title: "Ongoing Cluster Expansion",
+    desc: "We keep expanding and refreshing your topic clusters as your niche and search demand evolve.",
+    ctaText: "Know Our Services",
+    services: [
+      "Cluster Expansion Planning",
+      "Content Refresh Cycles",
+      "New Topic Identification",
+      "Seasonal Content Updates",
+      "Emerging Query Coverage",
+      "Content Pruning",
+      "Quarterly Cluster Reviews",
+      "Long-Term Content Roadmapping",
+    ],
   },
 ];
 
-const WE_ARE_POINTS = [
+const ROADMAP_STEPS = [
   {
-    number: "001",
+    number: "01",
+    title: "Topic & Entity Mapping",
+    desc: "We map the core topics and entities that define real authority in your niche, based on what search engines already associate with expertise there.",
+  },
+  {
+    number: "02",
+    title: "Content Gap Analysis",
+    desc: "We identify the subtopics your site is missing compared to what a genuine authority in your space would cover.",
+  },
+  {
+    number: "03",
+    title: "Cluster Architecture Planning",
+    desc: "We plan how pillar and supporting content will connect, including internal linking structure, before writing begins.",
+  },
+  {
+    number: "04",
+    title: "Cluster Build-Out",
+    desc: "We create and interlink supporting content around each core topic, building a structure search engines can clearly map to expertise.",
+  },
+  {
+    number: "05",
+    title: "Publishing & Internal Linking",
+    desc: "Content gets published in a planned sequence, with internal links connecting each new piece into the wider cluster as it goes live.",
+  },
+  {
+    number: "06",
+    title: "Track & Expand",
+    desc: "We monitor rankings across the full cluster and keep expanding coverage as your niche and search demand evolve.",
+  },
+];
+
+const DIFFERENTIATORS = [
+  {
+    number: "01",
     title: "Meaning Over Keywords",
-    description:
-      "We focus on topics and entities search engines associate with real expertise, not just keyword density.",
+    desc: "We focus on topics and entities search engines associate with real expertise, not just keyword density.",
   },
   {
-    number: "002",
+    number: "02",
     title: "Structured Content Clusters",
-    description:
-      "Content is built as connected clusters, not isolated pages competing against each other for the same terms.",
+    desc: "Content is built as connected clusters, not isolated pages competing against each other for the same terms.",
   },
   {
-    number: "003",
+    number: "03",
     title: "Entity-Based SEO",
-    description:
-      "We build content around real-world entities and concepts, helping search engines place your business correctly within your niche.",
+    desc: "We build content around real-world entities and concepts, helping search engines place your business correctly within your niche.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Gap-Driven Content Planning",
-    description:
-      "New content is planned based on genuine gaps versus what a topical authority would be expected to cover.",
+    desc: "New content is planned based on genuine gaps versus what a topical authority would be expected to cover.",
   },
   {
-    number: "005",
+    number: "05",
     title: "Data-Driven Execution",
-    description:
-      "Every recommendation is backed by real ranking and content-gap data, not assumptions about your niche.",
+    desc: "Every recommendation is backed by real ranking and content-gap data, not assumptions about your niche.",
   },
   {
-    number: "006",
+    number: "06",
     title: "Honest Reporting",
-    description:
-      "No agency can guarantee topical authority overnight, and we won't pretend otherwise — you get transparent, honest progress reports instead.",
+    desc: "No agency can guarantee topical authority overnight, and we won't pretend otherwise — you get transparent, honest progress reports instead.",
   },
 ];
 
@@ -152,113 +247,30 @@ const FAQS = [
 
 export default function SemanticSeoTopicalAuthority() {
   return (
-    <>
-      <BpoHero
-        heading="Semantic SEO & Topical Authority Services in India"
-        description="Search engines now focus on meaning and expertise rather than just keywords. We build your website into a trusted authority within your niche."
-        img="/seO2.jpg"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/seoGraph.png"
-              alt="Semantic SEO and topical authority at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Built as an Authority, Not Just a Website
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              Search engines now focus on meaning and expertise rather than
-              just keywords. We build your website into a trusted authority
-              within your niche through connected content clusters and
-              entity-based SEO.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re an SEO services company based in Prayagraj, serving
-              clients locally across Allahabad and Uttar Pradesh, as well as
-              businesses across India, building strategies for how search
-              actually evaluates expertise today.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our Semantic SEO Services"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our Semantic SEO Process"
-            description="We map the topics and entities that define real authority in your niche, then build and interlink content that closes the gaps."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="Semantic SEO & Topical Authority Company"
-          description="BizzBuzz Creations builds businesses across India into trusted topical authorities through connected content clusters and entity-based SEO."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="SEO Services"
+      label="Semantic SEO & Topical Authority"
+      icon={Network}
+      description="Search engines now focus on meaning and expertise rather than just keywords. We build your website into a trusted authority within your niche."
+      heroTitle="Semantic SEO & Topical Authority Services in India"
+      heroDescription="Search engines now focus on meaning and expertise rather than just keywords. We build your website into a trusted authority within your niche."
+      capabilitiesHeading="Built for Businesses Ready to Own Their Niche"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our Semantic SEO"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Businesses Trust Us to Build Their Topical Authority"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Scattered Content Into a Topical Authority"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Building Topical Authority Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every semantic SEO engagement, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, building topic clusters sized to each business's actual niche and competition. For businesses looking to build topical authority beyond India, we deliver semantic SEO remotely, tracking rankings across markets and time zones to the same standard regardless of location. Whether you're a startup building your first content cluster or an enterprise maintaining authority across multiple product lines, our approach starts with mapping what real expertise looks like in your niche."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready to Be Treated as an Authority, Not Just a Website?"
+      ctaText="Whether you need a topic and entity mapping project, a content gap analysis for your existing site, or a full cluster build-out, the right approach depends on where the gaps in your current content actually are. Let's talk through your niche and scope what building topical authority would actually involve."
+      ctaPrimaryText="Talk to a Semantic SEO Specialist"
+      ctaSecondaryText="Get Your Free Topical Authority Audit"
+    />
   );
 }

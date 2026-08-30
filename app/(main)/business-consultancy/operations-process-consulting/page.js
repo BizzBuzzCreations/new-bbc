@@ -1,17 +1,11 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Settings,
-  Search,
-  Workflow,
-  Wallet,
-  BarChart3,
+  Rocket,
+  Building2,
+  Building,
+  ShoppingCart,
+  Handshake,
   RefreshCw,
 } from "lucide-react";
 
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: Search,
-    heading: "Operational Bottleneck Audit",
-    description:
-      "We identify exactly where inefficiency is quietly eating into profit in your day-to-day operations, not vague generalizations.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups often run ad-hoc processes that worked at small scale but now cause daily friction. We help early-stage teams formalize just enough process to remove friction without over-engineering operations too early.",
   },
   {
-    icon: Workflow,
-    heading: "Process Redesign",
-    description:
-      "Inefficient processes get redesigned around how work actually flows through your business, cutting unnecessary steps.",
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs frequently have processes that grew organically and now waste real time daily. We size operations consulting for SMB budgets, targeting the specific bottlenecks costing you the most.",
   },
   {
-    icon: Settings,
-    heading: "Tool & System Optimization",
-    description:
-      "We assess whether your current tools and systems are helping or hindering operations, and recommend changes where needed.",
+    icon: Building,
+    title: "Enterprises & Large Organizations",
+    desc: "Enterprises need process improvements that work across departments without disrupting critical operations. We run operations consulting at enterprise scale, built around careful, low-disruption rollout.",
   },
   {
-    icon: Wallet,
-    heading: "Cost & Resource Efficiency",
-    description:
-      "We identify where resources — time, staff, budget — are being spent inefficiently, and where they'd have more impact.",
+    icon: ShoppingCart,
+    title: "Ecommerce & Retail Operations",
+    desc: "Ecommerce operations involve order, inventory, and fulfillment processes that strain under growing volume. We streamline retail and ecommerce operations specifically around order flow and fulfillment efficiency.",
   },
   {
-    icon: BarChart3,
-    heading: "Operational KPI Tracking",
-    description:
-      "We set up clear metrics to track operational health, so improvements are measurable, not just assumed.",
+    icon: Handshake,
+    title: "Service Businesses & Agencies",
+    desc: "Service businesses and agencies often lose margin to inefficient internal delivery processes. We help service businesses streamline delivery workflows so more time goes to billable, valuable work.",
   },
   {
     icon: RefreshCw,
-    heading: "Continuous Improvement Framework",
-    description:
-      "We help build a habit of ongoing process review, so operations keep improving instead of drifting back to old inefficiencies.",
+    title: "Businesses With Broken Legacy Processes",
+    desc: "Businesses running critical operations on outdated, undocumented processes need a careful overhaul. We map existing legacy processes first, then redesign them without disrupting day-to-day operations.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
-    title: "Operations Audit",
-    body: "We look closely at your day-to-day running to find exactly where bottlenecks and inefficiencies are actually happening.",
+    number: "01",
+    title: "Operational Bottleneck Audit",
+    desc: "We identify exactly where inefficiency is quietly eating into profit in your day-to-day operations, not vague generalizations.",
+    ctaText: "Know Our Services",
+    services: [
+      "Operational Audits",
+      "Bottleneck Identification",
+      "Process Time Studies",
+      "Efficiency Assessments",
+      "Stakeholder Interviews",
+      "Current-State Mapping",
+      "Cost-of-Inefficiency Analysis",
+      "Audit Reporting",
+    ],
   },
   {
+    number: "02",
     title: "Process Redesign",
-    body: "We redesign the specific processes causing friction, built around your team's actual workflow, not a generic framework.",
+    desc: "Inefficient processes get redesigned around how work actually flows through your business, cutting unnecessary steps.",
+    ctaText: "Know Our Services",
+    services: [
+      "Process Redesign",
+      "Workflow Simplification",
+      "Step Elimination",
+      "Process Standardization",
+      "Cross-Functional Process Mapping",
+      "Redesign Testing",
+      "Process Documentation",
+      "Implementation Support",
+    ],
   },
   {
-    title: "Hands-On Implementation",
-    body: "We stay involved through rollout, not just handing over recommendations and disappearing after the first meeting.",
+    number: "03",
+    title: "Tool & System Optimization",
+    desc: "We assess whether your current tools and systems are helping or hindering operations, and recommend changes where needed.",
+    ctaText: "Know Our Services",
+    services: [
+      "Tool Stack Audits",
+      "System Fit Assessment",
+      "Tool Consolidation Recommendations",
+      "System Integration Review",
+      "Software Selection Guidance",
+      "Tool Migration Planning",
+      "System Training Support",
+      "Ongoing Tool Optimization",
+    ],
   },
   {
-    title: "Ongoing Review & Course Correction",
-    body: "We're direct about what's working and honest about what isn't, adjusting the approach as real operational data comes in.",
+    number: "04",
+    title: "Cost & Resource Efficiency",
+    desc: "We identify where resources — time, staff, budget — are being spent inefficiently, and where they'd have more impact.",
+    ctaText: "Know Our Services",
+    services: [
+      "Resource Allocation Analysis",
+      "Cost Efficiency Review",
+      "Time Utilization Analysis",
+      "Staffing Efficiency Assessment",
+      "Budget Reallocation Recommendations",
+      "Vendor Cost Review",
+      "Resource Optimization Planning",
+      "Efficiency Reporting",
+    ],
+  },
+  {
+    number: "05",
+    title: "Operational KPI Tracking",
+    desc: "We set up clear metrics to track operational health, so improvements are measurable, not just assumed.",
+    ctaText: "Know Our Services",
+    services: [
+      "Operational KPI Development",
+      "Dashboard Setup",
+      "Performance Tracking Systems",
+      "Reporting Cadence Design",
+      "Benchmark Setting",
+      "Operational Health Scorecards",
+      "KPI Review Sessions",
+      "Continuous Tracking Support",
+    ],
+  },
+  {
+    number: "06",
+    title: "Continuous Improvement Framework",
+    desc: "We help build a habit of ongoing process review, so operations keep improving instead of drifting back to old inefficiencies.",
+    ctaText: "Know Our Services",
+    services: [
+      "Continuous Improvement Setup",
+      "Process Review Cadence",
+      "Feedback Loop Design",
+      "Team Improvement Training",
+      "Improvement Culture Building",
+      "Regular Audit Scheduling",
+      "Process Drift Monitoring",
+      "Long-Term Improvement Support",
+    ],
   },
 ];
 
-const WE_ARE_POINTS = [
+const ROADMAP_STEPS = [
   {
-    number: "001",
+    number: "01",
+    title: "Operations Audit",
+    desc: "We look closely at your day-to-day running to find exactly where bottlenecks and inefficiencies are actually happening.",
+  },
+  {
+    number: "02",
+    title: "Root Cause Analysis",
+    desc: "We dig into why each bottleneck exists, so the fix addresses the actual cause rather than a surface symptom.",
+  },
+  {
+    number: "03",
+    title: "Process Redesign",
+    desc: "We redesign the specific processes causing friction, built around your team's actual workflow, not a generic framework.",
+  },
+  {
+    number: "04",
+    title: "Tool & System Adjustments",
+    desc: "We recommend and help implement tool or system changes where the current stack is genuinely holding operations back.",
+  },
+  {
+    number: "05",
+    title: "Hands-On Implementation",
+    desc: "We stay involved through rollout, not just handing over recommendations and disappearing after the first meeting.",
+  },
+  {
+    number: "06",
+    title: "Ongoing Review & Course Correction",
+    desc: "We're direct about what's working and honest about what isn't, adjusting the approach as real operational data comes in.",
+  },
+];
+
+const DIFFERENTIATORS = [
+  {
+    number: "01",
     title: "Focused on Real Bottlenecks",
-    description:
-      "Inefficiency quietly eats into profit every single day. We identify the bottlenecks in your day-to-day running and streamline them.",
+    desc: "Inefficiency quietly eats into profit every single day. We identify the bottlenecks in your day-to-day running and streamline them.",
   },
   {
-    number: "002",
+    number: "02",
     title: "No Generic Playbooks",
-    description:
-      "Every recommendation is built around your industry, your team, and your real numbers — not a template pulled off a shelf.",
+    desc: "Every recommendation is built around your industry, your team, and your real numbers — not a template pulled off a shelf.",
   },
   {
-    number: "003",
+    number: "03",
     title: "We Stay Involved",
-    description:
-      "From the first audit to final rollout, we stay by your side long after the first meeting.",
+    desc: "From the first audit to final rollout, we stay by your side long after the first meeting.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Outcomes You Can Measure",
-    description:
-      "Every engagement is focused on results you can point to, not just reports and recommendations that sit unread.",
+    desc: "Every engagement is focused on results you can point to, not just reports and recommendations that sit unread.",
   },
   {
-    number: "005",
+    number: "05",
     title: "A Team, Not Outside Consultants",
-    description:
-      "Think of us less like outside consultants and more like a hired team that's genuinely invested in your operations.",
+    desc: "Think of us less like outside consultants and more like a hired team that's genuinely invested in your operations.",
   },
   {
-    number: "006",
+    number: "06",
     title: "Local Roots, India-Wide Reach",
-    description:
-      "Born and based in Prayagraj, we understand what it takes to run a business here as well as in the metros.",
+    desc: "Born and based in Prayagraj, we understand what it takes to run a business here as well as in the metros.",
   },
 ];
 
@@ -152,112 +247,30 @@ const FAQS = [
 
 export default function OperationsProcessConsulting() {
   return (
-    <>
-      <BpoHero
-        heading="Operations & Process Consulting in India"
-        description="Inefficiency quietly eats into profit every single day. Through focused operations consulting, we identify the bottlenecks in your day-to-day running and streamline them."
-        img="/businesscons.webp"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/bc-img.png"
-              alt="Operations and process consulting at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Fix the Inefficiency Eating Into Your Profit
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              Inefficiency quietly eats into profit every single day.
-              Through focused operations consulting, we identify the
-              bottlenecks in your day-to-day running and streamline them.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re a business consulting firm based in Prayagraj,
-              helping companies locally across Allahabad and Uttar Pradesh,
-              as well as across India, run leaner, more efficient
-              operations.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our Operations Consulting"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our Operations Consulting Process"
-            description="Anyone can point out inefficiency. Not everyone will help you actually fix it. Our four-step process stays involved from audit to rollout."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="Operations & Process Consulting Firm"
-          description="BizzBuzz Creations helps businesses across India streamline day-to-day operations, identifying and fixing the bottlenecks that quietly eat into profit."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="Business Consultancy"
+      label="Operations & Process Consulting"
+      icon={Settings}
+      description="Inefficiency quietly eats into profit every single day. Through focused operations consulting, we identify the bottlenecks in your day-to-day running and streamline them."
+      heroTitle="Operations & Process Consulting in India"
+      heroDescription="Inefficiency quietly eats into profit every single day. Through focused operations consulting, we identify the bottlenecks in your day-to-day running and streamline them."
+      capabilitiesHeading="Built for Businesses Ready to Fix What's Quietly Slowing Them Down"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our Operations Consulting"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Businesses Trust Us to Streamline Their Operations"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Inefficiency Into a Streamlined Operation"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Streamlining Operations Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every operations engagement, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, sizing operations consulting to each business's actual process complexity and volume. For businesses looking to work with us beyond India, we deliver operations consulting remotely, working across time zones to the same standard regardless of location. Whether you're a startup formalizing your first process or an enterprise redesigning a cross-department workflow, our approach starts with auditing what's actually happening today."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready to Stop Losing Profit to Inefficiency?"
+      ctaText="Whether you need a full operations audit, a redesign of a specific bottleneck process, or ongoing support building a culture of continuous improvement, guessing was never going to fix it. Let's talk through your operations and scope what process consulting would actually involve."
+      ctaPrimaryText="Talk to an Operations Consulting Specialist"
+      ctaSecondaryText="Get Your Free Operations Audit"
+    />
   );
 }

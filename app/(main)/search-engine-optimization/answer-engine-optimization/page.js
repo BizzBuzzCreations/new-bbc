@@ -1,17 +1,11 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   MessageCircleQuestion,
-  ListChecks,
-  Code2,
-  Target,
-  BarChart3,
+  Rocket,
+  Building2,
+  Building,
+  ShoppingCart,
+  Handshake,
   RefreshCw,
 } from "lucide-react";
 
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: MessageCircleQuestion,
-    heading: "Question-Based Content Mapping",
-    description:
-      "We identify the exact questions your customers ask and structure content to answer them directly, instead of burying answers deep in long articles.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups need visibility fast, and featured snippets are one of the quickest wins available. We structure early content around direct-answer formatting, giving startups a shot at snippet visibility before competitors catch on.",
   },
   {
-    icon: ListChecks,
-    heading: "Featured Snippet Optimization",
-    description:
-      "Clear, concise formatting — lists, tables, short definitions — increases your odds of winning featured snippets and voice search answers.",
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs often bury useful answers deep inside long articles that never win a snippet. We restructure existing content for AEO sized for SMB budgets, targeting the questions your customers actually ask.",
   },
   {
-    icon: Code2,
-    heading: "FAQ & Schema Markup",
-    description:
-      "We add structured FAQ and Q&A schema so search engines and AI tools can easily lift accurate answers from your pages.",
+    icon: Building,
+    title: "Enterprises & Large Organizations",
+    desc: "Enterprises need consistent answer-engine visibility across product lines and support content. We run AEO programs at enterprise scale, covering FAQ, support, and product content consistently.",
   },
   {
-    icon: Target,
-    heading: "Direct-Answer Formatting",
-    description:
-      "Content gets restructured so the answer appears immediately, with supporting detail after, matching how users and AI systems actually scan pages.",
+    icon: ShoppingCart,
+    title: "Ecommerce & Retail Brands",
+    desc: "Shoppers ask specific product and comparison questions that voice search and AI answer directly. We structure product FAQs and comparison content to win featured snippets and voice search answers.",
   },
   {
-    icon: BarChart3,
-    heading: "Answer Visibility Tracking",
-    description:
-      "We track snippet wins, voice search appearances, and AI answer citations, giving you a clear picture of your answer-engine presence.",
+    icon: Handshake,
+    title: "Agencies Needing an AEO Partner",
+    desc: "Content agencies need a specialist partner as answer engines become a bigger share of search traffic. We work as a white-label AEO partner, handling the restructuring work agencies can present as their own.",
   },
   {
     icon: RefreshCw,
-    heading: "Continuous Question Research",
-    description:
-      "Customer questions change over time. We keep refreshing question research and content to match what people are actually asking now.",
+    title: "Businesses Losing Traffic to Zero-Click Search",
+    desc: "Businesses seeing traffic decline as answers get shown directly on the results page need a different strategy. We help you become the answer being shown, rather than losing visibility to zero-click search.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
-    title: "Question Research",
-    body: "We identify the real questions your customers search for, using search data and direct customer insight, not guesswork.",
+    number: "01",
+    title: "Question-Based Content Mapping",
+    desc: "We identify the exact questions your customers ask and structure content to answer them directly, instead of burying answers deep in long articles.",
+    ctaText: "Know Our Services",
+    services: [
+      "Question Research",
+      "Customer Query Mapping",
+      "Search Intent Analysis",
+      "Question Clustering",
+      "Content Gap Identification",
+      "Voice Search Query Research",
+      "People-Also-Ask Analysis",
+      "Question Prioritization",
+    ],
   },
   {
-    title: "Direct-Answer Content Structuring",
-    body: "We restructure or create content so the answer appears immediately and clearly, formatted the way answer engines prefer.",
+    number: "02",
+    title: "Featured Snippet Optimization",
+    desc: "Clear, concise formatting — lists, tables, short definitions — increases your odds of winning featured snippets and voice search answers.",
+    ctaText: "Know Our Services",
+    services: [
+      "Featured Snippet Formatting",
+      "List & Table Formatting",
+      "Definition Block Writing",
+      "Snippet Length Optimization",
+      "Snippet Competitor Analysis",
+      "Snippet Win Tracking",
+      "Paragraph Snippet Optimization",
+      "Snippet Testing",
+    ],
   },
   {
-    title: "Schema & Technical Setup",
-    body: "FAQ and Q&A schema get implemented so search engines and AI tools can accurately parse and surface your answers.",
+    number: "03",
+    title: "FAQ & Schema Markup",
+    desc: "We add structured FAQ and Q&A schema so search engines and AI tools can easily lift accurate answers from your pages.",
+    ctaText: "Know Our Services",
+    services: [
+      "FAQ Schema Implementation",
+      "Q&A Schema Setup",
+      "HowTo Schema Markup",
+      "Structured Data Testing",
+      "Schema Validation",
+      "Rich Result Monitoring",
+      "FAQ Page Development",
+      "Schema Maintenance",
+    ],
   },
   {
-    title: "Track & Refresh",
-    body: "We monitor snippet wins and answer visibility, refreshing content regularly as questions and search behavior evolve.",
-  },
-];
-
-const WE_ARE_POINTS = [
-  {
-    number: "001",
-    title: "Question-First Strategy",
-    description:
-      "We start from what your customers are actually asking, not assumptions about what content they want.",
-  },
-  {
-    number: "002",
-    title: "Snippet & Voice Search Ready",
-    description:
-      "Content is formatted specifically to win featured snippets and voice search answers, not just rank on a page.",
+    number: "04",
+    title: "Direct-Answer Formatting",
+    desc: "Content gets restructured so the answer appears immediately, with supporting detail after, matching how users and AI systems actually scan pages.",
+    ctaText: "Know Our Services",
+    services: [
+      "Answer-First Rewriting",
+      "Content Restructuring",
+      "Heading Optimization",
+      "Scannable Formatting",
+      "Supporting Detail Structuring",
+      "Readability Optimization",
+      "Content Length Auditing",
+      "Format Testing",
+    ],
   },
   {
-    number: "003",
-    title: "Schema-Backed Accuracy",
-    description:
-      "Structured FAQ and Q&A schema help search engines and AI tools surface your answers correctly and consistently.",
-  },
-  {
-    number: "004",
+    number: "05",
     title: "Answer Visibility Tracking",
-    description:
-      "We measure snippet wins and answer citations directly, not just proxy traffic metrics.",
+    desc: "We track snippet wins, voice search appearances, and AI answer citations, giving you a clear picture of your answer-engine presence.",
+    ctaText: "Know Our Services",
+    services: [
+      "Snippet Win Tracking",
+      "Voice Search Monitoring",
+      "AI Answer Citation Tracking",
+      "Visibility Dashboards",
+      "Competitor Snippet Tracking",
+      "Monthly AEO Reports",
+      "Ranking Fluctuation Alerts",
+      "Answer Coverage Analysis",
+    ],
   },
   {
-    number: "005",
+    number: "06",
+    title: "Continuous Question Research",
+    desc: "Customer questions change over time. We keep refreshing question research and content to match what people are actually asking now.",
+    ctaText: "Know Our Services",
+    services: [
+      "Ongoing Question Research",
+      "Seasonal Query Updates",
+      "Content Refresh Cycles",
+      "Trending Question Monitoring",
+      "New Query Identification",
+      "Content Expansion Planning",
+      "Question Bank Maintenance",
+      "Quarterly AEO Reviews",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
+    title: "Question Research",
+    desc: "We identify the real questions your customers search for, using search data and direct customer insight, not guesswork.",
+  },
+  {
+    number: "02",
+    title: "Direct-Answer Content Structuring",
+    desc: "We restructure or create content so the answer appears immediately and clearly, formatted the way answer engines prefer.",
+  },
+  {
+    number: "03",
+    title: "Schema & Technical Setup",
+    desc: "FAQ and Q&A schema get implemented so search engines and AI tools can accurately parse and surface your answers.",
+  },
+  {
+    number: "04",
+    title: "Snippet Targeting & Testing",
+    desc: "We target specific featured snippets, testing formatting variations to improve the odds of winning the answer position.",
+  },
+  {
+    number: "05",
+    title: "Publishing & Rollout",
+    desc: "We publish restructured content in batches, prioritizing the highest-opportunity questions first for faster visibility gains.",
+  },
+  {
+    number: "06",
+    title: "Track & Refresh",
+    desc: "We monitor snippet wins and answer visibility, refreshing content regularly as questions and search behavior evolve.",
+  },
+];
+
+const DIFFERENTIATORS = [
+  {
+    number: "01",
+    title: "Question-First Strategy",
+    desc: "We start from what your customers are actually asking, not assumptions about what content they want.",
+  },
+  {
+    number: "02",
+    title: "Snippet & Voice Search Ready",
+    desc: "Content is formatted specifically to win featured snippets and voice search answers, not just rank on a page.",
+  },
+  {
+    number: "03",
+    title: "Schema-Backed Accuracy",
+    desc: "Structured FAQ and Q&A schema help search engines and AI tools surface your answers correctly and consistently.",
+  },
+  {
+    number: "04",
+    title: "Answer Visibility Tracking",
+    desc: "We measure snippet wins and answer citations directly, not just proxy traffic metrics.",
+  },
+  {
+    number: "05",
     title: "Data-Driven Execution",
-    description:
-      "Every recommendation is backed by real search and question data, not industry guesswork.",
+    desc: "Every recommendation is backed by real search and question data, not industry guesswork.",
   },
   {
-    number: "006",
+    number: "06",
     title: "Honest Reporting",
-    description:
-      "No agency can guarantee every snippet or AI answer, and we won't pretend otherwise — you get transparent, honest progress reports instead.",
+    desc: "No agency can guarantee every snippet or AI answer, and we won't pretend otherwise — you get transparent, honest progress reports instead.",
   },
 ];
 
@@ -152,113 +247,30 @@ const FAQS = [
 
 export default function AnswerEngineOptimization() {
   return (
-    <>
-      <BpoHero
-        heading="Answer Engine Optimization (AEO) Services in India"
-        description="Modern users want quick answers without scrolling through pages. We optimize your content so it becomes the direct answer across search engines and AI tools."
-        img="/seO2.jpg"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/BizzBuzz-Creations-5.png"
-              alt="Answer Engine Optimization at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Be the Direct Answer, Not Just Another Result
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              Modern users want quick answers without scrolling through
-              pages. We optimize your content so it becomes the direct
-              answer across search engines and AI tools, formatted the way
-              answer engines actually prefer.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re an SEO services company based in Prayagraj, serving
-              clients locally across Allahabad and Uttar Pradesh, as well as
-              businesses across India, building content that gets chosen as
-              the answer.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our AEO Services"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our AEO Process"
-            description="We research the real questions your customers ask, then structure and mark up content so it's the answer search engines and AI tools reach for."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="Answer Engine Optimization Company"
-          description="BizzBuzz Creations helps businesses across India become the direct answer in featured snippets, voice search, and AI-generated responses."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="SEO Services"
+      label="Answer Engine Optimization (AEO)"
+      icon={MessageCircleQuestion}
+      description="Modern users want quick answers without scrolling through pages. We optimize your content so it becomes the direct answer across search engines and AI tools."
+      heroTitle="Answer Engine Optimization (AEO) Services in India"
+      heroDescription="Modern users want quick answers without scrolling through pages. We optimize your content so it becomes the direct answer across search engines and AI tools."
+      capabilitiesHeading="Built for Businesses Ready to Become the Direct Answer"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our AEO Services"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Businesses Trust Us to Build Their Answer Visibility"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Your Content Into the Direct Answer"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Building Answer Visibility Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every AEO engagement, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, restructuring content sized to each business's actual question volume and competition. For businesses looking to improve answer-engine visibility beyond India, we deliver AEO remotely, testing snippet wins across platforms and time zones to the same standard regardless of location. Whether you're a startup winning your first featured snippet or an enterprise protecting answer visibility across product lines, our approach starts with the real questions your customers are asking."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready to Be the Answer, Not Just Another Result?"
+      ctaText="Whether you need a question research and content mapping project, direct-answer restructuring for existing content, or ongoing snippet and voice search tracking, the right approach depends on what your customers are actually asking. Let's talk through your content and scope what AEO would actually involve."
+      ctaPrimaryText="Talk to an AEO Specialist"
+      ctaSecondaryText="Get Your Free AEO Audit"
+    />
   );
 }

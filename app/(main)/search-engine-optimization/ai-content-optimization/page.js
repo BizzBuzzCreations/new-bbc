@@ -1,18 +1,12 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   PenTool,
-  FileCheck2,
-  Bot,
-  BarChart3,
+  Rocket,
+  Building2,
+  Building,
+  ShoppingCart,
+  Handshake,
   RefreshCw,
-  Users,
 } from "lucide-react";
 
 export const metadata = {
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: FileCheck2,
-    heading: "Content Audits & Refresh",
-    description:
-      "We audit existing content for accuracy, structure, and depth, refreshing what's underperforming instead of only writing new pages.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups need content that works hard from the first post, without years to build a backlog. We write and structure content for both readers and AI systems from day one, so startups don't need a rewrite cycle later.",
   },
   {
-    icon: PenTool,
-    heading: "Human-First, AI-Ready Writing",
-    description:
-      "Content is written to genuinely help readers first, then structured so AI systems can parse and cite it accurately.",
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs often have existing content that's thin or outdated and underperforming. We audit and rewrite content sized for SMB budgets, prioritizing the pages with the most potential first.",
   },
   {
-    icon: Bot,
-    heading: "AI Citation Optimization",
-    description:
-      "We format facts, definitions, and data points so AI tools can lift them cleanly and correctly when generating answers.",
+    icon: Building,
+    title: "Enterprises & Large Organizations",
+    desc: "Enterprises need content quality and consistency maintained across large libraries and multiple writers. We run AI content optimization at enterprise scale, keeping quality standards consistent across the whole site.",
   },
   {
-    icon: Users,
-    heading: "Experience & Expertise Signals",
-    description:
-      "We strengthen author credibility, first-hand experience, and expertise signals that both readers and search engines value.",
+    icon: ShoppingCart,
+    title: "Ecommerce & Retail Brands",
+    desc: "Ecommerce product and category pages often read as thin, templated text that neither ranks nor converts. We rewrite product and category content to genuinely help shoppers while staying easy for AI systems to cite.",
   },
   {
-    icon: BarChart3,
-    heading: "Engagement & Ranking Tracking",
-    description:
-      "We track how optimized content performs on both traditional engagement metrics and AI citation visibility.",
+    icon: Handshake,
+    title: "Agencies Needing a Content Partner",
+    desc: "Marketing agencies need a reliable content partner as quality and AI-readiness both start to matter more. We work as a white-label content optimization partner, delivering writing agencies can present as their own.",
   },
   {
     icon: RefreshCw,
-    heading: "Ongoing Content Maintenance",
-    description:
-      "Content gets revisited and updated regularly, so it stays accurate and competitive rather than going stale after publication.",
+    title: "Businesses With Content That's Gone Stale",
+    desc: "Businesses sitting on years of unmaintained content need a structured refresh, not a full rewrite of everything. We audit and prioritize existing content, refreshing what's underperforming instead of starting from zero.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
+    number: "01",
+    title: "Content Audits & Refresh",
+    desc: "We audit existing content for accuracy, structure, and depth, refreshing what's underperforming instead of only writing new pages.",
+    ctaText: "Know Our Services",
+    services: [
+      "Content Audits",
+      "Performance-Based Prioritization",
+      "Accuracy Reviews",
+      "Structural Reviews",
+      "Content Refresh Writing",
+      "Outdated Content Identification",
+      "Content Pruning",
+      "Refresh Impact Tracking",
+    ],
+  },
+  {
+    number: "02",
+    title: "Human-First, AI-Ready Writing",
+    desc: "Content is written to genuinely help readers first, then structured so AI systems can parse and cite it accurately.",
+    ctaText: "Know Our Services",
+    services: [
+      "Reader-First Copywriting",
+      "AI-Readable Formatting",
+      "Content Structuring",
+      "Tone & Voice Consistency",
+      "Readability Optimization",
+      "Long-Form Content Writing",
+      "Content Editing & Proofreading",
+      "Style Guide Development",
+    ],
+  },
+  {
+    number: "03",
+    title: "AI Citation Optimization",
+    desc: "We format facts, definitions, and data points so AI tools can lift them cleanly and correctly when generating answers.",
+    ctaText: "Know Our Services",
+    services: [
+      "Fact Formatting for AI",
+      "Definition Block Writing",
+      "Data Point Structuring",
+      "Citation-Ready Content",
+      "AI Parsing Testing",
+      "Content Chunking",
+      "Quotable Content Writing",
+      "Citation Accuracy Checks",
+    ],
+  },
+  {
+    number: "04",
+    title: "Experience & Expertise Signals",
+    desc: "We strengthen author credibility, first-hand experience, and expertise signals that both readers and search engines value.",
+    ctaText: "Know Our Services",
+    services: [
+      "Author Bio Development",
+      "Expertise Signal Building",
+      "First-Hand Experience Content",
+      "Credential Highlighting",
+      "Case Study Development",
+      "Original Insight Writing",
+      "Trust Signal Auditing",
+      "E-E-A-T Optimization",
+    ],
+  },
+  {
+    number: "05",
+    title: "Engagement & Ranking Tracking",
+    desc: "We track how optimized content performs on both traditional engagement metrics and AI citation visibility.",
+    ctaText: "Know Our Services",
+    services: [
+      "Engagement Tracking",
+      "Ranking Monitoring",
+      "AI Citation Tracking",
+      "Content Performance Dashboards",
+      "Bounce Rate Analysis",
+      "Time-on-Page Tracking",
+      "Conversion Tracking",
+      "Monthly Content Reports",
+    ],
+  },
+  {
+    number: "06",
+    title: "Ongoing Content Maintenance",
+    desc: "Content gets revisited and updated regularly, so it stays accurate and competitive rather than going stale after publication.",
+    ctaText: "Know Our Services",
+    services: [
+      "Scheduled Content Reviews",
+      "Fact Update Cycles",
+      "Competitive Refresh Checks",
+      "Ranking Decay Monitoring",
+      "Content Update Prioritization",
+      "Seasonal Content Updates",
+      "Long-Term Content Calendar",
+      "Maintenance Reporting",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
     title: "Content Audit",
-    body: "We review your existing content for accuracy, structure, depth, and how well it currently performs for both readers and AI systems.",
+    desc: "We review your existing content for accuracy, structure, depth, and how well it currently performs for both readers and AI systems.",
   },
   {
+    number: "02",
+    title: "Prioritization & Planning",
+    desc: "We prioritize which pages to rewrite first based on traffic potential and current performance, so effort goes where it matters most.",
+  },
+  {
+    number: "03",
     title: "Rewrite & Restructure",
-    body: "Underperforming or thin content gets rewritten and restructured to genuinely help readers while staying easy for AI systems to parse.",
+    desc: "Underperforming or thin content gets rewritten and restructured to genuinely help readers while staying easy for AI systems to parse.",
   },
   {
+    number: "04",
     title: "Authority & Trust Signals",
-    body: "We strengthen author credibility and expertise signals across key content, which both readers and AI systems weigh heavily.",
+    desc: "We strengthen author credibility and expertise signals across key content, which both readers and AI systems weigh heavily.",
   },
   {
+    number: "05",
+    title: "Publishing & Quality Review",
+    desc: "Refreshed content goes through a final quality review before publishing, checking accuracy, tone, and structure one last time.",
+  },
+  {
+    number: "06",
     title: "Monitor & Refresh",
-    body: "We track engagement and citation performance, refreshing content regularly instead of letting it go stale after publication.",
+    desc: "We track engagement and citation performance, refreshing content regularly instead of letting it go stale after publication.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "Human-First, Machine-Ready",
-    description:
-      "Every piece is written to genuinely help the reader first, then structured for AI systems, not the other way around.",
+    desc: "Every piece is written to genuinely help the reader first, then structured for AI systems, not the other way around.",
   },
   {
-    number: "002",
+    number: "02",
     title: "Depth Over Filler",
-    description:
-      "We prioritize real depth and accuracy over word count padding, which both readers and search engines can tell apart.",
+    desc: "We prioritize real depth and accuracy over word count padding, which both readers and search engines can tell apart.",
   },
   {
-    number: "003",
+    number: "03",
     title: "Citation-Ready Structuring",
-    description:
-      "Content is formatted so AI systems can lift facts and definitions cleanly and correctly.",
+    desc: "Content is formatted so AI systems can lift facts and definitions cleanly and correctly.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Expertise Signals Built In",
-    description:
-      "We strengthen author credibility and experience signals that build trust with readers and search engines alike.",
+    desc: "We strengthen author credibility and experience signals that build trust with readers and search engines alike.",
   },
   {
-    number: "005",
+    number: "05",
     title: "Data-Driven Execution",
-    description:
-      "Every recommendation is backed by real engagement and citation data, not assumptions about what content should work.",
+    desc: "Every recommendation is backed by real engagement and citation data, not assumptions about what content should work.",
   },
   {
-    number: "006",
+    number: "06",
     title: "Honest Reporting",
-    description:
-      "No agency can guarantee every citation or ranking, and we won't pretend otherwise — you get transparent, honest progress reports instead.",
+    desc: "No agency can guarantee every citation or ranking, and we won't pretend otherwise — you get transparent, honest progress reports instead.",
   },
 ];
 
@@ -152,112 +247,30 @@ const FAQS = [
 
 export default function AiContentOptimization() {
   return (
-    <>
-      <BpoHero
-        heading="AI Content Optimization Services in India"
-        description="Content must now work for both humans and AI systems. We create and refine content that ranks, gets cited, and drives real engagement."
-        img="/seO2.jpg"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/SEO.webp"
-              alt="AI content optimization at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Content Built for Readers and AI Alike
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              Content must now work for both humans and AI systems. We
-              create and refine content that ranks, gets cited, and drives
-              real engagement — not just word count for its own sake.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re an SEO services company based in Prayagraj, serving
-              clients locally across Allahabad and Uttar Pradesh, as well as
-              businesses across India, building content strategies for how
-              search actually works today.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our AI Content Optimization"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our AI Content Optimization Process"
-            description="We audit existing content first, then rewrite and structure it to genuinely help readers while staying easy for AI systems to cite."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="AI Content Optimization Company"
-          description="BizzBuzz Creations creates and refines content for businesses across India that ranks, gets cited by AI systems, and drives real engagement."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="SEO Services"
+      label="AI Content Optimization"
+      icon={PenTool}
+      description="Content must now work for both humans and AI systems. We create and refine content that ranks, gets cited, and drives real engagement."
+      heroTitle="AI Content Optimization Services in India"
+      heroDescription="Content must now work for both humans and AI systems. We create and refine content that ranks, gets cited, and drives real engagement."
+      capabilitiesHeading="Built for Businesses Ready for Content That Works Twice as Hard"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our AI Content Optimization"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Businesses Trust Us to Optimize Their Content"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Underperforming Content Into Content That Works"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Optimizing Content Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every content optimization engagement, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, refreshing content sized to each business's actual content library and goals. For businesses looking to optimize content beyond India, we deliver this work remotely, tracking engagement and citations across markets and time zones to the same standard regardless of location. Whether you're a startup writing your first optimized page or an enterprise maintaining a large content library, our approach starts with auditing what's actually underperforming and why."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready for Content That Actually Works for You?"
+      ctaText="Whether you need a full content audit and refresh, new content written to be AI-ready from the start, or ongoing maintenance for an existing library, the right approach depends on what's currently underperforming. Let's talk through your content and scope what optimization would actually involve."
+      ctaPrimaryText="Talk to a Content Optimization Specialist"
+      ctaSecondaryText="Get Your Free Content Audit"
+    />
   );
 }

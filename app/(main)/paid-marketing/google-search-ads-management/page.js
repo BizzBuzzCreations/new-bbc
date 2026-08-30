@@ -1,18 +1,12 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Target,
-  Search,
-  ShoppingBag,
-  Image as ImageIcon,
-  BarChart3,
-  Wallet,
+  Rocket,
+  Building2,
+  Building,
+  ShoppingCart,
+  Handshake,
+  RefreshCw,
 } from "lucide-react";
 
 export const metadata = {
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: Search,
-    heading: "Search Campaign Management",
-    description:
-      "We target keywords tied to real buyer intent, so your ads show up when someone is actively searching for what you offer.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups need leads fast without burning through limited budget on untested campaigns. We build Google Ads campaigns around a small, high-intent keyword set, letting startups test demand before scaling spend.",
   },
   {
-    icon: ShoppingBag,
-    heading: "Google Shopping Campaigns",
-    description:
-      "Product listing ads are structured and optimized to get your catalog in front of shoppers ready to buy, not just browse.",
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs often waste budget on broad campaigns that generate clicks but not customers. We manage Google Ads sized for SMB budgets, focused tightly on the searches most likely to convert.",
   },
   {
-    icon: ImageIcon,
-    heading: "Display & Remarketing Ads",
-    description:
-      "Visual display ads keep your brand visible across the web, while remarketing brings back visitors who didn't convert the first time.",
+    icon: Building,
+    title: "Enterprises & Large Organizations",
+    desc: "Enterprises need campaign management across multiple product lines and markets without losing control of spend. We run Google Ads at enterprise scale, structured for multi-campaign management and clear attribution.",
   },
   {
-    icon: Target,
-    heading: "Keyword & Bid Strategy",
-    description:
-      "We continuously refine keyword lists and bidding strategy, cutting wasted spend on searches that never convert.",
+    icon: ShoppingCart,
+    title: "Ecommerce & Retail Brands",
+    desc: "Ecommerce brands need shopping and search campaigns that actually move product, not just generate impressions. We build Google Shopping and search campaigns structured around your actual catalog and margins.",
   },
   {
-    icon: Wallet,
-    heading: "Budget & Bid Optimization",
-    description:
-      "Budgets get allocated toward campaigns and keywords that are actually driving results, adjusted as real data comes in.",
+    icon: Handshake,
+    title: "Agencies Needing a Google Ads Partner",
+    desc: "Marketing agencies need a specialist partner to execute Google Ads management for clients. We work as a white-label Google Ads partner, handling campaign execution agencies can present as their own.",
   },
   {
-    icon: BarChart3,
-    heading: "Transparent Performance Reporting",
-    description:
-      "You see exactly what your ad spend is generating — clicks, conversions, and cost per lead — not vague monthly summaries.",
+    icon: RefreshCw,
+    title: "Businesses Switching From Another Agency",
+    desc: "Businesses unhappy with underperforming Google Ads management need a careful account transition. We take over existing accounts, auditing what's working before making changes, rather than rebuilding blindly.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
+    number: "01",
+    title: "Search Campaign Management",
+    desc: "We target keywords tied to real buyer intent, so your ads show up when someone is actively searching for what you offer.",
+    ctaText: "Know Our Services",
+    services: [
+      "Search Campaign Setup",
+      "Keyword Research",
+      "Ad Copywriting",
+      "Negative Keyword Management",
+      "Bid Strategy Setup",
+      "Ad Extensions Setup",
+      "Search Campaign Optimization",
+      "Quality Score Improvement",
+    ],
+  },
+  {
+    number: "02",
+    title: "Google Shopping Campaigns",
+    desc: "Product listing ads are structured and optimized to get your catalog in front of shoppers ready to buy, not just browse.",
+    ctaText: "Know Our Services",
+    services: [
+      "Shopping Campaign Setup",
+      "Product Feed Optimization",
+      "Merchant Center Management",
+      "Product Group Structuring",
+      "Shopping Bid Optimization",
+      "Performance Max Setup",
+      "Product Title Optimization",
+      "Shopping ROAS Tracking",
+    ],
+  },
+  {
+    number: "03",
+    title: "Display & Remarketing Ads",
+    desc: "Visual display ads keep your brand visible across the web, while remarketing brings back visitors who didn't convert the first time.",
+    ctaText: "Know Our Services",
+    services: [
+      "Display Campaign Setup",
+      "Remarketing List Setup",
+      "Display Creative Design",
+      "Audience Targeting",
+      "Remarketing Campaign Optimization",
+      "Dynamic Remarketing",
+      "Display Placement Management",
+      "Frequency Capping",
+    ],
+  },
+  {
+    number: "04",
+    title: "Keyword & Bid Strategy",
+    desc: "We continuously refine keyword lists and bidding strategy, cutting wasted spend on searches that never convert.",
+    ctaText: "Know Our Services",
+    services: [
+      "Keyword List Refinement",
+      "Bid Strategy Optimization",
+      "Search Term Report Analysis",
+      "Wasted Spend Elimination",
+      "Match Type Optimization",
+      "Automated Bidding Setup",
+      "Budget Allocation Strategy",
+      "Bid Adjustment Management",
+    ],
+  },
+  {
+    number: "05",
+    title: "Budget & Bid Optimization",
+    desc: "Budgets get allocated toward campaigns and keywords that are actually driving results, adjusted as real data comes in.",
+    ctaText: "Know Our Services",
+    services: [
+      "Budget Allocation",
+      "Campaign-Level Optimization",
+      "Cost-Per-Conversion Tracking",
+      "Bid Cap Management",
+      "Daily Budget Monitoring",
+      "Spend Pacing",
+      "ROI-Based Reallocation",
+      "Budget Forecasting",
+    ],
+  },
+  {
+    number: "06",
+    title: "Transparent Performance Reporting",
+    desc: "You see exactly what your ad spend is generating — clicks, conversions, and cost per lead — not vague monthly summaries.",
+    ctaText: "Know Our Services",
+    services: [
+      "Conversion Tracking Setup",
+      "Custom Dashboard Reporting",
+      "Cost-Per-Lead Reporting",
+      "Weekly Performance Updates",
+      "Monthly Performance Reports",
+      "Call Tracking Integration",
+      "Attribution Reporting",
+      "ROI Reporting",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
     title: "Business & Keyword Research",
-    body: "We study your business, customers, and the exact search terms real buyers use before building a single campaign.",
+    desc: "We study your business, customers, and the exact search terms real buyers use before building a single campaign.",
   },
   {
+    number: "02",
     title: "Campaign & Ad Copy Setup",
-    body: "Search, shopping, and display campaigns get structured around buyer intent, with ad copy written to actually convert clicks.",
+    desc: "Search, shopping, and display campaigns get structured around buyer intent, with ad copy written to actually convert clicks.",
   },
   {
+    number: "03",
+    title: "Tracking & Conversion Setup",
+    desc: "We set up conversion tracking before launch, so every click and conversion is measured accurately from day one.",
+  },
+  {
+    number: "04",
     title: "Launch & Daily Optimization",
-    body: "Campaigns go live with daily monitoring — bids, budgets, and keywords get adjusted as real performance data comes in.",
+    desc: "Campaigns go live with daily monitoring — bids, budgets, and keywords get adjusted as real performance data comes in.",
   },
   {
+    number: "05",
+    title: "Testing & Refinement",
+    desc: "We test ad copy, landing pages, and targeting variations, doubling down on what's proving to convert.",
+  },
+  {
+    number: "06",
     title: "Scale & Report",
-    body: "Once a campaign proves itself, we scale spend into what's working and report honestly on cost per lead every month.",
+    desc: "Once a campaign proves itself, we scale spend into what's working and report honestly on cost per lead every month.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "Intent-First Targeting",
-    description:
-      "We target keywords tied to real buyer intent, so your budget reaches people actually ready to act.",
+    desc: "We target keywords tied to real buyer intent, so your budget reaches people actually ready to act.",
   },
   {
-    number: "002",
+    number: "02",
     title: "Full Google Ads Coverage",
-    description:
-      "Search, shopping, and display campaigns are all managed under one strategy, not siloed separately.",
+    desc: "Search, shopping, and display campaigns are all managed under one strategy, not siloed separately.",
   },
   {
-    number: "003",
+    number: "03",
     title: "Daily Optimization",
-    description:
-      "Campaigns don't sit untouched between monthly check-ins — we adjust bids and budgets as data comes in daily.",
+    desc: "Campaigns don't sit untouched between monthly check-ins — we adjust bids and budgets as data comes in daily.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Wasted Spend Reduction",
-    description:
-      "We continuously refine keyword lists and negative keywords to cut spend on searches that never convert.",
+    desc: "We continuously refine keyword lists and negative keywords to cut spend on searches that never convert.",
   },
   {
-    number: "005",
+    number: "05",
     title: "Transparent Numbers",
-    description:
-      "We're honest about what's working and what isn't, obsessed with getting you a better cost per lead every month.",
+    desc: "We're honest about what's working and what isn't, obsessed with getting you a better cost per lead every month.",
   },
   {
-    number: "006",
+    number: "06",
     title: "A Team, Not a Vendor",
-    description:
-      "Think of us less like a vendor and more like a hired paid marketing team pushing for your growth every day.",
+    desc: "Think of us less like a vendor and more like a hired paid marketing team pushing for your growth every day.",
   },
 ];
 
@@ -152,113 +247,30 @@ const FAQS = [
 
 export default function GoogleSearchAdsManagement() {
   return (
-    <>
-      <BpoHero
-        heading="Google & Search Ads Management in India"
-        description="Get found the moment someone is ready to buy. Our digital ads management services cover search, display, and shopping campaigns built around real buyer intent, so your business shows up when it matters most, not just when budgets allow."
-        img="/ads.webp"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/google%20ad.webp"
-              alt="Google and search ads management at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Show Up the Moment Someone's Ready to Buy
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              Get found the moment someone is ready to buy. Our digital ads
-              management services cover search, display, and shopping
-              campaigns built around real buyer intent, so your business
-              shows up when it matters most, not just when budgets allow.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re a paid marketing agency based in Prayagraj,
-              proudly serving businesses locally across Allahabad and Uttar
-              Pradesh, as well as brands across India, turning ad spend into
-              measurable business growth.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our Google & Search Ads Management"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our Google & Search Ads Process"
-            description="We research your business and buyer intent first, then build, launch, and continuously optimize campaigns around real conversions, not vanity clicks."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="Google & Search Ads Management Company"
-          description="BizzBuzz Creations manages Google search, shopping, and display campaigns for businesses across India, built around real buyer intent and tracked against real results."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="Paid Marketing"
+      label="Google & Search Ads Management"
+      icon={Target}
+      description="Get found the moment someone is ready to buy. Our digital ads management services cover search, display, and shopping campaigns built around real buyer intent, so your business shows up when it matters most, not just when budgets allow."
+      heroTitle="Google & Search Ads Management in India"
+      heroDescription="Get found the moment someone is ready to buy. Our digital ads management services cover search, display, and shopping campaigns built around real buyer intent, so your business shows up when it matters most, not just when budgets allow."
+      capabilitiesHeading="Built for Businesses Ready to Stop Wasting Ad Spend"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our Google Ads Management"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Businesses Trust Us to Run Their Google Ads"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Your Budget Into Real Conversions"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Running Google Ads Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we manage every Google Ads account, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, sizing campaigns to each business's actual budget and buyer intent. For businesses looking to run Google Ads beyond India, we manage accounts remotely, working across time zones and markets to deliver the same performance standard regardless of location. Whether you're a startup running your first campaign or an enterprise managing spend across multiple product lines, our approach starts with the same question: what does a genuinely good lead look like for your business."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready to Stop Paying for Clicks That Go Nowhere?"
+      ctaText="Whether you need a fresh Google Ads account built from scratch, a takeover of an underperforming campaign, or full coverage across search, shopping, and display, the right setup depends on your actual buyer intent and budget. Let's talk through your goals and scope what Google Ads management would actually involve."
+      ctaPrimaryText="Talk to a Google Ads Specialist"
+      ctaSecondaryText="Get Your Free Google Ads Audit"
+    />
   );
 }

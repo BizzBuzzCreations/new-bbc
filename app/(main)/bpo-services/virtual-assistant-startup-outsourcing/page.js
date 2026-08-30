@@ -1,18 +1,12 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
-  CalendarClock,
-  Mail,
-  Headset,
-  Users,
-  TrendingUp,
   UserCheck,
+  Rocket,
+  Building2,
+  Building,
+  ShoppingCart,
+  Handshake,
+  RefreshCw,
 } from "lucide-react";
 
 export const metadata = {
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: CalendarClock,
-    heading: "Scheduling & Calendar Management",
-    description:
-      "Meetings, follow-ups, and appointments get organized and confirmed, so founders aren't losing hours to calendar back-and-forth.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups need admin and scheduling help without hiring a full-time employee before revenue supports it. We provide flexible virtual assistant support that scales with founders, starting at a few hours a week and growing as needed.",
   },
   {
-    icon: Mail,
-    heading: "Email & Admin Support",
-    description:
-      "Inbox triage, routine correspondence, and admin paperwork get handled reliably, freeing you to focus on higher-value work.",
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs often need extra hands for admin, scheduling, and customer queries but not a full department. We size virtual assistant support for SMB budgets, handing off the routine work eating into your team's time.",
   },
   {
-    icon: Headset,
-    heading: "Customer Query Handling",
-    description:
-      "Your virtual assistant can field routine customer questions directly, escalating only what genuinely needs your attention.",
+    icon: Building,
+    title: "Enterprises & Large Organizations",
+    desc: "Enterprises sometimes need overflow admin support for specific teams or projects without expanding headcount. We provide virtual assistant capacity that plugs into existing enterprise workflows for defined periods or ongoing support.",
   },
   {
-    icon: TrendingUp,
-    heading: "Research & Data Support",
-    description:
-      "Market research, competitor tracking, and basic data compilation get handed off, so you're working from findings, not raw digging.",
+    icon: ShoppingCart,
+    title: "Ecommerce & Retail Brands",
+    desc: "Ecommerce founders juggle customer messages, order queries, and admin alongside running the business. We provide virtual assistants trained on your store and policies to handle routine customer and admin work.",
   },
   {
-    icon: Users,
-    heading: "Flexible Part-Time or Full-Time VAs",
-    description:
-      "Engage a virtual assistant for a few hours a week or full-time, matched to how much support your stage of growth actually needs.",
+    icon: Handshake,
+    title: "Agencies & Consultants",
+    desc: "Agencies and consultants need reliable support for scheduling, client admin, and research without a full hire. We work as an embedded virtual assistant partner, handling the admin load that eats into billable time.",
   },
   {
-    icon: UserCheck,
-    heading: "Scale-as-You-Grow Model",
-    description:
-      "Start small and add more virtual assistant hours or team members only once the workload genuinely demands it.",
+    icon: RefreshCw,
+    title: "Businesses Replacing a Departing Assistant",
+    desc: "Businesses losing an in-house assistant need continuity without a hiring gap. We can step in as an interim or ongoing virtual assistant, learning your systems quickly to keep operations running without disruption.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
+    number: "01",
+    title: "Scheduling & Calendar Management",
+    desc: "Meetings, follow-ups, and appointments get organized and confirmed, so founders aren't losing hours to calendar back-and-forth.",
+    ctaText: "Know Our Services",
+    services: [
+      "Calendar Management",
+      "Meeting Scheduling",
+      "Appointment Confirmations",
+      "Reminder Management",
+      "Travel Scheduling Support",
+      "Time Zone Coordination",
+      "Rescheduling Handling",
+      "Calendar Conflict Resolution",
+    ],
+  },
+  {
+    number: "02",
+    title: "Email & Admin Support",
+    desc: "Inbox triage, routine correspondence, and admin paperwork get handled reliably, freeing you to focus on higher-value work.",
+    ctaText: "Know Our Services",
+    services: [
+      "Inbox Management",
+      "Email Triage",
+      "Routine Correspondence",
+      "Document Preparation",
+      "Admin Paperwork Support",
+      "Filing & Organization",
+      "Travel Booking Support",
+      "Expense Tracking Support",
+    ],
+  },
+  {
+    number: "03",
+    title: "Customer Query Handling",
+    desc: "Your virtual assistant can field routine customer questions directly, escalating only what genuinely needs your attention.",
+    ctaText: "Know Our Services",
+    services: [
+      "Customer Query Response",
+      "Order Status Support",
+      "FAQ Handling",
+      "Live Chat Support",
+      "Email Support Handling",
+      "Escalation Management",
+      "Customer Follow-Ups",
+      "Feedback Collection",
+    ],
+  },
+  {
+    number: "04",
+    title: "Research & Data Support",
+    desc: "Market research, competitor tracking, and basic data compilation get handed off, so you're working from findings, not raw digging.",
+    ctaText: "Know Our Services",
+    services: [
+      "Market Research",
+      "Competitor Tracking",
+      "Data Compilation",
+      "Lead List Building",
+      "Report Preparation",
+      "Presentation Support",
+      "Spreadsheet Analysis",
+      "Fact-Checking Support",
+    ],
+  },
+  {
+    number: "05",
+    title: "Flexible Part-Time or Full-Time VAs",
+    desc: "Engage a virtual assistant for a few hours a week or full-time, matched to how much support your stage of growth actually needs.",
+    ctaText: "Know Our Services",
+    services: [
+      "Part-Time VA Engagement",
+      "Full-Time VA Engagement",
+      "Hourly Support Packages",
+      "Dedicated VA Assignment",
+      "Multi-VA Team Support",
+      "Flexible Hour Adjustments",
+      "Trial Engagements",
+      "Contract Flexibility",
+    ],
+  },
+  {
+    number: "06",
+    title: "Scale-as-You-Grow Model",
+    desc: "Start small and add more virtual assistant hours or team members only once the workload genuinely demands it.",
+    ctaText: "Know Our Services",
+    services: [
+      "Usage-Based Scaling",
+      "Additional VA Onboarding",
+      "Workload Reviews",
+      "Capacity Planning",
+      "Team Expansion Support",
+      "Seasonal Scaling",
+      "Role Specialization Over Time",
+      "Ongoing Needs Assessment",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
     title: "Understand Founder's Workload",
-    body: "We learn what's actually eating your time — scheduling, admin, support — before matching you with the right kind of help.",
+    desc: "We learn what's actually eating your time — scheduling, admin, support — before matching you with the right kind of help.",
   },
   {
+    number: "02",
     title: "Match the Right Virtual Assistant",
-    body: "We assign a virtual assistant suited to your tools, industry, and communication style, not a random generalist.",
+    desc: "We assign a virtual assistant suited to your tools, industry, and communication style, not a random generalist.",
   },
   {
+    number: "03",
+    title: "Tool & Access Setup",
+    desc: "We set up access to your calendar, inbox, and tools securely, so your assistant can start working without delays.",
+  },
+  {
+    number: "04",
     title: "Onboard & Set Communication Rhythm",
-    body: "We agree on check-ins, tools, and reporting cadence upfront, so handoffs feel smooth from week one.",
+    desc: "We agree on check-ins, tools, and reporting cadence upfront, so handoffs feel smooth from week one.",
   },
   {
+    number: "05",
+    title: "Live Support & Early Feedback",
+    desc: "Your assistant starts handling real tasks with close feedback in the first weeks, so the working style gets fine-tuned quickly.",
+  },
+  {
+    number: "06",
     title: "Scale Support as You Grow",
-    body: "Hours or team size increase only as your workload genuinely grows, not on a fixed schedule that outpaces your needs.",
+    desc: "Hours or team size increase only as your workload genuinely grows, not on a fixed schedule that outpaces your needs.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "Founder-Friendly Engagement",
-    description:
-      "Built for founders and small teams who need reliable help without hiring a full in-house role.",
+    desc: "Built for founders and small teams who need reliable help without hiring a full in-house role.",
   },
   {
-    number: "002",
+    number: "02",
     title: "No Long-Term Lock-In",
-    description:
-      "Start with what you need today and adjust hours or scope as your business changes.",
+    desc: "Start with what you need today and adjust hours or scope as your business changes.",
   },
   {
-    number: "003",
+    number: "03",
     title: "Trained on Startup Tools",
-    description:
-      "Our virtual assistants are comfortable with common startup tools — CRMs, calendars, project trackers — from day one.",
+    desc: "Our virtual assistants are comfortable with common startup tools — CRMs, calendars, project trackers — from day one.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Flexible Hours",
-    description:
-      "Engage support part-time or full-time, matched to your actual workload rather than a fixed package.",
+    desc: "Engage support part-time or full-time, matched to your actual workload rather than a fixed package.",
   },
   {
-    number: "005",
+    number: "05",
     title: "Direct Communication",
-    description:
-      "You work directly with your assigned virtual assistant, not through a rotating ticket queue.",
+    desc: "You work directly with your assigned virtual assistant, not through a rotating ticket queue.",
   },
   {
-    number: "006",
+    number: "06",
     title: "Affordable Entry Point",
-    description:
-      "A lower-cost way to get admin, scheduling, and support help without the overhead of a full-time hire.",
+    desc: "A lower-cost way to get admin, scheduling, and support help without the overhead of a full-time hire.",
   },
 ];
 
@@ -152,114 +247,30 @@ const FAQS = [
 
 export default function VirtualAssistantStartupOutsourcing() {
   return (
-    <>
-      <BpoHero
-        heading="Virtual Assistant & Startup Outsourcing in India"
-        description="Not every business needs a 50-seat floor. Hand off scheduling, support, and admin work through flexible remote team outsourcing, scaling up only when it's genuinely needed."
-        img="/BPO%20service.png"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/bpo-img.png"
-              alt="Virtual assistant and startup outsourcing at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Support Sized for Founders, Not Enterprises
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              Not every business needs a 50-seat floor. Our virtual assistant
-              services and startup outsourcing services let founders and
-              small teams hand off scheduling, support, and admin work
-              through flexible remote team outsourcing, scaling up only when
-              the workload genuinely demands it.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re a BPO and outsourcing partner based in Prayagraj,
-              serving startups locally across Allahabad and Uttar Pradesh, as
-              well as founders across India, taking their first step into
-              outsourcing.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our Virtual Assistant Services"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our Virtual Assistant Onboarding Process"
-            description="We match support to your actual workload, not a fixed package, so founders get exactly the help they need without overpaying for unused hours."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="Virtual Assistant & Startup Outsourcing Company"
-          description="BizzBuzz Creations supports founders and small teams across India with flexible virtual assistant and startup outsourcing services that scale as they grow."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="BPO Services"
+      label="Virtual Assistant & Startup Outsourcing"
+      icon={UserCheck}
+      description="Not every business needs a 50-seat floor. Hand off scheduling, support, and admin work through flexible remote team outsourcing, scaling up only when it's genuinely needed."
+      heroTitle="Virtual Assistant & Startup Outsourcing in India"
+      heroDescription="Not every business needs a 50-seat floor. Hand off scheduling, support, and admin work through flexible remote team outsourcing, scaling up only when it's genuinely needed."
+      capabilitiesHeading="Built for Founders Ready to Hand Off the Busywork"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our Virtual Assistant Support"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Founders Trust Us to Handle Their Admin Work"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Match You With the Right Virtual Assistant"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Supporting Founders Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we match every virtual assistant engagement, with the same care whether a founder is nearby or overseas. We work with startups, SMBs, and enterprises across India, sizing support to each founder's actual workload and tools. For founders looking to outsource admin work beyond India, we provide virtual assistant support remotely, working across time zones to deliver the same reliability regardless of location. Whether you're a solo founder handing off your first task or a growing team needing multiple assistants, our approach starts with understanding exactly what's eating your time."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready to Get Your Time Back?"
+      ctaText="Whether you need a few hours of admin support a week, a dedicated full-time virtual assistant, or a small team supporting multiple founders, the right setup depends on your actual workload. Let's talk through what's eating your time and scope what virtual assistant support would actually involve."
+      ctaPrimaryText="Talk to a Virtual Assistant Specialist"
+      ctaSecondaryText="Get Your Free VA Consultation"
+    />
   );
 }

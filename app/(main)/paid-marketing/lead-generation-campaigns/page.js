@@ -1,18 +1,12 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Users,
-  FileText,
-  Gift,
-  Target,
-  BarChart3,
-  PhoneCall,
+  Rocket,
+  Building2,
+  Building,
+  ShoppingCart,
+  Handshake,
+  RefreshCw,
 } from "lucide-react";
 
 export const metadata = {
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: Target,
-    heading: "Lead-Focused Targeting",
-    description:
-      "Campaigns are targeted at audiences most likely to actually need your product or service, not just anyone who might click.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups need a steady stream of leads to prove demand and fuel early sales conversations. We build lean lead generation campaigns focused on volume that's actually sales-ready, not just cheap form fills.",
   },
   {
-    icon: FileText,
-    heading: "High-Converting Landing Pages",
-    description:
-      "We design landing pages specifically built to capture leads, with clear offers and forms that don't lose visitors halfway through.",
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs often generate leads that never convert because targeting and offers aren't aligned to what buyers want. We build lead generation sized for SMB budgets, focused on quality over raw volume.",
   },
   {
-    icon: Gift,
-    heading: "Offer & Lead Magnet Strategy",
-    description:
-      "We craft offers and lead magnets genuinely valuable enough for prospects to hand over their contact details.",
+    icon: Building,
+    title: "Enterprises & Large Organizations",
+    desc: "Enterprises need lead generation that feeds into structured sales processes across multiple teams. We run lead generation at enterprise scale, integrated with CRM systems and sales handoff workflows.",
   },
   {
-    icon: PhoneCall,
-    heading: "Lead Form & Call Campaigns",
-    description:
-      "Lead form ads and call-focused campaigns make it effortless for interested prospects to reach out directly.",
+    icon: ShoppingCart,
+    title: "B2B & Service Businesses",
+    desc: "B2B and service businesses need leads that are genuinely ready for a sales conversation, not just curious clicks. We build offers and landing pages specifically designed to qualify leads before they reach your sales team.",
   },
   {
-    icon: BarChart3,
-    heading: "Lead Quality Tracking",
-    description:
-      "We track not just lead volume but lead quality, so your sales team spends time on prospects genuinely worth pursuing.",
+    icon: Handshake,
+    title: "Agencies Needing a Lead Gen Partner",
+    desc: "Agencies need a specialist partner for the campaign execution side of lead generation. We work as a white-label lead generation partner, delivering campaigns agencies can present as their own.",
   },
   {
-    icon: Users,
-    heading: "Nurture-Ready Lead Handoff",
-    description:
-      "Leads are captured and organized in a way that makes handoff to your sales or nurture process smooth, not chaotic.",
+    icon: RefreshCw,
+    title: "Businesses Getting Leads That Never Close",
+    desc: "Businesses generating leads that go nowhere need a structural fix to targeting and qualification, not more spend. We rebuild the targeting and offer strategy so leads actually match what your sales team can close.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
+    number: "01",
+    title: "Lead-Focused Targeting",
+    desc: "Campaigns are targeted at audiences most likely to actually need your product or service, not just anyone who might click.",
+    ctaText: "Know Our Services",
+    services: [
+      "Ideal Customer Profiling",
+      "Audience Targeting Setup",
+      "Intent-Based Targeting",
+      "B2B Targeting Strategy",
+      "Exclusion List Management",
+      "Lookalike Audience Building",
+      "Targeting Refinement",
+      "Audience Performance Analysis",
+    ],
+  },
+  {
+    number: "02",
+    title: "High-Converting Landing Pages",
+    desc: "We design landing pages specifically built to capture leads, with clear offers and forms that don't lose visitors halfway through.",
+    ctaText: "Know Our Services",
+    services: [
+      "Landing Page Design",
+      "Landing Page Copywriting",
+      "Form Optimization",
+      "Landing Page A/B Testing",
+      "Mobile Landing Page Optimization",
+      "Load Speed Optimization",
+      "Trust Signal Placement",
+      "Conversion Rate Optimization",
+    ],
+  },
+  {
+    number: "03",
+    title: "Offer & Lead Magnet Strategy",
+    desc: "We craft offers and lead magnets genuinely valuable enough for prospects to hand over their contact details.",
+    ctaText: "Know Our Services",
+    services: [
+      "Lead Magnet Development",
+      "Offer Strategy",
+      "Content Upgrade Creation",
+      "Discount & Incentive Structuring",
+      "Free Consultation Offers",
+      "Webinar & Demo Offers",
+      "Offer Testing",
+      "Offer Performance Analysis",
+    ],
+  },
+  {
+    number: "04",
+    title: "Lead Form & Call Campaigns",
+    desc: "Lead form ads and call-focused campaigns make it effortless for interested prospects to reach out directly.",
+    ctaText: "Know Our Services",
+    services: [
+      "Lead Form Ad Setup",
+      "Call Extension Setup",
+      "Click-to-Call Campaigns",
+      "Instant Form Integration",
+      "Call Tracking Setup",
+      "Lead Form Optimization",
+      "Multi-Step Form Setup",
+      "Form Abandonment Reduction",
+    ],
+  },
+  {
+    number: "05",
+    title: "Lead Quality Tracking",
+    desc: "We track not just lead volume but lead quality, so your sales team spends time on prospects genuinely worth pursuing.",
+    ctaText: "Know Our Services",
+    services: [
+      "Lead Scoring Setup",
+      "Lead Quality Reporting",
+      "Sales Feedback Loops",
+      "Cost-Per-Qualified-Lead Tracking",
+      "Lead Source Attribution",
+      "Conversion-to-Sale Tracking",
+      "Lead Quality Dashboards",
+      "Disqualified Lead Analysis",
+    ],
+  },
+  {
+    number: "06",
+    title: "Nurture-Ready Lead Handoff",
+    desc: "Leads are captured and organized in a way that makes handoff to your sales or nurture process smooth, not chaotic.",
+    ctaText: "Know Our Services",
+    services: [
+      "CRM Integration",
+      "Lead Routing Setup",
+      "Handoff Workflow Design",
+      "Lead Notification Automation",
+      "Sales Team Handoff Documentation",
+      "Nurture Sequence Handoff",
+      "Response Time Tracking",
+      "Handoff Process Auditing",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
     title: "Define a Good Lead",
-    body: "We learn exactly what a genuinely good, sales-ready lead looks like for your business before building any campaign.",
+    desc: "We learn exactly what a genuinely good, sales-ready lead looks like for your business before building any campaign.",
   },
   {
+    number: "02",
     title: "Offer & Landing Page Build",
-    body: "We craft an offer and landing page designed specifically to convert visitors into leads, not just generate traffic.",
+    desc: "We craft an offer and landing page designed specifically to convert visitors into leads, not just generate traffic.",
   },
   {
+    number: "03",
+    title: "Targeting & Campaign Setup",
+    desc: "We build campaigns around audiences most likely to match your ideal customer profile, not broad reach for its own sake.",
+  },
+  {
+    number: "04",
     title: "Launch & Real-Time Optimization",
-    body: "Campaigns launch with daily monitoring, adjusting targeting and creative as real lead quality data comes in.",
+    desc: "Campaigns launch with daily monitoring, adjusting targeting and creative as real lead quality data comes in.",
   },
   {
+    number: "05",
+    title: "Lead Handoff & Feedback Loop",
+    desc: "We set up handoff to your sales team and build a feedback loop so lead quality insights inform ongoing optimization.",
+  },
+  {
+    number: "06",
     title: "Scale & Report on Lead Quality",
-    body: "We scale what's generating genuinely good leads and report transparently on volume and quality every month.",
+    desc: "We scale what's generating genuinely good leads and report transparently on volume and quality every month.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "Calendar-Filling, Not Just Inbox-Filling",
-    description:
-      "Our lead generation marketing services are engineered to fill your calendar, not just your inbox with unqualified contacts.",
+    desc: "Our lead generation marketing services are engineered to fill your calendar, not just your inbox with unqualified contacts.",
   },
   {
-    number: "002",
+    number: "02",
     title: "Quality Over Volume",
-    description:
-      "We track lead quality alongside volume, so your sales team's time isn't wasted chasing dead ends.",
+    desc: "We track lead quality alongside volume, so your sales team's time isn't wasted chasing dead ends.",
   },
   {
-    number: "003",
+    number: "03",
     title: "Conversion-Built Landing Pages",
-    description:
-      "Landing pages are designed specifically to capture leads, with offers and forms that don't lose visitors halfway through.",
+    desc: "Landing pages are designed specifically to capture leads, with offers and forms that don't lose visitors halfway through.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Smart Targeting",
-    description:
-      "We combine smart targeting with offers that convert visitors into genuine, sales-ready leads.",
+    desc: "We combine smart targeting with offers that convert visitors into genuine, sales-ready leads.",
   },
   {
-    number: "005",
+    number: "05",
     title: "Transparent Numbers",
-    description:
-      "We're honest about lead volume and quality, obsessed with getting you a better cost per lead every month.",
+    desc: "We're honest about lead volume and quality, obsessed with getting you a better cost per lead every month.",
   },
   {
-    number: "006",
+    number: "06",
     title: "A Team, Not a Vendor",
-    description:
-      "Think of us less like a vendor and more like a hired paid marketing team pushing for your growth every day.",
+    desc: "Think of us less like a vendor and more like a hired paid marketing team pushing for your growth every day.",
   },
 ];
 
@@ -152,113 +247,30 @@ const FAQS = [
 
 export default function LeadGenerationCampaigns() {
   return (
-    <>
-      <BpoHero
-        heading="Lead Generation Campaigns in India"
-        description="Our lead generation marketing services are engineered to fill your calendar, not just your inbox. We combine smart targeting, landing pages, and offers that convert visitors into genuine, sales-ready leads."
-        img="/ads.webp"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/lead%20generation.webp"
-              alt="Lead generation campaigns at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Engineered to Fill Your Calendar, Not Just Your Inbox
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              Our lead generation marketing services are engineered to fill
-              your calendar, not just your inbox. We combine smart
-              targeting, landing pages, and offers that convert visitors
-              into genuine, sales-ready leads.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re a paid marketing agency based in Prayagraj,
-              proudly serving businesses locally across Allahabad and Uttar
-              Pradesh, as well as brands across India, focused on lead
-              quality, not just lead count.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our Lead Generation Campaigns"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our Lead Generation Process"
-            description="We define what a genuinely good lead looks like for your business first, then build, launch, and optimize campaigns specifically around that outcome."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="Lead Generation Campaign Company"
-          description="BizzBuzz Creations runs lead generation campaigns for businesses across India, built to fill your calendar with genuine, sales-ready leads."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="Paid Marketing"
+      label="Lead Generation Campaigns"
+      icon={Users}
+      description="Our lead generation marketing services are engineered to fill your calendar, not just your inbox. We combine smart targeting, landing pages, and offers that convert visitors into genuine, sales-ready leads."
+      heroTitle="Lead Generation Campaigns in India"
+      heroDescription="Our lead generation marketing services are engineered to fill your calendar, not just your inbox. We combine smart targeting, landing pages, and offers that convert visitors into genuine, sales-ready leads."
+      capabilitiesHeading="Built for Businesses Ready for Leads That Actually Close"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our Lead Generation Campaigns"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Businesses Trust Us to Run Their Lead Generation"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Visitors Into Sales-Ready Leads"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Generating Leads Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we build every lead generation campaign, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, sizing campaigns to each business's actual sales process and lead quality bar. For businesses looking to run lead generation beyond India, we manage campaigns remotely, tracking lead quality across markets and time zones to the same standard regardless of location. Whether you're a startup filling your first sales pipeline or an enterprise feeding leads into multiple sales teams, our approach starts with defining what a genuinely good lead looks like for you."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready to Fill Your Calendar, Not Just Your Inbox?"
+      ctaText="Whether you need a fresh lead generation campaign built from scratch, better-qualified leads from your current channels, or a full-funnel program feeding your sales team, the right approach depends on what a good lead looks like for your business. Let's talk through your sales process and scope what lead generation would actually involve."
+      ctaPrimaryText="Talk to a Lead Generation Specialist"
+      ctaSecondaryText="Get Your Free Lead Gen Consultation"
+    />
   );
 }

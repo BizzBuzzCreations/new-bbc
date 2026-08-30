@@ -1,18 +1,12 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Workflow,
-  Plug,
-  FileText,
-  Bell,
+  Rocket,
+  Building2,
+  Building,
+  ShoppingCart,
+  Handshake,
   RefreshCw,
-  BarChart3,
 } from "lucide-react";
 
 export const metadata = {
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: Plug,
-    heading: "Tool & System Integration",
-    description:
-      "We connect your CRM, spreadsheets, and other tools so data flows automatically between systems instead of manual re-entry.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups often run on manual follow-ups and spreadsheets that don't scale with growth. We build lightweight AI automation early, so founders spend time on decisions rather than repetitive coordination.",
   },
   {
-    icon: FileText,
-    heading: "Automated Reports & Approvals",
-    description:
-      "Recurring reports and approval workflows run automatically, freeing your team from chasing signatures and compiling data manually.",
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs frequently have processes that grew organically and now cost real hours weekly. We build workflow automation sized for SMB budgets, targeting the specific bottlenecks costing you the most time.",
   },
   {
-    icon: Bell,
-    heading: "Automated Follow-Ups",
-    description:
-      "Leads and customers get timely automated follow-ups, so opportunities don't quietly slip through the cracks.",
+    icon: Building,
+    title: "Enterprises & Large Organizations",
+    desc: "Enterprises need automation that integrates cleanly across departments without disrupting existing systems. We design AI-powered automation for enterprise-scale workflows, built to work alongside your current tools.",
   },
   {
-    icon: Workflow,
-    heading: "AI-Powered Workflow Design",
-    description:
-      "We use AI to identify where a workflow can be automated intelligently, not just scripted rigidly step by step.",
+    icon: ShoppingCart,
+    title: "Ecommerce & Retail Brands",
+    desc: "Ecommerce operations involve constant order, inventory, and follow-up handling that's ripe for automation. We automate order processing and customer follow-ups intelligently, not with rigid, brittle scripts.",
+  },
+  {
+    icon: Handshake,
+    title: "Agencies & Operations Partners",
+    desc: "Agencies managing repetitive client deliverables need internal efficiency to stay profitable. We build AI-powered automation for agency operations, freeing billable time from admin work.",
   },
   {
     icon: RefreshCw,
-    heading: "Error Reduction & Consistency",
-    description:
-      "Automated processes cut down the human error and inconsistency that creeps into manual, repetitive work at volume.",
-  },
-  {
-    icon: BarChart3,
-    heading: "Ongoing Monitoring & Refinement",
-    description:
-      "We monitor automated workflows after launch and refine them as your processes or volume changes over time.",
+    title: "Businesses Replacing Rigid, Broken Automations",
+    desc: "Businesses with brittle scripts that break on edge cases need a smarter approach. We rebuild automation using AI-powered decision-making, so it handles real-world variation, not just the happy path.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
+    number: "01",
+    title: "Tool & System Integration",
+    desc: "We connect your CRM, spreadsheets, and other tools so data flows automatically between systems instead of manual re-entry.",
+    ctaText: "Know Our Services",
+    services: [
+      "CRM Integration",
+      "Spreadsheet Integration",
+      "API-Based Integrations",
+      "Third-Party Tool Connectors",
+      "Zapier/Make Workflow Setup",
+      "Database Synchronization",
+      "Cross-Platform Data Sync",
+      "Integration Monitoring",
+    ],
+  },
+  {
+    number: "02",
+    title: "Automated Reports & Approvals",
+    desc: "Recurring reports and approval workflows run automatically, freeing your team from chasing signatures and compiling data manually.",
+    ctaText: "Know Our Services",
+    services: [
+      "Automated Report Generation",
+      "Approval Workflow Automation",
+      "Digital Sign-Off Systems",
+      "Scheduled Reporting",
+      "Report Distribution Automation",
+      "Multi-Level Approval Chains",
+      "Report Template Design",
+      "Approval Audit Trails",
+    ],
+  },
+  {
+    number: "03",
+    title: "Automated Follow-Ups",
+    desc: "Leads and customers get timely automated follow-ups, so opportunities don't quietly slip through the cracks.",
+    ctaText: "Know Our Services",
+    services: [
+      "Automated Follow-Up Sequences",
+      "Lead Nurture Automation",
+      "Reminder Automation",
+      "Missed-Response Triggers",
+      "Follow-Up Timing Optimization",
+      "Multi-Channel Follow-Up",
+      "Follow-Up Performance Tracking",
+      "Escalation Rules",
+    ],
+  },
+  {
+    number: "04",
+    title: "AI-Powered Workflow Design",
+    desc: "We use AI to identify where a workflow can be automated intelligently, not just scripted rigidly step by step.",
+    ctaText: "Know Our Services",
+    services: [
+      "AI Workflow Mapping",
+      "Intelligent Decision Rules",
+      "Exception Handling Logic",
+      "AI-Assisted Routing",
+      "Dynamic Workflow Adjustments",
+      "Workflow Simulation Testing",
+      "Edge Case Handling",
+      "Workflow Documentation",
+    ],
+  },
+  {
+    number: "05",
+    title: "Error Reduction & Consistency",
+    desc: "Automated processes cut down the human error and inconsistency that creeps into manual, repetitive work at volume.",
+    ctaText: "Know Our Services",
+    services: [
+      "Data Validation Rules",
+      "Duplicate Detection",
+      "Error Alerting",
+      "Consistency Audits",
+      "Exception Reporting",
+      "Quality Control Checks",
+      "Audit Trail Logging",
+      "Process Standardization",
+    ],
+  },
+  {
+    number: "06",
+    title: "Ongoing Monitoring & Refinement",
+    desc: "We monitor automated workflows after launch and refine them as your processes or volume changes over time.",
+    ctaText: "Know Our Services",
+    services: [
+      "Workflow Performance Monitoring",
+      "Automation Health Checks",
+      "Process Refinement",
+      "Volume-Based Scaling",
+      "Automation Expansion Planning",
+      "Change Management Support",
+      "Quarterly Automation Reviews",
+      "Continuous Improvement Cycles",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
     title: "Understanding Your Workflow",
-    body: "We learn where your team spends repetitive hours and where approvals, reports, or follow-ups tend to get stuck.",
+    desc: "We learn where your team spends repetitive hours and where approvals, reports, or follow-ups tend to get stuck.",
   },
   {
+    number: "02",
     title: "Building the Right Automation",
-    body: "A custom automation gets built around that exact gap, connecting the tools you already use, not replacing them.",
+    desc: "A custom automation gets built around that exact gap, connecting the tools you already use, not replacing them.",
   },
   {
+    number: "03",
+    title: "AI Decision Logic Design",
+    desc: "We design the AI-powered decision rules that let the automation handle real-world variation, not just a rigid script.",
+  },
+  {
+    number: "04",
     title: "Testing With Your Team",
-    body: "Every automation is tested with the people who'll actually use it before it goes live, so it fits real workflows.",
+    desc: "Every automation is tested with the people who'll actually use it before it goes live, so it fits real workflows.",
   },
   {
+    number: "05",
+    title: "Live Pilot & Feedback",
+    desc: "The automation runs on a limited scope first, with close feedback so edge cases get caught before a full rollout.",
+  },
+  {
+    number: "06",
     title: "Launch, Refine & Monitor",
-    body: "We stay involved after launch, refining automation based on real usage instead of leaving it running blind.",
+    desc: "We stay involved after launch, refining automation based on real usage instead of leaving it running blind.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "Practical, Not Generic",
-    description:
-      "We don't sell generic automation software off a shelf — every workflow is built for what your specific business actually needs.",
+    desc: "We don't sell generic automation software off a shelf — every workflow is built for what your specific business actually needs.",
   },
   {
-    number: "002",
+    number: "02",
     title: "Built Around Your Real Workflow",
-    description:
-      "We start by understanding how your business actually runs before building any automation.",
+    desc: "We start by understanding how your business actually runs before building any automation.",
   },
   {
-    number: "003",
+    number: "03",
     title: "Connects Your Existing Tools",
-    description:
-      "Automation integrates with your CRM, spreadsheets, and existing tools instead of requiring you to switch systems.",
+    desc: "Automation integrates with your CRM, spreadsheets, and existing tools instead of requiring you to switch systems.",
   },
   {
-    number: "004",
+    number: "04",
     title: "AI-Powered, Not Just Rigid Scripts",
-    description:
-      "We use AI to handle workflow decisions intelligently, not just rigid, brittle step-by-step scripts.",
+    desc: "We use AI to handle workflow decisions intelligently, not just rigid, brittle step-by-step scripts.",
   },
   {
-    number: "005",
+    number: "05",
     title: "Tested With Your Team",
-    description:
-      "Every automation is tested with your team before launch, not handed over as an untested demo.",
+    desc: "Every automation is tested with your team before launch, not handed over as an untested demo.",
   },
   {
-    number: "006",
+    number: "06",
     title: "Refined After Launch",
-    description:
-      "We don't disappear after handoff — every system is refined based on real usage, not left running blind.",
+    desc: "We don't disappear after handoff — every system is refined based on real usage, not left running blind.",
   },
 ];
 
@@ -152,112 +247,30 @@ const FAQS = [
 
 export default function WorkflowProcessAutomation() {
   return (
-    <>
-      <BpoHero
-        heading="Workflow & Process Automation in India"
-        description="Our AI workflow automation connects your tools together, so approvals, reports, follow-ups, and data entry run without anyone chasing them manually."
-        img="/aiservice.webp"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/image-4.webp"
-              alt="Workflow and process automation at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Stop Chasing Approvals, Reports, and Follow-Ups
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              Our AI workflow automation connects your tools together, so
-              approvals, reports, follow-ups, and data entry run without
-              anyone chasing them manually.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re an AI solutions company based in Prayagraj,
-              helping businesses locally across Allahabad and Uttar
-              Pradesh, as well as across India, automate the repetitive
-              work that quietly eats up hours every week.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our Workflow Automation"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our Workflow Automation Process"
-            description="We're not a company that hands you a demo and disappears. Every automation is built around your real workflow, tested with your team, and refined after launch."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="Workflow & Process Automation Company"
-          description="BizzBuzz Creations builds AI-powered workflow automation for businesses across India, connecting existing tools so repetitive work runs without manual chasing."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="AI Solutions"
+      label="Workflow & Process Automation"
+      icon={Workflow}
+      description="Our AI workflow automation connects your tools together, so approvals, reports, follow-ups, and data entry run without anyone chasing them manually."
+      heroTitle="Workflow & Process Automation in India"
+      heroDescription="Our AI workflow automation connects your tools together, so approvals, reports, follow-ups, and data entry run without anyone chasing them manually."
+      capabilitiesHeading="Built for Businesses Ready to Stop Chasing Manual Work"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our Workflow Automation"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Businesses Trust Us to Automate Their Workflows"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Manual Chasing Into Automated Workflows"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Automating Workflows Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we build every workflow automation project, with the same care whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, automating workflows sized to each business's actual volume and existing tools. For businesses looking to automate workflows beyond India, we deliver this work remotely, working across time zones to deliver the same reliability standard regardless of location. Whether you're a startup automating your first follow-up sequence or an enterprise automating cross-department approvals, our approach starts with mapping where your team actually loses time today."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready to Stop Chasing Approvals and Follow-Ups?"
+      ctaText="Whether you need a single repetitive process automated, a full AI-powered workflow rebuilt around intelligent decisions, or a replacement for brittle automation that keeps breaking, the right approach depends on how your process actually runs today. Let's talk through your workflow and scope what AI-powered automation would actually involve."
+      ctaPrimaryText="Talk to an Automation Specialist"
+      ctaSecondaryText="Get Your Free Automation Consultation"
+    />
   );
 }

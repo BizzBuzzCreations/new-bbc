@@ -1,18 +1,12 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Target,
-  Compass,
-  Map,
-  Users,
-  BarChart3,
-  ClipboardCheck,
+  Rocket,
+  Building2,
+  Building,
+  ShoppingCart,
+  Handshake,
+  RefreshCw,
 } from "lucide-react";
 
 export const metadata = {
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: Compass,
-    heading: "Goal & Vision Clarification",
-    description:
-      "We help translate a broad ambition into specific, measurable goals, so your team knows exactly what success actually looks like.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups often move fast without a clear strategic roadmap behind the momentum. We help early-stage founders define concrete goals and a practical roadmap, so growth is intentional, not just reactive.",
   },
   {
-    icon: Map,
-    heading: "Market & Competitor Mapping",
-    description:
-      "We map your market position and competitors clearly, so strategy is built on where you actually stand, not assumptions.",
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs often operate on instinct once past the early stage, without a documented strategy. We build strategy engagements sized for SMB budgets, giving growing businesses real clarity on where to focus.",
   },
   {
-    icon: Target,
-    heading: "Strategic Roadmap Development",
-    description:
-      "Big ambitions get broken down into a practical, sequenced roadmap of executable steps, not a vague vision statement.",
+    icon: Building,
+    title: "Enterprises & Large Organizations",
+    desc: "Enterprises need strategy that aligns multiple departments and stakeholders around shared goals. We run strategy engagements at enterprise scale, built to align leadership across business units.",
   },
   {
-    icon: Users,
-    heading: "Stakeholder Alignment",
-    description:
-      "We help align leadership and teams around the strategy, so execution doesn't stall on internal disagreement.",
+    icon: ShoppingCart,
+    title: "Ecommerce & Retail Brands",
+    desc: "Ecommerce brands scaling fast often lack a strategy for where to expand next. We build growth and market strategy specifically for retail and ecommerce brands navigating expansion decisions.",
   },
   {
-    icon: BarChart3,
-    heading: "KPI & Milestone Setting",
-    description:
-      "Clear KPIs and milestones get set so progress is measurable, not just a feeling that things are moving forward.",
+    icon: Handshake,
+    title: "Family Businesses & Ownership Transitions",
+    desc: "Family businesses navigating leadership transitions need outside clarity on strategic direction. We provide strategy consulting that helps family businesses formalize direction during ownership changes.",
   },
   {
-    icon: ClipboardCheck,
-    heading: "Strategy Review & Adjustment",
-    description:
-      "We revisit the strategy periodically and adjust it as real market conditions and results come in, not once and forget.",
+    icon: RefreshCw,
+    title: "Businesses Pivoting or Repositioning",
+    desc: "Businesses needing to pivot after market shifts need a structured approach, not guesswork. We help businesses reassess their market position and build a new strategic roadmap around the pivot.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
+    number: "01",
+    title: "Goal & Vision Clarification",
+    desc: "We help translate a broad ambition into specific, measurable goals, so your team knows exactly what success actually looks like.",
+    ctaText: "Know Our Services",
+    services: [
+      "Vision Workshops",
+      "Goal Definition",
+      "Success Metric Setting",
+      "Leadership Alignment Sessions",
+      "Strategic Priority Mapping",
+      "Mission Clarification",
+      "Long-Term Vision Planning",
+      "Goal Documentation",
+    ],
+  },
+  {
+    number: "02",
+    title: "Market & Competitor Mapping",
+    desc: "We map your market position and competitors clearly, so strategy is built on where you actually stand, not assumptions.",
+    ctaText: "Know Our Services",
+    services: [
+      "Market Analysis",
+      "Competitor Mapping",
+      "Positioning Analysis",
+      "Market Share Assessment",
+      "Industry Trend Research",
+      "SWOT Analysis",
+      "Customer Landscape Mapping",
+      "Competitive Benchmarking",
+    ],
+  },
+  {
+    number: "03",
+    title: "Strategic Roadmap Development",
+    desc: "Big ambitions get broken down into a practical, sequenced roadmap of executable steps, not a vague vision statement.",
+    ctaText: "Know Our Services",
+    services: [
+      "Roadmap Development",
+      "Milestone Sequencing",
+      "Resource Planning",
+      "Timeline Development",
+      "Priority Sequencing",
+      "Risk Identification",
+      "Roadmap Documentation",
+      "Execution Planning",
+    ],
+  },
+  {
+    number: "04",
+    title: "Stakeholder Alignment",
+    desc: "We help align leadership and teams around the strategy, so execution doesn't stall on internal disagreement.",
+    ctaText: "Know Our Services",
+    services: [
+      "Stakeholder Workshops",
+      "Leadership Alignment Sessions",
+      "Communication Planning",
+      "Buy-In Building",
+      "Conflict Resolution Facilitation",
+      "Cross-Team Alignment",
+      "Change Management Support",
+      "Alignment Documentation",
+    ],
+  },
+  {
+    number: "05",
+    title: "KPI & Milestone Setting",
+    desc: "Clear KPIs and milestones get set so progress is measurable, not just a feeling that things are moving forward.",
+    ctaText: "Know Our Services",
+    services: [
+      "KPI Development",
+      "Milestone Definition",
+      "Performance Dashboard Setup",
+      "Tracking Framework Design",
+      "Goal-to-KPI Mapping",
+      "Reporting Cadence Planning",
+      "Accountability Structuring",
+      "Progress Review Frameworks",
+    ],
+  },
+  {
+    number: "06",
+    title: "Strategy Review & Adjustment",
+    desc: "We revisit the strategy periodically and adjust it as real market conditions and results come in, not once and forget.",
+    ctaText: "Know Our Services",
+    services: [
+      "Quarterly Strategy Reviews",
+      "Performance-Based Adjustments",
+      "Market Condition Reassessment",
+      "Strategy Refresh Workshops",
+      "Course Correction Planning",
+      "Ongoing Advisory Sessions",
+      "Annual Strategy Reset",
+      "Long-Term Strategy Support",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
     title: "Business Audit & Discovery",
-    body: "We start with a clear-eyed look at what's actually working in your business and what's holding it back, before recommending anything.",
+    desc: "We start with a clear-eyed look at what's actually working in your business and what's holding it back, before recommending anything.",
   },
   {
+    number: "02",
+    title: "Market & Competitive Analysis",
+    desc: "We analyze your market position and competitors, so the strategy is grounded in where you actually stand today.",
+  },
+  {
+    number: "03",
     title: "Strategy & Roadmap",
-    body: "Goals, market position, and a practical roadmap get mapped out — built around your industry and real numbers, not a generic playbook.",
+    desc: "Goals, market position, and a practical roadmap get mapped out — built around your industry and real numbers, not a generic playbook.",
   },
   {
+    number: "04",
+    title: "Stakeholder Alignment",
+    desc: "We align leadership and key teams around the strategy before execution begins, so implementation doesn't stall on disagreement.",
+  },
+  {
+    number: "05",
     title: "Hands-On Implementation",
-    body: "We stay involved through execution, not just handing over a strategy deck and disappearing after the first meeting.",
+    desc: "We stay involved through execution, not just handing over a strategy deck and disappearing after the first meeting.",
   },
   {
+    number: "06",
     title: "Ongoing Review & Course Correction",
-    body: "We're direct about what's working and honest about what isn't, adjusting the plan as real results come in.",
+    desc: "We're direct about what's working and honest about what isn't, adjusting the plan as real results come in.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "No Generic Playbooks",
-    description:
-      "Every recommendation is built around your industry, your team, and your real numbers — not a template pulled off a shelf.",
+    desc: "Every recommendation is built around your industry, your team, and your real numbers — not a template pulled off a shelf.",
   },
   {
-    number: "002",
+    number: "02",
     title: "We Stay Involved",
-    description:
-      "From the first audit to final execution, we stay by your side long after the first meeting, not just handing over a strategy deck.",
+    desc: "From the first audit to final execution, we stay by your side long after the first meeting, not just handing over a strategy deck.",
   },
   {
-    number: "003",
+    number: "03",
     title: "Direct & Honest",
-    description:
-      "We're direct about what's working, honest about what isn't, and focused on outcomes you can actually measure.",
+    desc: "We're direct about what's working, honest about what isn't, and focused on outcomes you can actually measure.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Outcomes You Can Measure",
-    description:
-      "Every engagement is focused on results you can point to, not just reports and recommendations that sit unread.",
+    desc: "Every engagement is focused on results you can point to, not just reports and recommendations that sit unread.",
   },
   {
-    number: "005",
+    number: "05",
     title: "A Team, Not Outside Consultants",
-    description:
-      "Think of us less like outside consultants and more like a hired team that's genuinely invested in your growth.",
+    desc: "Think of us less like outside consultants and more like a hired team that's genuinely invested in your growth.",
   },
   {
-    number: "006",
+    number: "06",
     title: "Local Roots, India-Wide Reach",
-    description:
-      "Born and based in Prayagraj, we understand what it takes to build a business here as well as in the metros.",
+    desc: "Born and based in Prayagraj, we understand what it takes to build a business here as well as in the metros.",
   },
 ];
 
@@ -152,113 +247,30 @@ const FAQS = [
 
 export default function BusinessStrategyConsulting() {
   return (
-    <>
-      <BpoHero
-        heading="Business Strategy Consulting in India"
-        description="Every strong business runs on a clear plan, not guesswork. As a dedicated strategy consulting partner, we help you define your goals, map your market, and build a roadmap that turns big ambitions into practical, executable steps."
-        img="/businesscons.webp"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/pie%20chart%20showing%20financial%20growth.png"
-              alt="Business strategy consulting at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              A Clear Plan, Not Guesswork
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              Every strong business runs on a clear plan, not guesswork. As
-              a dedicated strategy consulting partner, we help you define
-              your goals, map your market, and build a roadmap that turns
-              big ambitions into practical, executable steps.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re a business consulting firm based in Prayagraj,
-              helping founders and growing companies locally across
-              Allahabad and Uttar Pradesh, as well as across India, turn
-              strategy into real, measurable results.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our Business Strategy Consulting"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our Business Strategy Process"
-            description="Anyone can hand you a strategy deck. Not everyone will sit with you and make sure it actually works. Our four-step process stays involved from the first audit to final execution."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="Business Strategy Consulting Firm"
-          description="BizzBuzz Creations is a business strategy consulting firm helping founders and growing companies across India turn ambition into a practical, executable roadmap."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="Business Consultancy"
+      label="Business Strategy Consulting"
+      icon={Target}
+      description="Every strong business runs on a clear plan, not guesswork. As a dedicated strategy consulting partner, we help you define your goals, map your market, and build a roadmap that turns big ambitions into practical, executable steps."
+      heroTitle="Business Strategy Consulting in India"
+      heroDescription="Every strong business runs on a clear plan, not guesswork. As a dedicated strategy consulting partner, we help you define your goals, map your market, and build a roadmap that turns big ambitions into practical, executable steps."
+      capabilitiesHeading="Built for Businesses Ready to Move With a Plan, Not Just Momentum"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our Business Strategy Consulting"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Businesses Trust Us to Build Their Strategy"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Ambition Into a Working Strategy"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Advising Businesses Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every strategy engagement, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, building strategy sized to each business's actual goals and market position. For businesses looking to work with us beyond India, we deliver strategy consulting remotely, working across time zones to the same standard regardless of location. Whether you're a founder clarifying your first roadmap or an enterprise aligning multiple business units, our approach starts with the same question: what does your business actually need this strategy to achieve."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready for a Strategy You Can Actually Execute?"
+      ctaText="Whether you need a full strategic roadmap built from scratch, help aligning leadership around a shared direction, or ongoing strategy review as your market shifts, a generic playbook was never going to get you there. Let's talk through your business and scope what a strategy engagement would actually involve."
+      ctaPrimaryText="Talk to a Business Strategy Specialist"
+      ctaSecondaryText="Get Your Free Strategy Consultation"
+    />
   );
 }

@@ -1,18 +1,12 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
-  Workflow,
-  Mic,
   Bot,
-  UserCheck,
-  BarChart3,
-  ShieldCheck,
+  Rocket,
+  Building2,
+  Building,
+  ShoppingCart,
+  Handshake,
+  RefreshCw,
 } from "lucide-react";
 
 export const metadata = {
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: Workflow,
-    heading: "Smart Call Routing",
-    description:
-      "Calls get directed to the right agent or queue automatically based on the query type, so customers reach someone useful faster instead of bouncing between transfers.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups need customer support that scales without hiring a full floor on day one. We layer AI call routing and chatbot support on a lean human team, letting early-stage businesses handle growing call volume without a large upfront hire.",
   },
   {
-    icon: Mic,
-    heading: "Live Call Transcription",
-    description:
-      "Real-time transcription gives supervisors and agents a searchable record of every call, making QA, training, and dispute resolution far less painful.",
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs often can't justify a dedicated call center but still need reliable customer response. We combine AI-powered triage with a small trained team sized for SMB budgets, giving growing businesses enterprise-style responsiveness without enterprise costs.",
   },
   {
-    icon: Bot,
-    heading: "AI Chatbot Customer Support",
-    description:
-      "Chatbots handle repetitive, common questions instantly around the clock, freeing your agents to focus on calls that actually need a human touch.",
+    icon: Building,
+    title: "Enterprises & Large Organizations",
+    desc: "Enterprises need call center operations that handle high volume across multiple departments reliably. We provide AI-powered BPO solutions built for high call volume, strict compliance requirements, and integration with existing CRM and telephony systems.",
   },
   {
-    icon: UserCheck,
-    heading: "Seamless Human Handoff",
-    description:
-      "When AI hits its limit, the conversation hands off to a trained agent with full context, so customers never have to repeat themselves.",
+    icon: ShoppingCart,
+    title: "Ecommerce & Retail Brands",
+    desc: "Ecommerce brands face support spikes tied to sales events and shipping delays. We combine AI chatbot triage with trained agents to handle order queries and returns at scale without service quality dropping during peak periods.",
   },
   {
-    icon: BarChart3,
-    heading: "Sentiment & Quality Monitoring",
-    description:
-      "AI-assisted sentiment analysis flags frustrated callers and quality issues early, so problems get caught before they become churn.",
+    icon: Handshake,
+    title: "Agencies & Outsourcing Partners",
+    desc: "Agencies managing client support needs a reliable delivery partner behind the scenes. We work as a white-label AI-powered BPO partner, handling call center operations agencies can present as their own without building internal capacity.",
   },
   {
-    icon: ShieldCheck,
-    heading: "Data Security & Compliance",
-    description:
-      "Call data and transcripts are handled under strict access controls and NDA-backed processes, in line with India's DPDP Act, 2023.",
+    icon: RefreshCw,
+    title: "Businesses Switching From Another BPO Provider",
+    desc: "Businesses stuck with an underperforming BPO vendor need a careful transition, not a risky cutover. We handle structured handovers from your existing provider, preserving scripts, data, and continuity while upgrading to AI-powered support.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
-    title: "Requirement & Workflow Mapping",
-    body: "We study your current call flows and pain points to decide exactly where AI genuinely helps and where human judgment stays essential.",
+    number: "01",
+    title: "Smart Call Routing & Triage",
+    desc: "Calls get directed to the right agent or queue automatically based on the query type, so customers reach someone useful faster instead of bouncing between transfers.",
+    ctaText: "Know Our Services",
+    services: [
+      "Smart Call Routing",
+      "IVR Configuration",
+      "Skill-Based Routing",
+      "Queue Management",
+      "Call Prioritization",
+      "Multi-Channel Routing",
+      "Overflow Handling",
+      "Routing Analytics",
+    ],
   },
   {
+    number: "02",
+    title: "AI Transcription & Quality Monitoring",
+    desc: "Real-time transcription gives supervisors and agents a searchable record of every call, making QA, training, and dispute resolution far less painful.",
+    ctaText: "Know Our Services",
+    services: [
+      "Live Call Transcription",
+      "Sentiment Analysis",
+      "Call Recording",
+      "QA Scoring",
+      "Compliance Monitoring",
+      "Keyword Spotting",
+      "Speech Analytics",
+      "Dispute Resolution Support",
+    ],
+  },
+  {
+    number: "03",
+    title: "AI Chatbot & Virtual Agent Support",
+    desc: "Chatbots handle repetitive, common questions instantly around the clock, freeing your agents to focus on calls that actually need a human touch.",
+    ctaText: "Know Our Services",
+    services: [
+      "Chatbot Development",
+      "Virtual Agent Setup",
+      "FAQ Automation",
+      "Multi-Language Bots",
+      "Chatbot Training",
+      "Live Chat Integration",
+      "WhatsApp Bot Support",
+      "Escalation Rules",
+    ],
+  },
+  {
+    number: "04",
+    title: "Human Handoff & Agent Support",
+    desc: "When AI hits its limit, the conversation hands off to a trained agent with full context, so customers never have to repeat themselves.",
+    ctaText: "Know Our Services",
+    services: [
+      "Seamless Handoff Design",
+      "Agent Training",
+      "Context Transfer Systems",
+      "Escalation Management",
+      "Agent Coaching",
+      "Real-Time Assist Tools",
+      "Supervisor Dashboards",
+      "Performance Reviews",
+    ],
+  },
+  {
+    number: "05",
+    title: "Data Security & Compliance",
+    desc: "Call data and transcripts are handled under strict access controls and NDA-backed processes, in line with India's DPDP Act, 2023.",
+    ctaText: "Know Our Services",
+    services: [
+      "Data Access Controls",
+      "NDA-Backed Handling",
+      "DPDP Act Compliance",
+      "Secure Call Storage",
+      "Access Audit Logs",
+      "Data Retention Policies",
+      "Vendor Risk Management",
+      "Compliance Reporting",
+    ],
+  },
+  {
+    number: "06",
+    title: "Reporting & Continuous Optimization",
+    desc: "We track call outcomes and sentiment data continuously, refining routing and chatbot responses as real conversations reveal gaps.",
+    ctaText: "Know Our Services",
+    services: [
+      "Performance Dashboards",
+      "Call Outcome Tracking",
+      "Sentiment Reporting",
+      "Weekly Reporting",
+      "Chatbot Response Tuning",
+      "Routing Optimization",
+      "Cost-Per-Call Analysis",
+      "Trend Analysis",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
+    title: "Discovery & Workflow Mapping",
+    desc: "We study your current call flows and pain points to decide exactly where AI genuinely helps and where human judgment stays essential.",
+  },
+  {
+    number: "02",
     title: "AI Tool Configuration & Training",
-    body: "Routing rules, transcription, and chatbot scripts are configured and trained on your actual product and tone, not a generic template.",
+    desc: "Routing rules, transcription, and chatbot scripts are configured and trained on your actual product and tone, not a generic template.",
   },
   {
+    number: "03",
+    title: "Agent Recruitment & Training",
+    desc: "We hire and train agents on your scripts, tone, and product, so the human side of the operation matches the AI side from day one.",
+  },
+  {
+    number: "04",
+    title: "Integration & Testing",
+    desc: "We integrate routing, chatbot, and CRM systems, testing the full flow end-to-end before a single live call goes through it.",
+  },
+  {
+    number: "05",
     title: "Agent + AI Integration Launch",
-    body: "Agents and AI tools go live together with close monitoring in the first weeks, so handoffs feel smooth from day one.",
+    desc: "Agents and AI tools go live together with close monitoring in the first weeks, so handoffs feel smooth from day one.",
   },
   {
+    number: "06",
     title: "Ongoing Monitoring & Optimization",
-    body: "We track call outcomes and sentiment data continuously, refining routing and chatbot responses as real conversations reveal gaps.",
+    desc: "We track call outcomes and sentiment data continuously, refining routing and chatbot responses as real conversations reveal gaps.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "AI-Assisted, Human-Led",
-    description:
-      "We use AI only where it genuinely helps — routing, transcription, first responses — while trained agents handle everything that needs real judgment.",
+    desc: "We use AI only where it genuinely helps — routing, transcription, first responses — while trained agents handle everything that needs real judgment.",
   },
   {
-    number: "002",
+    number: "02",
     title: "Faster First Response",
-    description:
-      "Smart routing and chatbot triage mean customers wait less, even during peak call volumes.",
+    desc: "Smart routing and chatbot triage mean customers wait less, even during peak call volumes.",
   },
   {
-    number: "003",
+    number: "03",
     title: "Trained, Dedicated Agents",
-    description:
-      "The humans behind the AI are trained specifically on your scripts, tone, and product, not a generic floor.",
+    desc: "The humans behind the AI are trained specifically on your scripts, tone, and product, not a generic floor.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Transparent Reporting",
-    description:
-      "Call recordings, transcripts, and sentiment reports are available on request, not locked behind a monthly summary.",
+    desc: "Call recordings, transcripts, and sentiment reports are available on request, not locked behind a monthly summary.",
   },
   {
-    number: "005",
+    number: "05",
     title: "Data Security First",
-    description:
-      "NDA available before any project details or access are shared, with handling built around India's DPDP Act, 2023.",
+    desc: "NDA available before any project details or access are shared, with handling built around India's DPDP Act, 2023.",
   },
   {
-    number: "006",
+    number: "06",
     title: "Scalable Engagement",
-    description:
-      "We scale AI and agent capacity with your business, not ahead of it — start small and add capacity as workload actually grows.",
+    desc: "We scale AI and agent capacity with your business, not ahead of it — start small and add capacity as workload actually grows.",
   },
 ];
 
@@ -152,114 +247,30 @@ const FAQS = [
 
 export default function AiPoweredBpoCallCenterSolutions() {
   return (
-    <>
-      <BpoHero
-        heading="AI-Powered BPO & Call Center Solutions in India"
-        description="Smart call routing, live transcription, and chatbot support layered on real, trained agents — so your team only steps in when a call truly needs a human touch."
-        img="/BPO%20service.png"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/CLI-Caller-Line-Identification.webp"
-              alt="AI-powered call center solutions at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              AI That Helps Your Agents, Not Replaces Them
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              We layer AI call center solutions on top of real agents — smart
-              call routing, live transcription, and chatbot customer support
-              services that pick up repetitive questions instantly. Your team
-              only steps in for calls that truly need a human touch, so
-              nothing slips through and nothing feels robotic.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re a BPO and customer support company based in
-              Prayagraj, serving clients locally across Allahabad and Uttar
-              Pradesh, as well as businesses across India, built around
-              transparent processes and teams tailored to your workflow.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our AI-Powered BPO Solutions"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our AI-Powered BPO Process"
-            description="We build every engagement around understanding your workflow first, then decide exactly where AI genuinely helps and where trained agents take over."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="AI-Powered BPO & Call Center Company"
-          description="BizzBuzz Creations blends AI tools with trained human agents to deliver faster, more cost-efficient BPO and call center support for businesses across India and beyond."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="BPO Services"
+      label="AI-Powered BPO & Call Center Solutions"
+      icon={Bot}
+      description="Smart call routing, live transcription, and chatbot support layered on real, trained agents — so your team only steps in when a call truly needs a human touch."
+      heroTitle="AI-Powered BPO & Call Center Solutions in India"
+      heroDescription="Smart call routing, live transcription, and chatbot support layered on real, trained agents — so your team only steps in when a call truly needs a human touch."
+      capabilitiesHeading="Built for Businesses Ready to Modernize Customer Support"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our AI-Powered BPO Solutions"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Businesses Trust Us to Run Their AI-Powered BPO Operations"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Your Support Requirements Into a Working AI-Powered Operation"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Running AI-Powered Support Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we build every AI-powered BPO engagement, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, blending AI tools with trained human agents sized to each business's actual call volume. For businesses looking to outsource support beyond India, we run AI-powered BPO operations remotely, working across time zones to deliver the same standard of service regardless of location. Whether you're a startup handling your first support inbox or an enterprise running a multi-department call center, our approach starts with the same question: where does AI genuinely help, and where does a trained human need to take over."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready for Support That Scales With AI, Not Against Your Budget?"
+      ctaText="Whether you need routing and chatbot support layered onto your current team, a full AI-powered call center built from scratch, or a careful migration from your existing BPO provider, the right setup depends on your actual call volume and workflow. Let's talk through your requirements and scope what an AI-powered BPO setup would actually involve."
+      ctaPrimaryText="Talk to a BPO Solutions Specialist"
+      ctaSecondaryText="Get Your Free BPO Consultation"
+    />
   );
 }

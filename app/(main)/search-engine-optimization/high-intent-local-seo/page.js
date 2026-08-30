@@ -1,18 +1,12 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   MapPin,
-  Target,
-  Star,
+  Rocket,
   Building2,
-  BarChart3,
-  Search,
+  Building,
+  ShoppingCart,
+  Handshake,
+  RefreshCw,
 } from "lucide-react";
 
 export const metadata = {
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: Target,
-    heading: "High-Intent Keyword Targeting",
-    description:
-      "We prioritize keywords that signal real buying intent, not just traffic volume, so visits are more likely to turn into leads.",
-  },
-  {
-    icon: MapPin,
-    heading: "Google Business Profile Optimization",
-    description:
-      "We optimize your Google Business Profile with accurate categories, photos, and posts, so you show up in local map results that drive calls and visits.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups with a local footprint need to show up in nearby searches fast, without a long organic SEO runway. We prioritize Google Business Profile and high-intent keyword targeting first, giving startups quick local visibility wins.",
   },
   {
     icon: Building2,
-    heading: "Local Citation Building",
-    description:
-      "Consistent business listings across relevant directories strengthen local trust signals and improve your visibility in nearby searches.",
+    title: "Small & Medium Businesses",
+    desc: "SMBs with a physical location often lose customers to competitors with a stronger local presence. We build high-intent and local SEO sized for SMB budgets, focused on the searches most likely to bring in real customers.",
   },
   {
-    icon: Star,
-    heading: "Review Generation & Management",
-    description:
-      "We help build a steady flow of genuine customer reviews and respond to them professionally, which strongly influences local rankings and trust.",
+    icon: Building,
+    title: "Enterprises & Multi-Location Brands",
+    desc: "Enterprises with multiple locations need consistent local visibility across every branch. We run local SEO programs at enterprise scale, managing profiles and location pages consistently across all your locations.",
   },
   {
-    icon: Search,
-    heading: "Location-Based Landing Pages",
-    description:
-      "For businesses serving multiple areas, we build dedicated location pages that rank for city and neighborhood-specific searches.",
+    icon: ShoppingCart,
+    title: "Retail & Service Businesses",
+    desc: "Retail and service businesses depend on customers finding them nearby when they're ready to act. We target high-intent, near-me searches so people close by and ready to buy actually find you first.",
   },
   {
-    icon: BarChart3,
-    heading: "Lead & Call Tracking",
-    description:
-      "We track calls, form fills, and direction requests generated from local search, not just impressions, so you see real business impact.",
+    icon: Handshake,
+    title: "Agencies Needing a Local SEO Partner",
+    desc: "Marketing agencies managing local clients need a specialist partner for the technical side of local SEO. We work as a white-label local SEO partner, handling profile and citation work agencies can present as their own.",
+  },
+  {
+    icon: RefreshCw,
+    title: "Businesses Losing Ground to Local Competitors",
+    desc: "Businesses watching competitors dominate the local map pack need a structural fix, not just more effort. We audit why competitors are outranking you locally and close the specific gaps causing it.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
+    number: "01",
+    title: "High-Intent Keyword Targeting",
+    desc: "We prioritize keywords that signal real buying intent, not just traffic volume, so visits are more likely to turn into leads.",
+    ctaText: "Know Our Services",
+    services: [
+      "High-Intent Keyword Research",
+      "Buyer Intent Analysis",
+      "Commercial Keyword Targeting",
+      "Conversion-Focused SEO",
+      "Keyword Prioritization",
+      "Search Intent Mapping",
+      "Competitor Keyword Analysis",
+      "Intent-Based Content Planning",
+    ],
+  },
+  {
+    number: "02",
+    title: "Google Business Profile Optimization",
+    desc: "We optimize your Google Business Profile with accurate categories, photos, and posts, so you show up in local map results that drive calls and visits.",
+    ctaText: "Know Our Services",
+    services: [
+      "GBP Setup & Optimization",
+      "Category Optimization",
+      "Photo & Media Management",
+      "GBP Post Scheduling",
+      "Business Description Optimization",
+      "GBP Attribute Setup",
+      "Map Pack Ranking Optimization",
+      "GBP Insights Reporting",
+    ],
+  },
+  {
+    number: "03",
+    title: "Local Citation Building",
+    desc: "Consistent business listings across relevant directories strengthen local trust signals and improve your visibility in nearby searches.",
+    ctaText: "Know Our Services",
+    services: [
+      "Citation Building",
+      "Directory Listing Management",
+      "NAP Consistency Audits",
+      "Local Directory Submissions",
+      "Duplicate Listing Cleanup",
+      "Industry-Specific Directories",
+      "Citation Monitoring",
+      "Local Link Building",
+    ],
+  },
+  {
+    number: "04",
+    title: "Review Generation & Management",
+    desc: "We help build a steady flow of genuine customer reviews and respond to them professionally, which strongly influences local rankings and trust.",
+    ctaText: "Know Our Services",
+    services: [
+      "Review Generation Campaigns",
+      "Review Request Automation",
+      "Review Response Management",
+      "Reputation Monitoring",
+      "Negative Review Handling",
+      "Review Widget Setup",
+      "Review Volume Tracking",
+      "Customer Feedback Analysis",
+    ],
+  },
+  {
+    number: "05",
+    title: "Location-Based Landing Pages",
+    desc: "For businesses serving multiple areas, we build dedicated location pages that rank for city and neighborhood-specific searches.",
+    ctaText: "Know Our Services",
+    services: [
+      "Location Page Development",
+      "City-Specific Content",
+      "Neighborhood Targeting",
+      "Multi-Location SEO Structure",
+      "Local Schema Markup",
+      "Location Page Templates",
+      "Service Area Content",
+      "Location Page Optimization",
+    ],
+  },
+  {
+    number: "06",
+    title: "Lead & Call Tracking",
+    desc: "We track calls, form fills, and direction requests generated from local search, not just impressions, so you see real business impact.",
+    ctaText: "Know Our Services",
+    services: [
+      "Call Tracking Setup",
+      "Form Submission Tracking",
+      "Direction Request Tracking",
+      "Lead Attribution",
+      "Local Conversion Reporting",
+      "Call Recording Setup",
+      "ROI Reporting",
+      "Monthly Lead Reports",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
     title: "Intent & Local Audit",
-    body: "We review your current local presence and identify high-intent keywords your actual customers use when they're ready to act.",
+    desc: "We review your current local presence and identify high-intent keywords your actual customers use when they're ready to act.",
   },
   {
+    number: "02",
     title: "Profile & Citation Optimization",
-    body: "We optimize your Google Business Profile and build consistent citations across relevant directories to strengthen local trust.",
+    desc: "We optimize your Google Business Profile and build consistent citations across relevant directories to strengthen local trust.",
   },
   {
+    number: "03",
+    title: "Review Strategy Setup",
+    desc: "We set up a review generation process so genuine customer reviews build steadily, strengthening trust and local rankings.",
+  },
+  {
+    number: "04",
     title: "Content & Landing Page Build",
-    body: "We create or refine location-specific pages and content targeting the high-intent searches your customers actually make.",
+    desc: "We create or refine location-specific pages and content targeting the high-intent searches your customers actually make.",
   },
   {
+    number: "05",
+    title: "Tracking Setup",
+    desc: "We implement call and form tracking so every lead generated from local search is measurable, not just estimated.",
+  },
+  {
+    number: "06",
     title: "Track Leads & Refine",
-    body: "We track calls, form fills, and direction requests, refining targeting based on what's actually converting into business.",
+    desc: "We track calls, form fills, and direction requests, refining targeting based on what's actually converting into business.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "Intent Over Volume",
-    description:
-      "We prioritize keywords that convert, not just ones that bring traffic — visibility that turns into leads and sales.",
+    desc: "We prioritize keywords that convert, not just ones that bring traffic — visibility that turns into leads and sales.",
   },
   {
-    number: "002",
+    number: "02",
     title: "Local Search Specialists",
-    description:
-      "We focus on the specific signals that drive local map pack rankings — profile accuracy, citations, and reviews.",
+    desc: "We focus on the specific signals that drive local map pack rankings — profile accuracy, citations, and reviews.",
   },
   {
-    number: "003",
+    number: "03",
     title: "Review-Driven Trust",
-    description:
-      "We actively help build genuine review volume and quality, a major factor in both local rankings and customer trust.",
+    desc: "We actively help build genuine review volume and quality, a major factor in both local rankings and customer trust.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Multi-Location Ready",
-    description:
-      "We build dedicated, properly structured location pages for businesses serving more than one area or city.",
+    desc: "We build dedicated, properly structured location pages for businesses serving more than one area or city.",
   },
   {
-    number: "005",
+    number: "05",
     title: "Lead Tracking, Not Just Traffic",
-    description:
-      "We measure calls, form fills, and direction requests, giving you visibility into real business results, not just visits.",
+    desc: "We measure calls, form fills, and direction requests, giving you visibility into real business results, not just visits.",
   },
   {
-    number: "006",
+    number: "06",
     title: "Honest Reporting",
-    description:
-      "No agency can guarantee first-page local rankings, and we won't pretend otherwise — you get transparent, honest progress reports instead.",
+    desc: "No agency can guarantee first-page local rankings, and we won't pretend otherwise — you get transparent, honest progress reports instead.",
   },
 ];
 
@@ -152,113 +247,30 @@ const FAQS = [
 
 export default function HighIntentLocalSeo() {
   return (
-    <>
-      <BpoHero
-        heading="High-Intent & Local SEO Services in India"
-        description="Driving traffic is not enough; you need customers ready to take action. We target high-intent and location-based searches to generate real business results."
-        img="/seO2.jpg"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/BizzBuzz-Creations-5.png"
-              alt="High-intent and local SEO at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Customers Ready to Act, Not Just Traffic
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              Driving traffic is not enough; you need customers ready to
-              take action. We target high-intent and location-based searches
-              to generate real business results — calls, form fills, and
-              store visits, not just page views.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re an SEO services company based in Prayagraj, serving
-              clients locally across Allahabad and Uttar Pradesh, as well as
-              businesses across India, helping local and multi-location
-              businesses get found by the right customers.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our High-Intent & Local SEO"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our High-Intent & Local SEO Process"
-            description="We audit your local presence and target keywords with real buying intent, then track calls and leads, not just clicks."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="High-Intent & Local SEO Company"
-          description="BizzBuzz Creations helps local and multi-location businesses across India target high-intent, ready-to-buy searches that turn into real leads."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="SEO Services"
+      label="High-Intent & Local SEO"
+      icon={MapPin}
+      description="Driving traffic is not enough; you need customers ready to take action. We target high-intent and location-based searches to generate real business results."
+      heroTitle="High-Intent & Local SEO Services in India"
+      heroDescription="Driving traffic is not enough; you need customers ready to take action. We target high-intent and location-based searches to generate real business results."
+      capabilitiesHeading="Built for Businesses Ready for Customers, Not Just Clicks"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our High-Intent & Local SEO"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Businesses Trust Us to Build Their Local Visibility"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Local Searches Into Real Customers"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Building Local Visibility Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every local SEO engagement, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and multi-location enterprises across India, sizing local SEO to each business's actual service area and competition. For businesses looking to build local visibility beyond India, we deliver high-intent and local SEO remotely, managing profiles and citations across regions and time zones to the same standard regardless of location. Whether you're a startup optimizing your first Google Business Profile or an enterprise managing local visibility across dozens of locations, our approach starts with auditing where you currently stand in local search."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready for Customers Who Are Actually Ready to Act?"
+      ctaText="Whether you need a Google Business Profile overhaul, a full local citation and review strategy, or location pages built for multiple areas, the right approach depends on where your local visibility currently stands. Let's talk through your local presence and scope what high-intent local SEO would actually involve."
+      ctaPrimaryText="Talk to a Local SEO Specialist"
+      ctaSecondaryText="Get Your Free Local SEO Audit"
+    />
   );
 }

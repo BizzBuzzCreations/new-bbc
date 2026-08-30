@@ -1,17 +1,11 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   MessageCircle,
-  Camera,
-  Target,
-  PenTool,
-  BarChart3,
+  Rocket,
+  Building2,
+  Building,
+  ShoppingCart,
+  Handshake,
   RefreshCw,
 } from "lucide-react";
 
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: Camera,
-    heading: "Facebook & Instagram Ad Creatives",
-    description:
-      "We design scroll-stopping ad creatives built specifically for feed and story placements, not repurposed banners that feel out of place.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups need to test messaging and audiences fast without burning through a small budget. We run lean Meta ad tests early, letting startups find what resonates before scaling spend into it.",
   },
   {
-    icon: Target,
-    heading: "Audience Targeting & Segmentation",
-    description:
-      "Ads are targeted using real customer data and lookalike audiences, reaching people genuinely likely to convert.",
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs often run Meta ads without a real targeting or creative strategy behind them. We manage Meta ads sized for SMB budgets, built around audience data instead of boosted posts.",
   },
   {
-    icon: PenTool,
-    heading: "Ad Copy & Messaging",
-    description:
-      "We write ad copy that starts conversations and prompts action, matched to how people actually scroll and read on social platforms.",
+    icon: Building,
+    title: "Enterprises & Large Organizations",
+    desc: "Enterprises need Meta ad management across multiple campaigns and audiences without losing consistency. We run Meta ads at enterprise scale, structured for multi-campaign management and clear reporting.",
+  },
+  {
+    icon: ShoppingCart,
+    title: "Ecommerce & D2C Brands",
+    desc: "D2C brands rely on Meta ads for both new customer acquisition and retargeting. We build full-funnel Meta campaigns covering prospecting and retargeting, structured around your actual product margins.",
+  },
+  {
+    icon: Handshake,
+    title: "Agencies Needing a Meta Ads Partner",
+    desc: "Marketing agencies need a specialist partner to execute Meta ads management for clients. We work as a white-label Meta ads partner, handling campaign execution agencies can present as their own.",
   },
   {
     icon: RefreshCw,
-    heading: "Retargeting & Funnel Campaigns",
-    description:
-      "We build retargeting campaigns that bring back visitors who engaged but didn't convert, recovering demand you'd otherwise lose.",
-  },
-  {
-    icon: MessageCircle,
-    heading: "Lead & Message Ads",
-    description:
-      "Lead form and click-to-message ads make it effortless for interested prospects to reach out directly from the ad itself.",
-  },
-  {
-    icon: BarChart3,
-    heading: "Transparent Performance Reporting",
-    description:
-      "You see exactly what your Meta ad spend is generating — leads, cost per result, and return — not a vague monthly summary.",
+    title: "Businesses Switching From Another Agency",
+    desc: "Businesses unhappy with underperforming Meta ads management need a careful account transition. We take over existing ad accounts, auditing performance history before making changes.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
-    title: "Audience & Goal Discovery",
-    body: "We understand your target customer and campaign goals before setting a single ad live on Facebook or Instagram.",
+    number: "01",
+    title: "Facebook & Instagram Ad Creatives",
+    desc: "We design scroll-stopping ad creatives built specifically for feed and story placements, not repurposed banners that feel out of place.",
+    ctaText: "Know Our Services",
+    services: [
+      "Ad Creative Design",
+      "Video Ad Production",
+      "Story Ad Design",
+      "Carousel Ad Design",
+      "UGC-Style Creative",
+      "Creative Testing",
+      "Placement-Specific Creative",
+      "Creative Refresh Cycles",
+    ],
   },
   {
+    number: "02",
+    title: "Audience Targeting & Segmentation",
+    desc: "Ads are targeted using real customer data and lookalike audiences, reaching people genuinely likely to convert.",
+    ctaText: "Know Our Services",
+    services: [
+      "Audience Research",
+      "Lookalike Audience Setup",
+      "Custom Audience Creation",
+      "Interest-Based Targeting",
+      "Behavioral Targeting",
+      "Audience Segmentation",
+      "Audience Testing",
+      "Audience Exclusions",
+    ],
+  },
+  {
+    number: "03",
+    title: "Ad Copy & Messaging",
+    desc: "We write ad copy that starts conversations and prompts action, matched to how people actually scroll and read on social platforms.",
+    ctaText: "Know Our Services",
+    services: [
+      "Ad Copywriting",
+      "Headline Testing",
+      "CTA Optimization",
+      "Messaging Frameworks",
+      "Hook Development",
+      "Copy A/B Testing",
+      "Tone & Voice Alignment",
+      "Platform-Specific Copy",
+    ],
+  },
+  {
+    number: "04",
+    title: "Retargeting & Funnel Campaigns",
+    desc: "We build retargeting campaigns that bring back visitors who engaged but didn't convert, recovering demand you'd otherwise lose.",
+    ctaText: "Know Our Services",
+    services: [
+      "Retargeting Campaign Setup",
+      "Website Visitor Retargeting",
+      "Engagement Retargeting",
+      "Funnel Stage Mapping",
+      "Cart Abandonment Retargeting",
+      "Cross-Sell Retargeting",
+      "Retargeting Frequency Management",
+      "Full-Funnel Strategy",
+    ],
+  },
+  {
+    number: "05",
+    title: "Lead & Message Ads",
+    desc: "Lead form and click-to-message ads make it effortless for interested prospects to reach out directly from the ad itself.",
+    ctaText: "Know Our Services",
+    services: [
+      "Lead Form Ad Setup",
+      "Click-to-Message Ads",
+      "Lead Form Optimization",
+      "Instant Reply Setup",
+      "Lead Ad Integration With CRM",
+      "Message Ad Copywriting",
+      "Lead Quality Filtering",
+      "Lead Follow-Up Workflow Setup",
+    ],
+  },
+  {
+    number: "06",
+    title: "Transparent Performance Reporting",
+    desc: "Every rupee spent is tracked and reported clearly, showing cost per lead and return on ad spend, not vague summaries.",
+    ctaText: "Know Our Services",
+    services: [
+      "Conversion Tracking Setup",
+      "Pixel & CAPI Setup",
+      "Custom Dashboard Reporting",
+      "Cost-Per-Lead Reporting",
+      "ROAS Reporting",
+      "Weekly Performance Updates",
+      "Monthly Performance Reports",
+      "Attribution Reporting",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
+    title: "Goals & Audience Discovery",
+    desc: "We understand your target customer and campaign goals before setting a single ad live on Facebook or Instagram.",
+  },
+  {
+    number: "02",
     title: "Creative & Targeting Setup",
-    body: "Ad creatives, copy, and audience segments are built to stop the scroll and start conversations with the right people.",
+    desc: "Ad creatives, copy, and audience segments are built to stop the scroll and start conversations with the right people.",
   },
   {
+    number: "03",
+    title: "Tracking & Pixel Setup",
+    desc: "We set up pixel and conversion tracking before launch, so every result is measured accurately from day one.",
+  },
+  {
+    number: "04",
     title: "Launch & Real-Time Monitoring",
-    body: "Campaigns launch with close monitoring in the first days, so underperforming ads get caught and adjusted quickly.",
+    desc: "Campaigns launch with close monitoring in the first days, so underperforming ads get caught and adjusted quickly.",
   },
   {
+    number: "05",
+    title: "Creative & Audience Testing",
+    desc: "We test multiple creatives and audience segments in parallel, identifying what's actually converting fastest.",
+  },
+  {
+    number: "06",
     title: "Optimize & Scale",
-    body: "We double down on what's converting and cut what isn't, scaling spend toward your best-performing creatives and audiences.",
+    desc: "We double down on what's converting and cut what isn't, scaling spend toward your best-performing campaigns.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "Scroll-Stopping Creative",
-    description:
-      "Ad creatives are designed specifically for how people scroll Facebook and Instagram, not repurposed from other channels.",
+    desc: "Ad creatives are designed specifically for how people scroll Facebook and Instagram, not repurposed from other channels.",
   },
   {
-    number: "002",
+    number: "02",
     title: "Data-Backed Targeting",
-    description:
-      "Audience segments are built from real customer data and lookalikes, not broad guesses.",
+    desc: "Audience segments are built from real customer data and lookalikes, not broad guesses.",
   },
   {
-    number: "003",
+    number: "03",
     title: "Conversation-Starting Copy",
-    description:
-      "We write ad copy designed to prompt action and start real conversations, not just generate impressions.",
+    desc: "We write ad copy designed to prompt action and start real conversations, not just generate impressions.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Retargeting Built In",
-    description:
-      "We capture visitors who engaged but didn't convert, recovering demand competitors leave on the table.",
+    desc: "We capture visitors who engaged but didn't convert, recovering demand competitors leave on the table.",
   },
   {
-    number: "005",
+    number: "05",
     title: "Transparent Numbers",
-    description:
-      "We're honest about what's working and what isn't, obsessed with getting you a better cost per lead every month.",
+    desc: "We're honest about what's working and what isn't, obsessed with getting you a better cost per lead every month.",
   },
   {
-    number: "006",
+    number: "06",
     title: "A Team, Not a Vendor",
-    description:
-      "Think of us less like a vendor and more like a hired paid marketing team pushing for your growth every day.",
+    desc: "Think of us less like a vendor and more like a hired paid marketing team pushing for your growth every day.",
   },
 ];
 
@@ -126,7 +221,7 @@ const FAQS = [
   {
     question: "What's the difference between Meta ads and Facebook ads?",
     answer:
-      "Meta ads is the umbrella term covering ads across both Facebook and Instagram, managed through Meta's ad platform as one coordinated strategy.",
+      "Meta ads is the umbrella term covering ads across Facebook and Instagram managed through Meta's ad platform — we run both as part of a coordinated strategy.",
   },
   {
     question: "How much should I budget for Meta ads?",
@@ -152,113 +247,30 @@ const FAQS = [
 
 export default function MetaSocialAdsManagement() {
   return (
-    <>
-      <BpoHero
-        heading="Meta & Social Ads Management in India"
-        description="From Facebook to Instagram, our paid media services are designed to stop the scroll and start conversations. We craft ad creatives and targeting strategies that turn casual scrollers into genuine leads for your brand."
-        img="/ads.webp"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/meta%20ads.webp"
-              alt="Meta and social ads management at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Stop the Scroll, Start the Conversation
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              From Facebook to Instagram, our paid media services are
-              designed to stop the scroll and start conversations. We craft
-              ad creatives and targeting strategies that turn casual
-              scrollers into genuine leads for your brand.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re a paid marketing agency based in Prayagraj,
-              proudly serving businesses locally across Allahabad and Uttar
-              Pradesh, as well as brands across India, turning social ad
-              spend into measurable business growth.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our Meta & Social Ads Management"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our Meta & Social Ads Process"
-            description="We understand your audience and goals first, then build, launch, and continuously optimize creatives and targeting around real leads, not vanity metrics."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="Meta & Social Ads Management Company"
-          description="BizzBuzz Creations runs Facebook and Instagram ad campaigns for businesses across India, built to stop the scroll and turn attention into genuine leads."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="Paid Marketing"
+      label="Meta & Social Ads Management"
+      icon={MessageCircle}
+      description="From Facebook to Instagram, our paid media services are designed to stop the scroll and start conversations. We craft ad creatives and targeting strategies that turn casual scrollers into genuine leads for your brand."
+      heroTitle="Meta & Social Ads Management in India"
+      heroDescription="From Facebook to Instagram, our paid media services are designed to stop the scroll and start conversations. We craft ad creatives and targeting strategies that turn casual scrollers into genuine leads for your brand."
+      capabilitiesHeading="Built for Brands Ready to Stop the Scroll"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our Meta Ads Management"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Brands Trust Us to Run Their Meta Ads"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Scrollers Into Genuine Leads"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Running Meta Ads Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we manage every Meta ads account, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, sizing campaigns to each brand's actual budget and audience. For brands looking to run Meta ads beyond India, we manage accounts remotely, working across time zones and markets to deliver the same performance standard regardless of location. Whether you're a startup testing your first creative or an enterprise managing spend across multiple audiences, our approach starts with understanding who you're actually trying to reach."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready to Turn Attention Into Leads?"
+      ctaText="Whether you need a fresh Meta ads account built from scratch, a takeover of an underperforming campaign, or full-funnel coverage from prospecting to retargeting, the right setup depends on your actual audience and budget. Let's talk through your goals and scope what Meta ads management would actually involve."
+      ctaPrimaryText="Talk to a Meta Ads Specialist"
+      ctaSecondaryText="Get Your Free Meta Ads Audit"
+    />
   );
 }

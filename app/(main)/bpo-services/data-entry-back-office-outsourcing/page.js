@@ -1,18 +1,12 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   FileText,
-  Database,
-  CheckCircle2,
-  Calculator,
-  ShieldCheck,
-  Clock,
+  Rocket,
+  Building2,
+  Building,
+  ShoppingCart,
+  Handshake,
+  RefreshCw,
 } from "lucide-react";
 
 export const metadata = {
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: FileText,
-    heading: "Data Entry & Digitization",
-    description:
-      "Paper records, forms, and scattered spreadsheets get converted into clean, structured digital data your team can actually use.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups often handle data entry themselves until it eats into founder time that should go elsewhere. We offer flexible, small-batch data entry outsourcing so early-stage teams can hand off records without a long-term commitment.",
   },
   {
-    icon: Database,
-    heading: "CRM & Database Updates",
-    description:
-      "We keep your CRM and databases current — new leads, contact updates, and status changes entered accurately and on schedule.",
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs frequently fall behind on invoices, records, and CRM updates during busy periods. We provide back office outsourcing sized for SMB budgets, keeping records current without the cost of a full in-house admin team.",
   },
   {
-    icon: CheckCircle2,
-    heading: "Invoice & Records Processing",
-    description:
-      "Invoices and business records are processed and filed consistently, reducing the backlog that piles up during busy periods.",
+    icon: Building,
+    title: "Enterprises & Large Organizations",
+    desc: "Enterprises need back office desks that handle high volume accurately across departments and systems. We run enterprise-grade data entry and reconciliation desks built for high volume, strict accuracy checks, and integration with existing systems.",
   },
   {
-    icon: ShieldCheck,
-    heading: "Reconciliation & Accuracy Checks",
-    description:
-      "Our desks work with the same accuracy checks a large enterprise would demand, catching mismatches before they become bigger problems.",
+    icon: ShoppingCart,
+    title: "Ecommerce & Retail Brands",
+    desc: "Ecommerce businesses generate constant order, inventory, and customer data that needs accurate entry. We handle order data entry, inventory updates, and customer record management so your catalog and CRM stay reliable.",
   },
   {
-    icon: Calculator,
-    heading: "Finance & Accounting Support",
-    description:
-      "Beyond raw data entry, we support finance and accounting back-office tasks like ledger updates and basic reconciliations.",
+    icon: Handshake,
+    title: "Agencies & Finance Partners",
+    desc: "Agencies and finance-adjacent partners managing client records need a dependable back office extension. We work as a white-label data entry and back office partner, handling volume agencies can present as part of their own service.",
   },
   {
-    icon: Clock,
-    heading: "Confidential, Timely Handling",
-    description:
-      "Sensitive business data is handled under NDA with agreed turnaround times, so backlogs don't quietly build up.",
+    icon: RefreshCw,
+    title: "Businesses Digitizing Legacy Records",
+    desc: "Businesses sitting on years of paper records or scattered spreadsheets need a structured digitization plan. We handle the conversion of legacy records into clean, structured digital data your team can actually use.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
+    number: "01",
+    title: "Data Entry & Digitization",
+    desc: "Paper records, forms, and scattered spreadsheets get converted into clean, structured digital data your team can actually use.",
+    ctaText: "Know Our Services",
+    services: [
+      "Manual Data Entry",
+      "Document Digitization",
+      "Form Data Capture",
+      "Spreadsheet Cleanup",
+      "OCR-Assisted Entry",
+      "Data Formatting",
+      "Bulk Data Upload",
+      "Data Entry Quality Checks",
+    ],
+  },
+  {
+    number: "02",
+    title: "CRM & Database Updates",
+    desc: "We keep your CRM and databases current — new leads, contact updates, and status changes entered accurately and on schedule.",
+    ctaText: "Know Our Services",
+    services: [
+      "CRM Record Updates",
+      "Contact Database Management",
+      "Lead Data Entry",
+      "Database Cleanup",
+      "Duplicate Record Removal",
+      "Field Standardization",
+      "Data Migration Support",
+      "Scheduled Update Cycles",
+    ],
+  },
+  {
+    number: "03",
+    title: "Invoice & Records Processing",
+    desc: "Invoices and business records are processed and filed consistently, reducing the backlog that piles up during busy periods.",
+    ctaText: "Know Our Services",
+    services: [
+      "Invoice Processing",
+      "Records Filing",
+      "Document Indexing",
+      "Backlog Clearance",
+      "Purchase Order Entry",
+      "Vendor Record Management",
+      "Archive Management",
+      "Records Retrieval Support",
+    ],
+  },
+  {
+    number: "04",
+    title: "Reconciliation & Accuracy Checks",
+    desc: "Our desks work with the same accuracy checks a large enterprise would demand, catching mismatches before they become bigger problems.",
+    ctaText: "Know Our Services",
+    services: [
+      "Data Reconciliation",
+      "Cross-System Verification",
+      "Discrepancy Resolution",
+      "Double-Entry Validation",
+      "Accuracy Audits",
+      "Error Reporting",
+      "Exception Handling",
+      "Sign-Off Checklists",
+    ],
+  },
+  {
+    number: "05",
+    title: "Finance & Accounting Support",
+    desc: "Beyond raw data entry, we support finance and accounting back-office tasks like ledger updates and basic reconciliations.",
+    ctaText: "Know Our Services",
+    services: [
+      "Ledger Entry Support",
+      "Basic Bookkeeping Support",
+      "Expense Record Entry",
+      "Payment Reconciliation",
+      "Financial Data Entry",
+      "Invoice Matching",
+      "Accounts Payable Support",
+      "Accounts Receivable Support",
+    ],
+  },
+  {
+    number: "06",
+    title: "Confidential, Timely Handling",
+    desc: "Sensitive business data is handled under NDA with agreed turnaround times, so backlogs don't quietly build up.",
+    ctaText: "Know Our Services",
+    services: [
+      "NDA-Backed Data Handling",
+      "Turnaround SLA Management",
+      "Access-Controlled Processing",
+      "Secure File Transfer",
+      "Confidentiality Protocols",
+      "Data Retention Compliance",
+      "Priority Batch Processing",
+      "Status Reporting",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
     title: "Understand Data & Formats",
-    body: "We review your current data sources, formats, and volume to design an accurate, efficient workflow for your specific records.",
+    desc: "We review your current data sources, formats, and volume to design an accurate, efficient workflow for your specific records.",
   },
   {
+    number: "02",
     title: "Set Up Accuracy Checks",
-    body: "Validation rules and double-checks are built into the process upfront, at a cost a small business can actually plan around.",
+    desc: "Validation rules and double-checks are built into the process upfront, at a cost a small business can actually plan around.",
   },
   {
+    number: "03",
+    title: "Team & Tool Assignment",
+    desc: "We assign a team trained on your specific data and formats, and set up the tools needed to process it efficiently.",
+  },
+  {
+    number: "04",
     title: "Dedicated Back Office Team",
-    body: "A team trained on your specific data and formats handles ongoing entry, updates, and processing.",
+    desc: "A team trained on your specific data and formats handles ongoing entry, updates, and processing.",
   },
   {
+    number: "05",
     title: "Ongoing Quality Audits",
-    body: "Regular audits catch drift in accuracy early, keeping your data reliable as volume grows.",
+    desc: "Regular audits catch drift in accuracy early, keeping your data reliable as volume grows.",
+  },
+  {
+    number: "06",
+    title: "Reporting & Scaling",
+    desc: "We report on volume, accuracy, and turnaround, scaling the desk up as your data volume genuinely grows.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "Enterprise-Grade Accuracy",
-    description:
-      "Our data entry outsourcing and back office desks work with the same accuracy checks a large enterprise would demand.",
+    desc: "Our data entry outsourcing and back office desks work with the same accuracy checks a large enterprise would demand.",
   },
   {
-    number: "002",
+    number: "02",
     title: "Affordable for Small Business",
-    description:
-      "Enterprise-level accuracy at a cost a small business can actually plan around, without a long-term enterprise contract.",
+    desc: "Enterprise-level accuracy at a cost a small business can actually plan around, without a long-term enterprise contract.",
   },
   {
-    number: "003",
+    number: "03",
     title: "Confidentiality First",
-    description:
-      "NDA available before any project details or data access are shared, with handling built around India's DPDP Act, 2023.",
+    desc: "NDA available before any project details or data access are shared, with handling built around India's DPDP Act, 2023.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Fast, Reliable Turnaround",
-    description:
-      "Agreed turnaround times keep your records current instead of piling up into a backlog during busy periods.",
+    desc: "Agreed turnaround times keep your records current instead of piling up into a backlog during busy periods.",
   },
   {
-    number: "005",
+    number: "05",
     title: "Finance & Accounting Ready",
-    description:
-      "Our desks support finance-adjacent back-office tasks, not just generic data entry.",
+    desc: "Our desks support finance-adjacent back-office tasks, not just generic data entry.",
   },
   {
-    number: "006",
+    number: "06",
     title: "Scalable Desk Size",
-    description:
-      "We scale the team with your actual data volume, adding capacity only as your workload genuinely grows.",
+    desc: "We scale the team with your actual data volume, adding capacity only as your workload genuinely grows.",
   },
 ];
 
@@ -152,114 +247,30 @@ const FAQS = [
 
 export default function DataEntryBackOfficeOutsourcing() {
   return (
-    <>
-      <BpoHero
-        heading="Data Entry & Back Office Outsourcing in India"
-        description="Invoices, records, CRM updates, and reconciliations handled with enterprise-grade accuracy checks, at a cost a small business can actually plan around."
-        img="/BPO%20service.png"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/bpo.jpg"
-              alt="Data entry and back office outsourcing at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Back-Office Accuracy Without the Enterprise Price Tag
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              Invoices, records, CRM updates, reconciliations — our data
-              entry outsourcing and back office outsourcing desks work with
-              the same accuracy checks a large enterprise would demand, at a
-              cost a small business can actually plan around, including
-              finance and accounting outsourcing support.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re a BPO and back-office partner based in Prayagraj,
-              serving clients locally across Allahabad and Uttar Pradesh, as
-              well as businesses across India, handling data with the same
-              care as our own.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our Data Entry & Back Office Outsourcing"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our Data Entry & Back Office Process"
-            description="We understand your data formats and accuracy needs before assigning a dedicated desk, so quality stays consistent from the first batch onward."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="Data Entry & Back Office Outsourcing Company"
-          description="BizzBuzz Creations runs data entry and back office outsourcing for businesses across India, combining enterprise-grade accuracy with pricing small businesses can plan around."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="BPO Services"
+      label="Data Entry & Back Office Outsourcing"
+      icon={FileText}
+      description="Invoices, records, CRM updates, and reconciliations handled with enterprise-grade accuracy checks, at a cost a small business can actually plan around."
+      heroTitle="Data Entry & Back Office Outsourcing in India"
+      heroDescription="Invoices, records, CRM updates, and reconciliations handled with enterprise-grade accuracy checks, at a cost a small business can actually plan around."
+      capabilitiesHeading="Built for Businesses Ready to Get Their Records Under Control"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our Data Entry & Back Office Desks"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Businesses Trust Us to Run Their Back Office"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Messy Records Into a Reliable Back Office"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Running Back Office Desks Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we handle every data entry and back office engagement, with the same accuracy standards whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, sizing desks to each business's actual data volume and formats. For businesses looking to outsource back office work beyond India, we run data entry and reconciliation desks remotely, working across time zones to deliver the same accuracy standard regardless of location. Whether you're a startup digitizing your first batch of records or an enterprise running a dedicated back office desk, our approach starts with understanding your exact data and formats before a single record is touched."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready for Records You Can Actually Rely On?"
+      ctaText="Whether you need a one-time digitization project, ongoing CRM and invoice processing, or a dedicated back office desk built around your specific formats, the right setup depends on your actual data volume. Let's talk through your requirements and scope what a back office desk would actually involve."
+      ctaPrimaryText="Talk to a Back Office Specialist"
+      ctaSecondaryText="Get Your Free Back Office Consultation"
+    />
   );
 }

@@ -1,18 +1,12 @@
-import BpoHero from "@/components/sections/bpoHero";
-import Image from "next/image";
-import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Bot,
-  Search,
-  MessageSquareText,
-  ShieldCheck,
-  BarChart3,
-  Sparkles,
+  Rocket,
+  Building2,
+  Building,
+  ShoppingCart,
+  Handshake,
+  RefreshCw,
 } from "lucide-react";
 
 export const metadata = {
@@ -25,100 +19,201 @@ export const metadata = {
   },
 };
 
-const SERVICE_ITEMS = [
+const CAPABILITIES = [
   {
-    icon: Bot,
-    heading: "AI Overview & Answer Visibility",
-    description:
-      "We structure your content so Google AI Overviews and other AI answer boxes can pull from it directly, keeping your brand visible even in zero-click results.",
+    icon: Rocket,
+    title: "Startups & Early-Stage Businesses",
+    desc: "Startups launching into a crowded market need visibility wherever people are actually searching, including inside AI tools. We build AI search optimization into the content plan from day one, so startups aren't playing catch-up later.",
   },
   {
-    icon: MessageSquareText,
-    heading: "LLM & Chatbot Discoverability",
-    description:
-      "We optimize how your business appears when people ask AI tools like ChatGPT or Gemini for recommendations in your industry.",
+    icon: Building2,
+    title: "Small & Medium Businesses",
+    desc: "SMBs often have zero presence inside AI-generated answers even when they rank well on Google. We size AI search optimization for SMB budgets, focused on the entity signals that matter most for smaller sites.",
   },
   {
-    icon: Search,
-    heading: "Entity & Structured Data Setup",
-    description:
-      "Schema markup and clear entity signals help AI systems correctly understand who you are, what you offer, and why you're credible.",
+    icon: Building,
+    title: "Enterprises & Large Organizations",
+    desc: "Enterprises need consistent, accurate representation across every AI platform customers might ask about them. We run AI search optimization at enterprise scale, covering multiple product lines and markets consistently.",
   },
   {
-    icon: ShieldCheck,
-    heading: "Trust & Authority Signals",
-    description:
-      "AI platforms favor sources they trust. We strengthen the credibility signals — citations, reviews, consistent facts — that AI systems weigh before recommending you.",
+    icon: ShoppingCart,
+    title: "Ecommerce & Retail Brands",
+    desc: "Shoppers increasingly ask AI tools for product recommendations before searching Google directly. We optimize product and category content so AI platforms can confidently recommend your store for relevant queries.",
   },
   {
-    icon: BarChart3,
-    heading: "AI Visibility Tracking",
-    description:
-      "We monitor how and where your brand shows up across AI search tools, not just traditional Google rankings, so you can see the real impact.",
+    icon: Handshake,
+    title: "Agencies Needing an AI SEO Partner",
+    desc: "Marketing agencies need a specialist partner as AI search reshapes how clients get discovered. We work as a white-label AI search optimization partner, handling the technical and content work agencies can present as their own.",
   },
   {
-    icon: Sparkles,
-    heading: "Continuous AI Algorithm Adaptation",
-    description:
-      "AI search evolves fast. We keep adjusting your strategy as platforms change how they source and rank information.",
+    icon: RefreshCw,
+    title: "Businesses Invisible in AI Search Today",
+    desc: "Businesses that rank on Google but never appear in AI answers are losing a growing share of visibility. We audit why you're currently invisible in AI search and rebuild the signals AI platforms actually look for.",
   },
 ];
 
-const PROCESS_STEPS = [
+const SERVICE_BREAKDOWN = [
   {
+    number: "01",
+    title: "AI Overview & Answer Visibility",
+    desc: "We structure your content so Google AI Overviews and other AI answer boxes can pull from it directly, keeping your brand visible even in zero-click results.",
+    ctaText: "Know Our Services",
+    services: [
+      "AI Overview Optimization",
+      "Zero-Click Content Structuring",
+      "Answer Box Formatting",
+      "Featured Snippet Alignment",
+      "Direct-Answer Content Blocks",
+      "AI Overview Tracking",
+      "Content Chunking for AI",
+      "Answer Visibility Reporting",
+    ],
+  },
+  {
+    number: "02",
+    title: "LLM & Chatbot Discoverability",
+    desc: "We optimize how your business appears when people ask AI tools like ChatGPT or Gemini for recommendations in your industry.",
+    ctaText: "Know Our Services",
+    services: [
+      "ChatGPT Visibility Optimization",
+      "Gemini Visibility Optimization",
+      "Perplexity Optimization",
+      "LLM Training Data Signals",
+      "Brand Mention Building",
+      "Recommendation Testing",
+      "Cross-Platform Query Testing",
+      "Chatbot Answer Auditing",
+    ],
+  },
+  {
+    number: "03",
+    title: "Entity & Structured Data Setup",
+    desc: "Schema markup and clear entity signals help AI systems correctly understand who you are, what you offer, and why you're credible.",
+    ctaText: "Know Our Services",
+    services: [
+      "Schema Markup Implementation",
+      "Entity Optimization",
+      "Organization Markup",
+      "Knowledge Panel Optimization",
+      "Structured Data Audits",
+      "Product & Service Schema",
+      "FAQ Schema Setup",
+      "Entity Consistency Checks",
+    ],
+  },
+  {
+    number: "04",
+    title: "Trust & Authority Signals",
+    desc: "AI platforms favor sources they trust. We strengthen the credibility signals — citations, reviews, consistent facts — that AI systems weigh before recommending you.",
+    ctaText: "Know Our Services",
+    services: [
+      "Citation Building",
+      "Review Signal Strengthening",
+      "Fact Consistency Audits",
+      "Author Credibility Signals",
+      "Backlink Trust Building",
+      "Third-Party Mention Building",
+      "Brand Consistency Audits",
+      "Trust Signal Reporting",
+    ],
+  },
+  {
+    number: "05",
+    title: "AI Visibility Tracking",
+    desc: "We monitor how and where your brand shows up across AI search tools, not just traditional Google rankings, so you can see the real impact.",
+    ctaText: "Know Our Services",
+    services: [
+      "AI Visibility Dashboards",
+      "Multi-Platform Query Monitoring",
+      "Citation Tracking",
+      "Competitor AI Visibility Tracking",
+      "Monthly Visibility Reports",
+      "Prompt Testing",
+      "Visibility Trend Analysis",
+      "Alert-Based Monitoring",
+    ],
+  },
+  {
+    number: "06",
+    title: "Continuous AI Algorithm Adaptation",
+    desc: "AI search evolves fast. We keep adjusting your strategy as platforms change how they source and rank information.",
+    ctaText: "Know Our Services",
+    services: [
+      "Algorithm Change Monitoring",
+      "Strategy Adjustment Cycles",
+      "Platform Update Tracking",
+      "Ongoing Content Refreshes",
+      "Testing New AI Platforms",
+      "Adaptive Content Strategy",
+      "Quarterly Strategy Reviews",
+      "Emerging Platform Coverage",
+    ],
+  },
+];
+
+const ROADMAP_STEPS = [
+  {
+    number: "01",
     title: "AI Visibility Audit",
-    body: "We check how your business currently appears — or doesn't — across Google AI Overviews, ChatGPT, and other AI search tools.",
+    desc: "We check how your business currently appears — or doesn't — across Google AI Overviews, ChatGPT, and other AI search tools.",
   },
   {
+    number: "02",
     title: "Entity & Content Structuring",
-    body: "We restructure key pages and add schema so AI systems can clearly parse who you are and what you offer.",
+    desc: "We restructure key pages and add schema so AI systems can clearly parse who you are and what you offer.",
   },
   {
+    number: "03",
     title: "Authority & Trust Building",
-    body: "We strengthen citations, reviews, and consistent facts about your business across the web, which AI platforms use to judge credibility.",
+    desc: "We strengthen citations, reviews, and consistent facts about your business across the web, which AI platforms use to judge credibility.",
   },
   {
+    number: "04",
+    title: "Content Publishing & Optimization",
+    desc: "We publish and refine content built specifically to be understood and cited by AI systems, not just traditional search crawlers.",
+  },
+  {
+    number: "05",
+    title: "Cross-Platform Testing",
+    desc: "We test how your business appears across multiple AI platforms with real queries, identifying gaps before customers do.",
+  },
+  {
+    number: "06",
     title: "Monitor & Refine",
-    body: "We track your AI search visibility monthly and adjust as platforms change how they source and present answers.",
+    desc: "We track your AI search visibility monthly and adjust as platforms change how they source and present answers.",
   },
 ];
 
-const WE_ARE_POINTS = [
+const DIFFERENTIATORS = [
   {
-    number: "001",
+    number: "01",
     title: "Built for How Search Works Now",
-    description:
-      "We optimize for AI Overviews, chatbot answers, and zero-click search, not just traditional blue-link rankings.",
+    desc: "We optimize for AI Overviews, chatbot answers, and zero-click search, not just traditional blue-link rankings.",
   },
   {
-    number: "002",
+    number: "02",
     title: "Entity-First Approach",
-    description:
-      "We make sure AI systems can clearly identify your business as a credible entity in your space, not just a page of text.",
+    desc: "We make sure AI systems can clearly identify your business as a credible entity in your space, not just a page of text.",
   },
   {
-    number: "003",
+    number: "03",
     title: "Trust Signal Focused",
-    description:
-      "We strengthen the citations and consistency signals that AI platforms weigh before recommending a source.",
+    desc: "We strengthen the citations and consistency signals that AI platforms weigh before recommending a source.",
   },
   {
-    number: "004",
+    number: "04",
     title: "Cross-Platform Visibility",
-    description:
-      "We track and optimize for visibility across multiple AI tools, not just one platform.",
+    desc: "We track and optimize for visibility across multiple AI tools, not just one platform.",
   },
   {
-    number: "005",
+    number: "05",
     title: "Data-Driven Execution",
-    description:
-      "Every recommendation is backed by real visibility data, not assumptions about how AI search works.",
+    desc: "Every recommendation is backed by real visibility data, not assumptions about how AI search works.",
   },
   {
-    number: "006",
+    number: "06",
     title: "Honest Reporting",
-    description:
-      "No agency can guarantee AI citations, and we won't pretend otherwise — you get transparent, honest progress reports instead.",
+    desc: "No agency can guarantee AI citations, and we won't pretend otherwise — you get transparent, honest progress reports instead.",
   },
 ];
 
@@ -152,113 +247,30 @@ const FAQS = [
 
 export default function AiSearchOptimization() {
   return (
-    <>
-      <BpoHero
-        heading="AI Search Optimization Services in India"
-        description="AI is transforming how people search, and your business needs to adapt to stay visible. We optimize your website for AI-driven platforms so your content gets understood, trusted, and recommended."
-        img="/seO2.jpg"
-      />
-
-      {/* Intro — dark section, glow accents behind the copy */}
-      <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/seoGraph.png"
-              alt="AI search optimization at BizzBuzz Creations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
-            />
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Get Understood, Trusted, and Recommended by AI
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-4">
-              AI is transforming how people search, and your business needs
-              to adapt to stay visible. We optimize your website for
-              AI-driven platforms so your content gets understood, trusted,
-              and recommended, not just crawled and ignored.
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              We&rsquo;re an SEO services company based in Prayagraj, serving
-              clients locally across Allahabad and Uttar Pradesh, as well as
-              businesses across India, building strategies for how search
-              actually works today.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="bg-black py-20">
-        <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid
-            title="What's Included in Our AI Search Optimization"
-            items={SERVICE_ITEMS}
-          />
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our AI Search Optimization Process"
-            description="We audit your current AI visibility first, then structure content and strengthen trust signals so AI platforms have real reason to recommend you."
-            steps={PROCESS_STEPS}
-          />
-        </div>
-      </section>
-
-      <div className="bg-black px-5">
-        <div className="max-w-5xl mx-auto border-t border-white" />
-      </div>
-
-      {/* We are */}
-      <section className="bg-black pt-20 pb-20 px-5">
-        <BpoWeAre
-          title="AI Search Optimization Company"
-          description="BizzBuzz Creations helps businesses across India get discovered, understood, and recommended by AI search platforms, not just traditional search engines."
-          points={WE_ARE_POINTS}
-        />
-      </section>
-
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
-
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
-      </div>
-    </>
+    <ServiceDetailPage
+      sectionLabel="SEO Services"
+      label="AI Search Optimization"
+      icon={Bot}
+      description="AI is transforming how people search, and your business needs to adapt to stay visible. We optimize your website for AI-driven platforms so your content gets understood, trusted, and recommended."
+      heroTitle="AI Search Optimization Services in India"
+      heroDescription="AI is transforming how people search, and your business needs to adapt to stay visible. We optimize your website for AI-driven platforms so your content gets understood, trusted, and recommended."
+      capabilitiesHeading="Built for Businesses Ready to Be Found Inside AI Answers"
+      capabilities={CAPABILITIES}
+      serviceBreakdownHeading="Everything That Goes Into Our AI Search Optimization"
+      serviceBreakdown={SERVICE_BREAKDOWN}
+      differentiatorsHeading="Why Businesses Trust Us to Build Their AI Search Visibility"
+      differentiators={DIFFERENTIATORS}
+      roadmapCarouselHeading="How We Turn Your Content Into an AI-Trusted Source"
+      roadmapCarouselSteps={ROADMAP_STEPS}
+      showStats={false}
+      localityHeading="Based in Prayagraj, Building AI Search Visibility Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every AI search optimization engagement, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, building AI visibility sized to each business's actual market and competition. For businesses looking to improve AI search visibility beyond India, we deliver this work remotely, tracking visibility across platforms and time zones to the same standard regardless of location. Whether you're a startup appearing in AI answers for the first time or an enterprise protecting visibility across multiple markets, our approach starts with auditing where you actually stand today."
+      faqs={FAQS}
+      showWhyChooseUs={false}
+      ctaHeading="Ready to Show Up Where AI Is Sending Your Customers?"
+      ctaText="Whether you need an audit of your current AI visibility, a full entity and content overhaul, or ongoing tracking across multiple AI platforms, the right approach depends on where you stand today. Let's talk through your current visibility and scope what AI search optimization would actually involve."
+      ctaPrimaryText="Talk to an AI Search Specialist"
+      ctaSecondaryText="Get Your Free AI Visibility Audit"
+    />
   );
 }
