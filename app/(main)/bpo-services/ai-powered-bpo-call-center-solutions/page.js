@@ -1,18 +1,18 @@
 import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Bot,
-  Rocket,
-  Building2,
-  Building,
+  Clock,
   ShoppingCart,
-  Handshake,
-  RefreshCw,
+  Rocket,
+  Inbox,
+  Globe,
+  HeartHandshake,
 } from "lucide-react";
 
 export const metadata = {
   title: "AI-Powered BPO & Call Center Solutions | BizzBuzz Creations",
   description:
-    "AI-powered BPO and call center solutions in India — smart call routing, live transcription, and chatbot support layered on trained agents, by BizzBuzz Creations.",
+    "BizzBuzz Creations delivers AI-powered BPO and call center solutions for businesses across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/bpo-services/ai-powered-bpo-call-center-solutions",
@@ -21,132 +21,132 @@ export const metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Rocket,
-    title: "Startups & Early-Stage Businesses",
-    desc: "Startups need customer support that scales without hiring a full floor on day one. We layer AI call routing and chatbot support on a lean human team, letting early-stage businesses handle growing call volume without a large upfront hire.",
-  },
-  {
-    icon: Building2,
-    title: "Small & Medium Businesses",
-    desc: "SMBs often can't justify a dedicated call center but still need reliable customer response. We combine AI-powered triage with a small trained team sized for SMB budgets, giving growing businesses enterprise-style responsiveness without enterprise costs.",
-  },
-  {
-    icon: Building,
-    title: "Enterprises & Large Organizations",
-    desc: "Enterprises need call center operations that handle high volume across multiple departments reliably. We provide AI-powered BPO solutions built for high call volume, strict compliance requirements, and integration with existing CRM and telephony systems.",
+    icon: Clock,
+    title: "Businesses Needing 24/7 Support Without a 24/7 Team",
+    desc: "Round-the-clock support usually means round-the-clock staffing costs, which most businesses can't justify early on. We provide AI-powered call center solutions that deliver continuous coverage without requiring a full overnight team.",
   },
   {
     icon: ShoppingCart,
-    title: "Ecommerce & Retail Brands",
-    desc: "Ecommerce brands face support spikes tied to sales events and shipping delays. We combine AI chatbot triage with trained agents to handle order queries and returns at scale without service quality dropping during peak periods.",
+    title: "Ecommerce Brands Needing Scalable Customer Support",
+    desc: "Ecommerce support volume spikes unpredictably around sales and seasons, straining teams sized for average days. We build AI customer service outsourcing that scales automatically with demand, not a fixed headcount that struggles during peaks.",
   },
   {
-    icon: Handshake,
-    title: "Agencies & Outsourcing Partners",
-    desc: "Agencies managing client support needs a reliable delivery partner behind the scenes. We work as a white-label AI-powered BPO partner, handling call center operations agencies can present as their own without building internal capacity.",
+    icon: Rocket,
+    title: "Startups Needing Enterprise-Grade Support on a Startup Budget",
+    desc: "Startups need support quality that matches larger competitors without the budget larger competitors have. We provide AI BPO services structured to deliver enterprise-level coverage at a cost that fits early-stage budgets.",
   },
   {
-    icon: RefreshCw,
-    title: "Businesses Switching From Another BPO Provider",
-    desc: "Businesses stuck with an underperforming BPO vendor need a careful transition, not a risky cutover. We handle structured handovers from your existing provider, preserving scripts, data, and continuity while upgrading to AI-powered support.",
+    icon: Inbox,
+    title: "Businesses Currently Overwhelmed by Support Ticket Volume",
+    desc: "Growing ticket volume without proportional team growth leads to slower response times and frustrated customers. We implement AI call center company support that handles routine queries instantly, freeing agents for what actually needs a human.",
+  },
+  {
+    icon: Globe,
+    title: "Companies Needing Multilingual, Round-the-Clock Coverage",
+    desc: "Serving customers across languages and time zones with human-only staffing is expensive and difficult to schedule reliably. We build conversational AI BPO solutions that provide consistent, multilingual coverage without complex staffing logistics.",
+  },
+  {
+    icon: HeartHandshake,
+    title: "Businesses Wanting AI Efficiency Without Losing the Human Touch",
+    desc: "Some businesses hesitate on AI support out of concern it will feel cold or mishandle sensitive situations. We build AI voice agent for call center systems designed to escalate to real agents exactly when it matters.",
   },
 ];
 
 const SERVICE_BREAKDOWN = [
   {
     number: "01",
-    title: "Smart Call Routing & Triage",
-    desc: "Calls get directed to the right agent or queue automatically based on the query type, so customers reach someone useful faster instead of bouncing between transfers.",
+    title: "AI Voice Agents & Conversational AI",
+    desc: "Voice AI that handles routine calls naturally, freeing human agents for conversations that genuinely need them.",
     ctaText: "Know Our Services",
     services: [
-      "Smart Call Routing",
-      "IVR Configuration",
-      "Skill-Based Routing",
-      "Queue Management",
-      "Call Prioritization",
-      "Multi-Channel Routing",
-      "Overflow Handling",
-      "Routing Analytics",
+      "AI Voice Agent Setup",
+      "Conversational AI Development",
+      "Natural Language Call Handling",
+      "AI-Powered IVR Systems",
+      "Voice Bot Script Development",
+      "Multilingual AI Voice Support",
+      "AI Voice Agent Training",
+      "Voice AI Performance Tuning",
     ],
   },
   {
     number: "02",
-    title: "AI Transcription & Quality Monitoring",
-    desc: "Real-time transcription gives supervisors and agents a searchable record of every call, making QA, training, and dispute resolution far less painful.",
+    title: "AI-Assisted Customer Support",
+    desc: "AI support tools that resolve common queries instantly while routing complex issues to the right person.",
     ctaText: "Know Our Services",
     services: [
-      "Live Call Transcription",
-      "Sentiment Analysis",
-      "Call Recording",
-      "QA Scoring",
-      "Compliance Monitoring",
-      "Keyword Spotting",
-      "Speech Analytics",
-      "Dispute Resolution Support",
+      "AI Chatbot Implementation",
+      "AI-Assisted Ticket Resolution",
+      "Automated FAQ Handling",
+      "AI Email Response Drafting",
+      "AI-Powered Live Chat",
+      "Sentiment-Aware AI Responses",
+      "AI Knowledge Base Integration",
+      "AI Escalation Triggers",
     ],
   },
   {
     number: "03",
-    title: "AI Chatbot & Virtual Agent Support",
-    desc: "Chatbots handle repetitive, common questions instantly around the clock, freeing your agents to focus on calls that actually need a human touch.",
+    title: "Hybrid AI + Human Agent Teams",
+    desc: "A support model where AI handles volume and trained agents handle nuance, working together seamlessly.",
     ctaText: "Know Our Services",
     services: [
-      "Chatbot Development",
-      "Virtual Agent Setup",
-      "FAQ Automation",
-      "Multi-Language Bots",
-      "Chatbot Training",
-      "Live Chat Integration",
-      "WhatsApp Bot Support",
-      "Escalation Rules",
+      "Hybrid Support Model Design",
+      "Human Agent Training",
+      "AI-to-Human Handoff Workflows",
+      "Agent Augmentation Tools",
+      "Quality Assurance for Hybrid Teams",
+      "Escalation Path Design",
+      "Agent Performance Coaching",
+      "Hybrid Team Scheduling",
     ],
   },
   {
     number: "04",
-    title: "Human Handoff & Agent Support",
-    desc: "When AI hits its limit, the conversation hands off to a trained agent with full context, so customers never have to repeat themselves.",
+    title: "AI Call Routing & Triage",
+    desc: "Calls routed intelligently based on intent and urgency, not a generic queue that treats every call the same.",
     ctaText: "Know Our Services",
     services: [
-      "Seamless Handoff Design",
-      "Agent Training",
-      "Context Transfer Systems",
-      "Escalation Management",
-      "Agent Coaching",
-      "Real-Time Assist Tools",
-      "Supervisor Dashboards",
-      "Performance Reviews",
+      "AI Call Routing",
+      "Intelligent Call Triage",
+      "Priority Queue Management",
+      "Skill-Based Routing Setup",
+      "Call Intent Recognition",
+      "Automated Callback Scheduling",
+      "Call Volume Forecasting",
+      "Routing Performance Analysis",
     ],
   },
   {
     number: "05",
-    title: "Data Security & Compliance",
-    desc: "Call data and transcripts are handled under strict access controls and NDA-backed processes, in line with India's DPDP Act, 2023.",
+    title: "AI Analytics & Quality Monitoring",
+    desc: "Real insight into what's actually happening across every customer interaction, not just call volume counts.",
     ctaText: "Know Our Services",
     services: [
-      "Data Access Controls",
-      "NDA-Backed Handling",
-      "DPDP Act Compliance",
-      "Secure Call Storage",
-      "Access Audit Logs",
-      "Data Retention Policies",
-      "Vendor Risk Management",
-      "Compliance Reporting",
+      "AI-Powered Call Analytics",
+      "Sentiment Analysis Reporting",
+      "Quality Monitoring Automation",
+      "Call Transcription & Insights",
+      "Customer Satisfaction Tracking",
+      "Agent Performance Analytics",
+      "Trend & Issue Detection",
+      "Compliance Monitoring",
     ],
   },
   {
     number: "06",
-    title: "Reporting & Continuous Optimization",
-    desc: "We track call outcomes and sentiment data continuously, refining routing and chatbot responses as real conversations reveal gaps.",
+    title: "Implementation & Ongoing Optimization",
+    desc: "Careful implementation and continuous tuning, since AI support systems improve meaningfully with ongoing attention.",
     ctaText: "Know Our Services",
     services: [
-      "Performance Dashboards",
-      "Call Outcome Tracking",
-      "Sentiment Reporting",
-      "Weekly Reporting",
-      "Chatbot Response Tuning",
-      "Routing Optimization",
-      "Cost-Per-Call Analysis",
-      "Trend Analysis",
+      "BPO Solution Implementation",
+      "System Integration Setup",
+      "Ongoing AI Model Tuning",
+      "Performance Benchmarking",
+      "Monthly Optimization Reviews",
+      "Scalability Planning",
+      "Technology Stack Support",
+      "Continuous Improvement Cycles",
     ],
   },
 ];
@@ -154,94 +154,101 @@ const SERVICE_BREAKDOWN = [
 const ROADMAP_STEPS = [
   {
     number: "01",
-    title: "Discovery & Workflow Mapping",
-    desc: "We study your current call flows and pain points to decide exactly where AI genuinely helps and where human judgment stays essential.",
+    title: "Business & Support Needs Discovery",
+    desc: "We start by understanding your support volume, common query types, and where AI could genuinely help versus where human judgment remains essential.",
   },
   {
     number: "02",
-    title: "AI Tool Configuration & Training",
-    desc: "Routing rules, transcription, and chatbot scripts are configured and trained on your actual product and tone, not a generic template.",
+    title: "AI & Hybrid Model Design",
+    desc: "We design the specific split between AI-handled and human-handled interactions, based on your actual query patterns and customer expectations.",
   },
   {
     number: "03",
-    title: "Agent Recruitment & Training",
-    desc: "We hire and train agents on your scripts, tone, and product, so the human side of the operation matches the AI side from day one.",
+    title: "AI Training & Agent Onboarding",
+    desc: "We train AI systems on your business specifics and onboard human agents on escalation handling, ensuring both sides of the hybrid model work together smoothly.",
   },
   {
     number: "04",
-    title: "Integration & Testing",
-    desc: "We integrate routing, chatbot, and CRM systems, testing the full flow end-to-end before a single live call goes through it.",
+    title: "Integration & System Setup",
+    desc: "We integrate the AI and human support systems with your existing tools, CRM, helpdesk, and communication channels.",
   },
   {
     number: "05",
-    title: "Agent + AI Integration Launch",
-    desc: "Agents and AI tools go live together with close monitoring in the first weeks, so handoffs feel smooth from day one.",
+    title: "Launch & Initial Monitoring",
+    desc: "We launch the hybrid support system with close monitoring in the early weeks, adjusting AI responses and escalation triggers based on real interactions.",
   },
   {
     number: "06",
-    title: "Ongoing Monitoring & Optimization",
-    desc: "We track call outcomes and sentiment data continuously, refining routing and chatbot responses as real conversations reveal gaps.",
+    title: "Ongoing Optimization & Scaling",
+    desc: "We continuously refine AI performance and scale capacity as your support volume grows, based on real performance data.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "AI-Assisted, Human-Led",
-    desc: "We use AI only where it genuinely helps — routing, transcription, first responses — while trained agents handle everything that needs real judgment.",
+    title: "AI Efficiency Without Losing the Human Touch",
+    desc: "We design AI systems to handle routine, repetitive queries while ensuring genuine escalation paths to trained human agents for anything requiring judgment, empathy, or complex problem-solving.",
   },
   {
     number: "02",
-    title: "Faster First Response",
-    desc: "Smart routing and chatbot triage mean customers wait less, even during peak call volumes.",
+    title: "Hybrid Model That Escalates to Real Agents When It Matters",
+    desc: "Our hybrid approach means customers never get stuck in an AI loop for issues that genuinely need a person, since we build clear, fast handoff triggers into every implementation.",
   },
   {
     number: "03",
-    title: "Trained, Dedicated Agents",
-    desc: "The humans behind the AI are trained specifically on your scripts, tone, and product, not a generic floor.",
+    title: "Multilingual, Round-the-Clock Coverage Without Round-the-Clock Headcount",
+    desc: "We deliver 24/7, multilingual support capability that would otherwise require complex shift scheduling and multiple language-specific hires, at a fraction of the traditional staffing cost.",
   },
   {
     number: "04",
-    title: "Transparent Reporting",
-    desc: "Call recordings, transcripts, and sentiment reports are available on request, not locked behind a monthly summary.",
+    title: "AI Trained on Your Business, Not Generic Scripts",
+    desc: "We train AI voice agents and chatbots on your actual products, policies, and common queries, rather than deploying generic scripts that frustrate customers with irrelevant answers.",
   },
   {
     number: "05",
-    title: "Data Security First",
-    desc: "NDA available before any project details or access are shared, with handling built around India's DPDP Act, 2023.",
+    title: "Analytics That Show What's Actually Being Resolved",
+    desc: "We provide clear reporting on resolution rates, sentiment, and escalation patterns, giving you genuine visibility into support quality rather than just call volume statistics.",
   },
   {
     number: "06",
-    title: "Scalable Engagement",
-    desc: "We scale AI and agent capacity with your business, not ahead of it — start small and add capacity as workload actually grows.",
+    title: "Scalable Support That Grows With Your Business, Not Ahead of It",
+    desc: "We scope AI-powered BPO capacity to match your actual current needs, with clear scaling paths as your business grows, rather than overselling capability you don't yet need.",
   },
 ];
 
 const FAQS = [
   {
-    question: "What is an AI-powered BPO?",
+    question:
+      "What is AI-powered BPO, and how is it different from a regular call center?",
     answer:
-      "It combines human agents with AI tools like smart routing, live transcription, and chatbots to deliver faster, more cost-efficient support without losing the human touch where it matters.",
+      "AI-powered BPO combines AI tools, voice agents, chatbots, automated routing, with trained human agents, handling routine queries automatically while escalating complex issues to people. Traditional call centers rely entirely on human agents for every interaction, which is typically more expensive and harder to scale quickly.",
   },
   {
-    question: "Will AI replace human agents on my account?",
+    question: "Will customers know they're talking to AI, not a human?",
     answer:
-      "No — AI handles repetitive, high-volume tasks, while trained agents handle everything that needs real judgment, empathy, or complex problem-solving.",
+      "This depends on your preference and industry, some businesses disclose AI interaction clearly, while others prefer a seamless experience with transparent escalation when needed. We configure this based on what fits your brand and regulatory requirements.",
   },
   {
-    question: "Is my call and customer data secure with AI tools involved?",
+    question: "How much does AI-powered BPO cost in India?",
     answer:
-      "Yes, we follow NDAs, strict access controls, and data handling practices aligned with India's DPDP Act, 2023, regardless of which tools are used.",
+      "Cost depends on scope, call volume, and the specific mix of AI and human agent support needed. We scope pricing after understanding your current support volume and requirements, rather than offering a flat rate upfront.",
   },
   {
-    question: "Can your AI tools integrate with our existing systems?",
+    question: "Can AI handle complex queries, or just simple ones?",
     answer:
-      "Yes, we configure routing, transcription, and chatbot tools to work with your existing CRM, helpdesk, or telephony setup wherever possible.",
+      "AI handles routine, pattern-based queries well but is deliberately routed to human agents for complex, sensitive, or judgment-requiring situations. We design escalation triggers specifically to catch these cases rather than letting AI attempt everything.",
   },
   {
-    question: "How much does an AI-powered BPO setup cost?",
+    question:
+      "How do you ensure quality when AI is handling customer interactions?",
     answer:
-      "Costs depend on call volume, the AI tools needed, and team size — we scope every engagement and give you a clear, tailored quote.",
+      "We monitor AI performance through sentiment analysis, resolution tracking, and regular quality reviews, adjusting training and scripts based on real interaction data. Human oversight remains part of the ongoing quality process, not a one-time setup.",
+  },
+  {
+    question: "Can we start with a hybrid model and increase AI usage over time?",
+    answer:
+      "Yes, most clients start with a conservative AI-to-human ratio and expand AI usage gradually as confidence and performance data build, rather than shifting entirely to AI from day one.",
   },
 ];
 
@@ -251,26 +258,27 @@ export default function AiPoweredBpoCallCenterSolutions() {
       sectionLabel="BPO Services"
       label="AI-Powered BPO & Call Center Solutions"
       icon={Bot}
-      description="Smart call routing, live transcription, and chatbot support layered on real, trained agents — so your team only steps in when a call truly needs a human touch."
-      heroTitle="AI-Powered BPO & Call Center Solutions in India"
-      heroDescription="Smart call routing, live transcription, and chatbot support layered on real, trained agents — so your team only steps in when a call truly needs a human touch."
-      capabilitiesHeading="Built for Businesses Ready to Modernize Customer Support"
+      description="AI-powered BPO and call center solutions built to scale support without scaling headcount, backed by trained human agents."
+      heroTitle="Get Support That Scales, Powered by AI and Real Agents"
+      heroDescription="AI-powered BPO and call center solutions built to scale support without scaling headcount, backed by trained human agents."
+      heroCtaText="Get a Free BPO Solutions Consultation"
+      capabilitiesHeading="Built for Businesses Ready to Scale Support Without Scaling Cost"
       capabilities={CAPABILITIES}
-      serviceBreakdownHeading="Everything That Goes Into Our AI-Powered BPO Solutions"
+      serviceBreakdownHeading="Everything Between a Customer Query and a Resolved Ticket"
       serviceBreakdown={SERVICE_BREAKDOWN}
-      differentiatorsHeading="Why Businesses Trust Us to Run Their AI-Powered BPO Operations"
+      differentiatorsHeading="Why Businesses Trust Us With AI-Powered BPO"
       differentiators={DIFFERENTIATORS}
-      roadmapCarouselHeading="How We Turn Your Support Requirements Into a Working AI-Powered Operation"
+      roadmapCarouselHeading="How We Combine AI Speed With Trained Human Agents"
       roadmapCarouselSteps={ROADMAP_STEPS}
       showStats={false}
-      localityHeading="Based in Prayagraj, Running AI-Powered Support Worldwide"
-      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we build every AI-powered BPO engagement, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, blending AI tools with trained human agents sized to each business's actual call volume. For businesses looking to outsource support beyond India, we run AI-powered BPO operations remotely, working across time zones to deliver the same standard of service regardless of location. Whether you're a startup handling your first support inbox or an enterprise running a multi-department call center, our approach starts with the same question: where does AI genuinely help, and where does a trained human need to take over."
+      localityHeading="Based in Prayagraj, Delivering AI BPO Solutions Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every BPO implementation, with the same attention to quality whether a client is nearby or across the world. We provide AI-powered call center solutions for businesses across India, built around each business's specific support volume and customer needs. For businesses looking for AI customer service outsourcing beyond India, we support clients worldwide remotely, delivering the same conversational AI BPO solutions standard of work regardless of time zone. Whether you're a startup in Prayagraj or an ecommerce brand anywhere else scaling support, our approach starts with the same question: where does AI genuinely help, and where does your business still need a real person."
       faqs={FAQS}
       showWhyChooseUs={false}
-      ctaHeading="Ready for Support That Scales With AI, Not Against Your Budget?"
-      ctaText="Whether you need routing and chatbot support layered onto your current team, a full AI-powered call center built from scratch, or a careful migration from your existing BPO provider, the right setup depends on your actual call volume and workflow. Let's talk through your requirements and scope what an AI-powered BPO setup would actually involve."
+      ctaHeading="Ready for Support That Scales Without Breaking Your Budget?"
+      ctaText="Whether you're overwhelmed by ticket volume, need genuine 24/7 coverage, or want AI efficiency without losing the human touch, hiring an entire in-house support team was never the only option. Let's talk through your current support needs and scope what AI-powered BPO would actually involve."
       ctaPrimaryText="Talk to a BPO Solutions Specialist"
-      ctaSecondaryText="Get Your Free BPO Consultation"
+      ctaSecondaryText="Get Your Free BPO Solutions Consultation"
     />
   );
 }

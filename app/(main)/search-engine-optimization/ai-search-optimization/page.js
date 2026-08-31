@@ -1,18 +1,18 @@
 import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Bot,
-  Rocket,
+  Search,
   Building2,
-  Building,
+  MapPin,
   ShoppingCart,
+  Newspaper,
   Handshake,
-  RefreshCw,
 } from "lucide-react";
 
 export const metadata = {
   title: "AI Search Optimization Services | BizzBuzz Creations",
   description:
-    "AI search optimization in India — get your website understood, trusted, and recommended by AI-driven platforms like Google AI Overviews and ChatGPT, by BizzBuzz Creations.",
+    "BizzBuzz Creations offers AI search optimization services that improve visibility across AI search results in India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/search-engine-optimization/ai-search-optimization",
@@ -21,132 +21,132 @@ export const metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Rocket,
-    title: "Startups & Early-Stage Businesses",
-    desc: "Startups launching into a crowded market need visibility wherever people are actually searching, including inside AI tools. We build AI search optimization into the content plan from day one, so startups aren't playing catch-up later.",
+    icon: Search,
+    title: "Businesses Relying Heavily on Organic Search Traffic",
+    desc: "Businesses that depend on organic search are already seeing traffic shift toward AI-generated answers that never send a click through. We provide ai search optimization services built to keep your business visible as search itself changes shape.",
   },
   {
     icon: Building2,
-    title: "Small & Medium Businesses",
-    desc: "SMBs often have zero presence inside AI-generated answers even when they rank well on Google. We size AI search optimization for SMB budgets, focused on the entity signals that matter most for smaller sites.",
+    title: "B2B & SaaS Companies Being Researched via AI Tools",
+    desc: "Buyers increasingly research vendors by asking AI tools directly, rather than clicking through a list of search results. We help B2B and SaaS companies optimize for ai search so they show up when a buyer asks an AI tool for a recommendation.",
   },
   {
-    icon: Building,
-    title: "Enterprises & Large Organizations",
-    desc: "Enterprises need consistent, accurate representation across every AI platform customers might ask about them. We run AI search optimization at enterprise scale, covering multiple product lines and markets consistently.",
+    icon: MapPin,
+    title: "Local Businesses Needing AI Visibility Alongside Google",
+    desc: "Local searches are increasingly answered directly by AI overviews, not just a list of nearby businesses. We build ai search visibility agency strategies that keep local businesses visible in both traditional and AI-generated local results.",
   },
   {
     icon: ShoppingCart,
-    title: "Ecommerce & Retail Brands",
-    desc: "Shoppers increasingly ask AI tools for product recommendations before searching Google directly. We optimize product and category content so AI platforms can confidently recommend your store for relevant queries.",
+    title: "Ecommerce Brands Needing Product Visibility in AI Answers",
+    desc: "Shoppers are starting to ask AI tools for product recommendations directly, bypassing traditional product search entirely. We optimize product content so ecommerce brands can rank in AI search results, not just standard search listings.",
+  },
+  {
+    icon: Newspaper,
+    title: "Content Publishers & Blogs Losing Traffic to AI Summaries",
+    desc: "Publishers are seeing real traffic loss as AI search engines summarize content instead of sending readers to the source. We help publishers restructure content to remain a cited, visible source rather than an invisible input.",
   },
   {
     icon: Handshake,
-    title: "Agencies Needing an AI SEO Partner",
-    desc: "Marketing agencies need a specialist partner as AI search reshapes how clients get discovered. We work as a white-label AI search optimization partner, handling the technical and content work agencies can present as their own.",
-  },
-  {
-    icon: RefreshCw,
-    title: "Businesses Invisible in AI Search Today",
-    desc: "Businesses that rank on Google but never appear in AI answers are losing a growing share of visibility. We audit why you're currently invisible in AI search and rebuild the signals AI platforms actually look for.",
+    title: "Agencies Needing AI Search Strategy for Their Own Clients",
+    desc: "Agencies are increasingly asked by clients about AI search visibility without necessarily having the specialized expertise yet. We provide ai search engine optimization company support agencies can bring to their own client relationships.",
   },
 ];
 
 const SERVICE_BREAKDOWN = [
   {
     number: "01",
-    title: "AI Overview & Answer Visibility",
-    desc: "We structure your content so Google AI Overviews and other AI answer boxes can pull from it directly, keeping your brand visible even in zero-click results.",
+    title: "AI Search Strategy & Audits",
+    desc: "A clear picture of where your business currently stands across AI search platforms, and what actually needs to change.",
     ctaText: "Know Our Services",
     services: [
-      "AI Overview Optimization",
-      "Zero-Click Content Structuring",
-      "Answer Box Formatting",
-      "Featured Snippet Alignment",
-      "Direct-Answer Content Blocks",
-      "AI Overview Tracking",
-      "Content Chunking for AI",
-      "Answer Visibility Reporting",
+      "AI Search Visibility Audit",
+      "AI Search Readiness Assessment",
+      "Competitor AI Visibility Analysis",
+      "AI Search Opportunity Mapping",
+      "Content Gap Analysis for AI",
+      "AI Search Strategy Development",
+      "Query Intent Mapping",
+      "AI Search KPI Planning",
     ],
   },
   {
     number: "02",
-    title: "LLM & Chatbot Discoverability",
-    desc: "We optimize how your business appears when people ask AI tools like ChatGPT or Gemini for recommendations in your industry.",
+    title: "Content Structuring for AI Retrieval",
+    desc: "Content restructured the way AI models actually retrieve and summarize information, not just formatted for human scanning.",
     ctaText: "Know Our Services",
     services: [
-      "ChatGPT Visibility Optimization",
-      "Gemini Visibility Optimization",
-      "Perplexity Optimization",
-      "LLM Training Data Signals",
-      "Brand Mention Building",
-      "Recommendation Testing",
-      "Cross-Platform Query Testing",
-      "Chatbot Answer Auditing",
+      "AI-Friendly Content Structuring",
+      "Question-Based Content Formatting",
+      "Structured Data Implementation",
+      "Content Chunking for AI Retrieval",
+      "Clear Answer Formatting",
+      "FAQ & Q&A Content Development",
+      "Content Clarity Optimization",
+      "Source Citation Optimization",
     ],
   },
   {
     number: "03",
-    title: "Entity & Structured Data Setup",
-    desc: "Schema markup and clear entity signals help AI systems correctly understand who you are, what you offer, and why you're credible.",
+    title: "AI Search Visibility Across Platforms",
+    desc: "Optimization across the specific AI tools your audience is actually using to search and research.",
     ctaText: "Know Our Services",
     services: [
-      "Schema Markup Implementation",
-      "Entity Optimization",
-      "Organization Markup",
-      "Knowledge Panel Optimization",
-      "Structured Data Audits",
-      "Product & Service Schema",
-      "FAQ Schema Setup",
-      "Entity Consistency Checks",
+      "ChatGPT Search Optimization",
+      "Perplexity Search Optimization",
+      "Google AI Overviews Optimization",
+      "Gemini Search Optimization",
+      "Bing Copilot Optimization",
+      "Multi-Platform AI Visibility Strategy",
+      "LLM Search Optimization",
+      "Cross-Platform Consistency Checks",
     ],
   },
   {
     number: "04",
-    title: "Trust & Authority Signals",
-    desc: "AI platforms favor sources they trust. We strengthen the credibility signals — citations, reviews, consistent facts — that AI systems weigh before recommending you.",
+    title: "Technical Optimization for AI Crawlers",
+    desc: "A technical foundation that makes your content genuinely accessible to AI crawlers, not just search engine bots.",
     ctaText: "Know Our Services",
     services: [
-      "Citation Building",
-      "Review Signal Strengthening",
-      "Fact Consistency Audits",
-      "Author Credibility Signals",
-      "Backlink Trust Building",
-      "Third-Party Mention Building",
-      "Brand Consistency Audits",
-      "Trust Signal Reporting",
+      "AI Crawler Accessibility Audits",
+      "Robots.txt & AI Crawler Configuration",
+      "Schema Markup Implementation",
+      "Site Speed for AI Indexing",
+      "Crawlability Optimization",
+      "XML Sitemap Optimization",
+      "Technical SEO for AI Search",
+      "Structured Content Architecture",
     ],
   },
   {
     number: "05",
-    title: "AI Visibility Tracking",
-    desc: "We monitor how and where your brand shows up across AI search tools, not just traditional Google rankings, so you can see the real impact.",
+    title: "Brand & Entity Presence Building",
+    desc: "A brand presence that extends beyond your website, since AI tools draw on sources across the entire web.",
     ctaText: "Know Our Services",
     services: [
-      "AI Visibility Dashboards",
-      "Multi-Platform Query Monitoring",
-      "Citation Tracking",
-      "Competitor AI Visibility Tracking",
-      "Monthly Visibility Reports",
-      "Prompt Testing",
-      "Visibility Trend Analysis",
-      "Alert-Based Monitoring",
+      "Brand Entity Optimization",
+      "Knowledge Panel Optimization",
+      "Digital PR for AI Visibility",
+      "Third-Party Mention Building",
+      "Wikipedia & Wikidata Presence",
+      "Authoritative Backlink Building",
+      "Brand Consistency Across the Web",
+      "Entity Relationship Building",
     ],
   },
   {
     number: "06",
-    title: "Continuous AI Algorithm Adaptation",
-    desc: "AI search evolves fast. We keep adjusting your strategy as platforms change how they source and rank information.",
+    title: "AI Search Monitoring & Reporting",
+    desc: "Ongoing tracking of where and how your brand actually appears across AI search platforms.",
     ctaText: "Know Our Services",
     services: [
-      "Algorithm Change Monitoring",
-      "Strategy Adjustment Cycles",
-      "Platform Update Tracking",
-      "Ongoing Content Refreshes",
-      "Testing New AI Platforms",
-      "Adaptive Content Strategy",
-      "Quarterly Strategy Reviews",
-      "Emerging Platform Coverage",
+      "AI Search Ranking Monitoring",
+      "AI Citation Tracking",
+      "Visibility Reporting Across Platforms",
+      "Competitor Benchmarking",
+      "Content Performance in AI Answers",
+      "Monthly AI Search Reports",
+      "Strategy Refinement Based on Data",
+      "AI Search Trend Monitoring",
     ],
   },
 ];
@@ -154,94 +154,99 @@ const SERVICE_BREAKDOWN = [
 const ROADMAP_STEPS = [
   {
     number: "01",
-    title: "AI Visibility Audit",
-    desc: "We check how your business currently appears — or doesn't — across Google AI Overviews, ChatGPT, and other AI search tools.",
+    title: "AI Search Visibility Audit",
+    desc: "We assess your current visibility across major AI search platforms, identifying where you currently appear, where you're missing, and why.",
   },
   {
     number: "02",
-    title: "Entity & Content Structuring",
-    desc: "We restructure key pages and add schema so AI systems can clearly parse who you are and what you offer.",
+    title: "Content & Technical Gap Analysis",
+    desc: "We identify what's preventing your content from being retrieved and cited properly, covering both content structure and technical accessibility.",
   },
   {
     number: "03",
-    title: "Authority & Trust Building",
-    desc: "We strengthen citations, reviews, and consistent facts about your business across the web, which AI platforms use to judge credibility.",
+    title: "Strategy & Structuring Plan",
+    desc: "We build a plan for restructuring content and building the technical foundation AI search visibility actually requires.",
   },
   {
     number: "04",
-    title: "Content Publishing & Optimization",
-    desc: "We publish and refine content built specifically to be understood and cited by AI systems, not just traditional search crawlers.",
+    title: "Content & Technical Implementation",
+    desc: "We implement content restructuring, schema markup, and technical fixes according to the strategy, prioritizing your highest-opportunity content first.",
   },
   {
     number: "05",
-    title: "Cross-Platform Testing",
-    desc: "We test how your business appears across multiple AI platforms with real queries, identifying gaps before customers do.",
+    title: "Entity & Authority Building",
+    desc: "We build brand presence and authority signals across relevant third-party sources, extending your visibility beyond your own website.",
   },
   {
     number: "06",
-    title: "Monitor & Refine",
-    desc: "We track your AI search visibility monthly and adjust as platforms change how they source and present answers.",
+    title: "Monitoring & Ongoing Optimization",
+    desc: "We track AI search visibility over time, adjusting strategy as platforms and algorithms continue to evolve.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "Built for How Search Works Now",
-    desc: "We optimize for AI Overviews, chatbot answers, and zero-click search, not just traditional blue-link rankings.",
+    title: "AI Search Optimization Built for How Search Is Actually Changing",
+    desc: "We treat AI search as a genuine shift in how people find information, not a temporary trend, building strategy around where search behavior is actually heading rather than optimizing exclusively for traditional rankings.",
   },
   {
     number: "02",
-    title: "Entity-First Approach",
-    desc: "We make sure AI systems can clearly identify your business as a credible entity in your space, not just a page of text.",
+    title: "Multi-Platform Strategy, Not Just One AI Tool",
+    desc: "We optimize across ChatGPT, Perplexity, Google AI Overviews, and other relevant platforms, since your audience isn't using just one AI tool, and neither should your visibility strategy be limited to just one.",
   },
   {
     number: "03",
-    title: "Trust Signal Focused",
-    desc: "We strengthen the citations and consistency signals that AI platforms weigh before recommending a source.",
+    title: "Technical Foundation That Makes Content Actually Retrievable",
+    desc: "We ensure AI crawlers can actually access and parse your content correctly, since even excellent content that AI systems can't retrieve properly won't show up in AI-generated answers regardless of quality.",
   },
   {
     number: "04",
-    title: "Cross-Platform Visibility",
-    desc: "We track and optimize for visibility across multiple AI tools, not just one platform.",
+    title: "Content Structured the Way AI Models Actually Read It",
+    desc: "We format content around clear, citable answers rather than traditional SEO structure alone, because AI systems retrieve and summarize information differently than a person scanning a search results page.",
   },
   {
     number: "05",
-    title: "Data-Driven Execution",
-    desc: "Every recommendation is backed by real visibility data, not assumptions about how AI search works.",
+    title: "Entity and Brand Presence Built Beyond Your Own Website",
+    desc: "We build authority signals across third-party sources, since AI tools draw on information from across the web, not just your own site, when generating answers about your business or industry.",
   },
   {
     number: "06",
-    title: "Honest Reporting",
-    desc: "No agency can guarantee AI citations, and we won't pretend otherwise — you get transparent, honest progress reports instead.",
+    title: "Transparent Reporting on Visibility You Can Actually See",
+    desc: "We track and report on actual AI citations and mentions, giving you real evidence of visibility rather than vague assurances about an emerging channel that's genuinely difficult to measure without the right tools.",
   },
 ];
 
 const FAQS = [
   {
-    question: "What is AI search optimization?",
+    question: "What is AI search optimization, and how is it different from SEO?",
     answer:
-      "It's the practice of structuring and strengthening your online presence so AI-driven platforms like Google AI Overviews and ChatGPT understand, trust, and recommend your business.",
+      "AI search optimization focuses specifically on getting content retrieved and cited by AI-generated answers, like Google AI Overviews or ChatGPT responses, rather than just ranking in traditional search results. It shares foundations with SEO but requires different content structuring and technical considerations specific to how AI systems retrieve information.",
   },
   {
-    question: "How is AI search optimization different from traditional SEO?",
+    question: "How do you rank in AI search results like ChatGPT or Google AI Overviews?",
     answer:
-      "Traditional SEO targets ranking positions on a search results page; AI search optimization also targets being cited or recommended directly inside AI-generated answers.",
+      "Ranking in AI search involves clear, well-structured content, technical accessibility for AI crawlers, and strong authority signals across the web, since AI systems draw on multiple sources when generating answers. There's no single trick, it's a combination of content quality, structure, and broader online presence.",
   },
   {
-    question: "Can you guarantee my business appears in AI answers?",
+    question: "How much does AI search optimization cost in India?",
     answer:
-      "No ethical agency can guarantee AI citations, but the right entity structuring and trust signals meaningfully improve your odds of being referenced.",
+      "Cost depends on scope, whether you need a full strategy including content restructuring and authority building, or a lighter technical audit and fix. We scope pricing after understanding your current visibility and specific goals, rather than offering a flat rate upfront.",
   },
   {
-    question: "How long does AI search optimization take to show results?",
+    question: "Can AI search optimization work alongside our existing SEO?",
     answer:
-      "Some visibility improvements can appear within weeks, but building strong, lasting authority signals typically takes a few months.",
+      "Yes, AI search optimization complements traditional SEO rather than replacing it, since both traditional search and AI-generated answers remain relevant channels. Many of the technical and content improvements benefit both simultaneously.",
   },
   {
-    question: "Do I still need traditional SEO alongside AI search optimization?",
+    question: "How do you measure whether AI search optimization is working?",
     answer:
-      "Yes, traditional SEO and AI search optimization work together — a technically strong, well-ranked site gives AI systems more to work with.",
+      "We track actual citations and mentions across AI platforms, along with any traceable referral traffic, giving you real evidence of visibility. This remains a genuinely evolving measurement space, and we're transparent about what can and can't be tracked precisely.",
+  },
+  {
+    question: "How long does it take to see results from AI search optimization?",
+    answer:
+      "Timeline varies since this is an emerging, fast-changing space, but initial technical and content improvements can show visibility changes within a few weeks, while broader authority building typically takes longer to compound meaningfully across platforms.",
   },
 ];
 
@@ -251,26 +256,27 @@ export default function AiSearchOptimization() {
       sectionLabel="SEO Services"
       label="AI Search Optimization"
       icon={Bot}
-      description="AI is transforming how people search, and your business needs to adapt to stay visible. We optimize your website for AI-driven platforms so your content gets understood, trusted, and recommended."
-      heroTitle="AI Search Optimization Services in India"
-      heroDescription="AI is transforming how people search, and your business needs to adapt to stay visible. We optimize your website for AI-driven platforms so your content gets understood, trusted, and recommended."
-      capabilitiesHeading="Built for Businesses Ready to Be Found Inside AI Answers"
+      description="AI search optimization is built to get your business found in AI-generated answers, not just standard search rankings, and engineered for how search is changing."
+      heroTitle="Get Visible in AI Search, Not Just Traditional Google Results"
+      heroDescription="AI search optimization is built to get your business found in AI-generated answers, not just standard search rankings, and engineered for how search is changing."
+      heroCtaText="Get a Free AI Search Visibility Audit"
+      capabilitiesHeading="Built for Businesses Not Ready to Disappear From AI Answers"
       capabilities={CAPABILITIES}
-      serviceBreakdownHeading="Everything That Goes Into Our AI Search Optimization"
+      serviceBreakdownHeading="Everything Between Your Content and an AI-Generated Answer"
       serviceBreakdown={SERVICE_BREAKDOWN}
-      differentiatorsHeading="Why Businesses Trust Us to Build Their AI Search Visibility"
+      differentiatorsHeading="Why Businesses Trust Us With AI Search Visibility"
       differentiators={DIFFERENTIATORS}
-      roadmapCarouselHeading="How We Turn Your Content Into an AI-Trusted Source"
+      roadmapCarouselHeading="How We Get Your Business Into AI Search Results"
       roadmapCarouselSteps={ROADMAP_STEPS}
       showStats={false}
-      localityHeading="Based in Prayagraj, Building AI Search Visibility Worldwide"
-      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every AI search optimization engagement, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, building AI visibility sized to each business's actual market and competition. For businesses looking to improve AI search visibility beyond India, we deliver this work remotely, tracking visibility across platforms and time zones to the same standard regardless of location. Whether you're a startup appearing in AI answers for the first time or an enterprise protecting visibility across multiple markets, our approach starts with auditing where you actually stand today."
+      localityHeading="Based in Prayagraj, Optimizing for AI Search Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach AI search optimization for every client, with the same technical rigor whether a client is nearby or across the world. We provide ai search optimization services for businesses across India, helping them stay visible as search behavior shifts toward AI-generated answers. For businesses looking for an ai search visibility agency beyond India, we support clients worldwide remotely, delivering the same ai search engine optimization company standard of work regardless of time zone. Whether you're a local business in Prayagraj or a SaaS company anywhere else being researched through AI tools, our approach starts with the same question: how is your specific audience actually searching now."
       faqs={FAQS}
       showWhyChooseUs={false}
-      ctaHeading="Ready to Show Up Where AI Is Sending Your Customers?"
-      ctaText="Whether you need an audit of your current AI visibility, a full entity and content overhaul, or ongoing tracking across multiple AI platforms, the right approach depends on where you stand today. Let's talk through your current visibility and scope what AI search optimization would actually involve."
-      ctaPrimaryText="Talk to an AI Search Specialist"
-      ctaSecondaryText="Get Your Free AI Visibility Audit"
+      ctaHeading="Ready to Show Up Where Search Is Actually Heading?"
+      ctaText="Whether your traffic is already shifting toward AI-generated answers, your content isn't being retrieved properly, or you simply haven't started thinking about AI search visibility yet, traditional rankings alone are no longer the full picture. Let's audit your current visibility and scope what AI search optimization would actually involve."
+      ctaPrimaryText="Talk to an AI Search Optimization Specialist"
+      ctaSecondaryText="Get Your Free AI Search Visibility Audit"
     />
   );
 }

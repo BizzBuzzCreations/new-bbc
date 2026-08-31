@@ -1,18 +1,18 @@
 import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Atom,
-  Rocket,
-  Building2,
-  Building,
+  Gauge,
   Layers,
-  Handshake,
+  LayoutDashboard,
+  Smartphone,
   RefreshCw,
+  Building,
 } from "lucide-react";
 
 export const metadata = {
-  title: "React & Next.js Development Company | BizzBuzz Creations",
+  title: "React & Next.js Development Agency | BizzBuzz Creations",
   description:
-    "High-performing, AI-integrated React and Next.js development in India — server-side rendering, fast page speed, and scalable frontends by BizzBuzz Creations.",
+    "BizzBuzz Creations is a React & Next.js development agency building fast, scalable web apps for businesses across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/web-development/react-nextjs-development",
@@ -21,132 +21,132 @@ export const metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Rocket,
-    title: "Startups & Early-Stage Businesses",
-    desc: "Startups need a frontend that can iterate fast as the product changes direction. We build on React and Next.js's component architecture, letting startups ship new features and pages without a rebuild every time the roadmap shifts.",
-  },
-  {
-    icon: Building2,
-    title: "Small & Medium Businesses",
-    desc: "SMBs often need a fast, SEO-friendly site that a template can't quite deliver. We build custom React and Next.js frontends sized for SMB budgets, giving growing businesses speed and search visibility without enterprise overhead.",
-  },
-  {
-    icon: Building,
-    title: "Enterprises & Large Organizations",
-    desc: "Enterprises need frontends that handle high traffic and integrate with existing backend systems reliably. We build Next.js applications structured for enterprise-scale traffic, strict performance requirements, and integration with existing APIs.",
+    icon: Gauge,
+    title: "Businesses Needing a Fast, SEO-Friendly Website",
+    desc: "Slow-loading websites lose both visitors and search rankings before a business ever gets a chance to convert them. We provide Next.js website development services built specifically for speed and search visibility, so pages load instantly and rank the way they should.",
   },
   {
     icon: Layers,
-    title: "SaaS & Product Companies",
-    desc: "SaaS companies need a marketing site and product app that work together seamlessly. We build React and Next.js frontends covering both the public-facing site and the authenticated product experience as one connected system.",
+    title: "SaaS & Product Companies Needing a React Frontend",
+    desc: "SaaS products need an interface that feels fast and responsive, since a sluggish frontend undermines the product experience. We build custom React web app development projects for SaaS companies, built around real-time interactions and complex product interfaces.",
   },
   {
-    icon: Handshake,
-    title: "Agencies Needing a Frontend Partner",
-    desc: "Design and marketing agencies often need a technical frontend partner to build what they've designed. We work as a white-label or direct React and Next.js development partner, delivering builds agencies can present as their own.",
+    icon: LayoutDashboard,
+    title: "Businesses Needing Custom Web Applications",
+    desc: "Businesses needing interactive dashboards, portals, or tools need a frontend framework built for complexity, not a simple template. We use React to build applications that handle real data, user interaction, and complex state without becoming unmanageable.",
+  },
+  {
+    icon: Smartphone,
+    title: "Startups Needing a Mobile App",
+    desc: "Startups needing both a website and a mobile app often can't justify building two separate codebases from scratch. We provide React Native app development company services that share logic across web and mobile, reducing both cost and development time.",
   },
   {
     icon: RefreshCw,
-    title: "Businesses Migrating From Older Frontends",
-    desc: "Businesses on outdated frontend stacks or slow-loading sites need a careful, SEO-safe migration to React or Next.js. We handle structured migrations, preserving rankings and content while upgrading the underlying technology.",
+    title: "Businesses Migrating From Legacy Frontend Frameworks",
+    desc: "Businesses stuck on outdated jQuery, Angular, or older React codebases need a careful migration path, not a risky full rebuild. We handle migration to modern React and Next.js incrementally, preserving what works while modernizing what doesn't.",
+  },
+  {
+    icon: Building,
+    title: "Enterprises Needing Scalable, Component-Based Architecture",
+    desc: "Enterprises need a frontend that stays maintainable as teams and features grow, not a codebase that becomes harder to touch over time. We build component-based React architecture designed for multiple developers to work in without breaking each other's work.",
   },
 ];
 
 const SERVICE_BREAKDOWN = [
   {
     number: "01",
-    title: "Custom React & Next.js Frontends",
-    desc: "We build interactive, component-based frontends tailored to your product, moving beyond static pages into fast, app-like user experiences.",
+    title: "React.js Web Application Development",
+    desc: "Custom React web app development built around real interactivity, from dashboards to complex, data-driven interfaces.",
     ctaText: "Know Our Services",
     services: [
-      "Custom Frontend Development",
+      "Custom React Web App Development",
+      "React Frontend Development",
+      "Single Page Application Development",
+      "React Dashboard Development",
+      "React State Management",
       "Component-Based Architecture",
-      "React Application Development",
-      "Next.js Application Development",
-      "Interactive UI Development",
-      "Single Page Application Builds",
-      "Progressive Web App Development",
-      "Frontend Documentation",
+      "React UI Development",
+      "React Testing & QA",
     ],
   },
   {
     number: "02",
-    title: "Server-Side Rendering & SEO",
-    desc: "Next.js's server-side rendering boosts load speed and Google ranking, so your React application doesn't sacrifice SEO for interactivity.",
+    title: "Next.js Website Development",
+    desc: "Next.js website development services combining React's interactivity with the speed and SEO benefits Next.js is built for.",
     ctaText: "Know Our Services",
     services: [
-      "Server-Side Rendering Setup",
-      "Static Site Generation",
-      "Incremental Static Regeneration",
-      "Technical SEO for React Apps",
-      "Metadata & Schema Setup",
-      "Core Web Vitals Optimization",
-      "Sitemap & Indexing Setup",
-      "SEO Migration Support",
+      "Next.js Website Development Services",
+      "Server-Side Rendering (SSR)",
+      "Static Site Generation (SSG)",
+      "Next.js SEO Optimization",
+      "Next.js API Routes Development",
+      "Next.js E-commerce Development",
+      "Headless CMS Integration",
+      "Next.js Performance Optimization",
     ],
   },
   {
     number: "03",
-    title: "Headless CMS & API Integration",
-    desc: "We connect your frontend to a headless CMS or existing backend and APIs, integrating seamlessly with your current team and systems.",
+    title: "React Native App Development",
+    desc: "React Native app development company services building a single codebase that works across both iOS and Android.",
     ctaText: "Know Our Services",
     services: [
-      "Headless CMS Integration",
-      "REST & GraphQL API Integration",
-      "Backend Integration",
-      "Content Modeling",
-      "Third-Party Service Integration",
-      "Authentication Integration",
-      "Data Fetching Strategy",
-      "API Documentation Support",
+      "React Native App Development",
+      "Cross-Platform Mobile Development",
+      "iOS App Development (React Native)",
+      "Android App Development (React Native)",
+      "React Native API Integration",
+      "App Store Deployment Support",
+      "React Native Performance Tuning",
+      "App Maintenance & Updates",
     ],
   },
   {
     number: "04",
-    title: "Performance Optimization",
-    desc: "Code-splitting, image optimization, and caching strategies keep your React and Next.js app fast even as features and traffic grow.",
+    title: "Custom React Component Development",
+    desc: "Custom, reusable components built to your design system, so your interface stays consistent as the product grows.",
     ctaText: "Know Our Services",
     services: [
-      "Code Splitting",
-      "Image Optimization",
-      "Caching Strategy Setup",
-      "Bundle Size Optimization",
-      "Lazy Loading Implementation",
-      "Performance Auditing",
-      "Core Web Vitals Monitoring",
-      "Load Testing",
+      "Custom React Component Development",
+      "Reusable UI Component Libraries",
+      "Design System Implementation",
+      "Third-Party Library Integration",
+      "Custom Hooks Development",
+      "Component Documentation",
+      "Accessibility-Focused Components",
+      "Component Performance Optimization",
     ],
   },
   {
     number: "05",
-    title: "AI-Integrated Features",
-    desc: "From chat interfaces to smart recommendations, we build AI-integrated frontends that add real functionality, not just novelty.",
+    title: "React/Next.js Migration & Modernization",
+    desc: "Migration from legacy frameworks or older React codebases to modern, maintainable React and Next.js architecture.",
     ctaText: "Know Our Services",
     services: [
-      "AI Chat Interface Development",
-      "Recommendation Engine Integration",
-      "AI API Integration",
-      "Personalization Features",
-      "Smart Search Implementation",
-      "AI-Assisted Content Rendering",
-      "Voice & NLP Feature Integration",
-      "AI Feature Testing",
+      "Legacy Frontend to React Migration",
+      "jQuery to React Migration",
+      "Angular/Vue to React Migration",
+      "React to Next.js Migration",
+      "Codebase Modernization",
+      "Technical Debt Reduction",
+      "Framework Version Upgrades",
+      "Migration Testing & QA",
     ],
   },
   {
     number: "06",
-    title: "Scalable Component Architecture",
-    desc: "We structure components and state management so your application stays maintainable as your product and team grow.",
+    title: "Performance, SEO & Ongoing Support",
+    desc: "React performance optimization and Next.js SEO work to keep your application fast and visible long after launch.",
     ctaText: "Know Our Services",
     services: [
-      "Component Library Development",
-      "Design System Implementation",
-      "State Management Setup",
-      "Code Architecture Planning",
-      "Reusable Component Patterns",
-      "Type Safety with TypeScript",
-      "Testing Infrastructure Setup",
-      "Team Onboarding Documentation",
+      "React Performance Optimization",
+      "Next.js SEO Optimization",
+      "Core Web Vitals Optimization",
+      "Bug Fixes & Updates",
+      "Security Patching",
+      "Ongoing Maintenance",
+      "Code Reviews & Audits",
+      "Technical Support",
     ],
   },
 ];
@@ -154,66 +154,66 @@ const SERVICE_BREAKDOWN = [
 const ROADMAP_STEPS = [
   {
     number: "01",
-    title: "Technical Discovery",
-    desc: "We assess your existing backend, team, and goals to decide the right rendering strategy and architecture for your Next.js build.",
+    title: "Requirements & Architecture Discovery",
+    desc: "We start by understanding your product, users, and performance requirements, identifying whether React, Next.js, or React Native best fits what you're actually trying to build.",
   },
   {
     number: "02",
-    title: "Architecture & Component Planning",
-    desc: "Component structure, state management, and data-fetching strategy get planned upfront to avoid a tangled codebase later.",
+    title: "Component & Data Architecture Planning",
+    desc: "We plan the application's component structure, state management approach, and data flow upfront, so the codebase stays maintainable as it grows.",
   },
   {
     number: "03",
-    title: "Design & Prototyping",
-    desc: "We design key screens and interactions, creating prototypes you can review before full frontend development begins.",
+    title: "UI Design & Prototyping",
+    desc: "We design interfaces around your users and brand, creating prototypes you can review and refine before full development begins.",
   },
   {
     number: "04",
-    title: "Development & Integration",
-    desc: "We build and integrate with your APIs or CMS iteratively, with regular reviews so the product evolves the way you expect.",
+    title: "Development & API Integration",
+    desc: "We build the application and connect any required APIs or backend systems, with regular progress updates throughout development.",
   },
   {
     number: "05",
-    title: "Performance Testing & QA",
-    desc: "We test performance, responsiveness, and functionality across devices, catching issues before they reach real users.",
+    title: "Testing & Performance Auditing",
+    desc: "We test functionality across devices and audit performance against Core Web Vitals before launch, catching issues before they affect real users.",
   },
   {
     number: "06",
-    title: "Launch & Performance Tuning",
-    desc: "Before and after launch, we tune performance and Core Web Vitals so the app stays fast as real users and traffic arrive.",
+    title: "Launch & Ongoing Optimization",
+    desc: "We launch the application, then continue monitoring performance and SEO as real usage data comes in, refining what's actually working.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "React & Next.js Specialists",
-    desc: "We focus on modern JavaScript frameworks, keeping up with the ecosystem so your build uses current best practices, not outdated patterns.",
+    title: "React & Next.js Development Built for Speed and Search Visibility",
+    desc: "We treat page speed and SEO as core requirements from the first line of code, not something addressed after launch. This matters because a beautifully built React app that loads slowly or doesn't rank still fails to bring in the traffic your business needs.",
   },
   {
     number: "02",
-    title: "SEO-First Rendering",
-    desc: "Server-side rendering and static generation are used deliberately to protect your search visibility, not just for speed alone.",
+    title: "Full-Stack Capability From Frontend to API",
+    desc: "Our React and Next.js work connects cleanly to backend systems and APIs, since a frontend rebuild rarely happens in isolation. This means fewer handoff issues between frontend and backend teams, and a single point of accountability for the full application.",
   },
   {
     number: "03",
-    title: "Seamless Backend Integration",
-    desc: "We integrate cleanly with your existing backend, APIs, or team's workflow instead of demanding a full-stack rebuild.",
+    title: "React Native Expertise for Mobile Without a Separate Codebase",
+    desc: "As a React Native app development company, we help businesses launch mobile apps that share logic with their web application, reducing the cost and time of maintaining two entirely separate codebases for web and mobile.",
   },
   {
     number: "04",
-    title: "AI-Ready Builds",
-    desc: "Our frontends are built to accommodate AI features — chatbots, recommendations, and automation — as your product needs them.",
+    title: "Migration From Legacy Frameworks Without Breaking What Works",
+    desc: "We handle migration to React and Next.js incrementally where possible, understanding what the existing site does before changing anything, so your business doesn't lose functionality or SEO equity during the transition.",
   },
   {
     number: "05",
-    title: "Component-Based Scalability",
-    desc: "Clean component architecture means new features get added without destabilizing what's already working.",
+    title: "Component-Based Architecture Built to Scale",
+    desc: "We build with reusable, well-documented components from the start, so your codebase stays manageable as more features and developers get added, rather than becoming harder to work in as the product grows.",
   },
   {
     number: "06",
-    title: "Prayagraj-Based, Globally Trusted",
-    desc: "A full-service development team in Prayagraj, serving clients locally across Uttar Pradesh as well as businesses across the UK, USA, and India.",
+    title: "Performance and SEO Treated as Core Requirements, Not Extras",
+    desc: "Core Web Vitals, load time, and search visibility are built into every React and Next.js project by default, not offered as a separate add-on service, because a fast, discoverable site is the actual point of the investment.",
   },
 ];
 
@@ -221,27 +221,32 @@ const FAQS = [
   {
     question: "What's the difference between React and Next.js?",
     answer:
-      "React is a library for building user interfaces; Next.js is a framework built on React that adds server-side rendering, routing, and performance features out of the box.",
+      "React is a JavaScript library for building user interfaces, while Next.js is a framework built on top of React that adds server-side rendering, routing, and SEO capabilities out of the box. Most new business websites benefit from Next.js specifically because of its speed and search visibility advantages over plain React.",
   },
   {
-    question: "Is a React or Next.js site good for SEO?",
+    question: "How much does it cost to hire React developers in India?",
     answer:
-      "Yes, when built correctly with Next.js's server-side rendering or static generation, these sites can rank just as well as traditional websites — sometimes better, due to speed.",
+      "Cost depends on project scope, a simple frontend costs far less than a full application with complex state management and API integrations. We scope pricing after understanding your specific requirements, features, and timeline, rather than offering a flat rate upfront for something this variable.",
   },
   {
-    question: "Can you migrate my existing website to React or Next.js?",
+    question: "Can you build a mobile app with React Native for our product?",
     answer:
-      "Yes, we handle migrations from other platforms or older frontend stacks, planning the move to preserve your SEO rankings and content.",
+      "Yes, React Native app development company work is one of our core services, letting you share logic between your web application and mobile app instead of building two separate codebases. This typically reduces both development cost and long-term maintenance compared to fully native apps.",
   },
   {
-    question: "How long does a React or Next.js project take?",
+    question: "Is Next.js better for SEO than a standard React app?",
     answer:
-      "Timelines depend on complexity — a focused frontend build can take a few weeks, while a larger application with custom integrations takes longer.",
+      "Generally yes, Next.js supports server-side rendering and static site generation, which help search engines index content more effectively than a client-side-only React app often can. For any business site where organic search matters, Next.js is usually the stronger technical choice.",
   },
   {
-    question: "How much does React & Next.js development cost?",
+    question: "Can you migrate our existing website to React or Next.js?",
     answer:
-      "Costs vary based on features, integrations, and complexity — we scope every project and provide a clear, tailored quote before starting.",
+      "Yes, we handle migration from legacy frameworks or older codebases to React and Next.js, working incrementally where possible to avoid disrupting existing functionality or losing SEO rankings during the transition. We scope this based on your current site's complexity.",
+  },
+  {
+    question: "Do you provide ongoing support after the React/Next.js app is launched?",
+    answer:
+      "Yes, we offer ongoing maintenance covering bug fixes, performance monitoring, and framework updates after launch, since a React or Next.js application needs continued attention to stay fast and secure. Most clients work with us on an ongoing basis rather than a single handoff.",
   },
 ];
 
@@ -251,26 +256,27 @@ export default function ReactNextjsDevelopment() {
       sectionLabel="Website Development"
       label="React & Next.js Development"
       icon={Atom}
-      description="High-performing, AI-integrated frontends using server-side rendering to boost load speed and Google ranking, integrating seamlessly with your existing backend and team."
-      heroTitle="React & Next.js Development Company in India"
-      heroDescription="High-performing, AI-integrated frontends using server-side rendering to boost load speed and Google ranking, integrating seamlessly with your existing backend and team."
-      capabilitiesHeading="Built for Products Ready to Load Fast and Rank Well"
+      description="React and Next.js applications built for speed and search visibility, not just modern looks, engineered to perform where it matters."
+      heroTitle="Get a Faster Website That Ranks Better With React & Next.js Development"
+      heroDescription="React and Next.js applications built for speed and search visibility, not just modern looks, engineered to perform where it matters."
+      heroCtaText="Get a Free React & Next.js Consultation"
+      capabilitiesHeading="Built for Businesses That Need Speed, Not Just a Frontend"
       capabilities={CAPABILITIES}
-      serviceBreakdownHeading="Everything That Goes Into a Frontend Built to Perform"
+      serviceBreakdownHeading="Everything Between a React Idea and a Production-Ready App"
       serviceBreakdown={SERVICE_BREAKDOWN}
-      differentiatorsHeading="Why Teams Trust Us to Build Their React & Next.js Frontend"
+      differentiatorsHeading="Why Businesses Hire Us for React & Next.js Development"
       differentiators={DIFFERENTIATORS}
-      roadmapCarouselHeading="How We Turn Your Requirements Into a Fast, Working Frontend"
+      roadmapCarouselHeading="How We Turn Your Requirements Into Production React Code"
       roadmapCarouselSteps={ROADMAP_STEPS}
       showStats={false}
-      localityHeading="Based in Prayagraj, Building Frontends Worldwide"
-      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every React and Next.js project, with the same care whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, building frontends sized to each product's actual traffic and feature needs. For teams looking to hire React and Next.js developers beyond India, we support clients worldwide remotely, working across time zones to deliver the same performance standard regardless of location. Whether you're a startup shipping your first component or an enterprise scaling a high-traffic application, our approach starts with the same question: what does your product actually need this frontend to do."
+      localityHeading="Based in Prayagraj, Building React Apps Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every React and Next.js project, with the same attention to performance whether a client is nearby or across the world. We work as a React JS development company for startups and businesses across India, providing Next.js development agency support built around speed, SEO, and real product requirements. For businesses looking to hire React developers beyond India, we support clients worldwide remotely, delivering the same React Native app development company standard of work regardless of time zone. Whether you're a startup in Prayagraj or an enterprise team anywhere else, our approach starts with the same question: what does your application actually need to be fast, usable, and found."
       faqs={FAQS}
       showWhyChooseUs={false}
-      ctaHeading="Ready for a Frontend That Actually Performs?"
-      ctaText="Whether you need a new React or Next.js frontend built from scratch, a migration from an older stack, or an AI-integrated product experience, an off-the-shelf template was never going to get you there. Let's talk through your requirements and scope what a custom frontend build would actually involve."
-      ctaPrimaryText="Talk to a React & Next.js Specialist"
-      ctaSecondaryText="Get Your Free Development Consultation"
+      ctaHeading="Ready for a Website That Loads Fast and Ranks Well?"
+      ctaText="Whether you need a Next.js website built for speed and search visibility, a complex React application, or a React Native app that shares code with your web platform, the framework you choose actually matters. Let's talk through your requirements and scope what a React or Next.js build would actually involve."
+      ctaPrimaryText="Talk to a React & Next.js Development Specialist"
+      ctaSecondaryText="Get Your Free React & Next.js Consultation"
     />
   );
 }

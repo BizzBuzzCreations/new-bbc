@@ -219,29 +219,34 @@ const DIFFERENTIATORS = [
 
 const FAQS = [
   {
-    question: "What is semantic SEO?",
+    question: "What is semantic SEO, and how is it different from traditional SEO?",
     answer:
-      "Semantic SEO focuses on the meaning and context behind search queries and content, helping search engines understand what your site is genuinely about, not just which keywords appear on it.",
+      "Semantic SEO focuses on building comprehensive topical coverage and entity relationships, rather than targeting isolated keywords one at a time. It reflects how modern search engines actually evaluate content, understanding topics and context, not just matching exact search terms.",
   },
   {
-    question: "What is topical authority and why does it matter?",
+    question: "How much does semantic SEO and content optimization cost in India?",
     answer:
-      "Topical authority is how much search engines trust your site as a genuine expert on a subject. Higher authority generally means better rankings across related searches, not just one keyword.",
+      "Cost depends on scope, whether you need a full topic cluster build-out or optimization of existing content within a narrower area. We scope pricing after understanding your current content and specific goals, rather than offering a flat rate upfront.",
   },
   {
-    question: "How long does it take to build topical authority?",
+    question: "What is topical authority, and why does it matter for rankings?",
     answer:
-      "Building genuine topical authority typically takes several months of consistent, connected content publishing — it isn't a quick fix.",
+      "Topical authority refers to how comprehensively and credibly your site covers a specific subject area, which search engines increasingly use to evaluate content quality and relevance. Strong topical authority tends to improve rankings across an entire topic, not just individual pages.",
   },
   {
-    question: "Do I need to publish a lot of new content for this?",
+    question: "Can you optimize our existing content, or do we need new content?",
     answer:
-      "Often yes, but we start with a gap analysis so new content fills real missing subtopics rather than adding volume for its own sake.",
+      "Both, we typically start by optimizing and restructuring existing content, since much of the needed value is often already written but poorly structured, then fill genuine gaps with new content where necessary.",
   },
   {
-    question: "How is this different from regular content marketing?",
+    question: "How long does it take to build topical authority in a niche?",
     answer:
-      "Semantic SEO content is deliberately structured and interlinked around topic clusters and entities, planned specifically to build search authority, not just general brand content.",
+      "Timeline depends on your starting point and competition level, but meaningful topical authority typically takes a few months to build through consistent, structured content development, rather than showing results from a single piece of content.",
+  },
+  {
+    question: "What is entity-based SEO, and do we need it?",
+    answer:
+      "Entity-based SEO focuses on how search engines understand your brand and topics as connected entities across the web, not just isolated pages. It's increasingly relevant as search engines rely more on entity understanding, and we assess its priority based on your specific industry and competition.",
   },
 ];
 

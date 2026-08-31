@@ -1,18 +1,18 @@
 import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   PhoneCall,
-  Rocket,
+  PhoneMissed,
+  Clock,
   Building2,
-  Building,
-  ShoppingCart,
-  Handshake,
-  RefreshCw,
+  PhoneOutgoing,
+  Globe,
+  Languages,
 } from "lucide-react";
 
 export const metadata = {
-  title: "Inbound & Outbound Call Center Services | BizzBuzz Creations",
+  title: "Inbound & Outbound Call Center | BizzBuzz Creations",
   description:
-    "Inbound and outbound call center services in India — agents trained on your scripts, tone, and product for sales, support, and collection calls, by BizzBuzz Creations.",
+    "BizzBuzz Creations provides inbound and outbound call center services for businesses across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/bpo-services/inbound-outbound-call-center-services",
@@ -21,132 +21,132 @@ export const metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Rocket,
-    title: "Startups & Early-Stage Businesses",
-    desc: "Startups need call coverage without hiring a floor of agents before revenue justifies it. We build small, trained call teams sized for early-stage volume, letting startups add seats only once call volume genuinely demands it.",
+    icon: PhoneMissed,
+    title: "Businesses Missing Calls They Can't Afford to Lose",
+    desc: "Every missed call is a potential customer lost to a competitor who happened to answer first. We provide inbound call center services built to ensure every call gets handled promptly and professionally.",
+  },
+  {
+    icon: Clock,
+    title: "Ecommerce Brands Needing 24/7 Customer Support Coverage",
+    desc: "Ecommerce customers expect support at any hour, not just during standard business hours. We provide 24/7 call center services that keep your store covered around the clock without you managing shifts.",
   },
   {
     icon: Building2,
-    title: "Small & Medium Businesses",
-    desc: "SMBs often lose leads and customers to slow or inconsistent phone response. We provide inbound and outbound call center services sized for SMB budgets, giving growing businesses a dedicated team without the cost of an in-house floor.",
+    title: "Small Businesses Needing Call Center Support Without In-House Staff",
+    desc: "Small businesses often can't justify hiring dedicated phone staff, even though missed calls directly cost them revenue. We provide call center services for small business sized to fit smaller budgets without sacrificing quality.",
   },
   {
-    icon: Building,
-    title: "Enterprises & Large Organizations",
-    desc: "Enterprises need call operations that handle high volume across regions and departments reliably. We run inbound and outbound campaigns built for enterprise-scale volume, compliance requirements, and integration with existing CRM systems.",
+    icon: PhoneOutgoing,
+    title: "Businesses Needing Outbound Sales & Follow-Up Calling",
+    desc: "Sales opportunities go cold without prompt, consistent follow-up, which many internal teams struggle to sustain. We provide outbound call center services built around timely, professional follow-up that keeps opportunities alive.",
   },
   {
-    icon: ShoppingCart,
-    title: "Ecommerce & Retail Brands",
-    desc: "Ecommerce brands need order support and outbound recovery calls handled consistently. We staff agents trained on your product catalog and policies to handle order queries, cart recovery calls, and returns at scale.",
+    icon: Globe,
+    title: "Companies Needing Offshore Call Center Cost Savings",
+    desc: "Businesses running in-house call teams often pay significantly more than outsourcing to an experienced offshore team. We provide offshore call center services that deliver quality coverage at meaningfully lower cost.",
   },
   {
-    icon: Handshake,
-    title: "Agencies & Outsourcing Partners",
-    desc: "Agencies managing client calling needs need a reliable execution partner. We work as a white-label call center partner, running inbound and outbound campaigns agencies can present as their own delivery capability.",
-  },
-  {
-    icon: RefreshCw,
-    title: "Businesses Switching From Another Call Center",
-    desc: "Businesses unhappy with their current call center vendor need a smooth handover, not a service gap. We manage structured transitions from your existing provider, preserving scripts and continuity while raising quality standards.",
+    icon: Languages,
+    title: "Businesses Needing Multilingual Call Center Coverage",
+    desc: "Serving customers across different languages with in-house staff is expensive and difficult to schedule reliably. We provide multilingual call center services that cover multiple languages without complex internal staffing.",
   },
 ];
 
 const SERVICE_BREAKDOWN = [
   {
     number: "01",
-    title: "Inbound Customer Support Calls",
-    desc: "Trained agents handle customer queries, order status, and troubleshooting calls with your scripts and tone, not a generic script read out from a random floor.",
+    title: "Inbound Call Center Services",
+    desc: "Every inbound call answered promptly and handled professionally, representing your business the way you'd want.",
     ctaText: "Know Our Services",
     services: [
-      "Inbound Call Handling",
-      "Customer Query Resolution",
-      "Order Status Support",
-      "Troubleshooting Calls",
-      "Complaint Handling",
-      "Appointment Booking Calls",
-      "Product Information Calls",
-      "Call Escalation Handling",
+      "Inbound Call Answering",
+      "Customer Query Handling",
+      "Order & Booking Support",
+      "Inbound Call Routing",
+      "After-Hours Call Coverage",
+      "Multilingual Inbound Support",
+      "Inbound Script Development",
+      "Inbound Call Reporting",
     ],
   },
   {
     number: "02",
-    title: "Outbound Sales & Collection Calls",
-    desc: "From lead follow-ups to payment reminders, our outbound teams run structured calling campaigns that stay on-brand and compliant.",
+    title: "Outbound Call Center Services",
+    desc: "Outbound calling that follows up consistently and professionally, keeping sales opportunities and relationships alive.",
     ctaText: "Know Our Services",
     services: [
       "Outbound Sales Calling",
-      "Lead Follow-Up Calls",
-      "Payment Reminder Calls",
-      "Collection Calling",
-      "Survey & Feedback Calls",
-      "Appointment Setting",
-      "Renewal Reminder Calls",
-      "Compliance-Checked Scripts",
+      "Follow-Up Call Campaigns",
+      "Appointment Setting Calls",
+      "Customer Feedback Calling",
+      "Outbound Survey Calling",
+      "Telemarketing Campaigns",
+      "Outbound Script Development",
+      "Outbound Call Reporting",
     ],
   },
   {
     number: "03",
-    title: "Script & Brand Training",
-    desc: "Every agent is trained specifically on your product, tone, and common objections before they take a single live call.",
+    title: "24/7 Call Center Coverage",
+    desc: "Genuine round-the-clock coverage, so your customers can always reach a real, capable agent.",
     ctaText: "Know Our Services",
     services: [
-      "Script Development",
-      "Brand Voice Training",
-      "Objection Handling Training",
-      "Product Knowledge Training",
-      "Role-Play Simulations",
-      "Onboarding Programs",
-      "Ongoing Refresher Training",
-      "Call Certification",
+      "Round-the-Clock Call Coverage",
+      "Overnight & Weekend Support",
+      "Holiday Coverage Planning",
+      "Peak-Hour Overflow Support",
+      "Time Zone Coverage Planning",
+      "Emergency Call Handling",
+      "Continuous Coverage Scheduling",
+      "24/7 Performance Monitoring",
     ],
   },
   {
     number: "04",
-    title: "Call Quality Monitoring",
-    desc: "Regular call reviews and scoring keep agents consistent with your standards, catching drift before it affects customers.",
+    title: "Customer Support Call Handling",
+    desc: "Support calls handled with real problem-solving, not just a script read without context.",
     ctaText: "Know Our Services",
     services: [
-      "Call Quality Audits",
-      "Scorecard Development",
-      "Call Recording Review",
-      "Compliance Checks",
-      "Agent Feedback Sessions",
-      "QA Reporting",
-      "Mystery Call Testing",
-      "Coaching Plans",
+      "Customer Support Call Handling",
+      "Complaint Resolution Calling",
+      "Technical Support Calls",
+      "Order Status Support",
+      "Refund & Return Call Support",
+      "Customer Retention Calling",
+      "Support Escalation Handling",
+      "Customer Support Reporting",
     ],
   },
   {
     number: "05",
-    title: "Multi-Language Support",
-    desc: "We staff agents across languages relevant to your customer base, so callers get served in the language they're comfortable with.",
+    title: "Sales & Lead Qualification Calling",
+    desc: "Sales calls that qualify genuine interest, so your sales team spends time on real opportunities.",
     ctaText: "Know Our Services",
     services: [
-      "Hindi Language Support",
-      "English Language Support",
-      "Regional Language Support",
-      "Bilingual Agent Staffing",
-      "Language-Based Call Routing",
-      "Translation Support",
-      "Localized Scripts",
-      "Accent Neutralization Training",
+      "Lead Qualification Calls",
+      "Sales Call Support",
+      "Cold Calling Campaigns",
+      "Warm Lead Follow-Up",
+      "Sales Script Development",
+      "CRM-Integrated Calling",
+      "Sales Call Coaching",
+      "Sales Call Reporting",
     ],
   },
   {
     number: "06",
-    title: "Scalable Agent Teams",
-    desc: "Start with a small team and scale up seats as call volume grows, without a long onboarding cycle each time.",
+    title: "Call Center Quality & Reporting",
+    desc: "Ongoing quality monitoring and clear reporting, so you always know how your calls are actually going.",
     ctaText: "Know Our Services",
     services: [
-      "Flexible Seat Scaling",
-      "Rapid Agent Onboarding",
-      "Shift Planning",
-      "Seasonal Capacity Support",
-      "Team Lead Assignment",
-      "Workforce Management",
-      "Attrition Backfill",
-      "Capacity Forecasting",
+      "Call Quality Monitoring",
+      "Call Recording & Review",
+      "Agent Performance Reporting",
+      "Customer Satisfaction Tracking",
+      "Call Volume Analytics",
+      "Compliance Monitoring",
+      "Monthly Performance Reports",
+      "Ongoing Process Refinement",
     ],
   },
 ];
@@ -154,94 +154,99 @@ const SERVICE_BREAKDOWN = [
 const ROADMAP_STEPS = [
   {
     number: "01",
-    title: "Discovery & Call Volume Assessment",
-    desc: "We review your existing scripts, call volume, and peak hours to size the right team and shift structure for your account.",
+    title: "Business & Call Volume Discovery",
+    desc: "We start by understanding your current call volume, common query types, and specific requirements for inbound and outbound handling.",
   },
   {
     number: "02",
-    title: "Script & Workflow Development",
-    desc: "We build or refine scripts and call workflows around your product, tone, and common objections before training begins.",
+    title: "Script & Process Design",
+    desc: "We design call scripts and handling processes around your actual products, policies, and common customer scenarios.",
   },
   {
     number: "03",
-    title: "Hire & Train Agents on Your Brand",
-    desc: "Agents are hired and trained specifically on your scripts, tone, and product, so they represent your brand from the first call.",
+    title: "Agent Training & Onboarding",
+    desc: "We train agents specifically on your business, ensuring they can handle genuine variation in calls, not just a rigid script.",
   },
   {
     number: "04",
-    title: "Systems & CRM Integration",
-    desc: "We connect call systems to your CRM and reporting tools, so call outcomes and lead status update automatically.",
+    title: "System & CRM Integration",
+    desc: "We integrate call handling with your existing CRM and systems, ensuring customer history and data stay properly connected.",
   },
   {
     number: "05",
-    title: "Launch With Live Call Monitoring",
-    desc: "Your call team goes live with close oversight in the first weeks, so issues get caught early instead of after they've cost you customers.",
+    title: "Launch & Initial Monitoring",
+    desc: "We launch call center operations with close monitoring in the early weeks, refining scripts and processes based on real calls.",
   },
   {
     number: "06",
     title: "Ongoing Reporting & Optimization",
-    desc: "Weekly reporting, call recordings, and quality scores keep the engagement improving long after onboarding ends.",
+    desc: "We provide regular reporting on call volume and outcomes, continuing to refine processes as your business needs evolve.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "Brand-Trained Agents",
-    desc: "Every account gets agents trained specifically on your scripts, tone, and product, not a generic script read out from a random floor.",
+    title: "Call Handling Built to Protect Your Customer Relationships",
+    desc: "We treat every call as a genuine touchpoint with your brand, training agents to represent your business professionally rather than treating calls as generic tickets to close quickly.",
   },
   {
     number: "02",
-    title: "Transparent Call Recordings",
-    desc: "Call recordings and quality scores are available on request, so you always know what's being said to your customers.",
+    title: "Trained Agents, Not a Script Read Without Context",
+    desc: "Our agents understand your products, policies, and common scenarios, allowing them to handle genuine variation in calls rather than breaking down whenever a conversation goes off-script.",
   },
   {
     number: "03",
-    title: "Flexible Scaling",
-    desc: "We scale seats up or down with your actual call volume instead of locking you into a fixed team size.",
+    title: "Inbound and Outbound Handled Under One Coordinated Team",
+    desc: "We manage both inbound and outbound calling together, keeping messaging and customer history consistent rather than fragmenting your call operations across separate, disconnected teams.",
   },
   {
     number: "04",
-    title: "Quality Assurance Built In",
-    desc: "Regular call reviews catch drift from your standards early, before it becomes a pattern customers notice.",
+    title: "24/7 Coverage Without Your Business Managing Shifts",
+    desc: "We handle the scheduling complexity of round-the-clock coverage internally, so you get continuous availability without the operational burden of managing overnight and weekend staffing yourself.",
   },
   {
     number: "05",
-    title: "Multi-Shift Coverage",
-    desc: "Shift-based staffing covers your peak call hours and time zones without leaving gaps in coverage.",
+    title: "Offshore Cost Efficiency Without Sacrificing Call Quality",
+    desc: "We deliver meaningful cost savings compared to in-house teams while maintaining genuine quality standards, rather than treating cost reduction as an excuse for lower service quality.",
   },
   {
     number: "06",
-    title: "Direct Account Management",
-    desc: "No ticket queues for active clients — you reach your point of contact directly, not a rotating cast of agents.",
+    title: "Transparent Reporting on Calls Handled and Outcomes",
+    desc: "You receive clear reporting on call volume, resolution rates, and outcomes, giving you real visibility into call center performance rather than a vague summary of activity.",
   },
 ];
 
 const FAQS = [
   {
-    question: "What languages can your call center agents support?",
+    question: "How much do call center outsourcing services cost in India?",
     answer:
-      "We staff agents in the languages relevant to your customer base, including Hindi, English, and regional languages on request.",
+      "Cost depends on call volume, coverage hours, and whether you need inbound, outbound, or both. We scope pricing after understanding your specific requirements, rather than offering a flat rate upfront for something this variable.",
   },
   {
-    question: "Is there a minimum call volume to get started?",
+    question: "Can you handle both inbound and outbound calls for our business?",
     answer:
-      "No fixed minimum — we size a team around your actual volume, whether that's a small pilot or a full-scale operation.",
+      "Yes, managing both together under one coordinated team is a core part of our service, keeping customer history and messaging consistent rather than fragmenting operations across separate providers.",
   },
   {
-    question: "How do you handle outbound calling compliance?",
+    question: "Do you provide 24/7 call center coverage?",
     answer:
-      "We follow relevant do-not-disturb and calling regulations, and align scripts and calling windows to your compliance requirements.",
+      "Yes, genuine round-the-clock coverage is available, including overnight, weekends, and holidays, handled through coordinated shift scheduling on our end so you don't have to manage it internally.",
   },
   {
-    question: "How is pricing structured for call center services?",
+    question: "Will your agents represent our brand professionally?",
     answer:
-      "Pricing is typically based on seats, call volume, or a hybrid model — we'll recommend what fits your usage pattern best.",
+      "Yes, we train agents specifically on your business, products, and tone, so calls reflect your brand accurately rather than sounding like a generic, disconnected call center.",
   },
   {
-    question: "How often will I get reports on call performance?",
+    question: "Can call center services work for a small business, not just large companies?",
     answer:
-      "We provide weekly performance reporting by default, with call recordings available on request for deeper review.",
+      "Yes, we scope services to fit smaller call volumes and budgets, since missed calls cost small businesses just as much proportionally as they cost larger companies.",
+  },
+  {
+    question: "How do you ensure call quality and customer satisfaction?",
+    answer:
+      "We monitor calls through recording review, quality scoring, and customer satisfaction tracking, providing regular reporting and adjusting training based on real performance data rather than assuming quality without verification.",
   },
 ];
 
@@ -251,24 +256,25 @@ export default function InboundOutboundCallCenterServices() {
       sectionLabel="BPO Services"
       label="Inbound & Outbound Call Center Services"
       icon={PhoneCall}
-      description="Agents trained on your scripts, tone, and product handle customer queries, sales calls, and collections — not a generic script read off a random floor."
-      heroTitle="Inbound & Outbound Call Center Services in India"
-      heroDescription="Agents trained on your scripts, tone, and product handle customer queries, sales calls, and collections — not a generic script read off a random floor."
-      capabilitiesHeading="Built for Businesses Ready to Fix How They Handle Calls"
+      description="Inbound and outbound call center services built to handle real call volume professionally, not just answer and transfer blindly."
+      heroTitle="Get Call Handling That Doesn't Cost You Customers"
+      heroDescription="Inbound and outbound call center services built to handle real call volume professionally, not just answer and transfer blindly."
+      heroCtaText="Get a Free Call Center Consultation"
+      capabilitiesHeading="Built for Businesses Losing Customers to Missed Calls"
       capabilities={CAPABILITIES}
-      serviceBreakdownHeading="Everything That Goes Into Our Call Center Services"
+      serviceBreakdownHeading="Everything Between a Ringing Phone and a Resolved Call"
       serviceBreakdown={SERVICE_BREAKDOWN}
-      differentiatorsHeading="Why Businesses Trust Us to Run Their Call Center Operations"
+      differentiatorsHeading="Why Businesses Trust Us With Their Call Center Operations"
       differentiators={DIFFERENTIATORS}
-      roadmapCarouselHeading="How We Turn Your Call Requirements Into a Working Call Team"
+      roadmapCarouselHeading="How We Handle Your Calls Like They're Our Own Business"
       roadmapCarouselSteps={ROADMAP_STEPS}
       showStats={false}
       localityHeading="Based in Prayagraj, Running Call Center Operations Worldwide"
-      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we build every call center engagement, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, staffing inbound and outbound teams sized to each business's actual call volume. For businesses looking to outsource calling beyond India, we run call center operations remotely, working across time zones and languages to deliver the same standard of service regardless of location. Whether you're a startup handling your first support line or an enterprise running multi-region campaigns, our approach starts with understanding your scripts, customers, and goals before assigning a single agent."
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every call center engagement, with the same attention to call quality whether a client is nearby or across the world. We provide inbound call center services for businesses across India, built around each business's specific call volume and customer needs. For businesses looking for offshore call center services beyond India, we support clients worldwide remotely, delivering the same call center outsourcing company standard of work regardless of time zone. Whether you're a small business in Prayagraj or an ecommerce brand anywhere else needing 24/7 coverage, our approach starts with the same question: what happens on your calls today that's actually costing you customers."
       faqs={FAQS}
       showWhyChooseUs={false}
-      ctaHeading="Ready for a Call Team That Actually Represents Your Brand?"
-      ctaText="Whether you need inbound support, outbound sales and collection calls, or a full call center team built from scratch, the right setup depends on your actual call volume and customer base. Let's talk through your requirements and scope what a dedicated call team would actually involve."
+      ctaHeading="Ready for Call Handling That Actually Keeps Customers?"
+      ctaText="Whether you're missing calls during busy hours, need genuine 24/7 coverage, or want consistent outbound follow-up that doesn't fall through the cracks, an overwhelmed in-house team was never going to solve that. Let's talk through your call volume and scope what proper call center support would actually involve."
       ctaPrimaryText="Talk to a Call Center Specialist"
       ctaSecondaryText="Get Your Free Call Center Consultation"
     />

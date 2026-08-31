@@ -1,18 +1,18 @@
 import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   MessageCircleQuestion,
-  Rocket,
-  Building2,
-  Building,
+  Search,
+  BookOpen,
+  MapPin,
   ShoppingCart,
-  Handshake,
-  RefreshCw,
+  Building2,
+  Mic,
 } from "lucide-react";
 
 export const metadata = {
-  title: "Answer Engine Optimization (AEO) Services | BizzBuzz Creations",
+  title: "Answer Engine Optimization Agency | BizzBuzz Creations",
   description:
-    "Answer Engine Optimization (AEO) in India — structure your content to become the direct answer across search engines and AI tools, by BizzBuzz Creations.",
+    "BizzBuzz Creations offers answer engine optimization services that get your content featured in AI overviews and snippets worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/search-engine-optimization/answer-engine-optimization",
@@ -21,132 +21,132 @@ export const metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Rocket,
-    title: "Startups & Early-Stage Businesses",
-    desc: "Startups need visibility fast, and featured snippets are one of the quickest wins available. We structure early content around direct-answer formatting, giving startups a shot at snippet visibility before competitors catch on.",
+    icon: Search,
+    title: "Businesses Losing Clicks to Featured Snippets & AI Overviews",
+    desc: "Ranking first no longer guarantees a click when Google answers the question directly above your result. We provide answer engine optimization built to get your content featured in the answer itself, not just listed beneath it.",
   },
   {
-    icon: Building2,
-    title: "Small & Medium Businesses",
-    desc: "SMBs often bury useful answers deep inside long articles that never win a snippet. We restructure existing content for AEO sized for SMB budgets, targeting the questions your customers actually ask.",
+    icon: BookOpen,
+    title: "Informational & Educational Content Sites",
+    desc: "Educational content is exactly the type of material Google and AI tools most often extract into direct answers. We optimize this content specifically for featured snippet optimization services, positioning it to be the source the answer pulls from.",
   },
   {
-    icon: Building,
-    title: "Enterprises & Large Organizations",
-    desc: "Enterprises need consistent answer-engine visibility across product lines and support content. We run AEO programs at enterprise scale, covering FAQ, support, and product content consistently.",
+    icon: MapPin,
+    title: "Local Businesses Needing to Answer \"Near Me\" Queries Directly",
+    desc: "Local \"near me\" searches are increasingly answered with a direct box, not just a list of nearby businesses to click through. We help local businesses optimize for ai overviews and local answer boxes specifically.",
   },
   {
     icon: ShoppingCart,
-    title: "Ecommerce & Retail Brands",
-    desc: "Shoppers ask specific product and comparison questions that voice search and AI answer directly. We structure product FAQs and comparison content to win featured snippets and voice search answers.",
+    title: "Ecommerce Brands Needing Product Q&A Visibility",
+    desc: "Shoppers ask specific product questions that search engines increasingly answer directly from product pages and reviews. We structure product content so ecommerce brands can win these answer placements, not just product listing rankings.",
   },
   {
-    icon: Handshake,
-    title: "Agencies Needing an AEO Partner",
-    desc: "Content agencies need a specialist partner as answer engines become a bigger share of search traffic. We work as a white-label AEO partner, handling the restructuring work agencies can present as their own.",
+    icon: Building2,
+    title: "B2B Companies Answering Complex Buyer Questions",
+    desc: "B2B buyers research detailed, specific questions during evaluation, and being the featured answer builds credibility early in that process. We build aeo services tailored to complex B2B queries, not just simple factual questions.",
   },
   {
-    icon: RefreshCw,
-    title: "Businesses Losing Traffic to Zero-Click Search",
-    desc: "Businesses seeing traffic decline as answers get shown directly on the results page need a different strategy. We help you become the answer being shown, rather than losing visibility to zero-click search.",
+    icon: Mic,
+    title: "Voice Search-Dependent Businesses Needing Concise Answers",
+    desc: "Voice search assistants typically read out a single answer, making it critical to be the one source selected. We optimize content for voice search optimization, structuring answers concisely enough to be read aloud clearly.",
   },
 ];
 
 const SERVICE_BREAKDOWN = [
   {
     number: "01",
-    title: "Question-Based Content Mapping",
-    desc: "We identify the exact questions your customers ask and structure content to answer them directly, instead of burying answers deep in long articles.",
+    title: "AEO Strategy & Query Research",
+    desc: "Research into the exact questions your audience is asking, and where the current answer opportunity actually is.",
     ctaText: "Know Our Services",
     services: [
-      "Question Research",
-      "Customer Query Mapping",
-      "Search Intent Analysis",
-      "Question Clustering",
-      "Content Gap Identification",
-      "Voice Search Query Research",
-      "People-Also-Ask Analysis",
-      "Question Prioritization",
+      "AEO Strategy Development",
+      "Question & Query Research",
+      "Search Intent Mapping",
+      "Competitor Snippet Analysis",
+      "Answer Opportunity Identification",
+      "Content Gap Analysis for AEO",
+      "Query Clustering",
+      "AEO KPI Planning",
     ],
   },
   {
     number: "02",
     title: "Featured Snippet Optimization",
-    desc: "Clear, concise formatting — lists, tables, short definitions — increases your odds of winning featured snippets and voice search answers.",
+    desc: "Content formatted specifically to win the featured snippet position, not just rank somewhere on page one.",
     ctaText: "Know Our Services",
     services: [
-      "Featured Snippet Formatting",
-      "List & Table Formatting",
-      "Definition Block Writing",
-      "Snippet Length Optimization",
+      "Featured Snippet Optimization",
+      "Paragraph Snippet Formatting",
+      "List & Table Snippet Formatting",
+      "Snippet-Ready Content Structuring",
+      "Position Zero Targeting",
       "Snippet Competitor Analysis",
-      "Snippet Win Tracking",
-      "Paragraph Snippet Optimization",
-      "Snippet Testing",
+      "Snippet Content Testing",
+      "Snippet Recovery Strategy",
     ],
   },
   {
     number: "03",
-    title: "FAQ & Schema Markup",
-    desc: "We add structured FAQ and Q&A schema so search engines and AI tools can easily lift accurate answers from your pages.",
+    title: "AI Overview & Answer Box Optimization",
+    desc: "Content structured to be the source Google's AI Overviews and answer boxes actually pull from.",
     ctaText: "Know Our Services",
     services: [
-      "FAQ Schema Implementation",
-      "Q&A Schema Setup",
-      "HowTo Schema Markup",
-      "Structured Data Testing",
-      "Schema Validation",
-      "Rich Result Monitoring",
-      "FAQ Page Development",
-      "Schema Maintenance",
+      "Google AI Overview Optimization",
+      "Answer Box Optimization",
+      "Direct Answer Formatting",
+      "Concise Answer Writing",
+      "AI Overview Citation Strategy",
+      "Multi-Query Answer Coverage",
+      "Answer Accuracy Optimization",
+      "AI Overview Monitoring",
     ],
   },
   {
     number: "04",
-    title: "Direct-Answer Formatting",
-    desc: "Content gets restructured so the answer appears immediately, with supporting detail after, matching how users and AI systems actually scan pages.",
+    title: "FAQ & Structured Q&A Content",
+    desc: "Structured question-and-answer content built around the real questions your audience is actually searching for.",
     ctaText: "Know Our Services",
     services: [
-      "Answer-First Rewriting",
-      "Content Restructuring",
-      "Heading Optimization",
-      "Scannable Formatting",
-      "Supporting Detail Structuring",
-      "Readability Optimization",
-      "Content Length Auditing",
-      "Format Testing",
+      "FAQ Page Development",
+      "Structured Q&A Content Writing",
+      "FAQ Schema Markup",
+      "Common Question Research",
+      "Long-Tail Question Targeting",
+      "Q&A Content Expansion",
+      "Help Center Content Development",
+      "Question-Based Blog Content",
     ],
   },
   {
     number: "05",
-    title: "Answer Visibility Tracking",
-    desc: "We track snippet wins, voice search appearances, and AI answer citations, giving you a clear picture of your answer-engine presence.",
+    title: "Voice Search Optimization",
+    desc: "Content formatted for how voice assistants read out a single, concise answer, not a full search results page.",
     ctaText: "Know Our Services",
     services: [
-      "Snippet Win Tracking",
-      "Voice Search Monitoring",
-      "AI Answer Citation Tracking",
-      "Visibility Dashboards",
-      "Competitor Snippet Tracking",
-      "Monthly AEO Reports",
-      "Ranking Fluctuation Alerts",
-      "Answer Coverage Analysis",
+      "Voice Search Optimization",
+      "Conversational Query Optimization",
+      "Natural Language Content Writing",
+      "Local Voice Search Optimization",
+      "Voice Search Featured Answers",
+      "Smart Speaker Optimization Strategy",
+      "Voice Query Research",
+      "Voice Search Performance Tracking",
     ],
   },
   {
     number: "06",
-    title: "Continuous Question Research",
-    desc: "Customer questions change over time. We keep refreshing question research and content to match what people are actually asking now.",
+    title: "AEO Monitoring & Reporting",
+    desc: "Ongoing tracking of your snippet and answer box visibility, since these placements shift more often than standard rankings.",
     ctaText: "Know Our Services",
     services: [
-      "Ongoing Question Research",
-      "Seasonal Query Updates",
-      "Content Refresh Cycles",
-      "Trending Question Monitoring",
-      "New Query Identification",
-      "Content Expansion Planning",
-      "Question Bank Maintenance",
-      "Quarterly AEO Reviews",
+      "Snippet & AI Overview Tracking",
+      "Answer Visibility Reporting",
+      "Competitor Answer Benchmarking",
+      "Query Performance Analysis",
+      "Monthly AEO Reports",
+      "Answer Retention Monitoring",
+      "Strategy Refinement",
+      "AEO Trend Monitoring",
     ],
   },
 ];
@@ -154,94 +154,99 @@ const SERVICE_BREAKDOWN = [
 const ROADMAP_STEPS = [
   {
     number: "01",
-    title: "Question Research",
-    desc: "We identify the real questions your customers search for, using search data and direct customer insight, not guesswork.",
+    title: "Query & Question Research",
+    desc: "We research the actual questions your audience is asking, including the specific phrasing that tends to trigger snippets and AI overviews.",
   },
   {
     number: "02",
-    title: "Direct-Answer Content Structuring",
-    desc: "We restructure or create content so the answer appears immediately and clearly, formatted the way answer engines prefer.",
+    title: "Content & Snippet Gap Analysis",
+    desc: "We identify which queries you're currently missing the featured answer for, and what's preventing your content from winning that position.",
   },
   {
     number: "03",
-    title: "Schema & Technical Setup",
-    desc: "FAQ and Q&A schema get implemented so search engines and AI tools can accurately parse and surface your answers.",
+    title: "AEO Content Strategy",
+    desc: "We build a plan for restructuring and creating content formatted specifically to win snippet and answer box placements.",
   },
   {
     number: "04",
-    title: "Snippet Targeting & Testing",
-    desc: "We target specific featured snippets, testing formatting variations to improve the odds of winning the answer position.",
+    title: "Content Structuring & Implementation",
+    desc: "We implement the content changes, including formatting, schema markup, and concise answer writing, prioritizing your highest-opportunity queries first.",
   },
   {
     number: "05",
-    title: "Publishing & Rollout",
-    desc: "We publish restructured content in batches, prioritizing the highest-opportunity questions first for faster visibility gains.",
+    title: "Answer Box & Snippet Targeting",
+    desc: "We monitor early results and refine content structure based on which formats are actually winning placements for your specific queries.",
   },
   {
     number: "06",
-    title: "Track & Refresh",
-    desc: "We monitor snippet wins and answer visibility, refreshing content regularly as questions and search behavior evolve.",
+    title: "Monitoring & Ongoing Optimization",
+    desc: "We track snippet and answer box performance over time, since these placements shift more frequently than standard search rankings.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "Question-First Strategy",
-    desc: "We start from what your customers are actually asking, not assumptions about what content they want.",
+    title: "AEO Built Around Being the Answer, Not Just a Link",
+    desc: "We structure content specifically to win featured snippets and answer boxes, recognizing that a page-one ranking below a direct answer often gets far fewer clicks than the featured answer itself.",
   },
   {
     number: "02",
-    title: "Snippet & Voice Search Ready",
-    desc: "Content is formatted specifically to win featured snippets and voice search answers, not just rank on a page.",
+    title: "Content Structured Specifically for Snippets and AI Overviews",
+    desc: "We format answers in the paragraph, list, or table structure each platform actually favors for extraction, rather than hoping general good content happens to get pulled into a featured position.",
   },
   {
     number: "03",
-    title: "Schema-Backed Accuracy",
-    desc: "Structured FAQ and Q&A schema help search engines and AI tools surface your answers correctly and consistently.",
+    title: "Voice Search Optimization for How People Actually Ask Questions",
+    desc: "We write content in the natural, conversational phrasing voice search actually uses, since voice queries differ meaningfully from how people type the same question into a search box.",
   },
   {
     number: "04",
-    title: "Answer Visibility Tracking",
-    desc: "We measure snippet wins and answer citations directly, not just proxy traffic metrics.",
+    title: "Query Research Based on Real Questions, Not Assumptions",
+    desc: "We research the actual questions your audience is searching, including long-tail variations, rather than guessing at likely queries based on general keyword volume alone.",
   },
   {
     number: "05",
-    title: "Data-Driven Execution",
-    desc: "Every recommendation is backed by real search and question data, not industry guesswork.",
+    title: "Continuous Monitoring as Answer Boxes and Snippets Change",
+    desc: "Featured snippets and AI overviews shift more frequently than standard rankings, and we track these changes actively rather than treating an initial win as a permanent, unmonitored result.",
   },
   {
     number: "06",
-    title: "Honest Reporting",
-    desc: "No agency can guarantee every snippet or AI answer, and we won't pretend otherwise — you get transparent, honest progress reports instead.",
+    title: "Transparent Reporting on Answer Visibility You Can Verify",
+    desc: "You see exactly which queries you're winning the featured answer for, and which remain an opportunity, giving you a clear, verifiable picture of AEO performance.",
   },
 ];
 
 const FAQS = [
   {
-    question: "What is Answer Engine Optimization (AEO)?",
+    question: "What is answer engine optimization, and how is it different from SEO?",
     answer:
-      "AEO is the practice of structuring content so it becomes the direct answer shown in featured snippets, voice search results, and AI-generated responses.",
+      "AEO focuses specifically on winning featured snippets, AI overviews, and answer boxes, positions where your content becomes the direct answer rather than just a ranked link. It builds on SEO fundamentals but requires content formatted specifically for extraction into these answer formats.",
   },
   {
-    question: "How is AEO different from traditional SEO?",
+    question: "What's the difference between AEO and traditional SEO (AEO vs SEO)?",
     answer:
-      "Traditional SEO focuses on ranking a page; AEO focuses specifically on your content being pulled out and shown as the direct answer to a question.",
+      "Traditional SEO focuses on ranking your page as high as possible in search results, while AEO focuses specifically on winning the featured answer position above those results. They overlap significantly but require different content formatting and query research approaches.",
   },
   {
-    question: "Does AEO help with voice search?",
+    question: "How much does answer engine optimization cost in India?",
     answer:
-      "Yes, direct-answer formatting is one of the main factors that helps content get selected for voice search responses.",
+      "Cost depends on scope, how many query opportunities you're targeting and how much content restructuring is required. We scope pricing after understanding your current content and specific query opportunities, rather than offering a flat rate upfront.",
   },
   {
-    question: "How long does AEO take to show results?",
+    question: "How do you get featured in Google's AI overviews?",
     answer:
-      "Snippet and answer visibility improvements can appear within weeks for well-structured content, though building broader coverage takes longer.",
+      "Getting featured typically requires clear, well-structured, factually accurate content that directly answers a specific question, combined with strong overall site authority. We optimize for this through targeted content structuring and technical implementation.",
   },
   {
-    question: "Do I need traditional SEO alongside AEO?",
+    question: "Can AEO help with voice search results too?",
     answer:
-      "Yes, a technically strong, well-ranked site gives search engines and AI tools more confidence to pull answers from your pages.",
+      "Yes, voice search optimization is part of our AEO service, since voice assistants typically read out featured answers or snippets. Content optimized for AEO often performs well for voice search since both favor clear, concise, directly-answered content.",
+  },
+  {
+    question: "How long does it take to start appearing in featured answers?",
+    answer:
+      "Timeline varies by query competitiveness and your site's existing authority, but well-optimized content can start winning snippets within a few weeks in less competitive queries, while competitive terms typically take longer to win and hold.",
   },
 ];
 
@@ -251,24 +256,25 @@ export default function AnswerEngineOptimization() {
       sectionLabel="SEO Services"
       label="Answer Engine Optimization (AEO)"
       icon={MessageCircleQuestion}
-      description="Modern users want quick answers without scrolling through pages. We optimize your content so it becomes the direct answer across search engines and AI tools."
-      heroTitle="Answer Engine Optimization (AEO) Services in India"
-      heroDescription="Modern users want quick answers without scrolling through pages. We optimize your content so it becomes the direct answer across search engines and AI tools."
-      capabilitiesHeading="Built for Businesses Ready to Become the Direct Answer"
+      description="Answer engine optimization is built to get your content featured directly in AI overviews and snippets, not just ranked below them."
+      heroTitle="Get Your Answer Featured, Not Buried on Page One"
+      heroDescription="Answer engine optimization is built to get your content featured directly in AI overviews and snippets, not just ranked below them."
+      heroCtaText="Get a Free AEO Audit"
+      capabilitiesHeading="Built for Businesses Tired of Ranking Below the Answer"
       capabilities={CAPABILITIES}
-      serviceBreakdownHeading="Everything That Goes Into Our AEO Services"
+      serviceBreakdownHeading="Everything Between Your Content and Being the Featured Answer"
       serviceBreakdown={SERVICE_BREAKDOWN}
-      differentiatorsHeading="Why Businesses Trust Us to Build Their Answer Visibility"
+      differentiatorsHeading="Why Businesses Trust Us With Answer Engine Optimization"
       differentiators={DIFFERENTIATORS}
-      roadmapCarouselHeading="How We Turn Your Content Into the Direct Answer"
+      roadmapCarouselHeading="How We Get Your Content Featured as the Answer"
       roadmapCarouselSteps={ROADMAP_STEPS}
       showStats={false}
-      localityHeading="Based in Prayagraj, Building Answer Visibility Worldwide"
-      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every AEO engagement, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, restructuring content sized to each business's actual question volume and competition. For businesses looking to improve answer-engine visibility beyond India, we deliver AEO remotely, testing snippet wins across platforms and time zones to the same standard regardless of location. Whether you're a startup winning your first featured snippet or an enterprise protecting answer visibility across product lines, our approach starts with the real questions your customers are asking."
+      localityHeading="Based in Prayagraj, Running AEO Campaigns Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach answer engine optimization for every client, with the same attention to query research whether a client is nearby or across the world. We provide answer engine optimization for businesses across India, helping them win featured answer placements for the queries that matter most to their audience. For businesses looking for an answer engine optimization agency beyond India, we support clients worldwide remotely, delivering the same AEO service standard of work regardless of time zone. Whether you're a local business in Prayagraj answering \"near me\" queries or a B2B company anywhere else answering complex buyer questions, our approach starts with the same question: what is your audience actually asking?"
       faqs={FAQS}
       showWhyChooseUs={false}
-      ctaHeading="Ready to Be the Answer, Not Just Another Result?"
-      ctaText="Whether you need a question research and content mapping project, direct-answer restructuring for existing content, or ongoing snippet and voice search tracking, the right approach depends on what your customers are actually asking. Let's talk through your content and scope what AEO would actually involve."
+      ctaHeading="Ready to Be the Answer, Not Just a Result?"
+      ctaText="Whether you're losing clicks to a competitor's featured snippet, missing out on AI overview placements entirely, or simply haven't started optimizing for answer positions yet, ranking below the answer was never going to capture that traffic. Let's audit your current visibility and scope of what AEO would actually involve."
       ctaPrimaryText="Talk to an AEO Specialist"
       ctaSecondaryText="Get Your Free AEO Audit"
     />

@@ -1,18 +1,18 @@
 import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
-  PenTool,
-  Rocket,
-  Building2,
-  Building,
-  ShoppingCart,
-  Handshake,
-  RefreshCw,
+  Users,
+  Megaphone,
+  Layout,
+  Share2,
+  User,
+  TrendingUp,
+  ShieldCheck,
 } from "lucide-react";
 
 export const metadata = {
-  title: "AI Content Optimization Services | BizzBuzz Creations",
+  title: "White Label SEO Services for Agencies | BizzBuzz Creations",
   description:
-    "AI content optimization in India — content that ranks, gets cited by AI systems, and drives real engagement, built for both humans and machines, by BizzBuzz Creations.",
+    "BizzBuzz Creations provides white label SEO fulfillment for agencies serving clients across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/search-engine-optimization/ai-content-optimization",
@@ -21,132 +21,132 @@ export const metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Rocket,
-    title: "Startups & Early-Stage Businesses",
-    desc: "Startups need content that works hard from the first post, without years to build a backlog. We write and structure content for both readers and AI systems from day one, so startups don't need a rewrite cycle later.",
+    icon: Megaphone,
+    title: "Digital Marketing Agencies Needing SEO Fulfillment",
+    desc: "Agencies often sell SEO as part of a broader package without having dedicated in-house SEO capacity to actually deliver it well. We provide white label seo services that let you offer SEO confidently without building an internal team.",
   },
   {
-    icon: Building2,
-    title: "Small & Medium Businesses",
-    desc: "SMBs often have existing content that's thin or outdated and underperforming. We audit and rewrite content sized for SMB budgets, prioritizing the pages with the most potential first.",
+    icon: Layout,
+    title: "Web Design Agencies Adding SEO as a New Service",
+    desc: "Web design agencies frequently get asked for SEO by clients who assume it's part of the same service. We provide seo services for agencies that let design-focused shops add SEO as a genuine offering, not a rushed afterthought.",
   },
   {
-    icon: Building,
-    title: "Enterprises & Large Organizations",
-    desc: "Enterprises need content quality and consistency maintained across large libraries and multiple writers. We run AI content optimization at enterprise scale, keeping quality standards consistent across the whole site.",
+    icon: Share2,
+    title: "PPC & Social Media Agencies Expanding Into SEO",
+    desc: "Agencies built around paid or social often lack organic SEO expertise but face growing client demand for it. We work as a white label seo reseller partner, letting these agencies expand their service line without retraining their team.",
   },
   {
-    icon: ShoppingCart,
-    title: "Ecommerce & Retail Brands",
-    desc: "Ecommerce product and category pages often read as thin, templated text that neither ranks nor converts. We rewrite product and category content to genuinely help shoppers while staying easy for AI systems to cite.",
+    icon: User,
+    title: "Freelancers Needing Reliable SEO Delivery Support",
+    desc: "Freelancers juggling multiple clients often can't take on additional SEO work without sacrificing quality or turnaround time. We provide seo fulfillment for agencies and individual freelancers, working quietly in the background under their brand.",
   },
   {
-    icon: Handshake,
-    title: "Agencies Needing a Content Partner",
-    desc: "Marketing agencies need a reliable content partner as quality and AI-readiness both start to matter more. We work as a white-label content optimization partner, delivering writing agencies can present as their own.",
+    icon: TrendingUp,
+    title: "Agencies With Growing Client Rosters and Limited SEO Staff",
+    desc: "Agencies growing faster than their SEO team can keep pace with risk delivery quality slipping as workload increases. We scale fulfillment capacity with your agency's growth, so client quality doesn't decline as your roster expands.",
   },
   {
-    icon: RefreshCw,
-    title: "Businesses With Content That's Gone Stale",
-    desc: "Businesses sitting on years of unmaintained content need a structured refresh, not a full rewrite of everything. We audit and prioritize existing content, refreshing what's underperforming instead of starting from zero.",
+    icon: ShieldCheck,
+    title: "Agencies Needing a Trustworthy Private Label SEO Partner",
+    desc: "Agencies considering outsourcing SEO need a partner whose work quality reflects well on their own reputation, not just low cost. We work as a private label seo company built around consistent, dependable delivery your agency can stand behind.",
   },
 ];
 
 const SERVICE_BREAKDOWN = [
   {
     number: "01",
-    title: "Content Audits & Refresh",
-    desc: "We audit existing content for accuracy, structure, and depth, refreshing what's underperforming instead of only writing new pages.",
+    title: "White Label SEO Strategy & Audits",
+    desc: "Full strategy and audit work delivered under your brand, ready to present directly to your clients.",
     ctaText: "Know Our Services",
     services: [
-      "Content Audits",
-      "Performance-Based Prioritization",
-      "Accuracy Reviews",
-      "Structural Reviews",
-      "Content Refresh Writing",
-      "Outdated Content Identification",
-      "Content Pruning",
-      "Refresh Impact Tracking",
+      "White Label SEO Audits",
+      "Client SEO Strategy Development",
+      "Competitor Analysis for Clients",
+      "Keyword Research Fulfillment",
+      "SEO Roadmap Creation",
+      "Client Onboarding Support",
+      "Custom Strategy Documentation",
+      "Ongoing Strategy Reviews",
     ],
   },
   {
     number: "02",
-    title: "Human-First, AI-Ready Writing",
-    desc: "Content is written to genuinely help readers first, then structured so AI systems can parse and cite it accurately.",
+    title: "White Label Content & On-Page SEO",
+    desc: "Content and on-page optimization delivered consistently, so your clients get quality work without you writing it yourself.",
     ctaText: "Know Our Services",
     services: [
-      "Reader-First Copywriting",
-      "AI-Readable Formatting",
-      "Content Structuring",
-      "Tone & Voice Consistency",
-      "Readability Optimization",
-      "Long-Form Content Writing",
-      "Content Editing & Proofreading",
-      "Style Guide Development",
+      "White Label Content Writing",
+      "On-Page SEO Fulfillment",
+      "Blog Content Creation",
+      "Meta Tag Optimization",
+      "Content Optimization Services",
+      "Landing Page SEO Content",
+      "Content Calendar Fulfillment",
+      "Editorial Quality Control",
     ],
   },
   {
     number: "03",
-    title: "AI Citation Optimization",
-    desc: "We format facts, definitions, and data points so AI tools can lift them cleanly and correctly when generating answers.",
+    title: "White Label Link Building",
+    desc: "Link building fulfillment handled carefully, since backlink quality directly affects your agency's client results and reputation.",
     ctaText: "Know Our Services",
     services: [
-      "Fact Formatting for AI",
-      "Definition Block Writing",
-      "Data Point Structuring",
-      "Citation-Ready Content",
-      "AI Parsing Testing",
-      "Content Chunking",
-      "Quotable Content Writing",
-      "Citation Accuracy Checks",
+      "White Label Link Building",
+      "Guest Post Outreach",
+      "Digital PR Fulfillment",
+      "Backlink Quality Assurance",
+      "Link Building Reporting",
+      "Competitor Backlink Analysis",
+      "Outreach Campaign Management",
+      "Link Building Strategy",
     ],
   },
   {
     number: "04",
-    title: "Experience & Expertise Signals",
-    desc: "We strengthen author credibility, first-hand experience, and expertise signals that both readers and search engines value.",
+    title: "White Label Technical SEO",
+    desc: "Technical SEO work handled by specialists, covering the fixes most agencies don't have in-house capacity to execute.",
     ctaText: "Know Our Services",
     services: [
-      "Author Bio Development",
-      "Expertise Signal Building",
-      "First-Hand Experience Content",
-      "Credential Highlighting",
-      "Case Study Development",
-      "Original Insight Writing",
-      "Trust Signal Auditing",
-      "E-E-A-T Optimization",
+      "White Label Technical SEO Audits",
+      "Site Speed Optimization",
+      "Crawlability & Indexation Fixes",
+      "Schema Markup Implementation",
+      "Technical SEO Fulfillment",
+      "Core Web Vitals Optimization",
+      "Mobile SEO Optimization",
+      "Technical Issue Resolution",
     ],
   },
   {
     number: "05",
-    title: "Engagement & Ranking Tracking",
-    desc: "We track how optimized content performs on both traditional engagement metrics and AI citation visibility.",
+    title: "White Label Local SEO",
+    desc: "Local SEO fulfillment for your clients' local visibility needs, delivered under your agency's name.",
     ctaText: "Know Our Services",
     services: [
-      "Engagement Tracking",
-      "Ranking Monitoring",
-      "AI Citation Tracking",
-      "Content Performance Dashboards",
-      "Bounce Rate Analysis",
-      "Time-on-Page Tracking",
-      "Conversion Tracking",
-      "Monthly Content Reports",
+      "White Label Local SEO",
+      "Google Business Profile Fulfillment",
+      "Local Citation Building",
+      "Local Content Fulfillment",
+      "Multi-Location SEO Fulfillment",
+      "Local Ranking Reports",
+      "Review Management Fulfillment",
+      "Local SEO Client Support",
     ],
   },
   {
     number: "06",
-    title: "Ongoing Content Maintenance",
-    desc: "Content gets revisited and updated regularly, so it stays accurate and competitive rather than going stale after publication.",
+    title: "White Label Reporting & Client Communication Support",
+    desc: "Branded reporting and client-ready materials, so you always look prepared and in control on client calls.",
     ctaText: "Know Our Services",
     services: [
-      "Scheduled Content Reviews",
-      "Fact Update Cycles",
-      "Competitive Refresh Checks",
-      "Ranking Decay Monitoring",
-      "Content Update Prioritization",
-      "Seasonal Content Updates",
-      "Long-Term Content Calendar",
-      "Maintenance Reporting",
+      "White Label Reporting",
+      "Branded Client Reports",
+      "Dashboard & Analytics Setup",
+      "Client-Ready Presentation Support",
+      "Account Management Support",
+      "Escalation Handling",
+      "Custom Reporting Templates",
+      "Communication Support for Client Calls",
     ],
   },
 ];
@@ -154,123 +154,129 @@ const SERVICE_BREAKDOWN = [
 const ROADMAP_STEPS = [
   {
     number: "01",
-    title: "Content Audit",
-    desc: "We review your existing content for accuracy, structure, depth, and how well it currently performs for both readers and AI systems.",
+    title: "Agency & Client Needs Discovery",
+    desc: "We start by understanding your agency's service offerings, client base, and what specific SEO fulfillment support you need.",
   },
   {
     number: "02",
-    title: "Prioritization & Planning",
-    desc: "We prioritize which pages to rewrite first based on traffic potential and current performance, so effort goes where it matters most.",
+    title: "Fulfillment Scope & Branding Agreement",
+    desc: "We agree on exactly what's being delivered, how it's branded, and how communication and reporting will work between our teams.",
   },
   {
     number: "03",
-    title: "Rewrite & Restructure",
-    desc: "Underperforming or thin content gets rewritten and restructured to genuinely help readers while staying easy for AI systems to parse.",
+    title: "Client Strategy & Audit Delivery",
+    desc: "We deliver initial strategy and audit work for your clients, formatted and branded for you to present directly.",
   },
   {
     number: "04",
-    title: "Authority & Trust Signals",
-    desc: "We strengthen author credibility and expertise signals across key content, which both readers and AI systems weigh heavily.",
+    title: "Content, Technical & Link Building Fulfillment",
+    desc: "We execute ongoing fulfillment work, content, technical SEO, and link building, according to each client's specific strategy.",
   },
   {
     number: "05",
-    title: "Publishing & Quality Review",
-    desc: "Refreshed content goes through a final quality review before publishing, checking accuracy, tone, and structure one last time.",
+    title: "Branded Reporting & Client-Ready Documentation",
+    desc: "We provide branded reports and documentation ready for you to share directly with clients, without additional reformatting needed.",
   },
   {
     number: "06",
-    title: "Monitor & Refresh",
-    desc: "We track engagement and citation performance, refreshing content regularly instead of letting it go stale after publication.",
+    title: "Ongoing Fulfillment & Account Support",
+    desc: "We continue delivering fulfillment work as an extension of your team, adjusting capacity as your client roster grows.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "Human-First, Machine-Ready",
-    desc: "Every piece is written to genuinely help the reader first, then structured for AI systems, not the other way around.",
+    title: "Fulfillment That Stays Fully Under Your Agency's Brand",
+    desc: "All deliverables, reports, and communication materials carry your branding, not ours, so your clients experience your agency delivering consistent, professional work.",
   },
   {
     number: "02",
-    title: "Depth Over Filler",
-    desc: "We prioritize real depth and accuracy over word count padding, which both readers and search engines can tell apart.",
+    title: "SEO Delivered at a Standard You Can Confidently Resell",
+    desc: "We treat every fulfillment project as a reflection of your agency's reputation, delivering work quality you can present to clients without needing to double-check or rework it yourself.",
   },
   {
     number: "03",
-    title: "Citation-Ready Structuring",
-    desc: "Content is formatted so AI systems can lift facts and definitions cleanly and correctly.",
+    title: "Flexible Fulfillment Sized to Your Agency's Client Roster",
+    desc: "We scale fulfillment capacity up or down based on your current client load, so you're not paying for unused capacity or scrambling when your roster grows quickly.",
   },
   {
     number: "04",
-    title: "Expertise Signals Built In",
-    desc: "We strengthen author credibility and experience signals that build trust with readers and search engines alike.",
+    title: "Communication Support That Makes You Look Prepared on Client Calls",
+    desc: "We provide talking points and clear documentation ahead of client conversations, helping your account managers speak confidently about work even when they weren't directly involved in delivering it.",
   },
   {
     number: "05",
-    title: "Data-Driven Execution",
-    desc: "Every recommendation is backed by real engagement and citation data, not assumptions about what content should work.",
+    title: "Transparent Internal Reporting So You Always Know What's Happening",
+    desc: "You receive full visibility into what's being delivered for each client internally, separate from the branded reports your clients see, so nothing happens without your agency's full awareness.",
   },
   {
     number: "06",
-    title: "Honest Reporting",
-    desc: "No agency can guarantee every citation or ranking, and we won't pretend otherwise — you get transparent, honest progress reports instead.",
+    title: "A Partner You Can Scale With as Your Agency Grows",
+    desc: "We build fulfillment relationships meant to grow alongside your agency, not a one-off engagement, so you have consistent SEO delivery capacity as your client roster expands over time.",
   },
 ];
 
 const FAQS = [
   {
-    question: "What is AI content optimization?",
+    question: "How does white label SEO fulfillment actually work?",
     answer:
-      "It's the practice of writing and structuring content so it genuinely helps readers while also being easy for AI systems to accurately parse, cite, and recommend.",
+      "We work as an extension of your agency, delivering strategy, content, technical, and link building work under your brand, while you manage the direct client relationship. You receive branded deliverables ready to present, along with internal visibility into everything being done.",
   },
   {
-    question: "Will AI-optimized content still sound natural to readers?",
+    question: "Will our clients know BizzBuzz Creations is doing the work?",
     answer:
-      "Yes — we write for humans first and structure for AI systems second, so content stays genuinely readable and useful, not robotic.",
+      "No, all client-facing deliverables, reports, and communication materials carry your agency's branding, not ours. The fulfillment relationship stays between our two teams, with your agency remaining the visible point of contact for your clients throughout.",
   },
   {
-    question: "Do you use AI tools to write the content?",
+    question: "How much does white label SEO cost for agencies in India?",
     answer:
-      "We may use AI tools to assist with research and drafts, but every piece is reviewed, refined, and fact-checked by our team before publishing.",
+      "Cost depends on the scope and volume of fulfillment work needed, whether that's occasional overflow support or ongoing full-service delivery across your client roster. We scope pricing after understanding your specific fulfillment needs, rather than offering a flat rate upfront.",
   },
   {
-    question: "How often should content be refreshed?",
+    question: "Can you handle reporting in our agency's branding?",
     answer:
-      "It depends on the topic, but most content benefits from a review every few months to keep facts, data, and rankings current.",
+      "Yes, branded reporting is a core part of our white label service, with reports formatted under your agency's name and ready to present directly to your clients without additional work on your end.",
   },
   {
-    question: "Can you optimize content I already have instead of writing new pages?",
+    question: "What if we only need fulfillment for some SEO services, not all?",
     answer:
-      "Yes, we start with an audit and often get better results refreshing and restructuring existing content before adding new pages.",
+      "That's common, many agencies use us for specific gaps, like technical SEO or link building, while handling other services in-house. We scope fulfillment around exactly what you need, not an all-or-nothing package.",
+  },
+  {
+    question: "How do you handle communication if something goes wrong with a client's SEO?",
+    answer:
+      "We flag issues to your team promptly with clear documentation and recommended next steps, so you're never caught off guard on a client call. You retain full control over how and when issues get communicated to your clients directly.",
   },
 ];
 
-export default function AiContentOptimization() {
+export default function AgencyGrowthWhiteLabelSeo() {
   return (
     <ServiceDetailPage
       sectionLabel="SEO Services"
-      label="AI Content Optimization"
-      icon={PenTool}
-      description="Content must now work for both humans and AI systems. We create and refine content that ranks, gets cited, and drives real engagement."
-      heroTitle="AI Content Optimization Services in India"
-      heroDescription="Content must now work for both humans and AI systems. We create and refine content that ranks, gets cited, and drives real engagement."
-      capabilitiesHeading="Built for Businesses Ready for Content That Works Twice as Hard"
+      label="Agency Growth & White Label SEO"
+      icon={Users}
+      description="White label SEO fulfillment built to scale your agency's delivery, not add to your workload, backed by work done under your brand."
+      heroTitle="Get SEO Fulfillment That Makes Your Agency Look Great"
+      heroDescription="White label SEO fulfillment built to scale your agency's delivery, not add to your workload, backed by work done under your brand."
+      heroCtaText="Get a Free White Label SEO Consultation"
+      capabilitiesHeading="Built for Agencies That Need to Scale Without Hiring"
       capabilities={CAPABILITIES}
-      serviceBreakdownHeading="Everything That Goes Into Our AI Content Optimization"
+      serviceBreakdownHeading="Everything Between Client SEO Needs and Your Agency's Delivery"
       serviceBreakdown={SERVICE_BREAKDOWN}
-      differentiatorsHeading="Why Businesses Trust Us to Optimize Their Content"
+      differentiatorsHeading="Why Agencies Trust Us as Their White Label SEO Partner"
       differentiators={DIFFERENTIATORS}
-      roadmapCarouselHeading="How We Turn Underperforming Content Into Content That Works"
+      roadmapCarouselHeading="How We Deliver SEO That Stays Under Your Brand"
       roadmapCarouselSteps={ROADMAP_STEPS}
       showStats={false}
-      localityHeading="Based in Prayagraj, Optimizing Content Worldwide"
-      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every content optimization engagement, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, refreshing content sized to each business's actual content library and goals. For businesses looking to optimize content beyond India, we deliver this work remotely, tracking engagement and citations across markets and time zones to the same standard regardless of location. Whether you're a startup writing your first optimized page or an enterprise maintaining a large content library, our approach starts with auditing what's actually underperforming and why."
+      localityHeading="Based in Prayagraj, Fulfilling White Label SEO Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every fulfillment relationship, with the same reliability whether a partner agency is nearby or across the world. We provide white label seo services for agencies across India, helping them deliver consistent SEO work without expanding their own internal team. For agencies looking for a private label seo company beyond India, we support partners worldwide remotely, delivering the same seo fulfillment for agencies standard of work regardless of time zone. Whether you're a growing agency in Prayagraj or an established shop anywhere else expanding your service line, our approach starts with the same question: what does your specific client roster actually need delivered."
       faqs={FAQS}
       showWhyChooseUs={false}
-      ctaHeading="Ready for Content That Actually Works for You?"
-      ctaText="Whether you need a full content audit and refresh, new content written to be AI-ready from the start, or ongoing maintenance for an existing library, the right approach depends on what's currently underperforming. Let's talk through your content and scope what optimization would actually involve."
-      ctaPrimaryText="Talk to a Content Optimization Specialist"
-      ctaSecondaryText="Get Your Free Content Audit"
+      ctaHeading="Ready to Scale Your Agency Without Scaling Headcount?"
+      ctaText="Whether you're turning down SEO work you don't have capacity for, adding SEO as a new service line, or simply need reliable fulfillment support as your agency grows, hiring an entire in-house team was never the only option. Let's talk through your client roster and scope what a white label SEO partnership would actually involve."
+      ctaPrimaryText="Talk to a White Label SEO Specialist"
+      ctaSecondaryText="Get Your Free White Label SEO Consultation"
     />
   );
 }

@@ -1,18 +1,18 @@
 import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Server,
-  Rocket,
-  Building2,
+  Wrench,
+  FileSpreadsheet,
+  Users,
   Building,
-  Layers,
-  Handshake,
+  Rocket,
   RefreshCw,
 } from "lucide-react";
 
 export const metadata = {
-  title: "PHP Web Application Development Company | BizzBuzz Creations",
+  title: "PHP Web Application Development | BizzBuzz Creations",
   description:
-    "Custom PHP web application development and legacy system modernization in India — secure, scalable backend builds for internal tools and customer-facing platforms by BizzBuzz Creations.",
+    "BizzBuzz Creations is a PHP web application development company building custom PHP and Laravel solutions for India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/web-development/php-web-application-development",
@@ -21,34 +21,34 @@ export const metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Rocket,
-    title: "Startups & Early-Stage Businesses",
-    desc: "Startups need a backend that can evolve fast as the product finds its shape. We build PHP applications on a flexible architecture, letting startups add features without a full rebuild every time requirements change.",
+    icon: Wrench,
+    title: "Businesses Needing Custom Internal Tools",
+    desc: "Businesses running key processes through spreadsheets and email eventually hit a ceiling on accuracy and speed. We build custom PHP development services that turn manual processes into a reliable internal tool built around your actual workflow, not a generic template.",
   },
   {
-    icon: Building2,
-    title: "Small & Medium Businesses",
-    desc: "SMBs often need internal tools or customer platforms off-the-shelf software can't quite fit. We build custom PHP applications sized for SMB budgets, matching your exact workflow instead of forcing you to adapt to generic software.",
+    icon: FileSpreadsheet,
+    title: "Companies Replacing Manual or Spreadsheet Processes",
+    desc: "Manual processes break down as a team grows, causing errors that a proper system would catch automatically. We build PHP web application development company projects that digitize these processes, reducing manual error and freeing up staff time for higher-value work.",
+  },
+  {
+    icon: Users,
+    title: "Businesses Needing a Custom CRM",
+    desc: "Off-the-shelf CRMs often force your sales process to fit their structure instead of the other way around. We provide PHP CRM development services built around your actual sales stages, customer data, and reporting needs, not a generic pipeline.",
   },
   {
     icon: Building,
-    title: "Enterprises & Large Organizations",
-    desc: "Enterprises need backend systems that handle scale, security, and integration with existing internal tools reliably. We provide enterprise PHP development built for high traffic, strict security requirements, and integration with existing CRMs and ERPs.",
+    title: "Organizations Needing a Custom ERP",
+    desc: "Growing organizations juggling inventory, finance, and HR across disconnected tools need one system that actually talks to itself. We build custom PHP ERP systems that unify these functions into a single, maintainable platform built for your specific operations.",
   },
   {
-    icon: Layers,
-    title: "SaaS & Platform Companies",
-    desc: "SaaS companies need a backend that supports multi-user access, billing, and ongoing feature development. We build custom PHP applications covering everything from authentication to billing as one connected, maintainable system.",
-  },
-  {
-    icon: Handshake,
-    title: "Agencies Needing a Development Partner",
-    desc: "Agencies often need a reliable backend development partner to execute what they've scoped for clients. We work as a white-label or direct PHP development partner, helping agencies deliver custom builds without adding permanent headcount.",
+    icon: Rocket,
+    title: "Startups Building a PHP-Based Product",
+    desc: "Startups building a product on PHP or Laravel need a technical partner who can move fast without accumulating technical debt. We work as a Laravel development agency partner, building scalable foundations that support the product as it grows.",
   },
   {
     icon: RefreshCw,
-    title: "Businesses Modernizing Legacy PHP Systems",
-    desc: "Businesses running old, unmaintainable PHP codebases need a careful, planned modernization rather than a risky rebuild. We handle migration from legacy PHP systems to modern, maintainable applications, preserving what works while fixing what doesn't.",
+    title: "Businesses With Legacy PHP Needing Modernization",
+    desc: "Businesses running old, unmaintained PHP code face growing security risk and rising maintenance cost. We handle legacy PHP modernization carefully, upgrading and refactoring existing applications without disrupting the operations that currently depend on them.",
   },
 ];
 
@@ -56,97 +56,97 @@ const SERVICE_BREAKDOWN = [
   {
     number: "01",
     title: "Custom PHP Application Development",
-    desc: "From internal tools to customer-facing platforms, our full-stack PHP developers build applications tailored to your exact workflow instead of forcing you into off-the-shelf software.",
+    desc: "Custom PHP development services built around your specific business logic, not adapted from a generic off-the-shelf system.",
     ctaText: "Know Our Services",
     services: [
-      "Custom PHP Development",
-      "Internal Business Tools",
-      "Customer-Facing Platforms",
-      "Laravel Application Development",
-      "Multi-User Systems",
-      "Admin Panel Development",
-      "Workflow-Specific Applications",
-      "Application Documentation",
+      "Custom PHP Web Application Development",
+      "PHP Backend Development",
+      "PHP Web Portal Development",
+      "Custom Business Software Development",
+      "PHP Dashboard Development",
+      "Multi-User PHP Applications",
+      "Role-Based Access Systems",
+      "Scalable PHP Architecture",
     ],
   },
   {
     number: "02",
-    title: "Legacy System Modernization",
-    desc: "Running an old PHP codebase that's become a liability? We modernize legacy systems for better security, speed, and maintainability without disrupting your business.",
+    title: "Laravel Development",
+    desc: "As a Laravel development agency, we build modern, maintainable applications using Laravel's structure for faster, cleaner development.",
     ctaText: "Know Our Services",
     services: [
-      "Legacy Code Audits",
-      "Framework Migration",
-      "Codebase Refactoring",
-      "Security Hardening for Legacy Systems",
-      "Performance Modernization",
-      "Incremental Migration Planning",
-      "Legacy Data Migration",
-      "Downtime-Minimized Rollouts",
+      "Laravel Web Application Development",
+      "Laravel API Development",
+      "Laravel Custom Package Development",
+      "Laravel Migration Services",
+      "Laravel Performance Optimization",
+      "Laravel Security Hardening",
+      "Laravel E-commerce Development",
+      "Laravel Upgrade Services",
     ],
   },
   {
     number: "03",
-    title: "Database Design & Integration",
-    desc: "Well-structured databases underpin every reliable application. We design schemas and integrations that stay fast and consistent as your data grows.",
+    title: "PHP CRM Development",
+    desc: "PHP CRM development services built around your actual sales process, customer data structure, and reporting requirements.",
     ctaText: "Know Our Services",
     services: [
-      "Database Schema Design",
-      "MySQL/PostgreSQL Development",
-      "Database Optimization",
-      "Data Migration Support",
-      "Query Performance Tuning",
-      "Database Integration",
-      "Backup & Recovery Setup",
-      "Data Integrity Checks",
+      "Custom PHP CRM Development",
+      "Sales & Lead Management CRM",
+      "Customer Support CRM Systems",
+      "CRM Integration Services",
+      "CRM Customization & Extensions",
+      "Multi-Tenant CRM Development",
+      "CRM Reporting & Analytics",
+      "CRM Migration Services",
     ],
   },
   {
     number: "04",
-    title: "API Development & Integration",
-    desc: "We build and integrate APIs so your PHP application talks cleanly to other systems — payment gateways, CRMs, third-party tools, or your own internal services.",
+    title: "PHP ERP & Business Systems",
+    desc: "Custom PHP ERP development that unifies inventory, finance, HR, and operations into one system built for your business.",
     ctaText: "Know Our Services",
     services: [
-      "REST API Development",
-      "Third-Party API Integration",
-      "Payment Gateway Integration",
-      "CRM & ERP Integration",
-      "Webhook Development",
-      "API Documentation",
-      "API Security & Authentication",
-      "Rate Limiting & Throttling",
+      "Custom PHP ERP Development",
+      "Inventory Management Systems",
+      "HR & Payroll Systems",
+      "Accounting & Finance Modules",
+      "Workflow Automation Systems",
+      "Multi-Department ERP Solutions",
+      "Business Process Digitization",
+      "ERP Integration Services",
     ],
   },
   {
     number: "05",
-    title: "Security Hardening",
-    desc: "Custom applications are a common attack target. We follow secure coding practices and harden deployments against common vulnerabilities.",
+    title: "PHP API & Integration Development",
+    desc: "PHP API development connects your custom application to the tools, payment systems, and platforms your business already relies on.",
     ctaText: "Know Our Services",
     services: [
-      "Secure Coding Practices",
-      "Vulnerability Assessments",
-      "Authentication & Authorization Systems",
-      "Input Validation & Sanitization",
-      "SQL Injection Prevention",
-      "Server Hardening",
-      "Security Patch Management",
-      "Penetration Test Support",
+      "PHP API Development",
+      "REST API Development",
+      "Third-Party API Integration",
+      "Payment Gateway Integration",
+      "Database Design & Development",
+      "Microservices Architecture",
+      "System-to-System Integration",
+      "Webhook & Automation Development",
     ],
   },
   {
     number: "06",
-    title: "Ongoing Maintenance & Support",
-    desc: "Applications need upkeep long after launch. We provide ongoing bug fixes, updates, and performance monitoring to keep things running smoothly.",
+    title: "PHP Maintenance, Support & Modernization",
+    desc: "Legacy PHP application modernization and ongoing support to keep your PHP systems secure, current, and reliable long-term.",
     ctaText: "Know Our Services",
     services: [
-      "Ongoing Bug Fixes",
-      "Feature Enhancements",
-      "Performance Monitoring",
-      "Security Patching",
-      "Server & Hosting Support",
-      "Version Upgrades",
-      "Technical Documentation",
-      "SLA-Based Support Plans",
+      "PHP Application Maintenance",
+      "Legacy PHP Modernization",
+      "PHP Version Upgrades",
+      "Bug Fixes & Patches",
+      "Security Audits & Fixes",
+      "Performance Optimization",
+      "Codebase Refactoring",
+      "Ongoing Technical Support",
     ],
   },
 ];
@@ -154,94 +154,99 @@ const SERVICE_BREAKDOWN = [
 const ROADMAP_STEPS = [
   {
     number: "01",
-    title: "Requirement Analysis",
-    desc: "We dig into your actual workflow and technical constraints before proposing an architecture, so the build matches how your business really operates.",
+    title: "Business & Workflow Discovery",
+    desc: "We start by mapping your actual process in detail, sales stages, approval chains, data flow, identifying exactly what the application needs to handle before any development begins.",
   },
   {
     number: "02",
-    title: "Architecture & Database Design",
-    desc: "We plan the application structure and database schema upfront, avoiding the shortcuts that turn into expensive rewrites later.",
+    title: "System Architecture Planning",
+    desc: "We plan the application's structure, database design, and technical approach upfront, whether it's custom PHP, Laravel, or a modernization of existing code.",
   },
   {
     number: "03",
-    title: "Design & Prototyping",
-    desc: "We design the interface and key workflows, creating prototypes you can review before full development begins.",
+    title: "Design & Database Structuring",
+    desc: "We design the interface and structure the underlying database around your actual data and workflow, creating a foundation that supports how your business really operates.",
   },
   {
     number: "04",
-    title: "Development & Testing",
-    desc: "Features get built and tested iteratively, with regular check-ins so you see progress and can course-correct early.",
+    title: "Development & Integration",
+    desc: "We build the application and any required integrations, connecting it to existing tools like payment systems or accounting software as needed.",
   },
   {
     number: "05",
-    title: "Security & Quality Assurance",
-    desc: "We test functionality, performance, and security thoroughly before launch, catching issues while they're still easy to fix.",
+    title: "Testing & Quality Assurance",
+    desc: "We test functionality, security, and performance thoroughly across real-world scenarios before launch, catching issues while they're still easy to fix.",
   },
   {
     number: "06",
-    title: "Deployment & Support",
-    desc: "We handle deployment and stay on for maintenance, security patches, and feature updates as your needs evolve.",
+    title: "Launch & Ongoing Support",
+    desc: "We launch the application, then provide ongoing maintenance and support so it continues running reliably as your business and requirements evolve.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "Full-Stack PHP Team",
-    desc: "From frontend to database, our developers handle the complete stack, so you're not coordinating between multiple vendors.",
+    title: "PHP Development Built Around Business Workflows, Not Generic Templates",
+    desc: "We start by understanding your actual process, sales stages, inventory flow, approval chains, then build the application around that, rather than forcing your business to adapt to a pre-built system. This means the finished tool does exactly what your team needs it to do.",
   },
   {
     number: "02",
-    title: "Legacy Modernization Experts",
-    desc: "We specialize in updating aging PHP systems for better security and performance without a risky full rebuild.",
+    title: "Laravel Expertise for Modern, Maintainable Applications",
+    desc: "As a Laravel development agency, we build on a framework designed for clean, maintainable code, meaning your application stays easier to update and extend as your business needs change, rather than becoming harder to work with over time.",
   },
   {
     number: "03",
-    title: "Secure by Design",
-    desc: "Security isn't bolted on at the end — we build with secure coding practices from the first line of code.",
+    title: "Custom CRM and ERP Built for How You Actually Work",
+    desc: "Generic CRM and ERP software forces your process to fit their structure. Our PHP CRM development services and custom ERP builds are shaped around your actual sales stages, departments, and reporting needs, not a one-size-fits-all template.",
   },
   {
     number: "04",
-    title: "Scalable Architecture",
-    desc: "We design applications to handle growth in users and data, not just the demo you saw in the pitch.",
+    title: "Legacy PHP Modernized Without Disrupting Operations",
+    desc: "We handle legacy PHP modernization carefully, understanding what the existing system does before changing anything, so upgrades and refactoring happen without breaking the operations that currently depend on the application every day.",
   },
   {
     number: "05",
-    title: "Transparent Communication",
-    desc: "Regular updates and clear technical explanations, so you always know where your project stands.",
+    title: "API Development That Connects Your Existing Tools",
+    desc: "Most businesses already run on multiple tools, payment gateways, accounting software, marketing platforms. Our PHP API development connects your custom application to what you already use, instead of forcing you to abandon existing systems that work.",
   },
   {
     number: "06",
-    title: "Prayagraj-Based, Globally Trusted",
-    desc: "A full-service PHP development team in Prayagraj, serving clients locally across Uttar Pradesh as well as businesses across the UK, USA, and India.",
+    title: "Ongoing Support That Doesn't End at Launch",
+    desc: "Custom PHP applications need continued attention as your business evolves. We provide ongoing maintenance, security updates, and feature additions after launch, so the system keeps working reliably rather than becoming outdated within a year.",
   },
 ];
 
 const FAQS = [
   {
-    question: "What PHP frameworks do you work with?",
+    question: "How much does custom PHP development cost in India?",
     answer:
-      "We work with Laravel and other modern PHP frameworks, choosing the right fit based on your project's complexity and long-term maintenance needs.",
+      "Cost depends on scope, a simple internal tool costs far less than a full custom CRM or ERP with multiple integrations. We scope pricing after understanding your specific requirements, workflow complexity, and any integrations needed, rather than offering a flat rate upfront for something this variable.",
   },
   {
-    question: "Can you take over and modernize an existing PHP application?",
+    question: "What's the difference between PHP and Laravel development?",
     answer:
-      "Yes, we regularly step into legacy codebases, audit them, and modernize them for better security and performance without disrupting your business.",
+      "PHP is the underlying language, while Laravel is a framework built on PHP that provides structure, security features, and tools that speed up development and improve maintainability. Most new custom applications we build use Laravel, while existing PHP codebases are handled on their own terms during modernization work.",
   },
   {
-    question: "How much does PHP application development cost?",
+    question: "Can you build a custom CRM or ERP for my business?",
     answer:
-      "It depends on the complexity of the features and integrations required — we scope every project and provide a clear, tailored quote.",
+      "Yes, PHP CRM development services and custom ERP development are core parts of what we do, built around your actual sales process, departments, and reporting needs rather than adapted from an existing off-the-shelf product. We scope these projects based on your specific workflow requirements.",
   },
   {
-    question: "How do you handle application security?",
+    question: "Do you offer offshore PHP development services?",
     answer:
-      "We follow secure coding practices, harden deployments, and can add ongoing monitoring to catch vulnerabilities before they become incidents.",
+      "Yes, we work as an offshore PHP development company for clients based outside India, delivering the same development standard and communication process regardless of time zone. We adapt working hours and check-in schedules to fit each client's location and preferences.",
   },
   {
-    question: "How long does a typical PHP project take?",
+    question: "Can you modernize or maintain an existing legacy PHP application?",
     answer:
-      "Timelines vary with scope, from a few weeks for a focused tool to several months for a full platform — we'll give you a realistic estimate upfront.",
+      "Yes, legacy PHP application modernization is one of our core services, covering security updates, PHP version upgrades, and code refactoring for applications that are still critical to daily operations. We assess the existing system carefully before making changes to avoid disrupting what currently works.",
+  },
+  {
+    question: "How long does it take to build a custom PHP web application?",
+    answer:
+      "Timeline depends on complexity, a simple internal tool typically takes a few weeks, while a full CRM or ERP with integrations can take a few months. We provide a specific timeline estimate after the discovery phase, once your exact requirements and workflow are clear.",
   },
 ];
 
@@ -251,26 +256,27 @@ export default function PhpWebApplicationDevelopment() {
       sectionLabel="Website Development"
       label="PHP Web Application Development"
       icon={Server}
-      description="Custom PHP applications and legacy system modernization for businesses with complex backend needs — built for security, speed, and long-term maintainability."
-      heroTitle="PHP Web Application Development Company in India"
-      heroDescription="Custom PHP applications and legacy system modernization for businesses with complex backend needs — built for security, speed, and long-term maintainability."
-      capabilitiesHeading="Built for Businesses With Backend Needs a Template Can't Solve"
+      description="Custom PHP and Laravel applications built to run your business better, not just look good, engineered around how you actually work."
+      heroTitle="Get a PHP Web Application Built Around How Your Business Actually Runs"
+      heroDescription="Custom PHP and Laravel applications built to run your business better, not just look good, engineered around how you actually work."
+      heroCtaText="Get a Free PHP Development Consultation"
+      capabilitiesHeading="Built for Businesses Running on More Than Spreadsheets"
       capabilities={CAPABILITIES}
-      serviceBreakdownHeading="Everything That Goes Into Our PHP Application Development"
+      serviceBreakdownHeading="Everything Between a Business Problem and a Working PHP App"
       serviceBreakdown={SERVICE_BREAKDOWN}
-      differentiatorsHeading="Why Businesses Trust Us to Build Their PHP Applications"
+      differentiatorsHeading="Why Businesses Trust Us With Their PHP Development"
       differentiators={DIFFERENTIATORS}
-      roadmapCarouselHeading="How We Turn Your Requirements Into a Working Application"
+      roadmapCarouselHeading="How We Turn Your Workflow Into Working PHP Code"
       roadmapCarouselSteps={ROADMAP_STEPS}
       showStats={false}
       localityHeading="Based in Prayagraj, Building PHP Applications Worldwide"
-      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every PHP application project, with the same care whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, building backend systems sized to each business's actual complexity and scale. For businesses looking to hire PHP developers beyond India, we support clients worldwide remotely, working across time zones to deliver the same engineering standard regardless of location. Whether you're a startup building your first internal tool or an enterprise modernizing a legacy system, our approach starts with the same question: what does your business actually need this application to do."
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every PHP project, with the same attention to detail whether a client is nearby or across the world. We work as a PHP web application development company for businesses across India, providing custom PHP development services and PHP CRM development services built around each business's actual workflow. For businesses looking to hire PHP developers beyond India, we work as an offshore PHP development company supporting clients worldwide remotely, delivering the same Laravel development agency standard of work regardless of time zone. Whether you're a business in Prayagraj replacing spreadsheets or an organization anywhere else modernizing legacy code, our approach starts with the same question: what does your actual workflow need this application to do."
       faqs={FAQS}
       showWhyChooseUs={false}
-      ctaHeading="Ready for a Backend That Actually Fits How You Work?"
-      ctaText="Whether you need a custom internal tool, a customer-facing platform, or a careful modernization of an aging PHP system, off-the-shelf software was never going to get you there. Let's talk through your requirements and scope what a custom PHP build would actually involve."
+      ctaHeading="Ready for a PHP Application That Actually Works the Way You Do?"
+      ctaText="Whether you're replacing manual processes, need a custom CRM or ERP, or have a legacy PHP application that needs modernizing without disrupting operations, off-the-shelf software was never going to fit your exact workflow. Let's talk through your process and scope what a custom PHP application would actually involve."
       ctaPrimaryText="Talk to a PHP Development Specialist"
-      ctaSecondaryText="Get Your Free Development Consultation"
+      ctaSecondaryText="Get Your Free PHP Development Consultation"
     />
   );
 }

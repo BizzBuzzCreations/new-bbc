@@ -1,18 +1,18 @@
 import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   ShoppingCart,
-  Rocket,
-  Building2,
+  ShoppingBag,
   Building,
-  Package,
-  Handshake,
   RefreshCw,
+  Shirt,
+  Share2,
+  Rocket,
 } from "lucide-react";
 
 export const metadata = {
-  title: "Shopify & Ecommerce Development Company | BizzBuzz Creations",
+  title: "Shopify & Ecommerce Development Agency | BizzBuzz Creations",
   description:
-    "Fast, conversion-focused Shopify and ecommerce development in India — custom stores, secure checkout, and scalable builds from 20 products to 20,000, by BizzBuzz Creations.",
+    "BizzBuzz Creations is a Shopify development agency building fast, conversion-focused e-commerce stores for brands across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/web-development/shopify-ecommerce-development",
@@ -21,132 +21,132 @@ export const metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Rocket,
-    title: "Startups & New Store Launches",
-    desc: "New brands need a store that looks credible and converts from day one without a bloated build timeline. We build launch-ready Shopify stores around a lean product catalog, letting startups get to market fast without cutting corners on checkout or speed.",
-  },
-  {
-    icon: Building2,
-    title: "Small & Medium Businesses",
-    desc: "SMB stores often outgrow generic themes once they need specific workflows or a distinct brand look. We build custom Shopify stores sized for SMB budgets, giving growing catalogs a design and structure that actually fits how they sell.",
+    icon: ShoppingBag,
+    title: "D2C Brands & Online Retailers",
+    desc: "D2C brands need a store that converts cold traffic into first-time buyers without relying on a marketplace's built-in audience. We build Shopify e-commerce development company projects focused on product page clarity, fast checkout, and conversion-tested layouts that turn visitors into paying customers.",
   },
   {
     icon: Building,
-    title: "Enterprises & High-Volume Retailers",
-    desc: "Large catalogs need store architecture that handles high traffic and complex inventory reliably. We build enterprise-grade Shopify Plus stores structured for high SKU counts, multi-region selling, and integration with existing ERP systems.",
-  },
-  {
-    icon: Package,
-    title: "D2C & Product Brands",
-    desc: "D2C brands live and die on checkout conversion and mobile shopping experience. We build stores optimized for mobile shoppers and smooth checkout flows, designed specifically to turn browsers into repeat buyers.",
-  },
-  {
-    icon: Handshake,
-    title: "Agencies Needing a Shopify Partner",
-    desc: "Marketing and design agencies often need a technical Shopify partner to execute builds for clients. We work as a white-label or direct Shopify development partner, handling the technical build so agencies can focus on strategy and creative.",
+    title: "Shopify Plus Merchants & Enterprise Brands",
+    desc: "High-volume brands need infrastructure that handles scale, complex catalogs, and custom checkout logic reliably. We provide Shopify Plus development agency services built for enterprise traffic, multi-store setups, and B2B storefronts that standard Shopify plans can't support.",
   },
   {
     icon: RefreshCw,
     title: "Businesses Migrating to Shopify",
-    desc: "Stores stuck on WooCommerce, Magento, or another platform need a careful, SEO-safe migration. We handle structured migrations to Shopify, preserving products, orders, and rankings while upgrading the underlying store.",
+    desc: "Brands stuck on WooCommerce, Magento, or a custom platform needs a migration that doesn't tank their SEO rankings or lose product data. We handle Shopify migration services with a documented plan for redirects, data integrity, and zero-downtime cutover.",
+  },
+  {
+    icon: Shirt,
+    title: "Fashion, Beauty & Lifestyle Brands",
+    desc: "Visual-first brands need a store where design and speed both matter equally, since slow product pages lose sales regardless of how good the photography is. We build fast, image-heavy Shopify store development projects that don't sacrifice load time for visual appeal.",
+  },
+  {
+    icon: Share2,
+    title: "Multi-Channel & Marketplace Sellers",
+    desc: "Sellers running Amazon, Instagram Shop, and their own store simultaneously need Shopify set up to sync inventory and orders across every channel. We build e-commerce website development services that connect your Shopify store to the other platforms you already sell on.",
+  },
+  {
+    icon: Rocket,
+    title: "Startups Launching Their First Store",
+    desc: "First-time Shopify sellers need a store that's ready to sell from day one, without months of trial and error on theme settings. We build launch-ready stores sized for a startup budget, covering the essentials that actually drive early sales.",
   },
 ];
 
 const SERVICE_BREAKDOWN = [
   {
     number: "01",
-    title: "Custom Shopify Theme Development",
-    desc: "We design and build Shopify themes around your brand instead of relying on stock templates, so your store looks distinct and matches how you actually sell.",
+    title: "Shopify Store Design & Development",
+    desc: "Custom Shopify store development built around your product catalog and brand, designed to guide visitors toward checkout rather than just browsing.",
     ctaText: "Know Our Services",
     services: [
-      "Custom Theme Design",
-      "Custom Theme Development",
-      "Shopify 2.0 Section Builds",
-      "Brand-Led Store Design",
-      "Homepage & Collection Design",
-      "Product Page Customization",
-      "Theme Speed Optimization",
-      "Theme Documentation",
+      "Shopify Store Setup",
+      "Custom Shopify Store Design",
+      "Product Page Development",
+      "Collection Page Development",
+      "Checkout Customization",
+      "Shopify Store Development",
+      "Mobile-Optimized Shopify Stores",
+      "Conversion-Focused Store Design",
     ],
   },
   {
     number: "02",
-    title: "Secure Checkout & Payment Integration",
-    desc: "Smooth, trustworthy checkout experiences with the payment gateways your customers actually use, tuned to reduce cart abandonment at the final step.",
+    title: "Shopify Plus Development",
+    desc: "Shopify Plus development agency work for high-volume merchants needing enterprise-scale architecture, automation, and multi-store capability.",
     ctaText: "Know Our Services",
     services: [
-      "Checkout Customization",
-      "Payment Gateway Integration",
-      "Multi-Currency Setup",
-      "Cart Abandonment Reduction",
-      "One-Click Checkout Setup",
-      "Local Payment Method Support",
-      "Fraud Prevention Setup",
-      "Checkout Testing",
+      "Shopify Plus Development",
+      "Shopify Plus Migration",
+      "Multi-Store Setup",
+      "B2B Shopify Development",
+      "Custom Checkout Extensions",
+      "Shopify Plus App Integration",
+      "Automation & Shopify Flow",
+      "Enterprise-Scale Store Architecture",
     ],
   },
   {
     number: "03",
-    title: "Product Catalog & Inventory Setup",
-    desc: "From 20 SKUs to 20,000, we structure collections, variants, and inventory so your catalog stays manageable as it grows, not chaotic.",
+    title: "Custom Shopify App Development",
+    desc: "Custom Shopify app development for functionality that off-the-shelf apps from the Shopify App Store simply don't cover for your specific store.",
     ctaText: "Know Our Services",
     services: [
-      "Product Catalog Structuring",
-      "Collection Setup",
-      "Variant Configuration",
-      "Bulk Product Upload",
-      "Inventory Sync Setup",
-      "Product Data Migration",
-      "SKU Management",
-      "Catalog Taxonomy Planning",
+      "Custom Shopify App Development",
+      "Private App Development",
+      "Shopify API Integration",
+      "Third-Party App Integration",
+      "Custom Shopify Functions",
+      "Shopify Checkout Extensions",
+      "Inventory & Order Automation Apps",
+      "Custom Storefront Features",
     ],
   },
   {
     number: "04",
-    title: "Store Speed & Mobile Optimization",
-    desc: "Most ecommerce traffic is mobile. We optimize page speed and mobile UX so shoppers don't bounce before they even see your products.",
+    title: "Ecommerce Migration & Replatforming",
+    desc: "Shopify migration services that move your store, products, and rankings over safely, without losing what your current SEO has already built.",
     ctaText: "Know Our Services",
     services: [
-      "Page Speed Optimization",
-      "Mobile UX Optimization",
-      "Image Optimization",
-      "Core Web Vitals Fixes",
-      "App Bloat Reduction",
-      "Lazy Loading Setup",
-      "Mobile Checkout Testing",
-      "Performance Monitoring",
+      "Shopify Migration Services",
+      "WooCommerce to Shopify Migration",
+      "Magento to Shopify Migration",
+      "Custom Platform to Shopify Migration",
+      "Data & Product Migration",
+      "SEO-Safe Migration",
+      "Zero-Downtime Migration Planning",
+      "Post-Migration Testing",
     ],
   },
   {
     number: "05",
-    title: "App Integrations & Automation",
-    desc: "We connect the apps you need — reviews, email marketing, shipping, inventory sync — and automate the repetitive parts of running a store.",
+    title: "Shopify Theme Development & Customization",
+    desc: "Shopify theme development that goes beyond editing a purchased theme, built or customized to match exactly what your store needs to do.",
     ctaText: "Know Our Services",
     services: [
-      "Review App Integration",
-      "Email Marketing Integration",
-      "Shipping App Setup",
-      "Inventory Sync Automation",
-      "Subscription App Setup",
-      "Loyalty Program Integration",
-      "Third-Party API Integration",
-      "Workflow Automation",
+      "Shopify Theme Development",
+      "Custom Theme Coding",
+      "Theme Customization",
+      "Liquid Development",
+      "Theme Speed Optimization",
+      "Responsive Theme Design",
+      "Theme Section & Block Development",
+      "Theme Upgrades & Maintenance",
     ],
   },
   {
     number: "06",
-    title: "Ecommerce SEO & Migration",
-    desc: "Whether you're launching fresh or migrating from another platform, we handle SEO-safe migrations and structure your store to actually rank.",
+    title: "Shopify Store Optimization & Support",
+    desc: "Ongoing Shopify SEO optimization and Shopify speed optimization to keep your store converting well after the initial launch.",
     ctaText: "Know Our Services",
     services: [
-      "Ecommerce SEO Setup",
-      "Platform Migration",
-      "URL Redirect Mapping",
-      "Product Schema Markup",
-      "Collection Page SEO",
-      "Technical SEO Audits",
-      "Search Ranking Preservation",
-      "Post-Migration QA",
+      "Shopify SEO Optimization",
+      "Shopify Speed Optimization",
+      "Conversion Rate Optimization",
+      "Ongoing Store Maintenance",
+      "Bug Fixes & Updates",
+      "Shopify Store Audits",
+      "A/B Testing Support",
+      "Post-Launch Support",
     ],
   },
 ];
@@ -154,94 +154,99 @@ const SERVICE_BREAKDOWN = [
 const ROADMAP_STEPS = [
   {
     number: "01",
-    title: "Discovery & Catalog Assessment",
-    desc: "We map out your catalog, customer journey, and growth plans before choosing the right Shopify plan and structure for your store.",
+    title: "Store & Business Discovery",
+    desc: "We start by understanding your products, target customers, and current sales challenges, identifying what your Shopify store specifically needs to do to convert visitors in your category.",
   },
   {
     number: "02",
-    title: "Architecture & Platform Setup",
-    desc: "We plan the store's structure, apps, and Shopify plan upfront, so the foundation supports your catalog size and growth plans.",
+    title: "Shopify Architecture Planning",
+    desc: "We plan the store's structure, app requirements, and technical approach upfront, whether that's standard Shopify, Shopify Plus, or a migration from an existing platform.",
   },
   {
     number: "03",
-    title: "Design & Theme Development",
-    desc: "A custom or heavily customized theme gets built around your brand and products, designed mobile-first for real shoppers.",
+    title: "Design & Prototyping",
+    desc: "We design product pages, collections, and checkout flow around your brand and conversion goals, creating a structure you can review before full development begins.",
   },
   {
     number: "04",
-    title: "Apps, Payments & Shipping Setup",
-    desc: "We configure payment gateways, shipping rules, taxes, and the apps your store needs to actually run day-to-day.",
+    title: "Development & App Integration",
+    desc: "We build the store, theme, and any custom apps or integrations required, keeping speed and mobile performance in mind throughout development.",
   },
   {
     number: "05",
     title: "Testing & Quality Assurance",
-    desc: "We test checkout flows, mobile experience, and app integrations thoroughly across devices before launch.",
+    desc: "We test checkout flow, payment processing, and site performance thoroughly across devices before launch, catching issues before they cost you real sales.",
   },
   {
     number: "06",
-    title: "Launch, Testing & Growth Support",
-    desc: "We test checkout flows end-to-end before launch, then stick around for performance monitoring and ongoing store improvements.",
+    title: "Launch & Ongoing Optimization",
+    desc: "We launch the store, then continue optimizing speed, conversion rate, and SEO as real customer data comes in, refining what's actually working.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "Specialist Shopify Developers",
-    desc: "We focus on Shopify and ecommerce builds specifically, not general websites, so we know the platform's quirks and workarounds inside out.",
+    title: "Shopify Development Built Around Revenue, Not Just Design",
+    desc: "We treat every Shopify project as a sales tool first and a design project second. Product pages, checkout flow, and site speed are all built with conversion in mind, so the finished store isn't just visually polished, it's structured to actually turn visitors into paying customers.",
   },
   {
     number: "02",
-    title: "Built for Conversions",
-    desc: "Every store is designed around smooth checkout flows and clear product pages that turn browsers into buyers.",
+    title: "Shopify Plus Expertise for Growing Brands",
+    desc: "As a Shopify Plus development agency, we understand the added complexity of enterprise-scale stores, custom checkout logic, multi-store setups, and B2B requirements that standard Shopify plans can't handle, giving growing brands the infrastructure to match their scale.",
   },
   {
     number: "03",
-    title: "Mobile Shopper Ready",
-    desc: "Fast-loading, mobile-first storefronts designed for how people actually shop today — on their phones, in short sessions.",
+    title: "Custom App Development When Off-the-Shelf Apps Fall Short",
+    desc: "When your store needs functionality that no App Store app quite covers, we build it directly through custom Shopify app development, giving you exactly the feature you need instead of stacking multiple apps that slow your store down.",
   },
   {
     number: "04",
-    title: "Scales From 20 to 20,000 Products",
-    desc: "Whether you're launching a small catalog or migrating an established store, we structure it to handle growth without a rebuild.",
+    title: "Migration Handled Without Losing SEO or Sales",
+    desc: "Moving platforms is risky if redirects, product data, and search rankings aren't handled carefully. Our Shopify migration services follow a documented process built to protect your existing SEO equity and sales continuity throughout the switch.",
   },
   {
     number: "05",
-    title: "Secure Payments, Global Reach",
-    desc: "Trusted payment integrations and store architecture built to serve customers reliably across India and international markets.",
+    title: "Store Performance Built for Speed and Conversion",
+    desc: "A slow Shopify store loses sales regardless of how good the design looks. We prioritize Shopify speed optimization and conversion-focused structure from the first line of code, not as an afterthought once the store is already live.",
   },
   {
     number: "06",
-    title: "Ongoing Store Support",
-    desc: "Apps break, platforms update, and traffic grows — we provide ongoing support so your store keeps running smoothly after launch.",
+    title: "Support That Continues After Launch",
+    desc: "Shopify store development doesn't end at launch, we provide ongoing maintenance, bug fixes, and optimization support so your store keeps performing as your product catalog and traffic grow, not just on day one.",
   },
 ];
 
 const FAQS = [
   {
-    question: "Should I use Shopify or another ecommerce platform?",
+    question: "How much does it cost to hire a Shopify developer in India?",
     answer:
-      "For most growing businesses, Shopify offers the best balance of speed, security, and app ecosystem — we'll advise honestly if another platform suits your case better.",
+      "Cost depends on scope, a store built on a standard theme with light customization costs far less than a fully custom Shopify Plus build with custom apps. We scope pricing after understanding your specific requirements, product catalog size, and any custom functionality needed, rather than quoting a flat rate upfront.",
   },
   {
-    question: "Can you migrate my existing store to Shopify?",
+    question: "What's the difference between Shopify and Shopify Plus?",
     answer:
-      "Yes, we handle SEO-safe migrations of products, orders, and customer data from platforms like WooCommerce or Magento with minimal downtime.",
+      "Shopify Plus is built for higher-volume merchants, offering greater checkout customization, multi-store management, B2B functionality, and higher API limits than standard Shopify plans. Most growing brands stay on standard Shopify until traffic, catalog complexity, or specific features genuinely require the added capability Shopify Plus provides.",
   },
   {
-    question: "How much does Shopify development cost?",
+    question: "Can you build a custom Shopify app for my store?",
     answer:
-      "Costs depend on catalog size, custom features, and integrations needed — we'll give you a clear quote after understanding your requirements.",
+      "Yes, custom Shopify app development is one of our core services, used when existing Shopify App Store apps don't cover a specific feature your store needs. We build private apps and custom functionality tailored to your exact requirements rather than relying on generic third-party solutions.",
   },
   {
-    question: "How long does it take to launch a Shopify store?",
+    question: "How long does it take to build a Shopify store?",
     answer:
-      "A standard store typically launches in a few weeks; larger catalogs or heavily custom builds take longer. We'll set a realistic timeline upfront.",
+      "Timeline depends on complexity, a standard store with light customization typically takes a few weeks, while a Shopify Plus build with custom apps and migration can take longer. We provide a specific timeline once your requirements, product catalog, and any custom features are clear.",
   },
   {
-    question: "Do you provide support after the store goes live?",
+    question: "Can you migrate my existing store to Shopify without losing SEO rankings?",
     answer:
-      "Yes, we offer ongoing maintenance, app updates, and performance monitoring so your store keeps converting after launch.",
+      "Yes, our Shopify migration services follow a structured process covering redirects, metadata preservation, and product data migration specifically to protect your existing search rankings. We test thoroughly before and after cutover to catch any issues that could affect your organic traffic.",
+  },
+  {
+    question: "Do you provide support after the Shopify store is launched?",
+    answer:
+      "Yes, we offer ongoing maintenance covering bug fixes, speed optimization, and feature updates after launch, since a Shopify store's performance depends on continued attention, not just the initial build. Most clients work with us on an ongoing basis rather than a single one-time project.",
   },
 ];
 
@@ -251,26 +256,27 @@ export default function ShopifyEcommerceDevelopment() {
       sectionLabel="Website Development"
       label="Shopify & Ecommerce Development"
       icon={ShoppingCart}
-      description="Fast-loading, conversion-focused online stores with smooth checkout experiences — built for speed, mobile shoppers, and global scalability, from a team in Prayagraj serving all of India."
-      heroTitle="Shopify & Ecommerce Development Company in India"
-      heroDescription="Fast-loading, conversion-focused online stores with smooth checkout experiences — built for speed, mobile shoppers, and global scalability, from a team in Prayagraj serving all of India."
-      capabilitiesHeading="Built for Stores Ready to Turn Browsers Into Buyers"
+      description="Shopify stores engineered to turn traffic into orders, not just look good, are built around checkout, speed and real conversion for your brand."
+      heroTitle="Get More Sales With a Shopify Store Built to Convert"
+      heroDescription="Shopify stores engineered to turn traffic into orders, not just look good, are built around checkout, speed and real conversion for your brand."
+      heroCtaText="Get a Free Shopify Store Audit"
+      capabilitiesHeading="Built for Brands Ready to Sell More on Shopify"
       capabilities={CAPABILITIES}
-      serviceBreakdownHeading="Everything That Goes Into a Store Built to Sell"
+      serviceBreakdownHeading="Everything Between a Shopify Store and Real Sales"
       serviceBreakdown={SERVICE_BREAKDOWN}
-      differentiatorsHeading="Why Brands Trust Us to Build Their Shopify Store"
+      differentiatorsHeading="Why Brands Trust Us With Their Shopify Store"
       differentiators={DIFFERENTIATORS}
-      roadmapCarouselHeading="How We Turn Your Catalog Into a Converting Store"
+      roadmapCarouselHeading="How We Turn a Shopify Build Into a Selling Machine"
       roadmapCarouselSteps={ROADMAP_STEPS}
       showStats={false}
-      localityHeading="Based in Prayagraj, Building Shopify Stores Worldwide"
-      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every Shopify build, with the same care whether a client is nearby or overseas. We work with startups, SMBs, and enterprise retailers across India, providing Shopify and ecommerce development sized to each brand's actual catalog and traffic. For brands looking to hire Shopify developers beyond India, we support clients worldwide remotely, working across time zones to deliver the same store quality standard regardless of location. Whether you're launching your first 20 products or migrating an established catalog of 20,000, our approach starts with the same question: what does your store actually need to do to convert."
+      localityHeading="Based in Prayagraj, Building Shopify Stores That Sell Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every Shopify project, with the same attention to detail whether a client is nearby or on the other side of the world. We work as a Shopify development agency for D2C brands and retailers across India, providing Shopify e-commerce development company support built around each store's specific products and customers. For brands looking to hire a Shopify developer beyond India, we support clients worldwide remotely, delivering the same Shopify Plus development agency standard of work regardless of location or time zone. Whether you're launching your first store in Prayagraj or migrating an enterprise catalog from anywhere else, our approach starts with the same question: what does your store actually need to convert more of its visitors."
       faqs={FAQS}
       showWhyChooseUs={false}
-      ctaHeading="Ready for a Store That Actually Converts?"
-      ctaText="Whether you need a new Shopify store built from scratch, a custom theme for an existing catalog, or a careful migration from another platform, a generic theme was never going to get you there. Let's talk through your catalog and scope what a custom Shopify build would actually involve."
+      ctaHeading="Ready for a Shopify Store That Actually Sells?"
+      ctaText="Whether you're launching your first Shopify store, migrating from another platform, or need a custom app your current setup can't support, a good-looking store isn't the same as one that converts. Let's talk through your products and requirements and scope what a store built for sales would actually involve."
       ctaPrimaryText="Talk to a Shopify Development Specialist"
-      ctaSecondaryText="Get Your Free Shopify Consultation"
+      ctaSecondaryText="Get Your Free Shopify Store Audit"
     />
   );
 }

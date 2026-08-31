@@ -64,7 +64,7 @@ const SERVICE_LINKS = [
       { label: "Generative Engine Optimization (GEO)", href: "/search-engine-optimization/generative-engine-optimization" },
       { label: "Answer Engine Optimization (AEO)", href: "/search-engine-optimization/answer-engine-optimization" },
       { label: "Semantic SEO & Topical Authority", href: "/search-engine-optimization/semantic-seo-topical-authority" },
-      { label: "AI Content Optimization", href: "/search-engine-optimization/ai-content-optimization" },
+      { label: "Agency Growth & White Label SEO", href: "/search-engine-optimization/ai-content-optimization" },
       { label: "High-Intent & Local SEO", href: "/search-engine-optimization/high-intent-local-seo" },
     ],
   },

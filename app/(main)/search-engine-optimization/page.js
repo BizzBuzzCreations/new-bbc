@@ -6,7 +6,7 @@ import BpoWeAre from "@/components/sections/bpoWeAre";
 import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
 import CTA from "@/components/sections/CTA";
 import DarkFAQSection from "@/components/sections/darkFAQSection";
-import { Bot, Sparkles, MessageCircleQuestion, Network, PenTool, MapPin } from "lucide-react";
+import { Bot, Sparkles, MessageCircleQuestion, Network, Users, MapPin } from "lucide-react";
 
 export const metadata = {
   title: "SEO Services India | AI & Local SEO | BizzBuzz Creations",
@@ -47,10 +47,10 @@ const SERVICE_ITEMS = [
     href: "/search-engine-optimization/semantic-seo-topical-authority",
   },
   {
-    icon: PenTool,
-    heading: "AI Content Optimization",
+    icon: Users,
+    heading: "Agency Growth & White Label SEO",
     description:
-      "Content must now work for both humans and AI systems. We create and refine content that ranks, gets cited, and drives real engagement.",
+      "White label SEO fulfillment built to scale your agency's delivery, not add to your workload, backed by work done under your brand.",
     href: "/search-engine-optimization/ai-content-optimization",
   },
   {

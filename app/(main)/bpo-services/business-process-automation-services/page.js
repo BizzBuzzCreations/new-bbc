@@ -1,18 +1,18 @@
 import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Workflow,
-  Rocket,
+  ClipboardList,
   Building2,
-  Building,
-  ShoppingCart,
-  Handshake,
-  RefreshCw,
+  TrendingUp,
+  Bot,
+  Puzzle,
+  Rocket,
 } from "lucide-react";
 
 export const metadata = {
   title: "Business Process Automation Services | BizzBuzz Creations",
   description:
-    "Business process automation services in India — map your workflow, automate the repetitive middle, and free your team to focus on decisions, by BizzBuzz Creations.",
+    "BizzBuzz Creations delivers business process automation services that save time for companies across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/bpo-services/business-process-automation-services",
@@ -21,132 +21,132 @@ export const metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Rocket,
-    title: "Startups & Early-Stage Businesses",
-    desc: "Startups often run on manual spreadsheets and repeated copy-paste work in the early days. We build lightweight automation that removes the busywork early, so founders and small teams spend time on decisions, not data entry.",
+    icon: ClipboardList,
+    title: "Businesses Drowning in Repetitive Manual Tasks",
+    desc: "Teams spending hours on repetitive data entry, approvals, or reporting have less time for work that actually needs human judgment. We provide business process automation services that eliminate this repetitive burden entirely.",
   },
   {
     icon: Building2,
-    title: "Small & Medium Businesses",
-    desc: "SMBs frequently have processes that grew organically and now waste real hours every week. We build business process automation sized for SMB budgets, targeting the specific repetitive tasks costing your team the most time.",
+    title: "Companies Needing Back-Office Process Automation",
+    desc: "Back-office functions like invoicing, HR processing, and compliance documentation often run on outdated, manual workflows. We provide back office automation services that modernize these processes without disrupting daily operations.",
   },
   {
-    icon: Building,
-    title: "Enterprises & Large Organizations",
-    desc: "Enterprises need automation that integrates cleanly with existing systems across departments without disrupting operations. We design automation for enterprise-scale workflows, built to work alongside your current tools, not replace them wholesale.",
+    icon: TrendingUp,
+    title: "Businesses Scaling Faster Than Their Manual Processes Can Handle",
+    desc: "Manual processes that worked at a smaller scale often break down as transaction volume grows. We provide workflow automation services built to scale alongside your business, not processes that become a bottleneck.",
   },
   {
-    icon: ShoppingCart,
-    title: "Ecommerce & Retail Brands",
-    desc: "Ecommerce operations involve constant order, inventory, and customer data handling that's ripe for automation. We automate order processing, inventory sync, and customer follow-ups so your team isn't manually managing every transaction.",
+    icon: Bot,
+    title: "Companies Needing RPA for Data-Heavy Workflows",
+    desc: "Data-heavy tasks like report generation and data transfer between systems are ideal for automation but often left manual. We work as an RPA services company handling exactly this kind of repetitive, rules-based work.",
   },
   {
-    icon: Handshake,
-    title: "Agencies & Operations Partners",
-    desc: "Agencies managing repetitive client deliverables need internal efficiency to stay profitable. We build automation for agency operations — reporting, onboarding, and internal workflows — so billable time isn't lost to admin work.",
+    icon: Puzzle,
+    title: "Businesses Needing Workflow Automation Across Multiple Tools",
+    desc: "Teams using multiple disconnected tools often waste time manually transferring information between systems. We provide BPA services company support that connects your tools into automated, seamless workflows.",
   },
   {
-    icon: RefreshCw,
-    title: "Businesses Replacing Manual Legacy Processes",
-    desc: "Businesses running critical processes manually or through outdated spreadsheets need a careful, planned automation rollout. We map existing manual processes first, then automate incrementally so nothing breaks during the transition.",
+    icon: Rocket,
+    title: "Startups Needing Lean Operations Without Extra Headcount",
+    desc: "Startups need to operate efficiently without hiring purely to handle repetitive administrative work. We provide process automation consulting that lets lean teams handle more without proportionally more staff.",
   },
 ];
 
 const SERVICE_BREAKDOWN = [
   {
     number: "01",
-    title: "Workflow Mapping & Analysis",
-    desc: "We start by mapping your actual workflow end-to-end, so automation targets the real bottlenecks instead of guesswork.",
+    title: "Process Automation Strategy & Audits",
+    desc: "A clear picture of which processes are actually worth automating, and the real return each would deliver.",
     ctaText: "Know Our Services",
     services: [
-      "Workflow Mapping",
-      "Process Documentation",
-      "Bottleneck Identification",
-      "Time & Motion Analysis",
-      "Stakeholder Interviews",
-      "Current-State Assessment",
-      "Automation Opportunity Scoring",
+      "Process Automation Audit",
+      "Manual Process Mapping",
+      "Automation Opportunity Identification",
+      "ROI Analysis for Automation",
+      "Automation Strategy Development",
+      "Tool Selection Consulting",
       "Process Prioritization",
+      "Automation Roadmap Planning",
     ],
   },
   {
     number: "02",
-    title: "Repetitive Task Automation",
-    desc: "Data copying, status updates, and routine approvals get automated, freeing your in-house team to focus on decisions, not repetitive clicks.",
+    title: "Workflow Automation Implementation",
+    desc: "Workflows automated across the tools and steps your team actually uses every day.",
     ctaText: "Know Our Services",
     services: [
-      "Data Entry Automation",
-      "Status Update Automation",
+      "Workflow Automation Setup",
+      "Cross-Tool Workflow Automation",
       "Approval Workflow Automation",
-      "Report Generation Automation",
-      "Email & Notification Automation",
-      "File & Document Automation",
-      "Scheduling Automation",
-      "Task Handoff Automation",
+      "Notification & Alert Automation",
+      "Document Workflow Automation",
+      "Task Assignment Automation",
+      "Workflow Testing & QA",
+      "Workflow Documentation",
     ],
   },
   {
     number: "03",
-    title: "Custom Automation Tools",
-    desc: "Where off-the-shelf automation tools don't fit, we build custom scripts and workflows tailored to how your business actually operates.",
+    title: "Robotic Process Automation (RPA)",
+    desc: "Bots handling repetitive, rules-based tasks reliably, freeing your team from work that doesn't need human judgment.",
     ctaText: "Know Our Services",
     services: [
-      "Custom Script Development",
-      "Internal Tool Development",
-      "Workflow Builder Configuration",
-      "Business Rule Engines",
-      "Custom Dashboards",
-      "No-Code/Low-Code Automation",
-      "Automation Testing",
-      "Tool Documentation",
+      "RPA Implementation",
+      "Bot Development for Repetitive Tasks",
+      "Data Entry Automation",
+      "Report Generation Automation",
+      "RPA Bot Testing",
+      "RPA Maintenance & Support",
+      "RPA Scalability Planning",
+      "RPA Performance Monitoring",
     ],
   },
   {
     number: "04",
-    title: "Third-Party System Integration",
-    desc: "We connect your CRM, spreadsheets, and other tools so data flows automatically between systems instead of being re-entered manually.",
+    title: "Back-Office Process Automation",
+    desc: "Core back-office functions automated so your team spends less time on paperwork and more on real work.",
     ctaText: "Know Our Services",
     services: [
-      "CRM Integration",
-      "Spreadsheet Integration",
-      "API-Based Integration",
-      "Third-Party Tool Connectors",
-      "Zapier/Make Workflow Setup",
-      "Database Synchronization",
-      "Cross-Platform Data Sync",
-      "Integration Monitoring",
+      "Back-Office Automation",
+      "Invoice Processing Automation",
+      "HR Process Automation",
+      "Payroll Process Automation",
+      "Inventory Process Automation",
+      "Compliance Process Automation",
+      "Reporting Automation",
+      "Back-Office Workflow Redesign",
     ],
   },
   {
     number: "05",
-    title: "Error Reduction & Accuracy",
-    desc: "Automated processes cut down the human error that creeps into manual, repetitive work, especially at high volume.",
+    title: "Tool & Software Integration",
+    desc: "Your existing tools connected properly, so information flows automatically instead of being manually re-entered.",
     ctaText: "Know Our Services",
     services: [
-      "Data Validation Rules",
-      "Duplicate Detection",
-      "Error Alerting",
-      "Exception Handling",
-      "Accuracy Audits",
-      "Reconciliation Automation",
-      "Quality Control Checks",
-      "Audit Trail Logging",
+      "Software Integration Setup",
+      "API-Based Automation",
+      "CRM Automation Integration",
+      "ERP Automation Integration",
+      "Third-Party Tool Connections",
+      "Data Sync Automation",
+      "Integration Testing",
+      "Integration Documentation",
     ],
   },
   {
     number: "06",
-    title: "Ongoing Process Optimization",
-    desc: "As your business changes, we refine and extend the automation, keeping it aligned with how your workflow actually evolves.",
+    title: "Automation Monitoring & Optimization",
+    desc: "Ongoing monitoring that catches issues early and keeps improving automation performance over time.",
     ctaText: "Know Our Services",
     services: [
-      "Performance Monitoring",
-      "Process Refinement",
-      "Automation Expansion",
-      "Time Savings Tracking",
-      "Workflow Reviews",
-      "Change Management Support",
-      "Automation Roadmapping",
-      "Continuous Improvement Reviews",
+      "Automation Performance Monitoring",
+      "Error & Exception Handling",
+      "Automation ROI Tracking",
+      "Monthly Automation Reports",
+      "Continuous Process Improvement",
+      "Automation Scaling Support",
+      "Bottleneck Identification",
+      "Ongoing Optimization",
     ],
   },
 ];
@@ -154,94 +154,99 @@ const SERVICE_BREAKDOWN = [
 const ROADMAP_STEPS = [
   {
     number: "01",
-    title: "Discovery & Workflow Audit",
-    desc: "We document how the process actually runs today — every handoff, tool, and manual step — before proposing any changes.",
+    title: "Process & Workflow Discovery",
+    desc: "We start by understanding your current manual processes and where your team is spending the most repetitive, time-consuming effort.",
   },
   {
     number: "02",
-    title: "Identify Automation Opportunities",
-    desc: "We flag exactly which steps are safe and valuable to automate, and which still need human judgment.",
+    title: "Automation Opportunity Audit",
+    desc: "We assess which processes offer the strongest return on automation investment, prioritizing based on time saved and complexity.",
   },
   {
     number: "03",
-    title: "Automation Design & Planning",
-    desc: "We design the automation approach and tools needed, planning how it fits into your existing systems before building anything.",
+    title: "Automation Strategy & Tool Selection",
+    desc: "We build a plan for automating priority processes, selecting the right tools and approach, whether RPA, workflow automation, or integration.",
   },
   {
     number: "04",
-    title: "Build & Integrate Automation",
-    desc: "We build and connect the automation to your existing tools, testing it against real scenarios before rollout.",
+    title: "Implementation & Integration",
+    desc: "We implement the automation and integrate it with your existing tools, testing thoroughly before full deployment.",
   },
   {
     number: "05",
-    title: "Team Training & Rollout",
-    desc: "We train your team on the new automated workflow, so adoption is smooth and nothing falls back into manual habits.",
+    title: "Testing & Quality Assurance",
+    desc: "We test automated workflows against real scenarios to catch errors and edge cases before they affect daily operations.",
   },
   {
     number: "06",
-    title: "Monitor & Refine",
-    desc: "We track performance after launch and adjust the automation as your process or volume changes over time.",
+    title: "Monitoring & Ongoing Optimization",
+    desc: "We monitor automation performance and continue refining it as your processes and business needs evolve.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "Process-First Approach",
-    desc: "We understand your workflow before recommending any tool, so automation solves the actual bottleneck, not a symptom of it.",
+    title: "Automation Built Around Real Bottlenecks, Not Generic Templates",
+    desc: "We identify which specific processes are actually costing your team the most time, then automate those first, rather than applying a generic automation package regardless of where your real bottlenecks are.",
   },
   {
     number: "02",
-    title: "No One-Size-Fits-All Tools",
-    desc: "We pick or build the right automation approach for your specific process instead of forcing a generic platform on everything.",
+    title: "Workflow Design That Actually Fits How Your Team Works",
+    desc: "We design automated workflows around your team's actual process, not a rigid template that forces your team to adapt to how the automation happens to work.",
   },
   {
     number: "03",
-    title: "Integrates With Your Stack",
-    desc: "Automation connects with the CRM, spreadsheets, and tools you already use, instead of requiring you to switch systems.",
+    title: "RPA Implementation Without Requiring an In-House Dev Team",
+    desc: "We handle bot development, testing, and maintenance directly, so you get the benefit of RPA without needing to build or maintain technical capability internally.",
   },
   {
     number: "04",
-    title: "Faster Turnaround",
-    desc: "Automated steps complete in a fraction of the time manual processing takes, especially at scale.",
+    title: "Integration Across the Tools You Already Use",
+    desc: "We connect automation to your existing software stack rather than requiring you to switch to entirely new tools just to enable automation.",
   },
   {
     number: "05",
-    title: "Measurable Time Savings",
-    desc: "We track hours saved and errors reduced, so the value of automation is visible, not just assumed.",
+    title: "Transparent ROI Tracking on Time and Cost Actually Saved",
+    desc: "We track and report on the actual time and cost savings automation delivers, giving you clear evidence of return rather than assuming automation is inherently valuable without proof.",
   },
   {
     number: "06",
-    title: "Ongoing Support",
-    desc: "We stay on to refine and extend automation as your business processes evolve, not just deliver and disappear.",
+    title: "Ongoing Optimization as Your Processes Continue to Evolve",
+    desc: "We continue refining automated workflows as your business changes, rather than treating automation as a one-time setup that never gets revisited as needs shift.",
   },
 ];
 
 const FAQS = [
   {
-    question: "What kinds of processes can you automate?",
+    question: "How much does business process automation cost in India?",
     answer:
-      "Repetitive, rule-based tasks are the best fit — data entry, status updates, report generation, approvals, and data transfers between systems.",
+      "Cost depends on process complexity and the number of workflows being automated. We scope pricing after understanding your specific processes and tools, rather than offering a flat rate upfront for something this variable.",
   },
   {
-    question: "Will automation replace my staff?",
+    question: "What's the difference between RPA and general workflow automation?",
     answer:
-      "No — automation removes the repetitive, low-value parts of a process so your team can focus on decisions and work that actually needs judgment.",
+      "RPA typically refers to software bots handling specific, rules-based tasks like data entry, while workflow automation covers broader process orchestration across multiple steps and tools. Many automation projects combine both approaches depending on the process.",
   },
   {
-    question: "Can automation integrate with our existing software?",
+    question: "How do you decide which processes to automate first?",
     answer:
-      "Yes, we connect automation to your existing CRM, spreadsheets, and other tools wherever integration is technically possible.",
+      "We prioritize based on time currently spent, error rate, and how repetitive and rules-based the process is, since these factors typically indicate the strongest return on automation investment.",
   },
   {
-    question: "How much does business process automation cost?",
+    question: "Can automation work with the tools and software we already use?",
     answer:
-      "It depends on the complexity of the process and the tools involved — we scope every project and provide a clear, tailored quote.",
+      "Yes, we integrate automation with your existing tools wherever possible, connecting them through APIs or other integration methods rather than requiring you to switch to entirely new software.",
   },
   {
-    question: "How long does it take to implement automation?",
+    question: "How long does it take to implement process automation?",
     answer:
-      "Simple automations can be live within a couple of weeks; more complex, multi-system workflows take longer. We'll give you a realistic timeline upfront.",
+      "Timeline depends on process complexity, a single workflow automation can take a few weeks, while broader back-office automation across multiple processes typically takes longer to implement and test thoroughly.",
+  },
+  {
+    question: "Will automation require our team to learn new complex systems?",
+    answer:
+      "Generally no, well-designed automation should reduce complexity for your team, not add to it. We design workflows to work within or alongside tools your team already knows, minimizing the learning curve.",
   },
 ];
 
@@ -251,26 +256,27 @@ export default function BusinessProcessAutomationServices() {
       sectionLabel="BPO Services"
       label="Business Process Automation Services"
       icon={Workflow}
-      description="We map your workflow first, then automate the boring middle, freeing your in-house team to focus on decisions, not data-copying."
-      heroTitle="Business Process Automation Services in India"
-      heroDescription="We map your workflow first, then automate the boring middle, freeing your in-house team to focus on decisions, not data-copying."
-      capabilitiesHeading="Built for Businesses Ready to Stop Doing Repetitive Work Manually"
+      description="Business process automation built to eliminate repetitive manual work, not just digitize it, engineered to actually save your team time."
+      heroTitle="Get Hours Back With Automation, Not More Manual Work"
+      heroDescription="Business process automation built to eliminate repetitive manual work, not just digitize it, engineered to actually save your team time."
+      heroCtaText="Get a Free Process Automation Audit"
+      capabilitiesHeading="Built for Businesses Drowning in Repetitive Manual Work"
       capabilities={CAPABILITIES}
-      serviceBreakdownHeading="Everything That Goes Into Our Business Process Automation"
+      serviceBreakdownHeading="Everything Between a Manual Process and an Automated One"
       serviceBreakdown={SERVICE_BREAKDOWN}
-      differentiatorsHeading="Why Businesses Trust Us to Automate Their Operations"
+      differentiatorsHeading="Why Businesses Trust Us With Process Automation"
       differentiators={DIFFERENTIATORS}
-      roadmapCarouselHeading="How We Turn Manual Workflows Into Automated Processes"
+      roadmapCarouselHeading="How We Turn Manual Work Into Automated Workflows"
       roadmapCarouselSteps={ROADMAP_STEPS}
       showStats={false}
-      localityHeading="Based in Prayagraj, Automating Operations Worldwide"
-      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we build every automation engagement, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, automating workflows sized to each business's actual volume and tools. For businesses looking to automate operations beyond India, we deliver business process automation remotely, working across time zones to reach the same standard of reliability regardless of location. Whether you're a startup removing your first spreadsheet bottleneck or an enterprise automating a cross-department process, our approach starts with mapping what actually happens today before changing anything."
+      localityHeading="Based in Prayagraj, Automating Processes Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every automation project, with the same attention to real ROI whether a client is nearby or across the world. We provide business process automation services for businesses across India, built around each business's specific bottlenecks and tools. For companies looking for an RPA services company beyond India, we support clients worldwide remotely, delivering the same process automation consulting standard of work regardless of time zone. Whether you're a growing business in Prayagraj or a company anywhere else scaling back-office operations, our approach starts with the same question: where is your team actually losing the most time to manual work."
       faqs={FAQS}
       showWhyChooseUs={false}
-      ctaHeading="Ready to Stop Losing Hours to Manual Work?"
-      ctaText="Whether you need a single repetitive task automated, a full workflow rebuilt around automation, or integration between systems that currently don't talk to each other, the right approach depends on how your process actually runs today. Let's talk through your workflow and scope what automation would actually involve."
-      ctaPrimaryText="Talk to an Automation Specialist"
-      ctaSecondaryText="Get Your Free Automation Consultation"
+      ctaHeading="Ready to Get Hours Back From Manual Work?"
+      ctaText="Whether your team is drowning in repetitive data entry, your back-office processes haven't scaled with your business, or you simply haven't started automating yet, manual work alone was never going to keep pace with growth. Let's audit your current processes and scope what automation would actually involve."
+      ctaPrimaryText="Talk to a Process Automation Specialist"
+      ctaSecondaryText="Get Your Free Process Automation Audit"
     />
   );
 }
