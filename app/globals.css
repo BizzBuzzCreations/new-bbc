@@ -517,3 +517,49 @@ body {
   background: #fafafa;
   transition: background 0.3s ease;
 }
+
+/* ============================================================
+   Site-wide button hover effect
+   Every real <button> and every pill-shaped CTA link (the
+   rounded-full anchors used everywhere for "Book a Consultation" /
+   "Talk to a Specialist" style buttons) gets a guaranteed color
+   shift on hover, on top of whatever hover:bg-*/hover:text-* a
+   given button already defines. This is a safety net so no button
+   anywhere on the site is left without a visible hover state, not
+   a replacement for the per-component hover classes already in
+   place.
+   ============================================================ */
+button:not(:disabled),
+input[type="submit"]:not(:disabled),
+input[type="button"]:not(:disabled),
+a[class*="rounded-full"] {
+  transition:
+    filter 0.25s ease,
+    transform 0.15s ease,
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+button:not(:disabled):hover,
+input[type="submit"]:not(:disabled):hover,
+input[type="button"]:not(:disabled):hover,
+a[class*="rounded-full"]:hover {
+  filter: brightness(1.15);
+}
+
+button:not(:disabled):active,
+input[type="submit"]:not(:disabled):active,
+input[type="button"]:not(:disabled):active,
+a[class*="rounded-full"]:active {
+  filter: brightness(0.92);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button,
+  input[type="submit"],
+  input[type="button"],
+  a[class*="rounded-full"] {
+    transition: none !important;
+  }
+}

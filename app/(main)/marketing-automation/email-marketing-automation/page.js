@@ -1,18 +1,18 @@
 import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Mail,
-  Rocket,
-  Building2,
-  Building,
   ShoppingCart,
-  Handshake,
+  Inbox,
+  Layers,
+  UserPlus,
   RefreshCw,
+  Users,
 } from "lucide-react";
 
 export const metadata = {
-  title: "Email Marketing Automation | BizzBuzz Creations",
+  title: "Email Marketing Automation Services | BizzBuzz Creations",
   description:
-    "Email marketing automation in India — welcome sequences, abandoned cart reminders, and re-engagement campaigns, every email timed, tested, and tracked, by BizzBuzz Creations.",
+    "BizzBuzz Creations provides email marketing automation services that turn subscribers into customers across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/marketing-automation/email-marketing-automation",
@@ -21,132 +21,132 @@ export const metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Rocket,
-    title: "Startups & Early-Stage Businesses",
-    desc: "Startups often send one-off emails manually until the list grows too large to manage that way. We set up lightweight email automation early, so welcome and follow-up sequences run without founder time each send.",
-  },
-  {
-    icon: Building2,
-    title: "Small & Medium Businesses",
-    desc: "SMBs frequently have a subscriber list but no structured sequence sending emails automatically. We build email automation sized for SMB budgets, turning an idle list into a working sales channel.",
-  },
-  {
-    icon: Building,
-    title: "Enterprises & Large Organizations",
-    desc: "Enterprises need email automation that segments large audiences and integrates with existing marketing systems. We build enterprise-scale email automation with segmentation, compliance, and reporting built in.",
-  },
-  {
     icon: ShoppingCart,
-    title: "Ecommerce & Retail Brands",
-    desc: "Ecommerce stores lose real revenue to abandoned carts and one-time buyers who never return. We build cart recovery and re-engagement sequences specifically tuned to ecommerce buying behavior.",
+    title: "Ecommerce Brands Needing Abandoned Cart & Post-Purchase Emails",
+    desc: "Ecommerce stores lose real revenue when abandoned carts and post-purchase moments have no automated follow-up. We provide abandoned cart email automation built to recover sales that would otherwise be lost.",
   },
   {
-    icon: Handshake,
-    title: "Agencies Managing Client Email Programs",
-    desc: "Agencies running email marketing for clients need reliable sequence-building capacity. We work as a white-label email automation partner, building sequences agencies can present as their own work.",
+    icon: Inbox,
+    title: "Businesses With an Email List That Isn't Being Used Well",
+    desc: "A large email list sitting mostly unused represents real, wasted opportunity. We provide email marketing automation services that turn a dormant list into an active revenue channel.",
+  },
+  {
+    icon: Layers,
+    title: "SaaS Companies Needing Onboarding Email Sequences",
+    desc: "New SaaS users who don't get properly onboarded often churn before seeing real product value. We build onboarding sequences that guide new users toward genuine product adoption automatically.",
+  },
+  {
+    icon: UserPlus,
+    title: "Businesses Needing Welcome & Nurture Sequences for New Leads",
+    desc: "New leads that don't receive prompt, structured follow-up often go cold quickly. We provide welcome email sequence services that keep new leads engaged from the first interaction.",
   },
   {
     icon: RefreshCw,
-    title: "Businesses Migrating Email Platforms",
-    desc: "Businesses switching email platforms need sequences and lists carried over without breaking deliverability. We handle structured migrations, rebuilding automation properly on the new platform.",
+    title: "Companies Sending Manual, Inconsistent Email Campaigns",
+    desc: "Manually sent campaigns are easy to delay or skip when things get busy, leading to inconsistent communication. We work as an email automation agency that keeps communication consistent without manual effort.",
+  },
+  {
+    icon: Users,
+    title: "Businesses Needing Segmented, Personalized Email Automation",
+    desc: "Generic, one-size-fits-all emails perform worse than messages tailored to what a specific subscriber actually cares about. We provide email segmentation and automation that sends relevant content to the right audience.",
   },
 ];
 
 const SERVICE_BREAKDOWN = [
   {
     number: "01",
-    title: "Welcome & Onboarding Sequences",
-    desc: "New subscribers and customers get a structured welcome sequence that introduces your brand and moves them toward their first purchase.",
+    title: "Email Automation Strategy & Setup",
+    desc: "The technical and strategic foundation your automation needs to actually work reliably from day one.",
     ctaText: "Know Our Services",
     services: [
-      "Welcome Sequence Design",
-      "Onboarding Email Series",
-      "Brand Introduction Emails",
-      "First-Purchase Nudge Emails",
-      "New Subscriber Segmentation",
-      "Sign-Up Confirmation Flows",
-      "Welcome Offer Automation",
-      "Sequence Copywriting",
+      "Email Automation Strategy",
+      "Email Platform Setup",
+      "Automation Workflow Mapping",
+      "List Import & Cleanup",
+      "Email Deliverability Setup",
+      "Automation Trigger Planning",
+      "Email Compliance Setup",
+      "Automation Tool Selection",
     ],
   },
   {
     number: "02",
-    title: "Abandoned Cart Reminders",
-    desc: "Shoppers who leave without checking out get timely, well-timed reminder emails, recovering sales you'd otherwise lose.",
+    title: "Drip & Nurture Sequences",
+    desc: "Sequences that guide subscribers through a genuine relationship with your brand, not a single blast of content.",
     ctaText: "Know Our Services",
     services: [
-      "Cart Abandonment Sequences",
-      "Recovery Email Design",
-      "Discount Trigger Emails",
-      "Multi-Step Reminder Flows",
-      "Browse Abandonment Emails",
-      "Checkout Recovery Automation",
-      "Timing Optimization",
-      "Recovery Rate Tracking",
+      "Welcome Email Sequences",
+      "Lead Nurture Drip Campaigns",
+      "Onboarding Email Sequences",
+      "Re-Engagement Campaigns",
+      "Post-Purchase Follow-Up Sequences",
+      "Educational Email Series",
+      "Milestone-Based Email Triggers",
+      "Sequence Performance Testing",
     ],
   },
   {
     number: "03",
-    title: "Re-Engagement Campaigns",
-    desc: "Inactive subscribers get targeted campaigns designed to bring them back, rather than quietly going ignored.",
+    title: "Ecommerce Email Automation",
+    desc: "Automation built specifically around ecommerce moments that directly affect revenue.",
     ctaText: "Know Our Services",
     services: [
+      "Abandoned Cart Email Automation",
+      "Browse Abandonment Emails",
+      "Post-Purchase Email Flows",
+      "Product Recommendation Emails",
       "Win-Back Campaigns",
-      "Inactivity Trigger Rules",
-      "Re-Engagement Offers",
-      "List Segmentation for Inactivity",
-      "Sunset Flow Design",
-      "Reactivation Sequences",
-      "Preference Update Emails",
-      "Unsubscribe Prevention Flows",
+      "Order & Shipping Update Emails",
+      "Review Request Automation",
+      "Seasonal Campaign Automation",
     ],
   },
   {
     number: "04",
-    title: "Behavior-Triggered Emails",
-    desc: "Emails trigger automatically based on real customer actions — a click, a purchase, a browse — not a fixed, generic send schedule.",
+    title: "Segmentation & Personalization",
+    desc: "Messages built around who a subscriber actually is, not the same content sent to everyone.",
     ctaText: "Know Our Services",
     services: [
-      "Behavioral Trigger Setup",
-      "Click-Based Automation",
-      "Purchase-Triggered Emails",
-      "Browse-Based Triggers",
-      "Event-Based Sequences",
-      "Dynamic Content Rules",
-      "Trigger Testing",
-      "Automation Rule Mapping",
+      "Audience Segmentation Setup",
+      "Behavioral Trigger Automation",
+      "Personalized Content Blocks",
+      "Dynamic Email Content",
+      "Lead Scoring Integration",
+      "Segment-Based Campaign Planning",
+      "Preference Center Setup",
+      "Segmentation Performance Analysis",
     ],
   },
   {
     number: "05",
-    title: "Subject Line & Content Testing",
-    desc: "We test subject lines and content variations continuously, so email performance improves over time instead of staying flat.",
+    title: "Campaign Design & Copywriting",
+    desc: "Emails that look and read well, since even perfect automation fails behind poor design and copy.",
     ctaText: "Know Our Services",
     services: [
-      "A/B Subject Line Testing",
-      "Content Variation Testing",
-      "Send Time Testing",
-      "CTA Testing",
-      "Design Testing",
-      "Deliverability Testing",
-      "Performance Benchmarking",
-      "Test Result Reporting",
+      "Email Template Design",
+      "Email Copywriting",
+      "Subject Line Testing",
+      "Mobile-Responsive Email Design",
+      "Brand-Consistent Email Design",
+      "CTA Optimization",
+      "A/B Testing Campaigns",
+      "Campaign Calendar Planning",
     ],
   },
   {
     number: "06",
-    title: "Open Rate & Conversion Tracking",
-    desc: "Every email is tracked for opens, clicks, and conversions, giving you a clear picture of what's actually working.",
+    title: "Email Analytics & Optimization",
+    desc: "Ongoing tracking that shows what's actually driving revenue, not just what's getting opened.",
     ctaText: "Know Our Services",
     services: [
-      "Open Rate Tracking",
-      "Click-Through Tracking",
-      "Conversion Attribution",
-      "Revenue Reporting",
-      "Sequence Performance Dashboards",
-      "List Health Reporting",
+      "Email Performance Analytics",
+      "Open & Click Rate Optimization",
+      "Conversion Tracking",
       "Deliverability Monitoring",
       "Monthly Performance Reports",
+      "List Health Monitoring",
+      "Automation Flow Optimization",
+      "Ongoing Strategy Refinement",
     ],
   },
 ];
@@ -154,94 +154,99 @@ const SERVICE_BREAKDOWN = [
 const ROADMAP_STEPS = [
   {
     number: "01",
-    title: "Mapping the Customer Journey",
-    desc: "We look at where leads and customers actually stall — a signup never followed up, a cart abandoned and forgotten.",
+    title: "List & Business Discovery",
+    desc: "We start by understanding your current email list, business goals, and existing email performance, identifying the real opportunity for automation.",
   },
   {
     number: "02",
-    title: "Sequence & Content Planning",
-    desc: "We plan the specific sequences needed — welcome, cart recovery, re-engagement — and the messaging each one requires.",
+    title: "Automation Strategy & Mapping",
+    desc: "We map out the specific automation sequences and triggers that make sense for your business, from welcome flows to post-purchase follow-up.",
   },
   {
     number: "03",
-    title: "Building Sequences & Messaging",
-    desc: "We design the actual email sequences and write the messaging ourselves, rather than handing you a generic tool template.",
+    title: "Sequence & Campaign Development",
+    desc: "We build out the email content, design, and copy for each sequence according to the strategy.",
   },
   {
     number: "04",
-    title: "Connecting to Your CRM & Launch",
-    desc: "Every sequence gets connected to your CRM so your sales team wakes up to warm leads, not cold silence, once it goes live.",
+    title: "Setup & Integration",
+    desc: "We configure the automation platform and integrate it with your website, ecommerce store, or CRM as needed.",
   },
   {
     number: "05",
-    title: "Testing & Deliverability Checks",
-    desc: "We test sequences end-to-end and check deliverability before launch, so emails land in inboxes, not spam folders.",
+    title: "Launch & Initial Testing",
+    desc: "Sequences launch with close monitoring in the early weeks, testing subject lines and content variations to identify what's resonating.",
   },
   {
     number: "06",
-    title: "Monthly Review & Optimization",
-    desc: "Every workflow is reviewed and improved monthly — not left running on autopilot and forgotten after setup.",
+    title: "Ongoing Optimization & Reporting",
+    desc: "We provide regular reporting on performance and continue refining sequences based on real subscriber behavior.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "Timed, Tested, and Tracked",
-    desc: "Every email is timed, tested, and tracked, not just scheduled and forgotten after launch.",
+    title: "Email Automation Built Around Revenue, Not Just Opens",
+    desc: "We design sequences with actual conversion in mind, sales, sign-ups, repeat purchases, rather than optimizing purely for open rates that don't reflect genuine business impact.",
   },
   {
     number: "02",
-    title: "Behavior-Based, Not Generic Blasts",
-    desc: "Emails trigger based on real customer behavior, not a one-size-fits-all newsletter blast to your whole list.",
+    title: "Ecommerce Flows That Actually Recover Lost Sales",
+    desc: "Our abandoned cart and post-purchase automation is built specifically around ecommerce buying behavior, recovering sales that a generic email approach would simply miss.",
   },
   {
     number: "03",
-    title: "We Write the Messaging Ourselves",
-    desc: "We don't sell you a tool subscription and walk away — we build the sequence and write the messaging ourselves.",
+    title: "Segmentation That Sends the Right Message to the Right Person",
+    desc: "We build genuine segmentation based on behavior and interest, so subscribers receive content actually relevant to them, rather than the same blast everyone else gets.",
   },
   {
     number: "04",
-    title: "CRM-Connected",
-    desc: "Email automation connects directly to your CRM, so engagement data feeds into lead status automatically.",
+    title: "Copy and Design That Doesn't Look or Read Like Spam",
+    desc: "We write and design emails that feel genuinely useful and on-brand, avoiding the generic, promotional tone that gets automated emails ignored or unsubscribed.",
   },
   {
     number: "05",
-    title: "Reviewed Monthly",
-    desc: "Every workflow is reviewed and improved monthly, not left running on autopilot and forgotten.",
+    title: "Continuous Testing Instead of Set-and-Forget Sequences",
+    desc: "We test subject lines, content, and timing continuously, refining sequences based on real performance rather than launching automation once and leaving it unchanged indefinitely.",
   },
   {
     number: "06",
-    title: "Built Around Real Behavior",
-    desc: "We build sequences around how your customers actually behave, not a generic funnel template.",
+    title: "Transparent Reporting on Revenue Generated, Not Just Open Rates",
+    desc: "You see clear reporting tied to actual revenue and conversions where trackable, giving you real evidence of automation's value, not just vanity engagement metrics.",
   },
 ];
 
 const FAQS = [
   {
-    question: "What's the difference between email marketing and email automation?",
+    question: "How much does email marketing automation cost in India?",
     answer:
-      "Email marketing is often a single manual send; email automation triggers timed, personalized sequences automatically based on subscriber behavior.",
+      "Cost depends on scope, a single welcome sequence costs less than a full ecommerce automation suite covering abandoned cart, post-purchase, and win-back flows. We scope pricing after understanding your specific requirements, rather than offering a flat rate upfront.",
   },
   {
-    question: "Can you recover abandoned cart sales?",
+    question: "Which email platform do you use, or can you work with ours?",
     answer:
-      "Yes, abandoned cart reminder sequences are one of our core email automation services, designed specifically to recover near-miss sales.",
+      "We work with major email marketing platforms and can set up automation within whichever platform you're already using, or recommend one if you haven't chosen yet, based on your specific needs.",
   },
   {
-    question: "Do you write the email content, or do I need to provide it?",
+    question: "Can automation recover abandoned cart sales for our store?",
     answer:
-      "We write the email sequences and messaging as part of the service, working with your brand voice and goals.",
+      "Yes, abandoned cart email automation is one of our most requested services, since it typically recovers a meaningful share of otherwise lost sales with relatively straightforward setup.",
   },
   {
-    question: "How do you measure email automation performance?",
+    question: "How long does it take to set up email automation?",
     answer:
-      "We track opens, clicks, and conversions for every sequence, and continuously test subject lines and content to improve results.",
+      "Timeline depends on scope, a single sequence can take a couple of weeks, while a full suite of ecommerce automation flows typically takes longer to build and test properly.",
   },
   {
-    question: "Which email platforms do you work with?",
+    question: "Will our emails end up in spam if we automate them?",
     answer:
-      "We work with popular email marketing platforms and can assess compatibility with your existing setup during onboarding.",
+      "Not if set up correctly, we configure proper authentication and deliverability settings as part of setup, and monitor deliverability ongoing to catch issues before they affect your sender reputation.",
+  },
+  {
+    question: "Do you write the email copy, or do we need to provide it?",
+    answer:
+      "We handle copywriting as part of our service, though we're happy to incorporate your existing brand voice, content, or drafts if you already have material you'd like used.",
   },
 ];
 
@@ -251,26 +256,27 @@ export default function EmailMarketingAutomation() {
       sectionLabel="Marketing Automation"
       label="Email Marketing Automation"
       icon={Mail}
-      description="We set up email automation that sends the right message at the right moment: welcome sequences, abandoned cart reminders, and re-engagement campaigns, every email timed, tested, and tracked."
-      heroTitle="Email Marketing Automation in India"
-      heroDescription="We set up email automation that sends the right message at the right moment: welcome sequences, abandoned cart reminders, and re-engagement campaigns, every email timed, tested, and tracked."
-      capabilitiesHeading="Built for Businesses Ready to Put Their Email List to Work"
+      description="Email marketing automation is built to nurture and convert automatically, not just send newsletters, and engineered to work while you focus elsewhere."
+      heroTitle="Get Emails That Sell While You Sleep"
+      heroDescription="Email marketing automation is built to nurture and convert automatically, not just send newsletters, and engineered to work while you focus elsewhere."
+      heroCtaText="Get a Free Email Automation Audit"
+      capabilitiesHeading="Built for Businesses Sending Emails That Nobody Opens"
       capabilities={CAPABILITIES}
-      serviceBreakdownHeading="Everything That Goes Into Our Email Marketing Automation"
+      serviceBreakdownHeading="Everything Between a Subscriber and a Repeat Customer"
       serviceBreakdown={SERVICE_BREAKDOWN}
-      differentiatorsHeading="Why Businesses Trust Us to Automate Their Email Marketing"
+      differentiatorsHeading="Why Businesses Trust Us With Their Email Automation"
       differentiators={DIFFERENTIATORS}
-      roadmapCarouselHeading="How We Turn a Quiet List Into a Working Email Channel"
+      roadmapCarouselHeading="How We Turn Your Email List Into a Sales Channel"
       roadmapCarouselSteps={ROADMAP_STEPS}
       showStats={false}
-      localityHeading="Based in Prayagraj, Automating Email Marketing Worldwide"
-      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we build every email automation engagement, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, sizing sequences to each business's actual list size and customer journey. For businesses looking to automate email beyond India, we build email marketing automation remotely, working across time zones to reach the same standard of reliability regardless of location. Whether you're a startup sending your first welcome sequence or an enterprise segmenting a large list, our approach starts with mapping where your customers actually stall."
+      localityHeading="Based in Prayagraj, Running Email Automation Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every email automation project, with the same attention to deliverability whether a client is nearby or across the world. We provide email marketing automation services for businesses across India, built around each business's specific list and customer journey. For businesses looking for an email automation agency beyond India, we support clients worldwide remotely, delivering the same automated email marketing services standard of work regardless of time zone. Whether you're an e-commerce store in Prayagraj or a SaaS company anywhere else needing onboarding sequences, our approach starts with the same question: where is your current email approach actually leaving revenue on the table."
       faqs={FAQS}
       showWhyChooseUs={false}
-      ctaHeading="Ready to Turn Your Email List Into Real Revenue?"
-      ctaText="Whether you need a welcome sequence built from scratch, cart recovery emails recovering lost sales, or a full re-engagement program for an inactive list, the right setup depends on your actual customer journey. Let's talk through your list and scope what email automation would actually involve."
+      ctaHeading="Ready for Emails That Actually Sell?"
+      ctaText="Whether your email list sits mostly unused, you're losing sales to abandoned carts, or new leads go cold without proper follow-up, manual, inconsistent emails were never going to fix that. Let's audit your current setup and scope what real email automation would actually involve."
       ctaPrimaryText="Talk to an Email Automation Specialist"
-      ctaSecondaryText="Get Your Free Email Automation Consultation"
+      ctaSecondaryText="Get Your Free Email Automation Audit"
     />
   );
 }

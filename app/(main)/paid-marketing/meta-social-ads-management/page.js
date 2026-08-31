@@ -10,9 +10,9 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "Meta & Social Ads Management | BizzBuzz Creations",
+  title: "Meta & Social Ads Management Agency | BizzBuzz Creations",
   description:
-    "Meta and social ads management in India — Facebook and Instagram ad creatives and targeting that turn casual scrollers into genuine leads, by BizzBuzz Creations.",
+    "BizzBuzz Creations is a social media ads management agency running paid campaigns across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/paid-marketing/meta-social-ads-management",
@@ -219,29 +219,34 @@ const DIFFERENTIATORS = [
 
 const FAQS = [
   {
-    question: "What's the difference between Meta ads and Facebook ads?",
+    question: "How much does social media ads management cost in India?",
     answer:
-      "Meta ads is the umbrella term covering ads across Facebook and Instagram managed through Meta's ad platform — we run both as part of a coordinated strategy.",
+      "Cost typically includes both our management fee and your ad spend budget, which are kept separate. We scope management pricing after understanding your goals and target audience, since campaign complexity varies between a single-platform local campaign and a multi-platform ecommerce funnel.",
   },
   {
-    question: "How much should I budget for Meta ads?",
+    question: "Which platform is best for our business, Facebook, Instagram, or TikTok?",
     answer:
-      "Budget depends on your goals and industry — we'll recommend a realistic starting budget and optimize allocation based on what's converting.",
+      "It depends on where your specific audience is actually active, which we assess during strategy planning rather than assuming based on general trends. Most businesses benefit from testing across a couple of platforms before committing significant budget to just one.",
   },
   {
-    question: "Do you design the ad creatives, or do I need to provide them?",
+    question: "Can you manage ads across multiple social platforms at once?",
     answer:
-      "Our team designs ad creatives specifically for Facebook and Instagram placements, or we can work with brand assets you already have.",
+      "Yes, managing Meta, TikTok, and other platforms simultaneously is a core part of what we do, coordinated through one team to keep messaging and targeting consistent rather than fragmented across separate management.",
   },
   {
-    question: "How is Meta ads performance measured?",
+    question: "How long before social ads start showing results?",
     answer:
-      "We track cost per lead, conversion rate, and return on ad spend — the metrics that actually reflect business impact, not just reach.",
+      "Initial data usually comes in within the first one to two weeks, though meaningful optimization typically takes four to six weeks as the algorithm gathers enough data to target effectively. We set realistic expectations during onboarding based on your budget and industry.",
   },
   {
-    question: "How quickly will I see results from Meta ads?",
+    question: "Do you handle ad creative, or do we need to provide it?",
     answer:
-      "Initial data typically comes in within the first one to two weeks, with meaningful optimization improving results over the following month.",
+      "We handle ad creative development as part of our service, including design, copywriting, and video where needed, though we're happy to incorporate brand assets or existing content you already have.",
+  },
+  {
+    question: "Can you fix an underperforming social ads account we already have?",
+    answer:
+      "Yes, auditing and rebuilding underperforming accounts is a core part of what we do. We review targeting, creative, and campaign structure to identify what's actually causing poor performance before making changes.",
   },
 ];
 

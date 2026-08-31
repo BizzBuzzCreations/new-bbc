@@ -12,7 +12,7 @@ import {
 export const metadata = {
   title: "Local & City-Based Ad Campaigns | BizzBuzz Creations",
   description:
-    "Local and city-based ad campaigns in India — hyper-local targeting that puts your business in front of nearby customers actively searching for what you offer, by BizzBuzz Creations.",
+    "BizzBuzz Creations runs local and city-based ad campaigns that bring nearby customers across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/paid-marketing/local-city-based-ad-campaigns",
@@ -219,29 +219,34 @@ const DIFFERENTIATORS = [
 
 const FAQS = [
   {
-    question: "What is a local or city-based ad campaign?",
+    question: "How much do local PPC advertising services cost in India?",
     answer:
-      "It's an ad campaign geo-targeted to a specific city, neighborhood, or radius zone, aimed at reaching nearby customers actively searching for your product or service.",
+      "Cost typically includes both our management fee and your ad spend budget, kept separate. We scope management pricing after understanding your service area and competition level, rather than offering a flat rate upfront.",
   },
   {
-    question: "Which businesses benefit most from local ad campaigns?",
+    question: "What's the difference between local ads and regular PPC campaigns?",
     answer:
-      "Businesses with a physical location or a defined local service area — clinics, restaurants, retail stores, and local service providers — typically see the strongest results.",
+      "Local ads use precise geographic targeting, radius targeting, location extensions, geo-fencing, to reach only people within your realistic service area, while regular PPC campaigns often target much broader or even national audiences by default.",
   },
   {
-    question: "Can you run campaigns for multiple cities or branches?",
+    question: "Can you run separate campaigns for each of our locations?",
     answer:
-      "Yes, we manage separate, properly targeted campaigns for each location or city your business serves.",
+      "Yes, multi-location campaign management is a core part of what we do, coordinating separate, location-specific campaigns that stay consistent in branding without competing against each other for the same nearby customers.",
   },
   {
-    question: "How do you track results from local campaigns?",
+    question: "What is geo-fencing, and is it worth it for a local business?",
     answer:
-      "We track calls, direction requests, and store visits generated from your campaigns, not just clicks and impressions.",
+      "Geo-fencing targets ads to people within a very specific geographic boundary, often used around a physical location or event. It's genuinely valuable for businesses needing precise, neighborhood-level targeting, though not every local business needs this level of precision.",
   },
   {
-    question: "How much does a local ad campaign cost?",
+    question: "How do you prevent multiple locations from competing against each other?",
     answer:
-      "Budget depends on your city, competition, and campaign scope — we'll recommend a realistic starting budget and optimize it as data comes in.",
+      "We structure campaigns with clear geographic boundaries and coordinated bidding, so each location's ads target its own specific area without overlapping and bidding against a sister location for the same searches.",
+  },
+  {
+    question: "How long before local ad campaigns start bringing in customers?",
+    answer:
+      "Initial local leads typically start coming in within the first couple of weeks, since local intent searches often convert faster than broader awareness campaigns, though full optimization usually takes four to six weeks.",
   },
 ];
 

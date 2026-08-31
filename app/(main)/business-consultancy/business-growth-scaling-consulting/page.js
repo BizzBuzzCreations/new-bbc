@@ -10,9 +10,9 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "Business Growth & Scaling Consulting | BizzBuzz Creations",
+  title: "Business Growth & Scaling Consultant | BizzBuzz Creations",
   description:
-    "Business growth and scaling consulting in India — systems and processes built to help you expand sustainably, not just quickly, by BizzBuzz Creations.",
+    "BizzBuzz Creations is a business growth consultant helping companies scale sustainably across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/business-consultancy/business-growth-scaling-consulting",
@@ -219,29 +219,34 @@ const DIFFERENTIATORS = [
 
 const FAQS = [
   {
-    question: "How do I know if my business is ready to scale?",
+    question: "How much does business growth consulting cost in India?",
     answer:
-      "Signs include consistent demand outpacing your current capacity, stable unit economics, and processes that are starting to strain — we assess this together during the first stage.",
+      "Cost depends on scope, a focused growth strategy review costs less than ongoing advisory covering strategy, operations, and expansion together. We scope pricing after understanding your specific goals, rather than offering a flat rate upfront.",
   },
   {
-    question: "What's the risk of scaling too fast?",
+    question: "How do you know which growth channels to prioritize first?",
     answer:
-      "Scaling too fast without the right systems can break quality, strain cash flow, and burn out teams — our approach focuses on sustainable, not just rapid, growth.",
+      "We assess channels based on your specific business, audience, and resources, prioritizing based on realistic return and feasibility rather than chasing every channel that seems promising in general.",
   },
   {
-    question: "Do you help with hiring decisions during growth?",
+    question: "Can growth consulting help with scaling operations, not just revenue?",
     answer:
-      "Yes, we advise on team structure and hiring priorities as part of building a scalable growth plan.",
+      "Yes, operational scaling is a core part of our approach, since growth that outpaces your operational capacity tends to create quality and service problems that undermine the growth itself.",
   },
   {
-    question: "How long does a growth consulting engagement last?",
+    question: "How do you make sure growth doesn't outpace what our team can handle?",
     answer:
-      "It varies by business, but many engagements continue through implementation and review over several months as growth unfolds.",
+      "We plan operational readiness alongside growth targets from the start, assessing team capacity and infrastructure needs as part of the growth strategy itself, not as an afterthought.",
   },
   {
-    question: "What metrics should we track while scaling?",
+    question: "Do you help with market or geographic expansion specifically?",
     answer:
-      "It depends on your business model, but we help set up the specific metrics that reveal whether growth is genuinely healthy for your situation.",
+      "Yes, business expansion planning is one of our core services, covering feasibility assessment, risk analysis, and planning for entering new markets or locations.",
+  },
+  {
+    question: "How long does a typical growth consulting engagement take?",
+    answer:
+      "Timeline depends on scope, a focused strategy review can take a few weeks, while ongoing growth advisory typically continues over several months as your business actually scales.",
   },
 ];
 

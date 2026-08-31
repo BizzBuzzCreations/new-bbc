@@ -10,9 +10,9 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "Performance Marketing & ROI Campaigns | BizzBuzz Creations",
+  title: "Performance Marketing Agency | BizzBuzz Creations",
   description:
-    "Performance marketing and ROI-focused campaigns in India — every rupee tracked against one metric that matters: return on investment, by BizzBuzz Creations.",
+    "BizzBuzz Creations is a performance marketing agency running data-driven, ROI-focused campaigns across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/paid-marketing/performance-marketing-roi-campaigns",
@@ -219,29 +219,34 @@ const DIFFERENTIATORS = [
 
 const FAQS = [
   {
-    question: "What is performance marketing?",
+    question: "How much does performance marketing cost in India?",
     answer:
-      "Performance marketing focuses campaigns and reporting around measurable outcomes like leads, sales, and return on investment, rather than impressions or clicks alone.",
+      "Cost typically includes both our management fee and your channel ad spend, kept separate. We scope management pricing after understanding your goals, current channels, and funnel complexity, rather than offering a flat rate upfront.",
   },
   {
-    question: "How is performance marketing different from regular ad management?",
+    question: "What's the difference between performance marketing and regular digital marketing?",
     answer:
-      "Performance marketing puts ROI and revenue tracking at the center of every decision, from targeting to budget allocation, not just running ads and hoping they convert.",
+      "Performance marketing specifically ties strategy and spend to measurable outcomes, leads, sales, or ROI, rather than broader brand-building activities without direct attribution. It tends to prioritize channels and tactics that can be tracked and optimized based on real results.",
   },
   {
-    question: "What tracking do I need in place before starting?",
+    question: "How do you measure ROI across multiple marketing channels?",
     answer:
-      "At minimum, conversion tracking on your website or landing pages — we help set this up properly if it isn't already in place.",
+      "We implement multi-touch attribution and proper conversion tracking, giving visibility into how different channels contribute to the full customer journey, rather than crediting all conversions to just the last channel touched.",
   },
   {
-    question: "How do you decide where to allocate budget?",
+    question: "Can performance marketing work for a startup with a limited budget?",
     answer:
-      "We allocate and shift budget across channels based on real performance data and return on investment, not a fixed split decided upfront.",
+      "Yes, performance marketing is often especially valuable for limited budgets, since the focus on measurable ROI helps ensure every rupee spent is working as efficiently as possible rather than being spread thin across untested channels.",
   },
   {
-    question: "How long before I see a positive ROI?",
+    question: "How long before performance marketing starts showing measurable ROI?",
     answer:
-      "It varies by industry and starting point, but most campaigns show meaningful ROI trends within the first two to three months of optimization.",
+      "Timeline depends on your industry and starting point, but initial data typically comes in within a few weeks, while meaningful ROI trends usually take a few months to establish as channels optimize and attribution data accumulates.",
+  },
+  {
+    question: "Do you handle conversion rate optimization as part of performance marketing?",
+    answer:
+      "Yes, CRO is included as a core part of our performance marketing approach, since improving what happens after the click often delivers better overall ROI than only focusing on driving more traffic.",
   },
 ];
 

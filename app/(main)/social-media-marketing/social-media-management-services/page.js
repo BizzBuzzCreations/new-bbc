@@ -1,18 +1,18 @@
 import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   TrendingUp,
-  Rocket,
+  Store,
   Building2,
-  Building,
-  ShoppingCart,
   Handshake,
-  RefreshCw,
+  Building,
+  User,
+  CalendarClock,
 } from "lucide-react";
 
 export const metadata = {
   title: "Social Media Management Services | BizzBuzz Creations",
   description:
-    "Social media management services in India — daily posting, content calendars, and audience engagement handled end-to-end by BizzBuzz Creations.",
+    "BizzBuzz Creations offers social media management services that grow your brand consistently across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/social-media-marketing/social-media-management-services",
@@ -21,132 +21,132 @@ export const metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Rocket,
-    title: "Startups & Early-Stage Businesses",
-    desc: "Startups need an active social presence fast, without a founder personally posting every day. We build a content calendar and posting rhythm early, so startups show up consistently without it eating into founder time.",
+    icon: Store,
+    title: "Small Businesses Needing a Consistent Social Presence",
+    desc: "Small businesses often post inconsistently, going quiet for weeks before a sudden burst of activity that confuses followers. We provide social media management services built around a real, sustainable posting cadence, not sporadic effort when time allows.",
   },
   {
     icon: Building2,
-    title: "Small & Medium Businesses",
-    desc: "SMBs often post reactively, whenever there's time, rather than on a planned schedule. We manage social media sized for SMB budgets, keeping profiles active and on-brand without you having to think about it daily.",
-  },
-  {
-    icon: Building,
-    title: "Enterprises & Multi-Brand Companies",
-    desc: "Enterprises need consistent voice and quality maintained across multiple brands, teams, and platforms at once. We run social media management at enterprise scale, keeping tone and visual identity aligned across every profile.",
-  },
-  {
-    icon: ShoppingCart,
-    title: "Ecommerce & Retail Brands Needing Daily Content",
-    desc: "Ecommerce brands need a steady stream of product and lifestyle content to stay visible between campaigns. We build daily content and posting schedules that keep your store's social presence active and shoppable.",
+    title: "Brands Currently Managing Social Media In-House",
+    desc: "In-house social media often falls to whoever has time, resulting in inconsistent quality and strategy. We work as a social media management company that takes this off your plate, applying dedicated strategy instead of leftover attention.",
   },
   {
     icon: Handshake,
-    title: "Agencies Needing a Social Media Fulfillment Partner",
-    desc: "Agencies managing multiple client accounts need a reliable partner to handle day-to-day execution. We work as a white-label social media management partner, handling content and engagement agencies can present as their own.",
+    title: "Businesses Outsourcing Social Media for the First Time",
+    desc: "First-time outsourcing can feel risky without knowing what to expect from an agency relationship. We provide clear onboarding and reporting as part of outsource social media management, so you always know what's being done and why.",
   },
   {
-    icon: RefreshCw,
-    title: "Businesses With Inconsistent or Abandoned Profiles",
-    desc: "Businesses with profiles that go quiet for weeks at a time lose the audience they've already built. We audit and rebuild inactive accounts into a properly managed, consistently active presence.",
+    icon: Building,
+    title: "Multi-Location Businesses Needing Coordinated Posting",
+    desc: "Businesses with multiple locations struggle to keep messaging consistent while still reflecting each location's local relevance. We coordinate content across locations while allowing for local flexibility, keeping brand voice consistent without making every post identical.",
+  },
+  {
+    icon: User,
+    title: "Personal Brands & Founders Needing Visibility",
+    desc: "Founders and personal brands need consistent content to build visibility, but rarely have time to plan and post it themselves. We manage the full social media presence, keeping the founder's voice intact without demanding their daily attention.",
+  },
+  {
+    icon: CalendarClock,
+    title: "Businesses Needing Monthly, Ongoing Management",
+    desc: "Some businesses need consistent monthly management, not a one-off campaign that stops after a few weeks. We provide monthly social media management packages built for ongoing presence, not a short-term project with no follow-through.",
   },
 ];
 
 const SERVICE_BREAKDOWN = [
   {
     number: "01",
-    title: "Social Media Strategy & Content Calendars",
-    desc: "A content calendar planned around your brand's key dates, campaigns, and audience activity, not a random posting schedule.",
+    title: "Social Media Strategy & Planning",
+    desc: "A clear strategy behind every post, built around your actual audience and goals, not a generic content template.",
     ctaText: "Know Our Services",
     services: [
       "Social Media Strategy Development",
-      "Monthly Content Calendar Planning",
-      "Campaign-Aligned Scheduling",
-      "Platform Mix Planning",
-      "Audience Activity Analysis",
-      "Content Theme Planning",
-      "Posting Frequency Strategy",
-      "Content Calendar Documentation",
+      "Content Calendar Planning",
+      "Audience Research",
+      "Competitor Analysis",
+      "Platform Selection Strategy",
+      "Brand Voice Development",
+      "Campaign Planning",
+      "Goal & KPI Setting",
     ],
   },
   {
     number: "02",
-    title: "Content Creation & Daily Posting",
-    desc: "Captions, visuals, and posts produced and published on schedule, so your profiles stay active without your involvement.",
+    title: "Content Creation & Scheduling",
+    desc: "Consistent, brand-aligned content creation and scheduling, so your feed stays active without demanding your daily involvement.",
     ctaText: "Know Our Services",
     services: [
       "Social Media Content Creation",
+      "Graphic Design for Social Posts",
       "Caption Writing",
-      "Graphic & Visual Design",
-      "Daily Post Scheduling",
-      "Content Batching",
-      "Platform-Specific Formatting",
-      "Post Approval Workflows",
-      "Content Library Management",
+      "Post Scheduling",
+      "Content Calendar Management",
+      "Seasonal & Festive Content",
+      "Brand-Consistent Visual Content",
+      "Content Approval Workflows",
     ],
   },
   {
     number: "03",
-    title: "Community & Audience Engagement",
-    desc: "Comments, DMs, and mentions handled promptly and on-brand, turning casual followers into an engaged community.",
+    title: "Community Management & Engagement",
+    desc: "Active community management that responds to your audience and protects your brand's reputation in real time.",
     ctaText: "Know Our Services",
     services: [
-      "Comment Management",
-      "DM & Inbox Management",
-      "Mention Monitoring",
-      "Community Engagement",
-      "Response Time Optimization",
-      "Follower Interaction Strategy",
+      "Community Management",
+      "Comment & DM Response",
+      "Engagement Monitoring",
+      "Follower Growth Support",
       "Crisis & Negative Comment Handling",
-      "Engagement Reporting",
+      "User-Generated Content Curation",
+      "Hashtag Strategy",
+      "Audience Interaction Campaigns",
     ],
   },
   {
     number: "04",
-    title: "Brand Consistency Across Platforms",
-    desc: "Visual style, tone, and messaging kept consistent across Instagram, Facebook, and LinkedIn, so your brand feels like one voice everywhere.",
+    title: "Social Media Analytics & Reporting",
+    desc: "Clear reporting on what's actually working, so decisions are based on real performance, not guesswork.",
     ctaText: "Know Our Services",
     services: [
-      "Brand Voice Documentation",
-      "Cross-Platform Style Guides",
-      "Visual Identity Consistency",
-      "Multi-Platform Coordination",
-      "Tone & Messaging Alignment",
-      "Brand Guideline Development",
-      "Platform-Specific Adaptation",
-      "Consistency Audits",
+      "Performance Analytics",
+      "Monthly Reporting",
+      "Engagement Rate Tracking",
+      "Follower Growth Tracking",
+      "Content Performance Analysis",
+      "Competitor Benchmarking",
+      "ROI Reporting",
+      "Strategy Adjustment Based on Data",
     ],
   },
   {
     number: "05",
-    title: "Performance Reporting & Analytics",
-    desc: "Regular reports showing what's actually working, reach, engagement, and follower growth, not just vanity numbers.",
+    title: "Platform-Specific Management",
+    desc: "Coordinated management across every platform that matters for your brand, each handled the way that platform actually works.",
     ctaText: "Know Our Services",
     services: [
-      "Monthly Performance Reports",
-      "Reach & Engagement Tracking",
-      "Follower Growth Analysis",
-      "Content Performance Breakdown",
-      "Platform Analytics Review",
-      "Competitor Benchmarking",
-      "Custom Reporting Dashboards",
-      "Strategy Refinement Based on Data",
+      "Instagram Management",
+      "Facebook Page Management",
+      "LinkedIn Page Management",
+      "Twitter/X Management",
+      "YouTube Channel Management",
+      "Pinterest Management",
+      "Multi-Platform Coordination",
+      "Platform-Specific Content Formatting",
     ],
   },
   {
     number: "06",
-    title: "Ongoing Optimization & Trend Adaptation",
-    desc: "Continuous adjustment of content types, timing, and formats as platforms and audience behavior shift.",
+    title: "Monthly Social Media Packages & Support",
+    desc: "Ongoing monthly social media management packages built for ongoing consistency, not a short-lived project.",
     ctaText: "Know Our Services",
     services: [
-      "Posting Time Optimization",
-      "Content Format Testing",
-      "Trend Monitoring & Adaptation",
-      "AI-Backed Content Planning",
-      "Seasonal Campaign Planning",
-      "Platform Algorithm Monitoring",
-      "Content Refresh Cycles",
-      "Quarterly Strategy Reviews",
+      "Monthly Social Media Management Packages",
+      "Dedicated Account Management",
+      "Priority Support",
+      "Flexible Package Upgrades",
+      "Ad-Hoc Campaign Support",
+      "Onboarding & Brand Audit",
+      "Ongoing Strategy Reviews",
+      "Content Bank & Backup Planning",
     ],
   },
 ];
@@ -155,93 +155,98 @@ const ROADMAP_STEPS = [
   {
     number: "01",
     title: "Brand & Audience Discovery",
-    desc: "We learn your brand's story, tone, and audience before planning a single post, so the content actually fits who you are.",
+    desc: "We start by understanding your brand, audience, and current social media performance, identifying what's working, what isn't, and where the real opportunity is.",
   },
   {
     number: "02",
-    title: "Content Calendar Build",
-    desc: "We map out a month-by-month content calendar aligned to your goals, key dates, and platform mix.",
+    title: "Strategy & Content Calendar Planning",
+    desc: "We build a content strategy and calendar aligned with your goals, covering what to post, when, and on which platforms.",
   },
   {
     number: "03",
-    title: "Content Production & Approval",
-    desc: "Captions and visuals get produced and shared for your review, keeping you in the loop before anything goes live.",
+    title: "Content Creation & Design",
+    desc: "We create content, posts, graphics, captions, and video, aligned with your brand voice and the strategy already agreed on.",
   },
   {
     number: "04",
-    title: "Daily Posting & Engagement",
-    desc: "Posts go out on schedule while we actively manage comments, DMs, and community engagement in your brand voice.",
+    title: "Scheduling & Community Management",
+    desc: "We schedule content consistently and manage community engagement, responding to comments and messages as they come in.",
   },
   {
     number: "05",
-    title: "Reporting & Refinement",
-    desc: "We review performance regularly and adjust content types and timing based on what's genuinely resonating.",
+    title: "Performance Tracking & Reporting",
+    desc: "We track performance against your goals and provide clear monthly reporting on growth, engagement, and content results.",
   },
   {
     number: "06",
-    title: "Ongoing Scaling & Optimization",
-    desc: "As your audience grows, we scale content volume and platform coverage to match, refining the strategy continuously.",
+    title: "Ongoing Optimization & Scaling",
+    desc: "We refine strategy based on what's actually performing, scaling what works and adjusting what isn't delivering results.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "Consistent, On-Brand Presence",
-    desc: "Your profiles stay active and cohesive across platforms, professional and on-brand at all times, rather than going quiet between campaigns.",
+    title: "Social Media Management Built Around Growth, Not Just Posting",
+    desc: "We treat every post as part of a larger strategy toward actual growth, followers, engagement, and enquiries, rather than treating consistent posting alone as the goal. This means your social media works toward real business outcomes.",
   },
   {
     number: "02",
-    title: "No One-Size-Fits-All Packages",
-    desc: "Every content calendar is shaped around your specific brand, audience, and goals, not a generic template applied across every client.",
+    title: "Consistent Content Without the Consistency Falling on You",
+    desc: "Once you hand off social media management, it stays consistent regardless of how busy your team gets internally, since it's no longer dependent on someone finding spare time between other responsibilities.",
   },
   {
     number: "03",
-    title: "Real Community Engagement, Not a Checkbox",
-    desc: "We treat comments and DMs as real conversations, building genuine follower relationships instead of just marking engagement as handled.",
+    title: "Strategy That Adapts Based on Real Performance Data",
+    desc: "We review what's actually resonating with your audience and adjust content strategy accordingly, rather than sticking rigidly to an initial plan regardless of how it performs in practice.",
   },
   {
     number: "04",
-    title: "AI-Backed Planning With Human Judgment",
-    desc: "AI marketing tools help plan smarter content and predict trends early, paired with human judgment on tone and creative calls.",
+    title: "Community Management That Protects Your Brand's Reputation",
+    desc: "We monitor and respond to comments and messages actively, catching issues early and handling them appropriately, so your brand's online reputation stays protected rather than left unmanaged.",
   },
   {
     number: "05",
-    title: "Transparent, Honest Reporting",
-    desc: "You get regular, honest reports on reach and engagement, not just a vague monthly summary with no real detail behind it.",
+    title: "Multi-Platform Coordination From One Team",
+    desc: "Managing Instagram, Facebook, LinkedIn, and other platforms through one coordinated team keeps your brand voice consistent everywhere, instead of fragmenting across different people or agencies handling each platform separately.",
   },
   {
     number: "06",
-    title: "Built to Scale as Your Brand Grows",
-    desc: "Content volume and platform coverage scale with your business, so management doesn't need rebuilding every time you grow.",
+    title: "Transparent Monthly Reporting on What's Actually Working",
+    desc: "You receive clear monthly reporting on growth, engagement, and content performance, so you always know exactly what outsource social media management is actually delivering for your business.",
   },
 ];
 
 const FAQS = [
   {
-    question: "What's included in social media management services?",
+    question: "How much do social media management services cost in India?",
     answer:
-      "Content calendar planning, daily posting, community engagement, and performance reporting across your chosen social platforms.",
+      "Cost depends on scope, platforms managed, and content volume, a single-platform package costs less than full multi-platform management with video content. We scope pricing after understanding your specific requirements and goals, rather than offering a flat rate upfront for something this variable.",
   },
   {
-    question: "Which platforms do you manage?",
+    question: "What's included in monthly social media management packages?",
     answer:
-      "We typically manage Instagram, Facebook, and LinkedIn, and can tailor the mix to whichever platforms matter most for your business.",
+      "Monthly packages typically include content creation, scheduling, community management, and monthly reporting, with the exact scope depending on your plan. We can adjust the package based on how many platforms you need managed and how actively your audience needs engagement.",
   },
   {
-    question: "How often will you post on our profiles?",
+    question: "Can you manage multiple platforms at once?",
     answer:
-      "Posting frequency is planned around your brand and goals — we'll recommend a realistic, sustainable schedule during onboarding.",
+      "Yes, managing Instagram, Facebook, LinkedIn, and other platforms simultaneously is a core part of what we do, coordinated through one team to keep your brand voice consistent everywhere rather than fragmented across separate management for each platform.",
   },
   {
-    question: "Do you also handle comments and messages?",
+    question: "Do you create the content, or do we need to provide it?",
     answer:
-      "Yes, community engagement — responding to comments and DMs in your brand voice — is part of our management service.",
+      "We handle content creation as part of our service, including graphics, captions, and video, though we're also happy to incorporate content or assets you already have. Most clients prefer we handle the full process rather than supplying raw material themselves.",
   },
   {
-    question: "How much do social media management services cost?",
+    question: "How do you measure whether social media management is actually working?",
     answer:
-      "Pricing depends on platform count, posting frequency, and content complexity — we'll give you a clear, tailored quote.",
+      "We track engagement rate, follower growth, content performance, and where relevant, enquiries or leads generated, reporting on these clearly each month. This gives you a real picture of impact rather than vanity metrics that don't reflect actual business results.",
+  },
+  {
+    question: "Can you take over social media management from our in-house team?",
+    answer:
+      "Yes, we regularly take over accounts previously managed in-house, starting with a brand and content audit to understand what's already been done before building a forward strategy, so the transition happens smoothly without losing existing audience trust.",
   },
 ];
 
@@ -251,27 +256,27 @@ export default function SocialMediaManagementServices() {
       sectionLabel="Social Media Marketing"
       label="Social Media Management Services"
       icon={TrendingUp}
-      description="Daily posting, content calendars, and audience engagement handled end-to-end, keeping your brand active and consistent across every platform."
-      heroTitle="Get a Social Media Presence That Actually Stays Active"
-      heroDescription="Daily posting, content calendars, and audience engagement handled end-to-end, keeping your brand active and consistent across every platform."
-      heroCtaText="Get a Free Social Media Consultation"
-      capabilitiesHeading="Built for Businesses Ready for a Consistent Social Presence"
+      description="Social media management built to grow your audience and generate enquiries, not just fill a content calendar, backed by real strategy."
+      heroTitle="Get a Social Media Presence Built to Grow, Not Just Post"
+      heroDescription="Social media management built to grow your audience and generate enquiries, not just fill a content calendar, backed by real strategy."
+      heroCtaText="Get a Free Social Media Audit"
+      capabilitiesHeading="Built for Brands Tired of Posting Into the Void"
       capabilities={CAPABILITIES}
-      serviceBreakdownHeading="Everything That Goes Into Our Social Media Management"
+      serviceBreakdownHeading="Everything Between a Content Calendar and Real Growth"
       serviceBreakdown={SERVICE_BREAKDOWN}
-      differentiatorsHeading="What Makes Our Social Media Management Different"
+      differentiatorsHeading="Why Brands Trust Us With Their Social Media"
       differentiators={DIFFERENTIATORS}
-      roadmapCarouselHeading="Our Social Media Management Process"
+      roadmapCarouselHeading="How We Turn Posting Into an Actual Strategy"
       roadmapCarouselSteps={ROADMAP_STEPS}
       showStats={false}
-      localityHeading="Based in Prayagraj, Managing Social Media Nationally"
-      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we manage every social media account, with the same consistency whether a client is nearby or across the country. We provide social media management services for startups, SMBs, and enterprises across India, sizing content calendars and posting cadence to each business's actual audience. Whether you're a startup building your first real presence in Prayagraj or a multi-brand company managing several accounts at once, our approach starts with the same question: what does your audience actually want to see from you."
+      localityHeading="Based in Prayagraj, Managing Social Media Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every social media account, with the same consistency whether a client is nearby or across the world. We work as a social media management company for businesses across India, providing monthly social media management packages built around each brand's actual audience and goals. For businesses looking to outsource social media management beyond India, we support clients worldwide remotely, delivering the same best social media management agency standard of work regardless of time zone. Whether you're a small business in Prayagraj building your first real presence or a brand anywhere else scaling across platforms, our approach starts with the same question: what does your audience actually want to see from you."
       faqs={FAQS}
       showWhyChooseUs={false}
-      ctaHeading="Ready for Social Media That Actually Stays Active?"
-      ctaText="Whether your profiles have gone quiet, you need a proper content calendar for the first time, or you're ready to hand off day-to-day posting entirely, inconsistent effort was never going to build a real audience. Let's talk through your brand and scope what social media management would actually involve."
-      ctaPrimaryText="Talk to a Social Media Management Specialist"
-      ctaSecondaryText="Get Your Free Social Media Consultation"
+      ctaHeading="Ready for Social Media That Actually Grows Your Business?"
+      ctaText="Whether your social media has gone quiet, feels inconsistent, or simply isn't translating into real business results, posting alone was never going to fix that. Let's audit your current presence and scope what a proper social media management strategy would actually involve."
+      ctaPrimaryText="Talk to a Social Media Specialist"
+      ctaSecondaryText="Get Your Free Social Media Audit"
     />
   );
 }

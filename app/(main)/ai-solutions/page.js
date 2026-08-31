@@ -6,7 +6,7 @@ import BpoWeAre from "@/components/sections/bpoWeAre";
 import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
 import CTA from "@/components/sections/CTA";
 import DarkFAQSection from "@/components/sections/darkFAQSection";
-import { Bot, Sparkles, Workflow, Radar } from "lucide-react";
+import { Bot, Sparkles, Workflow, Compass } from "lucide-react";
 
 export const metadata = {
   title: "AI Solutions Company in India | Bizzbuzz Creations",
@@ -40,10 +40,10 @@ const SERVICE_ITEMS = [
     href: "/ai-solutions/workflow-process-automation",
   },
   {
-    icon: Radar,
-    heading: "GEO (Generative Engine Optimization)",
+    icon: Compass,
+    heading: "AI Strategy & Implementation Consulting",
     description:
-      "Our GEO service structures your content and website so AI engines like ChatGPT, Perplexity, and Google AI Overviews actually cite and recommend your business.",
+      "AI strategy consulting built around real business use cases, not AI for its own sake, engineered to identify where it actually helps.",
     href: "/ai-solutions/generative-engine-optimization",
   },
 ];

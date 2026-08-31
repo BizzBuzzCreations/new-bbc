@@ -1,18 +1,18 @@
 import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Linkedin,
-  Rocket,
+  Target,
   Building2,
-  Building,
-  ShoppingCart,
-  Handshake,
+  User,
   RefreshCw,
+  BarChart3,
+  Handshake,
 } from "lucide-react";
 
 export const metadata = {
-  title: "LinkedIn Marketing for B2B Growth | BizzBuzz Creations",
+  title: "LinkedIn Marketing Agency for B2B | BizzBuzz Creations",
   description:
-    "LinkedIn marketing for B2B growth in India — connect with decision-makers, build industry authority, and turn LinkedIn into a steady lead source, by BizzBuzz Creations.",
+    "BizzBuzz Creations is a LinkedIn marketing agency generating qualified B2B leads for businesses across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/social-media-marketing/linkedin-marketing-b2b-growth",
@@ -21,132 +21,132 @@ export const metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Rocket,
-    title: "B2B Startups & Early-Stage Companies",
-    desc: "B2B startups need to reach decision-makers without an existing brand or network to lean on. We build LinkedIn presence and outreach early, so startups start conversations with the right people from day one.",
+    icon: Target,
+    title: "B2B Companies Needing Qualified Leads",
+    desc: "B2B companies need leads that turn into actual sales conversations, not just page followers with no buying intent. We provide b2b linkedin lead generation agency services built around reaching people who are actually in a position to buy.",
   },
   {
     icon: Building2,
-    title: "Small & Medium B2B Businesses",
-    desc: "SMBs often have a LinkedIn page that sits idle without any real lead generation strategy behind it. We build LinkedIn marketing sized for SMB budgets, focused on converting connections into genuine pipeline.",
+    title: "SaaS & Tech Companies Building Category Authority",
+    desc: "SaaS companies need to be seen as credible experts before a prospect ever books a demo. We build linkedin marketing services for b2b that position your company as a category authority through consistent, substantive content.",
   },
   {
-    icon: Building,
-    title: "Enterprises & Multi-Team Organizations",
-    desc: "Enterprises need consistent thought leadership and lead generation across multiple teams and product lines. We run LinkedIn marketing at enterprise scale, coordinating company pages and executive presence together.",
-  },
-  {
-    icon: ShoppingCart,
-    title: "B2B SaaS & Service Providers",
-    desc: "SaaS and service companies need LinkedIn to actually shorten their sales cycle, not just build vague brand awareness. We build content and outreach strategies tied directly to demo requests and qualified conversations.",
-  },
-  {
-    icon: Handshake,
-    title: "Agencies Needing a LinkedIn Fulfillment Partner",
-    desc: "Agencies managing B2B clients need specialist LinkedIn execution without building that expertise internally. We work as a white-label LinkedIn partner, handling strategy and content agencies can present as their own.",
+    icon: User,
+    title: "Founders & Executives Building a Personal Brand",
+    desc: "Buyers increasingly trust individual voices over company pages, making founder visibility a genuine B2B growth lever. We manage executive LinkedIn presence as part of our linkedin growth agency work, building trust before the first sales call.",
   },
   {
     icon: RefreshCw,
-    title: "Companies With an Inactive Company Page",
-    desc: "Companies with a LinkedIn page that hasn't been touched in months are losing credibility with prospects who check it. We rebuild inactive pages into an active source of authority and inbound interest.",
+    title: "Companies With an Inactive or Underused LinkedIn Page",
+    desc: "Many B2B companies have a LinkedIn page that's been dormant for months, quietly signaling inactivity to visiting prospects. We revive underused pages with a real content strategy, not just a burst of posts before going quiet again.",
+  },
+  {
+    icon: BarChart3,
+    title: "Businesses Needing LinkedIn Ads for B2B",
+    desc: "Organic reach alone often isn't enough to reach specific job titles or industries at scale. We provide linkedin ads management services targeted precisely at the roles and companies most likely to actually convert.",
+  },
+  {
+    icon: Handshake,
+    title: "Agencies & Consultancies Needing LinkedIn-Led Growth",
+    desc: "Agencies and consultancies often rely on referrals alone, missing the compounding effect of consistent LinkedIn visibility. We work as a b2b social media marketing agency helping these businesses build a second, scalable growth channel.",
   },
 ];
 
 const SERVICE_BREAKDOWN = [
   {
     number: "01",
-    title: "Company Page Optimization",
-    desc: "Your LinkedIn company page optimized to clearly communicate what you do and why decision-makers should pay attention.",
+    title: "LinkedIn Strategy & Company Page Management",
+    desc: "A clear strategy behind your company page, built around your specific buyers and sales cycle.",
     ctaText: "Know Our Services",
     services: [
+      "LinkedIn Strategy Development",
       "Company Page Setup & Optimization",
-      "Page Positioning & Messaging",
-      "Showcase Page Strategy",
-      "Page Content Calendar",
-      "Employee Tagging Strategy",
-      "Page Analytics Review",
-      "Visual Branding for LinkedIn",
+      "Content Calendar Planning",
+      "Audience Research",
+      "Competitor Analysis",
+      "Posting Schedule Management",
       "Page Growth Strategy",
+      "Brand Voice Development",
     ],
   },
   {
     number: "02",
-    title: "Thought Leadership Content",
-    desc: "Posts planned and written that position your leadership as genuine experts in your industry, not generic corporate updates.",
+    title: "B2B Content Marketing on LinkedIn",
+    desc: "Content built to position your company as a credible authority, not just an active poster.",
     ctaText: "Know Our Services",
     services: [
-      "Thought Leadership Strategy",
-      "Executive Ghostwriting",
-      "Industry Insight Content",
-      "Founder Personal Branding",
-      "Content Series Planning",
-      "Long-Form Post Development",
-      "Comment Engagement Strategy",
-      "Content Performance Tracking",
+      "LinkedIn Content Creation",
+      "Thought Leadership Content",
+      "Case Study Content",
+      "Industry Insight Posts",
+      "Carousel & Document Posts",
+      "LinkedIn Article Writing",
+      "Video Content for LinkedIn",
+      "Content Performance Optimization",
     ],
   },
   {
     number: "03",
-    title: "Decision-Maker Targeting",
-    desc: "Content and outreach aimed at the specific job titles and industries most likely to become real B2B customers.",
+    title: "LinkedIn Ads Management",
+    desc: "Precisely targeted campaigns reaching the specific roles and industries most likely to actually convert.",
     ctaText: "Know Our Services",
     services: [
-      "ICP & Decision-Maker Mapping",
-      "Job Title & Industry Targeting",
-      "Sales Navigator Strategy",
-      "Account-Based Targeting",
-      "Persona-Based Content Planning",
-      "Targeted Outreach Lists",
-      "Connection Request Strategy",
-      "Audience Segmentation",
+      "LinkedIn Ads Management",
+      "Sponsored Content Campaigns",
+      "LinkedIn Lead Gen Forms",
+      "Message Ads Campaigns",
+      "Audience Targeting",
+      "Ad Creative Development",
+      "Budget Optimization",
+      "Conversion Tracking",
     ],
   },
   {
     number: "04",
-    title: "LinkedIn Ads for Lead Generation",
-    desc: "LinkedIn ad campaigns built specifically for B2B lead generation, tracked against real pipeline impact.",
+    title: "LinkedIn Lead Generation & Outreach",
+    desc: "Direct outreach and lead generation campaigns focused on quality conversations, not spray-and-pray connection requests.",
     ctaText: "Know Our Services",
     services: [
-      "LinkedIn Ad Campaign Setup",
-      "Sponsored Content Ads",
-      "Lead Gen Form Ads",
-      "InMail Campaign Setup",
-      "B2B Audience Targeting",
-      "Ad Budget Management",
-      "Conversion Tracking Setup",
-      "Ad Performance Reporting",
+      "B2B Lead Generation Campaigns",
+      "LinkedIn Outreach Services",
+      "Connection Request Strategy",
+      "InMail Campaign Management",
+      "Lead Qualification",
+      "CRM Integration for Leads",
+      "Sales Navigator Strategy",
+      "Follow-Up Sequence Design",
     ],
   },
   {
     number: "05",
-    title: "Employee Advocacy & Networking",
-    desc: "Your team supported in extending organic reach by sharing and engaging with company content on their own profiles.",
+    title: "Executive & Founder Personal Branding",
+    desc: "Personal brand management for founders and executives, building trust with buyers before the first sales call.",
     ctaText: "Know Our Services",
     services: [
-      "Employee Advocacy Programs",
-      "Team Profile Optimization",
-      "Shareable Content Kits",
-      "Networking Outreach Support",
-      "Internal Engagement Guidelines",
-      "Executive Networking Strategy",
-      "Employee Content Amplification",
-      "Advocacy Performance Tracking",
+      "Executive Personal Branding",
+      "Founder LinkedIn Profile Optimization",
+      "Thought Leadership Positioning",
+      "Personal Content Strategy",
+      "Ghostwriting for Executives",
+      "Engagement & Networking Support",
+      "Speaking & Visibility Positioning",
+      "Personal Brand Analytics",
     ],
   },
   {
     number: "06",
-    title: "Pipeline & Lead Tracking",
-    desc: "Actual leads and connections generated measured, not just impressions, so LinkedIn's ROI is clear to you.",
+    title: "LinkedIn Analytics & Reporting",
+    desc: "Clear reporting on lead quality and engagement, not just follower growth or impressions.",
     ctaText: "Know Our Services",
     services: [
-      "Lead Tracking Setup",
-      "Pipeline Attribution Reporting",
-      "Connection-to-Lead Tracking",
-      "CRM Integration for LinkedIn Leads",
-      "Monthly Pipeline Reports",
+      "LinkedIn Performance Analytics",
+      "Lead Quality Reporting",
+      "Engagement Rate Tracking",
+      "Follower Growth Analysis",
       "Campaign ROI Reporting",
-      "Conversation-to-Meeting Tracking",
-      "Ongoing Reporting Reviews",
+      "Monthly Strategy Reviews",
+      "Competitor Benchmarking",
+      "Content Performance Analysis",
     ],
   },
 ];
@@ -154,94 +154,99 @@ const SERVICE_BREAKDOWN = [
 const ROADMAP_STEPS = [
   {
     number: "01",
-    title: "B2B Audience & Goal Mapping",
-    desc: "We identify the exact decision-makers and industries you want to reach before planning a single post or ad.",
+    title: "Business & Audience Discovery",
+    desc: "We start by understanding your business, ideal customer profile, and sales cycle, identifying which roles and industries LinkedIn efforts should actually target.",
   },
   {
     number: "02",
-    title: "Profile & Content Strategy",
-    desc: "We optimize your company page and plan thought leadership content that builds credibility with your target audience.",
+    title: "LinkedIn Strategy & Positioning",
+    desc: "We define content pillars, positioning, and outreach strategy aligned with how your specific buyers research and make decisions.",
   },
   {
     number: "03",
-    title: "Content Production & Approval",
-    desc: "Thought leadership posts and company content get drafted and shared for review before anything goes live.",
+    title: "Content & Campaign Development",
+    desc: "We build content, ad creative, and outreach messaging according to the strategy, positioning your company and any relevant executives as credible authorities.",
   },
   {
     number: "04",
-    title: "Content & Ad Launch",
-    desc: "Posts and LinkedIn ad campaigns go live together, aimed at generating genuine B2B leads, not just visibility.",
+    title: "Outreach & Ads Launch",
+    desc: "We launch content publishing, outreach campaigns, and any agreed LinkedIn ads, tracking engagement and response from the start.",
   },
   {
     number: "05",
-    title: "Track Pipeline & Refine",
-    desc: "We track leads and connections generated, refining targeting and content based on what's actually building pipeline.",
+    title: "Lead Qualification & Follow-Up",
+    desc: "We qualify incoming leads and manage follow-up sequences, ensuring conversations move toward genuine sales opportunities rather than stalling.",
   },
   {
     number: "06",
-    title: "Monthly Pipeline Review",
-    desc: "We review pipeline impact each month with your team, adjusting content and targeting based on real sales feedback.",
+    title: "Ongoing Reporting & Optimization",
+    desc: "We report on lead quality and engagement regularly, refining targeting and messaging based on what's actually generating results.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "Built for B2B Lead Generation",
-    desc: "Every strategy is designed around generating real business leads, not just LinkedIn engagement for its own sake.",
+    title: "LinkedIn Marketing Built for B2B Buying Behavior",
+    desc: "We understand that B2B purchase decisions take longer and involve multiple stakeholders, and build content and outreach strategy around that reality, rather than applying consumer social media tactics that don't fit how B2B buyers actually decide.",
   },
   {
     number: "02",
-    title: "Decision-Maker Focused",
-    desc: "Content and targeting are aimed at the specific roles and industries that actually make purchasing decisions.",
+    title: "Content That Positions You as Category Authority, Not Just Active",
+    desc: "Our content strategy focuses on substantive insight and thought leadership, not generic engagement bait, because B2B buyers trust companies that demonstrate genuine expertise over accounts that simply post frequently.",
   },
   {
     number: "03",
-    title: "Thought Leadership Positioning",
-    desc: "We help build genuine authority for your leadership team, which drives trust with B2B buyers earlier in the sales process.",
+    title: "Lead Generation Focused on Qualified Decision-Makers",
+    desc: "Our outreach and lead generation campaigns target specific roles and industries relevant to your business, so you're having conversations with people who can actually make a purchasing decision, not just anyone willing to connect.",
   },
   {
     number: "04",
-    title: "Pipeline-Tracked Results",
-    desc: "We measure leads and connections generated, giving you a clear picture of LinkedIn's actual business impact.",
+    title: "Executive Branding That Builds Trust Before the First Call",
+    desc: "We help founders and executives build a credible LinkedIn presence, since buyers increasingly research individual leadership before ever contacting a company, making personal branding a genuine part of the B2B sales funnel.",
   },
   {
     number: "05",
-    title: "Coordinated Organic & Paid",
-    desc: "Organic content and LinkedIn ads work together as one strategy, not disconnected efforts pulling in different directions.",
+    title: "Ads Targeted at Actual Buyers, Not Broad Reach",
+    desc: "LinkedIn ad targeting lets us reach specific job titles, industries, and company sizes precisely, and we use that capability fully rather than running broad campaigns that waste budget on irrelevant audiences.",
   },
   {
     number: "06",
-    title: "Sales Team Feedback Built Into Strategy",
-    desc: "We incorporate what your sales team hears from real conversations, keeping content grounded in actual buyer objections.",
+    title: "Transparent Reporting on Lead Quality, Not Just Volume",
+    desc: "We report on the quality of leads generated, not just the quantity, since a smaller number of genuinely qualified B2B leads is worth more than a large number of unqualified form fills.",
   },
 ];
 
 const FAQS = [
   {
-    question: "Is LinkedIn marketing worth it for B2B businesses?",
+    question: "How much does LinkedIn marketing cost for B2B companies in India?",
     answer:
-      "Yes, LinkedIn is one of the most effective platforms for reaching decision-makers directly, especially for B2B lead generation and industry authority building.",
+      "Cost depends on scope, organic content management alone costs less than a package including outreach, ads, and executive personal branding. We scope pricing after understanding your specific goals, target audience, and sales cycle, rather than offering a flat rate upfront.",
   },
   {
-    question: "How is LinkedIn marketing different from Instagram or Facebook?",
+    question: "How is LinkedIn marketing different from Facebook or Instagram marketing?",
     answer:
-      "LinkedIn content and targeting focus on professional decision-makers and B2B relationships, while Instagram and Facebook typically suit broader consumer engagement.",
+      "LinkedIn audiences engage in a more professional, research-driven mindset, making thought leadership and credibility more important than the visual, entertainment-focused content that works on Facebook or Instagram. Strategy, tone, and content format all differ significantly between the platforms.",
   },
   {
-    question: "Do you run LinkedIn ads as well as organic content?",
+    question: "Can you help generate leads through LinkedIn outreach, not just ads?",
     answer:
-      "Yes, we combine organic thought leadership content with targeted LinkedIn ad campaigns for a coordinated lead generation strategy.",
+      "Yes, direct outreach through connection requests and personalized messaging is a core part of our lead generation approach, often producing higher-quality conversations than ads alone. We combine outreach with content strategy so prospects recognize your brand before you reach out.",
   },
   {
-    question: "How long does it take to see B2B leads from LinkedIn?",
+    question: "Do you build personal LinkedIn brands for founders and executives?",
     answer:
-      "Ads can generate initial leads within weeks, while organic thought leadership and authority-building typically takes a few months to compound.",
+      "Yes, executive personal branding is one of our core services, since B2B buyers increasingly research individual leaders before engaging with a company. We help position founders and executives as credible voices in their specific industry through consistent content.",
   },
   {
-    question: "Can you help our leadership team build a personal presence too?",
+    question: "How long does it take to see results from LinkedIn marketing?",
     answer:
-      "Yes, we can plan thought leadership content for founders or executives alongside your company page strategy.",
+      "B2B sales cycles are typically longer than consumer purchases, so meaningful lead flow often takes a few months to build, though engagement and visibility improvements can appear sooner. We set realistic expectations during onboarding based on your specific industry and sales cycle.",
+  },
+  {
+    question: "Can you manage LinkedIn ads for a small B2B budget?",
+    answer:
+      "Yes, we scope LinkedIn ad campaigns to fit realistic budgets, focusing spend on the most relevant audience segments rather than broad targeting that wastes a smaller budget. We're transparent about what results a given budget can realistically deliver.",
   },
 ];
 
@@ -251,27 +256,27 @@ export default function LinkedinMarketingB2bGrowth() {
       sectionLabel="Social Media Marketing"
       label="LinkedIn Marketing for B2B Growth"
       icon={Linkedin}
-      description="LinkedIn strategy built for B2B lead generation, connecting you with decision-makers and turning LinkedIn into a steady source of business leads."
-      heroTitle="Get a LinkedIn Strategy Built to Generate Real B2B Pipeline"
-      heroDescription="LinkedIn strategy built for B2B lead generation, connecting you with decision-makers and turning LinkedIn into a steady source of business leads."
-      heroCtaText="Get a Free LinkedIn Marketing Consultation"
-      capabilitiesHeading="Built for B2B Companies Ready to Reach Decision-Makers"
+      description="LinkedIn marketing built to reach real decision-makers, not just grow page followers, engineered around B2B buying behavior."
+      heroTitle="Get Qualified B2B Leads From LinkedIn, Not Just Impressions"
+      heroDescription="LinkedIn marketing built to reach real decision-makers, not just grow page followers, engineered around B2B buying behavior."
+      heroCtaText="Get a Free LinkedIn Strategy Consultation"
+      capabilitiesHeading="Built for B2B Brands That Need Decision-Makers, Not Just Views"
       capabilities={CAPABILITIES}
-      serviceBreakdownHeading="Everything That Goes Into Our LinkedIn Marketing"
+      serviceBreakdownHeading="Everything Between a LinkedIn Post and a Qualified Lead"
       serviceBreakdown={SERVICE_BREAKDOWN}
-      differentiatorsHeading="What Makes Our LinkedIn Marketing Different"
+      differentiatorsHeading="Why B2B Brands Trust Us With LinkedIn"
       differentiators={DIFFERENTIATORS}
-      roadmapCarouselHeading="Our LinkedIn Marketing Process"
+      roadmapCarouselHeading="How We Turn LinkedIn Into a B2B Lead Channel"
       roadmapCarouselSteps={ROADMAP_STEPS}
       showStats={false}
-      localityHeading="Based in Prayagraj, Building B2B Pipeline Nationally"
-      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we build every LinkedIn strategy, with the same discipline on decision-maker targeting whether a client is nearby or across the country. We run LinkedIn marketing for B2B startups, SMBs, and enterprises across India, sizing content and outreach to each business's actual sales cycle. Whether you're a B2B startup in Prayagraj starting your first thought leadership push or an enterprise coordinating multiple teams on LinkedIn, our approach starts with the same question: who exactly is the decision-maker you need to reach."
+      localityHeading="Based in Prayagraj, Running B2B LinkedIn Campaigns Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every LinkedIn account, with the same attention to lead quality whether a client is nearby or across the world. We work as a linkedin marketing agency for B2B companies across India, providing b2b linkedin lead generation agency support built around each business's specific buyers and sales cycle. For companies looking for linkedin marketing services for b2b beyond India, we support clients worldwide remotely, delivering the same linkedin growth agency standard of work regardless of time zone. Whether you're a SaaS company in Prayagraj or a consultancy anywhere else building B2B visibility, our approach starts with the same question: who actually makes the buying decision, and how do they research it."
       faqs={FAQS}
       showWhyChooseUs={false}
-      ctaHeading="Ready for LinkedIn to Actually Build Your Pipeline?"
-      ctaText="Whether your company page has gone quiet, your leadership team wants genuine industry authority, or you need LinkedIn ads tied to real pipeline impact, occasional posting was never going to generate consistent B2B leads. Let's talk through your goals and scope what real LinkedIn marketing would actually involve."
+      ctaHeading="Ready for LinkedIn That Actually Generates B2B Leads?"
+      ctaText="Whether your company page has gone quiet, your outreach isn't converting, or you simply haven't started using LinkedIn strategically yet, impressions alone were never going to bring in qualified B2B leads. Let's talk through your sales cycle and scope what a real LinkedIn strategy would actually involve."
       ctaPrimaryText="Talk to a LinkedIn Marketing Specialist"
-      ctaSecondaryText="Get Your Free LinkedIn Marketing Consultation"
+      ctaSecondaryText="Get Your Free LinkedIn Strategy Consultation"
     />
   );
 }

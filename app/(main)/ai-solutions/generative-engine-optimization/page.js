@@ -1,18 +1,18 @@
 import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
-  Radar,
-  Rocket,
-  Building2,
-  Building,
-  ShoppingCart,
-  Handshake,
-  RefreshCw,
+  Compass,
+  Search,
+  ShieldQuestion,
+  AlertTriangle,
+  Map,
+  ShieldCheck,
+  ClipboardList,
 } from "lucide-react";
 
 export const metadata = {
-  title: "GEO (Generative Engine Optimization) | BizzBuzz Creations",
+  title: "AI Strategy Consulting Services | BizzBuzz Creations",
   description:
-    "Generative Engine Optimization (GEO) in India — structure your content and website so AI engines like ChatGPT and Google AI Overviews cite and recommend your business, by BizzBuzz Creations.",
+    "BizzBuzz Creations provides AI strategy consulting that helps businesses adopt AI properly across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/ai-solutions/generative-engine-optimization",
@@ -21,132 +21,132 @@ export const metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Rocket,
-    title: "Startups & Early-Stage Businesses",
-    desc: "Startups building content from scratch have a rare chance to structure it for AI citation from day one. We build GEO into the content plan early, so startups get cited in AI answers before competitors catch up.",
+    icon: Search,
+    title: "Businesses Unsure Where AI Actually Fits Their Operations",
+    desc: "Most businesses know AI is relevant somehow but lack a clear sense of where it genuinely applies to their operations. We provide ai strategy consulting services that identify real, specific fit, not generic AI enthusiasm.",
   },
   {
-    icon: Building2,
-    title: "Small & Medium Businesses",
-    desc: "SMBs often have thin, disconnected content that AI engines skip over for citations. We rework existing content into citable, connected material sized for SMB budgets and content volume.",
+    icon: ShieldQuestion,
+    title: "Leadership Teams Needing an Honest AI Readiness Assessment",
+    desc: "Leadership teams often need an honest answer about whether their data, team, and processes are actually ready for AI adoption. We provide ai readiness assessment services that give a genuinely realistic picture.",
   },
   {
-    icon: Building,
-    title: "Enterprises & Large Organizations",
-    desc: "Enterprises need consistent citation across product lines and markets inside AI engines. We run GEO programs at enterprise scale, covering multiple content hubs and maintaining consistency across them.",
+    icon: AlertTriangle,
+    title: "Companies Under Pressure to \"Do Something With AI\"",
+    desc: "Internal or board-level pressure to adopt AI quickly often leads to rushed, poorly-scoped initiatives. We work as an ai adoption strategy consultant helping companies respond thoughtfully rather than reactively.",
   },
   {
-    icon: ShoppingCart,
-    title: "Ecommerce & Retail Brands",
-    desc: "Shoppers increasingly ask AI engines to compare products before visiting a store directly. We structure product and comparison content so AI engines can accurately cite your offerings.",
+    icon: Map,
+    title: "Businesses Needing a Prioritized AI Adoption Roadmap",
+    desc: "Businesses with multiple potential AI use cases need help prioritizing which to pursue first, and in what order. We build ai roadmap development services structured around realistic sequencing, not everything at once.",
   },
   {
-    icon: Handshake,
-    title: "Agencies Needing a GEO Partner",
-    desc: "Content and marketing agencies need a specialist partner as AI engines reshape content strategy. We work as a white-label GEO partner, handling the restructuring work agencies can present as their own.",
+    icon: ShieldCheck,
+    title: "Enterprises Needing AI Governance and Risk Guidelines",
+    desc: "Enterprises adopting AI at scale need genuine governance around data privacy, risk, and responsible use, not an afterthought. We provide ai governance consulting that takes these considerations seriously from the start.",
   },
   {
-    icon: RefreshCw,
-    title: "Businesses With Content That Never Gets Cited",
-    desc: "Businesses publishing regularly but never appearing in AI-generated answers need a structural fix, not more volume. We audit why your content isn't being cited and rebuild it into a format AI engines can actually use.",
+    icon: ClipboardList,
+    title: "Companies Needing Help Evaluating AI Vendors and Tools",
+    desc: "The AI vendor landscape changes constantly, making it genuinely hard to evaluate options without bias toward any one platform. We work as an ai implementation consulting company providing independent vendor evaluation support.",
   },
 ];
 
 const SERVICE_BREAKDOWN = [
   {
     number: "01",
-    title: "Answer-Ready Content Structuring",
-    desc: "We restructure key pages into clear, citable chunks — definitions, comparisons, step-by-step answers — the format generative engines pull from most.",
+    title: "AI Readiness Assessment",
+    desc: "An honest assessment of whether your business is actually ready for AI adoption, and what needs to change if not.",
     ctaText: "Know Our Services",
     services: [
-      "Content Chunking",
-      "Definition Block Formatting",
-      "Comparison Table Structuring",
-      "Step-by-Step Formatting",
-      "Answer-First Rewriting",
-      "Heading Structure Optimization",
-      "Citable Format Auditing",
-      "Content Restructuring Reports",
+      "AI Readiness Assessment",
+      "Data Infrastructure Evaluation",
+      "Team Capability Assessment",
+      "Current Process AI-Fit Analysis",
+      "Technology Stack Review",
+      "AI Maturity Benchmarking",
+      "Risk & Gap Identification",
+      "Readiness Report Delivery",
     ],
   },
   {
     number: "02",
-    title: "Citation & Source Optimization",
-    desc: "We strengthen the facts, data, and sourcing on your pages so AI engines have clean, quotable material to draw from.",
+    title: "AI Use Case Identification",
+    desc: "Identification of the specific, realistic places AI could genuinely help your business, not generic possibilities.",
     ctaText: "Know Our Services",
     services: [
-      "Fact Verification",
-      "Data Sourcing Improvements",
-      "Quotable Statement Writing",
-      "Statistic & Data Formatting",
-      "Source Attribution Cleanup",
-      "Original Research Development",
-      "Citation-Ready Summaries",
-      "Fact Consistency Audits",
+      "AI Use Case Discovery",
+      "Business Process AI Mapping",
+      "Opportunity Prioritization",
+      "Feasibility Assessment",
+      "Cost-Benefit Analysis",
+      "Quick-Win Identification",
+      "Use Case Documentation",
+      "Stakeholder Alignment Sessions",
     ],
   },
   {
     number: "03",
-    title: "Entity & Topic Authority Building",
-    desc: "We build interconnected content around your core topics and entities, giving AI systems a fuller picture of your expertise.",
+    title: "AI Adoption Roadmap Development",
+    desc: "A sequenced, realistic roadmap for actually implementing AI, not an overwhelming list of possibilities.",
     ctaText: "Know Our Services",
     services: [
-      "Entity Research",
-      "Topic Cluster Mapping",
-      "Entity-Rich Content Writing",
-      "Pillar Content Development",
-      "Entity Relationship Building",
-      "Knowledge Graph Alignment",
-      "Entity Schema Markup",
-      "Authority Depth Auditing",
+      "AI Roadmap Development",
+      "Implementation Sequencing",
+      "Resource & Budget Planning",
+      "Milestone Definition",
+      "Change Management Planning",
+      "Pilot Program Design",
+      "Roadmap Documentation",
+      "Roadmap Review Sessions",
     ],
   },
   {
     number: "04",
-    title: "Multi-Platform AI Visibility",
-    desc: "We optimize for how your business appears across multiple AI engines — ChatGPT, Perplexity, Google AI Overviews, and more.",
+    title: "AI Governance & Risk Advisory",
+    desc: "Governance guidance that takes data privacy, ethical use, and risk genuinely seriously, not as an afterthought.",
     ctaText: "Know Our Services",
     services: [
-      "Multi-Platform Optimization",
-      "Google AI Overviews Optimization",
-      "ChatGPT Citation Building",
-      "Perplexity Optimization",
-      "Platform-Specific Testing",
-      "Coverage Gap Analysis",
-      "Emerging Platform Monitoring",
-      "Cross-Platform Reporting",
+      "AI Governance Framework Development",
+      "AI Risk Assessment",
+      "Data Privacy & Compliance Guidance",
+      "Ethical AI Use Guidelines",
+      "AI Policy Documentation",
+      "Vendor Risk Assessment",
+      "Governance Training",
+      "Ongoing Compliance Monitoring Guidance",
     ],
   },
   {
     number: "05",
-    title: "AI Citation Tracking",
-    desc: "We track when and how your brand gets cited or recommended in AI-generated answers, beyond traditional search rankings.",
+    title: "AI Vendor & Tool Evaluation",
+    desc: "Independent evaluation of AI vendors and tools, free from bias toward any specific platform.",
     ctaText: "Know Our Services",
     services: [
-      "Citation Tracking",
-      "Prompt Testing",
-      "Visibility Dashboards",
-      "Competitor Citation Tracking",
-      "Monthly Visibility Reports",
-      "Trend Analysis",
-      "Alert-Based Monitoring",
-      "Citation Attribution Analysis",
+      "AI Vendor Evaluation",
+      "Tool Comparison & Selection",
+      "Build vs. Buy Analysis",
+      "Vendor Negotiation Support",
+      "Proof-of-Concept Planning",
+      "Integration Feasibility Review",
+      "Total Cost of Ownership Analysis",
+      "Vendor Shortlist Development",
     ],
   },
   {
     number: "06",
-    title: "Continuous Model Adaptation",
-    desc: "Generative engines update constantly. We continuously adjust content and structure as these systems change how they select sources.",
+    title: "Ongoing AI Strategy Advisory",
+    desc: "Continued advisory as your AI initiatives progress and the broader AI landscape keeps shifting.",
     ctaText: "Know Our Services",
     services: [
-      "Algorithm Update Monitoring",
-      "Content Refresh Cycles",
-      "Structure Adaptation",
-      "Testing New Formats",
-      "Model Behavior Tracking",
-      "Strategy Adjustment Reviews",
-      "Quarterly GEO Audits",
-      "Emerging Model Coverage",
+      "Ongoing AI Advisory Sessions",
+      "Quarterly Strategy Reviews",
+      "AI Trend Monitoring & Briefings",
+      "Implementation Progress Tracking",
+      "Strategy Adjustment Support",
+      "Leadership AI Education Sessions",
+      "Long-Term Advisory Partnership",
+      "AI Initiative Accountability Support",
     ],
   },
 ];
@@ -154,123 +154,129 @@ const SERVICE_BREAKDOWN = [
 const ROADMAP_STEPS = [
   {
     number: "01",
-    title: "GEO Readiness Audit",
-    desc: "We assess how citable your current content actually is, and where the gaps are compared to what generative engines favor.",
+    title: "Business & AI Readiness Discovery",
+    desc: "We start by understanding your business, current data and technology infrastructure, and honestly assessing your genuine readiness for AI adoption.",
   },
   {
     number: "02",
-    title: "Content Restructuring",
-    desc: "We rework key pages into clear, well-sourced, citable formats that AI engines can pull from directly.",
+    title: "Use Case Identification & Prioritization",
+    desc: "We identify specific, realistic AI use cases relevant to your business, prioritizing based on feasibility and actual impact.",
   },
   {
     number: "03",
-    title: "Authority & Entity Building",
-    desc: "We strengthen entity signals and topic depth, which AI systems weigh heavily before recommending a source.",
+    title: "Roadmap & Governance Development",
+    desc: "We build a sequenced adoption roadmap alongside governance guidelines covering risk, privacy, and responsible use.",
   },
   {
     number: "04",
-    title: "Publishing & Rollout",
-    desc: "Restructured content gets published in priority order, focusing first on pages with the highest citation potential.",
+    title: "Vendor & Tool Evaluation Support",
+    desc: "We support evaluation of relevant AI vendors and tools, providing independent analysis suited to your specific needs.",
   },
   {
     number: "05",
-    title: "Cross-Platform Testing",
-    desc: "We test real prompts across multiple AI platforms to see where your content is being cited and where it's still missing.",
+    title: "Pilot Planning & Implementation Guidance",
+    desc: "We help plan initial pilot programs and provide guidance through early implementation stages.",
   },
   {
     number: "06",
-    title: "Track & Iterate",
-    desc: "We monitor citations across AI platforms and refine the approach as models and their sourcing behavior evolve.",
+    title: "Ongoing Strategy Advisory & Review",
+    desc: "We continue as an ongoing advisor, reviewing progress and adjusting strategy as implementation and the AI landscape evolve.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "GEO From Day One",
-    desc: "We combine AI integration with GEO from the start, so you're visible wherever customers search, including inside AI answers.",
+    title: "Strategy Built Around Real Use Cases, Not AI for Its Own Sake",
+    desc: "We identify genuine, specific applications for your business, rather than recommending AI adoption broadly just because it's currently the trend everyone's discussing.",
   },
   {
     number: "02",
-    title: "Answer-First Content",
-    desc: "Content is structured specifically to be the source AI systems pull from, not just content that ranks traditionally.",
+    title: "Honest Readiness Assessment, Including When AI Isn't the Answer Yet",
+    desc: "We give a genuinely honest assessment of your readiness, including telling you when data or process gaps need addressing before AI adoption would actually work well.",
   },
   {
     number: "03",
-    title: "Multi-Platform Coverage",
-    desc: "We optimize for visibility across multiple generative engines, not a single AI platform.",
+    title: "Roadmaps Sequenced for Realistic, Achievable Implementation",
+    desc: "We prioritize and sequence AI initiatives based on genuine feasibility and impact, rather than proposing an ambitious roadmap that's impressive on paper but unrealistic to actually execute.",
   },
   {
     number: "04",
-    title: "Entity-First Approach",
-    desc: "We make sure AI systems can clearly identify your business as a credible entity in your space, not just a page of text.",
+    title: "Governance Guidance That Takes Risk and Compliance Seriously",
+    desc: "We build governance and risk considerations into strategy from the start, rather than treating data privacy and ethical use as an afterthought addressed only after problems arise.",
   },
   {
     number: "05",
-    title: "Citation Tracking",
-    desc: "We measure actual citations and mentions in AI-generated answers, not just proxy metrics.",
+    title: "Vendor Evaluation Free From Bias Toward Any Specific Platform",
+    desc: "We evaluate AI vendors and tools independently, based on your specific needs, rather than steering you toward a particular platform due to a partnership or resale relationship.",
   },
   {
     number: "06",
-    title: "Honest Reporting",
-    desc: "No agency can guarantee citations in every AI answer, and we won't pretend otherwise — you get transparent, honest progress reports instead.",
+    title: "Ongoing Advisory as AI Capability and Your Business Both Evolve",
+    desc: "We stay engaged as implementation progresses and the AI landscape continues to shift, rather than delivering a static strategy document that quickly becomes outdated.",
   },
 ];
 
 const FAQS = [
   {
-    question: "What is GEO, and do I need it?",
+    question: "How much does AI strategy consulting cost in India?",
     answer:
-      "GEO helps AI tools recommend your business in search results, making it essential alongside traditional SEO as more searches happen through AI assistants.",
+      "Cost depends on scope, a focused readiness assessment costs less than a comprehensive strategy engagement including roadmap and governance development. We scope pricing after understanding your specific needs, rather than offering a flat rate upfront.",
   },
   {
-    question: "How is GEO different from traditional SEO?",
+    question: "How do we know if our business is actually ready for AI?",
     answer:
-      "Traditional SEO aims for a ranked position on a results page; GEO aims for your content being the actual source an AI system quotes or summarizes in its answer.",
+      "Readiness depends on factors like data quality, team capability, and process maturity, which we assess honestly during a readiness assessment. Being unprepared in some areas doesn't mean AI is off the table, it often just means addressing specific gaps first.",
   },
   {
-    question: "Which AI platforms does GEO target?",
+    question: "Can you help us figure out which AI use cases to prioritize?",
     answer:
-      "We optimize for visibility across multiple generative platforms, including ChatGPT, Perplexity, and Google's AI Overviews.",
+      "Yes, use case identification and prioritization is a core part of our service, helping you focus on opportunities with genuine feasibility and impact rather than pursuing every possibility at once.",
   },
   {
-    question: "Can you guarantee my business appears in AI answers?",
+    question: "Do you implement the AI solutions too, or just the strategy?",
     answer:
-      "No ethical agency can guarantee AI citations, but the right entity structuring and content restructuring meaningfully improve your odds of being referenced.",
+      "We provide strategy and roadmap guidance, and can support implementation directly or work alongside your team or another development partner, depending on what fits your situation best.",
   },
   {
-    question: "How long does GEO take to show results?",
+    question: "What does AI governance actually involve for a smaller business?",
     answer:
-      "Some citation improvements can appear within weeks of restructuring key content, though building broader topical authority takes longer.",
+      "For smaller businesses, governance typically means clear guidelines on data privacy, appropriate AI use, and risk awareness, scaled to your actual size rather than an enterprise-level framework that's disproportionate to your needs.",
+  },
+  {
+    question: "How do you help us choose between different AI vendors and tools?",
+    answer:
+      "We evaluate vendors and tools independently against your specific requirements, covering cost, capability, and integration feasibility, without bias toward any particular platform based on partnership arrangements.",
   },
 ];
 
-export default function GenerativeEngineOptimization() {
+export default function AiStrategyImplementationConsulting() {
   return (
     <ServiceDetailPage
       sectionLabel="AI Solutions"
-      label="GEO (Generative Engine Optimization)"
-      icon={Radar}
-      description="Our GEO service structures your content and website so AI engines like ChatGPT, Perplexity, and Google AI Overviews actually cite and recommend your business."
-      heroTitle="GEO (Generative Engine Optimization) in India"
-      heroDescription="Our GEO service structures your content and website so AI engines like ChatGPT, Perplexity, and Google AI Overviews actually cite and recommend your business."
-      capabilitiesHeading="Built for Businesses Ready to Be Cited by AI, Not Just Ranked"
+      label="AI Strategy & Implementation Consulting"
+      icon={Compass}
+      description="AI strategy consulting built around real business use cases, not AI for its own sake, engineered to identify where it actually helps."
+      heroTitle="Get an AI Roadmap Built Around What Actually Matters"
+      heroDescription="AI strategy consulting built around real business use cases, not AI for its own sake, engineered to identify where it actually helps."
+      heroCtaText="Get a Free AI Readiness Assessment"
+      capabilitiesHeading="Built for Businesses Overwhelmed by AI Hype"
       capabilities={CAPABILITIES}
-      serviceBreakdownHeading="Everything That Goes Into Our GEO Services"
+      serviceBreakdownHeading="Everything Between AI Curiosity and a Working Adoption Plan"
       serviceBreakdown={SERVICE_BREAKDOWN}
-      differentiatorsHeading="Why Businesses Trust Us to Build Their GEO Strategy"
+      differentiatorsHeading="Why Businesses Trust Us to Guide Their AI Strategy"
       differentiators={DIFFERENTIATORS}
-      roadmapCarouselHeading="How We Turn Your Content Into an AI-Cited Source"
+      roadmapCarouselHeading="How We Turn AI Interest Into a Real Implementation Plan"
       roadmapCarouselSteps={ROADMAP_STEPS}
       showStats={false}
-      localityHeading="Based in Prayagraj, Building GEO Visibility Worldwide"
-      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every GEO engagement, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, restructuring content sized to each business's actual topic depth and competition. For businesses looking to improve AI engine visibility beyond India, we deliver GEO remotely, testing citations across platforms and time zones to the same standard regardless of location. Whether you're a startup structuring your first content cluster or an enterprise protecting citations across multiple product lines, our approach starts with auditing how citable your content actually is today."
+      localityHeading="Based in Prayagraj, Advising on AI Strategy Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every AI strategy engagement, with the same honesty about readiness whether a client is nearby or across the world. We provide ai strategy consulting services for businesses across India, built around each business's specific operations and genuine AI readiness. For businesses looking for an ai transformation consulting agency beyond India, we support clients worldwide remotely, delivering the same ai implementation consulting company standard of work regardless of time zone. Whether you're a business in Prayagraj unsure where AI fits or an enterprise anywhere else needing AI governance guidelines, our approach starts with the same question: where would AI actually help your business, honestly."
       faqs={FAQS}
       showWhyChooseUs={false}
-      ctaHeading="Ready to Be the Source AI Actually Recommends?"
-      ctaText="Whether you need a GEO readiness audit, a full content restructuring project, or ongoing citation tracking across multiple AI platforms, the right approach depends on how citable your content is today. Let's talk through your content and scope what GEO would actually involve."
-      ctaPrimaryText="Talk to a GEO Specialist"
-      ctaSecondaryText="Get Your Free GEO Audit"
+      ctaHeading="Ready for an AI Strategy Built Around What Actually Matters?"
+      ctaText="Whether you're unsure where AI actually fits your business, under pressure to adopt it quickly, or need a genuine governance framework before scaling AI use, hype alone was never going to produce a workable plan. Let's talk through your business and scope what a real AI strategy would actually involve."
+      ctaPrimaryText="Talk to an AI Strategy Specialist"
+      ctaSecondaryText="Get Your Free AI Readiness Assessment"
     />
   );
 }

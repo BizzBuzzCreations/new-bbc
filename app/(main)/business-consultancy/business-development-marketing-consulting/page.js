@@ -10,9 +10,9 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "Business Development & Marketing Consulting | BizzBuzz Creations",
+  title: "Business Development Consulting | BizzBuzz Creations",
   description:
-    "Business development and marketing consulting in India — build pipeline and brand visibility together, not as disconnected efforts, by BizzBuzz Creations.",
+    "BizzBuzz Creations provides business development and marketing consulting for companies across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/business-consultancy/business-development-marketing-consulting",
@@ -219,29 +219,34 @@ const DIFFERENTIATORS = [
 
 const FAQS = [
   {
-    question: "What's the difference between business development and marketing consulting?",
+    question: "How much does business development and marketing consulting cost in India?",
     answer:
-      "Business development focuses on winning customers and partnerships directly, while marketing builds brand visibility and inbound demand — we align both so they reinforce each other.",
+      "Cost depends on scope, a focused strategy engagement costs less than ongoing fractional CMO-level advisory. We scope pricing after understanding your specific goals and current setup, rather than offering a flat rate upfront.",
   },
   {
-    question: "Do you also execute the marketing, or just plan it?",
+    question: "What is fractional CMO consulting, and do we need it?",
     answer:
-      "We stay involved through hands-on implementation, not just handing over a strategy and disappearing after the first meeting.",
+      "Fractional CMO consulting provides senior marketing leadership and strategic direction on a part-time or advisory basis, useful for businesses that need genuine marketing leadership but aren't ready for a full-time executive hire. We assess whether this fits your specific stage.",
+  },
+  {
+    question: "Can you help align our sales and marketing teams specifically?",
+    answer:
+      "Yes, sales and marketing alignment is a core part of our service, addressing the common disconnect between what marketing produces and what sales actually needs to close deals.",
+  },
+  {
+    question: "Do you replace our marketing team, or work alongside them?",
+    answer:
+      "We typically work alongside your existing team, providing strategic direction and alignment, though we can also provide fractional leadership if you don't currently have senior marketing direction in place.",
   },
   {
     question: "How is this different from hiring a marketing agency?",
     answer:
-      "We connect marketing directly to business development and sales outcomes, not just campaign metrics disconnected from actual pipeline.",
+      "A marketing agency typically executes specific marketing tactics, while our consulting focuses on strategy, alignment, and leadership direction, often working alongside an agency or internal team handling execution.",
   },
   {
-    question: "Can you help identify potential partnerships for our business?",
+    question: "How long does a typical consulting engagement last?",
     answer:
-      "Yes, we help identify and structure partnerships and channels that can meaningfully extend your reach and revenue.",
-  },
-  {
-    question: "How much does business development and marketing consulting cost?",
-    answer:
-      "It depends on the scope of the engagement — we offer flexible pricing based on your goals and current stage.",
+      "Timeline depends on scope, a focused alignment project can take a few weeks, while ongoing fractional CMO advisory typically continues over several months or longer as an ongoing relationship.",
   },
 ];
 

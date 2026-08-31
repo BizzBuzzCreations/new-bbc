@@ -10,9 +10,9 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "Operations & Process Consulting | BizzBuzz Creations",
+  title: "Operations & Process Consulting Firm | BizzBuzz Creations",
   description:
-    "Operations and process consulting in India — identify the bottlenecks in your day-to-day running and streamline them, by BizzBuzz Creations.",
+    "BizzBuzz Creations is an operations consulting firm improving business processes for companies across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/business-consultancy/operations-process-consulting",
@@ -219,29 +219,34 @@ const DIFFERENTIATORS = [
 
 const FAQS = [
   {
-    question: "How do you identify operational bottlenecks?",
+    question: "How much does operations consulting cost in India?",
     answer:
-      "We audit your day-to-day operations closely, looking at where time, resources, and processes are getting stuck or wasted.",
+      "Cost depends on scope, a focused process audit costs less than a comprehensive operations overhaul with implementation support. We scope pricing after understanding your specific processes and goals, rather than offering a flat rate upfront.",
   },
   {
-    question: "Will this require changing our existing tools or software?",
+    question: "How do you identify which processes actually need fixing?",
     answer:
-      "Not always — we assess whether your current tools are helping or hindering first, and recommend changes only where genuinely needed.",
+      "We conduct an operational audit and process mapping exercise, identifying genuine bottlenecks and inefficiencies through direct observation and data, rather than relying on assumptions about where problems exist.",
   },
   {
-    question: "How long does an operations consulting engagement take?",
+    question: "Will process changes disrupt our day-to-day operations?",
     answer:
-      "Initial audits typically take a few weeks, with implementation and review continuing over a longer period depending on the scope of changes.",
+      "We design implementation to minimize disruption, often rolling out changes incrementally rather than all at once, so your business can continue operating while improvements are put in place.",
   },
   {
-    question: "Is operations consulting only useful for larger companies?",
+    question: "Do you help implement changes, or just recommend them?",
     answer:
-      "No, even small businesses lose significant time and money to operational inefficiency — the audit and fixes scale to your size.",
+      "We help with both, providing implementation support and team alignment guidance, not just a report recommending changes you'd need to figure out how to execute alone.",
   },
   {
-    question: "How do you measure if operations have actually improved?",
+    question: "Can operations consulting help a small business, not just large companies?",
     answer:
-      "We set up clear operational KPIs upfront, so improvements are tracked and measurable, not just assumed.",
+      "Yes, we scope operations consulting to fit smaller businesses just as thoughtfully as larger organizations, since inefficient processes cost small businesses proportionally just as much.",
+  },
+  {
+    question: "How long does a typical operations consulting engagement take?",
+    answer:
+      "Timeline depends on scope, a focused process audit can take a few weeks, while a comprehensive operations overhaul with implementation support typically continues over several months.",
   },
 ];
 

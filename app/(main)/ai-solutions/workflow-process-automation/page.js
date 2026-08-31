@@ -1,18 +1,18 @@
 import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Workflow,
-  Rocket,
-  Building2,
-  Building,
-  ShoppingCart,
+  ArrowRightLeft,
+  Sparkles,
+  Puzzle,
+  Share2,
   Handshake,
-  RefreshCw,
+  Code2,
 } from "lucide-react";
 
 export const metadata = {
-  title: "Workflow & Process Automation | BizzBuzz Creations",
+  title: "AI Workflow Automation Services | BizzBuzz Creations",
   description:
-    "AI workflow and process automation in India — connect your tools so approvals, reports, follow-ups, and data entry run without manual chasing, by BizzBuzz Creations.",
+    "BizzBuzz Creations delivers AI workflow automation using tools like n8n and Zapier for businesses across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/ai-solutions/workflow-process-automation",
@@ -21,132 +21,132 @@ export const metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Rocket,
-    title: "Startups & Early-Stage Businesses",
-    desc: "Startups often run on manual follow-ups and spreadsheets that don't scale with growth. We build lightweight AI automation early, so founders spend time on decisions rather than repetitive coordination.",
+    icon: ArrowRightLeft,
+    title: "Businesses Manually Moving Data Between Different Tools",
+    desc: "Manually copying data between disconnected tools wastes real time and introduces errors. We provide ai workflow automation services that connect your tools so data flows automatically instead.",
   },
   {
-    icon: Building2,
-    title: "Small & Medium Businesses",
-    desc: "SMBs frequently have processes that grew organically and now cost real hours weekly. We build workflow automation sized for SMB budgets, targeting the specific bottlenecks costing you the most time.",
+    icon: Sparkles,
+    title: "Teams Needing AI-Powered Decision Steps in Their Workflows",
+    desc: "Simple if-this-then-that automation often can't handle decisions that require genuine judgment or interpretation. We build ai process automation agency workflows with AI-powered decision steps built in.",
   },
   {
-    icon: Building,
-    title: "Enterprises & Large Organizations",
-    desc: "Enterprises need automation that integrates cleanly across departments without disrupting existing systems. We design AI-powered automation for enterprise-scale workflows, built to work alongside your current tools.",
+    icon: Puzzle,
+    title: "Companies Needing n8n or Zapier Automation Built Properly",
+    desc: "Many businesses attempt automation themselves but hit limits or build fragile workflows that break easily. We work as an n8n automation agency and zapier automation services provider building automation that actually holds up.",
   },
   {
-    icon: ShoppingCart,
-    title: "Ecommerce & Retail Brands",
-    desc: "Ecommerce operations involve constant order, inventory, and follow-up handling that's ripe for automation. We automate order processing and customer follow-ups intelligently, not with rigid, brittle scripts.",
+    icon: Share2,
+    title: "Businesses Needing Cross-Platform Workflow Connections",
+    desc: "Tools that don't have a native integration require custom connection work most teams can't build themselves. We provide business workflow automation company support for exactly these cross-platform connection challenges.",
   },
   {
     icon: Handshake,
-    title: "Agencies & Operations Partners",
-    desc: "Agencies managing repetitive client deliverables need internal efficiency to stay profitable. We build AI-powered automation for agency operations, freeing billable time from admin work.",
+    title: "Agencies Needing Automation Built for Client Delivery",
+    desc: "Agencies delivering automation as part of client work need reliable build capacity beyond their own internal team. We support agencies needing ai powered workflow automation company capacity for client projects.",
   },
   {
-    icon: RefreshCw,
-    title: "Businesses Replacing Rigid, Broken Automations",
-    desc: "Businesses with brittle scripts that break on edge cases need a smarter approach. We rebuild automation using AI-powered decision-making, so it handles real-world variation, not just the happy path.",
+    icon: Code2,
+    title: "Companies Needing Custom Automation Beyond No-Code Tool Limits",
+    desc: "Some automation needs genuinely exceed what no-code tools like Zapier or n8n can handle out of the box. We provide custom automation development when no-code platforms hit their ceiling.",
   },
 ];
 
 const SERVICE_BREAKDOWN = [
   {
     number: "01",
-    title: "Tool & System Integration",
-    desc: "We connect your CRM, spreadsheets, and other tools so data flows automatically between systems instead of manual re-entry.",
+    title: "Workflow Automation Strategy & Audit",
+    desc: "A clear picture of which manual processes are actually worth automating first.",
     ctaText: "Know Our Services",
     services: [
-      "CRM Integration",
-      "Spreadsheet Integration",
-      "API-Based Integrations",
-      "Third-Party Tool Connectors",
-      "Zapier/Make Workflow Setup",
-      "Database Synchronization",
-      "Cross-Platform Data Sync",
-      "Integration Monitoring",
+      "Workflow Automation Audit",
+      "Manual Process Mapping",
+      "Automation Opportunity Identification",
+      "Tool Stack Assessment",
+      "Automation Strategy Development",
+      "ROI Analysis for Automation",
+      "Automation Roadmap Planning",
+      "Platform Selection Guidance",
     ],
   },
   {
     number: "02",
-    title: "Automated Reports & Approvals",
-    desc: "Recurring reports and approval workflows run automatically, freeing your team from chasing signatures and compiling data manually.",
+    title: "n8n Automation Development",
+    desc: "Complex, reliable workflows built on n8n, including self-hosted setups and custom nodes.",
     ctaText: "Know Our Services",
     services: [
-      "Automated Report Generation",
-      "Approval Workflow Automation",
-      "Digital Sign-Off Systems",
-      "Scheduled Reporting",
-      "Report Distribution Automation",
-      "Multi-Level Approval Chains",
-      "Report Template Design",
-      "Approval Audit Trails",
+      "n8n Workflow Development",
+      "Custom Node Development",
+      "Self-Hosted n8n Setup",
+      "n8n Workflow Migration",
+      "Complex Multi-Step Workflows",
+      "n8n Error Handling Setup",
+      "n8n Workflow Testing",
+      "n8n Maintenance & Support",
     ],
   },
   {
     number: "03",
-    title: "Automated Follow-Ups",
-    desc: "Leads and customers get timely automated follow-ups, so opportunities don't quietly slip through the cracks.",
+    title: "Zapier & No-Code Automation",
+    desc: "Zapier and other no-code automation built properly, with real testing and error handling.",
     ctaText: "Know Our Services",
     services: [
-      "Automated Follow-Up Sequences",
-      "Lead Nurture Automation",
-      "Reminder Automation",
-      "Missed-Response Triggers",
-      "Follow-Up Timing Optimization",
-      "Multi-Channel Follow-Up",
-      "Follow-Up Performance Tracking",
-      "Escalation Rules",
+      "Zapier Workflow Setup",
+      "Multi-Step Zap Development",
+      "No-Code Automation Consulting",
+      "Zapier Alternative Evaluation",
+      "No-Code Tool Integration",
+      "Zapier Workflow Optimization",
+      "No-Code Automation Training",
+      "Zapier Troubleshooting",
     ],
   },
   {
     number: "04",
-    title: "AI-Powered Workflow Design",
-    desc: "We use AI to identify where a workflow can be automated intelligently, not just scripted rigidly step by step.",
+    title: "AI-Powered Workflow Steps",
+    desc: "AI built directly into workflows for genuine decision-making, not just simple conditional logic.",
     ctaText: "Know Our Services",
     services: [
-      "AI Workflow Mapping",
-      "Intelligent Decision Rules",
-      "Exception Handling Logic",
-      "AI-Assisted Routing",
-      "Dynamic Workflow Adjustments",
-      "Workflow Simulation Testing",
-      "Edge Case Handling",
-      "Workflow Documentation",
+      "AI Decision Steps in Workflows",
+      "AI Data Extraction & Processing",
+      "AI-Powered Routing Logic",
+      "AI Content Generation in Workflows",
+      "AI Classification & Tagging",
+      "AI-Assisted Approval Workflows",
+      "AI Agent Integration Into Workflows",
+      "AI Workflow Testing",
     ],
   },
   {
     number: "05",
-    title: "Error Reduction & Consistency",
-    desc: "Automated processes cut down the human error and inconsistency that creeps into manual, repetitive work at volume.",
+    title: "Cross-Platform Integration",
+    desc: "Tools connected together even when no native integration exists between them.",
     ctaText: "Know Our Services",
     services: [
-      "Data Validation Rules",
-      "Duplicate Detection",
-      "Error Alerting",
-      "Consistency Audits",
-      "Exception Reporting",
-      "Quality Control Checks",
-      "Audit Trail Logging",
-      "Process Standardization",
+      "Cross-Platform Workflow Connections",
+      "CRM Integration",
+      "Marketing Tool Integration",
+      "Database & Spreadsheet Integration",
+      "API-Based Custom Integration",
+      "Webhook Configuration",
+      "Integration Testing",
+      "Integration Documentation",
     ],
   },
   {
     number: "06",
-    title: "Ongoing Monitoring & Refinement",
-    desc: "We monitor automated workflows after launch and refine them as your processes or volume changes over time.",
+    title: "Automation Monitoring & Support",
+    desc: "Ongoing monitoring that catches broken workflows before they cause real problems.",
     ctaText: "Know Our Services",
     services: [
-      "Workflow Performance Monitoring",
-      "Automation Health Checks",
-      "Process Refinement",
-      "Volume-Based Scaling",
-      "Automation Expansion Planning",
-      "Change Management Support",
-      "Quarterly Automation Reviews",
-      "Continuous Improvement Cycles",
+      "Automation Performance Monitoring",
+      "Error & Exception Alerts",
+      "Automation Uptime Monitoring",
+      "Monthly Automation Reports",
+      "Ongoing Workflow Refinement",
+      "Automation Scaling Support",
+      "Documentation & Handover",
+      "Continuous Support",
     ],
   },
 ];
@@ -154,94 +154,99 @@ const SERVICE_BREAKDOWN = [
 const ROADMAP_STEPS = [
   {
     number: "01",
-    title: "Understanding Your Workflow",
-    desc: "We learn where your team spends repetitive hours and where approvals, reports, or follow-ups tend to get stuck.",
+    title: "Tool Stack & Process Discovery",
+    desc: "We start by understanding your current tools and manual processes, identifying where automation would deliver the most value.",
   },
   {
     number: "02",
-    title: "Building the Right Automation",
-    desc: "A custom automation gets built around that exact gap, connecting the tools you already use, not replacing them.",
+    title: "Automation Opportunity Audit",
+    desc: "We assess which specific workflows are worth automating first, based on time saved and complexity.",
   },
   {
     number: "03",
-    title: "AI Decision Logic Design",
-    desc: "We design the AI-powered decision rules that let the automation handle real-world variation, not just a rigid script.",
+    title: "Workflow Design & Platform Selection",
+    desc: "We design the automation workflow and select the right platform, n8n, Zapier, or custom development, for your needs.",
   },
   {
     number: "04",
-    title: "Testing With Your Team",
-    desc: "Every automation is tested with the people who'll actually use it before it goes live, so it fits real workflows.",
+    title: "Development & AI Integration",
+    desc: "We build the automation, integrating AI decision steps where they genuinely add value.",
   },
   {
     number: "05",
-    title: "Live Pilot & Feedback",
-    desc: "The automation runs on a limited scope first, with close feedback so edge cases get caught before a full rollout.",
+    title: "Testing & Quality Assurance",
+    desc: "We test workflows against real scenarios and edge cases, including proper error handling, before full deployment.",
   },
   {
     number: "06",
-    title: "Launch, Refine & Monitor",
-    desc: "We stay involved after launch, refining automation based on real usage instead of leaving it running blind.",
+    title: "Monitoring & Ongoing Support",
+    desc: "We monitor automation performance and provide ongoing support as your tools and processes evolve.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "Practical, Not Generic",
-    desc: "We don't sell generic automation software off a shelf — every workflow is built for what your specific business actually needs.",
+    title: "Automation Built Around Your Actual Tool Stack, Not a Generic Template",
+    desc: "We design automation specifically around the tools you already use, rather than requiring you to adopt a new platform just to enable automation.",
   },
   {
     number: "02",
-    title: "Built Around Your Real Workflow",
-    desc: "We start by understanding how your business actually runs before building any automation.",
+    title: "n8n and Zapier Expertise for Both No-Code and Custom Needs",
+    desc: "We work fluently across both n8n and Zapier, recommending whichever fits your specific technical needs and budget, rather than pushing one platform regardless of fit.",
   },
   {
     number: "03",
-    title: "Connects Your Existing Tools",
-    desc: "Automation integrates with your CRM, spreadsheets, and existing tools instead of requiring you to switch systems.",
+    title: "AI Built Into Workflows, Not Just Simple If-This-Then-That Logic",
+    desc: "We integrate genuine AI decision-making into workflows where it adds real value, going beyond basic conditional automation that can't handle judgment calls.",
   },
   {
     number: "04",
-    title: "AI-Powered, Not Just Rigid Scripts",
-    desc: "We use AI to handle workflow decisions intelligently, not just rigid, brittle step-by-step scripts.",
+    title: "Custom Development When No-Code Tools Hit Their Limits",
+    desc: "When your automation needs genuinely exceed what no-code platforms can do, we build custom solutions rather than forcing a workaround that doesn't actually work reliably.",
   },
   {
     number: "05",
-    title: "Tested With Your Team",
-    desc: "Every automation is tested with your team before launch, not handed over as an untested demo.",
+    title: "Reliable Error Handling So Automation Doesn't Silently Fail",
+    desc: "We build proper error handling and alerts into every workflow, so failures get caught and addressed quickly rather than silently breaking without anyone noticing.",
   },
   {
     number: "06",
-    title: "Refined After Launch",
-    desc: "We don't disappear after handoff — every system is refined based on real usage, not left running blind.",
+    title: "Ongoing Monitoring That Catches Issues Before They Cost You Time",
+    desc: "We monitor automation performance continuously after launch, catching issues proactively rather than waiting for a broken workflow to cause a visible problem.",
   },
 ];
 
 const FAQS = [
   {
-    question: "What kinds of processes can you automate?",
+    question: "How much does workflow automation cost in India?",
     answer:
-      "Approvals, reports, follow-ups, and data entry between systems are common candidates — we assess your specific workflow to identify the best opportunities.",
+      "Cost depends on complexity, a simple Zapier workflow costs far less than a custom n8n system with AI decision steps and multiple integrations. We scope pricing after understanding your specific needs, rather than a flat rate upfront.",
   },
   {
-    question: "Will automation replace my team's jobs?",
+    question: "Should we use n8n or Zapier for our automation?",
     answer:
-      "No, automation removes repetitive manual tasks so your team can focus on decisions and work that genuinely needs judgment.",
+      "It depends on your specific needs, Zapier is often simpler for straightforward automation, while n8n offers more flexibility for complex, custom workflows, especially when self-hosted. We recommend based on your actual requirements.",
   },
   {
-    question: "Can automation integrate with the tools we already use?",
+    question: "Can you build automation that uses AI to make decisions?",
     answer:
-      "Yes, we connect automation to your existing CRM, spreadsheets, and other tools wherever integration is technically possible.",
+      "Yes, integrating AI-powered decision steps into workflows is a core part of our service, going beyond simple conditional logic to handle genuine judgment calls within the automation.",
   },
   {
-    question: "How is AI-powered automation different from basic scripts?",
+    question: "What happens if a workflow breaks or a tool changes its API?",
     answer:
-      "AI-powered automation can make more nuanced decisions within a workflow, rather than following only rigid, pre-defined rules that break on edge cases.",
+      "We build proper error handling and monitoring into every workflow, so issues get caught quickly, and we provide ongoing support to fix and adjust automation when connected tools change.",
   },
   {
-    question: "How long does it take to build a workflow automation?",
+    question: "Can you automate workflows across tools that don't have a native integration?",
     answer:
-      "Simple automations can be live within a couple of weeks; more complex, multi-system workflows take longer, depending on integrations needed.",
+      "Yes, custom integration work for tools without native connections is a core part of what we do, often using API-based custom development to bridge the gap.",
+  },
+  {
+    question: "Do you provide ongoing support after the automation is built?",
+    answer:
+      "Yes, ongoing monitoring and support is part of our standard approach, since automation needs continued attention as your tools, processes, and business needs evolve over time.",
   },
 ];
 
@@ -251,26 +256,27 @@ export default function WorkflowProcessAutomation() {
       sectionLabel="AI Solutions"
       label="Workflow & Process Automation"
       icon={Workflow}
-      description="Our AI workflow automation connects your tools together, so approvals, reports, follow-ups, and data entry run without anyone chasing them manually."
-      heroTitle="Workflow & Process Automation in India"
-      heroDescription="Our AI workflow automation connects your tools together, so approvals, reports, follow-ups, and data entry run without anyone chasing them manually."
-      capabilitiesHeading="Built for Businesses Ready to Stop Chasing Manual Work"
+      description="AI workflow automation built to connect your tools and eliminate manual steps, not just another app you have to manage."
+      heroTitle="Get Workflows That Run Themselves, Powered by AI"
+      heroDescription="AI workflow automation built to connect your tools and eliminate manual steps, not just another app you have to manage."
+      heroCtaText="Get a Free Workflow Automation Audit"
+      capabilitiesHeading="Built for Businesses Stuck Copy-Pasting Between Tools"
       capabilities={CAPABILITIES}
-      serviceBreakdownHeading="Everything That Goes Into Our Workflow Automation"
+      serviceBreakdownHeading="Everything Between a Manual Task and an Automated Workflow"
       serviceBreakdown={SERVICE_BREAKDOWN}
-      differentiatorsHeading="Why Businesses Trust Us to Automate Their Workflows"
+      differentiatorsHeading="Why Businesses Trust Us With Their Workflow Automation"
       differentiators={DIFFERENTIATORS}
-      roadmapCarouselHeading="How We Turn Manual Chasing Into Automated Workflows"
+      roadmapCarouselHeading="How We Connect Your Tools Into One Automated System"
       roadmapCarouselSteps={ROADMAP_STEPS}
       showStats={false}
       localityHeading="Based in Prayagraj, Automating Workflows Worldwide"
-      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we build every workflow automation project, with the same care whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, automating workflows sized to each business's actual volume and existing tools. For businesses looking to automate workflows beyond India, we deliver this work remotely, working across time zones to deliver the same reliability standard regardless of location. Whether you're a startup automating your first follow-up sequence or an enterprise automating cross-department approvals, our approach starts with mapping where your team actually loses time today."
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every automation project, with the same attention to reliability whether a client is nearby or across the world. We provide ai workflow automation services for businesses across India, built around each business's specific tool stack and processes. For businesses looking for an n8n automation agency beyond India, we support clients worldwide remotely, delivering the same zapier automation services standard of work regardless of time zone. Whether you're a business in Prayagraj manually moving data between tools or an agency anywhere else needing automation capacity for client delivery, our approach starts with the same question: where is your team currently wasting time on manual, repetitive steps."
       faqs={FAQS}
       showWhyChooseUs={false}
-      ctaHeading="Ready to Stop Chasing Approvals and Follow-Ups?"
-      ctaText="Whether you need a single repetitive process automated, a full AI-powered workflow rebuilt around intelligent decisions, or a replacement for brittle automation that keeps breaking, the right approach depends on how your process actually runs today. Let's talk through your workflow and scope what AI-powered automation would actually involve."
-      ctaPrimaryText="Talk to an Automation Specialist"
-      ctaSecondaryText="Get Your Free Automation Consultation"
+      ctaHeading="Ready for Workflows That Actually Run Themselves?"
+      ctaText="Whether you're manually moving data between tools, need AI-powered decision logic in your workflows, or have automation needs that exceed what no-code tools can handle, doing it manually was never going to scale. Let's audit your current processes and scope what real workflow automation would actually involve."
+      ctaPrimaryText="Talk to a Workflow Automation Specialist"
+      ctaSecondaryText="Get Your Free Workflow Automation Audit"
     />
   );
 }

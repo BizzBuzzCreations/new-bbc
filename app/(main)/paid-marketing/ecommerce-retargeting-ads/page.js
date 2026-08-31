@@ -10,9 +10,9 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "E-commerce & Retargeting Ads | BizzBuzz Creations",
+  title: "Ecommerce & Retargeting Ads Agency | BizzBuzz Creations",
   description:
-    "E-commerce and retargeting ad campaigns in India — product ads and retargeting for shoppers who almost bought, recovering lost sales, by BizzBuzz Creations.",
+    "BizzBuzz Creations is an e-commerce ads agency running retargeting and PPC campaigns for stores across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/paid-marketing/ecommerce-retargeting-ads",
@@ -219,29 +219,34 @@ const DIFFERENTIATORS = [
 
 const FAQS = [
   {
-    question: "What is retargeting and how does it help my online store?",
+    question: "How much does ecommerce ads management cost in India?",
     answer:
-      "Retargeting shows ads to people who already visited your store or viewed products but didn't buy, bringing them back to complete a purchase they were already considering.",
+      "Cost typically includes both our management fee and your ad spend budget, kept separate. We scope management pricing after understanding your product catalog, margins, and current performance, rather than offering a flat rate upfront.",
   },
   {
-    question: "Which platforms do you use for e-commerce ads?",
+    question: "Can you manage ads for a Shopify store specifically?",
     answer:
-      "We typically run product and retargeting campaigns across Google Shopping, Facebook, and Instagram, depending on where your customers are most active.",
+      "Yes, Shopify-specific ads management is a core part of our service, including pixel setup, product feed optimization, and app integrations built around how Shopify stores actually operate.",
   },
   {
-    question: "Can you help with cart abandonment specifically?",
+    question: "How does retargeting help recover abandoned carts?",
     answer:
-      "Yes, cart abandonment retargeting is one of our core e-commerce campaign types, aimed directly at recovering near-miss sales.",
+      "Dynamic retargeting shows shoppers the exact products they viewed or added to cart in a previous visit, reminding them of genuine interest rather than showing a generic ad. This typically recovers a meaningful share of otherwise lost sales.",
   },
   {
-    question: "Do you also target past customers for repeat purchases?",
+    question: "What's a good ROAS for ecommerce ad campaigns?",
     answer:
-      "Yes, we build campaigns specifically aimed at bringing past customers back for repeat purchases, not just acquiring new buyers.",
+      "A \"good\" ROAS varies significantly by product margin and business model, there's no universal benchmark that applies to every store. We help establish a realistic target based on your specific margins, then optimize campaigns toward that number.",
   },
   {
-    question: "How do you measure success for e-commerce campaigns?",
+    question: "Do you manage both Google Shopping and Meta ads together?",
     answer:
-      "We track return on ad spend and actual revenue generated, giving you a clear picture of real business impact from your ad budget.",
+      "Yes, we manage Shopping, search, and social ecommerce ads together as one coordinated strategy, since most stores benefit from combined visibility across how shoppers actually research and buy products.",
+  },
+  {
+    question: "How long before ecommerce ads start showing profitable results?",
+    answer:
+      "Initial data usually comes in within the first one to two weeks, though meaningful ROAS improvement typically takes four to six weeks as retargeting audiences build and campaigns gather enough data to optimize efficiently.",
   },
 ];
 

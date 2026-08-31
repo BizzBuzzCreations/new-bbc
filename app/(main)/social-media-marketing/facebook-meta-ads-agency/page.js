@@ -1,18 +1,18 @@
 import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Users,
-  Rocket,
-  Building2,
-  Building,
   ShoppingCart,
-  Handshake,
+  MapPin,
+  Building2,
   RefreshCw,
+  Rocket,
+  BarChart3,
 } from "lucide-react";
 
 export const metadata = {
   title: "Facebook & Meta Ads Agency | BizzBuzz Creations",
   description:
-    "Facebook and Meta ads agency in India — performance-focused campaigns backed by data, every rupee tracked and optimized for real leads, by BizzBuzz Creations.",
+    "BizzBuzz Creations is a Facebook & Meta ads agency running conversion-focused campaigns for brands across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/social-media-marketing/facebook-meta-ads-agency",
@@ -21,132 +21,132 @@ export const metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Rocket,
-    title: "Startups & Early-Stage Businesses",
-    desc: "Startups need to validate demand quickly without burning through a limited ad budget on guesswork. We build Facebook and Meta ad campaigns focused on early, measurable signal, so startups learn what converts before scaling spend.",
+    icon: ShoppingCart,
+    title: "Ecommerce Brands Needing Meta Ads for Sales",
+    desc: "Ecommerce brands often run ads that generate clicks without generating sales, wasting budget on the wrong audience or offer. We build meta ads agency for ecommerce campaigns tracked specifically on ROAS, not vanity engagement metrics.",
+  },
+  {
+    icon: MapPin,
+    title: "Local Businesses Needing Nearby Customer Reach",
+    desc: "Local businesses need ads that reach people actually near them, not a broad, wasteful audience spread across an entire city or region. We build facebook advertising agency near me campaigns using precise local targeting built for foot traffic and local enquiries.",
   },
   {
     icon: Building2,
-    title: "Small & Medium Businesses",
-    desc: "SMBs often run ads without a clear system for tracking what's actually converting versus what's just spending. We manage Meta ads sized for SMB budgets, focused on cost per lead, not vanity reach numbers.",
-  },
-  {
-    icon: Building,
-    title: "Enterprises & Large Organizations",
-    desc: "Enterprises need ad accounts managed consistently across multiple campaigns, products, and markets at once. We run Meta ads at enterprise scale, maintaining consistent tracking and reporting across every account.",
-  },
-  {
-    icon: ShoppingCart,
-    title: "Ecommerce & Retail Brands",
-    desc: "Ecommerce brands need ads that drive actual purchases, not just clicks to a product page. We build conversion-focused Facebook and Instagram ad campaigns tied directly to sales and return on ad spend.",
-  },
-  {
-    icon: Handshake,
-    title: "Agencies Needing a Meta Ads Fulfillment Partner",
-    desc: "Agencies managing client ad accounts need a specialist who can execute campaigns reliably in the background. We work as a white-label Meta ads partner, handling setup and optimization agencies can present as their own.",
+    title: "B2B & Service Businesses Needing Lead Generation Ads",
+    desc: "Service businesses need qualified leads, not just form fills from people who were never going to buy. We run facebook ads for lead generation campaigns with qualification built into the funnel, not just the ad itself.",
   },
   {
     icon: RefreshCw,
-    title: "Businesses With Underperforming Ad Accounts",
-    desc: "Businesses running ads with rising costs and declining returns need a structural fix, not just a bigger budget. We audit underperforming ad accounts and rebuild targeting and creative around what's actually converting.",
+    title: "Businesses With Ad Spend That Isn't Converting",
+    desc: "Many businesses are already running Facebook ads, just not profitably, often due to poor targeting or weak creative. We audit and rebuild underperforming accounts as part of our meta ads audit services, fixing what's actually broken.",
+  },
+  {
+    icon: Rocket,
+    title: "Startups Running Their First Ever Ad Campaigns",
+    desc: "First-time advertisers need guidance on budget, targeting, and creative without wasting early spend on trial and error. We provide facebook ads management services structured to avoid the common early mistakes that burn through a startup's first ad budget.",
+  },
+  {
+    icon: BarChart3,
+    title: "Businesses Needing Ongoing Ad Management & Optimization",
+    desc: "Ad accounts need continuous attention as performance shifts, audiences fatigue, and costs change over time. We provide ongoing meta ads management agency support, not a set-and-forget campaign left unmonitored after launch.",
   },
 ];
 
 const SERVICE_BREAKDOWN = [
   {
     number: "01",
-    title: "Audience Targeting & Segmentation",
-    desc: "Precise audience segments built from real customer data, not broad guesses, so ad spend reaches people likely to convert.",
+    title: "Facebook & Instagram Ads Strategy",
+    desc: "A clear campaign strategy built around your specific business goals, not a generic boosted-post approach.",
     ctaText: "Know Our Services",
     services: [
-      "Audience Research & Segmentation",
-      "Lookalike Audience Building",
-      "Custom Audience Setup",
-      "Interest & Behavior Targeting",
-      "Retargeting Audience Setup",
-      "Audience Exclusion Rules",
-      "Demographic Targeting",
-      "Audience Performance Analysis",
+      "Meta Ads Strategy Development",
+      "Campaign Objective Planning",
+      "Audience Research",
+      "Competitor Ad Analysis",
+      "Budget Planning",
+      "Funnel Strategy Design",
+      "Platform Selection (FB/IG)",
+      "Ad Account Structure Setup",
     ],
   },
   {
     number: "02",
-    title: "Campaign Setup & Ad Budget Management",
-    desc: "Budgets allocated and adjusted based on performance data, moving spend toward what's actually converting.",
+    title: "Campaign Setup & Creative Development",
+    desc: "Campaigns built and launched properly from day one, with creative tested rather than guessed at.",
     ctaText: "Know Our Services",
     services: [
-      "Campaign Structure Planning",
-      "Budget Allocation Strategy",
-      "Bid Strategy Management",
-      "Ad Set Configuration",
-      "Daily Budget Monitoring",
-      "Spend Pacing Management",
-      "Campaign Objective Selection",
-      "Budget Scaling Rules",
+      "Campaign Setup & Launch",
+      "Ad Creative Design",
+      "Ad Copywriting",
+      "Video Ad Production",
+      "Carousel Ad Design",
+      "A/B Ad Testing",
+      "Landing Page Alignment",
+      "Pixel & Conversion Tracking Setup",
     ],
   },
   {
     number: "03",
-    title: "Lead & Conversion Campaigns",
-    desc: "Campaigns structured around lead generation and conversions, not just reach or engagement metrics that don't pay the bills.",
+    title: "Audience Targeting & Retargeting",
+    desc: "Precise audience targeting that reaches the people most likely to actually convert, not a broad, wasteful net.",
     ctaText: "Know Our Services",
     services: [
-      "Lead Generation Campaigns",
-      "Conversion Campaign Setup",
-      "Landing Page Alignment",
-      "Pixel & Conversion Tracking Setup",
-      "Form Ad Optimization",
-      "Sales Campaign Structuring",
-      "Funnel-Stage Campaign Mapping",
-      "Conversion Rate Optimization",
+      "Custom Audience Targeting",
+      "Lookalike Audience Creation",
+      "Retargeting Campaigns",
+      "Interest & Behavior Targeting",
+      "Audience Segmentation",
+      "Exclusion Audience Setup",
+      "Cross-Platform Audience Sync",
+      "Audience Performance Analysis",
     ],
   },
   {
     number: "04",
-    title: "Retargeting & Funnel Ads",
-    desc: "Retargeting campaigns that bring back visitors who didn't convert the first time, capturing demand you'd otherwise lose.",
+    title: "Meta Ads for Ecommerce",
+    desc: "Campaigns built around real product sales, tracked on ROAS rather than reach or impressions alone.",
     ctaText: "Know Our Services",
     services: [
-      "Website Retargeting Campaigns",
-      "Cart Abandonment Retargeting",
-      "Engagement Retargeting",
-      "Video View Retargeting",
-      "Multi-Stage Funnel Ads",
-      "Dynamic Product Retargeting",
-      "Cross-Sell & Upsell Ads",
-      "Retargeting Sequence Planning",
+      "Ecommerce Ad Campaigns",
+      "Product Catalog Ads",
+      "Dynamic Retargeting Ads",
+      "Shopping Ads Setup",
+      "Abandoned Cart Ads",
+      "Sales & Promotion Campaigns",
+      "Collection Ads",
+      "Ecommerce Conversion Tracking",
     ],
   },
   {
     number: "05",
-    title: "Creative Testing & Optimization",
-    desc: "Multiple ad creatives and copy variations tested continuously, doubling down on what's proven to perform.",
+    title: "Lead Generation Campaigns",
+    desc: "Lead campaigns built with qualification in mind, so you receive genuine prospects, not just cheap form fills.",
     ctaText: "Know Our Services",
     services: [
-      "Ad Creative Development",
-      "Ad Copywriting",
-      "A/B Creative Testing",
-      "Creative Refresh Cycles",
-      "Video Ad Production Support",
-      "Static & Carousel Ad Design",
-      "Hook & Headline Testing",
-      "Creative Performance Analysis",
+      "Lead Generation Ad Campaigns",
+      "Lead Form Ads",
+      "B2B Lead Campaigns",
+      "Local Lead Generation Ads",
+      "Lead Qualification Setup",
+      "CRM Integration for Leads",
+      "Cost-Per-Lead Optimization",
+      "Follow-Up Funnel Design",
     ],
   },
   {
     number: "06",
-    title: "Transparent Performance Reporting",
-    desc: "Every rupee spent tracked and reported clearly, showing cost per lead and return on ad spend, not vague summaries.",
+    title: "Ads Analytics, ROAS & Optimization",
+    desc: "Continuous monitoring and optimization, since ad performance shifts constantly and needs ongoing attention to stay efficient.",
     ctaText: "Know Our Services",
     services: [
-      "Cost Per Lead Reporting",
-      "Return on Ad Spend Tracking",
-      "Campaign Performance Dashboards",
-      "Weekly Performance Summaries",
-      "Attribution Reporting",
-      "Spend vs. Results Breakdown",
-      "Competitor Benchmarking",
-      "Monthly Strategy Reviews",
+      "ROAS Tracking & Reporting",
+      "Conversion Rate Optimization",
+      "Budget Reallocation",
+      "Ad Fatigue Monitoring",
+      "Performance Reporting",
+      "Monthly Ad Audits",
+      "Scaling Winning Campaigns",
+      "Pausing Underperforming Ads",
     ],
   },
 ];
@@ -154,94 +154,99 @@ const SERVICE_BREAKDOWN = [
 const ROADMAP_STEPS = [
   {
     number: "01",
-    title: "Goals & Audience Discovery",
-    desc: "We understand your target customer and business goals before setting a single campaign live.",
+    title: "Business & Ad Account Discovery",
+    desc: "We start by understanding your business goals and auditing any existing ad account, identifying what's working, what isn't, and where budget is currently being wasted.",
   },
   {
     number: "02",
-    title: "Tracking & Pixel Setup",
-    desc: "We set up conversion tracking and pixels correctly upfront, so every result reported actually reflects reality.",
+    title: "Audience & Funnel Strategy",
+    desc: "We define target audiences and build a funnel strategy, whether the goal is sales, leads, or local foot traffic, before any creative development begins.",
   },
   {
     number: "03",
-    title: "Campaign & Creative Setup",
-    desc: "Audiences, budgets, and ad creatives are built around lead generation and conversions, not vanity metrics.",
+    title: "Creative Development & Campaign Setup",
+    desc: "We build ad creative, copy, and campaign structure according to the strategy, setting up proper tracking so results can be measured accurately from day one.",
   },
   {
     number: "04",
-    title: "Launch & Real-Time Monitoring",
-    desc: "Campaigns launch with close monitoring in the first days, so underperforming ads get caught and fixed quickly.",
+    title: "Launch & Initial Testing",
+    desc: "Campaigns launch with A/B testing built in, comparing creative and targeting variations to identify what's actually resonating with your audience early.",
   },
   {
     number: "05",
-    title: "Optimize & Scale",
-    desc: "We double down on what's converting and cut what isn't, scaling spend toward your best-performing campaigns.",
+    title: "Optimization & Scaling",
+    desc: "We optimize based on real performance data, reallocating budget toward what's working and scaling the campaigns delivering the strongest return.",
   },
   {
     number: "06",
     title: "Ongoing Reporting & Refinement",
-    desc: "We report on performance regularly and keep refining targeting and creative as the account matures.",
+    desc: "We provide regular reporting on ROAS and performance, continuing to refine targeting and creative as the account matures and audiences shift.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "Performance-Focused Campaigns",
-    desc: "Every campaign is run and measured against real leads, not just clicks and impressions that look good but don't convert.",
+    title: "Meta Ads Built Around ROAS, Not Just Reach or Clicks",
+    desc: "Every campaign is tracked and judged on actual return, sales or qualified leads generated, rather than vanity metrics like reach or clicks that don't reflect whether the ad spend is actually working for your business.",
   },
   {
     number: "02",
-    title: "Data-Backed Targeting",
-    desc: "Audience segments are built from real data and performance signals, not broad guesses about who might be interested.",
+    title: "Ecommerce Ad Expertise for Campaigns That Actually Sell",
+    desc: "As a meta ads agency for ecommerce, we understand catalog ads, dynamic retargeting, and abandoned cart campaigns in detail, going beyond generic boosted posts to campaigns built specifically for online sales.",
   },
   {
     number: "03",
-    title: "Full Transparency on Spend",
-    desc: "You see exactly where every rupee goes and what it's returning, not a black-box monthly invoice with no real breakdown.",
+    title: "Lead Generation Campaigns That Deliver Qualified Leads",
+    desc: "We build qualification directly into lead generation funnels, so you receive genuine prospects rather than cheap, low-intent form fills that waste your sales team's time following up on unqualified leads.",
   },
   {
     number: "04",
-    title: "Continuous Creative Testing",
-    desc: "We keep testing ad creatives and copy, so campaigns improve over time instead of stagnating on the same tired assets.",
+    title: "Constant Optimization Instead of Set-and-Forget Campaigns",
+    desc: "We monitor performance continuously, adjusting targeting, budget, and creative as ad fatigue sets in or costs shift, rather than launching a campaign and leaving it unmonitored until results decline.",
   },
   {
     number: "05",
-    title: "Retargeting Built In From Day One",
-    desc: "We capture visitors who didn't convert the first time, recovering demand competitors typically leave on the table.",
+    title: "Creative That's Tested, Not Just Published",
+    desc: "We A/B test ad creative and copy before scaling budget behind a single version, since even small creative changes can significantly affect cost-per-result across a campaign.",
   },
   {
     number: "06",
-    title: "Tracking Set Up Correctly, Not Assumed",
-    desc: "We verify pixel and conversion tracking before scaling spend, so optimization decisions are based on accurate data.",
+    title: "Transparent Reporting on Real Spend and Real Results",
+    desc: "You see exactly what's being spent and what it's generating, ROAS, cost-per-lead, and conversion data, rather than a vague summary that doesn't clarify whether your ad budget is actually paying off.",
   },
 ];
 
 const FAQS = [
   {
-    question: "What's the difference between Facebook ads and Meta ads?",
+    question: "How much does Facebook and Meta ads management cost in India?",
     answer:
-      "Meta ads is the umbrella term covering ads across Facebook and Instagram managed through Meta's ad platform — we run both as part of a coordinated strategy.",
+      "Cost typically includes both our management fee and your ad spend budget, which are separate. We scope management pricing after understanding your goals, industry, and target audience, since campaign complexity varies significantly between a simple local campaign and a full ecommerce funnel.",
   },
   {
-    question: "How much should I budget for Facebook and Meta ads?",
+    question: "What's a good ROAS for Facebook and Instagram ads?",
     answer:
-      "Budget depends on your goals and industry — we'll recommend a realistic starting budget and optimize allocation based on what's converting.",
+      "A \"good\" ROAS varies significantly by industry, margin, and business model, there's no universal benchmark that applies to every business. We help establish a realistic target based on your specific margins and goals, then optimize campaigns toward that number over time.",
   },
   {
-    question: "How do you measure success for ad campaigns?",
+    question: "Can you manage ads for ecommerce and lead generation both?",
     answer:
-      "We track cost per lead, conversion rate, and return on ad spend — the metrics that actually reflect business impact, not just reach.",
+      "Yes, we run both ecommerce-focused campaigns tracked on ROAS and lead generation campaigns tracked on cost-per-qualified-lead, since the strategy and creative approach differ significantly between the two. We scope each based on your specific business model and goals.",
   },
   {
-    question: "How quickly will I see results from Facebook ads?",
+    question: "How long before Facebook ads start showing results?",
     answer:
-      "Initial data typically comes in within the first one to two weeks, with meaningful optimization improving results over the following month.",
+      "Initial data usually comes in within the first one to two weeks, though meaningful optimization typically takes four to six weeks as the algorithm gathers enough data to target effectively. We set realistic expectations during onboarding based on your budget and industry.",
   },
   {
-    question: "Do you handle ad creative and copywriting too?",
+    question: "Do you handle ad creative, or do we need to provide it?",
     answer:
-      "Yes, we create and continuously test ad creatives and copy variations as part of the campaign management service.",
+      "We handle ad creative development as part of our service, including design, copywriting, and video where needed, though we're happy to incorporate brand assets or existing content you already have rather than starting entirely from scratch.",
+  },
+  {
+    question: "Can you fix an underperforming Facebook ads account we already have?",
+    answer:
+      "Yes, auditing and rebuilding underperforming accounts is a core part of what we do. We review targeting, creative, tracking setup, and account structure to identify what's actually causing poor performance before making changes, rather than rebuilding everything unnecessarily.",
   },
 ];
 
@@ -251,25 +256,25 @@ export default function FacebookMetaAdsAgency() {
       sectionLabel="Social Media Marketing"
       label="Facebook & Meta Ads Agency"
       icon={Users}
-      description="Performance-focused Facebook and Meta ad campaigns backed by data, every rupee tracked and optimized for real leads, not just clicks and impressions."
-      heroTitle="Get Meta Ads That Are Tracked for Leads, Not Just Clicks"
-      heroDescription="Performance-focused Facebook and Meta ad campaigns backed by data, every rupee tracked and optimized for real leads, not just clicks and impressions."
+      description="Facebook and Instagram ad campaigns built around ROAS, not just reach, engineered to turn ad spend into real leads and sales."
+      heroTitle="Get Leads and Sales From Meta Ads That Actually Convert"
+      heroDescription="Facebook and Instagram ad campaigns built around ROAS, not just reach, engineered to turn ad spend into real leads and sales."
       heroCtaText="Get a Free Meta Ads Audit"
-      capabilitiesHeading="Built for Businesses Ready for Ads That Actually Convert"
+      capabilitiesHeading="Built for Businesses Tired of Ad Spend That Doesn't Convert"
       capabilities={CAPABILITIES}
-      serviceBreakdownHeading="Everything That Goes Into Our Facebook & Meta Ads Management"
+      serviceBreakdownHeading="Everything Between a Meta Ad and a Paying Customer"
       serviceBreakdown={SERVICE_BREAKDOWN}
-      differentiatorsHeading="What Makes Our Facebook & Meta Ads Different"
+      differentiatorsHeading="Why Businesses Trust Us With Their Meta Ad Spend"
       differentiators={DIFFERENTIATORS}
-      roadmapCarouselHeading="Our Facebook & Meta Ads Process"
+      roadmapCarouselHeading="How We Turn Ad Budget Into Actual Leads"
       roadmapCarouselSteps={ROADMAP_STEPS}
       showStats={false}
-      localityHeading="Based in Prayagraj, Running Meta Ads Nationally"
-      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we manage every Meta ads account, with the same discipline on tracking and spend whether a client is nearby or across the country. We run Facebook and Meta ad campaigns for startups, SMBs, and enterprises across India, sizing budgets and targeting to each business's actual sales process. Whether you're a startup validating your first campaign in Prayagraj or an ecommerce brand anywhere else scaling ad spend, our approach starts with the same question: what does a converted lead actually look like for you."
+      localityHeading="Based in Prayagraj, Running Meta Ads Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every ad account, with the same attention to ROAS whether a client is nearby or across the world. We work as a facebook ads agency for businesses across India, providing meta ads management agency support built around each business's specific goals and margins. For businesses looking to hire a facebook ads expert beyond India, we support clients worldwide remotely, delivering the same meta ads agency for ecommerce standard of work regardless of time zone. Whether you're a local business in Prayagraj or an ecommerce brand anywhere else scaling ad spend, our approach starts with the same question: what does your specific audience actually respond to."
       faqs={FAQS}
       showWhyChooseUs={false}
-      ctaHeading="Ready for Meta Ads That Actually Convert?"
-      ctaText="Whether your current ads are generating clicks without real leads, you're starting from scratch, or costs have crept up without a clear reason, more budget alone was never going to fix a targeting or tracking problem. Let's audit your account and scope what real Meta ads management would actually involve."
+      ctaHeading="Ready for Meta Ads That Actually Pay Off?"
+      ctaText="Whether you're launching your first Facebook ad campaign, trying to fix an account that isn't converting, or scaling an ecommerce store's ad spend, boosted posts alone were never going to deliver real ROAS. Let's audit your current setup and scope what a properly managed Meta ads account would actually involve."
       ctaPrimaryText="Talk to a Meta Ads Specialist"
       ctaSecondaryText="Get Your Free Meta Ads Audit"
     />

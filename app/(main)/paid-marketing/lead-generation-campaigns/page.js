@@ -10,9 +10,9 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "Lead Generation Campaigns | BizzBuzz Creations",
+  title: "Lead Generation Agency | BizzBuzz Creations",
   description:
-    "Lead generation campaigns in India — smart targeting, landing pages, and offers that convert visitors into genuine, sales-ready leads, by BizzBuzz Creations.",
+    "BizzBuzz Creations is a lead generation agency delivering qualified leads for businesses across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/paid-marketing/lead-generation-campaigns",
@@ -219,29 +219,34 @@ const DIFFERENTIATORS = [
 
 const FAQS = [
   {
-    question: "What counts as a 'good' lead in a lead generation campaign?",
+    question: "How much does lead generation cost in India?",
     answer:
-      "A good lead is someone genuinely likely to become a customer — we define this together with you before building any campaign so quality, not just volume, is the target.",
+      "Cost depends on channel mix and lead volume needed, PPC-based lead generation costs differently than outreach-heavy B2B campaigns. We scope pricing after understanding your specific goals and target audience, rather than offering a flat rate upfront.",
   },
   {
-    question: "Do you build the landing pages too?",
+    question: "What's the difference between leads and qualified leads?",
     answer:
-      "Yes, we design landing pages specifically built to convert visitors into leads, with offers and forms tailored to your campaign.",
+      "A lead is simply someone who's shown some interest, while a qualified lead has been assessed as a genuine fit based on criteria like budget, need, and decision-making authority. We build qualification into every campaign so you're not just measuring raw lead volume.",
   },
   {
-    question: "Which platforms do you use for lead generation?",
+    question: "Can you generate B2B leads through outreach, not just ads?",
     answer:
-      "We typically use Google and Meta ads, choosing the platform mix based on where your ideal customers actually spend time.",
+      "Yes, direct outreach through LinkedIn and email is a core part of our B2B lead generation approach, often producing higher-quality conversations than ads alone, especially for higher-value, longer-consideration purchases.",
   },
   {
-    question: "How do you track lead quality, not just quantity?",
+    question: "How long before we start seeing qualified leads?",
     answer:
-      "We work with you to define what a sales-ready lead looks like, then track conversion from lead to customer, not just form fills.",
+      "Timeline depends on the channel, PPC campaigns typically generate initial leads within a few weeks, while outreach-based B2B lead generation often takes longer to build momentum as relationships and trust develop.",
   },
   {
-    question: "How much does a lead generation campaign cost?",
+    question: "Do you handle lead nurturing, or just lead capture?",
     answer:
-      "Costs depend on your industry, targeting, and ad spend — we'll recommend a realistic budget and optimize it toward your cost-per-lead target.",
+      "We handle both, building nurturing sequences and follow-up funnels alongside lead capture, since a captured lead that goes cold without follow-up rarely converts into an actual sale.",
+  },
+  {
+    question: "Can lead generation work for a small business with a limited budget?",
+    answer:
+      "Yes, we scope lead generation strategy to fit realistic budgets, often starting with the most efficient channel for your specific business rather than spreading a limited budget across too many channels at once.",
   },
 ];
 

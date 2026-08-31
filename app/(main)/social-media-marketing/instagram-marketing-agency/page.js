@@ -1,18 +1,18 @@
 import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Camera,
-  Rocket,
-  Building2,
-  Building,
+  TrendingUp,
   ShoppingCart,
-  Handshake,
-  RefreshCw,
+  User,
+  MapPin,
+  Target,
+  Film,
 } from "lucide-react";
 
 export const metadata = {
   title: "Instagram Marketing Agency | BizzBuzz Creations",
   description:
-    "Instagram marketing agency in India — reels, story strategy, and targeted ads that turn followers into genuine paying customers, by BizzBuzz Creations.",
+    "BizzBuzz Creations is an Instagram marketing agency helping brands grow followers and sales across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/social-media-marketing/instagram-marketing-agency",
@@ -21,132 +21,132 @@ export const metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Rocket,
-    title: "Startups & Early-Stage Businesses",
-    desc: "Startups need to build an Instagram presence from zero without years of organic growth to rely on. We combine reels-first content with targeted ads early, giving startups a faster path to a real, engaged following.",
-  },
-  {
-    icon: Building2,
-    title: "Small & Medium Businesses",
-    desc: "SMBs often post inconsistently on Instagram without a real content or ad strategy behind it. We build Instagram marketing sized for SMB budgets, focused on genuine engagement, not just posting for its own sake.",
-  },
-  {
-    icon: Building,
-    title: "Enterprises & Multi-Brand Companies",
-    desc: "Enterprises need Instagram content and ad management coordinated across multiple brands or product lines. We run Instagram marketing at enterprise scale, keeping creative quality and targeting consistent across accounts.",
+    icon: TrendingUp,
+    title: "Brands Wanting Real Followers, Not Just Numbers",
+    desc: "A large follower count means little if it doesn't translate into engagement or sales. We provide instagram marketing services focused on attracting followers who actually engage with and buy from your brand, not just inflate a vanity metric.",
   },
   {
     icon: ShoppingCart,
-    title: "Ecommerce & Retail Brands",
-    desc: "Ecommerce brands need Instagram to actually drive purchases, not just likes on product photos. We build shoppable content and targeted ad campaigns that turn Instagram traffic into real store revenue.",
+    title: "Ecommerce & D2C Brands Selling Through Instagram",
+    desc: "Instagram is often a primary sales channel for D2C brands, making content and shopping features critical to revenue. We build instagram marketing agency strategies around product discovery and conversion, not just aesthetic posting.",
   },
   {
-    icon: Handshake,
-    title: "Agencies Needing an Instagram Fulfillment Partner",
-    desc: "Agencies managing client Instagram accounts need reliable production and ad management support. We work as a white-label Instagram partner, handling content and ads agencies can present as their own.",
+    icon: User,
+    title: "Personal Brands & Influencers Growing an Audience",
+    desc: "Personal brands need consistent, authentic content to grow, but rarely have time to produce it themselves daily. We support instagram growth agency work for personal brands, keeping their voice intact while handling the consistent output growth requires.",
   },
   {
-    icon: RefreshCw,
-    title: "Brands With Stalled Instagram Growth",
-    desc: "Brands whose Instagram growth has plateaued despite regular posting need a structural fix, not just more content volume. We audit stalled accounts and rebuild the content and targeting strategy around what's actually working.",
+    icon: MapPin,
+    title: "Local Businesses Needing Local Instagram Visibility",
+    desc: "Local businesses need Instagram content that reaches people nearby, not just a broad, undifferentiated audience. We build location-aware content and hashtag strategy that helps local businesses show up for the audience that can actually visit or buy.",
+  },
+  {
+    icon: Target,
+    title: "Businesses Needing Instagram Ads Management",
+    desc: "Organic reach alone often isn't enough to grow quickly, making paid promotion necessary for faster results. We provide instagram ads agency services built around real conversion goals, not just boosted posts with no clear objective.",
+  },
+  {
+    icon: Film,
+    title: "Brands Needing Consistent Reels & Content Production",
+    desc: "Instagram increasingly favors accounts that post Reels consistently, which most brands struggle to sustain internally. We provide instagram content marketing agency support with a steady production pipeline built to match how the platform actually rewards consistency.",
   },
 ];
 
 const SERVICE_BREAKDOWN = [
   {
     number: "01",
-    title: "Reels & Story Strategy",
-    desc: "Reels and stories planned and produced to stop the scroll, matched to what's actually working on Instagram right now.",
+    title: "Instagram Strategy & Growth Planning",
+    desc: "A clear growth strategy built around your specific audience and goals, not generic advice copied across every account.",
     ctaText: "Know Our Services",
     services: [
-      "Reels Strategy Development",
-      "Story Content Planning",
-      "Reel Scripting & Concepting",
-      "Trend-Aligned Reel Ideas",
-      "Story Highlight Strategy",
-      "Interactive Story Features",
-      "Reels Distribution Planning",
-      "Reels Performance Tracking",
+      "Instagram Growth Strategy",
+      "Audience Research",
+      "Content Pillar Planning",
+      "Hashtag Strategy",
+      "Competitor Analysis",
+      "Bio & Profile Optimization",
+      "Posting Schedule Planning",
+      "Growth Goal Setting",
     ],
   },
   {
     number: "02",
-    title: "Scroll-Stopping Content Creation",
-    desc: "Feed posts, carousels, and visuals created to look native to Instagram, not like recycled content from another platform.",
+    title: "Instagram Content Creation",
+    desc: "Consistent, brand-aligned content across feed posts, stories, and carousels, built to match how your audience actually browses.",
     ctaText: "Know Our Services",
     services: [
+      "Instagram Content Creation",
       "Feed Post Design",
-      "Carousel Content Creation",
-      "Instagram-Native Visual Design",
+      "Story Content Creation",
       "Caption Writing",
-      "Content Batching",
-      "Brand-Aligned Visual Style",
-      "Product Photography Direction",
-      "Content Calendar Execution",
+      "Carousel Post Design",
+      "Brand-Consistent Visuals",
+      "Content Calendar Management",
+      "Seasonal Content Campaigns",
     ],
   },
   {
     number: "03",
-    title: "Targeted Instagram Ads",
-    desc: "Instagram ad campaigns targeted at the audiences most likely to convert, tracked and optimized for real results, not just reach.",
+    title: "Instagram Ads Management",
+    desc: "Ad campaigns built around real business objectives, tracked and optimized rather than run and forgotten.",
     ctaText: "Know Our Services",
     services: [
-      "Instagram Ad Campaign Setup",
-      "Audience Targeting & Segmentation",
-      "Story & Reel Ad Formats",
-      "Shopping Ad Integration",
-      "Retargeting Campaign Setup",
-      "Conversion Tracking Setup",
-      "Ad Creative Testing",
-      "Ad Performance Reporting",
+      "Instagram Ads Management",
+      "Instagram Ad Creative Design",
+      "Audience Targeting",
+      "Retargeting Campaigns",
+      "Ad Budget Optimization",
+      "Conversion Tracking",
+      "Story & Reels Ads",
+      "Shopping Ads Setup",
     ],
   },
   {
     number: "04",
-    title: "Influencer & Collaboration Support",
-    desc: "Influencer collaborations identified and coordinated where they genuinely fit your brand, extending reach authentically.",
+    title: "Instagram Reels Production",
+    desc: "Regular Reels production built to match how Instagram's algorithm currently rewards consistent short-form video content.",
     ctaText: "Know Our Services",
     services: [
-      "Influencer Identification",
-      "Collaboration Outreach",
-      "Content Brief Development",
-      "Partnership Negotiation Support",
-      "Collaboration Performance Tracking",
-      "Micro-Influencer Strategy",
-      "Affiliate & UGC Coordination",
-      "Influencer Content Repurposing",
+      "Instagram Reels Production",
+      "Reels Scripting",
+      "Reels Editing",
+      "Trend-Based Reels Content",
+      "UGC-Style Reels",
+      "Reels Performance Optimization",
+      "Reels Repurposing",
+      "Reels Posting Strategy",
     ],
   },
   {
     number: "05",
-    title: "Engagement & Growth Tracking",
-    desc: "Real engagement and follower growth tracked, not just impressions, so you know the strategy is actually building an audience.",
+    title: "Instagram Influencer Collaborations",
+    desc: "Creator partnerships matched to your specific audience, not selected on follower count alone.",
     ctaText: "Know Our Services",
     services: [
-      "Engagement Rate Tracking",
-      "Follower Growth Analysis",
-      "Audience Quality Assessment",
-      "Content Performance Breakdown",
-      "Reach vs. Engagement Reporting",
-      "Growth Benchmarking",
-      "Monthly Performance Reports",
-      "Strategy Adjustment Based on Data",
+      "Influencer Identification",
+      "Influencer Outreach",
+      "Collaboration Management",
+      "UGC Content Sourcing",
+      "Micro-Influencer Campaigns",
+      "Influencer Performance Tracking",
+      "Gifting & Barter Campaigns",
+      "Influencer Contract Support",
     ],
   },
   {
     number: "06",
-    title: "Trend-Responsive Planning",
-    desc: "Content plans adapted to emerging Instagram trends and formats quickly, so your brand doesn't fall behind the platform's shifts.",
+    title: "Instagram Analytics & Optimization",
+    desc: "Clear reporting on what's actually driving growth, so strategy adjusts based on real performance data.",
     ctaText: "Know Our Services",
     services: [
-      "Trend Monitoring",
-      "Format Adaptation Strategy",
-      "Audio & Sound Trend Tracking",
-      "Algorithm Update Monitoring",
-      "Rapid Content Turnaround",
-      "Seasonal Trend Planning",
-      "Platform Feature Adoption",
-      "Quarterly Strategy Refresh",
+      "Instagram Analytics & Reporting",
+      "Engagement Rate Tracking",
+      "Follower Growth Analysis",
+      "Content Performance Review",
+      "A/B Testing Content",
+      "Monthly Reporting",
+      "Strategy Adjustment",
+      "Competitor Benchmarking",
     ],
   },
 ];
@@ -154,94 +154,99 @@ const SERVICE_BREAKDOWN = [
 const ROADMAP_STEPS = [
   {
     number: "01",
-    title: "Audience & Content Audit",
-    desc: "We review your current Instagram presence and audience to see what's working and where the real opportunity is.",
+    title: "Brand & Audience Discovery",
+    desc: "We start by understanding your brand, audience, and current Instagram performance, identifying what's working and where the real growth opportunity is.",
   },
   {
     number: "02",
-    title: "Content & Reels Planning",
-    desc: "We plan a content mix of reels, stories, and feed posts built around what actually drives engagement for your niche.",
+    title: "Content & Growth Strategy",
+    desc: "We build a content strategy covering pillars, formats, and posting cadence, aligned with what your specific audience actually engages with.",
   },
   {
     number: "03",
-    title: "Content Production",
-    desc: "Reels, carousels, and feed content get scripted, shot, and edited according to the approved content plan.",
+    title: "Content & Reels Production",
+    desc: "We produce feed content, stories, and Reels consistently, keeping quality high while maintaining the posting frequency growth requires.",
   },
   {
     number: "04",
-    title: "Publishing & Ad Launch",
-    desc: "Content gets published, with targeted Instagram ads launched alongside organic content for coordinated growth.",
+    title: "Posting, Ads & Engagement",
+    desc: "We publish content on schedule, run any agreed ad campaigns, and manage community engagement as it comes in.",
   },
   {
     number: "05",
-    title: "Track & Optimize",
-    desc: "We monitor engagement, follower growth, and ad performance, adjusting creative and targeting to keep results improving.",
+    title: "Performance Tracking",
+    desc: "We track growth, engagement, and conversion metrics against your goals, reporting clearly on what's actually happening.",
   },
   {
     number: "06",
-    title: "Monthly Strategy Review",
-    desc: "We review what's genuinely working each month and adjust content mix, ad spend, and trend focus accordingly.",
+    title: "Ongoing Optimization & Scaling",
+    desc: "We refine strategy based on real performance data, scaling what's working and adjusting content that isn't landing.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "Real Engagement Focus",
-    desc: "We build genuine engagement, not just likes, so your audience actually becomes customers over time.",
+    title: "Instagram Marketing Built Around Conversion, Not Just Followers",
+    desc: "We track engagement and conversion alongside follower count, since a growing follower number that doesn't translate into business results isn't actually achieving what most brands need Instagram to do.",
   },
   {
     number: "02",
-    title: "Reels-First Content",
-    desc: "Short-form video gets prioritized in our content mix since it drives the most reach on Instagram today.",
+    title: "Reels Production That Keeps Up With How the Platform Actually Works",
+    desc: "Instagram consistently favors accounts posting Reels regularly, and we build a production pipeline that sustains this cadence, rather than treating Reels as an occasional extra alongside static posts.",
   },
   {
     number: "03",
-    title: "Performance-Tracked Ads",
-    desc: "Every rupee spent on Instagram ads is tracked and optimized for real leads, not just clicks and impressions.",
+    title: "Ads Management Focused on Real Sales, Not Just Reach",
+    desc: "Every ad campaign is built around a specific business objective, sales, leads, or traffic, and tracked accordingly, rather than run as a generic boost with no defined success metric.",
   },
   {
     number: "04",
-    title: "Platform-Native Creative",
-    desc: "Content is made to look and feel native to Instagram, not repurposed filler from another channel.",
+    title: "Influencer Collaborations Matched to Your Actual Audience",
+    desc: "We select creators based on audience fit and engagement quality, not just follower count, since a mismatched influencer partnership rarely delivers the trust transfer a brand is actually paying for.",
   },
   {
     number: "05",
-    title: "Trend-Aware Strategy",
-    desc: "We keep pace with Instagram's format shifts so your brand stays visible as the platform evolves.",
+    title: "Content Built for Your Brand, Not a Trend Template",
+    desc: "We adapt trends and formats to fit your specific brand voice, rather than posting generic trending content that could belong to any account, keeping your Instagram presence recognizably yours.",
   },
   {
     number: "06",
-    title: "Organic and Paid Working Together",
-    desc: "Content and ads are planned as one coordinated strategy, not two disconnected efforts pulling in different directions.",
+    title: "Transparent Reporting on Growth That Actually Matters",
+    desc: "You receive clear reporting on engagement, growth, and where relevant, sales or leads generated, giving you a real picture of what your Instagram investment is delivering each month.",
   },
 ];
 
 const FAQS = [
   {
-    question: "How does Instagram marketing help my business grow?",
+    question: "How much does Instagram marketing cost in India?",
     answer:
-      "It builds brand awareness and engagement through content and reels, while targeted ads convert that attention into real leads and customers.",
+      "Cost depends on scope, organic content management alone costs less than a package including Reels production, ads management, and influencer collaborations. We scope pricing after understanding your specific goals and current Instagram presence, rather than offering a flat rate upfront.",
   },
   {
-    question: "Do you create the reels and content yourselves?",
+    question: "Can you help us get more followers, or just more engagement?",
     answer:
-      "Yes, our team scripts, shoots, and edits reels and content, or works with material you provide, depending on what fits your brand best.",
+      "We focus on both, since sustainable follower growth and genuine engagement tend to move together when content and targeting are aligned with the right audience. Follower count alone without engagement rarely translates into real business value, so we track both metrics together.",
   },
   {
-    question: "How much do Instagram ads cost?",
+    question: "Do you manage Instagram ads as well as organic content?",
     answer:
-      "Ad spend is set based on your goals and budget — we recommend a starting budget and optimize it for the best return as data comes in.",
+      "Yes, instagram ads agency work is part of our core service, run alongside organic content strategy so both channels reinforce each other rather than operating as disconnected efforts with separate goals and messaging.",
   },
   {
-    question: "How long before I see growth on Instagram?",
+    question: "Can you find and manage influencers for our brand?",
     answer:
-      "Organic growth typically builds over a few months of consistent posting, while targeted ads can drive faster, measurable results.",
+      "Yes, influencer identification and collaboration management is a core service, matching creators to your specific audience and brand fit rather than selecting based on follower count alone, which rarely delivers the trust transfer brands are actually paying for.",
   },
   {
-    question: "Can you also handle influencer collaborations?",
+    question: "How often will you post on our Instagram account?",
     answer:
-      "Yes, where it fits your brand, we help identify and coordinate influencer partnerships that extend your reach authentically.",
+      "Posting frequency depends on your strategy and goals, though consistency matters more than sheer volume for most brands. We agree on a realistic, sustainable cadence during strategy planning rather than committing to an arbitrary daily posting schedule that sacrifices quality.",
+  },
+  {
+    question: "How do you measure whether Instagram marketing is working?",
+    answer:
+      "We track follower growth, engagement rate, Reels performance, and where relevant, traffic or sales generated from Instagram, reporting on these clearly each month. This gives a real picture of impact rather than vanity metrics that don't reflect actual results.",
   },
 ];
 
@@ -251,27 +256,27 @@ export default function InstagramMarketingAgency() {
       sectionLabel="Social Media Marketing"
       label="Instagram Marketing Agency"
       icon={Camera}
-      description="Reels, story strategy, and targeted ads built to turn followers into genuine paying customers, not just chase likes."
-      heroTitle="Get an Instagram Presence That Turns Followers Into Customers"
-      heroDescription="Reels, story strategy, and targeted ads built to turn followers into genuine paying customers, not just chase likes."
-      heroCtaText="Get a Free Instagram Marketing Consultation"
-      capabilitiesHeading="Built for Brands Ready to Turn Followers Into Customers"
+      description="Instagram marketing built to turn followers into customers, not just grow a number, backed by content and strategy that converts."
+      heroTitle="Get Real Instagram Growth, Not Just More Followers"
+      heroDescription="Instagram marketing built to turn followers into customers, not just grow a number, backed by content and strategy that converts."
+      heroCtaText="Get a Free Instagram Growth Audit"
+      capabilitiesHeading="Built for Brands Chasing More Than Vanity Followers"
       capabilities={CAPABILITIES}
-      serviceBreakdownHeading="Everything That Goes Into Our Instagram Marketing"
+      serviceBreakdownHeading="Everything Between an Instagram Post and a Real Customer"
       serviceBreakdown={SERVICE_BREAKDOWN}
-      differentiatorsHeading="What Makes Our Instagram Marketing Different"
+      differentiatorsHeading="Why Brands Hire Us for Instagram Marketing"
       differentiators={DIFFERENTIATORS}
-      roadmapCarouselHeading="Our Instagram Marketing Process"
+      roadmapCarouselHeading="How We Turn Instagram Content Into Actual Growth"
       roadmapCarouselSteps={ROADMAP_STEPS}
       showStats={false}
-      localityHeading="Based in Prayagraj, Growing Instagram Accounts Nationally"
-      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we build every Instagram strategy, with the same creative standard whether a client is nearby or across the country. We run Instagram marketing for startups, SMBs, and enterprises across India, sizing content production and ad spend to each brand's actual audience. Whether you're a startup building your first real following in Prayagraj or an ecommerce brand anywhere else scaling shoppable content, our approach starts with the same question: what's actually stopping people from following through."
+      localityHeading="Based in Prayagraj, Growing Instagram Accounts Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every Instagram account, with the same attention to detail whether a client is nearby or across the world. We work as an instagram marketing agency for brands and personal accounts across India, providing instagram growth agency support built around each account's specific audience and goals. For businesses looking to hire an instagram marketer beyond India, we support clients worldwide remotely, delivering the same instagram content marketing agency standard of work regardless of time zone. Whether you're a local business in Prayagraj or an ecommerce brand anywhere else selling through Instagram, our approach starts with the same question: what does your audience actually want to see and buy."
       faqs={FAQS}
       showWhyChooseUs={false}
-      ctaHeading="Ready for an Instagram Presence That Actually Converts?"
-      ctaText="Whether your reels aren't gaining traction, your ad spend isn't converting into real leads, or you're starting an Instagram presence from scratch, posting alone was never going to build a paying audience. Let's talk through your brand and scope what real Instagram marketing would actually involve."
+      ctaHeading="Ready for Instagram Growth That Actually Converts?"
+      ctaText="Whether your follower count has plateaued, your Reels aren't getting traction, or your Instagram simply isn't translating into real business results, more posts alone won't fix that. Let's audit your current account and scope what real Instagram growth would actually involve."
       ctaPrimaryText="Talk to an Instagram Marketing Specialist"
-      ctaSecondaryText="Get Your Free Instagram Marketing Consultation"
+      ctaSecondaryText="Get Your Free Instagram Growth Audit"
     />
   );
 }

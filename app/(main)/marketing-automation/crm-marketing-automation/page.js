@@ -1,18 +1,18 @@
 import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Contact,
-  Rocket,
-  Building2,
-  Building,
-  ShoppingCart,
-  Handshake,
+  Database,
+  Zap,
+  UserCheck,
   RefreshCw,
+  Share2,
+  BarChart3,
 } from "lucide-react";
 
 export const metadata = {
-  title: "CRM Marketing Automation | BizzBuzz Creations",
+  title: "CRM Marketing Automation Services | BizzBuzz Creations",
   description:
-    "CRM marketing automation in India — every call, form fill, or reply automatically updates lead status and triggers the next action, by BizzBuzz Creations.",
+    "BizzBuzz Creations provides CRM marketing automation that connects your data and campaigns across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/marketing-automation/crm-marketing-automation",
@@ -21,132 +21,132 @@ export const metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Rocket,
-    title: "Startups & Early-Stage Businesses",
-    desc: "Startups often track leads across scattered spreadsheets and chat threads before a CRM habit forms. We connect lightweight CRM automation early, so founders stop losing leads to a forgotten follow-up.",
+    icon: Database,
+    title: "Businesses With a CRM That's Underused for Marketing",
+    desc: "Many CRMs function as little more than an expensive contact database, with genuine marketing capability sitting unused. We provide crm marketing automation services that turn a passive CRM into an active growth tool.",
   },
   {
-    icon: Building2,
-    title: "Small & Medium Businesses",
-    desc: "SMBs frequently have a CRM that's set up but barely used because updates require manual effort. We build CRM marketing automation sized for SMB budgets, keeping the pipeline current without extra admin work.",
+    icon: Zap,
+    title: "Companies Needing Campaigns Triggered by Customer Behavior",
+    desc: "Manually deciding when to reach out to each customer doesn't scale as your customer base grows. We build automated campaign triggers based on real customer behavior, not manual guesswork.",
   },
   {
-    icon: Building,
-    title: "Enterprises & Large Organizations",
-    desc: "Enterprises need CRM automation that works reliably across multiple sales teams and territories. We build enterprise-scale CRM automation integrated with existing sales processes and reporting requirements.",
-  },
-  {
-    icon: ShoppingCart,
-    title: "Ecommerce & Retail Brands",
-    desc: "Ecommerce brands need customer and lead data flowing accurately between campaigns and their CRM. We connect ecommerce platforms to your CRM so customer behavior triggers the right follow-up automatically.",
-  },
-  {
-    icon: Handshake,
-    title: "Agencies Managing Client Pipelines",
-    desc: "Agencies running lead generation for clients need the leads landing somewhere reliable. We set up CRM automation agencies can hand off to clients or manage on their behalf as part of a broader campaign.",
+    icon: UserCheck,
+    title: "Sales Teams Needing Automated Follow-Up From CRM Data",
+    desc: "Sales reps manually tracking who to follow up with and when inevitably lets some prospects slip through. We provide sales automation within crm that handles this tracking and reminders automatically.",
   },
   {
     icon: RefreshCw,
-    title: "Businesses Switching or Cleaning Up a CRM",
-    desc: "Businesses migrating CRMs or fixing years of messy data need a careful, structured approach. We handle CRM migrations and cleanups, rebuilding automation properly instead of carrying old problems into the new system.",
+    title: "Businesses Migrating to a New CRM Needing Automation Setup",
+    desc: "Migrating to a new CRM is the ideal time to build automation properly, rather than recreating old, inefficient manual processes. We work as a crm automation agency supporting these transitions.",
+  },
+  {
+    icon: Share2,
+    title: "Companies Needing CRM and Marketing Tools Connected Properly",
+    desc: "A CRM disconnected from your email and marketing tools means data lives in silos, undermining automation potential. We provide crm integration and automation services that connect these systems properly.",
+  },
+  {
+    icon: BarChart3,
+    title: "Businesses Needing Automated Reporting From CRM Data",
+    desc: "Manually pulling reports from CRM data wastes time that could go toward actually acting on the insights. We build automated CRM reporting that surfaces what matters without manual effort.",
   },
 ];
 
 const SERVICE_BREAKDOWN = [
   {
     number: "01",
-    title: "CRM Integration & Setup",
-    desc: "We connect your CRM directly to your campaigns and forms, so lead data flows in automatically instead of being entered manually.",
+    title: "CRM Automation Strategy & Audit",
+    desc: "A clear picture of what your CRM could actually be doing, and what's currently holding it back.",
     ctaText: "Know Our Services",
     services: [
-      "CRM Integration",
-      "Form-to-CRM Connection",
-      "Landing Page Integration",
-      "Ad Platform Integration",
-      "API-Based Data Sync",
-      "Third-Party Tool Connectors",
-      "CRM Configuration",
-      "Field Mapping Setup",
+      "CRM Automation Audit",
+      "Current Workflow Assessment",
+      "Automation Opportunity Mapping",
+      "CRM Data Quality Review",
+      "Automation Strategy Development",
+      "Tool Compatibility Assessment",
+      "CRM Automation Roadmap",
+      "Stakeholder Requirements Gathering",
     ],
   },
   {
     number: "02",
-    title: "Automatic Lead Status Updates",
-    desc: "Every call, form fill, or reply automatically updates lead status in your CRM, so your pipeline reflects reality in real time.",
+    title: "CRM Workflow & Trigger Setup",
+    desc: "Workflows and triggers built around your actual sales and customer process, not generic default settings.",
     ctaText: "Know Our Services",
     services: [
-      "Lead Status Automation",
-      "Call Outcome Logging",
-      "Pipeline Stage Updates",
-      "Activity Tracking",
-      "Real-Time Sync Rules",
-      "Deal Progress Automation",
-      "Status Change Triggers",
-      "Data Accuracy Checks",
+      "CRM Workflow Automation",
+      "Trigger-Based Automation Setup",
+      "Pipeline Stage Automation",
+      "Task & Reminder Automation",
+      "Deal Stage Trigger Design",
+      "Automated Data Entry Rules",
+      "Custom Field Automation",
+      "Workflow Testing & QA",
     ],
   },
   {
     number: "03",
-    title: "Triggered Follow-Up Actions",
-    desc: "A status change can automatically trigger the next action — an email, a task for your sales rep, or a WhatsApp message — without manual intervention.",
+    title: "CRM-to-Marketing Tool Integration",
+    desc: "Your CRM connected properly to the marketing and communication tools you already use.",
     ctaText: "Know Our Services",
     services: [
-      "Trigger-Based Workflows",
-      "Automated Task Creation",
-      "Follow-Up Email Automation",
-      "WhatsApp Trigger Automation",
-      "Reminder Automation",
-      "Escalation Rules",
-      "Sales Rep Notifications",
-      "Multi-Step Sequences",
+      "CRM & Email Platform Integration",
+      "CRM & Ad Platform Sync",
+      "CRM & WhatsApp Integration",
+      "Third-Party Tool Connections",
+      "API-Based Integration Setup",
+      "Data Sync Automation",
+      "Integration Testing",
+      "Integration Documentation",
     ],
   },
   {
     number: "04",
-    title: "Lead Scoring & Routing",
-    desc: "Leads get scored and routed to the right salesperson automatically, based on rules built around how your sales process actually works.",
+    title: "Automated Campaign Triggers",
+    desc: "Campaigns that launch based on genuine customer behavior and lifecycle stage, not a manual calendar.",
     ctaText: "Know Our Services",
     services: [
-      "Lead Scoring Models",
-      "Automated Lead Routing",
-      "Territory-Based Assignment",
-      "Round-Robin Distribution",
-      "Priority Lead Flagging",
-      "Scoring Rule Configuration",
-      "Sales Team Assignment Logic",
-      "Lead Qualification Rules",
+      "Behavior-Triggered Campaigns",
+      "Lifecycle Stage Campaigns",
+      "Automated Re-Engagement Triggers",
+      "Purchase-Triggered Campaigns",
+      "Renewal & Upsell Triggers",
+      "Milestone-Based Campaign Automation",
+      "Abandoned Action Triggers",
+      "Trigger Performance Monitoring",
     ],
   },
   {
     number: "05",
-    title: "Pipeline Reporting & Visibility",
-    desc: "We set up reporting so you can see pipeline health and campaign performance directly from your CRM, not a separate spreadsheet.",
+    title: "Sales Automation Within CRM",
+    desc: "Sales workflow automation that reduces manual tracking and ensures nothing slips through the cracks.",
     ctaText: "Know Our Services",
     services: [
-      "Pipeline Dashboards",
-      "Campaign Performance Reports",
-      "Conversion Rate Tracking",
-      "Sales Funnel Reporting",
-      "Custom Report Building",
-      "Forecast Reporting",
-      "Team Performance Reports",
-      "Automated Report Delivery",
+      "Sales Task Automation",
+      "Automated Lead Assignment",
+      "Follow-Up Reminder Automation",
+      "Deal Progress Automation",
+      "Sales Notification Automation",
+      "Quote & Proposal Automation",
+      "Sales Activity Logging Automation",
+      "Sales Automation Reporting",
     ],
   },
   {
     number: "06",
-    title: "Duplicate & Data Cleanup",
-    desc: "We help clean up and prevent duplicate records, so your CRM stays a reliable source of truth, not a cluttered mess.",
+    title: "CRM Reporting & Optimization",
+    desc: "Automated reporting that surfaces real insight, so decisions are based on data, not assumption.",
     ctaText: "Know Our Services",
     services: [
-      "Duplicate Detection",
-      "Data Deduplication",
-      "Data Standardization",
-      "Field Cleanup Rules",
-      "Ongoing Data Hygiene",
-      "Migration Cleanup",
-      "Validation Rules",
-      "Data Quality Audits",
+      "CRM Dashboard Setup",
+      "Automated Reporting",
+      "Campaign Performance in CRM",
+      "Data Accuracy Monitoring",
+      "Automation Performance Review",
+      "Monthly CRM Reports",
+      "Ongoing Workflow Refinement",
+      "CRM ROI Analysis",
     ],
   },
 ];
@@ -154,94 +154,99 @@ const SERVICE_BREAKDOWN = [
 const ROADMAP_STEPS = [
   {
     number: "01",
-    title: "CRM & Workflow Audit",
-    desc: "We review your current CRM setup and where leads currently stall — a form filled and never followed up, a call logged and forgotten.",
+    title: "CRM & Process Discovery",
+    desc: "We start by understanding your current CRM setup, sales process, and how customer data currently flows, or doesn't, through your systems.",
   },
   {
     number: "02",
-    title: "Automation Design & Planning",
-    desc: "We plan the specific status updates, triggers, and routing rules needed, mapped to how your sales process actually runs.",
+    title: "Automation Opportunity Audit",
+    desc: "We identify which specific workflows and triggers would deliver the most value, based on your actual sales and marketing process.",
   },
   {
     number: "03",
-    title: "Integration & Automation Build",
-    desc: "We connect your CRM to your campaigns and build the automation rules for status updates and triggered actions.",
+    title: "Workflow & Trigger Design",
+    desc: "We design the specific automation workflows, triggers, and campaigns tailored to your business.",
   },
   {
     number: "04",
-    title: "Testing & Team Handoff",
-    desc: "We test the automation with your sales team before launch, so it fits how they actually work day-to-day.",
+    title: "Integration & Implementation",
+    desc: "We implement the automation and integrate your CRM with relevant marketing and communication tools.",
   },
   {
     number: "05",
-    title: "Launch & Live Monitoring",
-    desc: "Automation goes live with close monitoring in the first weeks, so any gaps in routing or triggers get caught early.",
+    title: "Testing & Quality Assurance",
+    desc: "We test workflows and triggers against real scenarios, catching issues before they affect actual customer interactions.",
   },
   {
     number: "06",
-    title: "Monthly Review & Optimization",
-    desc: "Every workflow is reviewed and improved monthly, not left running on autopilot and forgotten after setup.",
+    title: "Ongoing Monitoring & Optimization",
+    desc: "We monitor automation performance and continue refining workflows as your business and customer data evolve.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "CRM-Connected, Not Manual",
-    desc: "Every call, form fill, or reply automatically updates lead status and triggers the next action — no manual data entry required.",
+    title: "CRM Automation Built Around Your Actual Sales and Marketing Process",
+    desc: "We design automation around how your business genuinely operates, rather than forcing your process to fit generic default CRM workflows that don't reflect your reality.",
   },
   {
     number: "02",
-    title: "One Connected System",
-    desc: "We treat your CRM as the hub connecting email, WhatsApp, and lead nurturing, not a separate system running blind.",
+    title: "Integration That Connects Your CRM to the Tools You Already Use",
+    desc: "We connect your CRM to your existing email, WhatsApp, and marketing tools, rather than requiring you to abandon systems that already work for you.",
   },
   {
     number: "03",
-    title: "We Build the Workflow Ourselves",
-    desc: "We don't sell you a tool subscription and walk away — we build the automation and connect it properly ourselves.",
+    title: "Triggers Based on Real Customer Behavior, Not Generic Timers",
+    desc: "We build campaign triggers around genuine customer actions and lifecycle stages, rather than arbitrary time-based sends that ignore what a customer is actually doing.",
   },
   {
     number: "04",
-    title: "Sales Team Wakes Up to Warm Leads",
-    desc: "Automation is built so your sales team wakes up to warm, updated leads, not cold silence and manual data entry.",
+    title: "Sales Automation That Actually Reduces Manual Follow-Up Work",
+    desc: "We automate the tracking and reminder tasks that currently consume sales team time, freeing them to focus on actual selling rather than administrative follow-up.",
   },
   {
     number: "05",
-    title: "Reviewed Monthly",
-    desc: "Every workflow is reviewed and improved monthly, not left running on autopilot and forgotten.",
+    title: "Clean Data Practices That Keep Automation Reliable Long-Term",
+    desc: "We address data quality issues as part of setup, since automation built on messy data produces unreliable results regardless of how well the workflows themselves are designed.",
   },
   {
     number: "06",
-    title: "Scales With Real Volume",
-    desc: "Startups get plans that scale with real lead volume, not enterprise CRM pricing from day one.",
+    title: "Transparent Reporting on What Automation Is Actually Delivering",
+    desc: "You see clear reporting on what your CRM automation is generating, giving you real evidence of value rather than assuming automation is working without verification.",
   },
 ];
 
 const FAQS = [
   {
-    question: "Which CRMs do you work with?",
+    question: "How much does CRM marketing automation cost in India?",
     answer:
-      "We work with popular CRM platforms and can assess compatibility with your specific setup during onboarding.",
+      "Cost depends on scope, a few specific workflow automations cost less than a comprehensive CRM automation overhaul with multiple tool integrations. We scope pricing after understanding your specific CRM and requirements, rather than offering a flat rate upfront.",
   },
   {
-    question: "Will this replace our sales team's manual data entry?",
+    question: "Can you work with our existing CRM, or do we need to switch?",
     answer:
-      "Yes, automated status updates remove most manual data entry, though your team will still confirm and act on key decisions.",
+      "In most cases, we work within your existing CRM, building automation around what you already have rather than requiring a platform switch, unless your current CRM genuinely can't support what you need.",
   },
   {
-    question: "Can leads be automatically routed to the right salesperson?",
+    question: "What's the difference between CRM automation and email automation?",
     answer:
-      "Yes, we set up lead scoring and routing rules based on how your sales process actually works, not a generic default.",
+      "CRM automation covers workflows and triggers within your customer relationship management system broadly, including sales tasks and data automation, while email automation specifically focuses on automated email sequences. We often implement both together as one connected system.",
   },
   {
-    question: "Do you clean up existing duplicate or messy CRM data?",
+    question: "Can you connect our CRM to WhatsApp and other marketing tools?",
     answer:
-      "Yes, we help clean up and prevent duplicate records as part of setting up reliable automation.",
+      "Yes, integrating your CRM with WhatsApp, email platforms, and other marketing tools is a core part of our service, ensuring customer data and automation work consistently across every channel.",
   },
   {
-    question: "How long does CRM automation setup take?",
+    question: "Will CRM automation work with our current sales process?",
     answer:
-      "Setup typically takes a few weeks, depending on your CRM's complexity and how many campaigns and channels need to be connected.",
+      "Yes, we design automation around your actual sales process rather than forcing a generic workflow, ensuring the automation supports how your team genuinely works rather than disrupting it.",
+  },
+  {
+    question: "How long does it take to set up CRM automation?",
+    answer:
+      "Timeline depends on scope, a few specific workflows can be set up within a couple of weeks, while a comprehensive automation overhaul with multiple integrations typically takes longer.",
   },
 ];
 
@@ -251,26 +256,27 @@ export default function CrmMarketingAutomation() {
       sectionLabel="Marketing Automation"
       label="CRM Marketing Automation"
       icon={Contact}
-      description="Your CRM shouldn't be a place where leads go to be forgotten. We connect automation directly to your campaigns, so every call, form fill, or reply automatically updates lead status and triggers the next action."
-      heroTitle="CRM Marketing Automation in India"
-      heroDescription="Your CRM shouldn't be a place where leads go to be forgotten. We connect automation directly to your campaigns, so every call, form fill, or reply automatically updates lead status and triggers the next action."
-      capabilitiesHeading="Built for Businesses Ready to Stop Losing Leads in Their CRM"
+      description="CRM marketing automation built to trigger campaigns from real customer data, not a CRM that just sits there storing contacts."
+      heroTitle="Get a CRM That Markets for You, Not Just Stores Data"
+      heroDescription="CRM marketing automation built to trigger campaigns from real customer data, not a CRM that just sits there storing contacts."
+      heroCtaText="Get a Free CRM Automation Audit"
+      capabilitiesHeading="Built for Businesses Whose CRM Is Just a Contact List"
       capabilities={CAPABILITIES}
-      serviceBreakdownHeading="Everything That Goes Into Our CRM Marketing Automation"
+      serviceBreakdownHeading="Everything Between Customer Data and an Automated Campaign"
       serviceBreakdown={SERVICE_BREAKDOWN}
-      differentiatorsHeading="Why Businesses Trust Us to Automate Their CRM"
+      differentiatorsHeading="Why Businesses Trust Us With Their CRM Automation"
       differentiators={DIFFERENTIATORS}
-      roadmapCarouselHeading="How We Turn a Messy CRM Into a Working Pipeline"
+      roadmapCarouselHeading="How We Turn Your CRM Into a Marketing Engine"
       roadmapCarouselSteps={ROADMAP_STEPS}
       showStats={false}
       localityHeading="Based in Prayagraj, Automating CRMs Worldwide"
-      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we build every CRM automation engagement, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, sizing automation to each business's actual sales process and CRM setup. For businesses looking to automate their CRM beyond India, we deliver CRM marketing automation remotely, working across time zones to reach the same standard of reliability regardless of location. Whether you're a startup connecting your first form to a CRM or an enterprise routing leads across multiple sales teams, our approach starts with understanding exactly where leads currently stall."
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every CRM automation project, with the same attention to data quality whether a client is nearby or across the world. We provide crm marketing automation services for businesses across India, built around each business's specific CRM and sales process. For businesses looking for a crm automation agency beyond India, we support clients worldwide remotely, delivering the same crm integration and automation services standard of work regardless of time zone. Whether you're a business in Prayagraj with an underused CRM or a company anywhere else migrating to a new platform, our approach starts with the same question: what should your CRM actually be doing that it currently isn't."
       faqs={FAQS}
       showWhyChooseUs={false}
-      ctaHeading="Ready for a CRM That Actually Works for Your Sales Team?"
-      ctaText="Whether you need lead status updates automated, triggered follow-ups built around your sales process, or a full CRM cleanup and re-automation, the right setup depends on how your pipeline actually works today. Let's talk through your CRM and scope what automation would actually involve."
+      ctaHeading="Ready for a CRM That Actually Markets for You?"
+      ctaText="Whether your CRM is just an expensive contact list, your sales team is manually tracking follow-ups, or your marketing tools aren't connected to your customer data, an underused CRM was never going to drive real growth. Let's audit your current setup and scope what real CRM automation would actually involve."
       ctaPrimaryText="Talk to a CRM Automation Specialist"
-      ctaSecondaryText="Get Your Free CRM Automation Consultation"
+      ctaSecondaryText="Get Your Free CRM Automation Audit"
     />
   );
 }

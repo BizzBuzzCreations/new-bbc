@@ -1,18 +1,18 @@
 import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Filter,
-  Rocket,
   Building2,
-  Building,
+  Clock,
+  TrendingUp,
+  Target,
   ShoppingCart,
-  Handshake,
-  RefreshCw,
+  Share2,
 } from "lucide-react";
 
 export const metadata = {
-  title: "Lead Nurturing Automation | BizzBuzz Creations",
+  title: "Lead Nurturing Automation Services | BizzBuzz Creations",
   description:
-    "Lead nurturing automation in India — keep prospects warm with timed content, reminders, and offers until they're ready to talk to your team, by BizzBuzz Creations.",
+    "BizzBuzz Creations provides lead nurturing automation that moves prospects toward sales across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/marketing-automation/lead-nurturing-automation",
@@ -21,132 +21,132 @@ export const metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Rocket,
-    title: "Startups & Early-Stage Businesses",
-    desc: "Startups often generate leads faster than they can personally follow up with each one. We build lightweight nurture sequences early, so early-stage leads stay warm without founder time on every touchpoint.",
-  },
-  {
     icon: Building2,
-    title: "Small & Medium Businesses",
-    desc: "SMBs frequently have leads that go cold simply from lack of consistent follow-up. We build lead nurturing automation sized for SMB budgets, keeping prospects engaged until they're ready to talk.",
+    title: "B2B Companies With Long Sales Cycles",
+    desc: "B2B buyers often need weeks or months of consideration before they're ready to buy, and leads go cold without structured nurturing during that time. We provide b2b lead nurturing services built specifically for these longer decision journeys.",
   },
   {
-    icon: Building,
-    title: "Enterprises & Large Organizations",
-    desc: "Enterprises need nurture sequences that work across longer, multi-stakeholder sales cycles. We build enterprise-scale nurturing automation aligned with complex buying committees and longer decision timelines.",
+    icon: Clock,
+    title: "Businesses Losing Leads to Inconsistent Manual Follow-Up",
+    desc: "Manual follow-up is easy to delay when sales teams get busy, and leads quietly go cold as a result. We work as a lead nurturing agency that keeps follow-up consistent regardless of sales team bandwidth.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Companies Generating Leads Faster Than Sales Can Follow Up",
+    desc: "Marketing generating strong lead volume means little if sales can't keep pace with timely follow-up. We provide automated lead nurturing company support that keeps every lead engaged while sales works through the queue.",
+  },
+  {
+    icon: Target,
+    title: "Businesses Needing Lead Scoring to Prioritize Sales Effort",
+    desc: "Sales teams waste time on unqualified leads when there's no clear way to prioritize who's actually ready to buy. We build lead scoring and nurturing services that flag genuinely sales-ready prospects.",
   },
   {
     icon: ShoppingCart,
-    title: "Ecommerce & Retail Brands",
-    desc: "Ecommerce shoppers who browse but don't buy need nurturing that brings them back at the right moment. We build nurture sequences tuned to ecommerce browsing behavior and purchase timing.",
+    title: "Ecommerce Brands Needing Pre-Purchase Nurture Sequences",
+    desc: "Ecommerce shoppers researching higher-consideration products often need nurturing before they're ready to commit to a purchase. We build nurture sequence for sales leads applied specifically to pre-purchase ecommerce behavior.",
   },
   {
-    icon: Handshake,
-    title: "Agencies Managing Client Lead Pipelines",
-    desc: "Agencies generating leads for clients need those leads nurtured properly, not just handed off cold. We build nurture sequences agencies can offer as part of a complete lead generation service.",
-  },
-  {
-    icon: RefreshCw,
-    title: "Businesses Reviving a Stale Lead List",
-    desc: "Businesses sitting on years of uncontacted leads need a structured way to re-engage them. We build re-engagement nurture sequences that revive dormant lists without feeling spammy.",
+    icon: Share2,
+    title: "Companies Needing Nurturing Across Multiple Channels Together",
+    desc: "Leads increasingly expect follow-up across more than just email alone. We provide lead nurturing workflow design that coordinates nurturing across email, WhatsApp, and other channels together.",
   },
 ];
 
 const SERVICE_BREAKDOWN = [
   {
     number: "01",
-    title: "Timed Nurture Sequences",
-    desc: "Leads not ready to buy today get a structured sequence of timed touchpoints, keeping your brand top of mind until they are.",
+    title: "Lead Nurturing Strategy & Mapping",
+    desc: "A nurturing plan built around your actual sales cycle and buyer journey, not a generic template.",
     ctaText: "Know Our Services",
     services: [
-      "Nurture Sequence Design",
-      "Timed Touchpoint Planning",
-      "Multi-Channel Sequencing",
-      "Drip Campaign Setup",
-      "Sequence Pacing Strategy",
-      "Long-Cycle Nurture Flows",
-      "Re-Entry Rule Design",
-      "Sequence Copywriting",
+      "Lead Nurturing Strategy",
+      "Buyer Journey Mapping",
+      "Nurture Trigger Planning",
+      "Content Mapping to Funnel Stage",
+      "Nurture Workflow Design",
+      "Sales Cycle Analysis",
+      "Nurture Goal Setting",
+      "Nurturing Audit",
     ],
   },
   {
     number: "02",
-    title: "Educational Content Delivery",
-    desc: "We deliver helpful content that addresses common objections and questions, moving leads closer to a decision naturally.",
+    title: "Nurture Sequence Development",
+    desc: "Sequences that address genuine questions and objections at each stage of consideration, not generic drip content.",
     ctaText: "Know Our Services",
     services: [
-      "Educational Content Planning",
-      "Objection-Handling Content",
-      "Case Study Delivery",
-      "Content Sequencing",
-      "Resource Drip Campaigns",
-      "FAQ-Based Nurture Content",
-      "Content Personalization",
-      "Content Performance Tracking",
+      "Email Nurture Sequences",
+      "Multi-Touch Drip Campaigns",
+      "Educational Nurture Content",
+      "Re-Engagement Sequences",
+      "Objection-Handling Content Flows",
+      "Case Study & Proof Sequences",
+      "Event-Triggered Nurture Flows",
+      "Sequence Timing Optimization",
     ],
   },
   {
     number: "03",
-    title: "Timed Offers & Incentives",
-    desc: "Relevant offers get delivered at the right point in the nurture sequence, giving hesitant leads a reason to act.",
+    title: "Lead Scoring & Qualification",
+    desc: "A scoring system that reflects genuine buying intent, so sales knows exactly who to prioritize.",
     ctaText: "Know Our Services",
     services: [
-      "Offer Timing Strategy",
-      "Incentive Sequence Design",
-      "Discount Trigger Automation",
-      "Limited-Time Offer Flows",
-      "Upsell Nurture Offers",
-      "Offer Personalization",
-      "A/B Testing Offers",
-      "Conversion Tracking",
+      "Lead Scoring Model Development",
+      "Behavioral Scoring Setup",
+      "Demographic Scoring Criteria",
+      "Sales-Ready Threshold Definition",
+      "Scoring Automation Implementation",
+      "Lead Grade & Tier Setup",
+      "Scoring Model Refinement",
+      "Qualification Reporting",
     ],
   },
   {
     number: "04",
-    title: "Lead Scoring by Engagement",
-    desc: "Leads get scored based on how they engage with nurture content, so your sales team knows exactly who's warming up.",
+    title: "Multi-Channel Nurture Automation",
+    desc: "Nurturing coordinated across the channels your prospects actually use, not email alone.",
     ctaText: "Know Our Services",
     services: [
-      "Engagement Scoring Models",
-      "Behavioral Scoring Rules",
-      "Content Interaction Tracking",
-      "Score Threshold Setup",
-      "Multi-Touch Scoring",
-      "Scoring Dashboard Setup",
-      "Score Decay Rules",
-      "Sales-Ready Score Alerts",
+      "Multi-Channel Nurture Campaigns",
+      "Email & WhatsApp Nurture Integration",
+      "Retargeting Ad Nurture Sync",
+      "SMS Nurture Sequences",
+      "Social Media Nurture Touchpoints",
+      "Cross-Channel Consistency Management",
+      "Channel Performance Comparison",
+      "Unified Nurture Calendar",
     ],
   },
   {
     number: "05",
-    title: "Sales-Ready Handoff",
-    desc: "Once a lead shows real buying signals, it gets flagged and handed to your sales team automatically, not left sitting in a queue.",
+    title: "CRM & Sales Handoff Integration",
+    desc: "A clean, automated handoff from nurturing to sales, so sales-ready leads never sit unnoticed.",
     ctaText: "Know Our Services",
     services: [
-      "Sales-Ready Flagging",
-      "Automated Handoff Rules",
-      "CRM Task Creation",
-      "Sales Notification Automation",
-      "Handoff Context Notes",
-      "Lead Routing on Handoff",
-      "Handoff SLA Tracking",
-      "Post-Handoff Follow-Up",
+      "CRM Integration for Nurturing",
+      "Sales-Ready Lead Handoff",
+      "Automated Sales Notifications",
+      "Lead Activity Tracking",
+      "Sales Team Alert Automation",
+      "Handoff Process Documentation",
+      "CRM Workflow Automation",
+      "Sales & Marketing Alignment Support",
     ],
   },
   {
     number: "06",
-    title: "Nurture Performance Tracking",
-    desc: "We track engagement and conversion at each stage of the nurture sequence, refining it based on what's actually working.",
+    title: "Nurturing Analytics & Optimization",
+    desc: "Clear reporting on nurture-to-sale conversion, not just engagement metrics that don't reflect real pipeline impact.",
     ctaText: "Know Our Services",
     services: [
-      "Sequence Performance Dashboards",
-      "Stage Conversion Tracking",
-      "Drop-Off Analysis",
-      "Engagement Rate Reporting",
-      "Nurture-to-Sale Attribution",
-      "Sequence A/B Testing",
-      "Monthly Performance Reports",
-      "Continuous Sequence Refinement",
+      "Nurture Performance Analytics",
+      "Conversion Rate Tracking",
+      "Funnel Drop-Off Analysis",
+      "A/B Testing Nurture Content",
+      "Monthly Nurturing Reports",
+      "Lead Velocity Tracking",
+      "Nurture ROI Analysis",
+      "Ongoing Strategy Refinement",
     ],
   },
 ];
@@ -154,94 +154,99 @@ const SERVICE_BREAKDOWN = [
 const ROADMAP_STEPS = [
   {
     number: "01",
-    title: "Understanding Your Sales Cycle",
-    desc: "We learn how long your typical sales cycle is and what objections or questions usually come up before someone's ready to buy.",
+    title: "Buyer Journey & Sales Cycle Discovery",
+    desc: "We start by understanding your specific sales cycle, buyer journey, and where leads are currently falling through the cracks.",
   },
   {
     number: "02",
-    title: "Content & Offer Planning",
-    desc: "We plan the specific content, offers, and touchpoints needed at each stage of the nurture sequence before building anything.",
+    title: "Nurture Strategy & Scoring Design",
+    desc: "We design the nurturing strategy and lead scoring model tailored to your genuine buying signals and sales priorities.",
   },
   {
     number: "03",
-    title: "Building the Nurture Sequence",
-    desc: "We design the actual sequence of content, offers, and touchpoints ourselves, rather than handing you a generic tool template.",
+    title: "Sequence & Content Development",
+    desc: "We build out nurture content and sequences addressing real questions and objections at each stage of consideration.",
   },
   {
     number: "04",
-    title: "Connecting to Your CRM & Launch",
-    desc: "The nurture sequence connects to your CRM so lead scores and sales-ready flags update automatically as it runs.",
+    title: "Automation & CRM Integration",
+    desc: "We implement the automation and integrate it with your CRM, ensuring sales has full visibility into lead status.",
   },
   {
     number: "05",
-    title: "Testing & Scoring Calibration",
-    desc: "We test the sequence and calibrate lead scoring thresholds before launch, so sales-ready flags actually mean something.",
+    title: "Launch & Initial Testing",
+    desc: "Nurturing launches with close monitoring in the early weeks, testing content and timing to identify what's actually working.",
   },
   {
     number: "06",
-    title: "Monthly Review & Optimization",
-    desc: "Every workflow is reviewed and improved monthly — not left running on autopilot and forgotten after setup.",
+    title: "Ongoing Optimization & Reporting",
+    desc: "We provide regular reporting on nurture-to-sale conversion, continuing to refine sequences based on real performance data.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "Not a Lost Sale, Just Not Ready Yet",
-    desc: "A lead that isn't ready to buy today doesn't mean a lost sale — our nurture automation keeps them warm until they are.",
+    title: "Nurturing Built Around Your Actual Sales Cycle, Not a Generic Template",
+    desc: "We design sequences that match how long and complex your specific sales process actually is, rather than applying the same nurturing timeline to every business regardless of buying complexity.",
   },
   {
     number: "02",
-    title: "We Build the Sequence Ourselves",
-    desc: "We don't sell you a tool subscription and walk away — we design the content and offers ourselves, based on your sales cycle.",
+    title: "Lead Scoring That Actually Prioritizes Sales Team Effort",
+    desc: "We build scoring models around genuine buying signals specific to your business, so sales spends time on the leads most likely to actually convert.",
   },
   {
     number: "03",
-    title: "Engagement-Based Scoring",
-    desc: "Leads get scored based on real engagement with nurture content, not a generic time-based assumption.",
+    title: "Multi-Channel Nurturing, Not Just Email Alone",
+    desc: "We coordinate nurturing across email, WhatsApp, and other relevant channels, since relying on email alone increasingly misses prospects who respond better elsewhere.",
   },
   {
     number: "04",
-    title: "CRM-Connected Handoff",
-    desc: "Sales-ready leads get flagged and handed to your team automatically once they show genuine buying signals.",
+    title: "CRM Integration That Keeps Sales and Marketing in Sync",
+    desc: "We integrate nurturing directly with your CRM, ensuring sales always has visibility into where a lead is in the nurturing process without manual updates.",
   },
   {
     number: "05",
-    title: "Reviewed Monthly",
-    desc: "Every workflow is reviewed and improved monthly, not left running on autopilot and forgotten.",
+    title: "Content Mapped to Where a Prospect Actually Is in Their Journey",
+    desc: "We build content specifically for each stage of consideration, awareness, evaluation, decision, rather than sending the same generic messaging regardless of where a prospect actually stands.",
   },
   {
     number: "06",
-    title: "One Connected System",
-    desc: "We treat lead nurturing as part of one connected system with email, WhatsApp, and CRM, not a separate campaign running blind.",
+    title: "Transparent Reporting on Nurture-to-Sale Conversion, Not Just Engagement",
+    desc: "We report on how nurturing actually contributes to closed sales, not just open and click rates that don't reflect genuine pipeline impact.",
   },
 ];
 
 const FAQS = [
   {
-    question: "What is lead nurturing automation?",
+    question: "How much does lead nurturing automation cost in India?",
     answer:
-      "It's a system of timed content, offers, and touchpoints that keeps prospects engaged after their first interaction, until they're ready to talk to your sales team.",
+      "Cost depends on scope, a single nurture sequence costs less than a full multi-channel nurturing system with lead scoring and CRM integration. We scope pricing after understanding your specific sales cycle, rather than offering a flat rate upfront.",
   },
   {
-    question: "How do you know when a lead is ready to talk to sales?",
+    question: "What's the difference between lead nurturing and email marketing?",
     answer:
-      "We score leads based on how they engage with nurture content — opens, clicks, and specific actions — and flag genuinely sales-ready leads automatically.",
+      "Email marketing broadly covers any email communication with your audience, while lead nurturing specifically focuses on moving a prospect through their buying journey toward a sale, often using multiple channels and lead scoring, not just email alone.",
   },
   {
-    question: "Will nurturing feel spammy to my prospects?",
+    question: "Can you integrate nurturing with our existing CRM?",
     answer:
-      "No, sequences are designed around genuinely useful content and relevant offers timed to your sales cycle, not repetitive generic blasts.",
+      "Yes, CRM integration is a core part of our service, ensuring nurturing activity and lead status stay visible to your sales team without requiring manual updates.",
   },
   {
-    question: "How long should a nurture sequence run?",
+    question: "How does lead scoring actually work?",
     answer:
-      "It depends on your typical sales cycle — we design the sequence length and pacing around how your specific buyers actually decide.",
+      "Lead scoring assigns points based on behaviors and characteristics that indicate genuine buying intent, website visits, content downloads, email engagement, so leads crossing a certain threshold get flagged as sales-ready. We build the specific model around your actual buying signals.",
   },
   {
-    question: "Does lead nurturing automation connect to our CRM?",
+    question: "Can nurturing work across email, WhatsApp, and other channels together?",
     answer:
-      "Yes, nurture sequences connect to your CRM so lead scores and sales-ready flags update automatically as prospects engage.",
+      "Yes, multi-channel nurturing is a core part of our approach, coordinating touchpoints across the channels your specific prospects actually respond to, rather than relying on email alone.",
+  },
+  {
+    question: "How long before nurturing automation starts producing sales-ready leads?",
+    answer:
+      "Timeline depends on your sales cycle length, shorter B2C cycles can show results within weeks, while longer B2B cycles typically take a few months for nurturing to meaningfully move leads toward sales-readiness.",
   },
 ];
 
@@ -251,26 +256,27 @@ export default function LeadNurturingAutomation() {
       sectionLabel="Marketing Automation"
       label="Lead Nurturing Automation"
       icon={Filter}
-      description="A lead that isn't ready to buy today doesn't mean a lost sale. Our lead nurturing automation keeps prospects warm with timed content, reminders, and offers until they're ready to talk to your team."
-      heroTitle="Lead Nurturing Automation in India"
-      heroDescription="A lead that isn't ready to buy today doesn't mean a lost sale. Our lead nurturing automation keeps prospects warm with timed content, reminders, and offers until they're ready to talk to your team."
-      capabilitiesHeading="Built for Businesses Ready to Stop Losing Leads to Silence"
+      description="Lead nurturing automation built to move prospects toward a sale automatically, not leads that go cold waiting for follow-up."
+      heroTitle="Get Leads That Warm Themselves Up Before Sales Calls"
+      heroDescription="Lead nurturing automation built to move prospects toward a sale automatically, not leads that go cold waiting for follow-up."
+      heroCtaText="Get a Free Lead Nurturing Audit"
+      capabilitiesHeading="Built for Businesses Losing Leads to Slow Follow-Up"
       capabilities={CAPABILITIES}
-      serviceBreakdownHeading="Everything That Goes Into Our Lead Nurturing Automation"
+      serviceBreakdownHeading="Everything Between a New Lead and a Sales-Ready Prospect"
       serviceBreakdown={SERVICE_BREAKDOWN}
-      differentiatorsHeading="Why Businesses Trust Us to Nurture Their Leads"
+      differentiatorsHeading="Why Businesses Trust Us With Their Lead Nurturing"
       differentiators={DIFFERENTIATORS}
-      roadmapCarouselHeading="How We Turn Cold Leads Into Sales-Ready Conversations"
+      roadmapCarouselHeading="How We Keep Leads Warm Until They're Ready to Buy"
       roadmapCarouselSteps={ROADMAP_STEPS}
       showStats={false}
       localityHeading="Based in Prayagraj, Nurturing Leads Worldwide"
-      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we build every lead nurturing engagement, with the same rigor whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, sizing sequences to each business's actual sales cycle and lead volume. For businesses looking to nurture leads beyond India, we build lead nurturing automation remotely, working across time zones to reach the same standard of reliability regardless of location. Whether you're a startup nurturing your first batch of leads or an enterprise managing a long, multi-stakeholder sales cycle, our approach starts with understanding exactly how your buyers actually decide."
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every lead nurturing project, with the same attention to sales cycle nuance whether a client is nearby or across the world. We provide lead nurturing automation services for businesses across India, built around each business's specific buyer journey and sales process. For businesses looking for a lead nurturing agency beyond India, we support clients worldwide remotely, delivering the same b2b lead nurturing services standard of work regardless of time zone. Whether you're a B2B company in Prayagraj with a long sales cycle or a business anywhere else generating leads faster than sales can follow up, our approach starts with the same question: where are your leads actually going cold."
       faqs={FAQS}
       showWhyChooseUs={false}
-      ctaHeading="Ready to Stop Losing Leads to Silence?"
-      ctaText="Whether you need a simple nurture sequence for leads not ready to buy, a full re-engagement program for a dormant list, or scoring that tells your sales team exactly who's ready, the right setup depends on your actual sales cycle. Let's talk through your leads and scope what nurturing automation would actually involve."
+      ctaHeading="Ready for Leads That Nurture Themselves?"
+      ctaText="Whether your leads go cold waiting for manual follow-up, your sales team can't keep pace with lead volume, or you simply don't have a nurturing process in place yet, hoping leads stay warm on their own was never a real strategy. Let's talk through your sales cycle and scope what real lead nurturing automation would actually involve."
       ctaPrimaryText="Talk to a Lead Nurturing Specialist"
-      ctaSecondaryText="Get Your Free Lead Nurturing Consultation"
+      ctaSecondaryText="Get Your Free Lead Nurturing Audit"
     />
   );
 }

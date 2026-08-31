@@ -1,18 +1,18 @@
 import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Video,
-  Rocket,
-  Building2,
-  Building,
   ShoppingCart,
-  Handshake,
+  User,
+  Users,
+  MapPin,
+  Layers,
   RefreshCw,
 } from "lucide-react";
 
 export const metadata = {
-  title: "Reels & Short Video Marketing Services | BizzBuzz Creations",
+  title: "Reels & Short Video Marketing Agency | BizzBuzz Creations",
   description:
-    "Reels and short video marketing in India — scripted, shot, and edited scroll-stopping reels that bring your brand in front of new audiences daily, by BizzBuzz Creations.",
+    "BizzBuzz Creations is a Reels and short video marketing agency creating scroll-stopping content for brands across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/social-media-marketing/reels-short-video-marketing",
@@ -21,132 +21,132 @@ export const metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Rocket,
-    title: "Startups & Early-Stage Businesses",
-    desc: "Startups need reach fast without an existing following to build on. We produce reels built specifically to get new audiences discovering your brand early, without relying on years of organic growth.",
-  },
-  {
-    icon: Building2,
-    title: "Small & Medium Businesses",
-    desc: "SMBs often know short-form video matters but lack the in-house production capacity to do it consistently. We handle reel production sized for SMB budgets, keeping output steady without you hiring a video team.",
-  },
-  {
-    icon: Building,
-    title: "Enterprises & Multi-Location Brands",
-    desc: "Enterprises need short-form video produced consistently across multiple brands, products, or locations. We run reel production at enterprise scale, keeping quality and brand fit consistent across every output.",
-  },
-  {
     icon: ShoppingCart,
-    title: "Ecommerce & Retail Brands",
-    desc: "Ecommerce brands need product content that actually stops the scroll instead of looking like a static ad. We produce shoppable, trend-aware reels built to drive traffic straight to your product pages.",
+    title: "Ecommerce Brands Needing Product-Focused Reels",
+    desc: "Ecommerce brands need Reels that show products in action, not just static photos repurposed into video format. We provide instagram reels production services built around demonstrating real product value in the first few seconds.",
   },
   {
-    icon: Handshake,
-    title: "Agencies Needing a Video Production Partner",
-    desc: "Agencies serving clients need reliable short-form video production without building an internal studio. We work as a white-label reels partner, delivering production agencies can present as their own.",
+    icon: User,
+    title: "Personal Brands & Founders Needing Consistent Video Content",
+    desc: "Personal brands rely heavily on video to build genuine connection, but consistency is hard to maintain alone. We work with founders as a reels marketing agency partner, keeping their voice intact while producing content consistently.",
+  },
+  {
+    icon: Users,
+    title: "Businesses Needing UGC-Style Video Content",
+    desc: "Polished, ad-like videos often perform worse than authentic, UGC-style content that feels native to the platform. We work as a ugc video marketing agency, producing content that looks and feels genuinely native, not overly produced.",
+  },
+  {
+    icon: MapPin,
+    title: "Local Businesses Needing Local Short-Form Visibility",
+    desc: "Local businesses need short-form video that captures what makes their specific location or offering worth visiting. We produce short video marketing agency content that highlights genuine local appeal, not generic stock-style footage.",
+  },
+  {
+    icon: Layers,
+    title: "Brands Needing High-Volume, Consistent Reels Production",
+    desc: "Growing on short-form video usually requires volume and consistency that most internal teams can't sustain. We provide hire reels editor for business support with a production pipeline built to match the platform's actual demands.",
   },
   {
     icon: RefreshCw,
-    title: "Brands With Underperforming Video Content",
-    desc: "Brands producing video that isn't gaining traction need a structural fix, not just more uploads. We audit underperforming reels and rebuild concepts and editing style around what's actually working now.",
+    title: "Businesses Repurposing Long-Form Content Into Shorts",
+    desc: "Businesses already creating podcasts, webinars, or long-form video are sitting on content that could be repurposed into dozens of Reels. We handle video content marketing for social media that extracts far more value from content you've already made.",
   },
 ];
 
 const SERVICE_BREAKDOWN = [
   {
     number: "01",
-    title: "Reel Scripting & Concepting",
-    desc: "Reel concepts scripted around your brand and what's actually resonating in short-form video right now, not random trend-chasing.",
+    title: "Reels Strategy & Scripting",
+    desc: "A clear content strategy and script behind every Reel, not improvised filming without a plan.",
     ctaText: "Know Our Services",
     services: [
-      "Reel Concept Development",
-      "Script Writing",
-      "Hook & Opening Line Strategy",
-      "Storyboard Planning",
-      "Brand-Aligned Concepting",
-      "Trend-to-Concept Translation",
-      "Series & Format Planning",
-      "Concept Approval Workflow",
+      "Reels Content Strategy",
+      "Video Scripting",
+      "Trend Research & Adaptation",
+      "Hook Writing",
+      "Content Calendar Planning",
+      "Platform-Specific Strategy (Reels/Shorts/TikTok)",
+      "Storyboarding",
+      "Concept Development",
     ],
   },
   {
     number: "02",
-    title: "Shooting & Production",
-    desc: "The shoot handled by our team, whether on location or in-studio, capturing content built specifically for vertical, short-form formats.",
+    title: "Reels & Short Video Production",
+    desc: "Professional production covering everything from product demos to founder-led talking content.",
     ctaText: "Know Our Services",
     services: [
-      "On-Location Video Shoots",
-      "In-Studio Production",
-      "Vertical Format Filming",
-      "Lighting & Audio Setup",
-      "Talent & Presenter Coordination",
-      "Product Shoot Direction",
-      "B-Roll Capture",
-      "Multi-Take Production Management",
+      "Instagram Reels Production",
+      "YouTube Shorts Production",
+      "Product Video Production",
+      "Behind-the-Scenes Content",
+      "Talking-Head Video Production",
+      "Location & Studio Shoots",
+      "Founder-Led Video Content",
+      "Multi-Format Video Shoots",
     ],
   },
   {
     number: "03",
-    title: "Editing & Post-Production",
-    desc: "Fast-paced editing, captions, and sound design applied to keep viewers watching until the end, not scrolling past in seconds.",
+    title: "UGC-Style Video Content",
+    desc: "Authentic-feeling content that performs the way native, unpolished video often outperforms traditional ads.",
     ctaText: "Know Our Services",
     services: [
-      "Fast-Paced Video Editing",
-      "Caption & Subtitle Design",
-      "Sound Design & Music Selection",
-      "Color Grading",
-      "Motion Graphics & Text Overlays",
-      "Hook Optimization Editing",
-      "Multi-Version Cutdowns",
-      "Final Quality Review",
+      "UGC Video Production",
+      "UGC Creator Sourcing",
+      "Authentic-Style Content Direction",
+      "Testimonial-Style Videos",
+      "Unboxing & Review-Style Content",
+      "UGC Content Editing",
+      "UGC Campaign Management",
+      "UGC Usage Rights Management",
     ],
   },
   {
     number: "04",
-    title: "Trend & Audio Tracking",
-    desc: "Trending audio and formats tracked across platforms and adapted to fit your brand authentically, not force-fit irrelevant trends.",
+    title: "Editing & Post-Production",
+    desc: "Fast, polished editing that keeps content moving at the pace short-form video actually demands.",
     ctaText: "Know Our Services",
     services: [
-      "Trending Audio Monitoring",
-      "Format Trend Tracking",
-      "Trend Relevance Filtering",
-      "Brand-Fit Trend Adaptation",
-      "Rapid Trend Response",
-      "Platform Algorithm Awareness",
-      "Trend Performance Analysis",
-      "Trend Calendar Planning",
+      "Reels Editing",
+      "Motion Graphics & Text Overlays",
+      "Sound & Music Selection",
+      "Color Grading",
+      "Caption & Subtitle Addition",
+      "Transition & Effects Editing",
+      "Multi-Version Editing (Platform Sizes)",
+      "Rapid Turnaround Editing",
     ],
   },
   {
     number: "05",
-    title: "Multi-Platform Distribution",
-    desc: "Reels formatted and distributed across Instagram, Facebook, and other short-form platforms to maximize reach from one shoot.",
+    title: "Content Repurposing",
+    desc: "Getting significantly more value from content you've already created, rather than starting from zero every time.",
     ctaText: "Know Our Services",
     services: [
-      "Cross-Platform Formatting",
-      "Instagram Reels Distribution",
-      "Facebook Reels Distribution",
-      "YouTube Shorts Distribution",
-      "Platform-Specific Optimization",
-      "Repurposing for Multiple Channels",
-      "Distribution Scheduling",
-      "Platform Performance Comparison",
+      "Long-Form to Short-Form Repurposing",
+      "Podcast-to-Reels Repurposing",
+      "Webinar Clip Extraction",
+      "Blog-to-Video Repurposing",
+      "Multi-Platform Reformatting",
+      "Evergreen Content Recycling",
+      "Batch Repurposing Workflows",
+      "Content Library Management",
     ],
   },
   {
     number: "06",
-    title: "Reach & Engagement Tracking",
-    desc: "Views, completion rate, and engagement tracked to see which reel styles are actually bringing in new audiences.",
+    title: "Reels Performance & Distribution",
+    desc: "Distribution and optimization that ensures your Reels are actually seen, not just posted and forgotten.",
     ctaText: "Know Our Services",
     services: [
-      "View & Reach Tracking",
-      "Completion Rate Analysis",
-      "Engagement Rate Reporting",
-      "New Audience Growth Tracking",
-      "Content Style Performance Comparison",
-      "Monthly Performance Reports",
-      "Format Effectiveness Analysis",
-      "Strategy Refinement Based on Data",
+      "Reels Performance Analytics",
+      "Posting Time Optimization",
+      "Hashtag & Caption Optimization",
+      "Cross-Platform Distribution",
+      "A/B Testing Hooks",
+      "Monthly Performance Reporting",
+      "Trend Performance Analysis",
+      "Strategy Refinement",
     ],
   },
 ];
@@ -154,94 +154,99 @@ const SERVICE_BREAKDOWN = [
 const ROADMAP_STEPS = [
   {
     number: "01",
-    title: "Concept & Script Development",
-    desc: "We develop reel concepts and scripts aligned with your brand voice and what's genuinely performing in short-form video right now.",
+    title: "Brand & Content Discovery",
+    desc: "We start by understanding your brand, audience, and any existing content, identifying what kind of short-form video actually fits your specific business.",
   },
   {
     number: "02",
-    title: "Shoot Planning",
-    desc: "We plan the shoot logistics, whether on location or in-studio, and prepare everything needed before filming begins.",
+    title: "Strategy & Scripting",
+    desc: "We plan content pillars and script individual Reels around strong hooks, ensuring every piece has a clear structure before filming begins.",
   },
   {
     number: "03",
-    title: "Shoot & Production",
-    desc: "Our team shoots content built specifically for vertical, short-form formats, whether on location or in-studio.",
+    title: "Filming & Production",
+    desc: "We produce the video, whether that's a studio shoot, location filming, or founder-led talking content, following the agreed script and style.",
   },
   {
     number: "04",
     title: "Editing & Post-Production",
-    desc: "Reels are edited with fast pacing, captions, and sound design to keep viewers watching until the end.",
+    desc: "We edit quickly, adding captions, music, and motion graphics as needed, keeping pacing tight for how people actually watch short-form video.",
   },
   {
     number: "05",
-    title: "Publishing & Distribution",
-    desc: "Finished reels are published and distributed across relevant platforms to maximize reach from each shoot.",
+    title: "Posting & Distribution",
+    desc: "We publish content at optimal times across relevant platforms, ensuring each Reel reaches your audience where they're actually active.",
   },
   {
     number: "06",
-    title: "Track & Refine",
-    desc: "We track views, completion rate, and engagement, refining future reel concepts based on what's actually working.",
+    title: "Performance Tracking & Optimization",
+    desc: "We track which content performs best and refine future scripts and formats based on real data, not assumption.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "Built for Short-Form First",
-    desc: "Content is scripted and shot specifically for vertical, short-form video, not repurposed from other formats.",
+    title: "Reels Built to Perform, Not Just Look Good",
+    desc: "Every Reel is built around a hook and structure proven to hold attention, rather than treating production quality alone as the goal, since a beautifully shot Reel that loses viewers in the first second still fails.",
   },
   {
     number: "02",
-    title: "Trend-Aware, Brand-Authentic",
-    desc: "We adapt trending formats to fit your brand genuinely, instead of force-fitting irrelevant trends onto your content.",
+    title: "Consistent Production Volume Without Sacrificing Quality",
+    desc: "We build a repeatable production pipeline that sustains the posting frequency short-form video demands, without each individual piece feeling rushed or lower quality than the last.",
   },
   {
     number: "03",
-    title: "Full Production Handled",
-    desc: "From scripting to shooting to editing, the entire reel production process runs under one roof with one point of contact.",
+    title: "UGC-Style Content That Builds Genuine Trust",
+    desc: "We understand why authentic, native-feeling content frequently outperforms polished ads, and produce accordingly, rather than defaulting to overly produced video that feels like an obvious advertisement.",
   },
   {
     number: "04",
-    title: "Reach-Driven Strategy",
-    desc: "Short-form video drives the most reach today, our strategy is built around getting your brand in front of new audiences daily.",
+    title: "Fast Turnaround for Trend-Sensitive Content",
+    desc: "Trends move quickly on short-form platforms, and we build workflows fast enough to capture relevant moments while they're still culturally current, not weeks after the trend has already passed.",
   },
   {
     number: "05",
-    title: "Performance Tracked",
-    desc: "We measure views, completion rate, and engagement to double down on the reel styles genuinely working for your brand.",
+    title: "Repurposing That Gets More Value From Content You Already Have",
+    desc: "We extract Reels-ready clips from podcasts, webinars, and other existing content, getting significantly more mileage from material you've already invested in producing.",
   },
   {
     number: "06",
-    title: "One Shoot, Multiple Platforms",
-    desc: "Content gets formatted and distributed across multiple short-form platforms, maximizing reach from every production day.",
+    title: "Performance Tracking That Shows What's Actually Working",
+    desc: "We track which hooks, formats, and topics are actually performing, refining future content based on real data rather than continuing to guess at what your audience wants to see.",
   },
 ];
 
 const FAQS = [
   {
-    question: "Do I need to provide footage, or do you shoot everything?",
+    question: "How much does Reels and short video production cost in India?",
     answer:
-      "Our team can handle the full shoot, whether on location or in-studio, or work with footage you already have — whichever fits your setup better.",
+      "Cost depends on volume and production style, a few UGC-style Reels per month cost less than a full studio production schedule. We scope pricing after understanding your specific content needs and posting frequency, rather than offering a flat rate upfront.",
   },
   {
-    question: "How many reels do you produce per month?",
+    question: "Do you handle filming, or just editing existing footage?",
     answer:
-      "Volume depends on your plan and goals — we'll recommend a realistic, sustainable production schedule during onboarding.",
+      "We handle both, full production including filming, and editing-only services for businesses that already have raw footage. We scope this based on what you actually need, rather than assuming every client wants the same level of involvement.",
   },
   {
-    question: "Do reels work for every kind of business?",
+    question: "Can you produce UGC-style content without hiring outside creators?",
     answer:
-      "Most businesses can benefit from short-form video, though the content style and platform focus will vary based on your industry and audience.",
+      "Yes, we can produce UGC-style content in-house using your products or team, or source creators when a genuinely external voice better suits the content. We scope this based on what will actually feel most authentic for your specific brand.",
   },
   {
-    question: "How do you decide which trends to use?",
+    question: "How many Reels can you produce per month?",
     answer:
-      "We track trending audio and formats, then adapt only the ones that genuinely fit your brand voice, rather than chasing every trend.",
+      "Volume depends on your plan and content complexity, ranging from a handful of polished pieces to a higher-volume, faster-turnaround schedule. We agree on a realistic, sustainable volume during strategy planning rather than committing to more than can be produced well.",
   },
   {
-    question: "How is reels marketing priced?",
+    question: "Can you repurpose our existing long-form content into Reels?",
     answer:
-      "Pricing depends on production volume and complexity — we'll give you a clear, tailored quote based on what you need.",
+      "Yes, repurposing podcasts, webinars, or other long-form content into short-form clips is a core part of what we do, often producing significantly more Reels-ready material than starting from scratch would allow within the same budget.",
+  },
+  {
+    question: "How do you decide what type of Reels will actually perform?",
+    answer:
+      "We base this on platform trends, your specific audience's behavior, and ongoing performance data from your own account, rather than applying a generic template that ignores what your particular audience actually responds to.",
   },
 ];
 
@@ -251,27 +256,27 @@ export default function ReelsShortVideoMarketing() {
       sectionLabel="Social Media Marketing"
       label="Reels & Short Video Marketing"
       icon={Video}
-      description="Scroll-stopping reels scripted, shot, and edited to bring your brand in front of new audiences daily, not just recycled content."
-      heroTitle="Get Reels That Actually Bring You New Audiences Daily"
-      heroDescription="Scroll-stopping reels scripted, shot, and edited to bring your brand in front of new audiences daily, not just recycled content."
-      heroCtaText="Get a Free Reels Marketing Consultation"
-      capabilitiesHeading="Built for Brands Ready to Be Seen by New Audiences"
+      description="Reels and short-form video built to stop the scroll and drive real engagement, not just views, produced for how people actually watch."
+      heroTitle="Get Reels That Stop the Scroll and Drive Real Results"
+      heroDescription="Reels and short-form video built to stop the scroll and drive real engagement, not just views, produced for how people actually watch."
+      heroCtaText="Get a Free Reels Strategy Consultation"
+      capabilitiesHeading="Built for Brands Competing for Attention in Three Seconds"
       capabilities={CAPABILITIES}
-      serviceBreakdownHeading="Everything That Goes Into Our Reels & Video Marketing"
+      serviceBreakdownHeading="Everything Between a Video Idea and a Reel That Performs"
       serviceBreakdown={SERVICE_BREAKDOWN}
-      differentiatorsHeading="What Makes Our Reels & Video Marketing Different"
+      differentiatorsHeading="Why Brands Trust Us With Their Reels & Video Content"
       differentiators={DIFFERENTIATORS}
-      roadmapCarouselHeading="Our Reels & Video Marketing Process"
+      roadmapCarouselHeading="How We Turn an Idea Into a Reel That Actually Gets Watched"
       roadmapCarouselSteps={ROADMAP_STEPS}
       showStats={false}
-      localityHeading="Based in Prayagraj, Producing Reels Nationally"
-      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we produce every reel, with the same production standard whether a client is nearby or across the country. We produce reels and short-form video for startups, SMBs, and enterprises across India, sizing production volume to each brand's actual content needs. Whether you're a startup in Prayagraj needing your first batch of reels or an ecommerce brand anywhere else scaling shoppable video content, our approach starts with the same question: what will actually stop someone from scrolling past."
+      localityHeading="Based in Prayagraj, Producing Reels for Brands Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every video project, with the same attention to pacing and hooks whether a client is nearby or across the world. We work as a reels marketing agency for brands across India, providing instagram reels production services built around each brand's specific audience and products. For businesses looking to hire a reels editor beyond India, we support clients worldwide remotely, delivering the same ugc video marketing agency standard of work regardless of time zone. Whether you're a local business in Prayagraj or an ecommerce brand anywhere else scaling video content, our approach starts with the same question: what will actually make someone stop scrolling for your content specifically."
       faqs={FAQS}
       showWhyChooseUs={false}
-      ctaHeading="Ready for Reels That Actually Get Watched?"
-      ctaText="Whether your current videos aren't gaining traction, you need consistent production without building an in-house team, or you're starting short-form video from scratch, uploading alone was never going to build real reach. Let's talk through your brand and scope what reels production would actually involve."
-      ctaPrimaryText="Talk to a Reels Marketing Specialist"
-      ctaSecondaryText="Get Your Free Reels Marketing Consultation"
+      ctaHeading="Ready for Reels That Actually Drive Business Results?"
+      ctaText="Whether you need consistent product-focused Reels, UGC-style content that builds trust, or want to repurpose existing long-form content into dozens of clips, views alone were never the actual goal. Let's talk through your content and scope what a real Reels strategy would actually involve."
+      ctaPrimaryText="Talk to a Reels & Video Marketing Specialist"
+      ctaSecondaryText="Get Your Free Reels Strategy Consultation"
     />
   );
 }

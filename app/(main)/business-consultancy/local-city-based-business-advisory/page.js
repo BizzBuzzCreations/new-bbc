@@ -10,9 +10,9 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "Local & City-Based Business Advisory | BizzBuzz Creations",
+  title: "Local Business Advisor & Consultant | BizzBuzz Creations",
   description:
-    "Local and city-based business advisory in India — hands-on guidance grounded in the Prayagraj and Allahabad market landscape, by BizzBuzz Creations.",
+    "BizzBuzz Creations is a local business advisor helping small businesses in Prayagraj and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/business-consultancy/local-city-based-business-advisory",
@@ -219,29 +219,34 @@ const DIFFERENTIATORS = [
 
 const FAQS = [
   {
-    question: "Can I find a business consultant in Prayagraj or Allahabad?",
+    question: "How much does local business advisory cost in India?",
     answer:
-      "Yes, BizzBuzz Creations is a local business consulting firm that understands the market well and can work with you in person when needed.",
+      "Cost depends on scope and how ongoing the relationship is, a single strategic session costs less than ongoing monthly advisory. We scope pricing after understanding your specific needs, rather than offering a flat rate upfront.",
   },
   {
-    question: "Is local advisory different from general business consulting?",
+    question: "Do you only advise businesses in Prayagraj, or other cities too?",
     answer:
-      "Yes, local advisory is grounded in genuine knowledge of the specific city or region's market dynamics and customer behavior, not generalized national advice.",
+      "We're based in Prayagraj and have deep local market knowledge here, while also supporting businesses across India and worldwide remotely, adapting our approach to each specific local market we work with.",
   },
   {
-    question: "Do you only work with businesses in Prayagraj?",
+    question: "What's the difference between a local advisor and a general consultant?",
     answer:
-      "No, while we're rooted in Prayagraj with strong local market knowledge, we also work with growing companies across India.",
+      "A local advisor brings genuine, grounded knowledge of a specific city or region's market dynamics, customer behavior, and competitive landscape, rather than generic advice that could theoretically apply anywhere.",
   },
   {
-    question: "Can we meet in person for consulting sessions?",
+    question: "Can you help a business expand from one city to another?",
     answer:
-      "Yes, we offer in-person meetings when needed for businesses that value face-to-face conversation over purely remote consulting.",
+      "Yes, regional expansion advisory is a core part of what we offer, helping businesses navigate the genuine differences between markets when expanding into a new city or region.",
   },
   {
-    question: "How much does local business advisory cost?",
+    question: "Is this advisory only for startups, or established local businesses too?",
     answer:
-      "It depends on what you need — some businesses need a one-time strategy session, while others need ongoing support with flexible pricing.",
+      "We work with both, scoping our approach for early-stage local startups and for established businesses looking for growth guidance, rather than serving only one stage of business.",
+  },
+  {
+    question: "How often would we actually meet or check in?",
+    answer:
+      "This depends on your specific engagement, some clients prefer regular monthly check-ins, while others engage us for focused, specific projects. We agree on a cadence that fits your actual needs.",
   },
 ];
 

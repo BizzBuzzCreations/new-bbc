@@ -10,9 +10,9 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "Google & Search Ads Management | BizzBuzz Creations",
+  title: "Google Ads Management Services | BizzBuzz Creations",
   description:
-    "Google and search ads management in India — search, display, and shopping campaigns built around real buyer intent, by BizzBuzz Creations.",
+    "BizzBuzz Creations is a Google Ads agency delivering measurable PPC campaigns for businesses across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/paid-marketing/google-search-ads-management",
@@ -219,29 +219,34 @@ const DIFFERENTIATORS = [
 
 const FAQS = [
   {
-    question: "What's the difference between search, shopping, and display ads?",
+    question: "How much does Google Ads management cost in India?",
     answer:
-      "Search ads appear in Google search results for specific queries, shopping ads showcase product listings, and display ads appear as visual banners across websites — we use each where it fits your goals.",
+      "Cost typically includes both our management fee and your ad spend budget, which are kept separate. We scope management pricing after understanding your goals, industry, and competition level, since campaign complexity varies significantly between a simple local campaign and a full ecommerce account.",
   },
   {
-    question: "How much should I budget for Google Ads?",
+    question: "What's a realistic budget to start with Google Ads?",
     answer:
-      "Budget depends on your industry and competition — we recommend a realistic starting budget and optimize allocation as performance data comes in.",
+      "Realistic starting budgets vary significantly by industry and competition, a local service business needs far less than a competitive ecommerce category. We help establish a realistic budget based on your specific market during the initial strategy discussion.",
   },
   {
-    question: "How quickly do Google Ads start generating leads?",
+    question: "Do you manage Google Shopping ads for ecommerce stores?",
     answer:
-      "Search campaigns can start generating clicks and leads within days of launch, though optimization improves results significantly over the following weeks.",
+      "Yes, Google Shopping ads management is a core part of our service, including product feed optimization and Merchant Center management, treated with the same strategic attention as search campaigns rather than as an afterthought.",
   },
   {
-    question: "Do you write the ad copy and keyword lists?",
+    question: "How long before Google Ads start showing results?",
     answer:
-      "Yes, we handle keyword research, ad copywriting, and ongoing refinement as part of campaign management.",
+      "Initial data usually comes in within the first one to two weeks, though meaningful optimization typically takes four to six weeks as the account gathers enough data to perform efficiently. We set realistic expectations during onboarding based on your budget and industry.",
   },
   {
-    question: "How do you report on ad performance?",
+    question: "Can you fix an underperforming Google Ads account we already have?",
     answer:
-      "We provide transparent reporting on clicks, conversions, and cost per lead, so you always know what your spend is generating.",
+      "Yes, auditing and rebuilding underperforming accounts is a core part of what we do. We review keyword targeting, account structure, and landing page alignment to identify what's actually causing poor performance before making changes.",
+  },
+  {
+    question: "Do you handle landing pages, or just the ad campaigns?",
+    answer:
+      "We review and optimize landing page alignment as part of our service, since a well-targeted ad sending traffic to a poorly converting page wastes budget regardless of targeting quality. We're happy to build new landing pages or optimize existing ones.",
   },
 ];
 

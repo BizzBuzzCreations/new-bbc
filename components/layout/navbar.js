@@ -100,7 +100,7 @@ const SERVICE_LINKS = [
       { label: "Custom AI Agents & Chatbots", href: "/ai-solutions/custom-ai-agents-chatbots" },
       { label: "AI Content & Generative Engines", href: "/ai-solutions/ai-content-generative-engines" },
       { label: "Workflow & Process Automation", href: "/ai-solutions/workflow-process-automation" },
-      { label: "GEO (Generative Engine Optimization)", href: "/ai-solutions/generative-engine-optimization" },
+      { label: "AI Strategy & Implementation Consulting", href: "/ai-solutions/generative-engine-optimization" },
     ],
   },
   {

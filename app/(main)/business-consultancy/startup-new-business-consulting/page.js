@@ -10,9 +10,9 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "Startup & New Business Consulting | BizzBuzz Creations",
+  title: "Startup & New Business Consultant | BizzBuzz Creations",
   description:
-    "Startup and new business consulting in India — guidance through business models, funding readiness, and go-to-market strategy, by BizzBuzz Creations.",
+    "BizzBuzz Creations is a startup business consultant helping founders launch and grow across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/business-consultancy/startup-new-business-consulting",
@@ -219,29 +219,34 @@ const DIFFERENTIATORS = [
 
 const FAQS = [
   {
-    question: "I only have an idea, no business yet — can you still help?",
+    question: "How much does startup consulting cost in India?",
     answer:
-      "Yes, we regularly work with founders at the idea stage, helping validate the business model before significant time and money go in.",
+      "Cost depends on scope, a focused business plan engagement costs less than ongoing advisory covering validation, planning, and growth together. We scope pricing after understanding your specific needs, rather than offering a flat rate upfront.",
   },
   {
-    question: "Do you help with fundraising directly?",
+    question: "Can you help validate my business idea before I invest in it?",
     answer:
-      "We help you get pitch-ready and understand what investors typically expect, though direct fundraising introductions depend on the specific engagement.",
+      "Yes, business idea validation is one of our core services, helping you assess genuine market demand before committing significant time or money to an unproven concept.",
   },
   {
-    question: "How much does startup consulting cost?",
+    question: "Do you help write a full business plan, or just review one?",
     answer:
-      "It depends on the scope of support needed — we offer flexible engagements based on your stage and goals.",
+      "We do both, writing complete business plans from scratch or reviewing and refining a plan you've already drafted, depending on what stage you're at and what you actually need.",
   },
   {
-    question: "Can you help with co-founder or team structure decisions?",
+    question: "Can you help us prepare for fundraising and investor pitches?",
     answer:
-      "Yes, we advise on roles, equity, and structure for founding teams, helping avoid common disputes that derail promising startups.",
+      "Yes, fundraising and investor readiness support is a core part of what we offer, covering pitch development, financial storytelling, and preparation for genuine investor scrutiny.",
   },
   {
-    question: "How long does startup consulting typically last?",
+    question: "Is this consulting only for tech startups, or any small business?",
     answer:
-      "It varies — some founders need a focused engagement around launch, while others continue working with us through early growth stages.",
+      "We work with startups and small businesses across various industries, not just tech, scoping our guidance to fit whatever kind of business you're actually building.",
+  },
+  {
+    question: "How long does startup consulting typically continue?",
+    answer:
+      "Many founders start with a focused engagement, like validation or a business plan, then continue with ongoing advisory as new decisions come up during growth. We scope this based on what fits your specific situation.",
   },
 ];
 

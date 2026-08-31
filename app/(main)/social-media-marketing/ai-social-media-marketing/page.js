@@ -1,18 +1,18 @@
 import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Sparkles,
-  Rocket,
-  Building2,
-  Building,
+  Zap,
+  BarChart3,
+  Clock,
   ShoppingCart,
+  ShieldCheck,
   Handshake,
-  RefreshCw,
 } from "lucide-react";
 
 export const metadata = {
-  title: "AI Social Media Marketing Services | BizzBuzz Creations",
+  title: "AI Social Media Marketing Agency | BizzBuzz Creations",
   description:
-    "AI social media marketing in India — smarter content planning, trend prediction, and automation for faster results and lower cost per lead, by BizzBuzz Creations.",
+    "BizzBuzz Creations is an AI social media marketing agency combining automation and strategy for brands across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/social-media-marketing/ai-social-media-marketing",
@@ -21,132 +21,132 @@ export const metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Rocket,
-    title: "Startups & Early-Stage Businesses",
-    desc: "Startups need to move fast on content without a large team to plan and produce it manually. We use AI-assisted planning to help startups build a content engine early, without the usual trial-and-error ramp-up.",
+    icon: Zap,
+    title: "Brands Needing Faster Content Production",
+    desc: "Manual content creation often can't keep pace with how much brands need to post to stay visible. We provide ai content creation for social media that speeds up production without turning your brand voice generic.",
   },
   {
-    icon: Building2,
-    title: "Small & Medium Businesses",
-    desc: "SMBs often can't justify a full-time strategist to track trends and plan content daily. We size AI-backed social media marketing for SMB budgets, giving smaller teams data-driven planning without the overhead.",
+    icon: BarChart3,
+    title: "Businesses Wanting Data-Driven Social Strategy",
+    desc: "Many social strategies are based on guesswork rather than actual audience data and trend patterns. We use ai social media management tools to base strategy on real insight, not intuition alone.",
   },
   {
-    icon: Building,
-    title: "Enterprises & Large Organizations",
-    desc: "Enterprises need consistent, data-informed content decisions across multiple brands and markets. We run AI-assisted social media programs at enterprise scale, keeping strategy consistent while adapting to each market.",
+    icon: Clock,
+    title: "Teams Overwhelmed by Manual Posting & Reporting",
+    desc: "Internal teams often spend more time on repetitive scheduling and reporting tasks than actual strategy. We provide automated social media posting service support that frees up time for the strategic work that actually needs a human.",
   },
   {
     icon: ShoppingCart,
-    title: "Ecommerce & Retail Brands",
-    desc: "Ecommerce brands need to catch trends and shifts in shopper behavior before competitors do. We use AI-powered trend and performance analysis to keep product content ahead of what's actually resonating.",
+    title: "Ecommerce Brands Needing AI-Personalized Content",
+    desc: "Ecommerce brands benefit from content and targeting personalized to different audience segments at a scale manual work can't match. We use AI-assisted personalization to tailor content and targeting without losing brand consistency.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Businesses Curious About AI But Wary of Losing Brand Voice",
+    desc: "Many brands want AI's speed but worry about content sounding generic or off-brand. We combine ai powered social media management with human review on every piece, keeping your specific voice intact.",
   },
   {
     icon: Handshake,
-    title: "Agencies Needing an AI-Assisted Fulfillment Partner",
-    desc: "Agencies want the efficiency of AI tools without building that capability in-house. We work as a white-label AI social media partner, handling AI-backed planning and execution agencies can present as their own.",
-  },
-  {
-    icon: RefreshCw,
-    title: "Businesses Whose Content Has Stopped Performing",
-    desc: "Businesses seeing declining engagement despite consistent posting need a smarter approach, not just more volume. We use AI-powered analysis to diagnose what's actually underperforming and rebuild the content strategy around it.",
+    title: "Agencies & Marketing Teams Needing AI-Assisted Workflows",
+    desc: "Agencies and internal marketing teams increasingly need AI-assisted workflows to handle growing content demands efficiently. We work as an ai social media strategy agency partner, integrating AI tools into existing team workflows without replacing strategic judgment.",
   },
 ];
 
 const SERVICE_BREAKDOWN = [
   {
     number: "01",
-    title: "AI-Assisted Content Planning",
-    desc: "AI tools help identify content ideas and formats likely to perform, giving our strategists a data-backed starting point instead of guesswork.",
+    title: "AI-Assisted Content Strategy",
+    desc: "Strategy informed by real data and trend analysis, not just automated guesswork applied to every brand equally.",
     ctaText: "Know Our Services",
     services: [
-      "AI-Assisted Content Ideation",
+      "AI-Driven Content Strategy",
+      "Trend Prediction & Analysis",
+      "Audience Insight Generation",
+      "Content Gap Analysis",
+      "AI-Assisted Competitor Research",
       "Data-Backed Content Planning",
-      "Content Format Recommendations",
-      "AI Content Calendar Support",
-      "Audience Interest Analysis",
-      "Content Gap Identification",
-      "AI-Assisted Copywriting Support",
-      "Strategist-Reviewed Output",
+      "Platform Performance Prediction",
+      "Strategy Refinement Using AI Insights",
     ],
   },
   {
     number: "02",
-    title: "Early Trend Prediction",
-    desc: "AI-powered trend analysis helps us spot emerging content formats and topics early, so your brand posts before a trend peaks, not after.",
+    title: "AI Content Creation & Copywriting",
+    desc: "Faster content production using AI trained on your specific brand voice, reviewed before anything gets published.",
     ctaText: "Know Our Services",
     services: [
-      "AI-Powered Trend Monitoring",
-      "Emerging Format Identification",
-      "Audio & Sound Trend Tracking",
-      "Topic Trend Analysis",
-      "Early Adoption Content Planning",
-      "Platform Trend Alerts",
-      "Trend Relevance Filtering",
-      "Trend-to-Content Translation",
+      "AI-Generated Content Drafts",
+      "AI-Assisted Caption Writing",
+      "AI Image & Design Support",
+      "AI Video Script Generation",
+      "Brand-Voice-Trained AI Content",
+      "Multi-Format Content Generation",
+      "Rapid Content Iteration",
+      "AI Content Editing & Refinement",
     ],
   },
   {
     number: "03",
-    title: "Smart Posting Time Optimization",
-    desc: "Engagement data and AI recommendations used to post when your specific audience is most active, not a generic best-practice time.",
+    title: "AI-Powered Analytics & Insights",
+    desc: "Predictive insight into what's likely to perform, based on real data rather than assumption alone.",
     ctaText: "Know Our Services",
     services: [
-      "AI-Based Posting Time Analysis",
-      "Audience Activity Modeling",
-      "Platform-Specific Timing Optimization",
-      "Automated Schedule Recommendations",
-      "Time Zone-Aware Scheduling",
-      "Engagement Window Testing",
-      "Posting Cadence Optimization",
-      "Timing Performance Reviews",
+      "AI Social Media Management Tools",
+      "Predictive Performance Analytics",
+      "Sentiment Analysis",
+      "Automated Reporting",
+      "Real-Time Trend Alerts",
+      "Audience Behavior Insights",
+      "Content Performance Prediction",
+      "Competitive Intelligence Tracking",
     ],
   },
   {
     number: "04",
-    title: "Social Media Automation",
-    desc: "Routine scheduling and workflow tasks get automated, freeing our team's time for creative strategy and genuine engagement.",
+    title: "Automated Scheduling & Posting",
+    desc: "An automated social media posting service that keeps content live consistently without manual scheduling effort.",
     ctaText: "Know Our Services",
     services: [
-      "Automated Post Scheduling",
-      "Workflow Automation Setup",
-      "Content Approval Automation",
+      "Automated Social Media Posting",
+      "AI-Optimized Posting Times",
+      "Multi-Platform Auto-Scheduling",
+      "Content Queue Management",
+      "Automated A/B Testing",
+      "Smart Content Recycling",
+      "Automated Approval Workflows",
       "Cross-Platform Publishing Automation",
-      "Automated Performance Alerts",
-      "Reporting Automation",
-      "Engagement Trigger Automation",
-      "Automation Tool Integration",
     ],
   },
   {
     number: "05",
-    title: "AI-Powered Performance Analysis",
-    desc: "AI tools help surface patterns in what's converting across your content, sharpening the strategy faster than manual review alone.",
+    title: "AI Chatbots & Engagement Automation",
+    desc: "Automated responses that handle common questions instantly, while genuine conversations still reach a real person.",
     ctaText: "Know Our Services",
     services: [
-      "AI-Powered Analytics Review",
-      "Content Pattern Recognition",
-      "Performance Anomaly Detection",
-      "Predictive Performance Modeling",
-      "Cross-Content Comparison Analysis",
-      "AI-Assisted Reporting",
-      "Strategy Recommendation Generation",
-      "Data-Driven Strategy Refinement",
+      "AI Chatbot Setup for Social Media",
+      "Automated DM & Comment Responses",
+      "Lead Qualification Chatbots",
+      "FAQ Automation",
+      "Automated Engagement Triggers",
+      "AI-Assisted Community Management",
+      "Response Time Optimization",
+      "Chatbot Performance Monitoring",
     ],
   },
   {
     number: "06",
-    title: "Human-Reviewed AI Output",
-    desc: "Every AI-assisted recommendation and piece of content reviewed by our team before it goes live, keeping quality and brand voice intact.",
+    title: "Human Oversight, Editing & Brand Control",
+    desc: "Every piece of AI-assisted content reviewed by a real person before it represents your brand publicly.",
     ctaText: "Know Our Services",
     services: [
-      "Human Editorial Review",
-      "Brand Voice Quality Control",
-      "AI Output Fact-Checking",
-      "Tone Consistency Checks",
-      "Final Approval Workflows",
-      "Creative Judgment Layer",
-      "AI-Human Collaboration Process",
-      "Quality Assurance Standards",
+      "Human Review of AI Content",
+      "Brand Voice Consistency Checks",
+      "Quality Control Workflows",
+      "Strategic Human Oversight",
+      "AI Output Editing",
+      "Brand Safety Monitoring",
+      "Escalation Handling",
+      "Ongoing AI Tool Training",
     ],
   },
 ];
@@ -154,94 +154,99 @@ const SERVICE_BREAKDOWN = [
 const ROADMAP_STEPS = [
   {
     number: "01",
-    title: "AI Audit & Data Setup",
-    desc: "We connect AI tools to your existing social data to establish a baseline of what's currently working across your content.",
+    title: "Brand & Workflow Discovery",
+    desc: "We start by understanding your brand voice, current workflow, and where AI could genuinely help, rather than assuming automation fits every part of your process equally.",
   },
   {
     number: "02",
-    title: "AI-Backed Content Planning",
-    desc: "AI-assisted trend and performance analysis feeds into a content calendar, refined by our strategists before anything is scheduled.",
+    title: "AI Tool & Strategy Selection",
+    desc: "We select AI tools suited to your specific needs, training them on your brand voice and existing content where relevant.",
   },
   {
     number: "03",
-    title: "Human Review & Approval",
-    desc: "Every AI-assisted recommendation gets reviewed by our team, checking tone, accuracy, and brand fit before anything is finalized.",
+    title: "Content Generation & Human Review",
+    desc: "AI assists with drafting and ideation, with every piece reviewed and refined by a real person before anything gets published.",
   },
   {
     number: "04",
-    title: "Automated Scheduling & Posting",
-    desc: "Approved content gets scheduled and posted at data-optimized times using automation tools, reducing delays and missed windows.",
+    title: "Automated Scheduling & Engagement",
+    desc: "We set up automated posting and engagement workflows where appropriate, keeping human oversight on anything requiring genuine judgment.",
   },
   {
     number: "05",
-    title: "AI-Assisted Optimization",
-    desc: "We continuously feed performance data back into our AI tools to refine future content and targeting decisions.",
+    title: "Performance Tracking & Insights",
+    desc: "We track performance using AI-powered analytics, identifying patterns and opportunities that inform ongoing strategy adjustments.",
   },
   {
     number: "06",
-    title: "Monthly Strategy Review",
-    desc: "We review AI-surfaced patterns and human judgment together each month, adjusting strategy based on what's actually working.",
+    title: "Ongoing Refinement & Optimization",
+    desc: "We continuously refine which AI applications are genuinely adding value, adjusting the balance of automation and human input as needed.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "AI Where It Genuinely Helps",
-    desc: "We use AI for planning, trend spotting, and analysis, while creative judgment and brand voice stay human-led throughout.",
+    title: "AI Speed Without Losing Your Brand Voice",
+    desc: "We train AI tools specifically on your brand's tone and style, and review output before publishing, so speed doesn't come at the cost of your content sounding generic or off-brand.",
   },
   {
     number: "02",
-    title: "Faster, Lower-Cost Results",
-    desc: "AI-assisted planning and automation speed up execution, helping bring down cost per lead over time as the account matures.",
+    title: "Strategy Backed by Data, Not Just Automated Guesswork",
+    desc: "Our use of ai social media management tools focuses on genuine insight, trend prediction, audience behavior, performance patterns, rather than applying the same automated template to every brand regardless of context.",
   },
   {
     number: "03",
-    title: "Early Trend Advantage",
-    desc: "AI-powered trend analysis helps your brand show up on emerging formats before they become oversaturated by competitors.",
+    title: "Human Oversight on Every Piece of AI-Assisted Content",
+    desc: "No AI-generated content goes live without human review, protecting your brand from the generic or occasionally inaccurate output AI tools can produce when left completely unsupervised.",
   },
   {
     number: "04",
-    title: "Human-Reviewed Quality",
-    desc: "Every piece of AI-assisted content is reviewed by our team, so nothing generic or off-brand goes live under your name.",
+    title: "Faster Content Production Without Sacrificing Quality",
+    desc: "AI accelerates drafting and ideation, but final quality control remains human, giving you the speed benefit of automation without the quality risk of removing people from the process entirely.",
   },
   {
     number: "05",
-    title: "Data-Driven Decisions",
-    desc: "AI-powered analysis surfaces patterns in your performance data faster than manual review, sharpening strategy sooner.",
+    title: "AI Tools Selected for Your Brand, Not a One-Size-Fits-All Stack",
+    desc: "We choose which AI tools genuinely fit your specific needs and industry, rather than applying the same automated stack to every client regardless of what actually helps their particular situation.",
   },
   {
     number: "06",
-    title: "Automation That Frees Up Strategy Time",
-    desc: "Routine scheduling and reporting tasks run automatically, so more time goes into strategy and creative than manual admin.",
+    title: "Transparent Reporting on What AI Is Actually Improving",
+    desc: "We report clearly on where AI is genuinely saving time or improving performance, rather than presenting automation as inherently valuable without evidence that it's delivering real results for your account.",
   },
 ];
 
 const FAQS = [
   {
-    question: "Does AI replace human strategists in social media marketing?",
+    question: "Will AI-generated content sound like our brand, or generic?",
     answer:
-      "No, AI assists with planning, trend prediction, and analysis, while our human strategists make the creative and brand-voice decisions.",
+      "It depends heavily on execution, unsupervised AI content often does sound generic. We train tools on your specific brand voice and review every piece before publishing, which is why human oversight remains a core part of how we use AI rather than an afterthought.",
   },
   {
-    question: "Will AI-generated content look robotic or generic?",
+    question: "How much does AI social media marketing cost in India?",
     answer:
-      "No, every AI-assisted output is reviewed and refined by our team before publishing, so content stays genuine and on-brand.",
+      "Cost depends on scope, how much of your workflow involves AI-assisted content, automation, and analytics versus traditional management. We scope pricing after understanding your specific needs, rather than offering a flat rate that assumes every brand wants the same level of automation.",
   },
   {
-    question: "How does AI help lower cost per lead?",
+    question: "Do you use AI tools, or is a human still involved?",
     answer:
-      "AI-assisted targeting, timing, and content planning improve efficiency, meaning ad and content spend goes further toward results that convert.",
+      "Both, we use AI to speed up drafting, scheduling, and analysis, but every piece of content is reviewed by a real person before publishing. AI supports the process; it doesn't replace the strategic judgment a human brings to brand decisions.",
   },
   {
-    question: "What tools do you use for AI social media marketing?",
+    question: "Can AI really improve our social media strategy, not just speed?",
     answer:
-      "We use a mix of AI-powered scheduling, trend analysis, and performance tools, chosen based on what fits your platforms and goals best.",
+      "Yes, when used well, AI can surface patterns in audience behavior and content performance that would take much longer to identify manually, informing genuinely better strategic decisions rather than just producing content faster.",
   },
   {
-    question: "Is AI social media marketing more expensive than standard management?",
+    question: "Is AI content creation safe for a brand's reputation?",
     answer:
-      "Not necessarily — AI-assisted efficiency often helps offset costs over time by improving targeting and reducing wasted spend.",
+      "It can be, provided there's human review before anything publishes. Unsupervised AI content carries real risk of inaccuracy or off-brand tone, which is exactly why we build human oversight into every step of our AI-assisted workflow.",
+  },
+  {
+    question: "What social media management tools do you use AI for?",
+    answer:
+      "We use AI across content drafting, scheduling optimization, performance analytics, and chatbot-assisted engagement, selecting specific tools based on what genuinely fits your brand's needs rather than applying the same fixed stack to every client.",
   },
 ];
 
@@ -251,27 +256,27 @@ export default function AiSocialMediaMarketing() {
       sectionLabel="Social Media Marketing"
       label="AI Social Media Marketing"
       icon={Sparkles}
-      description="AI marketing tools and social media automation used to plan smarter content, predict trends early, and post at the best time for engagement."
-      heroTitle="Get Social Media Results Faster With AI-Backed Strategy"
-      heroDescription="AI marketing tools and social media automation used to plan smarter content, predict trends early, and post at the best time for engagement."
-      heroCtaText="Get a Free AI Social Media Consultation"
-      capabilitiesHeading="Built for Businesses Ready for Smarter, Faster Social Media"
+      description="AI-powered social media marketing built for speed and smarter strategy, not just automation for its own sake, backed by real oversight."
+      heroTitle="Get Smarter Social Media Marketing, Powered by AI"
+      heroDescription="AI-powered social media marketing built for speed and smarter strategy, not just automation for its own sake, backed by real oversight."
+      heroCtaText="Get a Free AI Social Media Audit"
+      capabilitiesHeading="Built for Brands Ready to Move Faster Than Manual Posting Allows"
       capabilities={CAPABILITIES}
-      serviceBreakdownHeading="Everything That Goes Into Our AI Social Media Marketing"
+      serviceBreakdownHeading="Everything Between AI Automation and a Real Strategy"
       serviceBreakdown={SERVICE_BREAKDOWN}
-      differentiatorsHeading="What Makes Our AI Social Media Marketing Different"
+      differentiatorsHeading="Why Brands Trust Us With AI-Powered Social Media"
       differentiators={DIFFERENTIATORS}
-      roadmapCarouselHeading="Our AI Social Media Marketing Process"
+      roadmapCarouselHeading="How We Combine AI Speed With Human Strategy"
       roadmapCarouselSteps={ROADMAP_STEPS}
       showStats={false}
-      localityHeading="Based in Prayagraj, Running AI-Backed Campaigns Nationally"
-      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we combine AI tools with human strategy for every client, with the same rigor whether a client is nearby or across the country. We provide AI-assisted social media marketing for startups, SMBs, and enterprises across India, sizing automation and planning to each business's actual content volume. Whether you're a startup in Prayagraj wanting a data-backed content engine from day one or an enterprise managing multiple brands, our approach starts with the same question: what does your performance data actually say is working."
+      localityHeading="Based in Prayagraj, Running AI-Powered Campaigns Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every AI-assisted social media account, with the same human oversight whether a client is nearby or across the world. We work as an ai social media marketing agency for brands across India, providing ai powered social media management support built around each brand's specific voice and goals. For businesses looking for an ai social media strategy agency beyond India, we support clients worldwide remotely, delivering the same standard of human-reviewed, AI-assisted work regardless of time zone. Whether you're a brand in Prayagraj exploring AI for the first time or a team anywhere else scaling content production, our approach starts with the same question: where can AI genuinely help without costing you your brand voice."
       faqs={FAQS}
       showWhyChooseUs={false}
-      ctaHeading="Ready for Social Media Backed by Real Data?"
-      ctaText="Whether your current content is guesswork dressed up as strategy, you want to catch trends before they peak, or you simply need results faster without ballooning cost per lead, manual planning alone was never going to keep pace. Let's talk through your content and scope what AI-backed social media marketing would actually involve."
+      ctaHeading="Ready for Social Media That Moves as Fast as AI Allows?"
+      ctaText="Whether you're overwhelmed by manual posting, curious about AI but worried about losing your brand voice, or ready to scale content production properly, automation alone was never going to replace real strategy. Let's talk through your workflow and scope where AI could actually help."
       ctaPrimaryText="Talk to an AI Social Media Specialist"
-      ctaSecondaryText="Get Your Free AI Social Media Consultation"
+      ctaSecondaryText="Get Your Free AI Social Media Audit"
     />
   );
 }

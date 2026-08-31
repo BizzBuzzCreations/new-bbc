@@ -10,9 +10,9 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "Business Strategy Consulting | BizzBuzz Creations",
+  title: "Business Strategy Consulting Firm | BizzBuzz Creations",
   description:
-    "Business strategy consulting in India — define your goals, map your market, and build a roadmap that turns big ambitions into practical, executable steps, by BizzBuzz Creations.",
+    "BizzBuzz Creations is a business strategy consulting firm helping companies plan and grow across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/business-consultancy/business-strategy-consulting",
@@ -219,29 +219,34 @@ const DIFFERENTIATORS = [
 
 const FAQS = [
   {
-    question: "What does business strategy consulting actually involve?",
+    question: "How much does business strategy consulting cost in India?",
     answer:
-      "It involves clarifying your goals, mapping your market position, and building a practical roadmap of executable steps to get there, not just a theoretical plan.",
+      "Cost depends on scope, a focused strategic review costs less than a comprehensive corporate strategy engagement with execution support. We scope pricing after understanding your specific situation and goals, rather than offering a flat rate upfront.",
   },
   {
-    question: "How long does a strategy engagement typically take?",
+    question: "What's the difference between a strategy consultant and a business coach?",
     answer:
-      "Initial strategy development typically takes a few weeks, though we often stay involved through implementation and review over a longer period.",
+      "A strategy consultant typically focuses on analyzing your market and business to develop a specific strategic plan, while a business coach often focuses more broadly on leadership development and ongoing guidance. We combine strategic analysis with practical, ongoing support.",
   },
   {
-    question: "Do you help implement the strategy, or just create it?",
+    question: "How long does a typical strategy consulting engagement take?",
     answer:
-      "We stay involved through hands-on implementation, not just handing over a strategy deck and disappearing after the first meeting.",
+      "Timeline depends on scope, a focused strategic review can take a few weeks, while a comprehensive strategy with execution support typically continues over several months. We provide a specific timeline after understanding your situation.",
   },
   {
-    question: "Is business strategy consulting only for large companies?",
+    question: "Do you help with execution, or just the strategy document itself?",
     answer:
-      "No, strategy consulting is valuable for founders and small businesses too — clarity on goals and roadmap matters at any size.",
+      "We help with both, since a strategy that never gets executed provides little value. We build execution support directly into our engagements, staying involved as your team implements the plan.",
   },
   {
-    question: "How do you measure if a strategy is working?",
+    question: "Can strategy consulting help a business that's already struggling?",
     answer:
-      "We set clear KPIs and milestones upfront, then review progress against them regularly, adjusting the plan as real results come in.",
+      "Yes, strategy consulting is often especially valuable for businesses facing real challenges, since an objective outside view can identify issues and opportunities that internal teams under pressure may not see clearly.",
+  },
+  {
+    question: "Do you work with small businesses, or only larger companies?",
+    answer:
+      "We work with businesses of various sizes, scoping our approach to fit smaller businesses just as thoughtfully as larger corporate engagements, rather than offering a one-size-fits-all consulting package.",
   },
 ];
 

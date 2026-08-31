@@ -1,18 +1,18 @@
 import ServiceDetailPage from "@/components/sections/serviceDetailPage";
 import {
   Sparkles,
-  Rocket,
-  Building2,
-  Building,
+  PenTool,
+  Zap,
   ShoppingCart,
   Handshake,
-  RefreshCw,
+  ShieldCheck,
+  Video,
 } from "lucide-react";
 
 export const metadata = {
-  title: "AI Content & Generative Engines | BizzBuzz Creations",
+  title: "AI Content Generation Services | BizzBuzz Creations",
   description:
-    "AI content and generative engines in India — draft, structure, and personalize copy at scale, trained on your brand voice, by BizzBuzz Creations.",
+    "BizzBuzz Creations offers AI content generation services combining generative AI and strategy across India and worldwide.",
   alternates: {
     canonical:
       "https://bizzbuzzcreations.com/ai-solutions/ai-content-generative-engines",
@@ -21,132 +21,132 @@ export const metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Rocket,
-    title: "Startups & Early-Stage Businesses",
-    desc: "Startups need to publish content consistently without a large writing team. We build lean content engines trained on brand basics early, so startups can scale output without scaling headcount right away.",
+    icon: PenTool,
+    title: "Businesses Needing More Content Than Their Team Can Produce",
+    desc: "Content demands often outpace what a small team can realistically write, edit, and publish consistently. We provide ai content generation services that scale output without sacrificing quality control.",
   },
   {
-    icon: Building2,
-    title: "Small & Medium Businesses",
-    desc: "SMBs often can't sustain a regular content schedule with a small team. We build content engines sized for SMB budgets, keeping output consistent without needing to hire additional writers.",
-  },
-  {
-    icon: Building,
-    title: "Enterprises & Large Organizations",
-    desc: "Enterprises need content consistency across multiple writers, brands, or regions at volume. We build enterprise content engines structured to maintain brand voice consistently at scale.",
+    icon: Zap,
+    title: "Marketing Teams Needing Faster Content Turnaround",
+    desc: "Marketing teams under pressure to ship content quickly often sacrifice quality or consistency in the rush. We work as an ai content marketing agency that speeds up production while keeping standards high.",
   },
   {
     icon: ShoppingCart,
-    title: "Ecommerce & Retail Brands",
-    desc: "Ecommerce catalogs need product descriptions and ad copy at a volume manual writing can't sustain. We build content engines that generate and personalize product copy at scale, reviewed before publishing.",
+    title: "Ecommerce Brands Needing Product Content at Scale",
+    desc: "Ecommerce catalogs with hundreds or thousands of products need product descriptions that would take forever to write manually one by one. We provide AI-generated product content built to scale with your catalog.",
   },
   {
     icon: Handshake,
-    title: "Agencies Needing a Content Engine Partner",
-    desc: "Content agencies need a technical partner to build generative systems for clients. We work as a white-label content engine partner, delivering systems agencies can present as their own.",
+    title: "Agencies Needing AI-Assisted Content Capacity",
+    desc: "Agencies serving multiple clients often need more content capacity than their internal team can deliver alone. We provide generative ai solutions company support that agencies can bring directly to client work.",
   },
   {
-    icon: RefreshCw,
-    title: "Businesses Replacing Inconsistent AI Content",
-    desc: "Businesses already using generic AI writing tools often get inconsistent, off-brand output. We replace ad-hoc AI writing with a properly trained content engine that actually sounds like your brand.",
+    icon: ShieldCheck,
+    title: "Businesses Worried AI Content Will Sound Generic",
+    desc: "Many businesses hesitate on AI content specifically because they've seen generic, obviously AI-written content elsewhere. We work as an ai copywriting agency focused specifically on avoiding that generic tell.",
+  },
+  {
+    icon: Video,
+    title: "Companies Needing AI Video & Image Content Production",
+    desc: "Written content isn't the only bottleneck, visual and video content production is often even more resource-intensive. We provide ai video content generation alongside written content as one connected service.",
   },
 ];
 
 const SERVICE_BREAKDOWN = [
   {
     number: "01",
-    title: "Brand-Voice Trained Content Engines",
-    desc: "Generative content engines are trained on your brand voice, tone, and past content, so output actually sounds like you, not a generic AI.",
+    title: "AI Content Strategy",
+    desc: "A content strategy that determines where AI genuinely helps, and where it doesn't, before production begins.",
     ctaText: "Know Our Services",
     services: [
-      "Brand Voice Training",
-      "Tone Calibration",
-      "Style Guide Development",
-      "Content Engine Configuration",
-      "Prompt Engineering",
-      "Sample Content Review",
-      "Voice Consistency Testing",
-      "Ongoing Voice Refinement",
+      "AI Content Strategy Consulting",
+      "Content Gap Analysis",
+      "Content Calendar Planning",
+      "Format & Channel Strategy",
+      "AI Tool Selection Guidance",
+      "Content ROI Planning",
+      "Workflow Design",
+      "Strategy Documentation",
     ],
   },
   {
     number: "02",
-    title: "Blog & Long-Form Content Generation",
-    desc: "We build systems that draft and structure blog posts and long-form content at scale, keeping quality consistent across volume.",
+    title: "AI Copywriting & Blog Content",
+    desc: "Written content across formats, generated efficiently and refined to actually sound like your brand.",
     ctaText: "Know Our Services",
     services: [
-      "Blog Content Generation",
-      "Long-Form Article Drafting",
-      "Content Structuring",
-      "Topic-to-Draft Workflows",
-      "SEO-Aligned Drafting",
-      "Content Calendar Integration",
-      "Draft Quality Scoring",
-      "Volume Scaling Support",
+      "AI Copywriting Services",
+      "AI-Assisted Blog Writing",
+      "Product Description Generation",
+      "Ad Copy Generation",
+      "Email Copy Generation",
+      "Landing Page Copy Generation",
+      "SEO Content Generation",
+      "Multi-Format Copy Adaptation",
     ],
   },
   {
     number: "03",
-    title: "Product Description & Ad Copy Variations",
-    desc: "Generate multiple product description and ad copy variations quickly, letting you test messaging without a full manual rewrite each time.",
+    title: "AI Video & Image Content",
+    desc: "Visual and video content produced at a pace manual production alone couldn't sustain.",
     ctaText: "Know Our Services",
     services: [
-      "Product Description Generation",
-      "Ad Copy Variation Generation",
-      "A/B Testing Copy Sets",
-      "Bulk Catalog Copywriting",
-      "Platform-Specific Copy Formats",
-      "Copy Variation Testing",
-      "Messaging Consistency Checks",
-      "Copy Refresh Cycles",
+      "AI Video Content Generation",
+      "AI Image Generation",
+      "AI-Assisted Video Editing",
+      "Social Media Visual Generation",
+      "Product Visual Generation",
+      "AI Voiceover Generation",
+      "Brand-Consistent Visual Prompting",
+      "Visual Content Quality Review",
     ],
   },
   {
     number: "04",
-    title: "Human Review Workflow",
-    desc: "Every generated draft flows through a review step before publishing, keeping accuracy and quality intact, not fully automated blind output.",
+    title: "Generative AI Workflow Setup",
+    desc: "A content production pipeline that actually uses AI systematically, not ad-hoc tool usage.",
     ctaText: "Know Our Services",
     services: [
-      "Editorial Review Workflow",
-      "Fact-Checking Process",
-      "Quality Control Checklists",
-      "Approval Workflow Setup",
-      "Editor Assignment System",
-      "Revision Tracking",
-      "Publishing Sign-Off Process",
-      "Review Turnaround Reporting",
+      "Generative AI Workflow Design",
+      "Content Production Pipeline Setup",
+      "AI Tool Stack Integration",
+      "Approval Workflow Automation",
+      "Content Repurposing Automation",
+      "Batch Content Generation Setup",
+      "Workflow Documentation",
+      "Team Training on AI Tools",
     ],
   },
   {
     number: "05",
-    title: "Personalization at Scale",
-    desc: "Content gets personalized for different audience segments automatically, something manual content production can't keep up with.",
+    title: "Brand Voice Training for AI",
+    desc: "AI trained specifically on your brand's tone and style, so output doesn't sound generic.",
     ctaText: "Know Our Services",
     services: [
-      "Audience Segment Personalization",
-      "Dynamic Content Variation",
-      "Segment-Specific Messaging",
-      "Personalization Rule Setup",
-      "Behavioral Content Triggers",
-      "Personalization Testing",
-      "Segment Performance Tracking",
-      "Personalization Scaling",
+      "Brand Voice Guideline Development",
+      "AI Model Fine-Tuning for Voice",
+      "Tone & Style Calibration",
+      "Brand-Specific Prompt Engineering",
+      "Voice Consistency Testing",
+      "Reference Content Training",
+      "Ongoing Voice Refinement",
+      "Brand Safety Guardrails",
     ],
   },
   {
     number: "06",
-    title: "Content Performance Tracking",
-    desc: "We track how AI-generated content performs, feeding results back into the engine to keep improving output quality over time.",
+    title: "Content Quality & Editorial Review",
+    desc: "Human review built into the process, catching errors and generic-sounding output before publication.",
     ctaText: "Know Our Services",
     services: [
-      "Content Performance Dashboards",
-      "Engagement Tracking",
-      "Conversion Tracking",
-      "Content Quality Scoring",
-      "Feedback Loop Integration",
-      "Performance-Based Retraining",
+      "Human Editorial Review",
+      "Fact-Checking & Accuracy Review",
+      "Plagiarism & Originality Checks",
+      "Content Performance Tracking",
+      "Quality Scoring Framework",
+      "Content Revision Workflows",
       "Monthly Content Reports",
-      "Engine Improvement Cycles",
+      "Continuous Quality Improvement",
     ],
   },
 ];
@@ -154,94 +154,99 @@ const SERVICE_BREAKDOWN = [
 const ROADMAP_STEPS = [
   {
     number: "01",
-    title: "Brand Voice & Content Audit",
-    desc: "We study your existing content and brand voice so the generative engine has a genuine foundation to work from.",
+    title: "Brand & Content Needs Discovery",
+    desc: "We start by understanding your brand voice, current content workflow, and where AI could genuinely add value without sacrificing quality.",
   },
   {
     number: "02",
-    title: "Engine Setup & Training",
-    desc: "The content engine is configured and trained on your specific brand guidelines, tone, and past high-performing content.",
+    title: "AI Tool & Workflow Design",
+    desc: "We design the specific AI tools and production pipeline suited to your content needs and formats.",
   },
   {
     number: "03",
-    title: "Review Workflow Integration",
-    desc: "We build in a human review step so every piece of generated content gets checked before it goes live.",
+    title: "Brand Voice Training",
+    desc: "We train AI systems on your specific brand voice and existing content, so output stays genuinely on-brand.",
   },
   {
     number: "04",
-    title: "Pilot Content Run",
-    desc: "We run a small batch of content through the engine first, refining prompts and training based on the actual output quality.",
+    title: "Content Production & Generation",
+    desc: "AI assists with drafting written, visual, and video content according to the workflow and strategy.",
   },
   {
     number: "05",
-    title: "Testing With Your Team",
-    desc: "Your team reviews sample output against real use cases, confirming the engine's voice and quality before scaling volume.",
+    title: "Editorial Review & Refinement",
+    desc: "Every piece goes through human review and refinement before publishing, catching errors and generic-sounding output.",
   },
   {
     number: "06",
-    title: "Scale & Refine",
-    desc: "We track content performance and refine the engine's output over time based on what's genuinely working.",
+    title: "Ongoing Optimization & Reporting",
+    desc: "We track content performance and continue refining the workflow and brand voice training based on real results.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "Trained on Your Brand Voice",
-    desc: "Content engines are trained on your actual brand voice and past content, not a generic AI writing style.",
+    title: "AI Speed Combined With Genuine Editorial Quality Control",
+    desc: "We use AI to accelerate drafting and ideation, but every piece goes through human editorial review before publishing, avoiding the generic, occasionally inaccurate output unsupervised AI tends to produce.",
   },
   {
     number: "02",
-    title: "Scale Without Losing Quality",
-    desc: "We build in review workflows so scaling content production doesn't mean sacrificing accuracy or brand fit.",
+    title: "Content Trained on Your Brand Voice, Not Generic Output",
+    desc: "We train AI tools specifically on your brand's tone and existing content, so output actually sounds like you rather than reading like it came from any generic AI tool.",
   },
   {
     number: "03",
-    title: "Multiple Content Types Covered",
-    desc: "From blog posts to product descriptions and ad copy, engines are built for the specific content types your business needs.",
+    title: "Video, Image, and Written Content Handled Under One Process",
+    desc: "We cover written, visual, and video content generation together, rather than treating them as separate, disconnected services requiring different vendors.",
   },
   {
     number: "04",
-    title: "Personalization at Scale",
-    desc: "Content can be personalized for different audience segments automatically, something manual production can't match.",
+    title: "Workflow Automation That Actually Scales Your Content Production",
+    desc: "We build genuine production pipelines, not one-off AI-generated pieces, so your content output scales systematically rather than depending on manual tool usage each time.",
   },
   {
     number: "05",
-    title: "Tested With Your Team",
-    desc: "Every content engine is tested with your team before going live, not handed over as an untested demo.",
+    title: "Human Review on Every Piece Before It Represents Your Brand",
+    desc: "We never publish AI output without human review, protecting your brand from inaccuracies or off-brand tone that unsupervised AI content can carry.",
   },
   {
     number: "06",
-    title: "Refined After Launch",
-    desc: "We track performance and keep refining the engine's output, not leaving it running blind after handoff.",
+    title: "Transparent Reporting on What AI Content Is Actually Achieving",
+    desc: "We report on content performance clearly, giving you real evidence of whether AI-assisted content is actually delivering results, not just producing volume.",
   },
 ];
 
 const FAQS = [
   {
-    question: "Will AI-generated content sound generic?",
+    question: "Will AI-generated content sound generic or actually match our brand?",
     answer:
-      "No, the content engine is trained specifically on your brand voice and existing content, and every draft goes through a human review step before publishing.",
+      "This depends heavily on how it's set up, unsupervised AI content often does sound generic. We train tools specifically on your brand voice and review every piece before publishing, which is why our approach avoids that generic tell.",
   },
   {
-    question: "What types of content can these engines produce?",
+    question: "How much does AI content generation cost in India?",
     answer:
-      "Blog posts, product descriptions, ad copy variations, and other content types tailored to what your business actually needs.",
+      "Cost depends on volume and content type, written content alone costs less than a full production pipeline covering written, visual, and video content together. We scope pricing after understanding your specific needs, rather than a flat rate upfront.",
   },
   {
-    question: "Do you still review the content before it's published?",
+    question: "Do you offer AI video and image generation, not just written content?",
     answer:
-      "Yes, we build a human review workflow into every content engine, so nothing goes live without a quality check.",
+      "Yes, AI video and image content generation is a core part of our service, covering visual and video production alongside written content as one connected offering.",
   },
   {
-    question: "Can content be personalized for different customer segments?",
+    question: "Is a human still reviewing content before it's published?",
     answer:
-      "Yes, generative engines can personalize messaging for different audience segments automatically, at a scale manual writing can't match.",
+      "Yes, human editorial review is a standard part of our process, since unsupervised AI content carries real risk of inaccuracy or off-brand tone that we specifically build review steps to catch.",
   },
   {
-    question: "How long does it take to set up a content engine?",
+    question: "Can AI content actually rank well for SEO?",
     answer:
-      "Setup typically takes a few weeks, depending on how much brand training and integration with your existing content workflow is needed.",
+      "Yes, when structured properly with genuine value and accuracy, AI-assisted content can perform well for SEO. We combine AI generation with proper SEO structuring and human quality review to support this.",
+  },
+  {
+    question: "Can you set up an AI content workflow for our own team to use?",
+    answer:
+      "Yes, we build production pipelines and provide training so your internal team can continue using the AI workflow independently, rather than remaining dependent on us for every piece of content.",
   },
 ];
 
@@ -251,24 +256,25 @@ export default function AiContentGenerativeEngines() {
       sectionLabel="AI Solutions"
       label="AI Content & Generative Engines"
       icon={Sparkles}
-      description="Our generative AI content engines draft, structure, and personalize copy at scale, including blog posts, product descriptions, and ad variations, trained on your brand voice."
-      heroTitle="AI Content & Generative Engines in India"
-      heroDescription="Our generative AI content engines draft, structure, and personalize copy at scale, including blog posts, product descriptions, and ad variations, trained on your brand voice."
-      capabilitiesHeading="Built for Businesses Ready to Scale Content Without Losing Their Voice"
+      description="AI content generation built for speed and quality together, not content that reads generic, backed by real strategy and human review."
+      heroTitle="Get Content Produced at AI Speed, Reviewed at Human Quality"
+      heroDescription="AI content generation built for speed and quality together, not content that reads generic, backed by real strategy and human review."
+      heroCtaText="Get a Free AI Content Consultation"
+      capabilitiesHeading="Built for Businesses Needing More Content Than They Can Write"
       capabilities={CAPABILITIES}
-      serviceBreakdownHeading="Everything That Goes Into Our AI Content Engines"
+      serviceBreakdownHeading="Everything Between a Content Brief and Published, On-Brand Work"
       serviceBreakdown={SERVICE_BREAKDOWN}
-      differentiatorsHeading="Why Businesses Trust Us to Build Their Content Engines"
+      differentiatorsHeading="Why Businesses Trust Us With AI Content Generation"
       differentiators={DIFFERENTIATORS}
-      roadmapCarouselHeading="How We Turn Your Brand Voice Into a Scalable Content Engine"
+      roadmapCarouselHeading="How We Combine AI Output With Real Editorial Quality"
       roadmapCarouselSteps={ROADMAP_STEPS}
       showStats={false}
-      localityHeading="Based in Prayagraj, Building Content Engines Worldwide"
-      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we build every content engine project, with the same care whether a client is nearby or overseas. We work with startups, SMBs, and enterprises across India, building engines sized to each business's actual content volume and brand complexity. For businesses looking to build content engines beyond India, we support clients worldwide remotely, working across time zones to deliver the same quality standard regardless of location. Whether you're a startup automating your first blog cadence or an enterprise scaling copy across multiple product lines, our approach starts with training the engine on your actual brand voice first."
+      localityHeading="Based in Prayagraj, Producing AI Content Worldwide"
+      localityText="BizzBuzz Creations is based in Prayagraj, Uttar Pradesh, and that local grounding shapes how we approach every AI content project, with the same editorial standards whether a client is nearby or across the world. We provide ai content generation services for businesses across India, built around each brand's specific voice and content needs. For businesses looking for a generative ai content agency beyond India, we support clients worldwide remotely, delivering the same ai copywriting agency standard of work regardless of time zone. Whether you're a marketing team in Prayagraj needing faster turnaround or an agency anywhere else needing AI-assisted content capacity, our approach starts with the same question: where can AI genuinely help without costing you your brand voice."
       faqs={FAQS}
       showWhyChooseUs={false}
-      ctaHeading="Ready for Content That Scales Without Losing Your Voice?"
-      ctaText="Whether you need a content engine for blog production, a system for generating product copy at scale, or a replacement for inconsistent AI writing you're already using, a generic tool was never going to get you there. Let's talk through your content needs and scope what a custom content engine would actually involve."
+      ctaHeading="Ready for Content That Scales Without Going Generic?"
+      ctaText="Whether you're overwhelmed by content demands, need faster turnaround for your marketing team, or want AI video and image content alongside written work, manual production alone was never going to keep pace. Let's talk through your content needs and scope what real AI-assisted production would actually involve."
       ctaPrimaryText="Talk to an AI Content Specialist"
       ctaSecondaryText="Get Your Free AI Content Consultation"
     />
