@@ -70,11 +70,6 @@ export default function IndustriesShowcase({ content }) {
 
   return (
     <section id="industries" className="relative overflow-hidden bg-black py-20 px-6 md:px-12 lg:px-24">
-      <div
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full blur-3xl opacity-15 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-        aria-hidden="true"
-      />
 
       <div className="relative max-w-6xl mx-auto">
         <div className="text-center mb-14">

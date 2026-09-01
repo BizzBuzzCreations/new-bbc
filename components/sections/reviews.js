@@ -47,11 +47,7 @@ export default function Reviews({ content }) {
 
   return (
     <section className="relative overflow-hidden bg-black py-20">
-      <div
-        className="absolute -top-24 -left-24 w-96 h-96 rounded-full blur-3xl opacity-20 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-        aria-hidden="true"
-      />
+
       <div className="container mx-auto px-5 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -9,12 +9,22 @@ import Link from "next/link";
 // (used on the Website Development hub to point at each of the 6
 // individual service pages); cards without one stay plain, non-clickable
 // divs exactly as before.
-export default function BpoServicesGrid({ title = "What We Handle", items = [] }) {
+export default function BpoServicesGrid({
+  title = "What We Handle",
+  subheading,
+  items = [],
+}) {
   return (
     <div>
-      <h2 className="text-3xl font-bold mb-10 text-center text-white">
+      <h2 className="text-3xl font-bold text-center text-white">
         {title}
       </h2>
+      {subheading && (
+        <p className="text-white/60 text-center max-w-2xl mx-auto mt-3 mb-10">
+          {subheading}
+        </p>
+      )}
+      {!subheading && <div className="mb-10" />}
       <div className="grid sm:grid-cols-2 gap-6">
         {items.map(({ icon: Icon, heading, description, href }) => {
           const Wrapper = href ? Link : "div";

@@ -4,6 +4,7 @@ import HomeAbout from "@/components/sections/homeAbout";
 import HomeHero from "@/components/sections/homeHero";
 import OurServices from "@/components/sections/ourServices";
 import CaseStudies from "@/components/sections/caseStudies";
+import ScrollZoomReveal from "@/components/sections/scrollZoomReveal";
 import StatsShowcase from "@/components/sections/statsShowcase";
 import WavyDivider from "@/components/ui/wavy-divider";
 import AiShowcase from "@/components/sections/aiShowcase";
@@ -62,6 +63,10 @@ export default async function Home() {
 
       {/* Case Studies — client work carousel */}
       <CaseStudies content={content} />
+
+      {/* Scroll-pinned "Know More About Us" zoom-text transition — the
+          rest of the homepage sections continue right after this. */}
+      <ScrollZoomReveal />
 
       {/* Wavy divider — visually splits the two back-to-back dark sections.
           Padding on both sides keeps it floating in the middle of the gap

@@ -101,20 +101,6 @@ export default function ServiceDetailPage({
           background: "radial-gradient(circle at top, #0d1b2e, #000000)",
         }}
       >
-        <div
-          className="absolute top-10 -right-20 w-[420px] h-[420px] rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{
-            background: "radial-gradient(circle, #0B60B0, transparent 70%)",
-          }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute bottom-0 -left-24 w-80 h-80 rounded-full blur-3xl opacity-15 pointer-events-none"
-          style={{
-            background: "radial-gradient(circle, #40A2D8, transparent 70%)",
-          }}
-          aria-hidden="true"
-        />
 
         <div className="relative max-w-3xl">
           <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-4">

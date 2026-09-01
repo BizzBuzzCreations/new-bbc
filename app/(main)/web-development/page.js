@@ -1,24 +1,23 @@
+import Link from "next/link";
 import BpoHero from "@/components/sections/bpoHero";
 import Image from "next/image";
 import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
+import RoadmapCarousel from "@/components/sections/roadmapCarousel";
 import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
 import DarkFAQSection from "@/components/sections/darkFAQSection";
 import {
   LayoutTemplate,
-  ShoppingCart,
-  Server,
-  Atom,
-  RefreshCw,
   Newspaper,
+  ShoppingCart,
+  Atom,
+  Server,
+  RefreshCw,
 } from "lucide-react";
 
 export const metadata = {
-  title: "Website Development India | Design | BizzBuzz Creations",
+  title: "Top Website Development Company | BizzBuzz Creations",
   description:
-    "Get fast, secure, and high-converting websites with custom web development, WordPress, and eCommerce solutions by BizzBuzz Creations in India.",
+    "BizzBuzz Creations builds fast, secure, high-converting websites — custom, WordPress, Shopify — for businesses in Prayagraj, Allahabad, India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/web-development",
   },
@@ -29,62 +28,76 @@ const SERVICE_ITEMS = [
     icon: LayoutTemplate,
     heading: "Custom Web Development & Design",
     description:
-      "Off-the-shelf templates only get you so far. Our custom web development team builds mobile-first, responsive websites around your specific goals — lead generation, bookings, or online sales — combining clean design with solid, maintainable code.",
+      "As a trusted custom web development company, we build mobile-first, responsive websites around your specific goals — leads, bookings, or sales — with code that scales as your business grows instead of going outdated in a year.",
     href: "/web-development/custom-web-development",
-  },
-  {
-    icon: ShoppingCart,
-    heading: "Shopify & Ecommerce Development",
-    description:
-      "As specialist Shopify website developers, we build fast-loading, conversion-focused online stores with smooth checkout experiences, designed for speed, mobile shoppers, and global scalability — from 20 products to 20,000.",
-    href: "/web-development/shopify-ecommerce-development",
-  },
-  {
-    icon: Server,
-    heading: "PHP Web Application Development",
-    description:
-      "For businesses with complex backend needs, our full-stack PHP developers build and modernize custom web applications, from internal tools to customer-facing platforms, updating legacy systems for better security and speed.",
-    href: "/web-development/php-web-application-development",
-  },
-  {
-    icon: Atom,
-    heading: "React & Next.js Development",
-    description:
-      "Our React and Next.js developers build high-performing, AI-integrated frontends using server-side rendering to boost load speed and Google ranking, integrating seamlessly with your existing backend and team.",
-    href: "/web-development/react-nextjs-development",
-  },
-  {
-    icon: RefreshCw,
-    heading: "Website Redesign & Management",
-    description:
-      "An outdated website quietly costs you customers every day. Our redesign services modernize UI/UX for higher conversions and fix Core Web Vitals, followed by ongoing monitoring, security updates, and backups.",
-    href: "/web-development/website-redesign-management",
   },
   {
     icon: Newspaper,
     heading: "WordPress Development",
     description:
-      "Our WordPress developers build high-performance, SEO-ready websites with strong security, including protection against common vulnerabilities and AI-assisted threat monitoring.",
+      "Our WordPress development company builds high-performance, SEO-ready WordPress sites with strong security and ongoing threat monitoring, ideal for businesses that want full control over updates without needing a developer for every change.",
     href: "/web-development/wordpress-development",
+  },
+  {
+    icon: ShoppingCart,
+    heading: "Shopify & Ecommerce Development",
+    description:
+      "As a specialist Shopify development agency and ecommerce website developer, we build fast-loading, conversion-focused online stores with smooth checkouts, designed for speed, mobile shoppers, and scalability — from 20 products to 20,000.",
+    href: "/web-development/shopify-ecommerce-development",
+  },
+  {
+    icon: Atom,
+    heading: "React, Next.js & Frontend Development",
+    description:
+      "As a react js development company and next js development agency, we build high-performing frontends using server-side rendering to boost load speed and search visibility, plus pixel-perfect HTML, CSS, and JavaScript.",
+    href: "/web-development/react-nextjs-development",
+  },
+  {
+    icon: Server,
+    heading: "PHP Web Application Development",
+    description:
+      "As a php web application development company, our full-stack PHP developers build and modernize custom web applications, from internal tools to customer-facing platforms, often improving security and speed dramatically.",
+    href: "/web-development/php-web-application-development",
+  },
+  {
+    icon: RefreshCw,
+    heading: "Website Redesign & Management",
+    description:
+      "Our website redesign services modernize your UI/UX and fix Core Web Vitals without losing rankings you've earned, followed by ongoing website management, monitoring, updates, and backups so your site stays online 24/7.",
+    href: "/web-development/website-redesign-management",
   },
 ];
 
 const PROCESS_STEPS = [
   {
-    title: "Discovery & Strategy",
-    body: "We start with your goals — lead generation, bookings, or online sales — and map out the structure and features your site actually needs.",
+    number: "01",
+    title: "Discovery & Requirements",
+    desc: "We start by understanding your business, goals, and what your website actually needs to do — generate leads, sell products, or showcase services — before any design or development begins.",
   },
   {
-    title: "Design & Development",
-    body: "Mobile-first design and clean, maintainable code get built in tandem, so your site looks sharp and scales with your business.",
+    number: "02",
+    title: "Planning & Platform Selection",
+    desc: "We recommend the right platform for your specific needs — WordPress, Shopify, custom development, or a React-based frontend — based on what you're actually trying to achieve, not a default choice.",
   },
   {
-    title: "Launch & SEO Optimization",
-    body: "We handle the technical launch with Core Web Vitals and search optimization built in from day one, not bolted on afterward.",
+    number: "03",
+    title: "Design & Prototyping",
+    desc: "We design the look and structure of your site around your brand and users, creating a version you can review and refine before development starts.",
   },
   {
-    title: "Ongoing Management & Support",
-    body: "Monitoring, security updates, performance checks, and backups keep your site fast and online 24/7 after launch.",
+    number: "04",
+    title: "Development & Build",
+    desc: "We build the site using clean, maintainable code, keeping mobile performance, security, and search visibility in mind throughout, not bolted on at the end.",
+  },
+  {
+    number: "05",
+    title: "Testing & Launch",
+    desc: "We test functionality, speed, and responsiveness across devices before launch, catching issues while they're still easy to fix rather than after going live.",
+  },
+  {
+    number: "06",
+    title: "Ongoing Support & Growth",
+    desc: "We provide ongoing maintenance, monitoring, and updates after launch, so your website keeps performing as your business and traffic grow.",
   },
 ];
 
@@ -129,28 +142,35 @@ const WE_ARE_POINTS = [
 
 const FAQS = [
   {
-    question: "How much does a website cost in 2026?",
+    question: "How much does website development cost in India?",
     answer:
-      "Costs vary based on features, but we offer affordable, tailored pricing.",
+      "Cost depends on complexity — a simple brochure site costs far less than a custom web application or a full ecommerce store with integrations. We scope pricing after understanding your specific requirements, features, and platform — WordPress, Shopify, or custom development — rather than offering a flat rate that doesn't reflect what your project actually needs.",
   },
   {
-    question: "Why does my business need a website?",
-    answer: "It builds trust and generates consistent leads online.",
+    question: "Why does my business need a professional website?",
+    answer:
+      "A website is often the first interaction a potential customer has with your business, and most people decide whether to trust you within seconds of landing on it. Beyond credibility, a proper website gives you a lead-generating asset you fully own and control, unlike a social media profile where you're renting attention.",
   },
   {
     question: "Will my website work on all devices?",
     answer:
-      "Yes, all our websites are fully responsive and mobile-friendly.",
+      "Yes, every website we build is fully responsive and tested across mobile, tablet, and desktop, since most visitors today arrive on a phone first. We also check Core Web Vitals and load speed specifically on mobile, since a slow or broken mobile experience quietly costs businesses real customers.",
   },
   {
-    question: "Can you add AI features to my website?",
+    question: "Can you add AI features like chatbots to my website?",
     answer:
-      "Yes, we integrate AI tools like chatbots and automation where useful.",
+      "Yes, we integrate AI tools like chatbots, automated forms, and smart recommendations where they genuinely add value, not as a gimmick. We assess whether a specific AI feature actually helps your visitors and business goals before recommending it, rather than adding AI just for its own sake.",
   },
   {
-    question: "Do you offer support after launch?",
+    question: "Do you provide support and maintenance after launch?",
     answer:
-      "Yes, we provide ongoing maintenance, updates, and security support.",
+      "Yes, ongoing website management is one of our core services, covering security updates, performance monitoring, backups, and bug fixes after launch. A website needs continued attention to stay fast and secure, so most clients work with us on an ongoing basis rather than a single one-time handoff.",
+  },
+  {
+    question:
+      "Which platform is right for my business — WordPress, Shopify, or custom development?",
+    answer:
+      "It depends on your goals — WordPress suits content-heavy sites needing easy updates, Shopify fits ecommerce stores needing built-in selling tools, and custom development suits businesses with specific functionality no template can provide. We help you choose the right fit during your free consultation, based on what you're actually trying to achieve.",
   },
 ];
 
@@ -158,23 +178,14 @@ export default function WebDevelopment() {
   return (
     <>
       <BpoHero
-        heading="Top Website Development Company in India"
-        description="Custom, high-performance websites for businesses in Prayagraj and across India. First impressions happen fast — we build fast, secure websites that actually bring in customers."
+        heading="Website Development That Actually Earns Its Keep"
+        description="Custom, high-performance websites for businesses in Prayagraj, across India and worldwide, built to load fast and convert visitors into paying customers."
         img="/web-dev.webp"
+        ctaText="Get a Free Consultation"
       />
 
       {/* Intro — dark section, glow accents behind the copy */}
       <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
 
         <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
           <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
@@ -204,24 +215,33 @@ export default function WebDevelopment() {
             />
           </div>
           <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Web Development Services in Prayagraj - Serving All of India
+            <h2 className="text-3xl font-bold mb-2 text-white">
+              Built in Prayagraj, Built for Businesses Everywhere
             </h2>
+            <h3 className="text-base font-semibold text-[#40A2D8] mb-4">
+              Who we build for, and why local roots shape how we work.
+            </h3>
             <p className="text-white/70 leading-relaxed mb-4">
               Your website is usually the first conversation you have with a
               customer, and most people decide whether to trust a business
               within seconds of landing on it. At BizzBuzz Creations, we
-              build websites that don&rsquo;t just look sharp; they convert
-              visitors into customers, tailored to how your business
-              actually works.
+              build websites that don&rsquo;t just look sharp — they convert
+              visitors into customers. Whether you&rsquo;re a local business
+              in Prayagraj or Allahabad looking for a website development
+              company near you, a small business owner elsewhere in India
+              searching for a website developer you can rely on, or a
+              startup needing a custom website developer built for how
+              startups actually move, our team builds fast, secure, scalable
+              websites tailored to how your business actually works.
             </p>
             <p className="text-white/70 leading-relaxed">
-              We&rsquo;re a full-service web development company in
+              We&rsquo;re a full-service web development company based in
               Prayagraj, proudly serving clients locally across Allahabad
-              and Uttar Pradesh, as well as businesses across the UK, USA,
-              and India. From your first idea to a fully launched,
-              search-optimized website, we handle strategy, design, and
-              code so you don&rsquo;t have to juggle five freelancers.
+              and Uttar Pradesh, nationally across India, and
+              internationally across the UK, USA, and worldwide. From your
+              first idea to a fully launched, search-optimized website, we
+              handle the strategy, design, and code so you don&rsquo;t have
+              to juggle five different freelancers to get it right.
             </p>
           </div>
         </div>
@@ -230,18 +250,27 @@ export default function WebDevelopment() {
       {/* "Web Development Services We Offer" */}
       <section className="bg-black py-20">
         <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid title="Web Development Services We Offer" items={SERVICE_ITEMS} />
+          <BpoServicesGrid
+            title="Six Ways We Build Websites That Actually Work"
+            subheading="Everything we build, matched to what your business actually needs to grow."
+            items={SERVICE_ITEMS}
+          />
         </div>
       </section>
 
-      {/* "Our Web Development Process" */}
+      {/* "How We Turn Your Website Into a Working Sales Tool" — auto-
+          scrolling carousel (right-to-left, pauses on hover) instead of a
+          static accordion, so the six-step process reads as motion. */}
       <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our Web Development Process"
-            description="We follow a results-driven approach — not just building websites that look good, but ones that sell. Our four-step process combines strong Core Web Vitals and technical SEO so sites are built to rank, not just launch and be forgotten."
-            steps={PROCESS_STEPS}
-          />
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-2">
+            How We Turn Your Website Into a Working Sales Tool
+          </h2>
+          <p className="text-white/60 text-center max-w-2xl mx-auto mb-14">
+            Our six-step process, from that first conversation to a fully
+            live website.
+          </p>
+          <RoadmapCarousel steps={PROCESS_STEPS} />
         </div>
       </section>
 
@@ -260,9 +289,102 @@ export default function WebDevelopment() {
 
       <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
 
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
+      {/* "Why Businesses Choose Us, and Where We're Rooted" — heading on
+          top, copy on the left, image on the right. */}
+      <section className="relative overflow-hidden bg-black py-20">
+        <div className="relative max-w-6xl mx-auto px-5">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 text-center">
+            Why Businesses Choose Us, and Where We&rsquo;re Rooted
+          </h2>
+          <p className="text-white/60 text-center max-w-2xl mx-auto mb-12">
+            What genuinely sets us apart from others, and where we&rsquo;re
+            actually rooted.
+          </p>
+          <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+            <div>
+              <p className="text-white/70 leading-relaxed mb-4">
+                We follow a results-driven approach, building websites that
+                don&rsquo;t just look good — they sell. A well-built website
+                often outperforms social media alone for building trust and
+                driving consistent traffic, and gives you clearer insight
+                into customer intent than any social platform can. Combined
+                with strong Core Web Vitals and technical SEO, our sites are
+                built to rank, which is exactly why businesses trust us as
+                their website development company of choice.
+              </p>
+              <p className="text-white/70 leading-relaxed">
+                BizzBuzz Creations is based in Prayagraj, Uttar Pradesh — a
+                city many still know as Allahabad — and that local
+                grounding shapes how we approach every project, with the
+                same standard of work whether a client is nearby or across
+                the world. We build for businesses locally across Prayagraj
+                and Allahabad, nationally across India, and internationally
+                across the UK, USA, and worldwide, as a website development
+                company that understands how to build for real business
+                results, not just a working site.
+              </p>
+            </div>
+            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
+              <Image
+                src="/why-choose-image.png"
+                alt="Why businesses choose BizzBuzz Creations"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Page-local CTA — heading + paragraph + two buttons, both pointing
+          to /contact, instead of the shared email-form CTA. */}
+      <div className="bg-black px-5 py-10 scroll-mt-34" id="CTA">
+        <div
+          className="rounded-3xl border-2 border-[#0B60B0] shadow-lg shadow-black md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto container"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(120, 180, 255, 0.25), transparent 70%), #000000",
+          }}
+        >
+          <div className="py-8 md:py-10 px-10 z-10 text-white">
+            <h2 className="md:text-3xl text-2xl font-bold mb-2">
+              Ready for a Website Built to Actually Perform?
+            </h2>
+            <h3 className="text-base font-semibold text-[#40A2D8] mb-5">
+              The next step, if you&rsquo;re ready to talk about what comes
+              next.
+            </h3>
+            <p className="max-w-3xl text-white/70 mb-8">
+              Whether you&rsquo;re a local business in Prayagraj, a growing
+              company anywhere else in India, or a business overseas
+              needing a team that understands both design and results, a
+              website is only worth what it actually does for you.
+              Let&rsquo;s talk about what your website should be doing for
+              your business.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-black text-sm font-semibold px-7 py-3.5 rounded-full transition"
+              >
+                Get a Free Consultation
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 border border-white/50 hover:bg-white/10 text-white text-sm font-semibold px-7 py-3.5 rounded-full transition"
+              >
+                Talk to a Web Development Specialist
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Same full-width divider the shared CTA ends with, so this page
+          still transitions into the footer the same way. */}
+      <div className="w-full bg-black pt-8 md:pt-10">
+        <div className="w-full border-t border-white" />
       </div>
     </>
   );

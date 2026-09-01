@@ -26,11 +26,6 @@ const DEFAULT_CARDS = [
 export default function BpoWhyChooseDark({ cards = DEFAULT_CARDS }) {
   return (
     <section className="relative overflow-hidden bg-black py-20">
-      <div
-        className="absolute -top-24 -right-24 w-96 h-96 rounded-full blur-3xl opacity-20 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-        aria-hidden="true"
-      />
 
       <div className="relative flex flex-wrap justify-center gap-10 items-center px-5 max-w-6xl mx-auto">
         <div className="relative w-[280px] sm:w-[340px] shrink-0 rounded-2xl overflow-hidden">

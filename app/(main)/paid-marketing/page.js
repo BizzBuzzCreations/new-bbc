@@ -1,18 +1,16 @@
+import Link from "next/link";
 import BpoHero from "@/components/sections/bpoHero";
 import Image from "next/image";
 import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
+import RoadmapCarousel from "@/components/sections/roadmapCarousel";
 import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
 import DarkFAQSection from "@/components/sections/darkFAQSection";
 import { Target, MessageCircle, TrendingUp, Users, ShoppingCart, MapPin } from "lucide-react";
 
 export const metadata = {
-  title:
-    "Paid Marketing Services in India | Google & Meta Ads | BizzBuzz Creations",
+  title: "Top Paid Marketing Agency | BizzBuzz Creations",
   description:
-    "Boost leads & sales with expert paid marketing services. Google Ads, Meta Ads & performance campaigns by BizzBuzz Creations in India & Prayagraj.",
+    "BizzBuzz Creations is a paid marketing agency running Google, Meta, and e-commerce ad campaigns for India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/paid-marketing",
   },
@@ -23,65 +21,82 @@ const SERVICE_ITEMS = [
     icon: Target,
     heading: "Google & Search Ads Management",
     description:
-      "Get found the moment someone is ready to buy. Our digital ads management services cover search, display, and shopping campaigns built around real buyer intent, so your business shows up when it matters most, not just when budgets allow.",
+      "As a google ads management company, we run search and Shopping campaigns tracked on cost-per-result, not just clicks, keeping your budget focused on searches that actually convert.",
     href: "/paid-marketing/google-search-ads-management",
   },
   {
     icon: MessageCircle,
     heading: "Meta & Social Ads Management",
     description:
-      "From Facebook to Instagram, our paid media services are designed to stop the scroll and start conversations. We craft ad creatives and targeting strategies that turn casual scrollers into genuine leads for your brand.",
+      "As a social media ads management agency, we run Facebook, Instagram, and TikTok campaigns tracked on ROAS, not just reach, built to turn ad spend into genuine sales.",
     href: "/paid-marketing/meta-social-ads-management",
   },
   {
     icon: TrendingUp,
-    heading: "Performance Marketing & ROI Campaigns",
+    heading: "Performance & ROI Campaigns",
     description:
-      "As a dedicated performance marketing agency, every campaign we run is tracked against one metric that matters: return on investment. No vanity numbers, no fluff, just campaigns built to hit your revenue targets.",
+      "As a performance marketing agency, we manage every channel toward measurable ROI, connecting ads, landing pages, and conversion tracking into one accountable system.",
     href: "/paid-marketing/performance-marketing-roi-campaigns",
   },
   {
     icon: Users,
     heading: "Lead Generation Campaigns",
     description:
-      "Our lead generation marketing services are engineered to fill your calendar, not just your inbox. We combine smart targeting, landing pages, and offers that convert visitors into genuine, sales-ready leads.",
+      "As a lead generation agency, we build funnels that deliver genuinely qualified leads, not just cheap form fills that waste your sales team's time following up.",
     href: "/paid-marketing/lead-generation-campaigns",
   },
   {
     icon: ShoppingCart,
     heading: "E-commerce & Retargeting Ads",
     description:
-      "Running an online store? Our team specializes in performance marketing for e-commerce needs, from product ads to retargeting shoppers who almost bought, helping you recover lost sales and boost repeat purchases.",
+      "As an ecommerce ads agency, we run Shopping, social, and dynamic retargeting campaigns built to recover abandoned carts and turn browsers into buyers.",
     href: "/paid-marketing/ecommerce-retargeting-ads",
   },
   {
     icon: MapPin,
     heading: "Local & City-Based Ad Campaigns",
     description:
-      "Need customers walking through your door? As a trusted paid marketing agency in Allahabad, we run hyper-local campaigns that put your business in front of nearby customers actively searching for what you offer.",
+      "As a local ppc advertising agency, we target ready-to-buy customers in your exact service area, not a broad, wasteful audience spread across an entire region.",
     href: "/paid-marketing/local-city-based-ad-campaigns",
   },
 ];
 
 const PROCESS_STEPS = [
   {
-    title: "Understanding Your Business & Goals",
-    body: "We start by learning your industry, customers, and what a genuinely good lead looks like for you — not a generic campaign template.",
+    number: "01",
+    title: "Business & Account Discovery",
+    desc: "We start by understanding your business goals and auditing any existing ad accounts, identifying where budget is currently being wasted.",
   },
   {
-    title: "Campaign Strategy & Creative Setup",
-    body: "Targeting, ad creatives, and landing pages get built around real buyer intent for your specific market and platform.",
+    number: "02",
+    title: "Audience & Channel Strategy",
+    desc: "We define target audiences and identify which channels genuinely make sense for your specific business and budget.",
   },
   {
-    title: "Launch & Real-Time Optimization",
-    body: "Campaigns go live with daily monitoring — budgets, bids, and creatives get adjusted as real performance data comes in, not on a fixed monthly cycle.",
+    number: "03",
+    title: "Campaign & Creative Development",
+    desc: "We build campaigns, ad creative, and landing page alignment according to the strategy, with accurate tracking from day one.",
   },
   {
-    title: "Scale & Transparent Reporting",
-    body: "Once a campaign proves itself, we scale spend into what's working and report honestly on cost per lead, every month.",
+    number: "04",
+    title: "Launch & Initial Testing",
+    desc: "Campaigns launch with A/B testing built in, comparing creative and targeting to identify what's actually resonating early.",
+  },
+  {
+    number: "05",
+    title: "Optimization & Scaling",
+    desc: "We optimize based on real performance data, reallocating budget toward what's delivering the strongest return.",
+  },
+  {
+    number: "06",
+    title: "Ongoing Reporting & Refinement",
+    desc: "We provide regular reporting on ROI and cost-per-result, continuing to refine campaigns as they mature.",
   },
 ];
 
+// "Paid Marketing Agency" section — left untouched by request, same
+// content and same position (between the process carousel and the FAQ)
+// as before.
 const WE_ARE_POINTS = [
   {
     number: "001",
@@ -123,29 +138,34 @@ const WE_ARE_POINTS = [
 
 const FAQS = [
   {
-    question: "What does a paid marketing agency do?",
+    question: "How much does paid marketing cost in India?",
     answer:
-      "A paid marketing agency runs and optimizes online ads to generate leads, calls, and sales through platforms like Google and Meta.",
+      "Cost typically includes both our management fee and your ad spend budget, kept separate. We scope management pricing after understanding your goals and channels, rather than offering a flat rate that doesn't reflect what your campaigns actually need.",
   },
   {
-    question: "What is performance marketing?",
+    question: "Which platform is right for my business — Google, Meta, or both?",
     answer:
-      "Performance marketing focuses on measurable results like leads and sales, not just clicks or impressions.",
+      "It depends on where your specific customers actually search and browse, which we assess during strategy planning. Many businesses benefit from running both together rather than committing to just one channel.",
   },
   {
-    question: "Is paid marketing good for small businesses in India?",
+    question: "What's a good ROAS or cost-per-lead to expect?",
     answer:
-      "Yes, it helps small businesses generate targeted leads quickly with a controlled budget.",
+      "Benchmarks vary significantly by industry and margin — there's no universal number that applies to every business. We help establish a realistic target based on your specific numbers, then optimize campaigns toward that goal.",
   },
   {
-    question: "What is the ideal budget for paid ads in India?",
+    question: "How long before paid marketing starts showing results?",
     answer:
-      "Budgets vary, but most businesses start small and scale once they see positive ROI.",
+      "Initial data usually comes in within one to two weeks, though meaningful optimization typically takes four to six weeks as campaigns gather enough data to perform efficiently.",
   },
   {
-    question: "Which is the best paid marketing agency in Prayagraj?",
+    question: "Can you manage ecommerce ads and lead generation together?",
     answer:
-      "BizzBuzz Creations is a trusted paid marketing agency in Prayagraj offering Google and Meta ad services.",
+      "Yes, we run both ecommerce campaigns tracked on ROAS and lead generation campaigns tracked on cost-per-qualified-lead, since the strategy differs between the two but often needs to work together.",
+  },
+  {
+    question: "Can you fix a paid ad account that isn't converting?",
+    answer:
+      "Yes, auditing and rebuilding underperforming accounts is a core part of what we do, reviewing targeting, creative, and tracking to find what's actually causing poor performance.",
   },
 ];
 
@@ -153,23 +173,14 @@ export default function PaidMarketing() {
   return (
     <>
       <BpoHero
-        heading="Turn Every Rupee You Spend On Ads Into A Paying Customer"
-        description="Stop paying for clicks that go nowhere. BizzBuzz Creations, Prayagraj's paid marketing agency, turns your ad budget into real leads, real calls, and real sales."
+        heading="Paid Marketing Built to Pay You Back"
+        description="Paid marketing campaigns built to turn ad spend into real leads and sales for businesses in Prayagraj, across India and worldwide, not just clicks."
         img="/ads.webp"
+        ctaText="Get a Free Paid Marketing Audit"
       />
 
       {/* Intro — dark section, glow accents behind the copy */}
       <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
 
         <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
           <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
@@ -199,43 +210,64 @@ export default function PaidMarketing() {
             />
           </div>
           <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              Paid Marketing Services In India, Built For How India Buys
+            <h2 className="text-3xl font-bold mb-2 text-white">
+              Paid Marketing Built Around ROI, Not Just Reach
             </h2>
+            <h3 className="text-base font-semibold text-[#40A2D8] mb-4">
+              Who we run paid marketing for, and why reaching alone isn&rsquo;t
+              the goal.
+            </h3>
             <p className="text-white/70 leading-relaxed mb-4">
-              BizzBuzz Creations is a full-service digital advertising
-              agency offering paid marketing services for small business
-              owners, growing startups, and established brands right across
-              India. Whether you&rsquo;re a clinic in Lucknow, a D2C brand
-              in Mumbai, or a B2B company in Bangalore, our team runs your
-              online advertising with one goal in mind: turning your ad
-              spend into measurable business growth.
+              Ad spend that generates clicks without generating sales is a
+              common outcome of campaigns run without real strategy behind
+              them. At BizzBuzz Creations, we run paid marketing judged on
+              leads and sales it actually produces, not vanity metrics like
+              reach or impressions. Whether you&rsquo;re a local business
+              in Prayagraj looking for a ppc management company near me, a
+              brand elsewhere in India searching for a digital advertising
+              agency that understands your specific margins, or a business
+              needing a performance marketing agency without hiring an
+              in-house team, our team builds campaigns tailored to how your
+              business actually converts customers.
             </p>
             <p className="text-white/70 leading-relaxed">
-              We work as a paid ads partner for clients in every major city
-              and state, managing everything from strategy to execution, so
-              you can focus on running your business while we focus on
-              filling your pipeline.
+              We&rsquo;re a full-service paid marketing agency based in
+              Prayagraj, proudly serving clients locally across Allahabad
+              and Uttar Pradesh, nationally across India, and
+              internationally across the UK, USA, and worldwide. From
+              Google and Meta ads to ecommerce retargeting and local
+              campaigns, we handle the full paid media stack so
+              you&rsquo;re not coordinating five different specialists
+              yourself.
             </p>
           </div>
         </div>
       </section>
 
-      {/* "Our Core Paid Marketing Services" */}
+      {/* "Six Ways We Turn Ad Spend Into Sales" */}
       <section className="bg-black py-20">
         <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid title="Our Core Paid Marketing Services" items={SERVICE_ITEMS} />
+          <BpoServicesGrid
+            title="Six Ways We Turn Ad Spend Into Sales"
+            subheading="Everything we offer, matched to what actually drives your specific business."
+            items={SERVICE_ITEMS}
+          />
         </div>
       </section>
 
-      {/* "Our Paid Marketing Process" */}
+      {/* "How We Turn Ad Budget Into Real Customers" — auto-scrolling
+          carousel (right-to-left, pauses on hover) instead of a static
+          accordion, so the six-step process reads as motion. */}
       <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our Paid Marketing Process"
-            description="Anyone can run an ad. Not everyone can run one that pays for itself. Our four-step process is built around your industry, your customers, and your goals — not a one-size-fits-all package."
-            steps={PROCESS_STEPS}
-          />
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-2">
+            How We Turn Ad Budget Into Real Customers
+          </h2>
+          <p className="text-white/60 text-center max-w-2xl mx-auto mb-14">
+            Our six-step process, from account discovery to ongoing
+            scaling.
+          </p>
+          <RoadmapCarousel steps={PROCESS_STEPS} />
         </div>
       </section>
 
@@ -243,7 +275,7 @@ export default function PaidMarketing() {
         <div className="max-w-5xl mx-auto border-t border-white" />
       </div>
 
-      {/* "Paid Marketing Agency" */}
+      {/* "Paid Marketing Agency" — left untouched by request. */}
       <section className="bg-black pt-20 pb-20 px-5">
         <BpoWeAre
           title="Paid Marketing Agency"
@@ -254,9 +286,101 @@ export default function PaidMarketing() {
 
       <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
 
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
+      {/* "Why Businesses Trust Us With Their Ad Spend, and Where We're
+          Rooted" — heading on top, copy on the left, image on the right. */}
+      <section className="relative overflow-hidden bg-black py-20">
+        <div className="relative max-w-6xl mx-auto px-5">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 text-center">
+            Why Businesses Trust Us With Their Ad Spend, and Where
+            We&rsquo;re Rooted
+          </h2>
+          <p className="text-white/60 text-center max-w-2xl mx-auto mb-12">
+            What genuinely sets us apart from others, and where we&rsquo;re
+            actually rooted.
+          </p>
+          <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+            <div>
+              <p className="text-white/70 leading-relaxed mb-4">
+                We treat every campaign as accountable to real business
+                outcomes, not just impressions or clicks that look busy in
+                a dashboard. A well-run paid marketing agency should be
+                judged on cost-per-result and actual ROI, not vanity
+                metrics, which is exactly why businesses trust us as their
+                performance marketing agency of choice.
+              </p>
+              <p className="text-white/70 leading-relaxed">
+                BizzBuzz Creations is based in Prayagraj, Uttar Pradesh — a
+                city many still know as Allahabad — and that local
+                grounding shapes how we approach every ad account, with
+                the same standard of work whether a client is nearby or
+                across the world. We manage paid marketing locally across
+                Prayagraj and Allahabad, nationally across India, and
+                internationally across the UK, USA, and worldwide, as a
+                paid marketing agency that understands how to build for
+                real business results, not just impressions.
+              </p>
+            </div>
+            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
+              <Image
+                src="/why-choose-image.png"
+                alt="Why businesses trust BizzBuzz Creations with their ad spend"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Page-local CTA — heading + paragraph + two buttons, both pointing
+          to /contact, instead of the shared email-form CTA. */}
+      <div className="bg-black px-5 py-10 scroll-mt-34" id="CTA">
+        <div
+          className="rounded-3xl border-2 border-[#0B60B0] shadow-lg shadow-black md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto container"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(120, 180, 255, 0.25), transparent 70%), #000000",
+          }}
+        >
+          <div className="py-8 md:py-10 px-10 z-10 text-white">
+            <h2 className="md:text-3xl text-2xl font-bold mb-2">
+              Ready for Ad Spend That Actually Pays Off?
+            </h2>
+            <h3 className="text-base font-semibold text-[#40A2D8] mb-5">
+              The next step, if you&rsquo;re ready to talk about what comes
+              next.
+            </h3>
+            <p className="max-w-3xl text-white/70 mb-8">
+              Whether you&rsquo;re a local business in Prayagraj, a growing
+              brand anywhere else in India, or a business overseas needing
+              a team that understands both campaigns and ROI, ad spend is
+              only worth what it actually brings back. Let&rsquo;s talk
+              about what your paid marketing should be doing for your
+              business.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-black text-sm font-semibold px-7 py-3.5 rounded-full transition"
+              >
+                Get a Free Paid Marketing Audit
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 border border-white/50 hover:bg-white/10 text-white text-sm font-semibold px-7 py-3.5 rounded-full transition"
+              >
+                Talk to a Paid Marketing Specialist
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Same full-width divider the shared CTA ends with, so this page
+          still transitions into the footer the same way. */}
+      <div className="w-full bg-black pt-8 md:pt-10">
+        <div className="w-full border-t border-white" />
       </div>
     </>
   );

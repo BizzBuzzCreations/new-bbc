@@ -1,17 +1,16 @@
+import Link from "next/link";
 import BpoHero from "@/components/sections/bpoHero";
 import Image from "next/image";
 import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
-import BpoProcess from "@/components/sections/bpoProcess";
+import RoadmapCarousel from "@/components/sections/roadmapCarousel";
 import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
 import DarkFAQSection from "@/components/sections/darkFAQSection";
 import { Bot, Sparkles, Workflow, Compass } from "lucide-react";
 
 export const metadata = {
-  title: "AI Solutions Company in India | Bizzbuzz Creations",
+  title: "Top AI Solutions Company | BizzBuzz Creations",
   description:
-    "Get custom AI solutions, chatbots, automation & GEO services. Bizzbuzz Creations helps businesses in India & Prayagraj scale with AI.",
+    "BizzBuzz Creations is an AI solutions company building agents, content, and automation for India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/ai-solutions",
   },
@@ -22,51 +21,68 @@ const SERVICE_ITEMS = [
     icon: Bot,
     heading: "Custom AI Agents & Chatbots",
     description:
-      "We design AI agents that do more than answer FAQs — they qualify leads, book calls, and resolve real customer queries, trained on your actual business so every chat feels like talking to your team.",
+      "As a custom ai agent development company, we build chatbots and voice agents that actually complete tasks, not just answer questions and hand off to a human anyway.",
     href: "/ai-solutions/custom-ai-agents-chatbots",
   },
   {
     icon: Sparkles,
     heading: "AI Content & Generative Engines",
     description:
-      "Our generative AI content engines draft, structure, and personalize copy at scale, including blog posts, product descriptions, and ad variations, trained on your brand voice.",
+      "As an ai content generation agency, we produce content at AI speed with human editorial review, so output never sounds generic or off-brand.",
     href: "/ai-solutions/ai-content-generative-engines",
   },
   {
     icon: Workflow,
     heading: "Workflow & Process Automation",
     description:
-      "Our AI workflow automation connects your tools together, so approvals, reports, follow-ups, and data entry run without anyone chasing them manually.",
+      "As an ai workflow automation company, we connect your tools and build AI decision steps into workflows, eliminating manual, repetitive work for good.",
     href: "/ai-solutions/workflow-process-automation",
   },
   {
     icon: Compass,
     heading: "AI Strategy & Implementation Consulting",
     description:
-      "AI strategy consulting built around real business use cases, not AI for its own sake, engineered to identify where it actually helps.",
+      "As an ai strategy consulting firm, we give you an honest readiness assessment and a realistic roadmap, not AI adoption for its own sake.",
     href: "/ai-solutions/generative-engine-optimization",
   },
 ];
 
 const PROCESS_STEPS = [
   {
-    title: "Understanding Your Workflow",
-    body: "We start by learning where your team spends repetitive hours, where leads go cold, and where content bottlenecks actually slow you down.",
+    number: "01",
+    title: "Business & Readiness Discovery",
+    desc: "We start by understanding your business and honestly assessing your genuine readiness for the specific AI solution you need.",
   },
   {
-    title: "Building the Right Solution",
-    body: "A custom agent, content engine, or automation gets built around that exact gap — not a generic AI tool pulled off a shelf.",
+    number: "02",
+    title: "Use Case Identification",
+    desc: "We identify specific, realistic use cases relevant to your business, prioritizing based on feasibility and actual impact.",
   },
   {
-    title: "Testing With Your Team",
-    body: "Every solution is tested with the people who'll actually use it before it goes live, so it fits real workflows, not a demo.",
+    number: "03",
+    title: "Architecture & Strategy",
+    desc: "We plan the technical architecture and approach, whether that's an AI agent, content workflow, or automation system.",
   },
   {
-    title: "Launch, Refine & Monitor",
-    body: "We stay involved after launch, refining based on real usage instead of leaving the system running blind.",
+    number: "04",
+    title: "Development & Training",
+    desc: "We build and train the AI solution on your specific business data, knowledge, and brand voice.",
+  },
+  {
+    number: "05",
+    title: "Testing & Integration",
+    desc: "We test thoroughly and integrate the solution with your existing systems before anything goes live.",
+  },
+  {
+    number: "06",
+    title: "Ongoing Optimization",
+    desc: "We monitor performance and continue refining the AI solution as your business and needs evolve.",
   },
 ];
 
+// "AI Solutions Company" section — left untouched by request, same
+// content and same position (between the process carousel and the FAQ)
+// as before.
 const WE_ARE_POINTS = [
   {
     number: "001",
@@ -108,30 +124,34 @@ const WE_ARE_POINTS = [
 
 const FAQS = [
   {
-    question:
-      "What's the difference between an AI solutions company and a developer?",
+    question: "How much do AI solutions cost in India?",
     answer:
-      "A developer builds a tool; an AI solutions company builds a complete system with automation, agents, and strategy.",
+      "Cost depends heavily on complexity — a simple chatbot costs far less than a custom multi-agent system or a full content automation pipeline. We scope pricing after understanding your specific use case, rather than a flat rate upfront.",
   },
   {
-    question: "Can small businesses afford AI solutions?",
+    question: "How do we know if our business is actually ready for AI?",
     answer:
-      "Yes, you can start with one use case (like a chatbot) and scale as needed.",
+      "Readiness depends on your data, team, and processes, which we assess honestly during a readiness consultation. Being unprepared in some areas doesn't rule out AI — it often just means addressing specific gaps first.",
   },
   {
-    question: "What is GEO, and do I need it?",
+    question: "Will AI content or chatbots sound generic instead of like our brand?",
     answer:
-      "GEO helps AI tools recommend your business in search results, making it essential alongside SEO.",
+      "Not when built correctly — we train AI on your specific brand voice and business data, with human review built into the process to catch anything that sounds off-brand.",
   },
   {
-    question: "Will an AI chatbot sound robotic?",
+    question: "How long does it take to build a custom AI solution?",
     answer:
-      "No, it's trained on your business tone to deliver natural, human-like responses.",
+      "Timeline depends on complexity — a simple chatbot can take a few weeks, while a multi-agent system or full automation pipeline typically takes longer to build and test properly.",
   },
   {
-    question: "How long does it take to build an AI agent?",
+    question: "Do you help with AI governance and risk, or just building the tools?",
     answer:
-      "Most AI agents are ready within 2 to 4 weeks, depending on complexity.",
+      "Yes, AI strategy consulting covers governance, risk, and responsible use guidelines, not just technical implementation, especially important for businesses adopting AI at scale.",
+  },
+  {
+    question: "Can you help us choose between different AI tools and vendors?",
+    answer:
+      "Yes, independent AI vendor and tool evaluation is part of our strategy consulting service, assessed against your specific needs rather than any partnership bias.",
   },
 ];
 
@@ -139,23 +159,14 @@ export default function AISolutions() {
   return (
     <>
       <BpoHero
-        heading="Your Business, Running on AI That Actually Understands It"
-        description="Bizzbuzz Creations builds custom AI agents, generative content engines, and workflow automation plus GEO, so your brand shows up when people ask AI for answers, not just Google."
+        heading="AI Solutions That Actually Get Work Done"
+        description="AI solutions built around real business tasks, not AI for its own sake, for businesses in Prayagraj, across India and worldwide, backed by human oversight."
         img="/aiservice.webp"
+        ctaText="Get a Free AI Readiness Consultation"
       />
 
       {/* Intro — dark section, glow accents behind the copy */}
       <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
 
         <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
           <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
@@ -185,42 +196,63 @@ export default function AISolutions() {
             />
           </div>
           <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              AI That Fits Your Business, Not the Other Way Around
+            <h2 className="text-3xl font-bold mb-2 text-white">
+              AI Built Around Real Tasks, Not Just Hype
             </h2>
+            <h3 className="text-base font-semibold text-[#40A2D8] mb-4">
+              Who we build AI for, and why hype alone isn&rsquo;t a
+              strategy.
+            </h3>
             <p className="text-white/70 leading-relaxed mb-4">
-              Most businesses hear &ldquo;AI solutions&rdquo; and picture
-              something complicated, expensive, or built for companies ten
-              times their size. That&rsquo;s not how we work. Bizzbuzz
-              Creations makes artificial intelligence practical for a
-              startup automating its first support inbox or a growing
-              brand that needs a full AI development partner.
+              Adopting AI because it&rsquo;s trending, without a genuine
+              use case behind it, is a common way businesses waste time
+              and budget. At BizzBuzz Creations, we build AI solutions
+              judged on real tasks they actually complete, not generic AI
+              features added for their own sake. Whether you&rsquo;re a
+              local business in Prayagraj looking for an ai solutions
+              company near me, a brand elsewhere in India searching for a
+              custom ai agent development company that understands your
+              specific workflow, or a business needing ai strategy
+              consulting before committing budget, our team builds AI
+              tailored to how your business actually operates.
             </p>
             <p className="text-white/70 leading-relaxed">
-              We start by understanding how your business actually runs —
-              where your team spends the most repetitive hours, where
-              leads go cold, and where content bottlenecks slow you down —
-              and build custom AI solutions around exactly that.
+              We&rsquo;re a full-service AI solutions company based in
+              Prayagraj, proudly serving clients locally across Allahabad
+              and Uttar Pradesh, nationally across India, and
+              internationally across the UK, USA, and worldwide. From
+              custom agents and content generation to workflow automation
+              and strategy, we handle the full AI adoption journey so
+              you&rsquo;re not piecing it together yourself.
             </p>
           </div>
         </div>
       </section>
 
-      {/* "Four Ways We Put AI to Work" */}
+      {/* "Four Ways We Put AI to Work for Your Business" */}
       <section className="bg-black py-20">
         <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid title="Four Ways We Put AI to Work in Your Business" items={SERVICE_ITEMS} />
+          <BpoServicesGrid
+            title="Four Ways We Put AI to Work for Your Business"
+            subheading="Everything we offer, matched to where AI could genuinely help your business."
+            items={SERVICE_ITEMS}
+          />
         </div>
       </section>
 
-      {/* "Our AI Solutions Process" */}
+      {/* "How We Turn AI Interest Into Working Systems" — auto-scrolling
+          carousel (right-to-left, pauses on hover) instead of a static
+          accordion, so the six-step process reads as motion. */}
       <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our AI Solutions Process"
-            description="We're not a company that hands you a demo and disappears. Every AI agent, content engine, or automation is built around your real workflow, tested with your team, and refined after launch."
-            steps={PROCESS_STEPS}
-          />
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-2">
+            How We Turn AI Interest Into Working Systems
+          </h2>
+          <p className="text-white/60 text-center max-w-2xl mx-auto mb-14">
+            Our six-step process, from readiness discovery to ongoing
+            optimization.
+          </p>
+          <RoadmapCarousel steps={PROCESS_STEPS} />
         </div>
       </section>
 
@@ -228,7 +260,7 @@ export default function AISolutions() {
         <div className="max-w-5xl mx-auto border-t border-white" />
       </div>
 
-      {/* "AI Solutions Company" */}
+      {/* "AI Solutions Company" — left untouched by request. */}
       <section className="bg-black pt-20 pb-20 px-5">
         <BpoWeAre
           title="AI Solutions Company"
@@ -239,9 +271,100 @@ export default function AISolutions() {
 
       <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
 
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
+      {/* "Why Businesses Trust Us With AI, and Where We're Rooted" —
+          heading on top, copy on the left, image on the right. */}
+      <section className="relative overflow-hidden bg-black py-20">
+        <div className="relative max-w-6xl mx-auto px-5">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 text-center">
+            Why Businesses Trust Us With AI, and Where We&rsquo;re Rooted
+          </h2>
+          <p className="text-white/60 text-center max-w-2xl mx-auto mb-12">
+            What genuinely sets us apart from others, and where we&rsquo;re
+            actually rooted.
+          </p>
+          <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+            <div>
+              <p className="text-white/70 leading-relaxed mb-4">
+                We treat every AI project as accountable to a real
+                business outcome, not a feature added because it&rsquo;s
+                currently trending. A well-run AI solutions company should
+                be judged on tasks genuinely completed and time genuinely
+                saved, which is exactly why businesses trust us as their
+                AI partner of choice.
+              </p>
+              <p className="text-white/70 leading-relaxed">
+                BizzBuzz Creations is based in Prayagraj, Uttar Pradesh — a
+                city many still know as Allahabad — and that local
+                grounding shapes how we approach every AI project, with
+                the same standard of work whether a client is nearby or
+                across the world. We build AI solutions locally across
+                Prayagraj and Allahabad, nationally across India, and
+                internationally across the UK, USA, and worldwide, as an
+                AI solutions company that understands how to build for
+                real business results, not just impressive demos.
+              </p>
+            </div>
+            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
+              <Image
+                src="/why-choose-image.png"
+                alt="Why businesses trust BizzBuzz Creations with AI"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Page-local CTA — heading + paragraph + two buttons, both pointing
+          to /contact, instead of the shared email-form CTA. */}
+      <div className="bg-black px-5 py-10 scroll-mt-34" id="CTA">
+        <div
+          className="rounded-3xl border-2 border-[#0B60B0] shadow-lg shadow-black md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto container"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(120, 180, 255, 0.25), transparent 70%), #000000",
+          }}
+        >
+          <div className="py-8 md:py-10 px-10 z-10 text-white">
+            <h2 className="md:text-3xl text-2xl font-bold mb-2">
+              Ready to Put AI to Work for Your Business?
+            </h2>
+            <h3 className="text-base font-semibold text-[#40A2D8] mb-5">
+              The next step, if you&rsquo;re ready to talk about what comes
+              next.
+            </h3>
+            <p className="max-w-3xl text-white/70 mb-8">
+              Whether you&rsquo;re a local business in Prayagraj, a growing
+              company anywhere else in India, or a business overseas
+              needing a partner that understands both AI capability and
+              genuine business fit, AI is only worth what it actually does
+              for you. Let&rsquo;s talk about where AI could genuinely
+              help.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-black text-sm font-semibold px-7 py-3.5 rounded-full transition"
+              >
+                Get a Free AI Readiness Consultation
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 border border-white/50 hover:bg-white/10 text-white text-sm font-semibold px-7 py-3.5 rounded-full transition"
+              >
+                Talk to an AI Solutions Specialist
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Same full-width divider the shared CTA ends with, so this page
+          still transitions into the footer the same way. */}
+      <div className="w-full bg-black pt-8 md:pt-10">
+        <div className="w-full border-t border-white" />
       </div>
     </>
   );

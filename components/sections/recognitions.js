@@ -63,16 +63,6 @@ export default function Recognitions({ content }) {
 
   return (
     <section className="relative bg-black text-white py-24 px-6 md:px-12 overflow-hidden">
-      <div
-        className="absolute top-1/3 -left-24 w-96 h-96 rounded-full blur-3xl opacity-20 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute -bottom-24 -right-16 w-80 h-80 rounded-full blur-3xl opacity-15 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-        aria-hidden="true"
-      />
 
       <div className="relative max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
         <div>

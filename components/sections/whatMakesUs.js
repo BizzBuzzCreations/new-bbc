@@ -54,16 +54,8 @@ export default function WhatMAkesUs({ content }) {
 
   return (
     <div className="relative overflow-hidden bg-black container py-20 mx-auto p-4 flex flex-col justify-center gap-5 items-center max-w-none">
-      <div
-        className="absolute -top-24 -left-24 w-96 h-96 rounded-full blur-3xl opacity-20 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute -bottom-24 -right-16 w-80 h-80 rounded-full blur-3xl opacity-15 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-        aria-hidden="true"
-      />
+
+
 
       <div className="relative text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-2 max-w-4xl text-white">

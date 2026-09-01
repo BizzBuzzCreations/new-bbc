@@ -100,11 +100,6 @@ export default function MarketingCTA({ content }) {
 
         {/* Right — 3x2 stage cards, dark glass-card grid */}
         <div className="relative flex flex-col justify-center bg-[#050505] p-6 sm:p-10 lg:p-12 overflow-hidden">
-          <div
-            className="absolute -top-16 -right-16 w-64 h-64 rounded-full blur-3xl opacity-20 pointer-events-none"
-            style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-            aria-hidden="true"
-          />
           {/* Same particle backdrop as the rest of the page — cards sit
               semi-transparent on top so it shows through subtly. */}
           <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">

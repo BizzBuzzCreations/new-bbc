@@ -10,7 +10,7 @@ export default function GuidesHero({ content } = {}) {
   const secondaryCtaText = content?.guidesHeroSecondaryCtaText || "Need Help With Marketing?";
 
   return (
-    <section className="relative overflow-hidden py-24 md:py-28 px-6 text-center text-white">
+    <section className="relative overflow-hidden py-24 md:py-28 px-6 md:px-12 lg:px-24 text-white">
       <div
         className="absolute inset-0"
         style={{
@@ -35,14 +35,14 @@ export default function GuidesHero({ content } = {}) {
         aria-hidden="true"
       />
 
-      <div className="relative max-w-3xl mx-auto">
+      <div className="relative max-w-3xl">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-5">
           {heading}
         </h1>
-        <p className="text-white/80 max-w-xl mx-auto mb-8 leading-relaxed">
+        <p className="text-white/80 max-w-xl mb-8 leading-relaxed">
           {paragraph}
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-4">
+        <div className="flex flex-wrap items-center gap-4">
           <Link
             href="#all-guides"
             className="inline-flex items-center gap-1.5 bg-white hover:bg-black text-black hover:text-white text-sm font-semibold px-7 py-3.5 rounded-lg transition-colors duration-300"

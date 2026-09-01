@@ -160,11 +160,6 @@ export default async function IndustriesIndexPage() {
         className="relative overflow-hidden pt-28 md:pt-32 pb-20 px-6 md:px-12 lg:px-24 text-white"
         style={{ background: "radial-gradient(circle at top, #0d1b2e, #000000)" }}
       >
-        <div
-          className="absolute top-1/4 right-[8%] w-[420px] h-[420px] rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
 
         <div className="relative max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <div>

@@ -29,11 +29,6 @@ const BADGES = [
 export default function IndustriesHeroBadges() {
   return (
     <div className="relative hidden lg:block h-[420px] w-full">
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full blur-3xl opacity-30 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-        aria-hidden="true"
-      />
       {BADGES.map((b, i) => {
         const Icon = b.icon;
         return (

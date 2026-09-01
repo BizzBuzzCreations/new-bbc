@@ -1,87 +1,102 @@
+import Link from "next/link";
 import BpoHero from "@/components/sections/bpoHero";
-import React from "react";
 import Image from "next/image";
 import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
+import RoadmapCarousel from "@/components/sections/roadmapCarousel";
 import BpoWeAre from "@/components/sections/bpoWeAre";
-import BpoProcess from "@/components/sections/bpoProcess";
-import BpoWhyChooseDark from "@/components/sections/bpoWhyChooseDark";
-import CTA from "@/components/sections/CTA";
 import DarkFAQSection from "@/components/sections/darkFAQSection";
-import { Bot, PhoneCall, Workflow, FileText, UserCheck, Clock } from "lucide-react";
+import { Bot, PhoneCall, Workflow, UserCheck, Clock, FileText } from "lucide-react";
 
-  export const metadata = {
-    title: "BPO Services India | Call Center | BizzBuzz Creations",
-    description:
-      "Outsource call center, back office, and customer support with AI-powered BPO services by BizzBuzz Creations, serving Prayagraj and businesses across India.",
-      alternates: {
+export const metadata = {
+  title: "Top BPO & Outsourcing Company | BizzBuzz Creations",
+  description:
+    "BizzBuzz Creations is a BPO and outsourcing company providing call center, automation, and support services worldwide.",
+  alternates: {
     canonical: "https://bizzbuzzcreations.com/bpo-services",
   },
-  };
+};
 
 const SERVICE_ITEMS = [
   {
     icon: Bot,
     heading: "AI-Powered BPO & Call Center Solutions",
     description:
-      "We layer AI call center solutions on top of real agents' smart call routing, live transcription, and chatbot customer support services that pick up repetitive questions instantly. Your team only steps in for calls that truly need a human touch, so nothing slips through and nothing feels robotic.",
+      "As an ai powered call center company, we blend AI voice agents with trained human agents, delivering 24/7 coverage without 24/7 headcount costs.",
     href: "/bpo-services/ai-powered-bpo-call-center-solutions",
   },
   {
     icon: PhoneCall,
     heading: "Inbound & Outbound Call Center Services",
     description:
-      "From answering customer queries to running outbound sales and collection calls, our inbound call center services and outbound call center services are staffed by agents trained on your scripts, tone, and product, not a generic script read out from a random floor.",
+      "As a call center outsourcing company, we handle inbound support and outbound sales calling professionally, so missed calls stop costing you customers.",
     href: "/bpo-services/inbound-outbound-call-center-services",
   },
   {
     icon: Workflow,
     heading: "Business Process Automation Services",
     description:
-      "Manual, repetitive processes are where most companies quietly lose hours every week. Our business process automation services map your workflow first, then automate the boring middle, freeing your in-house team to focus on decisions, not data-copying.",
+      "As a business process automation company, we eliminate repetitive manual work through workflow automation and RPA, freeing your team for work that needs them.",
     href: "/bpo-services/business-process-automation-services",
-  },
-  {
-    icon: FileText,
-    heading: "Data Entry & Back Office Outsourcing",
-    description:
-      "Invoices, records, CRM updates, reconciliations — our data entry outsourcing and back office outsourcing desks work with the same accuracy checks a large enterprise would demand, at a cost a small business can actually plan around, including finance and accounting outsourcing support.",
-    href: "/bpo-services/data-entry-back-office-outsourcing",
   },
   {
     icon: UserCheck,
     heading: "Virtual Assistant & Startup Outsourcing",
     description:
-      "Not every business needs a 50-seat floor. Our virtual assistant services and startup outsourcing services let founders and small teams hand off scheduling, support and admin work through flexible remote team outsourcing, scaling up only when the workload genuinely demands it.",
+      "As a virtual assistant agency, we provide dedicated, trained support for admin, ecommerce, and customer communication, matched to your specific startup needs.",
     href: "/bpo-services/virtual-assistant-startup-outsourcing",
   },
   {
     icon: Clock,
     heading: "24/7 & E-commerce Customer Support",
     description:
-      "Online stores and growing brands can't afford support that sleeps. Our 24/7 support outsourcing services and e-commerce customer support outsourcing cover order queries, returns, and chat support round the clock, with chatbot support services handling the late-night rush.",
+      "As an ecommerce customer support outsourcing partner, we provide genuine round-the-clock coverage across chat, email, and social, not just business-hours support.",
     href: "/bpo-services/24-7-ecommerce-customer-support",
+  },
+  {
+    icon: FileText,
+    heading: "Data Entry & Back-Office Outsourcing",
+    description:
+      "As a data entry outsourcing company, we handle bulk data processing and back-office work accurately at volume, without you hiring an in-house team.",
+    href: "/bpo-services/data-entry-back-office-outsourcing",
   },
 ];
 
 const PROCESS_STEPS = [
   {
-    title: "Understanding Your Requirements",
-    body: "We start by learning your current workflow, tools, and pain points, so the team we build actually fits how you operate — not a generic template.",
+    number: "01",
+    title: "Business & Volume Discovery",
+    desc: "We start by understanding your current call, support, or data volume, and what's genuinely taking up your team's time.",
   },
   {
-    title: "Team Setup & Training",
-    body: "Agents are hired and trained specifically on your scripts, tone, and product, so they represent your brand from the first call, not a random floor.",
+    number: "02",
+    title: "Process & Requirements Assessment",
+    desc: "We assess your specific processes and requirements, identifying exactly what needs to be handled and how.",
   },
   {
-    title: "Launch & Live Monitoring",
-    body: "Your outsourced team goes live with close oversight in the first weeks, so gaps get caught early instead of after they've cost you customers.",
+    number: "03",
+    title: "Team & System Setup",
+    desc: "We set up the team, systems, and any automation required, integrated with your existing tools.",
   },
   {
-    title: "Ongoing Optimization & Reporting",
-    body: "Weekly reporting and regular check-ins keep the engagement improving long after launch — not just during onboarding.",
+    number: "04",
+    title: "Training & Integration",
+    desc: "We train the team on your specific business, products, and policies, ensuring accurate, on-brand support.",
+  },
+  {
+    number: "05",
+    title: "Launch & Initial Monitoring",
+    desc: "We launch with close monitoring in the early weeks, refining processes based on real interactions.",
+  },
+  {
+    number: "06",
+    title: "Ongoing Reporting & Support",
+    desc: "We provide regular reporting and continued support as your volume and requirements evolve.",
   },
 ];
 
+// "BPO & Customer Support Company" section — left untouched by request,
+// same content and same position (between the process carousel and the
+// FAQ) as before.
 const WE_ARE_POINTS = [
   {
     number: "001",
@@ -123,29 +138,34 @@ const WE_ARE_POINTS = [
 
 const FAQS = [
   {
-    question: "Do you provide BPO services outside Prayagraj?",
+    question: "How much does BPO and outsourcing cost in India?",
     answer:
-      "Yes, we serve clients across India and internationally through offshore outsourcing.",
+      "Cost depends on volume, service type, and coverage hours needed — call handling costs differently than data entry or virtual assistant support. We scope pricing after understanding your specific requirements, rather than a flat rate upfront.",
   },
   {
-    question: "What is an AI-powered BPO?",
+    question: "Is our data and customer information kept secure?",
     answer:
-      "It combines human agents with AI tools to deliver faster, cost-efficient support.",
+      "Yes, we follow proper data security and confidentiality practices across every service, treating this as a standard requirement rather than an optional add-on.",
   },
   {
-    question: "Is outsourcing affordable for startups?",
+    question: "How do you ensure quality when work is outsourced?",
     answer:
-      "Yes, you can start small and scale your remote team as your business grows.",
+      "We monitor quality through training, call and interaction review, and regular reporting, adjusting processes based on real performance rather than assuming quality without verification.",
   },
   {
-    question: "Do you offer 24/7 customer support?",
+    question: "Can support scale up or down as our needs change?",
     answer:
-      "Yes, we provide round-the-clock support with shift-based teams and AI backup.",
+      "Yes, flexible scaling is built into how we work, whether that's seasonal call volume, growing data entry needs, or expanding virtual assistant hours.",
   },
   {
-    question: "Is my data secure with you?",
+    question: "Which BPO service actually fits what my business needs?",
     answer:
-      "Yes, we follow NDAs, access control, and strict data protection practices.",
+      "It depends on where you're losing the most time — calls, support tickets, manual data, or admin work. We help identify this during your initial consultation.",
+  },
+  {
+    question: "How do you handle communication if something goes wrong?",
+    answer:
+      "We flag issues promptly with clear documentation, keeping you informed rather than letting problems go unnoticed until they become bigger issues.",
   },
 ];
 
@@ -153,24 +173,16 @@ export default function BPO() {
   return (
     <>
       <BpoHero
-        heading="Outsourcing That Feels Like Your Own Team, Just Not On Your Payroll."
-        description="Bizzbuzz Creations runs call center outsourcing, AI-powered support, and back-office operations from Prayagraj for businesses across India-no jargon, no black-box vendor, just a team that delivers"
+        heading="BPO Outsourcing That Adds Support, Not Payroll"
+        description="BPO and outsourcing services built to scale your support and operations without scaling headcount, for businesses in Prayagraj, across India and worldwide."
         img="/BPO service.png"
+        ctaText="Get a Free BPO Consultation"
       />
 
-      {/* "More Than Outsourcing" — dark section, glow accents behind the
-          copy so the black background doesn't feel flat/empty. */}
+      {/* "Outsourcing Built to Scale You, Not Slow You Down" — dark
+          section, glow accents behind the copy so the black background
+          doesn't feel flat/empty. */}
       <section className="relative overflow-hidden bg-black py-20">
-        <div
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-          aria-hidden="true"
-        />
 
         <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
           <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
@@ -202,41 +214,65 @@ export default function BPO() {
             />
           </div>
           <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-3xl font-bold mb-3 text-white">
-              More Than Outsourcing A Team That Thinks Like You Do
+            <h2 className="text-3xl font-bold mb-2 text-white">
+              Outsourcing Built to Scale You, Not Slow You Down
             </h2>
+            <h3 className="text-base font-semibold text-[#40A2D8] mb-4">
+              Who we support, and why outsourcing should scale you, not
+              slow you down.
+            </h3>
             <p className="text-white/70 leading-relaxed mb-4">
-              Outsourcing often feels like handing your business to a stranger. You lose visibility into what's said to customers,
-              how data is handled, and whether anyone actually cares about the outcome the way you do. Bizzbuzz Creations was built in Prayagraj to fix exactly that gap.
-              We started as a small BPO services provider with one rule: every account should run like an extension of the client's own team,
-              not a distant vendor relationship.
+              Missed calls, overwhelmed support inboxes, and manual data
+              entry are common outcomes of growth outpacing internal
+              capacity. At BizzBuzz Creations, we run BPO and outsourcing
+              judged on how much it genuinely takes off your plate, not
+              just headcount added elsewhere. Whether you&rsquo;re a local
+              business in Prayagraj looking for a call center outsourcing
+              company near me, a brand elsewhere in India searching for a
+              bpo company that understands your specific volume, or a
+              startup needing virtual assistant services without hiring
+              in-house, our team builds support tailored to how your
+              business actually operates.
             </p>
             <p className="text-white/70 leading-relaxed">
-              Today, we work with startups taking their first step into outsourcing services, small businesses in Allahabad needing reliable support,
-              and growing companies across India that need a full-scale BPO company for inbound and outbound calling, data entry, and 24/7 customer support outsourcing.
-              Whatever the size of your business, the approach stays the same:  we learn your process first, then build a team around it,
-              instead of forcing your business into a generic template.
+              We&rsquo;re a full-service BPO company based in Prayagraj,
+              proudly serving clients locally across Allahabad and Uttar
+              Pradesh, nationally across India, and internationally across
+              the UK, USA, and worldwide. From call handling and
+              automation to virtual assistants and back-office work, we
+              handle the full outsourcing stack so you&rsquo;re not
+              coordinating five different vendors yourself.
             </p>
           </div>
         </div>
       </section>
 
-      {/* "What We Handle" — fanned card deck over a half-circle badge,
-          same dark treatment, continuous with the section above. */}
+      {/* "Six Ways We Support Your Operations" — fanned card deck over a
+          half-circle badge, same dark treatment, continuous with the
+          section above. */}
       <section className="bg-black py-20">
         <div className="container max-w-6xl mx-auto px-5">
-          <BpoServicesGrid title="What We Handle" items={SERVICE_ITEMS} />
+          <BpoServicesGrid
+            title="Six Ways We Support Your Operations"
+            subheading="Everything we offer, matched to what's actually taking up your team's time."
+            items={SERVICE_ITEMS}
+          />
         </div>
       </section>
 
-      {/* "Our BPO Process" — heading + copy left, expandable steps right */}
+      {/* "How We Take Work Off Your Plate" — auto-scrolling carousel
+          (right-to-left, pauses on hover) instead of a static accordion,
+          so the six-step process reads as motion. */}
       <section className="bg-black py-20 px-5">
-        <div className="max-w-5xl mx-auto">
-          <BpoProcess
-            title="Our BPO Process"
-            description="As a BPO and customer support partner, we build every engagement around understanding your workflow first, then design a team and process around it. Our four-step approach combines transparent onboarding with hands-on training, so your outsourced team runs like an extension of your own from day one."
-            steps={PROCESS_STEPS}
-          />
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-2">
+            How We Take Work Off Your Plate
+          </h2>
+          <p className="text-white/60 text-center max-w-2xl mx-auto mb-14">
+            Our six-step process, from understanding your volume to
+            ongoing support.
+          </p>
+          <RoadmapCarousel steps={PROCESS_STEPS} />
         </div>
       </section>
 
@@ -246,7 +282,7 @@ export default function BPO() {
         <div className="max-w-5xl mx-auto border-t border-white" />
       </div>
 
-      {/* "We are:" — same numbered two-column structure as the reference */}
+      {/* "BPO & Customer Support Company" — left untouched by request. */}
       <section className="bg-black pt-20 pb-20 px-5">
         <BpoWeAre
           title="BPO & Customer Support Company"
@@ -255,11 +291,103 @@ export default function BPO() {
         />
       </section>
 
-      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Question" />
+      <DarkFAQSection faqs={FAQS} heading="Frequently Asked Questions" />
 
-      <BpoWhyChooseDark />
-      <div className="bg-black pt-10">
-        <CTA />
+      {/* "Why Businesses Trust Us With Their Operations, and Where We're
+          Rooted" — heading on top, copy on the left, image on the right. */}
+      <section className="relative overflow-hidden bg-black py-20">
+        <div className="relative max-w-6xl mx-auto px-5">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 text-center">
+            Why Businesses Trust Us With Their Operations, and Where
+            We&rsquo;re Rooted
+          </h2>
+          <p className="text-white/60 text-center max-w-2xl mx-auto mb-12">
+            What genuinely sets us apart from others and where we&rsquo;re
+            actually rooted.
+          </p>
+          <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+            <div>
+              <p className="text-white/70 leading-relaxed mb-4">
+                We treat every engagement as an extension of your own
+                team, not a distant vendor relationship with no real
+                accountability. A well-run BPO company should be judged on
+                how much time and stress it genuinely removes, which is
+                exactly why businesses trust us as their outsourcing
+                partner of choice.
+              </p>
+              <p className="text-white/70 leading-relaxed">
+                BizzBuzz Creations is based in Prayagraj, Uttar Pradesh — a
+                city many still know as Allahabad — and that local
+                grounding shapes how we approach every engagement, with
+                the same standard of work whether a client is nearby or
+                across the world. We support operations locally across
+                Prayagraj and Allahabad, nationally across India, and
+                internationally across the UK, USA, and worldwide, as a
+                BPO company that understands how to build for real
+                business results, not just added capacity.
+              </p>
+            </div>
+            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
+              <Image
+                src="/why-choose-image.png"
+                alt="Why businesses trust BizzBuzz Creations with their operations"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Page-local CTA — heading + paragraph + two buttons, both pointing
+          to /contact, instead of the shared email-form CTA. */}
+      <div className="bg-black px-5 py-10 scroll-mt-34" id="CTA">
+        <div
+          className="rounded-3xl border-2 border-[#0B60B0] shadow-lg shadow-black md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto container"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(120, 180, 255, 0.25), transparent 70%), #000000",
+          }}
+        >
+          <div className="py-8 md:py-10 px-10 z-10 text-white">
+            <h2 className="md:text-3xl text-2xl font-bold mb-2">
+              Ready to Scale Without Scaling Headcount?
+            </h2>
+            <h3 className="text-base font-semibold text-[#40A2D8] mb-5">
+              The next step, if you&rsquo;re ready to talk about what comes
+              next.
+            </h3>
+            <p className="max-w-3xl text-white/70 mb-8">
+              Whether you&rsquo;re a local business in Prayagraj, a growing
+              company anywhere else in India, or a business overseas
+              needing a partner that understands both cost and quality,
+              outsourcing is only worth what it actually takes off your
+              plate. Let&rsquo;s talk about what&rsquo;s currently taking
+              up too much of your time.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-black text-sm font-semibold px-7 py-3.5 rounded-full transition"
+              >
+                Get a Free BPO Consultation
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 border border-white/50 hover:bg-white/10 text-white text-sm font-semibold px-7 py-3.5 rounded-full transition"
+              >
+                Talk to a BPO Solutions Specialist
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Same full-width divider the shared CTA ends with, so this page
+          still transitions into the footer the same way. */}
+      <div className="w-full bg-black pt-8 md:pt-10">
+        <div className="w-full border-t border-white" />
       </div>
     </>
   );

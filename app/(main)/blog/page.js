@@ -34,16 +34,8 @@ export default async function Blogs() {
   return (
     <section className="relative overflow-hidden bg-black md:pt-16 pt-10">
       {/* Soft brand-blue glows — decorative only, sit behind everything. */}
-      <div
-        className="absolute -top-24 -left-20 w-96 h-96 rounded-full blur-3xl opacity-20 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute top-40 -right-24 w-96 h-96 rounded-full blur-3xl opacity-15 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-        aria-hidden="true"
-      />
+
+
 
       <div className="relative text-center">
         <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">
