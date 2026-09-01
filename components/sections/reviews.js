@@ -46,13 +46,8 @@ export default function Reviews({ content }) {
   const thirdColumn = items.slice(4, 6);
 
   return (
-    <section className="relative overflow-hidden bg-black py-20">
-      <div
-        className="absolute -top-24 -left-24 w-96 h-96 rounded-full blur-3xl opacity-20 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-        aria-hidden="true"
-      />
-      <div className="container mx-auto px-5 relative">
+    <section className="bg-gray-50 my-20 relative">
+      <div className="container mx-auto px-5">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -63,11 +58,19 @@ export default function Reviews({ content }) {
           <div className="flex justify-center">
           </div>
 
+<<<<<<< HEAD
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tighter mt-5 text-white">
             {heading}
           </h2>
           <p className="text-center mt-5 text-white/60">
             {subtext}
+=======
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tighter mt-5">
+            Customer Reviews
+          </h2>
+          <p className="text-center mt-5 text-gray-500">
+            See what our customers have to say about us.
+>>>>>>> be2d797bb3e0611a2f1255d51d0dffc81a848556
           </p>
         </motion.div>
 

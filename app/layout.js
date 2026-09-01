@@ -5,7 +5,6 @@ import { ToastContainer, Bounce } from "react-toastify";
 import FlowbiteInit from "@/components/sections/FlowbiteInit";
 import Whatsapp from "@/components/sections/whatsapp";
 import AllScripts from "@/components/sections/allScripts";
-import ClickSpark from "@/components/ui/ClickSpark";
 
 const firaSans = Fira_Sans({
   subsets: ["latin"],
@@ -44,11 +43,11 @@ export default function RootLayout({ children }) {
       </head>
       <body
         className={`${firaSans.variable} ${ibmPlexSans.variable} antialiased`}
-        suppressHydrationWarning
       >
         <Whatsapp />
         <FlowbiteInit />
         <main>{children}</main>
+<<<<<<< HEAD
         <ClickSpark
           sparkColor="#40A2D8"
           sparkSize={10}
@@ -56,6 +55,8 @@ export default function RootLayout({ children }) {
           sparkCount={8}
           duration={450}
         />
+=======
+>>>>>>> be2d797bb3e0611a2f1255d51d0dffc81a848556
         <Script src="/js/flowbite.min.js" strategy="afterInteractive" />
         <ToastContainer
           position="top-right"

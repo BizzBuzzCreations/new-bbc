@@ -1,18 +1,16 @@
+import Counter from "@/components/sections/counter";
 import CTA from "@/components/sections/CTA";
+import CTA2 from "@/components/sections/CTA-2";
 import FAQ from "@/components/sections/FAQ";
 import HomeAbout from "@/components/sections/homeAbout";
 import HomeHero from "@/components/sections/homeHero";
 import OurServices from "@/components/sections/ourServices";
-import CaseStudies from "@/components/sections/caseStudies";
-import StatsShowcase from "@/components/sections/statsShowcase";
-import WavyDivider from "@/components/ui/wavy-divider";
-import AiShowcase from "@/components/sections/aiShowcase";
 import Reviews from "@/components/sections/reviews";
 import WhatMAkesUs from "@/components/sections/whatMakesUs";
-import Recognitions from "@/components/sections/recognitions";
-import IndustriesShowcase from "@/components/sections/industriesShowcase";
+import RecentWork from "@/components/sections/recentWork";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import ConsultationPopup from "@/components/sections/popupForm";
+import LogoSlider from "@/components/sections/logoSlider";
 import LatestBlogs from "@/components/sections/latestBlogs";
 import { getPageContent } from "@/actions/pageContentActions";
 
@@ -60,6 +58,7 @@ export default async function Home() {
       {/* Our Services */}
       <OurServices content={content} />
 
+<<<<<<< HEAD
       {/* Case Studies — client work carousel */}
       <CaseStudies content={content} />
 
@@ -75,11 +74,16 @@ export default async function Home() {
 
       {/* AI showcase — video + AI services split section */}
       <AiShowcase content={content} />
+=======
+      {/* CTA-2 Section */}
+      <CTA2 />
+>>>>>>> be2d797bb3e0611a2f1255d51d0dffc81a848556
 
       {/* What Makes Us Different section */}
       <WhatMAkesUs content={content} />
 
       {/* Why choose us */}
+<<<<<<< HEAD
       <WhyChooseUs dark content={content} />
 
       {/* Proven Expertise — real certifications & partnerships */}
@@ -90,10 +94,31 @@ export default async function Home() {
 
       {/* Reviews section */}
       <Reviews content={content} />
+=======
+      <WhyChooseUs />
 
-      <LatestBlogs dark />
+      {/* Why Choose Us Section */}
+      <RecentWork />
 
+      {/* <ClientLogo /> */}
+      <LogoSlider />
+
+      <div className="pt-10">
+        {/* Reviews section */}
+        <Reviews />
+      </div>
+>>>>>>> be2d797bb3e0611a2f1255d51d0dffc81a848556
+
+      {/* Growth counter  */}
+      <Counter />
+
+<<<<<<< HEAD
       <div className="bg-black pt-10">
+=======
+      <LatestBlogs />
+
+      <div className="py-10">
+>>>>>>> be2d797bb3e0611a2f1255d51d0dffc81a848556
         {/* FAQ section */}
         <FAQ content={content} />
 
@@ -105,10 +130,3 @@ export default async function Home() {
     </>
   );
 }
-
-// LatestBlogs fetches from MongoDB — force-dynamic so this page renders at
-// request time instead of during `next build`, where the build sandbox
-// can't reliably resolve the Atlas mongodb+srv:// DNS record (this was
-// causing the Netlify build to fail outright). Same pattern already used
-// on /career and /blog.
-export const dynamic = "force-dynamic";
