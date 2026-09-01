@@ -78,7 +78,7 @@ export default async function Career() {
                         href={job.applyForm}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 shrink-0 bg-[#0B60B0] hover:bg-black text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors duration-300 w-fit"
+                        className="inline-flex items-center gap-1.5 shrink-0 bg-[#0B60B0] hover:bg-white text-white hover:text-black text-sm font-semibold px-5 py-2.5 rounded-full transition-colors duration-300 w-fit"
                       >
                         Apply Now
                         <ArrowUpRight size={15} />

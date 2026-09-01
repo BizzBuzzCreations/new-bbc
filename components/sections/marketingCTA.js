@@ -19,7 +19,7 @@ const STAGE_LAYOUT = [
   { icon: Share2, href: "/social-media-marketing" },
   { icon: MonitorSmartphone, href: "/web-development" },
   { icon: Sparkles, href: "/business-consultancy" },
-  { icon: BarChart3, href: "/industries", hoverBg: "black" },
+  { icon: BarChart3, href: "/industries" },
 ];
 
 const DEFAULT_TRUST_LINES = [
@@ -34,7 +34,7 @@ const DEFAULT_STAGES = [
   { title: "Make Social Work Harder", description: "Turn attention and engagement into meaningful business growth.", ctaText: "Explore Social Media Marketing" },
   { title: "Build a Website That Sells", description: "Create a website that engages visitors and drives conversions.", ctaText: "Explore Web Development Services" },
   { title: "Make Your Brand Stand Out", description: "Build a memorable identity that makes your business impossible to ignore.", ctaText: "Explore Branding Services" },
-  { title: "See Growth in Action", description: "Explore our work, strategies, and results for growing businesses.", ctaText: "View Our Case Studies" },
+  { title: "See Growth in Action", description: "Explore our work, strategies, and results for growing businesses.", ctaText: "View Our Industries" },
 ];
 
 export default function MarketingCTA({ content }) {
@@ -79,7 +79,7 @@ export default function MarketingCTA({ content }) {
             </p>
             <Link
               href="#contact-form"
-              className="inline-flex items-center gap-2 bg-white hover:bg-[#0B60B0] hover:text-white text-[#0B60B0] text-sm font-semibold px-6 py-3.5 rounded-full transition-all duration-300 self-start w-fit shadow-lg mb-12"
+              className="inline-flex items-center gap-2 bg-white hover:bg-black text-[#0B60B0] text-sm font-semibold px-6 py-3.5 rounded-full transition-colors duration-300 self-start w-fit shadow-lg mb-12"
             >
               {buttonText}
               <ArrowUpRight size={16} />
@@ -122,13 +122,11 @@ export default function MarketingCTA({ content }) {
             {stagesEyebrow}
           </p>
           <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {STAGES.map(({ icon: Icon, title, description, ctaText, href, hoverBg }) => (
+            {STAGES.map(({ icon: Icon, title, description, ctaText, href }) => (
               <Link
                 key={title}
                 href={href}
-                className={`group relative rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-[#0B60B0]/20 ${
-                  hoverBg === "black" ? "hover:bg-black" : "hover:bg-[#0B60B0]"
-                }`}
+                className="group relative rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#40A2D8]/50 hover:bg-black hover:shadow-xl hover:shadow-[#0B60B0]/20"
               >
                 <div className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center text-[#40A2D8] mb-4 transition-all duration-300 group-hover:bg-white group-hover:text-[#0B60B0] group-hover:scale-110">
                   <Icon size={19} />

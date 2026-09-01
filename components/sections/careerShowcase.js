@@ -94,7 +94,7 @@ export function CareerJoinTeam() {
 
           <a
             href="#open-positions"
-            className="inline-flex items-center bg-[#0B60B0] hover:bg-black text-white text-sm font-semibold px-6 py-3 rounded-full transition-colors duration-300 w-fit"
+            className="inline-flex items-center bg-[#0B60B0] hover:bg-white text-white hover:text-black text-sm font-semibold px-6 py-3 rounded-full transition-colors duration-300 w-fit"
           >
             Apply Now
           </a>

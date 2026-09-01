@@ -71,7 +71,7 @@ export default function CareerHero() {
         </p>
         <Link
           href="/contact"
-          className="inline-flex items-center bg-[#0B60B0] hover:bg-black text-white text-sm font-semibold px-7 py-3.5 rounded-lg transition-colors duration-300"
+          className="inline-flex items-center bg-[#0B60B0] hover:bg-white text-white hover:text-black text-sm font-semibold px-7 py-3.5 rounded-lg transition-colors duration-300"
         >
           Apply Now
         </Link>
