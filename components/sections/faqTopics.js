@@ -500,7 +500,10 @@ export default function FaqTopics({ content } = {}) {
 
   return (
     <section className="bg-black">
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-[300px_1fr] lg:gap-6 px-4 md:px-6 py-10 md:py-16">
+      <div
+        data-no-reveal
+        className="max-w-7xl mx-auto grid lg:grid-cols-[300px_1fr] lg:gap-6 px-4 md:px-6 pt-20 pb-10 md:pt-28 md:pb-16"
+      >
         {/* TOC sidebar — stays put (sticky) while the page scrolls; only
             the active highlight moves between topics via scroll-spy. */}
         <div className="lg:sticky lg:top-24 lg:self-start bg-black px-2 md:px-4 py-4 lg:py-0">

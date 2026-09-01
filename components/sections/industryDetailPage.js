@@ -129,18 +129,22 @@ export default function IndustryDetailPage({
       <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-center gap-4 mb-14">
-            <span className="h-px w-10 bg-white/20" />
-            <p className="text-xs font-bold uppercase tracking-widest text-white">
+            <span className="h-px w-14 bg-white/20" />
+            <p className="text-sm md:text-base font-bold uppercase tracking-widest text-white">
               {capabilitiesHeading || `Built for Every Corner of ${label}`}
             </p>
-            <span className="h-px w-10 bg-white/20" />
+            <span className="h-px w-14 bg-white/20" />
           </div>
 
           {/* items-start: without it, CSS grid stretches every card in a
               row to match the tallest one, so hovering a card to expand
               its description (capabilitiesHoverReveal) visibly stretches
               its row-neighbors too, even though nothing about them
-              actually changed. */}
+              actually changed. Since that rules out stretch-based equal
+              heights, the title itself gets a fixed min-h (below) so a
+              one-line title and a two-line title still produce the same
+              collapsed card height across every industry (all 15 use
+              capabilitiesHoverReveal). */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
             {capabilities.map(({ icon: CapIcon, title, desc }) => (
               <div
@@ -151,7 +155,7 @@ export default function IndustryDetailPage({
                   <CapIcon size={20} />
                 </span>
                 <h3
-                  className={`font-bold text-white ${capabilitiesHoverReveal ? "" : "mb-2"}`}
+                  className={`font-bold text-white ${capabilitiesHoverReveal ? "min-h-[3rem]" : "mb-2"}`}
                 >
                   {title}
                 </h3>

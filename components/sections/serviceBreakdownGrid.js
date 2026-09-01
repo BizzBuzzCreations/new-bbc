@@ -93,7 +93,17 @@ export default function ServiceBreakdownGrid({ items, flip = false }) {
 
   if (flip) {
     return (
-      <div className="grid sm:grid-cols-2 gap-x-5 gap-y-3 items-start">
+      // data-no-reveal: opts every flip card out of the site-wide
+      // ScrollReveal effect (components/sections/scrollReveal.js). That
+      // effect animates opacity/transform on scroll-into-view, which
+      // conflicts with each card's own perspective/backface-visibility
+      // 3D transform and briefly renders the front and back faces
+      // overlapping (visible as doubled, overlapping text) until the
+      // reveal transition settles.
+      <div
+        data-no-reveal
+        className="grid sm:grid-cols-2 gap-x-5 gap-y-3 items-start"
+      >
         {items.map((item) => (
           <FlipCard key={item.title} {...item} />
         ))}

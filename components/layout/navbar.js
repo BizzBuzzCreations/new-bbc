@@ -165,6 +165,25 @@ const RESOURCE_LINKS = [
 ];
 
 function DesktopDropdown({ label, items, width = "w-72", href }) {
+  // JS-driven open state (not plain CSS group-hover) so every item link
+  // can close the panel immediately on click, on top of navigating —
+  // otherwise a click that doesn't move the mouse off the trigger leaves
+  // the dropdown visually open over the destination page.
+  const [open, setOpen] = useState(false);
+  const closeTimer = useRef(null);
+
+  const openMenu = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setOpen(true);
+  };
+  const scheduleClose = () => {
+    closeTimer.current = setTimeout(() => setOpen(false), 250);
+  };
+  const closeNow = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setOpen(false);
+  };
+
   return (
     // h-[72px] matches the navbar's own desktop height exactly, so this
     // wrapper's box spans the full navbar row instead of shrinking to
@@ -172,16 +191,21 @@ function DesktopDropdown({ label, items, width = "w-72", href }) {
     // shrunk wrapper made `top-full` land partway up the navbar instead
     // of at its true bottom edge, so the panel opened overlapping into
     // the navbar rather than sitting flush below it.
-    <div className="group relative h-[72px] flex items-center">
+    <div
+      className="relative h-[72px] flex items-center"
+      onMouseEnter={openMenu}
+      onMouseLeave={scheduleClose}
+    >
       {href ? (
         <Link
           href={href}
+          onClick={closeNow}
           className="text-white flex justify-center items-center gap-1 cursor-pointer hover:text-[#40A2D8] transition"
         >
           {label}
           <ChevronDown
             size={18}
-            className="transition-transform duration-300 group-hover:rotate-180"
+            className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`}
           />
         </Link>
       ) : (
@@ -189,30 +213,33 @@ function DesktopDropdown({ label, items, width = "w-72", href }) {
           {label}
           <ChevronDown
             size={18}
-            className="transition-transform duration-300 group-hover:rotate-180"
+            className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`}
           />
         </div>
       )}
-      {/* top-full now sits the panel flush against the navbar's true
-          bottom edge — no gap, no overlap. */}
-      <div className="z-20 absolute left-1/2 -translate-x-1/2 top-full hidden group-hover:block">
-        <div
-          className={`bg-white border border-gray-200 rounded-xl shadow-xl ${width}`}
-        >
-          <ul className="p-2 text-sm text-black font-medium">
-            {items.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="inline-flex items-center w-full p-2.5 rounded transition-colors duration-150 hover:bg-[#0B60B0] hover:text-white"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+      {/* top-full sits the panel flush against the navbar's true bottom
+          edge — no gap, no overlap. */}
+      {open && (
+        <div className="z-20 absolute left-1/2 -translate-x-1/2 top-full">
+          <div
+            className={`bg-white border border-gray-200 rounded-xl shadow-xl ${width}`}
+          >
+            <ul className="p-2 text-sm text-black font-medium">
+              {items.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={closeNow}
+                    className="inline-flex items-center w-full p-2.5 rounded transition-colors duration-150 hover:bg-[#0B60B0] hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
@@ -242,6 +269,14 @@ function ServicesMegaMenu() {
       setActive(SERVICE_LINKS[0]);
     }, 250);
   };
+  // Closes immediately on click (on top of navigating), instead of
+  // leaving the panel visually open over the destination page until the
+  // mouse happens to leave the trigger/panel area.
+  const closeNow = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setOpen(false);
+    setActive(SERVICE_LINKS[0]);
+  };
 
   return (
     <div
@@ -251,6 +286,7 @@ function ServicesMegaMenu() {
     >
       <Link
         href="/services"
+        onClick={closeNow}
         className="text-white flex justify-center items-center gap-1 cursor-pointer hover:text-[#40A2D8] transition py-4 -my-4"
       >
         Services
@@ -281,6 +317,7 @@ function ServicesMegaMenu() {
                 <Link
                   href={service.href}
                   onMouseEnter={() => setActive(service)}
+                  onClick={closeNow}
                   className={`flex items-center w-full p-2.5 rounded transition-colors duration-150 ${
                     active.href === service.href
                       ? "bg-[#0B60B0] text-white"
@@ -301,6 +338,7 @@ function ServicesMegaMenu() {
           <div className="flex-1 min-w-0 w-full p-6">
             <Link
               href={active.href}
+              onClick={closeNow}
               className="inline-flex items-center gap-1.5 text-lg font-semibold text-[#0B60B0] hover:underline mb-5"
             >
               {active.label}
@@ -321,6 +359,7 @@ function ServicesMegaMenu() {
                         <li key={sub.label} className="py-3 first:pt-0">
                           <Link
                             href={sub.href}
+                            onClick={closeNow}
                             className="block text-sm font-medium text-black hover:text-[#0B60B0] transition-colors duration-150 leading-snug"
                           >
                             {sub.label}
@@ -354,6 +393,13 @@ function IndustriesMegaMenu() {
   const scheduleClose = () => {
     closeTimer.current = setTimeout(() => setOpen(false), 250);
   };
+  // Closes immediately on click (on top of navigating), instead of
+  // leaving the panel visually open over the destination page until the
+  // mouse happens to leave the trigger/panel area.
+  const closeNow = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setOpen(false);
+  };
 
   return (
     <div
@@ -363,6 +409,7 @@ function IndustriesMegaMenu() {
     >
       <Link
         href="/industries"
+        onClick={closeNow}
         className="text-white flex justify-center items-center gap-1 cursor-pointer hover:text-[#40A2D8] transition py-4 -my-4"
       >
         Industries
@@ -395,6 +442,7 @@ function IndustriesMegaMenu() {
                       <li key={item.href}>
                         <Link
                           href={item.href}
+                          onClick={closeNow}
                           className="group/item flex items-center gap-3 w-full p-2.5 rounded transition-colors duration-150 hover:bg-[#0B60B0] hover:text-white"
                         >
                           <Icon
@@ -420,6 +468,7 @@ function IndustriesMegaMenu() {
               </p>
               <Link
                 href="/contact"
+                onClick={closeNow}
                 className="shrink-0 inline-flex items-center bg-[#0B60B0] hover:bg-[#0B60B0]/90 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition"
               >
                 Schedule Free Consultation

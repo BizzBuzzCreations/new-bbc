@@ -116,17 +116,14 @@ export default function ServiceDetailPage({
           aria-hidden="true"
         />
 
-        <div className="relative max-w-3xl mx-auto text-center">
-          <span className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/10 text-[#40A2D8] mb-6">
-            <Icon size={26} />
-          </span>
+        <div className="relative max-w-3xl">
           <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-4">
             {sectionLabel} — {label}
           </p>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
             {heroTitle || `${label} Services`}
           </h1>
-          <p className="text-white/70 leading-relaxed mb-9 max-w-2xl mx-auto">
+          <p className="text-white/70 leading-relaxed mb-9 max-w-2xl">
             {heroDescription || description}
           </p>
           <Link
@@ -143,19 +140,23 @@ export default function ServiceDetailPage({
       <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-center gap-4 mb-14">
-            <span className="h-px w-10 bg-white/20" />
-            <p className="text-xs font-bold uppercase tracking-widest text-white">
+            <span className="h-px w-14 bg-white/20" />
+            <p className="text-sm md:text-base font-bold uppercase tracking-widest text-white">
               {capabilitiesHeading || "What's Included"}
             </p>
-            <span className="h-px w-10 bg-white/20" />
+            <span className="h-px w-14 bg-white/20" />
           </div>
 
-          {/* items-start: without it, CSS grid stretches every card in a
-              row to match the tallest one, so hovering a card to expand
-              its description (capabilitiesHoverReveal) visibly stretches
-              its row-neighbors too, even though nothing about them
-              actually changed. */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
+          {/* items-start only applies when capabilitiesHoverReveal is on
+              (none of the current sub-service pages use it): without it
+              there, CSS grid would stretch every card in a row to match
+              the tallest one, so hovering a card to expand its
+              description would visibly stretch its row-neighbors too.
+              Everywhere else, the default stretch is exactly what makes
+              every card in a row match height/width evenly. */}
+          <div
+            className={`grid sm:grid-cols-2 lg:grid-cols-3 gap-5 ${capabilitiesHoverReveal ? "items-start" : ""}`}
+          >
             {capabilities.map(({ icon: CapIcon, title, desc }) => (
               <div
                 key={title}
@@ -280,18 +281,28 @@ export default function ServiceDetailPage({
       )}
 
       {/* Locality / positioning statement — optional, only rendered when
-          localityText is supplied. A plain heading + paragraph, no card
-          or grid, so it reads as a direct statement rather than another
-          content block. */}
+          localityText is supplied. Left-aligned copy with a matching
+          image on the right, same image on every sub-service page. */}
       {localityText && (
         <section className="bg-[#050505] py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              {localityHeading}
-            </h2>
-            <p className="text-white/70 leading-relaxed max-w-3xl mx-auto">
-              {localityText}
-            </p>
+          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                {localityHeading}
+              </h2>
+              <p className="text-white/70 leading-relaxed max-w-xl">
+                {localityText}
+              </p>
+            </div>
+            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
+              <Image
+                src="/why-choose-image.png"
+                alt={localityHeading || "Why businesses choose us"}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
           </div>
         </section>
       )}
