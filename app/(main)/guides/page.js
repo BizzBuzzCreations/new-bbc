@@ -179,35 +179,40 @@ export default function GuidesPage() {
 
           <aside className="lg:sticky lg:top-28 lg:self-start">
             <div
-              className="flex flex-col rounded-2xl p-7"
+              className="relative flex flex-col rounded-2xl p-7 overflow-hidden border border-white/20 shadow-2xl shadow-[#0B60B0]/30"
               style={{
                 background: "linear-gradient(160deg, #0B60B0, #40A2D8)",
               }}
             >
-              <span className="flex items-center justify-center w-12 h-12 rounded-xl bg-white/15 text-white mb-5">
+              <div
+                className="absolute -top-20 -right-16 w-56 h-56 rounded-full blur-3xl opacity-40 pointer-events-none"
+                style={{ background: "radial-gradient(circle, #ffffff, transparent 70%)" }}
+                aria-hidden="true"
+              />
+              <span className="relative z-10 flex items-center justify-center w-12 h-12 rounded-xl bg-white/15 text-white mb-5">
                 <Rocket size={22} />
               </span>
 
-              <h3 className="font-bold text-xl leading-snug mb-3">
+              <h3 className="relative z-10 font-bold text-xl leading-snug mb-3">
                 Want Hands-On Help With Any of This?
               </h3>
-              <p className="text-sm text-white/80 leading-relaxed mb-7">
+              <p className="relative z-10 text-sm text-white/80 leading-relaxed mb-7">
                 Reading is a great start — but a strategy built for your
                 specific business moves faster. Talk to our team and we&rsquo;ll
                 turn these guides into a clear, actionable plan.
               </p>
 
-              <div className="flex flex-col gap-3">
+              <div className="relative z-10 flex flex-col gap-3">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-1.5 bg-white text-[#0B60B0] font-semibold rounded-lg py-3 hover:bg-gray-100 transition"
+                  className="inline-flex items-center justify-center gap-1.5 bg-white text-[#0B60B0] hover:bg-black hover:text-white font-semibold rounded-lg py-3 transition-colors duration-300"
                 >
                   Schedule a Call
                   <ArrowUpRight size={16} />
                 </Link>
                 <Link
                   href="/services"
-                  className="block text-center border border-white/50 text-white rounded-lg py-3 hover:bg-white/10 transition"
+                  className="block text-center border border-white/50 hover:border-black bg-transparent hover:bg-black text-white rounded-lg py-3 transition-colors duration-300"
                 >
                   View Our Services
                 </Link>

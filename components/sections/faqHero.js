@@ -48,7 +48,7 @@ export default function FaqHero() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 bg-[#0B60B0] hover:bg-[#0d72cf] text-white text-sm font-semibold px-7 py-3.5 rounded-full shadow-lg shadow-[#0B60B0]/30 transition mt-8"
+            className="inline-flex items-center gap-2 bg-[#0B60B0] hover:bg-white text-white hover:text-[#0B60B0] text-sm font-semibold px-7 py-3.5 rounded-full shadow-lg shadow-[#0B60B0]/30 transition-colors duration-300 mt-8"
           >
             Ask Us Directly
             <ArrowUpRight size={16} />

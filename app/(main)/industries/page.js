@@ -136,7 +136,7 @@ export default async function IndustriesIndexPage() {
     "Every industry has different goals, audiences, and challenges. We create tailored digital marketing, BPO, and web solutions that fit the way your business works.";
   const heroButtonText = content?.industriesHeroButtonText || "Explore Our Solutions";
 
-  const gridEyebrow = content?.industriesGridEyebrow || "Industries We Serve";
+  const gridEyebrow = content?.industriesGridEyebrow || "";
   const gridHeading = content?.industriesGridHeading || "Delivering Value Across Every Major Industry";
   const gridSubtext = content?.industriesGridSubtext || "Real challenges, real solutions — pick your industry below to see how we approach it.";
   const CARD_IMAGES =

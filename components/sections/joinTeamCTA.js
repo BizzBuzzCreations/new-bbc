@@ -42,7 +42,7 @@ export default function JoinTeamCTA({ content }) {
             </Link>
             <Link
               href="/career"
-              className="inline-flex items-center gap-1.5 bg-[#0B60B0] hover:bg-[#0B60B0]/90 text-white text-sm font-semibold px-6 py-3 rounded-full transition"
+              className="inline-flex items-center gap-1.5 bg-[#0B60B0] hover:bg-black text-white text-sm font-semibold px-6 py-3 rounded-full transition-colors duration-300"
             >
               {careersButtonText}
               <ArrowUpRight size={16} />

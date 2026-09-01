@@ -47,7 +47,6 @@ export default async function Blogs() {
 
       <div className="relative text-center">
         <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">
-          The BizzBuzz Blog
         </p>
         <h1 className="md:text-4xl text-3xl font-bold text-white">
           Our Latest Blogs

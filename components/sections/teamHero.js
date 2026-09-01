@@ -28,7 +28,7 @@ export default function TeamHero() {
           </p>
           <Link
             href="#meet-our-team"
-            className="inline-flex items-center justify-center shrink-0 bg-white hover:bg-[#0B60B0] text-black hover:text-white text-sm font-semibold px-6 py-3 rounded-full transition-colors duration-300 w-fit"
+            className="inline-flex items-center justify-center shrink-0 bg-white hover:bg-black text-black hover:text-white text-sm font-semibold px-6 py-3 rounded-full transition-colors duration-300 w-fit"
           >
             Meet the Team
           </Link>

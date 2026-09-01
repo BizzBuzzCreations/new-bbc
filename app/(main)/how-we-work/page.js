@@ -240,7 +240,7 @@ export default function HowWeWorkPage() {
           </p>
           <a
             href="/contact"
-            className="inline-flex items-center bg-white hover:bg-gray-100 text-black text-sm font-semibold px-7 py-3.5 rounded-lg transition"
+            className="inline-flex items-center bg-white hover:bg-black text-black hover:text-white text-sm font-semibold px-7 py-3.5 rounded-lg transition-colors duration-300"
           >
             See How It Works
           </a>

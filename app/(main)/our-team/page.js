@@ -52,7 +52,7 @@ export default function OurTeamPage() {
                 </p>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 bg-[#0B60B0] hover:bg-[#0d72cf] text-white text-sm font-semibold px-6 py-3 rounded-full transition"
+                  className="inline-flex items-center gap-2 bg-white hover:bg-[#0B60B0] text-black hover:text-white text-sm font-semibold px-6 py-3 rounded-full transition-colors duration-300"
                 >
                   Work With Our Team
                   <ArrowUpRight size={16} />
@@ -64,7 +64,7 @@ export default function OurTeamPage() {
                 </p>
                 <Link
                   href="/career"
-                  className="inline-flex items-center gap-2 border border-white/50 hover:bg-white/10 text-white text-sm font-semibold px-6 py-3 rounded-full transition"
+                  className="inline-flex items-center gap-2 bg-black hover:bg-[#0B60B0] border border-white/50 hover:border-[#0B60B0] text-white text-sm font-semibold px-6 py-3 rounded-full transition-colors duration-300"
                 >
                   Explore Careers
                   <ArrowUpRight size={16} />

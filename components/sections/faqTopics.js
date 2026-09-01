@@ -462,7 +462,6 @@ export default function FaqTopics() {
             the active highlight moves between topics via scroll-spy. */}
         <div className="lg:sticky lg:top-24 lg:self-start bg-black px-2 md:px-4 py-4 lg:py-0">
           <p className="text-xs font-bold uppercase tracking-widest text-white/50 mb-6 px-2">
-            Topics
           </p>
           <div className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 -mx-1 px-1">
             {TOPICS.map((t, i) => {

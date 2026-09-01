@@ -39,14 +39,14 @@ export default function GuidesHero() {
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Link
             href="#all-guides"
-            className="inline-flex items-center gap-1.5 bg-white hover:bg-gray-100 text-black text-sm font-semibold px-7 py-3.5 rounded-lg transition"
+            className="inline-flex items-center gap-1.5 bg-white hover:bg-black text-black hover:text-white text-sm font-semibold px-7 py-3.5 rounded-lg transition-colors duration-300"
           >
             Explore Our Guides
             <span aria-hidden="true">→</span>
           </Link>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-1.5 border border-white/50 hover:bg-white/10 text-white text-sm font-semibold px-7 py-3.5 rounded-lg transition"
+            className="inline-flex items-center gap-1.5 border border-white/50 hover:border-white bg-transparent hover:bg-white text-white hover:text-black text-sm font-semibold px-7 py-3.5 rounded-lg transition-colors duration-300"
           >
             Need Help With Marketing?
             <span aria-hidden="true">→</span>

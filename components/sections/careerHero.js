@@ -56,7 +56,6 @@ export default function CareerHero() {
 
       <div className="relative w-full px-6 md:px-12 lg:px-24 py-16">
         <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-4">
-          We&rsquo;re Hiring
         </p>
         <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4">
           Work Where Your Ideas Matter
@@ -72,7 +71,7 @@ export default function CareerHero() {
         </p>
         <Link
           href="/contact"
-          className="inline-flex items-center bg-[#0B60B0] hover:bg-[#0B60B0]/90 text-white text-sm font-semibold px-7 py-3.5 rounded-lg transition"
+          className="inline-flex items-center bg-[#0B60B0] hover:bg-black text-white text-sm font-semibold px-7 py-3.5 rounded-lg transition-colors duration-300"
         >
           Apply Now
         </Link>

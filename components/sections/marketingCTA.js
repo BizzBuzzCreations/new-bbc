@@ -19,7 +19,7 @@ const STAGE_LAYOUT = [
   { icon: Share2, href: "/social-media-marketing" },
   { icon: MonitorSmartphone, href: "/web-development" },
   { icon: Sparkles, href: "/business-consultancy" },
-  { icon: BarChart3, href: "/#case-studies" },
+  { icon: BarChart3, href: "/industries", hoverBg: "black" },
 ];
 
 const DEFAULT_TRUST_LINES = [
@@ -122,11 +122,13 @@ export default function MarketingCTA({ content }) {
             {stagesEyebrow}
           </p>
           <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {STAGES.map(({ icon: Icon, title, description, ctaText, href }) => (
+            {STAGES.map(({ icon: Icon, title, description, ctaText, href, hoverBg }) => (
               <Link
                 key={title}
                 href={href}
-                className="group relative rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/20"
+                className={`group relative rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-[#0B60B0]/20 ${
+                  hoverBg === "black" ? "hover:bg-black" : "hover:bg-[#0B60B0]"
+                }`}
               >
                 <div className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center text-[#40A2D8] mb-4 transition-all duration-300 group-hover:bg-white group-hover:text-[#0B60B0] group-hover:scale-110">
                   <Icon size={19} />

@@ -139,7 +139,7 @@ export default function Footer() {
     >
       <div className="max-w-7xl mx-auto">
         {/* Brand + social row */}
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8 mb-12">
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8 mb-6">
           <div className="max-w-md">
             <Image
               src="/bbc-new-logo.png"
@@ -218,7 +218,7 @@ export default function Footer() {
                 Get In Touch
               </h4>
               <div className="flex flex-col gap-4 text-sm">
-                <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
                   <a
                     href="tel:+918115585285"
                     className="flex items-center gap-2 text-gray-300 hover:text-[#40A2D8] transition-colors"
@@ -228,9 +228,8 @@ export default function Footer() {
                   </a>
                   <a
                     href="tel:+4407862608652"
-                    className="flex items-center gap-2 text-gray-300 hover:text-[#40A2D8] transition-colors"
+                    className="text-gray-300 hover:text-[#40A2D8] transition-colors"
                   >
-                    <Phone size={15} className="text-[#40A2D8] shrink-0" />
                     +44 07862 608652
                   </a>
                 </div>
@@ -251,7 +250,7 @@ export default function Footer() {
         </div>
 
         {/* Office address cards */}
-        <div className="grid max-w-sm gap-6 mb-12">
+        <div className="grid max-w-sm gap-6 mb-6">
           {OFFICES.map(({ Flag, country, address }) => (
             <div
               key={country}

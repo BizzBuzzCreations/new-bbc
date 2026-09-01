@@ -21,7 +21,6 @@ export default async function LatestBlogs({ dark = false }) {
     <section className={`py-16 md:py-20 ${dark ? "bg-black" : "bg-white"}`}>
       <div className="text-center px-6">
         <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">
-          From the Blog
         </p>
         <h2 className={`md:text-4xl text-3xl font-bold mb-3 ${dark ? "text-white" : "text-black"}`}>
           Our Latest Blogs
