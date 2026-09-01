@@ -92,7 +92,7 @@ export default function AiShowcase({ content }) {
           <div className="flex flex-wrap gap-3 mt-2">
             <Link
               href="/ai-solutions"
-              className="inline-flex items-center justify-center gap-1.5 bg-white text-black hover:bg-white/90 text-sm font-semibold px-6 py-3 rounded-full transition"
+              className="inline-flex items-center justify-center gap-1.5 bg-white text-black hover:bg-[#0B60B0] hover:text-white text-sm font-semibold px-6 py-3 rounded-full transition-colors duration-300"
             >
               {buttonText}
               <ArrowUpRight size={16} />

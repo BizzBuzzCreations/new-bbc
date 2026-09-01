@@ -267,11 +267,6 @@ export default function CookiePolicyPage() {
               43/33, Tej Bahdur Sapru Rd, Agnipath Colony, Civil Lines, Prayagraj, Uttar Pradesh, India
             </p>
             <p>
-              <span className="font-medium">United Kingdom Office:</span>
-              <br />
-              3 Thornham St, London SE10 9SA
-            </p>
-            <p>
               📧 Email: <span className="font-medium">info@bizzbuzzcreations.com</span>
               <br />
               🌐 Website:{" "}

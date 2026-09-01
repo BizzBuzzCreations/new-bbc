@@ -147,11 +147,19 @@ function ListField({ field, items, onChange }) {
                 <label className="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-400">
                   {itemField.label}
                 </label>
-                <FieldControl
-                  field={itemField}
-                  value={item[itemField.key]}
-                  onChange={(value) => updateItem(index, itemField.key, value)}
-                />
+                {itemField.type === "list" ? (
+                  <ListField
+                    field={itemField}
+                    items={item[itemField.key]}
+                    onChange={(value) => updateItem(index, itemField.key, value)}
+                  />
+                ) : (
+                  <FieldControl
+                    field={itemField}
+                    value={item[itemField.key]}
+                    onChange={(value) => updateItem(index, itemField.key, value)}
+                  />
+                )}
               </div>
             ))}
           </div>

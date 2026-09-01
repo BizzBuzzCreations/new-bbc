@@ -45,6 +45,10 @@ export default function IndustryDetailPage({
   // pass this via lib/industryPageContent.js get the section.
   serviceBreakdownHeading,
   serviceBreakdown,
+  // When true, clicking "Know Our Services" 3D-flips the card to reveal
+  // its services on the back face, instead of expanding downward.
+  // Currently only Healthcare uses this.
+  serviceBreakdownFlip = false,
   // Optional "What Makes Us Different" section — an array of
   // { number, title, desc }, rendered as an alternating timeline instead
   // of another card grid.
@@ -64,6 +68,7 @@ export default function IndustryDetailPage({
   whoWeHelp,
   deliverables,
   faqs,
+  faqsHeading,
   trustPoints,
   // Optional override for the "Why [Industry] Businesses Choose Us"
   // section — when whyChooseUsText is supplied, it replaces the generic
@@ -103,17 +108,11 @@ export default function IndustryDetailPage({
           aria-hidden="true"
         />
 
-        <div className="relative max-w-3xl mx-auto text-center">
-          <span className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/10 text-[#40A2D8] mb-6">
-            <Icon size={26} />
-          </span>
-          <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-4">
-            Industries — {label}
-          </p>
+        <div className="relative max-w-3xl">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
             {heroTitle || `${label} Digital Marketing Services`}
           </h1>
-          <p className="text-white/70 leading-relaxed mb-9 max-w-2xl mx-auto">
+          <p className="text-white/70 leading-relaxed mb-9 max-w-2xl">
             {heroDescription || description}
           </p>
           <Link
@@ -182,7 +181,7 @@ export default function IndustryDetailPage({
             <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-14">
               {serviceBreakdownHeading}
             </h2>
-            <ServiceBreakdownGrid items={serviceBreakdown} />
+            <ServiceBreakdownGrid items={serviceBreakdown} flip={serviceBreakdownFlip} />
           </div>
         </section>
       )}
@@ -413,19 +412,19 @@ export default function IndustryDetailPage({
       )}
 
       {/* FAQ */}
-      <DarkFAQSection faqs={faqs} heading="Frequently Asked Questions" />
+      <DarkFAQSection faqs={faqs} heading={faqsHeading || "Frequently Asked Questions"} />
 
       {/* Why choose us — replaced with a single custom heading + paragraph
           when whyChooseUsText is supplied (e.g. Healthcare's local-market
           positioning copy); otherwise the generic trustPoints checklist
           every other industry still gets. */}
       <section className="bg-[#050505] py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className={whyChooseUsText ? "max-w-4xl" : "max-w-4xl mx-auto text-center"}>
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
             {whyChooseUsHeading || `Why ${label} Businesses Choose Us`}
           </h2>
           {whyChooseUsText ? (
-            <p className="text-white/70 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-white/70 leading-relaxed max-w-3xl">
               {whyChooseUsText}
             </p>
           ) : (

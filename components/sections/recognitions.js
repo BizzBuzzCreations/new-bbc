@@ -57,7 +57,7 @@ export default function Recognitions({ content }) {
   });
 
   const current = recognitions[active];
-  const eyebrow = content?.recognitionsEyebrow || "Certifications & Trust";
+  const eyebrow = content?.recognitionsEyebrow || "";
   const heading = content?.recognitionsHeading || DEFAULT_HEADING;
   const isDefaultHeading = heading === DEFAULT_HEADING;
 
