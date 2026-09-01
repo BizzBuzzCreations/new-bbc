@@ -4,7 +4,12 @@ import { SendHorizontal } from "lucide-react";
 import React, { useState } from "react";
 import { toast, Bounce } from "react-toastify";
 
-export default function CTA() {
+export default function CTA({ content } = {}) {
+  const heading = content?.ctaHeading || "Get Free Consultancy Now!";
+  const paragraph =
+    content?.ctaParagraph ||
+    "Ready to grow your business with trusted digital marketing services in UP? Contact Bizz Buzz Creations today and let’s build your success story together.";
+
   const [formData, setFormData] = useState({
     email: "",
   });
@@ -63,12 +68,10 @@ export default function CTA() {
         >
           <div className="py-8 md:py-10 px-10 z-10 text-white">
             <h2 className="md:text-3xl text-2xl font-bold mb-5">
-              Get Free Consultancy Now!
+              {heading}
             </h2>
             <p className="max-w-3xl">
-              Ready to grow your business with trusted digital marketing services
-              in UP? Contact Bizz Buzz Creations today and let’s build your
-              success story together.
+              {paragraph}
             </p>
             <form action={handleSubmit}>
               <div className="max-w-[250px] md:max-w-[300px] relative">

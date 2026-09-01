@@ -17,6 +17,7 @@ import GuidesHero from "@/components/sections/guidesHero";
 import CTA from "@/components/sections/CTA";
 import LatestBlogs from "@/components/sections/latestBlogs";
 import DarkFAQSection from "@/components/sections/darkFAQSection";
+import { getPageContent } from "@/actions/pageContentActions";
 
 export const metadata = {
   title: "Digital Marketing Guides & Resources | BizzBuzz Creations",
@@ -27,72 +28,39 @@ export const metadata = {
   },
 };
 
-// Guide categories — index, category, and description as provided.
-const GUIDES = [
-  {
-    icon: Megaphone,
-    tag: "01",
-    title: "Digital Marketing Services",
-    body: "Explore practical strategies, trends, and insights to strengthen your digital presence and accelerate business growth.",
-  },
-  {
-    icon: Search,
-    tag: "02",
-    title: "SEO Services",
-    body: "Discover proven SEO strategies, techniques, and insights to improve rankings, visibility, and organic traffic.",
-  },
-  {
-    icon: Bot,
-    tag: "03",
-    title: "AI Marketing",
-    body: "Explore AI-powered marketing strategies, tools, trends, and practical ideas for smarter digital growth.",
-  },
-  {
-    icon: Share2,
-    tag: "04",
-    title: "Social Media Marketing",
-    body: "Learn social media strategies, content ideas, trends, and techniques to build engagement and grow your brand.",
-  },
-  {
-    icon: MonitorSmartphone,
-    tag: "05",
-    title: "Website Development Services",
-    body: "Discover website development insights, technologies, strategies, and tips for creating better digital experiences.",
-  },
-  {
-    icon: Handshake,
-    tag: "06",
-    title: "Business Development",
-    body: "Explore practical strategies, opportunities, and insights to build partnerships, attract customers, and drive growth.",
-  },
-  {
-    icon: MousePointerClick,
-    tag: "07",
-    title: "Google Ads Services",
-    body: "Learn Google Ads strategies, optimization techniques, campaign insights, and tips for improving advertising results.",
-  },
-  {
-    icon: Link2,
-    tag: "08",
-    title: "Backlink Strategy",
-    body: "Discover effective backlink strategies, link-building insights, and techniques for building stronger search authority.",
-  },
-  {
-    icon: FileText,
-    tag: "09",
-    title: "Content Marketing & SEO",
-    body: "Learn how content and SEO work together to attract audiences, improve visibility, and generate organic growth.",
-  },
-  {
-    icon: Compass,
-    tag: "10",
-    title: "SEO, AEO & GEO",
-    body: "Explore modern search strategies for traditional search, answer engines, and AI-powered generative search experiences.",
-  },
+// Icons stay code-driven (design), matched positionally to whichever
+// guide categories are saved; the "01." style tag is auto-numbered.
+const GUIDE_ICONS = [
+  Megaphone,
+  Search,
+  Bot,
+  Share2,
+  MonitorSmartphone,
+  Handshake,
+  MousePointerClick,
+  Link2,
+  FileText,
+  Compass,
+];
+
+const DEFAULT_GUIDES = [
+  { title: "Digital Marketing Services", body: "Explore practical strategies, trends, and insights to strengthen your digital presence and accelerate business growth." },
+  { title: "SEO Services", body: "Discover proven SEO strategies, techniques, and insights to improve rankings, visibility, and organic traffic." },
+  { title: "AI Marketing", body: "Explore AI-powered marketing strategies, tools, trends, and practical ideas for smarter digital growth." },
+  { title: "Social Media Marketing", body: "Learn social media strategies, content ideas, trends, and techniques to build engagement and grow your brand." },
+  { title: "Website Development Services", body: "Discover website development insights, technologies, strategies, and tips for creating better digital experiences." },
+  { title: "Business Development", body: "Explore practical strategies, opportunities, and insights to build partnerships, attract customers, and drive growth." },
+  { title: "Google Ads Services", body: "Learn Google Ads strategies, optimization techniques, campaign insights, and tips for improving advertising results." },
+  { title: "Backlink Strategy", body: "Discover effective backlink strategies, link-building insights, and techniques for building stronger search authority." },
+  { title: "Content Marketing & SEO", body: "Learn how content and SEO work together to attract audiences, improve visibility, and generate organic growth." },
+  { title: "SEO, AEO & GEO", body: "Explore modern search strategies for traditional search, answer engines, and AI-powered generative search experiences." },
 ];
 
 // Guides page FAQs — questions specific to the guides/resources library.
-const GUIDES_FAQS = [
+// The last question's default answer includes a real link to /services;
+// an admin override falls back to plain text since a textarea can't
+// carry an embedded link.
+const DEFAULT_GUIDES_FAQS = [
   {
     question: "What topics are covered in the BizzBuzz Creations guides?",
     answer:
@@ -120,41 +88,71 @@ const GUIDES_FAQS = [
   },
   {
     question: "Can I get professional help if I need help implementing these strategies?",
-    answer: (
-      <>
-        Yes. If you need help applying the strategies covered in our guides,
-        you can explore our{" "}
-        <Link href="/services" className="text-[#40A2D8] font-semibold hover:underline">
-          digital marketing services
-        </Link>{" "}
-        or contact BizzBuzz Creations for a consultation.
-      </>
-    ),
+    answer:
+      "Yes. If you need help applying the strategies covered in our guides, you can explore our digital marketing services or contact BizzBuzz Creations for a consultation.",
   },
 ];
 
-export default function GuidesPage() {
+export default async function GuidesPage() {
+  const content = await getPageContent("guides");
+
+  const allGuidesHeading = content?.allGuidesHeading || "All Guides";
+  const guidesRaw = content?.guides?.length > 0 ? content.guides : DEFAULT_GUIDES;
+  const guides = guidesRaw.map((g, i) => ({
+    ...g,
+    icon: GUIDE_ICONS[i % GUIDE_ICONS.length],
+    tag: String(i + 1).padStart(2, "0"),
+  }));
+
+  const sidebarHeading = content?.guidesSidebarHeading || "Want Hands-On Help With Any of This?";
+  const sidebarParagraph =
+    content?.guidesSidebarParagraph ||
+    "Reading is a great start — but a strategy built for your specific business moves faster. Talk to our team and we'll turn these guides into a clear, actionable plan.";
+  const sidebarPrimaryText = content?.guidesSidebarPrimaryText || "Schedule a Call";
+  const sidebarSecondaryText = content?.guidesSidebarSecondaryText || "View Our Services";
+
+  const faqHeading = content?.guidesFaqHeading || "Frequently Asked Questions";
+  const isDefaultFaqs = !(content?.guidesFaqItems?.length > 0);
+  const GUIDES_FAQS = isDefaultFaqs
+    ? [
+        ...DEFAULT_GUIDES_FAQS.slice(0, 5),
+        {
+          question: DEFAULT_GUIDES_FAQS[5].question,
+          answer: (
+            <>
+              Yes. If you need help applying the strategies covered in our
+              guides, you can explore our{" "}
+              <Link href="/services" className="text-[#40A2D8] font-semibold hover:underline">
+                digital marketing services
+              </Link>{" "}
+              or contact BizzBuzz Creations for a consultation.
+            </>
+          ),
+        },
+      ]
+    : content.guidesFaqItems;
+
   return (
     <>
-      <GuidesHero />
+      <GuidesHero content={content} />
 
       {/* Guides — list + sidebar, dark theme */}
       <section id="all-guides" className="bg-black text-white py-16 px-6 md:px-12 lg:px-24">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-[1fr_320px] gap-12">
           <div>
             <h2 className="text-2xl md:text-3xl font-bold mb-1">
-              All Guides
+              {allGuidesHeading}
             </h2>
             <p className="text-white/40 text-sm mb-8">
-              {GUIDES.length} guides
+              {guides.length} guides
             </p>
 
             <div className="divide-y divide-white/10">
               {/* Each guide links to its matching category on the blog, so
                   readers land straight on that category's posts. */}
-              {GUIDES.map(({ icon: Icon, tag, title, body }) => (
+              {guides.map(({ icon: Icon, tag, title, body }, i) => (
                 <Link
-                  key={title}
+                  key={i}
                   href={`/blog?category=${encodeURIComponent(title)}`}
                   className="group flex gap-5 py-6 first:pt-0"
                 >
@@ -194,12 +192,10 @@ export default function GuidesPage() {
               </span>
 
               <h3 className="relative z-10 font-bold text-xl leading-snug mb-3">
-                Want Hands-On Help With Any of This?
+                {sidebarHeading}
               </h3>
               <p className="relative z-10 text-sm text-white/80 leading-relaxed mb-7">
-                Reading is a great start — but a strategy built for your
-                specific business moves faster. Talk to our team and we&rsquo;ll
-                turn these guides into a clear, actionable plan.
+                {sidebarParagraph}
               </p>
 
               <div className="relative z-10 flex flex-col gap-3">
@@ -207,14 +203,14 @@ export default function GuidesPage() {
                   href="/contact"
                   className="inline-flex items-center justify-center gap-1.5 bg-white text-[#0B60B0] hover:bg-black hover:text-white font-semibold rounded-lg py-3 transition-colors duration-300"
                 >
-                  Schedule a Call
+                  {sidebarPrimaryText}
                   <ArrowUpRight size={16} />
                 </Link>
                 <Link
                   href="/services"
                   className="block text-center border border-white/50 hover:border-black bg-transparent hover:bg-black text-white rounded-lg py-3 transition-colors duration-300"
                 >
-                  View Our Services
+                  {sidebarSecondaryText}
                 </Link>
               </div>
             </div>
@@ -223,14 +219,14 @@ export default function GuidesPage() {
       </section>
 
       {/* FAQs — questions specific to the guides/resources library */}
-      <DarkFAQSection faqs={GUIDES_FAQS} heading="Frequently Asked Questions" />
+      <DarkFAQSection faqs={GUIDES_FAQS} heading={faqHeading} />
 
       {/* Latest blogs — real, live content from the blog */}
       <LatestBlogs dark />
 
       {/* CTA — just above the footer */}
       <div className="bg-black pt-4">
-        <CTA />
+        <CTA content={content} />
       </div>
     </>
   );

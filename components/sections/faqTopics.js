@@ -21,7 +21,35 @@ import { FAQSection } from "@/components/ui/faq-accordion";
 // 90+ projects / 50+ clients figure from AboutFAQ, the real Clutch/Google
 // Ads/Google Analytics/ISO badges from Recognitions, the India + UK
 // offices) rather than inventing anything new.
-const TOPICS = [
+// Icons stay code-driven (design), matched positionally to whichever
+// topics are saved — a topic's id/icon aren't editable, only its label,
+// description, and questions.
+const TOPIC_ICONS = [
+  Building2,
+  Search,
+  Megaphone,
+  Share2,
+  Globe,
+  Cpu,
+  FileText,
+  Headset,
+  Briefcase,
+  Handshake,
+];
+const TOPIC_IDS = [
+  "about",
+  "seo",
+  "paid-ads",
+  "social-media",
+  "web-development",
+  "ai-automation",
+  "content-marketing",
+  "crm-bpo",
+  "consultancy",
+  "working-with-us",
+];
+
+const DEFAULT_TOPICS = [
   {
     id: "about",
     label: "About BizzBuzz Creations",
@@ -411,9 +439,24 @@ const TRIGGER_HOVER =
 
 const SCROLL_SPY_OFFSET = 140; // px from the top of the viewport
 
-export default function FaqTopics() {
+export default function FaqTopics({ content } = {}) {
   const [active, setActive] = useState(0);
   const sectionRefs = useRef([]);
+
+  // Topic overrides come from the dashboard positionally (icon/id stay
+  // code-driven); a topic missing real questions falls back to its own
+  // default set rather than rendering with no FAQs at all.
+  const overrides = content?.faqTopics;
+  const TOPICS =
+    overrides?.length > 0
+      ? overrides.map((t, i) => ({
+          id: TOPIC_IDS[i % TOPIC_IDS.length],
+          icon: TOPIC_ICONS[i % TOPIC_ICONS.length],
+          label: t.label || DEFAULT_TOPICS[i]?.label,
+          description: t.description || DEFAULT_TOPICS[i]?.description,
+          faqs: t.faqs?.length > 0 ? t.faqs : DEFAULT_TOPICS[i]?.faqs,
+        }))
+      : DEFAULT_TOPICS;
 
   // Scroll-spy: every topic's FAQs are on the page at once (stacked), and
   // the sidebar highlights whichever one the user has scrolled past —

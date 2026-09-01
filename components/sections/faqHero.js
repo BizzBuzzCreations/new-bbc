@@ -5,14 +5,25 @@ import { ArrowUpRight } from "lucide-react";
 // shot: the question-mark graphic spans the whole section as a background
 // image, fading from solid black (behind the text) into the photo on the
 // right. Dark-theme version of that pattern (black fade instead of white).
-export default function FaqHero() {
+export default function FaqHero({ content } = {}) {
+  const headingLine1 = content?.faqHeroHeadingLine1 || "Frequently Asked";
+  const headingLine2 = content?.faqHeroHeadingLine2 || "Questions";
+  const subheading =
+    content?.faqHeroSubheading ||
+    "Answers to What Businesses Ask Before They Grow With Us";
+  const paragraph =
+    content?.faqHeroParagraph ||
+    "Have questions about SEO, Google Ads, social media, web development, AI automation, or working with BizzBuzz Creations? Find clear answers below — and if you don't see what you're looking for, our team is one message away.";
+  const ctaText = content?.faqHeroCtaText || "Ask Us Directly";
+  const backgroundImage = content?.faqHeroBackgroundImage || "/question-mark.jpeg";
+
   return (
     <section className="relative overflow-hidden min-h-[420px] sm:min-h-[480px] md:min-h-[560px] flex items-center bg-black">
       {/* Background photo */}
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: "url('/question-mark.jpeg')",
+          backgroundImage: `url('${backgroundImage}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -31,26 +42,23 @@ export default function FaqHero() {
         <div className="max-w-xl">
           <h1 className="text-white leading-[1.05]">
             <span className="block text-4xl sm:text-5xl md:text-6xl font-light">
-              Frequently Asked
+              {headingLine1}
             </span>
             <span className="block text-4xl sm:text-5xl md:text-6xl font-bold">
-              Questions
+              {headingLine2}
             </span>
           </h1>
           <h2 className="mt-4 text-lg sm:text-xl font-semibold text-[#40A2D8]">
-            Answers to What Businesses Ask Before They Grow With Us
+            {subheading}
           </h2>
           <p className="mt-6 text-white/60 max-w-lg leading-relaxed">
-            Have questions about SEO, Google Ads, social media, web
-            development, AI automation, or working with BizzBuzz Creations?
-            Find clear answers below — and if you don't see what you're
-            looking for, our team is one message away.
+            {paragraph}
           </p>
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 bg-[#0B60B0] hover:bg-white text-white hover:text-[#0B60B0] text-sm font-semibold px-7 py-3.5 rounded-full shadow-lg shadow-[#0B60B0]/30 transition-colors duration-300 mt-8"
           >
-            Ask Us Directly
+            {ctaText}
             <ArrowUpRight size={16} />
           </Link>
         </div>

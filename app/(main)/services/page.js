@@ -420,9 +420,12 @@ export default async function ServicesIndexPage() {
       </section>
 
       {/* FAQs — questions specific to choosing/working with our services */}
-      <DarkFAQSection faqs={SERVICES_FAQS} heading="Frequently Asked Questions" />
+      <DarkFAQSection
+        faqs={content?.servicesFaqItems?.length > 0 ? content.servicesFaqItems : SERVICES_FAQS}
+        heading={content?.servicesFaqHeading || "Frequently Asked Questions"}
+      />
 
-      <CTA />
+      <CTA content={content} />
     </>
   );
 }

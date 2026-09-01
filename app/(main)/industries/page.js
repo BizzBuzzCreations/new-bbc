@@ -274,9 +274,12 @@ export default async function IndustriesIndexPage() {
       </section>
 
       {/* FAQs — questions specific to working across industries */}
-      <DarkFAQSection faqs={INDUSTRIES_FAQS} heading="Frequently Asked Questions" />
+      <DarkFAQSection
+        faqs={content?.industriesFaqItems?.length > 0 ? content.industriesFaqItems : INDUSTRIES_FAQS}
+        heading={content?.industriesFaqHeading || "Frequently Asked Questions"}
+      />
 
-      <CTA />
+      <CTA content={content} />
     </>
   );
 }

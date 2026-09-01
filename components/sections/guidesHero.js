@@ -1,7 +1,14 @@
 import Link from "next/link";
 
 // Colorful gradient treatment for the Guides resource page.
-export default function GuidesHero() {
+export default function GuidesHero({ content } = {}) {
+  const heading = content?.guidesHeroHeading || "Digital Marketing Guides & Resources";
+  const paragraph =
+    content?.guidesHeroParagraph ||
+    "Practical, no-fluff guides and insights on SEO, paid ads, social media, websites, content, AI, and digital growth.";
+  const primaryCtaText = content?.guidesHeroPrimaryCtaText || "Explore Our Guides";
+  const secondaryCtaText = content?.guidesHeroSecondaryCtaText || "Need Help With Marketing?";
+
   return (
     <section className="relative overflow-hidden py-24 md:py-28 px-6 text-center text-white">
       <div
@@ -30,25 +37,24 @@ export default function GuidesHero() {
 
       <div className="relative max-w-3xl mx-auto">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-5">
-          Digital Marketing Guides &amp; Resources
+          {heading}
         </h1>
         <p className="text-white/80 max-w-xl mx-auto mb-8 leading-relaxed">
-          Practical, no-fluff guides and insights on SEO, paid ads, social
-          media, websites, content, AI, and digital growth.
+          {paragraph}
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Link
             href="#all-guides"
             className="inline-flex items-center gap-1.5 bg-white hover:bg-black text-black hover:text-white text-sm font-semibold px-7 py-3.5 rounded-lg transition-colors duration-300"
           >
-            Explore Our Guides
+            {primaryCtaText}
             <span aria-hidden="true">→</span>
           </Link>
           <Link
             href="/contact"
             className="inline-flex items-center gap-1.5 border border-white/50 hover:border-white bg-transparent hover:bg-white text-white hover:text-black text-sm font-semibold px-7 py-3.5 rounded-lg transition-colors duration-300"
           >
-            Need Help With Marketing?
+            {secondaryCtaText}
             <span aria-hidden="true">→</span>
           </Link>
         </div>

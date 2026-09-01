@@ -7,7 +7,7 @@ import Link from "next/link";
 // Real BizzBuzz office/team photos (same assets already used elsewhere on
 // the site) auto-advancing behind the hero text, instead of one static
 // background image.
-const SLIDES = [
+const DEFAULT_SLIDES = [
   "/image-7.jpg",
   "/image-2.jpg",
   "/image-5.webp",
@@ -17,7 +17,16 @@ const SLIDES = [
 
 const SLIDE_DURATION = 4500;
 
-export default function CareerHero() {
+export default function CareerHero({ content } = {}) {
+  const heading = content?.careerHeroHeading || "Work Where Your Ideas Matter";
+  const subheading = content?.careerHeroSubheading || "Learn by Doing. Grow by Owning.";
+  const paragraph =
+    content?.careerHeroParagraph ||
+    "At BizzBuzz Creations, we believe great work comes from trust, ownership, and collaboration. Our flat structure means fewer layers, faster decisions, and more room to turn your ideas into real outcomes.";
+  const ctaText = content?.careerHeroCtaText || "Apply Now";
+  const slidesRaw = content?.careerHeroSlides?.length > 0 ? content.careerHeroSlides : null;
+  const SLIDES = slidesRaw ? slidesRaw.map((s) => s.image) : DEFAULT_SLIDES;
+
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -25,7 +34,7 @@ export default function CareerHero() {
       setActive((prev) => (prev + 1) % SLIDES.length);
     }, SLIDE_DURATION);
     return () => clearInterval(id);
-  }, []);
+  }, [SLIDES.length]);
 
   return (
     <section className="relative overflow-hidden min-h-[420px] sm:min-h-[480px] flex items-center pt-20">
@@ -58,22 +67,19 @@ export default function CareerHero() {
         <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-4">
         </p>
         <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4">
-          Work Where Your Ideas Matter
+          {heading}
         </h1>
         <h2 className="text-white/90 text-lg sm:text-xl font-semibold mb-4">
-          Learn by Doing. Grow by Owning.
+          {subheading}
         </h2>
         <p className="text-white/70 max-w-lg leading-relaxed mb-8">
-          At BizzBuzz Creations, we believe great work comes from trust,
-          ownership, and collaboration. Our flat structure means fewer
-          layers, faster decisions, and more room to turn your ideas into
-          real outcomes.
+          {paragraph}
         </p>
         <Link
           href="/contact"
           className="inline-flex items-center bg-[#0B60B0] hover:bg-white text-white hover:text-black text-sm font-semibold px-7 py-3.5 rounded-lg transition-colors duration-300"
         >
-          Apply Now
+          {ctaText}
         </Link>
       </div>
 

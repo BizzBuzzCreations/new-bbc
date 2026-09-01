@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import TeamHero from "@/components/sections/teamHero";
 import TeamGrids from "@/components/sections/teamGrids";
 import ContactSection from "@/components/sections/contactSection";
+import { getPageContent } from "@/actions/pageContentActions";
 
 export const metadata = {
   title: "Our Team | BizzBuzz Creations Digital Marketing Agency",
@@ -13,17 +14,34 @@ export const metadata = {
   },
 };
 
-export default function OurTeamPage() {
+export default async function OurTeamPage() {
+  const content = await getPageContent("our-team");
+
+  const ctaHeading = content?.teamCtaHeading || "Want to Work With the People Behind the Work?";
+  const ctaParagraph =
+    content?.teamCtaParagraph ||
+    "Whether you're looking for a digital marketing partner or interested in joining our growing team, we'd love to hear from you.";
+  const ctaPrimaryText = content?.teamCtaPrimaryText || "Work With Our Team";
+  const ctaSecondaryText = content?.teamCtaSecondaryText || "Explore Careers";
+
   return (
     <>
-      <TeamHero />
+      <TeamHero content={content} />
 
       {/* Founders, Our Leaders, and the BPO/R&D team photos — all with a
           staggered one-by-one reveal as they scroll into view. */}
-      <TeamGrids />
+      <TeamGrids content={content} />
 
-      {/* Contact — same working form as the Contact page */}
-      <ContactSection />
+      {/* Contact — same working form as the Contact page, with its own
+          page-scoped heading/copy overrides. */}
+      <ContactSection
+        content={{
+          contactHeroHeading: content?.teamContactHeading,
+          contactHeroParagraph: content?.teamContactParagraph,
+          contactFormHeading: content?.teamContactFormHeading,
+          contactFormButtonText: content?.teamContactFormButtonText,
+        }}
+      />
 
       {/* CTA — page-specific (not the shared site-wide CTA), same visual
           treatment as it, with two audiences instead of an email form. */}
@@ -37,12 +55,10 @@ export default function OurTeamPage() {
         >
           <div className="py-8 md:py-10 px-10 z-10 text-white">
             <h2 className="md:text-3xl text-2xl font-bold mb-5">
-              Want to Work With the People Behind the Work?
+              {ctaHeading}
             </h2>
             <p className="max-w-3xl mb-8 text-white/70">
-              Whether you&rsquo;re looking for a digital marketing partner or
-              interested in joining our growing team, we&rsquo;d love to
-              hear from you.
+              {ctaParagraph}
             </p>
 
             <div className="flex flex-wrap gap-8">
@@ -54,7 +70,7 @@ export default function OurTeamPage() {
                   href="/contact"
                   className="inline-flex items-center gap-2 bg-white hover:bg-[#0B60B0] text-black hover:text-white text-sm font-semibold px-6 py-3 rounded-full transition-colors duration-300"
                 >
-                  Work With Our Team
+                  {ctaPrimaryText}
                   <ArrowUpRight size={16} />
                 </Link>
               </div>
@@ -66,7 +82,7 @@ export default function OurTeamPage() {
                   href="/career"
                   className="inline-flex items-center gap-2 bg-black hover:bg-[#0B60B0] border border-white/50 hover:border-[#0B60B0] text-white text-sm font-semibold px-6 py-3 rounded-full transition-colors duration-300"
                 >
-                  Explore Careers
+                  {ctaSecondaryText}
                   <ArrowUpRight size={16} />
                 </Link>
               </div>

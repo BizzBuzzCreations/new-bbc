@@ -98,7 +98,7 @@ export default async function Home() {
         <FAQ content={content} />
 
         {/* CTA section */}
-        <CTA />
+        <CTA content={content} />
       </div>
       {/* Popup form */}
       <ConsultationPopup content={content} />

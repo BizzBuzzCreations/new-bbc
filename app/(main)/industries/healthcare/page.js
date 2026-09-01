@@ -1,9 +1,11 @@
 import IndustryDetailPage from "@/components/sections/industryDetailPage";
 import { getIndustryBySlug } from "@/lib/industriesData";
 import { getIndustryPageContent } from "@/lib/industryPageContent";
+import { mergeIndustryContent } from "@/lib/industryContentRegistry";
+import { getPageContent } from "@/actions/pageContentActions";
 
 const industry = getIndustryBySlug("healthcare");
-const content = getIndustryPageContent("healthcare");
+const staticContent = getIndustryPageContent("healthcare");
 
 export const metadata = {
   title: "Healthcare Digital Marketing Agency | BizzBuzz Creations",
@@ -14,13 +16,16 @@ export const metadata = {
   },
 };
 
-export default function HealthcareIndustryPage() {
+export default async function HealthcareIndustryPage() {
+  const overrides = await getPageContent("industry-healthcare");
+  const content = mergeIndustryContent(staticContent, overrides);
   return (
     <IndustryDetailPage
       label={industry.label}
       icon={industry.icon}
       description={industry.description}
       spectrumHeading={`Our Full Spectrum of ${industry.label} Marketing Services`}
+      serviceBreakdownFlip
       {...content}
     />
   );

@@ -7,8 +7,12 @@ import {
   uploadContentImage,
   uploadContentVideo,
 } from "@/actions/pageContentActions";
-import { PAGE_CONTENT_REGISTRY } from "@/lib/pageContentRegistry";
+import { INDUSTRY_CONTENT_REGISTRY } from "@/lib/industryContentRegistry";
 
+// Identical field controls to DashboardContent (components/sections/dashboardContent.js)
+// — kept as a separate copy rather than a shared import so this section
+// can evolve independently since it drives a generated registry, not the
+// hand-authored one.
 function MediaField({ value, onChange, label, kind }) {
   const [uploading, setUploading] = useState(false);
   const isVideo = kind === "video";
@@ -36,9 +40,6 @@ function MediaField({ value, onChange, label, kind }) {
   return (
     <div className="flex items-center gap-4">
       {value && !isVideo && (
-        // Uploaded content images (Cloudinary URLs, or any path already on
-        // the site) — a plain <img> avoids configuring next/image for
-        // arbitrary remote hosts just for this admin-only preview.
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={value}
@@ -102,8 +103,6 @@ function FieldControl({ field, value, onChange }) {
   );
 }
 
-// A repeatable list of items (e.g. FAQ questions, client cards) — each
-// item's own fields (text/textarea/image) come from `field.itemFields`.
 function ListField({ field, items, onChange }) {
   const list = Array.isArray(items) ? items : [];
 
@@ -176,18 +175,20 @@ function ListField({ field, items, onChange }) {
   );
 }
 
-// Lets an admin/writer edit the real text and images on live pages —
-// text and images ONLY, never layout/design — without touching code.
-// Each page in PAGE_CONTENT_REGISTRY shows up here as a dropdown option;
-// its sections/fields drive the form below automatically.
-export default function DashboardContent() {
-  const [pageKey, setPageKey] = useState(PAGE_CONTENT_REGISTRY[0]?.key || "");
+// Every /industries/<slug> page shares the exact same structure
+// (components/sections/industryDetailPage.js), so instead of 15 separate
+// dashboard entries, this is one picker: choose the industry, then edit
+// that industry's hero, capabilities, service breakdown, differentiators,
+// roadmap, why-choose-us, FAQ, and closing CTA — same section shapes for
+// every one of the 15 pages.
+export default function DashboardIndustries() {
+  const [pageKey, setPageKey] = useState(INDUSTRY_CONTENT_REGISTRY[0]?.key || "");
   const [values, setValues] = useState({});
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [savedAt, setSavedAt] = useState(null);
 
-  const page = PAGE_CONTENT_REGISTRY.find((p) => p.key === pageKey);
+  const page = INDUSTRY_CONTENT_REGISTRY.find((p) => p.key === pageKey);
 
   useEffect(() => {
     let cancelled = false;
@@ -224,21 +225,22 @@ export default function DashboardContent() {
     <section className="mt-6 rounded-2xl border border-slate-100 bg-white p-6">
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="text-base font-bold text-slate-900">Website Content</h2>
+          <h2 className="text-base font-bold text-slate-900">Industries Pages</h2>
           <p className="text-xs text-slate-400">
-            Edit the real text and images shown on the live site — design and
-            layout stay exactly as built.
+            Every industry page shares the same layout — pick one below to
+            edit its text and images. Design and layout stay exactly as
+            built.
           </p>
         </div>
         <div className="relative">
           <select
             value={pageKey}
             onChange={(e) => setPageKey(e.target.value)}
-            className="min-w-[180px] appearance-none rounded-lg border border-slate-200 bg-white py-2.5 pl-4 pr-9 text-sm font-medium text-slate-700 outline-none focus:border-slate-400"
+            className="min-w-[200px] appearance-none rounded-lg border border-slate-200 bg-white py-2.5 pl-4 pr-9 text-sm font-medium text-slate-700 outline-none focus:border-slate-400"
           >
-            {PAGE_CONTENT_REGISTRY.map((p) => (
+            {INDUSTRY_CONTENT_REGISTRY.map((p) => (
               <option key={p.key} value={p.key}>
-                {p.label}
+                {p.label.replace(/^Industries — /, "")}
               </option>
             ))}
           </select>

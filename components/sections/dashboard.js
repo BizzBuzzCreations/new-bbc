@@ -13,6 +13,7 @@ import {
 import { logout } from "@/actions/authActions";
 import DashboardBlogs from "@/components/sections/dashboardBlogs";
 import DashboardContent from "@/components/sections/dashboardContent";
+import DashboardIndustries from "@/components/sections/dashboardIndustries";
 
 const NAV_ITEMS = [
   { id: "overview", label: "Overview", icon: GridIcon },
@@ -21,6 +22,7 @@ const NAV_ITEMS = [
   { id: "comments", label: "Comments", icon: ChatIcon },
   { id: "submissions", label: "Submissions", icon: InboxIcon },
   { id: "content", label: "Website Content", icon: PageIcon },
+  { id: "industries", label: "Industries Pages", icon: IndustriesIcon },
 ];
 
 function timeAgo(dateString) {
@@ -444,6 +446,8 @@ export default function Dashboard({ role = "user", name = "" }) {
 
         {activeTab === "content" && <DashboardContent />}
 
+        {activeTab === "industries" && <DashboardIndustries />}
+
         {showAddJob && (
           <div
             className="fixed inset-0 z-100 flex items-center justify-center bg-slate-900/55 backdrop-blur-sm"
@@ -636,6 +640,25 @@ function PageIcon({ size = 18 }) {
       <path d="M14 2v6h6" />
       <line x1="8" y1="13" x2="16" y2="13" />
       <line x1="8" y1="17" x2="16" y2="17" />
+    </svg>
+  );
+}
+
+function IndustriesIcon({ size = 18 }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
+      <path d="M3 21h18" />
+      <path d="M5 21V7l7-4 7 4v14" />
+      <path d="M9 21v-6h6v6" />
+      <path d="M9 10h.01" />
+      <path d="M15 10h.01" />
     </svg>
   );
 }

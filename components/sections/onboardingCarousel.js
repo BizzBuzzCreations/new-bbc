@@ -5,40 +5,40 @@ import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 import "@splidejs/react-splide/css";
 import { Search, PenTool, Rocket, BarChart3, FileCheck2 } from "lucide-react";
 
-const ONBOARDING_STEPS = [
+const STEP_ICONS = [Search, PenTool, Rocket, BarChart3, FileCheck2];
+
+const DEFAULT_ONBOARDING_STEPS = [
   {
     step: "1 TO 2 WEEKS",
-    icon: Search,
     title: "Discover & Audit",
     desc: "We review your business, competitors, and current digital presence to identify real opportunities before recommending anything.",
   },
   {
     step: "1 WEEK",
-    icon: PenTool,
     title: "Strategise",
     desc: "We turn audit insights into a focused roadmap across the right channels, matched to your goals and budget.",
   },
   {
     step: "ONGOING",
-    icon: Rocket,
     title: "Create & Execute",
     desc: "Campaigns, content, and websites are built and launched in phases, so results start compounding early rather than all at once.",
   },
   {
     step: "CONTINUOUS",
-    icon: BarChart3,
     title: "Optimise & Scale",
     desc: "We don't stop after launch — testing, refining, and scaling run throughout the engagement, not just at the start.",
   },
   {
     step: "MONTHLY",
-    icon: FileCheck2,
     title: "Report & Grow",
     desc: "You receive clear reporting on a consistent monthly cycle, with strategy calls to review what's working and what's next.",
   },
 ];
 
-export default function OnboardingCarousel() {
+export default function OnboardingCarousel({ content } = {}) {
+  const stepsRaw = content?.onboardingSteps?.length > 0 ? content.onboardingSteps : DEFAULT_ONBOARDING_STEPS;
+  const ONBOARDING_STEPS = stepsRaw.map((s, i) => ({ ...s, icon: STEP_ICONS[i % STEP_ICONS.length] }));
+
   return (
     <Splide
       options={{

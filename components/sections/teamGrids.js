@@ -14,80 +14,78 @@ import {
   Target,
   Headset,
   FlaskConical,
+  Linkedin,
+  Instagram,
 } from "lucide-react";
 
 // Role-based structure rather than invented individual profiles with
 // stock photos — the real people behind each role can be swapped in as
 // the roster is finalized, without presenting placeholder faces as if
-// they were real employees.
-const FOUNDERS = [
-  { icon: Crown, name: "Abheuday Mishra", role: "Founder & CEO" },
-  { icon: Users, name: "Utkarsh Mishra", role: "Co-Founder & Director" },
+// they were real employees. Icons stay code-driven (design), matched
+// positionally to whichever cards are saved.
+const FOUNDER_ICONS = [Crown, Users];
+const DEFAULT_FOUNDERS = [
+  { name: "Abheuday Mishra", role: "Founder & CEO" },
+  { name: "Utkarsh Mishra", role: "Co-Founder & Director" },
 ];
 
-const LEADERS = [
-  { icon: Search, role: "Head of SEO & Growth", dept: "SEO" },
-  { icon: Megaphone, role: "Paid Media Lead", dept: "Paid Ads" },
-  { icon: Palette, role: "Creative & Brand Director", dept: "Creative" },
-  { icon: Code2, role: "Web Development Lead", dept: "Engineering" },
-  { icon: Bot, role: "AI & Automation Lead", dept: "AI & Automation" },
-  { icon: Briefcase, role: "Business Consultancy Lead", dept: "Consultancy" },
+const LEADER_ICONS = [Search, Megaphone, Palette, Code2, Bot, Briefcase];
+const DEFAULT_LEADERS = [
+  { role: "Head of SEO & Growth", dept: "SEO" },
+  { role: "Paid Media Lead", dept: "Paid Ads" },
+  { role: "Creative & Brand Director", dept: "Creative" },
+  { role: "Web Development Lead", dept: "Engineering" },
+  { role: "AI & Automation Lead", dept: "AI & Automation" },
+  { role: "Business Consultancy Lead", dept: "Consultancy" },
 ];
 
 // Real BizzBuzz team photos (same assets already used elsewhere on the
 // site — the hero and the About page's "Our Story" section), not
 // fabricated department photos.
-const TEAM_GROUPS = [
+const DEFAULT_TEAM_GROUPS = [
   {
     title: "Meet Our BPO Team",
     tagline: "The People Keeping Every Customer Interaction Moving",
     desc: "Our BPO team handles customer support, lead follow-ups, communication, and day-to-day customer interactions, helping businesses stay responsive while creating smoother experiences for their customers.",
     image: "/teamPic.webp",
-    imageAlt: "The BizzBuzz Creations BPO team",
   },
   {
     title: "Meet Our R&D Team",
     tagline: "Exploring What’s Next in Digital",
     desc: "Our R&D team researches and tests emerging technologies across AI search, SEO, automation, digital tools, and evolving search behaviour. Their work helps us turn new developments into practical strategies and smarter solutions for the businesses we serve.",
     image: "/banner.png",
-    imageAlt: "The BizzBuzz Creations R&D team",
   },
 ];
 
-const TEAM_SPECIALTIES = [
+const SPECIALTY_ICONS = [Megaphone, Palette, Code2, Target, Headset, FlaskConical];
+const DEFAULT_TEAM_SPECIALTIES = [
   {
-    icon: Megaphone,
     title: "Digital Marketing",
     desc: "Our marketing specialists combine SEO, paid advertising, social media, content, and campaign strategy to help businesses reach the right audiences and create measurable digital growth.",
   },
   {
-    icon: Palette,
     title: "Creative",
     desc: "Our creative team brings together branding, graphic design, visual content, and creative campaigns to help businesses communicate clearly, build recognition, and create memorable digital experiences.",
   },
   {
-    icon: Code2,
     title: "Technology",
     desc: "Our technology specialists work across web development, website optimisation, integrations, and digital solutions, creating reliable digital experiences designed around business and customer needs.",
   },
   {
-    icon: Target,
     title: "Strategy",
     desc: "Our strategists connect research, analytics, positioning, planning, and business goals to create focused digital roadmaps that give every campaign and digital initiative a clear direction.",
   },
   {
-    icon: Headset,
     title: "BPO & Support",
     desc: "Our BPO and support specialists manage customer communication, lead follow-ups, support operations, and day-to-day interactions, helping businesses deliver responsive and consistent customer experiences.",
   },
   {
-    icon: FlaskConical,
     title: "R&D",
     desc: "Our R&D specialists explore AI search, automation, emerging technologies, and evolving digital trends to help our teams discover smarter approaches and prepare businesses for what's next.",
   },
 ];
 
-const WHY_IT_WORKS = [
+const DEFAULT_WHY_IT_WORKS = [
   {
     title: "No Handoffs",
     desc: "Every project moves through one connected team, not separate vendors passing work between each other — so nothing gets lost in translation.",
@@ -113,9 +111,93 @@ const fadeUp = (i) => ({
   transition: { duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] },
 });
 
-function RoleCard({ icon: Icon, name, role, dept, index, size = "normal" }) {
+function RoleCard({
+  icon: Icon,
+  name,
+  role,
+  dept,
+  index,
+  size = "normal",
+  // When true (currently only the Founders cards), hovering the card
+  // 3D-flips it to reveal the name + LinkedIn/Instagram links on the
+  // back face, instead of just a hover lift.
+  flip = false,
+  linkedin,
+  instagram,
+}) {
   const isXl = size === "xl";
   const isLarge = size === "large" || isXl;
+
+  if (flip) {
+    return (
+      <motion.div {...fadeUp(index)} className="group [perspective:1500px]">
+        <div className="relative transition-transform duration-700 ease-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+          {/* Front — identical markup to the non-flip card below, just
+              sized the same way via isXl/isLarge so flip cards match
+              whichever grid (Founders, Leaders) they're used in. */}
+          <div className="[backface-visibility:hidden] rounded-2xl border border-white/10 bg-white/5 overflow-hidden shadow-sm">
+            <div
+              className={`${isLarge ? "aspect-[4/3]" : "aspect-square"} flex items-center justify-center bg-white/5`}
+            >
+              <div
+                className={`flex items-center justify-center rounded-full bg-white/10 text-[#40A2D8] ${
+                  isXl ? "w-28 h-28" : isLarge ? "w-20 h-20" : "w-16 h-16"
+                }`}
+              >
+                <Icon size={isXl ? 48 : isLarge ? 34 : 28} />
+              </div>
+            </div>
+            <div className={isXl ? "p-6" : "p-4"}>
+              {dept && (
+                <p className={`font-bold uppercase tracking-wide text-[#40A2D8] mb-1 ${isXl ? "text-sm" : "text-xs"}`}>
+                  {dept}
+                </p>
+              )}
+              {name && (
+                <h3 className={`font-bold text-white leading-snug ${isXl ? "text-xl mb-1" : "text-sm"}`}>
+                  {name}
+                </h3>
+              )}
+              <p className={`text-white/60 leading-snug ${isXl ? "text-base" : "font-bold text-white text-sm"}`}>
+                {role}
+              </p>
+            </div>
+          </div>
+
+          {/* Back — name + social links, flipped 180deg so it reads
+              correctly once the card itself rotates into view. Falls
+              back to the role when no name is set yet (e.g. leaders
+              whose roster hasn't been finalized with real names). */}
+          <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-2xl border border-[#40A2D8]/40 bg-[#0B60B0]/10 flex flex-col items-center justify-center gap-5 p-6 text-center">
+            <h3 className="font-bold text-white text-xl leading-snug">
+              {name || role}
+            </h3>
+            <div className="flex items-center gap-4">
+              <a
+                href={linkedin || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${name || role} on LinkedIn`}
+                className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 text-[#40A2D8] hover:bg-white hover:text-[#0B60B0] transition-colors duration-300"
+              >
+                <Linkedin size={19} />
+              </a>
+              <a
+                href={instagram || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${name || role} on Instagram`}
+                className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 text-[#40A2D8] hover:bg-white hover:text-[#0B60B0] transition-colors duration-300"
+              >
+                <Instagram size={19} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
+
   return (
     <motion.div
       {...fadeUp(index)}
@@ -151,7 +233,34 @@ function RoleCard({ icon: Icon, name, role, dept, index, size = "normal" }) {
   );
 }
 
-export default function TeamGrids() {
+export default function TeamGrids({ content } = {}) {
+  const foundersHeading = content?.foundersHeading || "Meet the Founders";
+  const foundersSubheading = content?.foundersSubheading || "The Minds Behind BizzBuzz Creations";
+  const foundersParagraph =
+    content?.foundersParagraph ||
+    "BizzBuzz Creations was built on a simple belief: digital marketing should connect creativity with measurable business outcomes. Our founders combine entrepreneurial thinking, marketing expertise, and a long-term vision to build solutions that help businesses grow with clarity and confidence.";
+  const foundersRaw = content?.founders?.length > 0 ? content.founders : DEFAULT_FOUNDERS;
+  const founders = foundersRaw.map((f, i) => ({ ...f, icon: FOUNDER_ICONS[i % FOUNDER_ICONS.length] }));
+
+  const leadersHeading = content?.leadersHeading || "Meet Our Leadership Team";
+  const leadersSubheading = content?.leadersSubheading || "The People Driving Strategy, Growth & Execution";
+  const leadersParagraph =
+    content?.leadersParagraph ||
+    "Our leadership team brings together expertise across digital marketing, technology, business strategy, and operations. They stay closely involved in the work, guide our teams, and help turn business objectives into focused strategies and effective digital solutions.";
+  const leadersRaw = content?.leaders?.length > 0 ? content.leaders : DEFAULT_LEADERS;
+  const leaders = leadersRaw.map((l, i) => ({ ...l, icon: LEADER_ICONS[i % LEADER_ICONS.length] }));
+
+  const teamGroupsHeading = content?.teamGroupsHeading || "Meet Our Team";
+  const teamGroups = content?.teamGroups?.length > 0 ? content.teamGroups : DEFAULT_TEAM_GROUPS;
+
+  const specialtiesHeading = content?.specialtiesHeading || "What Each Team Brings";
+  const specialtiesSubheading = content?.specialtiesSubheading || "One Team. Multiple Specialities.";
+  const specialtiesRaw = content?.teamSpecialties?.length > 0 ? content.teamSpecialties : DEFAULT_TEAM_SPECIALTIES;
+  const specialties = specialtiesRaw.map((s, i) => ({ ...s, icon: SPECIALTY_ICONS[i % SPECIALTY_ICONS.length] }));
+
+  const whyItWorksHeading = content?.whyItWorksHeading || "Why It Works Together";
+  const whyItWorks = content?.whyItWorks?.length > 0 ? content.whyItWorks : DEFAULT_WHY_IT_WORKS;
+
   return (
     <>
       {/* Founders */}
@@ -159,23 +268,19 @@ export default function TeamGrids() {
         <div className="max-w-6xl mx-auto text-center">
           <motion.div {...fadeUp(0)} className="mb-10">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
-              Meet the Founders
+              {foundersHeading}
             </h2>
             <h3 className="text-lg font-semibold text-[#40A2D8] mb-4">
-              The Minds Behind BizzBuzz Creations
+              {foundersSubheading}
             </h3>
             <p className="text-white/60 max-w-2xl mx-auto leading-relaxed">
-              BizzBuzz Creations was built on a simple belief: digital
-              marketing should connect creativity with measurable business
-              outcomes. Our founders combine entrepreneurial thinking,
-              marketing expertise, and a long-term vision to build solutions
-              that help businesses grow with clarity and confidence.
+              {foundersParagraph}
             </p>
           </motion.div>
 
           <div className="grid sm:grid-cols-2 max-w-3xl mx-auto gap-8">
-            {FOUNDERS.map((f, i) => (
-              <RoleCard key={f.role} {...f} index={i} size="xl" />
+            {founders.map((f, i) => (
+              <RoleCard key={i} {...f} index={i} size="xl" flip />
             ))}
           </div>
         </div>
@@ -186,23 +291,19 @@ export default function TeamGrids() {
         <div className="max-w-6xl mx-auto">
           <motion.div {...fadeUp(0)} className="mb-10 text-center">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
-              Meet Our Leadership Team
+              {leadersHeading}
             </h2>
             <h3 className="text-lg font-semibold text-[#40A2D8] mb-4">
-              The People Driving Strategy, Growth &amp; Execution
+              {leadersSubheading}
             </h3>
             <p className="text-white/60 max-w-xl mx-auto leading-relaxed">
-              Our leadership team brings together expertise across digital
-              marketing, technology, business strategy, and operations. They
-              stay closely involved in the work, guide our teams, and help
-              turn business objectives into focused strategies and effective
-              digital solutions.
+              {leadersParagraph}
             </p>
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {LEADERS.map((l, i) => (
-              <RoleCard key={l.role} {...l} index={i} />
+            {leaders.map((l, i) => (
+              <RoleCard key={i} {...l} index={i} flip />
             ))}
           </div>
         </div>
@@ -215,15 +316,15 @@ export default function TeamGrids() {
             {...fadeUp(0)}
             className="text-2xl md:text-3xl font-bold text-white mb-14 text-center"
           >
-            Meet Our Team
+            {teamGroupsHeading}
           </motion.h2>
 
           <div className="space-y-16">
-            {TEAM_GROUPS.map((group, i) => {
+            {teamGroups.map((group, i) => {
               const imageFirst = i % 2 === 1;
               return (
                 <div
-                  key={group.title}
+                  key={i}
                   className="grid md:grid-cols-2 gap-8 md:gap-12 items-center"
                 >
                   <motion.div
@@ -249,7 +350,7 @@ export default function TeamGrids() {
                   >
                     <Image
                       src={group.image}
-                      alt={group.imageAlt}
+                      alt={group.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover"
@@ -267,17 +368,17 @@ export default function TeamGrids() {
         <div className="max-w-6xl mx-auto text-center">
           <motion.div {...fadeUp(0)} className="mb-14">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
-              What Each Team Brings
+              {specialtiesHeading}
             </h2>
             <h3 className="text-lg font-semibold text-[#40A2D8]">
-              One Team. Multiple Specialities.
+              {specialtiesSubheading}
             </h3>
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {TEAM_SPECIALTIES.map(({ icon: Icon, title, desc }, i) => (
+            {specialties.map(({ icon: Icon, title, desc }, i) => (
               <motion.div
-                key={title}
+                key={i}
                 {...fadeUp(i)}
                 className="group text-left rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-black/40"
               >
@@ -302,14 +403,14 @@ export default function TeamGrids() {
           {...fadeUp(0)}
           className="text-2xl md:text-3xl font-bold text-white text-center mb-14 px-6"
         >
-          Why It Works Together
+          {whyItWorksHeading}
         </motion.h2>
 
         <div className="overflow-hidden">
           <div
             className="flex w-max gap-6 animate-[marquee-rtl_28s_linear_infinite] hover:[animation-play-state:paused]"
           >
-            {[...WHY_IT_WORKS, ...WHY_IT_WORKS].map(({ title, desc }, i) => (
+            {[...whyItWorks, ...whyItWorks].map(({ title, desc }, i) => (
               <div
                 key={i}
                 className="group shrink-0 w-[320px] rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-black/40"

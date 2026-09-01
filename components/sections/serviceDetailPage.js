@@ -45,6 +45,10 @@ export default function ServiceDetailPage({
   // { number, title, desc, ctaText, services[] }.
   serviceBreakdownHeading,
   serviceBreakdown,
+  // When true, clicking "Know Our Services" 3D-flips the card to reveal
+  // its services on the back face, instead of expanding downward. On by
+  // default — every /<service-hub>/<slug> sub-service page uses this.
+  serviceBreakdownFlip = true,
   // Optional "What Makes Us Different" section — an array of
   // { number, title, desc }, rendered as an alternating timeline instead
   // of another card grid.
@@ -183,15 +187,15 @@ export default function ServiceDetailPage({
       </section>
 
       {/* Service breakdown — optional, only rendered when supplied. Each
-          card expands on click to reveal its full list of specific
-          services. */}
+          card flips on click to reveal its full list of specific
+          services on the back face. */}
       {serviceBreakdown && serviceBreakdown.length > 0 && (
         <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-14">
               {serviceBreakdownHeading}
             </h2>
-            <ServiceBreakdownGrid items={serviceBreakdown} />
+            <ServiceBreakdownGrid items={serviceBreakdown} flip={serviceBreakdownFlip} />
           </div>
         </section>
       )}

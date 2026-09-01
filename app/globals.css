@@ -523,8 +523,8 @@ body {
    Every real <button> and every pill-shaped CTA link (the
    rounded-full anchors used everywhere for "Book a Consultation" /
    "Talk to a Specialist" style buttons) gets a guaranteed color
-   shift on hover, on top of whatever hover:bg-*/hover:text-* a
-   given button already defines. This is a safety net so no button
+   shift on hover, on top of whatever hover:bg and hover:text
+   utilities a given button already defines. This is a safety net so no button
    anywhere on the site is left without a visible hover state, not
    a replacement for the per-component hover classes already in
    place.

@@ -1,6 +1,7 @@
 import FaqHero from "@/components/sections/faqHero";
 import FaqTopics from "@/components/sections/faqTopics";
 import CTA from "@/components/sections/CTA";
+import { getPageContent } from "@/actions/pageContentActions";
 
 export const metadata = {
   title: "Digital Marketing FAQs | BizzBuzz Creations",
@@ -11,13 +12,15 @@ export const metadata = {
   },
 };
 
-export default function FAQPage() {
+export default async function FAQPage() {
+  const content = await getPageContent("faq");
+
   return (
     <>
-      <FaqHero />
-      <FaqTopics />
+      <FaqHero content={content} />
+      <FaqTopics content={content} />
       <div className="bg-black pt-4">
-        <CTA />
+        <CTA content={content} />
       </div>
     </>
   );

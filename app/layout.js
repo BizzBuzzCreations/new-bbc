@@ -6,6 +6,7 @@ import FlowbiteInit from "@/components/sections/FlowbiteInit";
 import Whatsapp from "@/components/sections/whatsapp";
 import AllScripts from "@/components/sections/allScripts";
 import ClickSpark from "@/components/ui/ClickSpark";
+import ScrollReveal from "@/components/sections/scrollReveal";
 
 const firaSans = Fira_Sans({
   subsets: ["latin"],
@@ -38,7 +39,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <AllScripts />
       </head>
@@ -48,6 +49,7 @@ export default function RootLayout({ children }) {
       >
         <Whatsapp />
         <FlowbiteInit />
+        <ScrollReveal />
         <main>{children}</main>
         <ClickSpark
           sparkColor="#40A2D8"

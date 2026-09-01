@@ -1,9 +1,11 @@
 import IndustryDetailPage from "@/components/sections/industryDetailPage";
 import { getIndustryBySlug } from "@/lib/industriesData";
 import { getIndustryPageContent } from "@/lib/industryPageContent";
+import { mergeIndustryContent } from "@/lib/industryContentRegistry";
+import { getPageContent } from "@/actions/pageContentActions";
 
 const industry = getIndustryBySlug("fashion-apparel");
-const content = getIndustryPageContent("fashion-apparel");
+const staticContent = getIndustryPageContent("fashion-apparel");
 
 export const metadata = {
   title: "Fashion Digital Marketing Agency | BizzBuzz Creations",
@@ -14,13 +16,16 @@ export const metadata = {
   },
 };
 
-export default function FashionApparelIndustryPage() {
+export default async function FashionApparelIndustryPage() {
+  const overrides = await getPageContent("industry-fashion-apparel");
+  const content = mergeIndustryContent(staticContent, overrides);
   return (
     <IndustryDetailPage
       label={industry.label}
       icon={industry.icon}
       description={industry.description}
       spectrumHeading={`Our Full Spectrum of ${industry.label} Marketing Services`}
+      serviceBreakdownFlip
       {...content}
     />
   );

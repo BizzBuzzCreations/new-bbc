@@ -3,6 +3,7 @@ import CareerHero from "@/components/sections/careerHero";
 import { CareerWhyUs, CareerJoinTeam } from "@/components/sections/careerShowcase";
 import CTA from "@/components/sections/CTA";
 import { ArrowUpRight, Briefcase, MapPin, Clock } from "lucide-react";
+import { getPageContent } from "@/actions/pageContentActions";
 
 export const metadata = {
   title: "Careers at BizzBuzz Creations | Digital Marketing Jobs & Internships",
@@ -21,20 +22,23 @@ export default async function Career() {
     return Math.floor(diffTime / (1000 * 60 * 60 * 24));
   };
 
+  const content = await getPageContent("career");
+  const openPositionsHeading = content?.openPositionsHeading || "Open Positions";
+
   const response = await getAllJobs();
   const jobsData = response?.success ? response?.data : [];
 
   return (
     <>
-      <CareerHero />
+      <CareerHero content={content} />
 
-      <CareerWhyUs />
+      <CareerWhyUs content={content} />
 
       {/* Open roles */}
       <section id="open-positions" className="bg-black py-16 px-6 md:px-12 lg:px-24 scroll-mt-20 border-t border-white/10">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-3">
-            Open Positions
+            {openPositionsHeading}
           </h2>
           <p className="text-center text-white/60 mb-12">
             {jobsData.length > 0
@@ -111,11 +115,11 @@ export default async function Career() {
         </div>
       </section>
 
-      <CareerJoinTeam />
+      <CareerJoinTeam content={content} />
 
       {/* CTA — just above the footer */}
       <div className="bg-black pt-4">
-        <CTA />
+        <CTA content={content} />
       </div>
     </>
   );

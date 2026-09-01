@@ -308,7 +308,7 @@ export default async function About() {
 
       <WhyChooseUs dark />
       <Reviews />
-      <CTA />
+      <CTA content={content} />
     </>
   );
 }
