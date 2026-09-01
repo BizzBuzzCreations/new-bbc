@@ -162,7 +162,7 @@ const DEFAULT_FAQS = [
     answer:
       "Yes. Every client receives transparent monthly reporting along with regular strategy calls to review progress and next steps.",
   },
-  {
+  {             
     question: "Will I own my website, ad accounts, and data?",
     answer:
       "Yes. Your website, advertising accounts, analytics, and digital assets remain fully under your ownership and control at every stage.",
@@ -187,61 +187,96 @@ const DEFAULT_FAQS = [
 export default async function HowWeWorkPage() {
   const content = await getPageContent("how-we-work");
 
-  const heroHeading = content?.hwwHeroHeading || "We Don't Wing It. Here's Our Process";
-  const heroSubheading = content?.hwwHeroSubheading || "A Clear, Repeatable System Behind Every Campaign We Run";
+  const heroHeading =
+    content?.hwwHeroHeading || "We Don't Wing It. Here's Our Process";
+  const heroSubheading =
+    content?.hwwHeroSubheading ||
+    "A Clear, Repeatable System Behind Every Campaign We Run";
   const heroParagraph =
     content?.hwwHeroParagraph ||
     "No vague promises, no \"we'll figure it out as we go.\" Every project at BizzBuzz Creations follows the same structured process of audit, strategy, execution, and reporting — so you always know what's happening, why it's happening, and what results to expect.";
   const heroCtaText = content?.hwwHeroCtaText || "See How It Works";
 
-  const principlesHeading = content?.principlesHeading || "The Principles That Power Every Client Partnership";
+  const principlesHeading =
+    content?.principlesHeading ||
+    "The Principles That Power Every Client Partnership";
   const principlesParagraph =
     content?.principlesParagraph ||
     "No complicated playbooks or hidden processes. Just six principles that shape how we communicate, collaborate, execute, and grow with every client.";
-  const principlesRaw = content?.principles?.length > 0 ? content.principles : DEFAULT_PRINCIPLES;
-  const principles = principlesRaw.map((p, i) => ({ ...p, icon: PRINCIPLE_ICONS[i % PRINCIPLE_ICONS.length] }));
+  const principlesRaw =
+    content?.principles?.length > 0 ? content.principles : DEFAULT_PRINCIPLES;
+  const principles = principlesRaw.map((p, i) => ({
+    ...p,
+    icon: PRINCIPLE_ICONS[i % PRINCIPLE_ICONS.length],
+  }));
 
-  const roadmapHeading = content?.hwwRoadmapHeading || "Our 5-Step Engagement Roadmap";
-  const roadmapStepsRaw = content?.hwwRoadmapSteps?.length > 0 ? content.hwwRoadmapSteps : DEFAULT_ROADMAP_STEPS;
-  const roadmapSteps = roadmapStepsRaw.map((s, i) => ({ number: i + 1, title: s.title, desc: s.desc }));
+  const roadmapHeading =
+    content?.hwwRoadmapHeading || "Our 5-Step Engagement Roadmap";
+  const roadmapStepsRaw =
+    content?.hwwRoadmapSteps?.length > 0
+      ? content.hwwRoadmapSteps
+      : DEFAULT_ROADMAP_STEPS;
+  const roadmapSteps = roadmapStepsRaw.map((s, i) => ({
+    number: i + 1,
+    title: s.title,
+    desc: s.desc,
+  }));
 
-  const toolsHeading = content?.toolsHeading || "The Tools Behind Every Strategy";
+  const toolsHeading =
+    content?.toolsHeading || "The Tools Behind Every Strategy";
   const toolsParagraph =
     content?.toolsParagraph ||
     "We combine industry-leading platforms with our own in-house systems to plan, execute, and track every campaign with precision.";
   const toolsRaw = content?.tools?.length > 0 ? content.tools : DEFAULT_TOOLS;
-  const tools = toolsRaw.map((t, i) => ({ ...t, icon: TOOL_ICONS[i % TOOL_ICONS.length] }));
+  const tools = toolsRaw.map((t, i) => ({
+    ...t,
+    icon: TOOL_ICONS[i % TOOL_ICONS.length],
+  }));
 
-  const onboardingHeading = content?.onboardingHeading || "What to Expect, and When";
+  const onboardingHeading =
+    content?.onboardingHeading || "What to Expect, and When";
   const onboardingParagraph =
     content?.onboardingParagraph ||
     "Every business is different, but here's a realistic timeline for how our process typically unfolds.";
 
-  const expectationsHeading = content?.expectationsHeading || "What You Can Expect";
+  const expectationsHeading =
+    content?.expectationsHeading || "What You Can Expect";
   const expectationsSubheading =
     content?.expectationsSubheading ||
     "Clear Communication. Accountable Execution. Continuous Improvement.";
   const expectationsParagraph =
     content?.expectationsParagraph ||
     "Working with BizzBuzz Creations means knowing where your project stands, what we're working toward, and how we're improving it along the way.";
-  const expectationsRaw = content?.expectations?.length > 0 ? content.expectations : DEFAULT_EXPECTATIONS;
-  const expectations = expectationsRaw.map((e, i) => ({ ...e, icon: EXPECTATION_ICONS[i % EXPECTATION_ICONS.length] }));
+  const expectationsRaw =
+    content?.expectations?.length > 0
+      ? content.expectations
+      : DEFAULT_EXPECTATIONS;
+  const expectations = expectationsRaw.map((e, i) => ({
+    ...e,
+    icon: EXPECTATION_ICONS[i % EXPECTATION_ICONS.length],
+  }));
 
-  const industriesHeading = content?.hwwIndustriesHeading || "Industries We Apply This Process To";
-  const industriesSubheading = content?.hwwIndustriesSubheading || "One Process. Every Industry.";
+  const industriesHeading =
+    content?.hwwIndustriesHeading || "Industries We Apply This Process To";
+  const industriesSubheading =
+    content?.hwwIndustriesSubheading || "One Process. Every Industry.";
   const industriesParagraph =
     content?.hwwIndustriesParagraph ||
     "This same structured process — discover, strategize, execute, optimize, and report — powers digital growth across every industry we work with, from healthcare and real estate to e-commerce, education, and beyond.";
 
-  const categoriesHeading = content?.categoriesHeading || "Everything Your Business Needs to Grow Digitally";
+  const categoriesHeading =
+    content?.categoriesHeading ||
+    "Everything Your Business Needs to Grow Digitally";
   const categoriesParagraph =
     content?.categoriesParagraph ||
     "One connected team across marketing, technology, automation, and business growth.";
 
   const faqHeading = content?.hwwFaqHeading || "Frequently Asked Questions";
-  const faqs = content?.hwwFaqItems?.length > 0 ? content.hwwFaqItems : DEFAULT_FAQS;
+  const faqs =
+    content?.hwwFaqItems?.length > 0 ? content.hwwFaqItems : DEFAULT_FAQS;
 
-  const ctaHeading = content?.ctaHeading || "Ready to See This Process Work for Your Business?";
+  const ctaHeading =
+    content?.ctaHeading || "Ready to See This Process Work for Your Business?";
   const ctaParagraph =
     content?.ctaParagraph ||
     "No guesswork, no vague timelines — just a clear process built to turn strategy into measurable growth. Book a free consultation and see exactly how we'd approach your business.";
@@ -296,9 +331,7 @@ export default async function HowWeWorkPage() {
           <h2 className="text-2xl md:text-3xl font-bold mb-4 max-w-2xl">
             {principlesHeading}
           </h2>
-          <p className="text-white/70 max-w-2xl mb-14">
-            {principlesParagraph}
-          </p>
+          <p className="text-white/70 max-w-2xl mb-14">{principlesParagraph}</p>
 
           <div className="grid sm:grid-cols-2 gap-5">
             {principles.map(({ icon: Icon, title, tagline, desc }, i) => (
@@ -491,9 +524,7 @@ export default async function HowWeWorkPage() {
             <h3 className="md:text-3xl text-2xl font-bold mb-5">
               {ctaHeading}
             </h3>
-            <p className="max-w-3xl text-white/70 mb-8">
-              {ctaParagraph}
-            </p>
+            <p className="max-w-3xl text-white/70 mb-8">{ctaParagraph}</p>
             <Link
               href="/contact"
               className="inline-flex items-center bg-white hover:bg-gray-100 text-black text-sm font-semibold px-7 py-3.5 rounded-lg transition"

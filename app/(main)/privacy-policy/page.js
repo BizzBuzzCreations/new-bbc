@@ -10,6 +10,7 @@ export const metadata = {
 
 export default function page() {
   return (
+    <>
     <div className="container mx-auto px-20 py-40">
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-2xl p-8 md:p-12">
         <h1 className="text-3xl font-bold mb-2 text-gray-900">
@@ -105,9 +106,6 @@ export default function page() {
         </p>
       </div>
     </div>
-<<<<<<< HEAD
     </>
-=======
->>>>>>> be2d797bb3e0611a2f1255d51d0dffc81a848556
   );
 }

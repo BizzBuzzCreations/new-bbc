@@ -4,6 +4,7 @@ import { extractTableOfContents } from "@/lib/extractTableOfContents";
 import { sanitizeBlogContent } from "@/lib/sanitizeBlogContent";
 import BlogContactForm from "@/components/sections/blogContactForm";
 import { FAQSection } from "@/components/ui/faq-accordion";
+import CTA from "@/components/sections/CTA";
 import { User, ImageOff } from "lucide-react";
 import { notFound } from "next/navigation";
 
@@ -100,6 +101,7 @@ export default async function SingleBlog({ params }) {
     : null;
 
   return (
+    <>
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-40 lg:flex lg:items-start gap-8">
       <script
         type="application/ld+json"
@@ -209,14 +211,11 @@ export default async function SingleBlog({ params }) {
         <BlogContactForm />
       </aside>
     </div>
-<<<<<<< HEAD
 
       {/* CTA — just above the footer */}
       <div className="bg-black pt-4">
         <CTA />
       </div>
     </>
-=======
->>>>>>> be2d797bb3e0611a2f1255d51d0dffc81a848556
   );
 }

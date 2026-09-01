@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 
-<<<<<<< HEAD
 const DEFAULT_FEATURES = [
   { title: "Transparent Reporting", description: "Know exactly where your marketing budget is invested with detailed reports and actionable insights." },
   { title: "Dedicated Marketing Experts", description: "Our team continuously monitors industry trends, and emerging technologies to keep your business ahead of competitors." },
@@ -17,11 +16,8 @@ export default function WhyChooseUs({ dark = false, content }) {
   const features =
     content?.whyChooseFeatures?.length > 0 ? content.whyChooseFeatures : DEFAULT_FEATURES;
 
-=======
-export default function WhyChooseUs() {
->>>>>>> be2d797bb3e0611a2f1255d51d0dffc81a848556
   return (
-    <div className="mx-10 flex flex-wrap justify-center gap-10 items-center px-5 mx-auto mb-20">
+    <div className={`mx-10 flex flex-wrap justify-center gap-10 items-center px-5 mx-auto ${dark ? "bg-black py-20" : "mb-20"}`}>
       <Image
         src={image}
         alt="banner"
@@ -29,7 +25,6 @@ export default function WhyChooseUs() {
         height={400}
       />
       <div className="lg:text-left text-center">
-<<<<<<< HEAD
         <h2 className={`text-3xl md:text-4xl font-bold mb-10 max-w-2xl ${dark ? "text-white" : ""}`}>
           {heading}
         </h2>
@@ -51,37 +46,6 @@ export default function WhyChooseUs() {
               </p>
             </div>
           ))}
-=======
-        <h2 className="text-3xl md:text-4xl font-bold mb-10 max-w-2xl">
-          Why Businesses Continue Working With Us
-        </h2>
-        <div className="flex flex-wrap justify-content items-center max-w-2xl gap-3">
-          <div className="max-w-xs bg-gray-200 p-5 rounded-lg mx-auto border border-gray-300 shadow-md shadow-gray-400">
-            <h3 className="font-bold mb-2">Transparent Reporting</h3>
-            <p className="text-sm">
-              Know exactly where your marketing budget is invested with detailed reports and actionable insights.
-            </p>
-          </div>
-          <div className="max-w-xs bg-gray-200 p-5 rounded-lg mx-auto border border-gray-300 shadow-md shadow-gray-400">
-            <h3 className="font-bold mb-2">Dedicated Marketing Experts</h3>
-            <p className="text-sm">
-              Our team continuously monitors industry trends, 
-              and emerging technologies to keep your business ahead of competitors.
-            </p>
-          </div>
-          <div className="max-w-xs bg-gray-200 p-5 rounded-lg mx-auto border border-gray-300 shadow-md shadow-gray-400">
-            <h3 className="font-bold mb-2">Data-Driven Decision Making</h3>
-            <p className="text-sm">
-              Every recommendation we make is backed by analytics, performance data, and business objectives, not assumptions.
-            </p>
-          </div>
-          <div className="max-w-xs bg-gray-200 p-5 rounded-lg mx-auto border border-gray-300 shadow-md shadow-gray-400">
-            <h3 className="font-bold mb-2">Long-Term Partnership</h3>
-            <p className="text-sm">
-              We focus on building lasting relationships by delivering consistent value, continuous optimization, and measurable growth.
-            </p>
-          </div>
->>>>>>> be2d797bb3e0611a2f1255d51d0dffc81a848556
         </div>
       </div>
     </div>
