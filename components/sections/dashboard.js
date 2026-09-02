@@ -14,6 +14,8 @@ import { logout } from "@/actions/authActions";
 import DashboardBlogs from "@/components/sections/dashboardBlogs";
 import DashboardContent from "@/components/sections/dashboardContent";
 import DashboardIndustries from "@/components/sections/dashboardIndustries";
+import DashboardServices from "@/components/sections/dashboardServices";
+import DashboardSubServices from "@/components/sections/dashboardSubServices";
 
 const NAV_ITEMS = [
   { id: "overview", label: "Overview", icon: GridIcon },
@@ -23,6 +25,8 @@ const NAV_ITEMS = [
   { id: "submissions", label: "Submissions", icon: InboxIcon },
   { id: "content", label: "Website Content", icon: PageIcon },
   { id: "industries", label: "Industries Pages", icon: IndustriesIcon },
+  { id: "services-pages", label: "Services Pages", icon: ServicesIcon },
+  { id: "sub-services", label: "Sub-Service Pages", icon: SubServicesIcon },
 ];
 
 function timeAgo(dateString) {
@@ -448,6 +452,10 @@ export default function Dashboard({ role = "user", name = "" }) {
 
         {activeTab === "industries" && <DashboardIndustries />}
 
+        {activeTab === "services-pages" && <DashboardServices />}
+
+        {activeTab === "sub-services" && <DashboardSubServices />}
+
         {showAddJob && (
           <div
             className="fixed inset-0 z-100 flex items-center justify-center bg-slate-900/55 backdrop-blur-sm"
@@ -659,6 +667,45 @@ function IndustriesIcon({ size = 18 }) {
       <path d="M9 21v-6h6v6" />
       <path d="M9 10h.01" />
       <path d="M15 10h.01" />
+    </svg>
+  );
+}
+
+function ServicesIcon({ size = 18 }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
+      <rect x="2" y="7" width="20" height="14" rx="2" />
+      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+    </svg>
+  );
+}
+
+// Distinct from ServicesIcon (the 8 main hub pages) — a parent node
+// branching into child leaves, representing the 44 individual sub-service
+// pages nested under those 8 hubs.
+function SubServicesIcon({ size = 18 }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
+      <rect x="9" y="2" width="6" height="6" rx="1" />
+      <rect x="2" y="16" width="6" height="6" rx="1" />
+      <rect x="16" y="16" width="6" height="6" rx="1" />
+      <path d="M12 8v4" />
+      <path d="M5 16v-2a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v2" />
+      <path d="M12 12v0" />
     </svg>
   );
 }

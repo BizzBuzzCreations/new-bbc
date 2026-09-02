@@ -354,24 +354,27 @@ export default async function ServicesIndexPage() {
             {engagementSubtext}
           </p>
 
-          <div className="relative">
-            {/* Mobile-only connecting spine — same dotted-line treatment
-                used for the "Our Core Values" and "Principles" card
-                stacks elsewhere on the site, so these cards read as
-                linked instead of floating separately, on mobile only. */}
-            <div
-              className="sm:hidden absolute left-[46px] top-8 bottom-8 w-px z-0"
-              style={{
-                backgroundImage:
-                  "repeating-linear-gradient(to bottom, rgba(64,162,216,0.4) 0px, rgba(64,162,216,0.4) 4px, transparent 4px, transparent 12px)",
-              }}
-              aria-hidden="true"
-            />
-            <div className="relative z-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {engagementFeatures.map(({ icon: Icon, title, desc }, i) => (
-                <HighlightCard key={i} icon={<Icon size={20} />} title={title} desc={desc} />
-              ))}
-            </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {engagementFeatures.map(({ icon: Icon, title, desc }, i) => (
+              <div key={i} className="relative">
+                {/* Mobile-only connector — sits only in the gap above this
+                    card (never over its body/icon). A full-height spine
+                    behind the cards (the previous approach) still showed
+                    through the icon since the card's own background is
+                    too transparent to hide anything placed behind it. */}
+                {i > 0 && (
+                  <span
+                    className="sm:hidden absolute left-[46px] -top-6 h-6 w-px"
+                    style={{
+                      backgroundImage:
+                        "repeating-linear-gradient(to bottom, rgba(64,162,216,0.4) 0px, rgba(64,162,216,0.4) 4px, transparent 4px, transparent 12px)",
+                    }}
+                    aria-hidden="true"
+                  />
+                )}
+                <HighlightCard icon={<Icon size={20} />} title={title} desc={desc} />
+              </div>
+            ))}
           </div>
         </div>
       </section>

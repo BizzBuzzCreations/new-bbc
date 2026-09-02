@@ -207,25 +207,27 @@ export default async function About() {
           <h3 className="text-2xl font-bold mt-15 mb-10 text-center text-white">
             {coreValuesHeading}
           </h3>
-          <div className="relative">
-            {/* Mobile-only connecting spine — same dotted-line language as
-                the industry pages' "differentiators" timeline — running
-                behind the stacked cards so each one reads as linked to
-                the next instead of floating as separate boxes. */}
-            <div
-              className="sm:hidden absolute left-1/2 top-8 bottom-8 w-px -translate-x-1/2 z-0"
-              style={{
-                backgroundImage:
-                  "repeating-linear-gradient(to bottom, rgba(64,162,216,0.4) 0px, rgba(64,162,216,0.4) 4px, transparent 4px, transparent 12px)",
-              }}
-              aria-hidden="true"
-            />
-            <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-              {coreValues.map((value, i) => (
-                <div
-                  key={i}
-                  className="group relative flex flex-col items-center rounded-2xl border border-white/10 bg-white/5 p-6 pt-8 w-full text-center shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-black/40"
-                >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            {coreValues.map((value, i) => (
+              <div key={i} className="relative">
+                {/* Mobile-only connector — sits only in the gap above this
+                    card (never over its body/icon), so it reads as a
+                    behind-the-scenes link between cards instead of a line
+                    drawn on top of one. The card's own bg-white/5 is too
+                    transparent to hide a line placed behind it via
+                    z-index, which is why a full-height spine (the
+                    previous approach) still showed through the icon. */}
+                {i > 0 && (
+                  <span
+                    className="sm:hidden absolute left-1/2 -top-6 h-6 w-px -translate-x-1/2"
+                    style={{
+                      backgroundImage:
+                        "repeating-linear-gradient(to bottom, rgba(64,162,216,0.4) 0px, rgba(64,162,216,0.4) 4px, transparent 4px, transparent 12px)",
+                    }}
+                    aria-hidden="true"
+                  />
+                )}
+                <div className="group relative flex flex-col items-center rounded-2xl border border-white/10 bg-white/5 p-6 pt-8 w-full h-full text-center shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-black/40">
                   {i > 0 && (
                     <span className="hidden lg:block absolute -left-6 top-[60px] w-6 h-0.5 bg-[#40A2D8]/30" aria-hidden="true" />
                   )}
@@ -239,8 +241,8 @@ export default async function About() {
                     {value.description}
                   </p>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
         </div>
