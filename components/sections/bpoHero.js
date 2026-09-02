@@ -35,8 +35,14 @@ export default function BpoHero({ heading, description, img, ctaText = "Start No
           {description}
         </p>
         <div className="flex flex-wrap gap-4">
-          <Link href="/contact" className="inline-block">
-            <button className="animated-button animated-button-lg whitespace-nowrap">
+          {/* whitespace-nowrap only from sm up — on mobile a long CTA
+              like "Get a Free Business Consulting Session" forced this
+              button (and, since nothing here constrained its width, the
+              entire hero section) wider than the viewport, cutting the
+              heading/paragraph/button off at the screen edge instead of
+              wrapping. Letting it wrap on narrow screens fixes that. */}
+          <Link href="/contact" className="inline-block max-w-full">
+            <button className="animated-button animated-button-lg whitespace-normal text-center sm:whitespace-nowrap">
               <svg
                 viewBox="0 0 24 24"
                 className="arr-2"

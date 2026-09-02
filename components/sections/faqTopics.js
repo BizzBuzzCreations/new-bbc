@@ -502,7 +502,7 @@ export default function FaqTopics({ content } = {}) {
     <section className="bg-black">
       <div
         data-no-reveal
-        className="max-w-7xl mx-auto grid lg:grid-cols-[300px_1fr] lg:gap-6 px-4 md:px-6 pt-20 pb-10 md:pt-28 md:pb-16"
+        className="max-w-7xl mx-auto grid lg:grid-cols-[300px_1fr] lg:gap-6 px-4 md:px-6 pt-8 pb-6 md:pt-28 md:pb-16"
       >
         {/* TOC sidebar — stays put (sticky) while the page scrolls; only
             the active highlight moves between topics via scroll-spy.
@@ -512,10 +512,15 @@ export default function FaqTopics({ content } = {}) {
             this whole grid (and the page along with it) wider than the
             viewport on mobile instead of letting overflow-x-auto scroll
             internally. */}
-        <div className="min-w-0 lg:sticky lg:top-24 lg:self-start bg-black px-2 md:px-4 py-4 lg:py-0">
+        <div className="min-w-0 lg:sticky lg:top-24 lg:self-start bg-black px-2 md:px-4 py-2 lg:py-0">
           <p className="text-xs font-bold uppercase tracking-widest text-white/50 mb-6 px-2">
           </p>
-          <div className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 -mx-1 px-1">
+          {/* Mobile: smaller, snap-scrolling pills — the full-size desktop
+              pills (icon + full label, generous padding) only fit about
+              1.5 on screen at once on a phone, making the other 9 topics
+              hard to discover. Scroll-snap makes each swipe land cleanly
+              on the next pill instead of stopping mid-pill. */}
+          <div className="flex lg:flex-col gap-1.5 lg:gap-2 overflow-x-auto snap-x snap-mandatory lg:overflow-visible pb-2 lg:pb-0 -mx-1 px-1">
             {TOPICS.map((t, i) => {
               const Icon = t.icon;
               const isActive = active === i;
@@ -523,20 +528,20 @@ export default function FaqTopics({ content } = {}) {
                 <button
                   key={t.id}
                   onClick={() => scrollToTopic(i)}
-                  className={`group shrink-0 flex items-center gap-3 text-left pl-4 pr-4 py-3.5 rounded-xl text-sm font-medium whitespace-nowrap lg:whitespace-normal transition-all duration-300 border ${
+                  className={`group snap-start shrink-0 flex items-center gap-2 lg:gap-3 text-left pl-3 pr-3.5 lg:pl-4 lg:pr-4 py-2.5 lg:py-3.5 rounded-xl text-xs lg:text-sm font-medium whitespace-nowrap lg:whitespace-normal transition-all duration-300 border ${
                     isActive
                       ? "bg-[#0B60B0] text-white border-[#40A2D8] shadow-lg shadow-[#0B60B0]/30"
                       : "text-white/60 border-transparent hover:text-white hover:bg-white/5 hover:border-white/10"
                   }`}
                 >
                   <span
-                    className={`shrink-0 flex items-center justify-center w-8 h-8 rounded-lg transition-colors ${
+                    className={`shrink-0 flex items-center justify-center w-6 h-6 lg:w-8 lg:h-8 rounded-lg transition-colors ${
                       isActive
                         ? "bg-white/15"
                         : "bg-white/5 group-hover:bg-white/10"
                     }`}
                   >
-                    <Icon size={16} />
+                    <Icon size={15} />
                   </span>
                   {t.label}
                 </button>
@@ -548,7 +553,7 @@ export default function FaqTopics({ content } = {}) {
         {/* All topics, stacked — no shared wrapper background anymore;
             each topic is just its own card floating directly on the
             section's black backdrop. */}
-        <div className="relative min-w-0 px-2 md:px-4 py-10 md:py-16 space-y-12 md:space-y-16">
+        <div className="relative min-w-0 px-2 md:px-4 py-6 md:py-16 space-y-6 md:space-y-16">
           {TOPICS.map((topic, i) => (
             <motion.div
               key={topic.id}
@@ -559,14 +564,15 @@ export default function FaqTopics({ content } = {}) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10% 0px" }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-              className="relative scroll-mt-28 bg-white rounded-2xl border border-gray-200 shadow-sm p-6 md:p-10"
+              className="relative scroll-mt-28 bg-white rounded-2xl border border-gray-200 shadow-sm p-5 md:p-10"
             >
               <FAQSection
                 heading={topic.label}
                 faqs={topic.faqs}
                 defaultValue="item-0"
-                headingClassName="text-2xl md:text-3xl font-bold text-black mb-8"
+                headingClassName="text-xl md:text-3xl font-bold text-black mb-5 md:mb-8"
                 triggerClassName={TRIGGER_HOVER}
+                questionTextClassName="text-base md:text-lg"
               />
             </motion.div>
           ))}

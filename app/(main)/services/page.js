@@ -15,6 +15,7 @@ import CTA from "@/components/sections/CTA";
 import Particles from "@/components/ui/Particles";
 import ServiceScenariosCarousel from "@/components/sections/serviceScenariosCarousel";
 import DarkFAQSection from "@/components/sections/darkFAQSection";
+import HighlightCard from "@/components/ui/highlightCard";
 import { SERVICES } from "@/lib/industriesData";
 import { getPageContent } from "@/actions/pageContentActions";
 
@@ -355,18 +356,7 @@ export default async function ServicesIndexPage() {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {engagementFeatures.map(({ icon: Icon, title, desc }, i) => (
-              <div
-                key={i}
-                className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/20"
-              >
-                <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-white/10 text-[#40A2D8] mb-4 transition-all duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
-                  <Icon size={20} />
-                </span>
-                <h3 className="font-bold text-white mb-2">{title}</h3>
-                <p className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85">
-                  {desc}
-                </p>
-              </div>
+              <HighlightCard key={i} icon={<Icon size={20} />} title={title} desc={desc} />
             ))}
           </div>
         </div>

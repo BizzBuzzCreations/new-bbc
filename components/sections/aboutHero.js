@@ -65,18 +65,26 @@ export default function AboutHero({ content }) {
         >
           {paragraph}
         </motion.p>
+        {/* flex-col + text-left on mobile: the two stats can each wrap to
+            2 lines, and with items-center + inherited text-center from
+            the hero root, the checkmark ended up vertically centered
+            against a centered (ragged) text block — pinned to the left
+            edge of a box whose second line drifted toward the middle,
+            reading as a disconnected, floating icon. items-start +
+            explicit text-left keeps the icon level with the first line,
+            same as the FAQ accordion fix. Row layout returns at sm/lg. */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...reveal, delay: 0.45 }}
-          className="flex flex-wrap justify-center lg:justify-start items-center gap-x-6 gap-y-2"
+          className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start items-start sm:items-center gap-x-6 gap-y-3 text-left"
         >
-          <div className="flex items-center gap-2">
-            <CheckCircle className="text-green-500" size={18} />
+          <div className="flex items-start gap-2">
+            <CheckCircle className="text-green-500 shrink-0 mt-0.5" size={18} />
             <span>{stat1}</span>
           </div>
-          <div className="flex items-center gap-2">
-            <CheckCircle className="text-green-500" size={18} />
+          <div className="flex items-start gap-2">
+            <CheckCircle className="text-green-500 shrink-0 mt-0.5" size={18} />
             <span>{stat2}</span>
           </div>
         </motion.div>

@@ -37,8 +37,12 @@ const CustomAccordionTrigger = React.forwardRef(
         )}
         {...props}
       >
-        <div className="flex items-center gap-4">
-          <HelpCircle className={cn("h-5 w-5 text-gray-600", iconClassName)} />
+        {/* items-start (not items-center) — a 3-4 line question was
+            vertically centering the "?" icon against the whole paragraph,
+            leaving it floating awkwardly beside the middle line instead of
+            sitting next to the first line, like a normal list icon. */}
+        <div className="flex items-start gap-3">
+          <HelpCircle className={cn("h-5 w-5 mt-0.5 shrink-0 text-gray-600", iconClassName)} />
           <span
             className={cn(
               "text-lg font-medium text-zinc-700 tracking-wide",

@@ -34,10 +34,10 @@ export default function JoinTeamCTA({ content }) {
       className="overflow-hidden"
       style={{
         // Brand blue, strongest on the right, fading through to white on
-        // the left where the text sits.
+        // the left where the text sits. (No more dotted overlay — removed
+        // per feedback, plain gradient only now.)
         backgroundImage:
-          "radial-gradient(rgba(11,96,176,0.14) 1px, transparent 1px), linear-gradient(90deg, #ffffff 0%, #eaf4fb 38%, #7ec2e8 72%, #0B60B0 100%)",
-        backgroundSize: "22px 22px, 100% 100%",
+          "linear-gradient(90deg, #ffffff 0%, #eaf4fb 38%, #7ec2e8 72%, #0B60B0 100%)",
       }}
     >
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 items-center gap-10 px-6 md:px-12 py-14">

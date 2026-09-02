@@ -66,7 +66,7 @@ export default function CTA({ content } = {}) {
               "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(120, 180, 255, 0.25), transparent 70%), #000000",
           }}
         >
-          <div className="py-8 md:py-10 px-10 z-10 text-white">
+          <div className="py-8 md:py-10 px-6 md:px-10 z-10 text-white">
             <h2 className="md:text-3xl text-2xl font-bold mb-5">
               {heading}
             </h2>
@@ -74,10 +74,13 @@ export default function CTA({ content } = {}) {
               {paragraph}
             </p>
             <form action={handleSubmit}>
-              <div className="max-w-[250px] md:max-w-[300px] relative">
+              {/* Full width on mobile instead of a fixed 250px box (the
+                  label was also text-black on this section's black
+                  background — invisible — fixed to text-white). */}
+              <div className="max-w-full sm:max-w-[300px] relative">
                 <label
                   htmlFor="email"
-                  className="block text-lg font-medium text-black mb-2"
+                  className="block text-lg font-medium text-white mb-2"
                 >
                   Email Address
                 </label>

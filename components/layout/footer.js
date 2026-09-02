@@ -293,7 +293,11 @@ export default function Footer() {
 
         <div className="mt-16 pt-6 border-t border-zinc-800">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-            <div className="flex flex-wrap gap-x-6 gap-y-2 mb-4 md:mb-0">
+            {/* 2x2 grid on mobile (was flex-wrap, which broke into an
+                odd 3-then-1 wrap depending on label widths) — a clean
+                2-per-row grid instead. Reverts to a plain inline row from
+                sm up, where all four labels comfortably fit on one line. */}
+            <div className="grid grid-cols-2 gap-x-6 gap-y-3 mb-4 sm:flex sm:flex-wrap sm:gap-y-2 md:mb-0">
               <Link
                 href="/privacy-policy"
                 className="text-xs text-gray-300 hover:text-gray-200"

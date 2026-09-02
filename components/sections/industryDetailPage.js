@@ -461,21 +461,26 @@ export default function IndustryDetailPage({
                   "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(120, 180, 255, 0.25), transparent 70%), #000000",
               }}
             >
-              <div className="py-8 md:py-10 px-10 z-10 text-white">
+              <div className="py-8 md:py-10 px-6 md:px-10 z-10 text-white">
                 <h2 className="md:text-3xl text-2xl font-bold mb-5">
                   {ctaHeading}
                 </h2>
                 <p className="max-w-3xl text-white/70 mb-8">{ctaText}</p>
-                <div className="flex flex-wrap gap-4">
+                {/* Stacked, full-width buttons on mobile (was flex-wrap,
+                    which — squeezed by the card's own padding — wrapped
+                    the two pills into an untidy layout) instead of forcing
+                    two side-by-side pills into too little width; back to
+                    a normal side-by-side row from sm up. */}
+                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-black text-sm font-semibold px-7 py-3.5 rounded-full transition"
+                    className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-white hover:bg-gray-100 text-black text-sm font-semibold px-7 py-3.5 rounded-full transition"
                   >
                     {ctaPrimaryText}
                   </Link>
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 border border-white/50 hover:bg-white/10 text-white text-sm font-semibold px-7 py-3.5 rounded-full transition"
+                    className="inline-flex items-center justify-center gap-2 w-full sm:w-auto border border-white/50 hover:bg-white/10 text-white text-sm font-semibold px-7 py-3.5 rounded-full transition"
                   >
                     {ctaSecondaryText}
                   </Link>
