@@ -77,6 +77,9 @@ export default function IndustryDetailPage({
   // Healthcare's local-market positioning copy).
   whyChooseUsHeading,
   whyChooseUsText,
+  // Mobile-only photo shown between the heading and the paragraph — no
+  // per-industry override needed unless a page wants a different one.
+  whyChooseUsImage = "/image-2.jpg",
   // Optional override for the closing CTA — when ctaHeading is supplied,
   // it replaces the shared site-wide email-form CTA with a page-local
   // heading + paragraph + two buttons (e.g. Healthcare's dedicated CTA).
@@ -136,12 +139,18 @@ export default function IndustryDetailPage({
       {/* Core capabilities */}
       <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-center gap-4 mb-14">
-            <span className="h-px w-20 bg-white/20" />
+          {/* Flanking lines hidden on mobile — at a fixed 80px each, they
+              squeezed a multi-word uppercase heading into a much narrower
+              column (forcing extra wrapping) and sat vertically centered
+              against the resulting 3-line block instead of framing it
+              cleanly. Reappear from sm up, where there's room for them
+              beside a heading that mostly stays on one or two lines. */}
+          <div className="flex items-center justify-center gap-4 mb-14 text-center">
+            <span className="hidden sm:block h-px w-20 bg-white/20" />
             <p className="text-xl md:text-2xl font-bold uppercase tracking-widest text-white">
               {capabilitiesHeading || `Built for Every Corner of ${label}`}
             </p>
-            <span className="h-px w-20 bg-white/20" />
+            <span className="hidden sm:block h-px w-20 bg-white/20" />
           </div>
 
           {/* items-start: without it, CSS grid stretches every card in a
@@ -419,9 +428,22 @@ export default function IndustryDetailPage({
             {whyChooseUsHeading || `Why ${label} Businesses Choose Us`}
           </h2>
           {whyChooseUsText ? (
-            <p className="text-white/70 leading-relaxed max-w-3xl">
-              {whyChooseUsText}
-            </p>
+            <>
+              {/* Mobile only — image between the heading and the
+                  paragraph. */}
+              <div className="md:hidden relative w-full max-w-md mx-auto aspect-[16/10] rounded-2xl overflow-hidden shadow-lg mb-6">
+                <Image
+                  src={whyChooseUsImage}
+                  alt={whyChooseUsHeading || `Why ${label} businesses choose BizzBuzz Creations`}
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                />
+              </div>
+              <p className="text-white/70 leading-relaxed max-w-3xl">
+                {whyChooseUsText}
+              </p>
+            </>
           ) : (
             <>
               <p className="text-white/60 leading-relaxed mb-12 max-w-2xl mx-auto">

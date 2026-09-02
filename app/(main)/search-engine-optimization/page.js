@@ -180,12 +180,14 @@ export default function SearchEngineOptimization() {
       <section className="relative overflow-hidden bg-black py-20">
 
         <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
+          {/* /BizzBuzz-Creations-5.png doesn't exist in /public — was
+              rendering as a broken image icon. Swapped for a real photo. */}
+          <div className="hidden lg:block relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
             <Image
-              src="/BizzBuzz-Creations-5.png"
+              src="/image-1.jpg"
               alt="BizzBuzz Creations SEO team at work"
               fill
-              sizes="(max-width: 1024px) 100vw, 440px"
+              sizes="440px"
               className="object-cover"
             />
             <div
@@ -213,6 +215,35 @@ export default function SearchEngineOptimization() {
             <h3 className="text-base font-semibold text-[#40A2D8] mb-4">
               Who we build SEO for, and why it goes beyond keyword reports.
             </h3>
+            {/* Mobile-only — image between the tagline and the
+                paragraphs; desktop shows its own copy on the left via
+                lg:flex-row above. */}
+            <div className="lg:hidden relative w-full max-w-sm mx-auto aspect-[4/5] rounded-3xl overflow-hidden shadow-xl mb-6">
+              <Image
+                src="/image-1.jpg"
+                alt="BizzBuzz Creations SEO team at work"
+                fill
+                sizes="100vw"
+                className="object-cover"
+              />
+              <div
+                className="absolute inset-0 opacity-30"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
+                  backgroundSize: "18px 18px",
+                }}
+                aria-hidden="true"
+              />
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
+                }}
+                aria-hidden="true"
+              />
+            </div>
             <p className="text-white/70 leading-relaxed mb-4">
               Ranking for the wrong keywords, or ranking well with no
               traffic behind it, is a common outcome of SEO done without
@@ -294,6 +325,15 @@ export default function SearchEngineOptimization() {
           </p>
           <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
             <div>
+              <div className="md:hidden relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg mb-6">
+                <Image
+                  src="/image-2.jpg"
+                  alt="Why businesses trust BizzBuzz Creations to rank"
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                />
+              </div>
               <p className="text-white/70 leading-relaxed mb-4">
                 We treat every SEO engagement as a growth strategy, not a
                 checklist of technical fixes and keyword reports. A
@@ -315,9 +355,9 @@ export default function SearchEngineOptimization() {
                 just improved rankings.
               </p>
             </div>
-            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
+            <div className="hidden md:block relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
               <Image
-                src="/why-choose-image.png"
+                src="/image-2.jpg"
                 alt="Why businesses trust BizzBuzz Creations to rank"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"

@@ -28,6 +28,7 @@ export default function AllBLogs() {
     id: "all",
   });
   const ref = useRef(null);
+  const isFirstRun = useRef(true);
 
   const getBlogs = async (pages, cate, posts) => {
     if (loading) return;
@@ -89,10 +90,20 @@ export default function AllBLogs() {
 
   useEffect(() => {
     if (posts === 0) return;
-    window.scrollTo({
-      top: document.documentElement.scrollHeight * 0.2,
-      behavior: "smooth",
-    });
+
+    // Skip the auto-scroll on the very first run of this effect (the
+    // page's initial load) — it was firing on every fresh visit to
+    // /blog, immediately jumping the page ~20% down instead of letting
+    // it open at the top. Later runs (pagination, category filter
+    // changes) still scroll to bring the grid back into view.
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+    } else {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight * 0.2,
+        behavior: "smooth",
+      });
+    }
 
     getBlogs(currPage, selected.id, posts);
     Cookies.set("blogPage", currPage, { expires: 1 / 24 });

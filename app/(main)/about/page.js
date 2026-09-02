@@ -207,7 +207,20 @@ export default async function About() {
           <h3 className="text-2xl font-bold mt-15 mb-10 text-center text-white">
             {coreValuesHeading}
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          <div className="relative">
+            {/* Mobile-only connecting spine — same dotted-line language as
+                the industry pages' "differentiators" timeline — running
+                behind the stacked cards so each one reads as linked to
+                the next instead of floating as separate boxes. */}
+            <div
+              className="sm:hidden absolute left-1/2 top-8 bottom-8 w-px -translate-x-1/2 z-0"
+              style={{
+                backgroundImage:
+                  "repeating-linear-gradient(to bottom, rgba(64,162,216,0.4) 0px, rgba(64,162,216,0.4) 4px, transparent 4px, transparent 12px)",
+              }}
+              aria-hidden="true"
+            />
+            <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
               {coreValues.map((value, i) => (
                 <div
                   key={i}
@@ -228,6 +241,7 @@ export default async function About() {
                 </div>
               ))}
             </div>
+          </div>
         </div>
         </div>
       </div>

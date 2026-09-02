@@ -188,12 +188,15 @@ export default function WebDevelopment() {
       <section className="relative overflow-hidden bg-black py-20">
 
         <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
+          {/* /Web-Development-Promotion-Instagram-Post-3.webp doesn't
+              exist in /public — was rendering as a broken image icon.
+              Swapped for a real photo. */}
+          <div className="hidden lg:block relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
             <Image
-              src="/Web-Development-Promotion-Instagram-Post-3.webp"
+              src="/image-1.jpg"
               alt="BizzBuzz Creations web development team at work"
               fill
-              sizes="(max-width: 1024px) 100vw, 440px"
+              sizes="440px"
               className="object-cover"
             />
             <div
@@ -221,6 +224,35 @@ export default function WebDevelopment() {
             <h3 className="text-base font-semibold text-[#40A2D8] mb-4">
               Who we build for, and why local roots shape how we work.
             </h3>
+            {/* Mobile-only — image between the tagline and the
+                paragraphs; desktop shows its own copy on the left via
+                lg:flex-row above. */}
+            <div className="lg:hidden relative w-full max-w-sm mx-auto aspect-[4/5] rounded-3xl overflow-hidden shadow-xl mb-6">
+              <Image
+                src="/image-1.jpg"
+                alt="BizzBuzz Creations web development team at work"
+                fill
+                sizes="100vw"
+                className="object-cover"
+              />
+              <div
+                className="absolute inset-0 opacity-30"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
+                  backgroundSize: "18px 18px",
+                }}
+                aria-hidden="true"
+              />
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
+                }}
+                aria-hidden="true"
+              />
+            </div>
             <p className="text-white/70 leading-relaxed mb-4">
               Your website is usually the first conversation you have with a
               customer, and most people decide whether to trust a business
@@ -301,6 +333,15 @@ export default function WebDevelopment() {
           </p>
           <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
             <div>
+              <div className="md:hidden relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg mb-6">
+                <Image
+                  src="/image-2.jpg"
+                  alt="Why businesses choose BizzBuzz Creations"
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                />
+              </div>
               <p className="text-white/70 leading-relaxed mb-4">
                 We follow a results-driven approach, building websites that
                 don&rsquo;t just look good — they sell. A well-built website
@@ -323,9 +364,9 @@ export default function WebDevelopment() {
                 results, not just a working site.
               </p>
             </div>
-            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
+            <div className="hidden md:block relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
               <Image
-                src="/why-choose-image.png"
+                src="/image-2.jpg"
                 alt="Why businesses choose BizzBuzz Creations"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"

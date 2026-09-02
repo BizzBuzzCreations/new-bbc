@@ -314,28 +314,41 @@ export default async function HowWeWorkPage() {
             {principlesParagraph}
           </p>
 
-          <div className="grid sm:grid-cols-2 gap-5">
-            {principles.map(({ icon: Icon, title, tagline, desc }, i) => (
-              <div
-                key={i}
-                className="group flex items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-white hover:shadow-xl hover:shadow-black/20"
-              >
-                <span className="shrink-0 flex items-center justify-center w-11 h-11 rounded-full bg-white/15 text-white transition-colors duration-300 group-hover:bg-[#0B60B0] group-hover:text-white">
-                  <Icon size={20} />
-                </span>
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-1.5 transition-colors duration-300 group-hover:text-[#0B60B0]">
-                    {title}
-                  </p>
-                  <h3 className="font-bold text-lg mb-1.5 transition-colors duration-300 group-hover:text-black">
-                    {tagline}
-                  </h3>
-                  <p className="text-white/70 text-sm leading-relaxed transition-colors duration-300 group-hover:text-gray-600">
-                    {desc}
-                  </p>
+          <div className="relative">
+            {/* Mobile-only connecting spine, same treatment as the "Our
+                Core Values" cards on /about — links the stacked principle
+                cards together instead of leaving them as separate boxes. */}
+            <div
+              className="sm:hidden absolute left-[42px] top-8 bottom-8 w-px z-0"
+              style={{
+                backgroundImage:
+                  "repeating-linear-gradient(to bottom, rgba(64,162,216,0.4) 0px, rgba(64,162,216,0.4) 4px, transparent 4px, transparent 12px)",
+              }}
+              aria-hidden="true"
+            />
+            <div className="relative z-10 grid sm:grid-cols-2 gap-5">
+              {principles.map(({ icon: Icon, title, tagline, desc }, i) => (
+                <div
+                  key={i}
+                  className="group flex items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-white hover:shadow-xl hover:shadow-black/20"
+                >
+                  <span className="shrink-0 flex items-center justify-center w-11 h-11 rounded-full bg-white/15 text-white transition-colors duration-300 group-hover:bg-[#0B60B0] group-hover:text-white">
+                    <Icon size={20} />
+                  </span>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-1.5 transition-colors duration-300 group-hover:text-[#0B60B0]">
+                      {title}
+                    </p>
+                    <h3 className="font-bold text-lg mb-1.5 transition-colors duration-300 group-hover:text-black">
+                      {tagline}
+                    </h3>
+                    <p className="text-white/70 text-sm leading-relaxed transition-colors duration-300 group-hover:text-gray-600">
+                      {desc}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>

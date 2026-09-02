@@ -64,17 +64,32 @@ export default function AboutCulture({ content }) {
   return (
     <section className="bg-black py-20 px-5">
       <div className="max-w-6xl mx-auto space-y-10">
+        {/* order-1/order-2 (reset via lg:order-none) puts the photo above
+            the text panel on mobile for every row, regardless of
+            imageSide — imageSide only controls left/right placement once
+            the 2-column desktop layout kicks in. Previously, whichever
+            element came first in the JSX for a given imageSide (text, for
+            "right" rows) also came first on a single-column mobile
+            screen, so 2 of the 3 rows showed text before photo. */}
         {ROWS.map((row, i) => (
           <div key={i} className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-center">
             {row.imageSide === "left" ? (
               <>
-                <Photo img={row.img} alt={row.title} size={row.imageSize} />
-                <TextPanel title={row.title} body={row.body} />
+                <div className="order-1 lg:order-none">
+                  <Photo img={row.img} alt={row.title} size={row.imageSize} />
+                </div>
+                <div className="order-2 lg:order-none">
+                  <TextPanel title={row.title} body={row.body} />
+                </div>
               </>
             ) : (
               <>
-                <TextPanel title={row.title} body={row.body} />
-                <Photo img={row.img} alt={row.title} size={row.imageSize} />
+                <div className="order-2 lg:order-none">
+                  <TextPanel title={row.title} body={row.body} />
+                </div>
+                <div className="order-1 lg:order-none">
+                  <Photo img={row.img} alt={row.title} size={row.imageSize} />
+                </div>
               </>
             )}
           </div>

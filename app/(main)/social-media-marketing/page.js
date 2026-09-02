@@ -183,12 +183,14 @@ export default function SocialMediaMarketing() {
       <section className="relative overflow-hidden bg-black py-20">
 
         <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
-          <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
+          {/* /smm1 (1).webp doesn't exist in /public — was rendering as a
+              broken image icon. Swapped for a real photo. */}
+          <div className="hidden lg:block relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
             <Image
-              src="/smm1 (1).webp"
+              src="/image-1.jpg"
               alt="BizzBuzz Creations social media team at work"
               fill
-              sizes="(max-width: 1024px) 100vw, 440px"
+              sizes="440px"
               className="object-cover"
             />
             <div
@@ -217,6 +219,35 @@ export default function SocialMediaMarketing() {
               Who we build social media marketing for, and why it goes
               beyond posting.
             </h3>
+            {/* Mobile-only — image between the tagline and the
+                paragraphs; desktop shows its own copy on the left via
+                lg:flex-row above. */}
+            <div className="lg:hidden relative w-full max-w-sm mx-auto aspect-[4/5] rounded-3xl overflow-hidden shadow-xl mb-6">
+              <Image
+                src="/image-1.jpg"
+                alt="BizzBuzz Creations social media team at work"
+                fill
+                sizes="100vw"
+                className="object-cover"
+              />
+              <div
+                className="absolute inset-0 opacity-30"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
+                  backgroundSize: "18px 18px",
+                }}
+                aria-hidden="true"
+              />
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(200deg, rgba(5,11,22,0.75) 0%, rgba(11,96,176,0.3) 45%, transparent 75%)",
+                }}
+                aria-hidden="true"
+              />
+            </div>
             <p className="text-white/70 leading-relaxed mb-4">
               Posting consistently isn&rsquo;t the same as growing, and most
               businesses have learned that the hard way after months of
@@ -299,6 +330,15 @@ export default function SocialMediaMarketing() {
           </p>
           <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
             <div>
+              <div className="md:hidden relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg mb-6">
+                <Image
+                  src="/image-2.jpg"
+                  alt="Why brands choose BizzBuzz Creations"
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                />
+              </div>
               <p className="text-white/70 leading-relaxed mb-4">
                 We treat every post and campaign as part of a larger
                 strategy toward real growth, not consistent posting for its
@@ -320,9 +360,9 @@ export default function SocialMediaMarketing() {
                 build for real business results, not just a working feed.
               </p>
             </div>
-            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
+            <div className="hidden md:block relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
               <Image
-                src="/why-choose-image.png"
+                src="/image-2.jpg"
                 alt="Why brands choose BizzBuzz Creations"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"

@@ -154,8 +154,13 @@ export default function ServiceDetailPage({
           <p className="text-white/70 leading-relaxed mb-9 max-w-2xl">
             {heroDescription || description}
           </p>
-          <Link href="/contact" className="inline-block">
-            <button className="animated-button animated-button-lg whitespace-nowrap">
+          {/* whitespace-nowrap only from sm up — on mobile a long CTA
+              forced this button (and, since nothing here constrained its
+              width, the whole hero content column) wider than the
+              viewport, clipping the eyebrow/heading/paragraph/button at
+              the screen edge instead of wrapping. */}
+          <Link href="/contact" className="inline-block max-w-full">
+            <button className="animated-button animated-button-lg whitespace-normal text-center sm:whitespace-nowrap">
               <svg
                 viewBox="0 0 24 24"
                 className="arr-2"
@@ -180,12 +185,16 @@ export default function ServiceDetailPage({
       {/* Core capabilities */}
       <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-center gap-4 mb-14">
-            <span className="h-px w-14 bg-white/20" />
+          {/* Flanking lines hidden on mobile — at a fixed width each,
+              they squeezed a multi-word uppercase heading into a much
+              narrower column (forcing extra wrapping) instead of framing
+              it cleanly. Reappear from sm up, where there's room. */}
+          <div className="flex items-center justify-center gap-4 mb-14 text-center">
+            <span className="hidden sm:block h-px w-14 bg-white/20" />
             <p className="text-sm md:text-base font-bold uppercase tracking-widest text-white">
               {capabilitiesHeading || "What's Included"}
             </p>
-            <span className="h-px w-14 bg-white/20" />
+            <span className="hidden sm:block h-px w-14 bg-white/20" />
           </div>
 
           {/* items-start only applies when capabilitiesHoverReveal is on
@@ -314,13 +323,27 @@ export default function ServiceDetailPage({
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
                 {localityHeading}
               </h2>
+              {/* Mobile only — image between the heading and the
+                  paragraph (was rendering after the paragraph, since the
+                  desktop image lives in the second grid column below).
+                  /why-choose-image.png doesn't exist in /public — was a
+                  broken image icon; swapped for a real photo. */}
+              <div className="md:hidden relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg mb-6">
+                <Image
+                  src="/image-2.jpg"
+                  alt={localityHeading || "Why businesses choose us"}
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                />
+              </div>
               <p className="text-white/70 leading-relaxed max-w-xl">
                 {localityText}
               </p>
             </div>
-            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
+            <div className="hidden md:block relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
               <Image
-                src="/why-choose-image.png"
+                src="/image-2.jpg"
                 alt={localityHeading || "Why businesses choose us"}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"

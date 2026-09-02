@@ -14,7 +14,6 @@ export default function HomeHero({ content }) {
     content?.heroSubtext ||
     "Looking for a trusted digital marketing agency in Prayagraj that helps your business generate more leads, increase website traffic, and grow revenue? Welcome to BizzBuzz Creations.";
   const ctaText = content?.heroCtaText || "Get Free Consultation";
-  const posterImage = content?.heroPosterImage || "/image-1.jpg";
 
   return (
     <>
@@ -29,15 +28,19 @@ export default function HomeHero({ content }) {
       <link rel="preload" as="video" href="/hero-sec.webm" type="video/webm" />
 
       <div className="relative overflow-hidden min-h-[90vh] text-white flex flex-col justify-center pb-30 -mt-14 pt-14 md:-mt-[72px] md:pt-[72px]">
-        {/* Background video */}
+        {/* Background video — no poster image. A poster always flashes
+            up front (that's what a poster is: shown immediately, then
+            swapped out once the video has a decoded frame ready), which
+            read as a jarring photo-then-video glitch. Dropping it leaves
+            a plain black frame for that instant instead, which blends
+            straight into the section's own dark scrim/background. */}
         <video
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
-          poster={posterImage}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover bg-black"
         >
           <source src="/hero-sec.webm" type="video/webm" />
           <source src="/Sequence 01 1.mp4" type="video/mp4" />
