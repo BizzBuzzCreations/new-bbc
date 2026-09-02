@@ -86,19 +86,32 @@ export default function AboutHero({ content }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...reveal, delay: 0.6 }}
         >
-          <Link
-            href="/services"
-            className="inline-flex items-center justify-center gap-2 mx-auto lg:mx-0 bg-white hover:bg-black text-black hover:text-white text-sm font-semibold px-7 py-3.5 rounded-full border-2 border-white transition-colors duration-300 w-fit"
-          >
-            {buttonText}
-            <svg
-              viewBox="0 0 24 24"
-              className="w-4 h-4 shrink-0"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-            >
-              <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-            </svg>
+          <Link href="/services" className="inline-block mx-auto lg:mx-0">
+            {/* animated-button-lg: the default circle-reveal only grows to
+                220px, which doesn't reach the edges of a button this wide
+                — leaving the outer text sitting on the still-dark
+                background while the middle sits on white, which is what
+                was showing up as garbled/illegible text on hover. The
+                -lg variant grows the circle to 700px, comfortably
+                covering the whole button regardless of text length. */}
+            <button className="animated-button animated-button-lg whitespace-nowrap">
+              <svg
+                viewBox="0 0 24 24"
+                className="arr-2"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
+              <span className="text">{buttonText}</span>
+              <span className="circle"></span>
+              <svg
+                viewBox="0 0 24 24"
+                className="arr-1"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
+            </button>
           </Link>
         </motion.div>
       </div>

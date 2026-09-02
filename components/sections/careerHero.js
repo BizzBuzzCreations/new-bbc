@@ -75,11 +75,25 @@ export default function CareerHero({ content } = {}) {
         <p className="text-white/70 max-w-lg leading-relaxed mb-8">
           {paragraph}
         </p>
-        <Link
-          href="/contact"
-          className="inline-flex items-center bg-[#0B60B0] hover:bg-white text-white hover:text-black text-sm font-semibold px-7 py-3.5 rounded-lg transition-colors duration-300"
-        >
-          {ctaText}
+        <Link href="/contact" className="inline-block">
+          <button className="animated-button animated-button-lg whitespace-nowrap">
+            <svg
+              viewBox="0 0 24 24"
+              className="arr-2"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+            </svg>
+            <span className="text">{ctaText}</span>
+            <span className="circle"></span>
+            <svg
+              viewBox="0 0 24 24"
+              className="arr-1"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+            </svg>
+          </button>
         </Link>
       </div>
 

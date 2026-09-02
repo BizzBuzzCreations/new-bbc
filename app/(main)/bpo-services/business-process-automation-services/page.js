@@ -260,6 +260,7 @@ export default function BusinessProcessAutomationServices() {
       heroTitle="Get Hours Back With Automation, Not More Manual Work"
       heroDescription="Business process automation built to eliminate repetitive manual work, not just digitize it, engineered to actually save your team time."
       heroCtaText="Get a Free Process Automation Audit"
+      heroImage="/Business Process Automation Services 1.png"
       capabilitiesHeading="Built for Businesses Drowning in Repetitive Manual Work"
       capabilities={CAPABILITIES}
       serviceBreakdownHeading="Everything Between a Manual Process and an Automated One"

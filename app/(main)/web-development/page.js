@@ -106,7 +106,7 @@ const WE_ARE_POINTS = [
     number: "001",
     title: "Custom-Built, Not Templated",
     description:
-      "Every site is built around your specific goals and how your business actually works, not squeezed into a generic template.",
+      "As a custom web development company, every site is built around your specific goals and how your business actually works, not squeezed into a generic template.",
   },
   {
     number: "002",
@@ -118,25 +118,25 @@ const WE_ARE_POINTS = [
     number: "003",
     title: "Built to Rank",
     description:
-      "Strong Core Web Vitals and technical SEO are built in from the start — our sites are built to rank, not just launch and be forgotten.",
+      "Strong Core Web Vitals and technical SEO are built in from the start, our sites are built to rank, not just launch and be forgotten.",
   },
   {
     number: "004",
     title: "Full-Stack Capability",
     description:
-      "PHP, React, Next.js, WordPress, and Shopify — we pick the right stack for your project instead of forcing one tool on everything.",
+      "As a php web application development company, wordpress development company, shopify development agency, and react js development company and next js development agency all under one roof, we pick the right stack for your project instead of forcing one tool on everything.",
   },
   {
     number: "005",
     title: "Ongoing Management & Security",
     description:
-      "Monitoring, updates, performance checks, and AI-assisted threat monitoring keep your site secure and online long after launch.",
+      "Our website redesign and management services include monitoring, updates, performance checks, and AI-assisted threat monitoring to keep your site secure and online long after launch.",
   },
   {
     number: "006",
     title: "Prayagraj-Based, Globally Trusted",
     description:
-      "A full-service web development team in Prayagraj, serving clients locally across Uttar Pradesh as well as businesses across the UK, USA, and India.",
+      "A full-service web development company based in Prayagraj, serving clients locally across Uttar Pradesh as well as businesses across the UK, USA, and India.",
   },
 ];
 
@@ -278,11 +278,10 @@ export default function WebDevelopment() {
         <div className="max-w-5xl mx-auto border-t border-white" />
       </div>
 
-      {/* "Website Development Company" */}
       <section className="bg-black pt-20 pb-20 px-5">
         <BpoWeAre
-          title="Website Development Company"
-          description="BizzBuzz Creations is a website development company in Prayagraj, building fast, secure, and scalable websites for businesses across India and beyond. As a full-stack development partner, we handle strategy, design, and code so your website actually works for your business."
+          title="How We Build Every Website"
+          description="What actually backs every website development project, not vague promises."
           points={WE_ARE_POINTS}
         />
       </section>

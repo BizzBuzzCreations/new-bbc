@@ -94,44 +94,42 @@ const PROCESS_STEPS = [
   },
 ];
 
-// "SEO Company" section — left untouched by request, same content and
-// same position (between the process carousel and the FAQ) as before.
 const WE_ARE_POINTS = [
   {
     number: "001",
     title: "AI-First Strategy",
     description:
-      "We don't follow outdated SEO — every strategy is built for how search actually works in 2026, not five years ago.",
+      "As an AI search optimization services provider, we don't follow outdated SEO; every strategy is built for how search actually works in 2026, not five years ago.",
   },
   {
     number: "002",
     title: "Semantic SEO & Topical Authority",
     description:
-      "We focus on meaning and expertise, building content clusters and entity-based SEO that establish real authority in your niche.",
+      "As a semantic seo services and content optimization agency, we focus on meaning and expertise, building content clusters and entity-based SEO that establish real authority in your niche.",
   },
   {
     number: "003",
     title: "High-Intent Keyword Targeting",
     description:
-      "We prioritize keywords that convert, not just ones that bring traffic — visibility that turns into leads and sales.",
+      "Our high-intent keyword seo strategy prioritizes keywords that convert, not just ones that bring traffic, visibility that turns into leads, and sales.",
   },
   {
     number: "004",
     title: "AI Search Visibility",
     description:
-      "We optimize for Google AI Overviews, ChatGPT answers, and zero-click search, not just traditional blue-link rankings.",
+      "We optimize for Google AI Overviews, ChatGPT answers, and zero-click search through generative engine optimization and answer engine optimization, not just traditional blue-link rankings.",
   },
   {
     number: "005",
     title: "Data-Driven Execution",
     description:
-      "Every recommendation is backed by real performance data and search behavior, not assumptions or industry guesswork.",
+      "Every recommendation from our search engine optimization services is backed by real performance data and search behavior, not assumptions or industry guesswork.",
   },
   {
     number: "006",
     title: "Honest Reporting",
     description:
-      "No ethical SEO agency can guarantee first-page rankings, and we won't pretend otherwise — you get transparent, honest progress reports instead.",
+      "No ethical seo company can guarantee first-page rankings, and we won't pretend otherwise, you get transparent, honest progress reports instead.",
   },
 ];
 
@@ -273,11 +271,10 @@ export default function SearchEngineOptimization() {
         <div className="max-w-5xl mx-auto border-t border-white" />
       </div>
 
-      {/* "SEO Company" — left untouched by request. */}
       <section className="bg-black pt-20 pb-20 px-5">
         <BpoWeAre
-          title="SEO Services Company"
-          description="BizzBuzz Creations is an SEO services company helping businesses in Prayagraj and across India rank higher, get discovered in AI search, and attract customers ready to buy. As a dedicated SEO partner, we build AI-first strategies designed for how search actually works today."
+          title="How We Actually Get You Ranked"
+          description="What actually backs every SEO engagement, not vague promises."
           points={WE_ARE_POINTS}
         />
       </section>

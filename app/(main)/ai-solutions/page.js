@@ -80,45 +80,42 @@ const PROCESS_STEPS = [
   },
 ];
 
-// "AI Solutions Company" section — left untouched by request, same
-// content and same position (between the process carousel and the FAQ)
-// as before.
 const WE_ARE_POINTS = [
   {
     number: "001",
     title: "Practical, Not Generic",
     description:
-      "We don't sell generic AI software off a shelf — every solution is built for what your specific business actually needs.",
+      "As a generative ai solutions company, we don't sell generic AI software off a shelf, every solution is built for what your specific business actually needs.",
   },
   {
     number: "002",
     title: "Built Around Your Real Workflow",
     description:
-      "We start by understanding how your business actually runs before building any agent, automation, or content engine.",
+      "As an ai workflow automation company, we start by understanding how your business actually runs before building any agent, automation, or content engine.",
   },
   {
     number: "003",
     title: "Tested With Your Team",
     description:
-      "Every AI agent or automation is tested with your team before launch, not handed over as an untested demo.",
+      "Every custom ai agent from our ai agent development agency is tested with your team before launch, not handed over as an untested demo.",
   },
   {
     number: "004",
     title: "GEO From Day One",
     description:
-      "We combine AI integration with GEO from the start, so you're visible wherever customers search, including inside AI answers.",
+      "We combine AI integration with generative engine optimization from the start, so you're visible wherever customers search, including inside AI answers.",
   },
   {
     number: "005",
     title: "Refined After Launch",
     description:
-      "We don't disappear after handoff — every system is refined based on real usage, not left running blind.",
+      "We don't disappear after handoff, every system from our ai implementation consulting company is refined based on real usage, not left running blind.",
   },
   {
     number: "006",
     title: "Scales From Startup to Enterprise",
     description:
-      "Whether you're automating your first support inbox or scaling AI across an established company, the approach stays practical.",
+      "Whether you're automating your first support inbox or scaling AI across an established company, our ai strategy consulting services keep the approach practical.",
   },
 ];
 
@@ -260,11 +257,10 @@ export default function AISolutions() {
         <div className="max-w-5xl mx-auto border-t border-white" />
       </div>
 
-      {/* "AI Solutions Company" — left untouched by request. */}
       <section className="bg-black pt-20 pb-20 px-5">
         <BpoWeAre
-          title="AI Solutions Company"
-          description="BizzBuzz Creations is an AI solutions company helping businesses in Prayagraj and across India put practical AI to work — custom agents, content engines, automation, and GEO, built around how your business actually runs."
+          title="How We Make AI Actually Useful"
+          description="What actually backs every AI project, not vague promises."
           points={WE_ARE_POINTS}
         />
       </section>

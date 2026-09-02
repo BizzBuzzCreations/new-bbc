@@ -32,7 +32,7 @@ export default function AiShowcase({ content }) {
     content?.aiParagraph ||
     "From AI chatbots and intelligent agents to workflow automation, AI-powered content, and AI search optimization, we help businesses in Prayagraj, across India, and worldwide put practical AI solutions to work.";
   const posterImage = content?.aiPosterImage || "/aiservice.webp";
-  const videoSrc = content?.aiVideo || "/Sequence 01 1.mp4";
+  const videoSrc = content?.aiVideo || "/ai-vid.webm";
   const buttonText = content?.aiButtonText || "Explore AI Solutions";
 
   // Icon stays fixed (structural); title + description come from the
@@ -59,7 +59,8 @@ export default function AiShowcase({ content }) {
                 "polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 55%, 8% 50%, 0 45%)",
             }}
           >
-            <source src={videoSrc} type="video/mp4" />
+            <source src={videoSrc} />
+            <source src="/Sequence 01 1.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-linear-to-r from-transparent via-transparent to-black/40 lg:to-black/10" />
         </div>

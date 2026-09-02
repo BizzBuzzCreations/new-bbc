@@ -259,6 +259,7 @@ export default function TwentyFourSevenEcommerceCustomerSupport() {
       heroTitle="Get Customer Support That Never Sleeps"
       heroDescription="24/7 ecommerce customer support built to answer real questions promptly, not just close tickets, keeping customers happy around the clock."
       heroCtaText="Get a Free Customer Support Consultation"
+      heroImage="/24 - 7 & E-commerce Customer Support 1.png"
       capabilitiesHeading="Built for Stores Losing Sales to Slow Support Response"
       capabilities={CAPABILITIES}
       serviceBreakdownHeading="Everything Between a Customer Question and a Resolved Issue"

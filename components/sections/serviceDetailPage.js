@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CheckCircle2, ArrowUpRight } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import CTA from "@/components/sections/CTA";
 import DarkFAQSection from "@/components/sections/darkFAQSection";
 import NumberedDeliverablesCarousel from "@/components/sections/numberedDeliverablesCarousel";
@@ -33,6 +33,10 @@ export default function ServiceDetailPage({
   heroTitle,
   heroDescription,
   heroCtaText,
+  // Optional hero image — when supplied, the hero switches from a single
+  // centered column to text-left/image-right, no dotted texture overlay
+  // (that treatment lives only on the service-hub pages' BpoHero).
+  heroImage,
   capabilities,
   // Optional override for the capabilities section's small eyebrow
   // heading — defaults to "What's Included".
@@ -94,13 +98,50 @@ export default function ServiceDetailPage({
 }) {
   return (
     <>
-      {/* Hero */}
+      {/* Hero — full-bleed background photo (same treatment as the
+          service-hub pages' BpoHero, minus the dotted texture overlay)
+          when heroImage is supplied; otherwise the plain gradient hero.
+          These hero photos are all a wide 2.18:1 crop — on desktop the
+          section's aspect-ratio is set to (nearly) match that, so
+          object-fit: cover needs almost no vertical crop and the
+          subject's head never gets cut off; min-h alone (a viewport-
+          height-based size, unrelated to the photo's own proportions)
+          was forcing a much wider effective ratio on large screens,
+          which is what kept clipping the top no matter how it was
+          tuned. Mobile keeps a plain min-height since there's no width
+          budget to keep the full photo in frame there anyway. */}
       <section
-        className="relative overflow-hidden pt-28 md:pt-32 pb-20 px-6 md:px-12 lg:px-24 text-white"
-        style={{
-          background: "radial-gradient(circle at top, #0d1b2e, #000000)",
-        }}
+        className={
+          heroImage
+            ? "relative min-h-[50vh] md:min-h-0 md:aspect-[2.18/1] flex items-center overflow-hidden pt-28 md:pt-32 pb-20 px-6 md:px-12 lg:px-24 text-white"
+            : "relative overflow-hidden pt-28 md:pt-32 pb-20 px-6 md:px-12 lg:px-24 text-white"
+        }
+        style={
+          heroImage
+            ? undefined
+            : { background: "radial-gradient(circle at top, #0d1b2e, #000000)" }
+        }
       >
+        {heroImage && (
+          <>
+            <Image
+              src={heroImage}
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-top"
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(100deg, rgba(5,11,22,0.94) 0%, rgba(11,96,176,0.85) 42%, rgba(11,96,176,0.25) 70%, transparent 100%)",
+              }}
+              aria-hidden="true"
+            />
+          </>
+        )}
 
         <div className="relative max-w-3xl">
           <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-4">
@@ -112,12 +153,25 @@ export default function ServiceDetailPage({
           <p className="text-white/70 leading-relaxed mb-9 max-w-2xl">
             {heroDescription || description}
           </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 bg-[#0B60B0] hover:bg-[#0d72cf] text-white text-sm font-semibold px-7 py-3.5 rounded-full shadow-lg shadow-[#0B60B0]/30 transition"
-          >
-            {heroCtaText || "Book Your Free Consultation"}
-            <ArrowUpRight size={16} />
+          <Link href="/contact" className="inline-block">
+            <button className="animated-button animated-button-lg whitespace-nowrap">
+              <svg
+                viewBox="0 0 24 24"
+                className="arr-2"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
+              <span className="text">{heroCtaText || "Book Your Free Consultation"}</span>
+              <span className="circle"></span>
+              <svg
+                viewBox="0 0 24 24"
+                className="arr-1"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
+            </button>
           </Link>
         </div>
       </section>

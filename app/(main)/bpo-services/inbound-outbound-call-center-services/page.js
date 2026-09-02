@@ -260,6 +260,7 @@ export default function InboundOutboundCallCenterServices() {
       heroTitle="Get Call Handling That Doesn't Cost You Customers"
       heroDescription="Inbound and outbound call center services built to handle real call volume professionally, not just answer and transfer blindly."
       heroCtaText="Get a Free Call Center Consultation"
+      heroImage="/Inbound & Outbound Call Center Services.png"
       capabilitiesHeading="Built for Businesses Losing Customers to Missed Calls"
       capabilities={CAPABILITIES}
       serviceBreakdownHeading="Everything Between a Ringing Phone and a Resolved Call"

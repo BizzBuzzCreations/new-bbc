@@ -99,37 +99,37 @@ const WE_ARE_POINTS = [
     number: "001",
     title: "Platform-Specific Strategy",
     description:
-      "Instagram, Facebook, and LinkedIn each get their own strategy — we don't run the same content everywhere and call it a campaign.",
+      "As an Instagram marketing agency, Facebook ads agency, and LinkedIn marketing agency all in one, each platform gets its own strategy; we don't run the same content everywhere and call it a campaign.",
   },
   {
     number: "002",
     title: "AI-Backed Campaign Planning",
     description:
-      "AI marketing tools help us plan smarter content and predict trends early, paired with human strategy for judgment calls.",
+      "As an ai social media marketing agency, we use AI tools to plan smarter content and predict trends early, paired with human strategy for judgment calls.",
   },
   {
     number: "003",
     title: "Local Roots, National Reach",
     description:
-      "Being based in Prayagraj means we understand Indian audiences closely, while our strategies scale brands nationally too.",
+      "Being based in Prayagraj as a social media marketing agency means we understand Indian audiences closely, while our strategies scale brands nationally too.",
   },
   {
     number: "004",
     title: "No Copy-Paste Templates",
     description:
-      "Every campaign is shaped around your audience, budget, and goals — not a bloated, generic package.",
+      "Every social media marketing plan we build is shaped around your audience, budget, and goals, not a bloated, generic package.",
   },
   {
     number: "005",
     title: "Full-Funnel Content",
     description:
-      "From daily social media management to reels production and paid ads, everything runs under one roof, one coordinated strategy.",
+      "From daily social media management to reel production as a reel marketing agency and paid ads, everything runs under one roof, one coordinated strategy.",
   },
   {
     number: "006",
     title: "Real Engagement Over Vanity Metrics",
     description:
-      "We combine creative content, sharp ad targeting, and AI-backed strategy to get you real results, not just likes and impressions.",
+      "We combine creative content, sharp social media advertising, and AI-backed strategy to get you real results, not just likes and impressions.",
   },
 ];
 
@@ -276,11 +276,10 @@ export default function SocialMediaMarketing() {
         <div className="max-w-5xl mx-auto border-t border-white" />
       </div>
 
-      {/* "Social Media Marketing Agency" */}
       <section className="bg-black pt-20 pb-20 px-5">
         <BpoWeAre
-          title="Social Media Marketing Agency"
-          description="BizzBuzz Creations is a social media marketing agency based in Prayagraj, helping brands across India grow through Instagram, Facebook, LinkedIn, and AI-powered strategy. Being rooted locally gives us a strong understanding of Indian audiences, while our approach scales brands nationally."
+          title="How We Grow Every Social Media Account"
+          description="What actually backs every social media marketing campaign, not vague promises."
           points={WE_ARE_POINTS}
         />
       </section>

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 
 // FAQ page hero — same full-bleed-photo treatment as HomeAbout's building
 // shot: the question-mark graphic spans the whole section as a background
@@ -54,12 +53,25 @@ export default function FaqHero({ content } = {}) {
           <p className="mt-6 text-white/60 max-w-lg leading-relaxed">
             {paragraph}
           </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 bg-[#0B60B0] hover:bg-white text-white hover:text-[#0B60B0] text-sm font-semibold px-7 py-3.5 rounded-full shadow-lg shadow-[#0B60B0]/30 transition-colors duration-300 mt-8"
-          >
-            {ctaText}
-            <ArrowUpRight size={16} />
+          <Link href="/contact" className="inline-block mt-8">
+            <button className="animated-button animated-button-lg whitespace-nowrap">
+              <svg
+                viewBox="0 0 24 24"
+                className="arr-2"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
+              <span className="text">{ctaText}</span>
+              <span className="circle"></span>
+              <svg
+                viewBox="0 0 24 24"
+                className="arr-1"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
+            </button>
           </Link>
         </div>
       </div>

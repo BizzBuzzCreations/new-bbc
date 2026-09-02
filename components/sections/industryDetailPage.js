@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CheckCircle2, ArrowUpRight } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import CTA from "@/components/sections/CTA";
 import DarkFAQSection from "@/components/sections/darkFAQSection";
 import NumberedDeliverablesCarousel from "@/components/sections/numberedDeliverablesCarousel";
@@ -101,12 +101,25 @@ export default function IndustryDetailPage({
           <p className="text-white/70 leading-relaxed mb-9 max-w-2xl">
             {heroDescription || description}
           </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 bg-[#0B60B0] hover:bg-[#0d72cf] text-white text-sm font-semibold px-7 py-3.5 rounded-full shadow-lg shadow-[#0B60B0]/30 transition"
-          >
-            {heroCtaText || "Book Your Free Consultation"}
-            <ArrowUpRight size={16} />
+          <Link href="/contact" className="inline-block">
+            <button className="animated-button animated-button-lg whitespace-nowrap">
+              <svg
+                viewBox="0 0 24 24"
+                className="arr-2"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
+              <span className="text">{heroCtaText || "Book Your Free Consultation"}</span>
+              <span className="circle"></span>
+              <svg
+                viewBox="0 0 24 24"
+                className="arr-1"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
+            </button>
           </Link>
         </div>
       </section>
@@ -115,11 +128,11 @@ export default function IndustryDetailPage({
       <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-center gap-4 mb-14">
-            <span className="h-px w-14 bg-white/20" />
-            <p className="text-sm md:text-base font-bold uppercase tracking-widest text-white">
+            <span className="h-px w-20 bg-white/20" />
+            <p className="text-xl md:text-2xl font-bold uppercase tracking-widest text-white">
               {capabilitiesHeading || `Built for Every Corner of ${label}`}
             </p>
-            <span className="h-px w-14 bg-white/20" />
+            <span className="h-px w-20 bg-white/20" />
           </div>
 
           {/* items-start: without it, CSS grid stretches every card in a

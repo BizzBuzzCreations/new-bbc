@@ -94,45 +94,42 @@ const PROCESS_STEPS = [
   },
 ];
 
-// "Paid Marketing Agency" section — left untouched by request, same
-// content and same position (between the process carousel and the FAQ)
-// as before.
 const WE_ARE_POINTS = [
   {
     number: "001",
     title: "Performance-First Campaigns",
     description:
-      "Every campaign we run is tracked against one metric that matters: return on investment — no vanity numbers, no fluff.",
+      "As a performance marketing agency, every campaign we run is tracked against one metric that matters, return on investment, no vanity numbers, no fluff.",
   },
   {
     number: "002",
     title: "Industry-Tailored Strategy",
     description:
-      "We don't believe in one-size-fits-all packages — every campaign is built around your industry, your customers, and your goals.",
+      "We don't believe in one-size-fits-all packages, every campaign is built around your industry, your customers, and your goals.",
   },
   {
     number: "003",
     title: "Transparent Numbers",
     description:
-      "We're honest about what's working and what isn't, obsessed with getting you a better cost per lead every month.",
+      "We're honest about what's working and what isn't, obsessed with getting you a better cost per lead through our lead generation approach every month.",
   },
   {
     number: "004",
     title: "Daily Optimization",
     description:
-      "From strategy to daily optimisation, we handle it all — campaigns don't sit untouched between monthly check-ins.",
+      "From strategy to daily optimisation, our google ads management services handle it all, campaigns don't sit untouched between monthly check-ins.",
   },
   {
     number: "005",
     title: "Full-Funnel Ad Management",
     description:
-      "Google, Meta, e-commerce retargeting, and hyper-local campaigns, all run from strategy through execution under one roof.",
+      "As a meta ads agency and ecommerce ads agency, we run Google, Meta, ecommerce retargeting, and hyper-local campaigns, all from strategy through execution under one roof.",
   },
   {
     number: "006",
     title: "A Team, Not a Vendor",
     description:
-      "Think of us less like a vendor and more like a hired paid marketing team sitting inside your business, pushing for growth every day.",
+      "Think of us less like a vendor and more like a hired performance marketing team sitting inside your business, pushing for growth every day.",
   },
 ];
 
@@ -275,11 +272,10 @@ export default function PaidMarketing() {
         <div className="max-w-5xl mx-auto border-t border-white" />
       </div>
 
-      {/* "Paid Marketing Agency" — left untouched by request. */}
       <section className="bg-black pt-20 pb-20 px-5">
         <BpoWeAre
-          title="Paid Marketing Agency"
-          description="BizzBuzz Creations is a paid marketing agency based in Prayagraj, built for businesses done experimenting and ready to invest in results. As an established online advertising partner, we run Google Ads, Meta Ads, and performance campaigns for brands across India."
+          title="How We Make Every Ad Rupee Work"
+          description="What actually backs every paid marketing engagement, not vague promises."
           points={WE_ARE_POINTS}
         />
       </section>

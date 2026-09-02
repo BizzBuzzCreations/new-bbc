@@ -1,7 +1,6 @@
 import Link from "next/link";
 import {
   ArrowUpRight,
-  ChevronRight,
   Users,
   ShieldCheck,
   FileSignature,
@@ -225,13 +224,6 @@ export default async function ServicesIndexPage() {
 
         <div className="relative max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <div>
-            <div className="flex items-center gap-1.5 text-sm text-white/50 mb-6">
-              <Link href="/" className="hover:text-[#40A2D8] transition">
-                Home
-              </Link>
-              <ChevronRight size={14} />
-              <span className="font-semibold text-[#40A2D8]">Services</span>
-            </div>
             <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
               {heroHeading}
             </h1>
@@ -239,19 +231,45 @@ export default async function ServicesIndexPage() {
               {heroParagraph}
             </p>
             <div className="flex flex-wrap items-center gap-4">
-              <Link
-                href="#services-grid"
-                className="inline-flex items-center gap-2 bg-[#0B60B0] hover:bg-[#0d72cf] text-white text-sm font-semibold px-7 py-3.5 rounded-full shadow-lg shadow-[#0B60B0]/30 transition"
-              >
-                {heroButtonText}
-                <ArrowUpRight size={16} />
+              <Link href="#services-grid" className="inline-block">
+                <button className="animated-button animated-button-lg whitespace-nowrap">
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="arr-2"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                  </svg>
+                  <span className="text">{heroButtonText}</span>
+                  <span className="circle"></span>
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="arr-1"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                  </svg>
+                </button>
               </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 border border-white/30 hover:bg-white/10 text-white text-sm font-semibold px-7 py-3.5 rounded-full transition"
-              >
-                {heroSecondaryButtonText}
-                <ArrowUpRight size={16} />
+              <Link href="/contact" className="inline-block">
+                <button className="animated-button animated-button-lg whitespace-nowrap">
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="arr-2"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                  </svg>
+                  <span className="text">{heroSecondaryButtonText}</span>
+                  <span className="circle"></span>
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="arr-1"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                  </svg>
+                </button>
               </Link>
             </div>
           </div>

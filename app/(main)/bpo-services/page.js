@@ -94,45 +94,42 @@ const PROCESS_STEPS = [
   },
 ];
 
-// "BPO & Customer Support Company" section — left untouched by request,
-// same content and same position (between the process carousel and the
-// FAQ) as before.
 const WE_ARE_POINTS = [
   {
     number: "001",
     title: "Trained, Dedicated Teams",
     description:
-      "Every account gets agents trained specifically on your scripts, tone, and product — not a generic script read out from a random floor.",
+      "Every account with our BPO company gets agents trained specifically on your scripts, tone, and product, not a generic script read out from a random floor.",
   },
   {
     number: "002",
     title: "Transparent Reporting",
     description:
-      "Weekly performance reporting and call recordings on request, so you always know what's happening on your account, not just a monthly summary.",
+      "Our call center outsourcing services include weekly performance reporting and call recordings on request, so you always know what's happening on your account, not just a monthly summary.",
   },
   {
     number: "003",
     title: "Data Security First",
     description:
-      "NDA available before any project details or access are shared, with account access scoped to what's needed and handling built around India's DPDP Act, 2023.",
+      "Every business process outsourcing engagement starts with an NDA before any project details or access are shared, with account access scoped to what's needed and handling built around India's DPDP Act, 2023.",
   },
   {
     number: "004",
     title: "AI-Assisted, Human-Led",
     description:
-      "We use AI only where it genuinely helps — routing, transcription, first responses — while trained agents handle everything that needs real judgment.",
+      "As an ai powered bpo and customer service outsourcing partner, we use AI only where it genuinely helps, routing, transcription, first responses, while trained agents handle everything that needs real judgment.",
   },
   {
     number: "005",
     title: "Scalable Engagement",
     description:
-      "We scale with your business, not ahead of it — start with what you need today and add capacity as your workload actually grows.",
+      "Our outsourcing services scale with your business, not ahead of it, start with what you need today and add capacity as your workload actually grows.",
   },
   {
     number: "006",
     title: "One Direct Point of Contact",
     description:
-      "No ticket queues for active clients — you reach your point of contact directly by phone or email, not a rotating cast of agents.",
+      "As an outsourced customer service company, we don't run ticket queues for active clients, you reach your point of contact directly by phone or email, not a rotating cast of agents.",
   },
 ];
 
@@ -282,11 +279,10 @@ export default function BPO() {
         <div className="max-w-5xl mx-auto border-t border-white" />
       </div>
 
-      {/* "BPO & Customer Support Company" — left untouched by request. */}
       <section className="bg-black pt-20 pb-20 px-5">
         <BpoWeAre
-          title="BPO & Customer Support Company"
-          description="BizzBuzz Creations is a BPO and customer support company helping businesses across India run outsourced operations without losing visibility or control. As a dedicated outsourcing partner, we emphasize transparent processes and trained teams tailored to your specific workflows and goals."
+          title="How We Run Every Outsourced Account"
+          description="The specifics behind our BPO outsourcing and customer support delivery, not vague promises."
           points={WE_ARE_POINTS}
         />
       </section>

@@ -30,11 +30,25 @@ export default function TeamHero({ content } = {}) {
           <p className="text-sm sm:text-base text-white/85 max-w-xl leading-relaxed">
             {paragraph}
           </p>
-          <Link
-            href="#meet-our-team"
-            className="inline-flex items-center justify-center shrink-0 bg-white hover:bg-black text-black hover:text-white text-sm font-semibold px-6 py-3 rounded-full transition-colors duration-300 w-fit"
-          >
-            {ctaText}
+          <Link href="#meet-our-team" className="inline-block w-fit">
+            <button className="animated-button animated-button-lg whitespace-nowrap">
+              <svg
+                viewBox="0 0 24 24"
+                className="arr-2"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
+              <span className="text">{ctaText}</span>
+              <span className="circle"></span>
+              <svg
+                viewBox="0 0 24 24"
+                className="arr-1"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
+            </button>
           </Link>
         </div>
       </div>

@@ -94,45 +94,42 @@ const PROCESS_STEPS = [
   },
 ];
 
-// "Business Consulting Firm" section — left untouched by request, same
-// content and same position (between the process carousel and the FAQ)
-// as before.
 const WE_ARE_POINTS = [
   {
     number: "001",
     title: "No Generic Playbooks",
     description:
-      "Every recommendation is built around your industry, your team, and your real numbers — not a template pulled off a shelf.",
+      "As a business strategy consulting firm, every recommendation is built around your industry, your team, and your real numbers, not a template pulled off a shelf.",
   },
   {
     number: "002",
     title: "We Stay Involved",
     description:
-      "From the first audit to final execution, we stay by your side long after the first meeting, not just handing over a strategy deck.",
+      "From the first audit to final execution, our business consulting firm stays by your side long after the first meeting, not just handing over a strategy deck.",
   },
   {
     number: "003",
     title: "Direct & Honest",
     description:
-      "We're direct about what's working, honest about what isn't, and focused on outcomes you can actually measure.",
+      "As your business consultant, we're direct about what's working, honest about what isn't, and focused on outcomes you can actually measure.",
   },
   {
     number: "004",
     title: "Outcomes You Can Measure",
     description:
-      "Every engagement is focused on results you can point to, not just reports and recommendations that sit unread.",
+      "Every engagement with our business growth consultant team is focused on results you can point to, not just reports and recommendations that sit unread.",
   },
   {
     number: "005",
     title: "A Team, Not Outside Consultants",
     description:
-      "Think of us less like outside consultants and more like a hired team that's genuinely invested in your growth.",
+      "Think of us less like outside consultants and more like a hired business consulting team that's genuinely invested in your growth.",
   },
   {
     number: "006",
     title: "Local Roots, India-Wide Reach",
     description:
-      "Born and based in Prayagraj, we understand what it takes to build a business here as well as in the metros.",
+      "Born and based in Prayagraj as a local business advisor, we understand what it takes to build a business here as well as in the metros.",
   },
 ];
 
@@ -275,11 +272,10 @@ export default function BusinessConsultancy() {
         <div className="max-w-5xl mx-auto border-t border-white" />
       </div>
 
-      {/* "Business Consulting Firm" — left untouched by request. */}
       <section className="bg-black pt-20 pb-20 px-5">
         <BpoWeAre
-          title="Business Consulting Firm"
-          description="BizzBuzz Creations is a business consulting firm based in Prayagraj, helping founders and growing companies across India turn strategy into real, measurable results — not just reports."
+          title="How We Work With Every Client"
+          description="What actually backs every business consulting engagement, not vague promises."
           points={WE_ARE_POINTS}
         />
       </section>

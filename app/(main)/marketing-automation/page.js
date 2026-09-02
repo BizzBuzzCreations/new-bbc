@@ -80,33 +80,30 @@ const PROCESS_STEPS = [
   },
 ];
 
-// "Marketing Automation Agency" section — left untouched by request,
-// same content and same position (between the process carousel and the
-// FAQ) as before.
 const WE_ARE_POINTS = [
   {
     number: "001",
     title: "One Connected System",
     description:
-      "We treat email, WhatsApp, and lead nurturing as one connected system, not separate campaigns running blind.",
+      "As a marketing automation agency, we treat email marketing automation, WhatsApp marketing automation, and lead nurturing as one connected system, not separate campaigns running blind.",
   },
   {
     number: "002",
     title: "We Build the Workflow Ourselves",
     description:
-      "We don't sell you a tool subscription and walk away — we build the workflow and write the messaging ourselves.",
+      "We don't sell you a tool subscription and walk away, as your marketing automation consultant, we build the workflow and write the messaging ourselves.",
   },
   {
     number: "003",
     title: "CRM-Connected, Not Manual",
     description:
-      "Every call, form fill, or reply automatically updates lead status and triggers the next action — no manual data entry required.",
+      "Every call, form fill, or reply through our crm marketing automation services automatically updates lead status and triggers the next action, no manual data entry required.",
   },
   {
     number: "004",
     title: "Scales With Real Volume",
     description:
-      "Startups get plans that scale with real volume, not enterprise pricing from day one.",
+      "Startups get lead nurturing automation services that scale with real volume, not enterprise pricing from day one.",
   },
   {
     number: "005",
@@ -261,11 +258,10 @@ export default function MarketingAutomation() {
         <div className="max-w-5xl mx-auto border-t border-white" />
       </div>
 
-      {/* "Marketing Automation Agency" — left untouched by request. */}
       <section className="bg-black pt-20 pb-20 px-5">
         <BpoWeAre
-          title="Marketing Automation Agency"
-          description="BizzBuzz Creations is a marketing automation agency helping businesses across India close the follow-up gap — email, CRM, WhatsApp, and lead nurturing built into one connected system around how your customers actually behave."
+          title="How We Close the Follow-Up Gap"
+          description="What actually backs every marketing automation build, not vague promises."
           points={WE_ARE_POINTS}
         />
       </section>

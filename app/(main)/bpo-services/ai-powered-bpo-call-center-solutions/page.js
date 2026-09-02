@@ -262,6 +262,7 @@ export default function AiPoweredBpoCallCenterSolutions() {
       heroTitle="Get Support That Scales, Powered by AI and Real Agents"
       heroDescription="AI-powered BPO and call center solutions built to scale support without scaling headcount, backed by trained human agents."
       heroCtaText="Get a Free BPO Solutions Consultation"
+      heroImage="/AI-Powered BPO & Call Center Solutions 1.png"
       capabilitiesHeading="Built for Businesses Ready to Scale Support Without Scaling Cost"
       capabilities={CAPABILITIES}
       serviceBreakdownHeading="Everything Between a Customer Query and a Resolved Ticket"

@@ -28,6 +28,7 @@ export default function HomeHero({ content }) {
           poster={posterImage}
           className="absolute inset-0 w-full h-full object-cover"
         >
+          <source src="/hero-sec.webm" type="video/webm" />
           <source src="/Sequence 01 1.mp4" type="video/mp4" />
         </video>
 
@@ -82,7 +83,7 @@ export default function HomeHero({ content }) {
             transition={{ ...reveal, delay: 0.45 }}
           >
             <Link href="/contact" className="inline-block">
-              <button className="animated-button">
+              <button className="animated-button animated-button-lg whitespace-nowrap">
                 <svg
                   viewBox="0 0 24 24"
                   className="arr-2"

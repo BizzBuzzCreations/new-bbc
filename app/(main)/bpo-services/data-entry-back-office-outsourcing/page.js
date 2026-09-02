@@ -260,6 +260,7 @@ export default function DataEntryBackOfficeOutsourcing() {
       heroTitle="Get Accurate Data Entry Without Hiring an In-House Team"
       heroDescription="Data entry and back-office outsourcing built for accuracy at volume, not just speed, backed by trained teams and quality checks."
       heroCtaText="Get a Free Back-Office Outsourcing Consultation"
+      heroImage="/data entry and backoffice outsourcing 1.png"
       capabilitiesHeading="Built for Businesses Drowning in Data They Can't Keep Up With"
       capabilities={CAPABILITIES}
       serviceBreakdownHeading="Everything Between Raw Data and a Clean, Usable Record"

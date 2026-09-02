@@ -260,6 +260,7 @@ export default function VirtualAssistantStartupOutsourcing() {
       heroTitle="Get a Virtual Assistant Who Actually Gets Things Done"
       heroDescription="Dedicated virtual assistant services built for startups needing real help, not generic task lists, backed by trained, reliable support."
       heroCtaText="Get a Free Virtual Assistant Consultation"
+      heroImage="/Virtual Assistant & Startup Outsourcing 1.png"
       capabilitiesHeading="Built for Founders Drowning in Tasks They Shouldn't Be Doing"
       capabilities={CAPABILITIES}
       serviceBreakdownHeading="Everything a Dedicated Virtual Assistant Can Take Off Your Plate"
