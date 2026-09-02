@@ -13,6 +13,18 @@ export function CareerWhyUs({ content } = {}) {
     "We're a growing agency with roots in Prayagraj, India, and clients across the world. From day one, you'll work on real challenges across digital marketing, technology, design, and strategy — building practical skills instead of simply following a checklist. We value people who stay curious, take initiative, share ideas, and want to keep getting better. Your growth matters here, because when our people grow, BizzBuzz Creations grows too.";
   const image = content?.careerWhyUsImage || "/image-2.jpg";
 
+  const photo = (
+    <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
+      <Image
+        src={image}
+        alt="Inside the BizzBuzz Creations office"
+        fill
+        sizes="(max-width: 768px) 100vw, 50vw"
+        className="object-cover"
+      />
+    </div>
+  );
+
   return (
     <section className="bg-black py-20 px-6 md:px-12 lg:px-24">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center">
@@ -20,20 +32,18 @@ export function CareerWhyUs({ content } = {}) {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
             {heading}
           </h2>
+
+          {/* On mobile only, the photo sits between the heading and the
+              paragraph; the desktop two-column layout (heading+paragraph
+              on the left, photo on the right) is unchanged. */}
+          <div className="mb-6 md:hidden">{photo}</div>
+
           <p className="text-white/60 leading-relaxed">
             {paragraph}
           </p>
         </div>
 
-        <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
-          <Image
-            src={image}
-            alt="Inside the BizzBuzz Creations office"
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover"
-          />
-        </div>
+        <div className="hidden md:block">{photo}</div>
       </div>
     </section>
   );
@@ -59,6 +69,46 @@ export function CareerJoinTeam({ content } = {}) {
   const image2 = content?.careerJoinImage2 || "/image-4.webp";
   const image3 = content?.careerJoinImage3 || "/teamPic.webp";
 
+  // The image grid is rendered twice on purpose: once inline for mobile
+  // (between the tagline and the paragraph, matching the requested
+  // heading → tagline → images → paragraph → points → button order) and
+  // once as the traditional desktop right column. Only one copy is ever
+  // visible at a given breakpoint (md:hidden / hidden md:grid), so this
+  // isn't duplicate content on screen — just the simplest way to reorder
+  // content differently per breakpoint without CSS `order` fighting the
+  // two-column grid placement.
+  const imageGrid = (
+    <div className="grid grid-cols-2 gap-4">
+      <div className="relative row-span-2 rounded-2xl overflow-hidden shadow-lg aspect-[3/4]">
+        <Image
+          src={image1}
+          alt="The BizzBuzz Creations team celebrating together"
+          fill
+          sizes="(max-width: 768px) 50vw, 25vw"
+          className="object-cover"
+        />
+      </div>
+      <div className="relative rounded-2xl overflow-hidden shadow-lg aspect-square">
+        <Image
+          src={image2}
+          alt="The BizzBuzz Creations team at an office event"
+          fill
+          sizes="(max-width: 768px) 50vw, 25vw"
+          className="object-cover"
+        />
+      </div>
+      <div className="relative rounded-2xl overflow-hidden shadow-lg aspect-square">
+        <Image
+          src={image3}
+          alt="The BizzBuzz Creations team"
+          fill
+          sizes="(max-width: 768px) 50vw, 25vw"
+          className="object-cover"
+        />
+      </div>
+    </div>
+  );
+
   return (
     <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center">
@@ -69,6 +119,9 @@ export function CareerJoinTeam({ content } = {}) {
           <p className="text-[#40A2D8] font-semibold mb-4">
             {tagline}
           </p>
+
+          <div className="mb-8 md:hidden">{imageGrid}</div>
+
           <p className="text-white/60 leading-relaxed mb-8">
             {paragraph}
           </p>
@@ -97,35 +150,7 @@ export function CareerJoinTeam({ content } = {}) {
           </a>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <div className="relative row-span-2 rounded-2xl overflow-hidden shadow-lg aspect-[3/4]">
-            <Image
-              src={image1}
-              alt="The BizzBuzz Creations team celebrating together"
-              fill
-              sizes="(max-width: 768px) 50vw, 25vw"
-              className="object-cover"
-            />
-          </div>
-          <div className="relative rounded-2xl overflow-hidden shadow-lg aspect-square">
-            <Image
-              src={image2}
-              alt="The BizzBuzz Creations team at an office event"
-              fill
-              sizes="(max-width: 768px) 50vw, 25vw"
-              className="object-cover"
-            />
-          </div>
-          <div className="relative rounded-2xl overflow-hidden shadow-lg aspect-square">
-            <Image
-              src={image3}
-              alt="The BizzBuzz Creations team"
-              fill
-              sizes="(max-width: 768px) 50vw, 25vw"
-              className="object-cover"
-            />
-          </div>
-        </div>
+        <div className="hidden md:grid">{imageGrid}</div>
       </div>
     </section>
   );

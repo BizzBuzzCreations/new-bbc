@@ -439,18 +439,22 @@ export default async function HowWeWorkPage() {
           </p>
           <p className="text-white/50 text-sm mb-10"></p>
 
-          <div className="flex flex-wrap justify-center gap-3">
+          {/* Mobile: a strict 3-column grid (5 rows for 15 industries)
+              instead of flex-wrap, which let differently-sized pills wrap
+              unevenly (2, then 1, then 2...) into a ragged layout. Desktop
+              keeps the original centered flex-wrap flow. */}
+          <div className="grid grid-cols-3 justify-items-center gap-2 sm:flex sm:flex-wrap sm:justify-center sm:gap-3">
             {INDUSTRY_LINKS.map(({ slug, label, icon: Icon }) => (
               <Link
                 key={slug}
                 href={`/industries/${slug}`}
-                className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-white/80 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:text-white hover:shadow-lg hover:shadow-black/40"
+                className="group inline-flex min-w-0 items-center gap-1.5 sm:gap-2 rounded-full border border-white/15 bg-white/5 px-2.5 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-sm font-medium text-white/80 text-center transition-all duration-300 hover:-translate-y-0.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:text-white hover:shadow-lg hover:shadow-black/40"
               >
                 <Icon
-                  size={15}
-                  className="text-[#40A2D8] transition-colors duration-300 group-hover:text-white"
+                  size={14}
+                  className="shrink-0 text-[#40A2D8] transition-colors duration-300 group-hover:text-white"
                 />
-                {label}
+                <span className="truncate">{label}</span>
               </Link>
             ))}
           </div>

@@ -115,23 +115,23 @@ export default function WhatMAkesUs({ content }) {
         })}
       </div>
 
-      {/* Mobile / tablet: simple stacked list — same card + hover treatment */}
-      <div className="relative w-full max-w-sm grid grid-cols-1 gap-6 md:hidden">
+      {/* Mobile / tablet: 2-per-row grid — same card + hover treatment */}
+      <div className="relative w-full max-w-xl grid grid-cols-2 gap-4 md:hidden">
         {displaySteps.map((step, i) => {
           const Icon = step.icon;
           return (
             <div
               key={step.title}
-              className="group relative flex flex-col items-center text-center rounded-2xl border border-white/10 bg-white/[0.03] px-5 pt-7 pb-6 transition-all duration-300 hover:border-[#0B60B0] hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/30"
+              className="group relative flex flex-col items-center text-center rounded-2xl border border-white/10 bg-white/[0.03] px-4 pt-7 pb-5 transition-all duration-300 hover:border-[#0B60B0] hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/30"
             >
               <span className="absolute -top-3 right-4 flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-[11px] font-bold text-white/60">
                 {i + 1}
               </span>
-              <div className="w-14 h-14 rounded-full flex items-center justify-center mb-4 bg-white/10 text-[#40A2D8] transition-all duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
-                <Icon size={22} />
+              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3 bg-white/10 text-[#40A2D8] transition-all duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
+                <Icon size={20} />
               </div>
-              <h3 className="font-semibold text-lg mb-2 text-white">{step.title}</h3>
-              <p className="text-sm text-white/50 max-w-xs transition-colors duration-300 group-hover:text-white/85">
+              <h3 className="font-semibold text-sm mb-2 text-white">{step.title}</h3>
+              <p className="text-xs text-white/50 transition-colors duration-300 group-hover:text-white/85">
                 {step.description}
               </p>
             </div>

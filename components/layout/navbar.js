@@ -527,14 +527,23 @@ function MobileAccordion({
               const isSubOpen = subOpen === item.label;
               return (
                 <li key={item.href}>
-                  <div
-                    onClick={() => setSubOpen(isSubOpen ? null : item.label)}
-                    className="flex items-center justify-between w-full p-2 hover:bg-white/10 rounded cursor-pointer"
-                  >
-                    {item.label}
+                  {/* Label navigates straight to the service's hub page
+                      (e.g. /bpo-services) — only the chevron toggles the
+                      sub-services accordion, instead of the whole row
+                      doing that and leaving the hub page unreachable from
+                      the mobile menu. */}
+                  <div className="flex items-center justify-between w-full hover:bg-white/10 rounded">
+                    <Link
+                      href={item.href}
+                      onClick={onNavigate}
+                      className="flex-1 p-2"
+                    >
+                      {item.label}
+                    </Link>
                     <ChevronDown
                       size={14}
-                      className={`shrink-0 transition-transform duration-300 ${isSubOpen ? "rotate-180" : ""}`}
+                      onClick={() => setSubOpen(isSubOpen ? null : item.label)}
+                      className={`shrink-0 mr-2 cursor-pointer transition-transform duration-300 ${isSubOpen ? "rotate-180" : ""}`}
                     />
                   </div>
                   {isSubOpen && (

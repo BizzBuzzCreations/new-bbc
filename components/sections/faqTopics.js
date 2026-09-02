@@ -505,8 +505,14 @@ export default function FaqTopics({ content } = {}) {
         className="max-w-7xl mx-auto grid lg:grid-cols-[300px_1fr] lg:gap-6 px-4 md:px-6 pt-20 pb-10 md:pt-28 md:pb-16"
       >
         {/* TOC sidebar — stays put (sticky) while the page scrolls; only
-            the active highlight moves between topics via scroll-spy. */}
-        <div className="lg:sticky lg:top-24 lg:self-start bg-black px-2 md:px-4 py-4 lg:py-0">
+            the active highlight moves between topics via scroll-spy.
+            min-w-0: without it, a CSS Grid item won't shrink below its
+            content's intrinsic width by default — since the pill row
+            below is an unwrapped horizontal scroller, that was forcing
+            this whole grid (and the page along with it) wider than the
+            viewport on mobile instead of letting overflow-x-auto scroll
+            internally. */}
+        <div className="min-w-0 lg:sticky lg:top-24 lg:self-start bg-black px-2 md:px-4 py-4 lg:py-0">
           <p className="text-xs font-bold uppercase tracking-widest text-white/50 mb-6 px-2">
           </p>
           <div className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 -mx-1 px-1">
@@ -542,7 +548,7 @@ export default function FaqTopics({ content } = {}) {
         {/* All topics, stacked — no shared wrapper background anymore;
             each topic is just its own card floating directly on the
             section's black backdrop. */}
-        <div className="relative px-2 md:px-4 py-10 md:py-16 space-y-12 md:space-y-16">
+        <div className="relative min-w-0 px-2 md:px-4 py-10 md:py-16 space-y-12 md:space-y-16">
           {TOPICS.map((topic, i) => (
             <motion.div
               key={topic.id}

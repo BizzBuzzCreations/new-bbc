@@ -123,10 +123,10 @@ export default async function About() {
           <Image src={storyImage} alt="team" width={500} height={500} />
           <div className="text-white">
             <h2 className="text-white"><b>{storySubheading}</b></h2>
-            <p className="leading-relaxed lg:text-left text-center max-w-xl mx-auto mb-4 text-white/70 whitespace-pre-line">
+            <p className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white/70 whitespace-pre-line">
               {storyParagraphOne}
             </p>
-            <p className="leading-relaxed lg:text-left text-center max-w-xl mx-auto mb-4 text-white/70 whitespace-pre-line">
+            <p className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white/70 whitespace-pre-line">
               {storyParagraphTwoIsDefault ? (
                 <>
                   BizzBuzz Creations started with a small team of marketers, designers, and
@@ -141,7 +141,7 @@ export default async function About() {
                 storyParagraphTwo
               )}
             </p>
-            <p className="leading-relaxed lg:text-left text-center max-w-xl mx-auto mb-4 text-white/70 whitespace-pre-line">
+            <p className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white/70 whitespace-pre-line">
               {storyParagraphThreeIsDefault ? (
                 <>
                   Today, we bring together strategy, creativity, technology,{" "}
@@ -159,7 +159,7 @@ export default async function About() {
                 storyParagraphThree
               )}
             </p>
-            <p className="leading-relaxed lg:text-left text-center max-w-xl mx-auto mb-4 text-white/70 whitespace-pre-line">
+            <p className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white/70 whitespace-pre-line">
               {storyParagraphFour}
             </p>
           </div>
@@ -173,26 +173,33 @@ export default async function About() {
           <h2 className="text-3xl font-bold mb-10 text-center text-white">
             {missionVisionHeading}
           </h2>
-          <div className="flex flex-wrap justify-center items-stretch gap-8">
-            <div className="group relative flex flex-1 min-w-[280px] max-w-lg flex-col items-center rounded-2xl border-2 border-white/10 bg-white/5 p-8 text-center shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-2xl hover:shadow-black/40">
-              <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 text-[#40A2D8] transition-colors duration-300 group-hover:bg-[#0B60B0] group-hover:text-white">
-                <Target size={32} />
+          {/* grid grid-cols-2 (not flex-wrap with a min-width) so Mission
+              and Vision always sit side by side, mobile included —
+              min-width-based wrapping was forcing them to stack on
+              narrow screens since two 280px-min cards don't fit a phone
+              width. */}
+          <div className="grid grid-cols-2 justify-center gap-3 sm:gap-8">
+            <div className="group relative flex flex-col items-center rounded-2xl border-2 border-white/10 bg-white/5 p-4 sm:p-8 text-center shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-2xl hover:shadow-black/40">
+              <div className="mb-3 sm:mb-5 flex h-10 w-10 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-white/10 text-[#40A2D8] transition-colors duration-300 group-hover:bg-[#0B60B0] group-hover:text-white">
+                <Target size={20} className="sm:hidden" />
+                <Target size={32} className="hidden sm:block" />
               </div>
-              <h3 className="text-2xl font-semibold mb-4 text-center text-white">
+              <h3 className="text-base sm:text-2xl font-semibold mb-2 sm:mb-4 text-center text-white">
                 {missionTitle}
               </h3>
-              <p className="text-lg leading-relaxed text-center max-w-xl mx-auto mb-4 text-white/60">
+              <p className="text-sm sm:text-lg leading-relaxed text-center max-w-xl mx-auto mb-4 text-white/60">
                 {missionText}
               </p>
             </div>
-            <div className="group relative flex flex-1 min-w-[280px] max-w-lg flex-col items-center rounded-2xl border-2 border-white/10 bg-white/5 p-8 text-center shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-2xl hover:shadow-black/40">
-              <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 text-[#40A2D8] transition-colors duration-300 group-hover:bg-[#0B60B0] group-hover:text-white">
-                <Rocket size={32} />
+            <div className="group relative flex flex-col items-center rounded-2xl border-2 border-white/10 bg-white/5 p-4 sm:p-8 text-center shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-2xl hover:shadow-black/40">
+              <div className="mb-3 sm:mb-5 flex h-10 w-10 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-white/10 text-[#40A2D8] transition-colors duration-300 group-hover:bg-[#0B60B0] group-hover:text-white">
+                <Rocket size={20} className="sm:hidden" />
+                <Rocket size={32} className="hidden sm:block" />
               </div>
-              <h3 className="text-2xl font-semibold mb-4 text-center text-white">
+              <h3 className="text-base sm:text-2xl font-semibold mb-2 sm:mb-4 text-center text-white">
                 {visionTitle}
               </h3>
-              <p className="text-lg leading-relaxed text-center max-w-xl mx-auto mb-4 text-white/60">
+              <p className="text-sm sm:text-lg leading-relaxed text-center max-w-xl mx-auto mb-4 text-white/60">
                 {visionText}
               </p>
             </div>

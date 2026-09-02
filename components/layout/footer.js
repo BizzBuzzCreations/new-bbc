@@ -102,7 +102,7 @@ const SOCIALS = [
 
 function FooterColumn({ title, links, viewMoreHref }) {
   return (
-    <div>
+    <div className="min-w-0">
       <h4 className="text-sm font-semibold text-white mb-5">{title}</h4>
       <ul className="space-y-3">
         {links.map((link) => (

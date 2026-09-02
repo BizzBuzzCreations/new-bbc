@@ -36,7 +36,11 @@ export default function GlobeTrust({ content }) {
           globe's own visual center, instead of pinned to the bottom of a
           much taller box. */}
       <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-        {/* Text — vertically centered against the globe. */}
+        {/* Text — vertically centered against the globe. Paragraph is
+            hidden here on mobile and re-rendered below the globe instead,
+            so the mobile order reads heading → globe → paragraph while
+            desktop keeps its original text-column / globe side-by-side
+            layout untouched. */}
         <div className="max-w-sm sm:max-w-md md:max-w-lg">
           <p className="text-lg sm:text-xl text-white/70 font-light mb-1">
             {eyebrow}
@@ -44,7 +48,7 @@ export default function GlobeTrust({ content }) {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             {heading}
           </h2>
-          <p className="text-sm text-white/60 leading-relaxed">
+          <p className="hidden md:block text-sm text-white/60 leading-relaxed">
             {paragraph}
           </p>
         </div>
@@ -71,6 +75,11 @@ export default function GlobeTrust({ content }) {
             initialLongitude={-15}
           />
         </div>
+
+        {/* Mobile-only paragraph, placed after the globe. */}
+        <p className="md:hidden max-w-sm sm:max-w-md text-sm text-white/60 leading-relaxed">
+          {paragraph}
+        </p>
       </div>
     </section>
   );

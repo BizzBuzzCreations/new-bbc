@@ -168,7 +168,7 @@ export default function AISolutions() {
         <div className="relative flex lg:flex-row flex-col px-5 lg:gap-20 gap-10 justify-center items-center max-w-6xl mx-auto">
           <div className="relative w-full lg:w-[440px] aspect-[4/5] shrink-0 rounded-3xl overflow-hidden shadow-xl">
             <Image
-              src="/hero (1).webp"
+              src="/image-1.jpg"
               alt="BizzBuzz Creations AI team at work"
               fill
               sizes="(max-width: 1024px) 100vw, 440px"

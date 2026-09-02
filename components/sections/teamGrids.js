@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
@@ -127,11 +128,33 @@ function RoleCard({
 }) {
   const isXl = size === "xl";
   const isLarge = size === "large" || isXl;
+  // Desktop flips these cards on :hover, which touch devices can never
+  // trigger — so on mobile the card just sat there, front-face-only,
+  // forever. Tapping now toggles the same flip via this state, on top of
+  // (not instead of) the existing hover behavior for mouse users.
+  const [flipped, setFlipped] = useState(false);
 
   if (flip) {
     return (
-      <motion.div {...fadeUp(index)} className="group [perspective:1500px]">
-        <div className="relative transition-transform duration-700 ease-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+      <motion.div
+        {...fadeUp(index)}
+        className="group [perspective:1500px] cursor-pointer"
+        onClick={() => setFlipped((f) => !f)}
+        role="button"
+        tabIndex={0}
+        aria-pressed={flipped}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setFlipped((f) => !f);
+          }
+        }}
+      >
+        <div
+          className={`relative transition-transform duration-700 ease-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] ${
+            flipped ? "[transform:rotateY(180deg)]" : ""
+          }`}
+        >
           {/* Front — identical markup to the non-flip card below, just
               sized the same way via isXl/isLarge so flip cards match
               whichever grid (Founders, Leaders) they're used in. */}
@@ -178,6 +201,7 @@ function RoleCard({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${name || role} on LinkedIn`}
+                onClick={(e) => e.stopPropagation()}
                 className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 text-[#40A2D8] hover:bg-white hover:text-[#0B60B0] transition-colors duration-300"
               >
                 <Linkedin size={19} />
@@ -187,6 +211,7 @@ function RoleCard({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${name || role} on Instagram`}
+                onClick={(e) => e.stopPropagation()}
                 className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 text-[#40A2D8] hover:bg-white hover:text-[#0B60B0] transition-colors duration-300"
               >
                 <Instagram size={19} />
@@ -329,7 +354,7 @@ export default function TeamGrids({ content } = {}) {
                 >
                   <motion.div
                     {...fadeUp(i)}
-                    className={imageFirst ? "md:order-2" : ""}
+                    className={`order-2 ${imageFirst ? "md:order-2" : "md:order-1"}`}
                   >
                     <h2 className="text-xl md:text-2xl font-bold text-white mb-2">
                       {group.title}
@@ -344,8 +369,8 @@ export default function TeamGrids({ content } = {}) {
 
                   <motion.div
                     {...fadeUp(i + 1)}
-                    className={`relative aspect-[16/10] rounded-3xl overflow-hidden shadow-lg ${
-                      imageFirst ? "md:order-1" : ""
+                    className={`relative order-1 aspect-[16/10] rounded-3xl overflow-hidden shadow-lg ${
+                      imageFirst ? "md:order-1" : "md:order-2"
                     }`}
                   >
                     <Image

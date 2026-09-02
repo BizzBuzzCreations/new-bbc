@@ -84,7 +84,7 @@ const CustomAccordionContent = React.forwardRef(
       )}
       {...props}
     >
-      <div className="mt-4 ml-14">
+      <div className="mt-4 ml-0 sm:ml-14">
         <div
           className={cn(
             "flex items-start gap-4 rounded-2xl bg-white p-4 shadow-md transition-all",

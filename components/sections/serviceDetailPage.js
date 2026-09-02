@@ -6,6 +6,7 @@ import DarkFAQSection from "@/components/sections/darkFAQSection";
 import NumberedDeliverablesCarousel from "@/components/sections/numberedDeliverablesCarousel";
 import ServiceBreakdownGrid from "@/components/sections/serviceBreakdownGrid";
 import RoadmapCarousel from "@/components/sections/roadmapCarousel";
+import CapabilityCard from "@/components/ui/capabilityCard";
 
 // Shared template every dedicated /<service-hub>/<slug> page renders
 // through — the same rich layout used for /industries/<slug> pages
@@ -198,30 +199,13 @@ export default function ServiceDetailPage({
             className={`grid sm:grid-cols-2 lg:grid-cols-3 gap-5 ${capabilitiesHoverReveal ? "items-start" : ""}`}
           >
             {capabilities.map(({ icon: CapIcon, title, desc }) => (
-              <div
+              <CapabilityCard
                 key={title}
-                className="group rounded-2xl p-6 border border-white/10 bg-white/[0.03] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/20"
-              >
-                <span className="flex items-center justify-center w-11 h-11 rounded-xl mb-4 bg-white/10 text-[#40A2D8] transition-colors duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
-                  <CapIcon size={20} />
-                </span>
-                <h3
-                  className={`font-bold text-white ${capabilitiesHoverReveal ? "" : "mb-2"}`}
-                >
-                  {title}
-                </h3>
-                {capabilitiesHoverReveal ? (
-                  <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out">
-                    <p className="overflow-hidden text-sm leading-relaxed text-white/60 pt-2 transition-colors duration-300 group-hover:text-white/85">
-                      {desc}
-                    </p>
-                  </div>
-                ) : (
-                  <p className="text-sm leading-relaxed text-white/60 transition-colors duration-300 group-hover:text-white/85">
-                    {desc}
-                  </p>
-                )}
-              </div>
+                icon={<CapIcon size={20} />}
+                title={title}
+                desc={desc}
+                hoverReveal={capabilitiesHoverReveal}
+              />
             ))}
           </div>
         </div>

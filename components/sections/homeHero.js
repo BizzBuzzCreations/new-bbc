@@ -14,10 +14,20 @@ export default function HomeHero({ content }) {
     content?.heroSubtext ||
     "Looking for a trusted digital marketing agency in Prayagraj that helps your business generate more leads, increase website traffic, and grow revenue? Welcome to BizzBuzz Creations.";
   const ctaText = content?.heroCtaText || "Get Free Consultation";
-  const posterImage = content?.heroPosterImage || "/hero (1).webp";
+  const posterImage = content?.heroPosterImage || "/image-1.jpg";
 
   return (
     <>
+      {/* Resource hint — tells the browser to start fetching the (large,
+          ~13MB) hero video immediately, in parallel with everything else,
+          instead of waiting for it to be discovered here in the render
+          tree. Without this the video could take a moment to have any
+          frame ready, during which the poster (previously pointing at a
+          file that didn't exist in /public, so nothing rendered at all)
+          was the only thing standing between the video element and a
+          blank section. */}
+      <link rel="preload" as="video" href="/hero-sec.webm" type="video/webm" />
+
       <div className="relative overflow-hidden min-h-[90vh] text-white flex flex-col justify-center pb-30 -mt-14 pt-14 md:-mt-[72px] md:pt-[72px]">
         {/* Background video */}
         <video
@@ -25,6 +35,7 @@ export default function HomeHero({ content }) {
           muted
           loop
           playsInline
+          preload="auto"
           poster={posterImage}
           className="absolute inset-0 w-full h-full object-cover"
         >

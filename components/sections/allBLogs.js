@@ -267,7 +267,10 @@ export default function AllBLogs() {
                 return (
                 <div
                   key={index}
-                  className="group relative rounded-2xl border border-white/10 bg-white/5 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-[#40A2D8] hover:shadow-xl hover:shadow-black/40"
+                  // On mobile only, cap the visible cards at 6 (fetch count,
+                  // pagination, and the desktop/tablet grid are untouched —
+                  // this is a pure display cap for narrow screens).
+                  className={`group relative rounded-2xl border border-white/10 bg-white/5 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-[#40A2D8] hover:shadow-xl hover:shadow-black/40 ${index >= 6 ? "hidden md:block" : ""}`}
                 >
                   <Link
                     href={`/blog/${e?.slug}`}

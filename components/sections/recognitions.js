@@ -115,7 +115,7 @@ export default function Recognitions({ content }) {
 
         {/* Featured badge — grows and gets a trophy pop-in whenever a row
             above is hovered. */}
-        <div className="relative flex justify-center items-center h-[340px]">
+        <div className="relative flex justify-center items-center h-[260px] sm:h-[340px] px-8">
           <AnimatePresence mode="wait">
             <motion.div
               key={current.org}
@@ -123,7 +123,7 @@ export default function Recognitions({ content }) {
               animate={{ opacity: 1, scale: 1.08 }}
               exit={{ opacity: 0, scale: 0.85 }}
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-72 h-72 bg-white/5 border border-white/10 rounded-3xl flex items-center justify-center shadow-2xl"
+              className="relative w-52 h-52 sm:w-72 sm:h-72 bg-white/5 border border-white/10 rounded-3xl flex items-center justify-center shadow-2xl"
             >
               <div
                 className="absolute inset-0 rounded-3xl opacity-40"
@@ -138,17 +138,23 @@ export default function Recognitions({ content }) {
                 alt={current.alt}
                 width={170}
                 height={170}
-                className="relative object-contain"
+                className="relative object-contain w-[120px] h-[120px] sm:w-[170px] sm:h-[170px]"
               />
 
+              {/* Smaller + closer-in on mobile (-top-3/-right-3 instead of
+                  -top-7/-right-7) so the trophy badge never pokes past the
+                  section's own padding and gets clipped at the screen
+                  edge — it only needed the bigger offset on wider screens
+                  where there's room to spare. */}
               <motion.div
                 key={`trophy-${current.org}`}
                 initial={{ opacity: 0, scale: 0.4, y: 10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.15, type: "spring", stiffness: 260, damping: 18 }}
-                className="absolute -top-7 -right-7 bg-[#0B60B0] text-white rounded-full p-4 shadow-xl"
+                className="absolute -top-3 -right-3 sm:-top-7 sm:-right-7 bg-[#0B60B0] text-white rounded-full p-2.5 sm:p-4 shadow-xl"
               >
-                <Trophy size={30} />
+                <Trophy size={22} className="sm:hidden" />
+                <Trophy size={30} className="hidden sm:block" />
               </motion.div>
             </motion.div>
           </AnimatePresence>

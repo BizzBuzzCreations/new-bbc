@@ -10,6 +10,25 @@ export default function JoinTeamCTA({ content }) {
   const careersButtonText = content?.joinTeamCareersButtonText || "See All Careers";
   const image = content?.joinTeamImage || "/teamPic.webp";
 
+  const emailLink = (
+    <Link
+      href="mailto:info@bizzbuzzcreations.com"
+      className="inline-flex items-center justify-center gap-1.5 border-2 border-[#0B60B0] text-[#0B60B0] hover:bg-[#0B60B0] hover:text-white text-xs sm:text-sm font-semibold px-4 sm:px-6 py-3 rounded-full transition"
+    >
+      <Mail size={16} />
+      {emailButtonText}
+    </Link>
+  );
+  const careersLink = (
+    <Link
+      href="/career"
+      className="inline-flex items-center justify-center gap-1.5 bg-[#0B60B0] hover:bg-black text-white text-xs sm:text-sm font-semibold px-4 sm:px-6 py-3 rounded-full transition-colors duration-300"
+    >
+      {careersButtonText}
+      <ArrowUpRight size={16} />
+    </Link>
+  );
+
   return (
     <section
       className="overflow-hidden"
@@ -32,21 +51,12 @@ export default function JoinTeamCTA({ content }) {
           <p className="text-black/60 mb-8 max-w-sm">
             {paragraph}
           </p>
-          <div className="flex flex-wrap items-center gap-4">
-            <Link
-              href="mailto:info@bizzbuzzcreations.com"
-              className="inline-flex items-center gap-1.5 border-2 border-[#0B60B0] text-[#0B60B0] hover:bg-[#0B60B0] hover:text-white text-sm font-semibold px-6 py-3 rounded-full transition"
-            >
-              <Mail size={16} />
-              {emailButtonText}
-            </Link>
-            <Link
-              href="/career"
-              className="inline-flex items-center gap-1.5 bg-[#0B60B0] hover:bg-black text-white text-sm font-semibold px-6 py-3 rounded-full transition-colors duration-300"
-            >
-              {careersButtonText}
-              <ArrowUpRight size={16} />
-            </Link>
+
+          {/* Desktop/tablet: buttons stay right under the paragraph, in
+              their own text column, same as before. */}
+          <div className="hidden lg:flex flex-wrap items-center gap-4">
+            {emailLink}
+            {careersLink}
           </div>
         </div>
 
@@ -62,6 +72,14 @@ export default function JoinTeamCTA({ content }) {
               className="object-cover"
             />
           </div>
+        </div>
+
+        {/* Mobile/tablet: image comes first (above), then both buttons
+            side by side underneath — a grid (not flex-wrap) so they stay
+            on one row instead of stacking on narrow screens. */}
+        <div className="grid grid-cols-2 gap-3 lg:hidden">
+          {emailLink}
+          {careersLink}
         </div>
       </div>
     </section>
