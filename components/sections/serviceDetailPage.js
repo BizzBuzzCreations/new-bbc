@@ -19,7 +19,7 @@ const CERTIFICATIONS = [
   { src: "/clutch.png", alt: "Clutch — Verified Partner" },
   { src: "/CDL.png", alt: "Certified Google Ads Partner" },
   { src: "/GA.png", alt: "Certified Google Analytics Partner" },
-  { src: "/ISO.png", alt: "ISO Certified" },
+  { src: "/iso.png", alt: "ISO Certified" },
 ];
 
 export default function ServiceDetailPage({

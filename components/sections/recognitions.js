@@ -34,7 +34,7 @@ const RECOGNITIONS = [
     org: "ISO",
     status: "Certified",
     title: "Quality-certified business processes",
-    badge: "/ISO.png",
+    badge: "/iso.png",
     alt: "ISO Certified",
   },
 ];

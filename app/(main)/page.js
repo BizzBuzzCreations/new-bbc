@@ -6,7 +6,6 @@ import OurServices from "@/components/sections/ourServices";
 import CaseStudies from "@/components/sections/caseStudies";
 import ScrollZoomReveal from "@/components/sections/scrollZoomReveal";
 import StatsShowcase from "@/components/sections/statsShowcase";
-import WavyDivider from "@/components/ui/wavy-divider";
 import AiShowcase from "@/components/sections/aiShowcase";
 import Reviews from "@/components/sections/reviews";
 import WhatMAkesUs from "@/components/sections/whatMakesUs";
@@ -64,19 +63,14 @@ export default async function Home() {
       {/* Case Studies — client work carousel */}
       <CaseStudies content={content} />
 
-      {/* Scroll-pinned "Know More About Us" zoom-text transition — the
-          rest of the homepage sections continue right after this. */}
-      <ScrollZoomReveal />
-
-      {/* Wavy divider — visually splits the two back-to-back dark sections.
-          Padding on both sides keeps it floating in the middle of the gap
-          instead of sitting flush against the section below it. */}
-      <div className="bg-black pt-3 pb-8 md:pt-4 md:pb-10">
-        <WavyDivider />
-      </div>
-
-      {/* Stats showcase — auto-scrolling numbers/logos/services carousel */}
+      {/* Stats showcase — auto-scrolling numbers/logos/services carousel —
+          now directly after Case Studies. */}
       <StatsShowcase content={content} />
+
+      {/* Scroll-pinned "Know More About Us" zoom-text transition — releases
+          straight into AiShowcase below with no divider/gap in between, so
+          the pin lets go right as the next section is already there. */}
+      <ScrollZoomReveal />
 
       {/* AI showcase — video + AI services split section */}
       <AiShowcase content={content} />

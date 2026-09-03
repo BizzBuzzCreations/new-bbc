@@ -242,7 +242,7 @@ export default function StatsShowcase({ content }) {
 
   return (
     <section
-      className="bg-black pt-16 pb-20 overflow-hidden"
+      className="bg-black pt-8 pb-20 overflow-hidden"
       aria-label="BizzBuzz Creations by the numbers"
       onMouseEnter={() => {
         hoveringRef.current = true;

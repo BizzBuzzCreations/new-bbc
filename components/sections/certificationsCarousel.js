@@ -11,7 +11,7 @@ const CERTIFICATIONS = [
   { src: "/clutch.png", alt: "Clutch — Verified Partner", label: "Clutch", sub: "Verified Partner" },
   { src: "/CDL.png", alt: "Certified Google Ads Partner", label: "Google Partner", sub: "Certified" },
   { src: "/GA.png", alt: "Certified Google Analytics Partner", label: "Google Analytics", sub: "Certified" },
-  { src: "/ISO.png", alt: "ISO Certified", label: "ISO", sub: "Certified" },
+  { src: "/iso.png", alt: "ISO Certified", label: "ISO", sub: "Certified" },
 ];
 
 export default function CertificationsCarousel() {

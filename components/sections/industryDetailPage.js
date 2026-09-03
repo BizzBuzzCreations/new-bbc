@@ -17,7 +17,7 @@ const CERTIFICATIONS = [
   { src: "/clutch.png", alt: "Clutch — Verified Partner" },
   { src: "/CDL.png", alt: "Certified Google Ads Partner" },
   { src: "/GA.png", alt: "Certified Google Analytics Partner" },
-  { src: "/ISO.png", alt: "ISO Certified" },
+  { src: "/iso.png", alt: "ISO Certified" },
 ];
 
 export default function IndustryDetailPage({
@@ -31,6 +31,9 @@ export default function IndustryDetailPage({
   heroTitle,
   heroDescription,
   heroCtaText,
+  // Optional hero image — real per-industry photos, all a uniform
+  // 1440x504 (~2.86:1) crop, sourced from lib/industryPageContent.js.
+  heroImage,
   capabilities,
   // Optional override for the capabilities section's small eyebrow
   // heading — defaults to "Built for Every Corner of {label}".
@@ -77,9 +80,6 @@ export default function IndustryDetailPage({
   // Healthcare's local-market positioning copy).
   whyChooseUsHeading,
   whyChooseUsText,
-  // Mobile-only photo shown between the heading and the paragraph — no
-  // per-industry override needed unless a page wants a different one.
-  whyChooseUsImage = "/image-2.jpg",
   // Optional override for the closing CTA — when ctaHeading is supplied,
   // it replaces the shared site-wide email-form CTA with a page-local
   // heading + paragraph + two buttons (e.g. Healthcare's dedicated CTA).
@@ -90,13 +90,43 @@ export default function IndustryDetailPage({
 }) {
   return (
     <>
-      {/* Hero */}
+      {/* Hero — full-bleed background photo (same treatment used for the
+          sub-service pages' heroImage) when supplied; otherwise the plain
+          gradient hero. These industry photos are all a uniform 1440x504
+          (~2.86:1) crop — desktop's aspect-ratio matches that closely so
+          object-fit: cover needs almost no vertical crop. */}
       <section
-        className="relative overflow-hidden pt-28 md:pt-32 pb-20 px-6 md:px-12 lg:px-24 text-white"
-        style={{
-          background: "radial-gradient(circle at top, #0d1b2e, #000000)",
-        }}
+        className={
+          heroImage
+            ? "relative min-h-[50vh] md:min-h-0 md:aspect-[20/7] flex items-center overflow-hidden pt-28 md:pt-32 pb-20 px-6 md:px-12 lg:px-24 text-white"
+            : "relative overflow-hidden pt-28 md:pt-32 pb-20 px-6 md:px-12 lg:px-24 text-white"
+        }
+        style={
+          heroImage
+            ? undefined
+            : { background: "radial-gradient(circle at top, #0d1b2e, #000000)" }
+        }
       >
+        {heroImage && (
+          <>
+            <Image
+              src={heroImage}
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-top"
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(100deg, rgba(5,11,22,0.94) 0%, rgba(11,96,176,0.85) 42%, rgba(11,96,176,0.25) 70%, transparent 100%)",
+              }}
+              aria-hidden="true"
+            />
+          </>
+        )}
 
         <div className="relative max-w-3xl">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
@@ -421,52 +451,61 @@ export default function IndustryDetailPage({
       {/* Why choose us — replaced with a single custom heading + paragraph
           when whyChooseUsText is supplied (e.g. Healthcare's local-market
           positioning copy); otherwise the generic trustPoints checklist
-          every other industry still gets. */}
+          every other industry still gets. When whyChooseUsText is set,
+          this is a plain two-column layout — content on the left, the
+          same per-industry heroImage as its own boxed photo on the right
+          (not a full-bleed background behind the text anymore). */}
       <section className="bg-[#050505] py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
-        <div className={whyChooseUsText ? "max-w-4xl" : "max-w-4xl mx-auto text-center"}>
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-            {whyChooseUsHeading || `Why ${label} Businesses Choose Us`}
-          </h2>
-          {whyChooseUsText ? (
-            <>
-              {/* Mobile only — image between the heading and the
-                  paragraph. */}
-              <div className="md:hidden relative w-full max-w-md mx-auto aspect-[16/10] rounded-2xl overflow-hidden shadow-lg mb-6">
-                <Image
-                  src={whyChooseUsImage}
-                  alt={whyChooseUsHeading || `Why ${label} businesses choose BizzBuzz Creations`}
-                  fill
-                  sizes="100vw"
-                  className="object-cover"
-                />
-              </div>
-              <p className="text-white/70 leading-relaxed max-w-3xl">
+        <div
+          className={
+            whyChooseUsText
+              ? "max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center"
+              : "max-w-4xl mx-auto text-center"
+          }
+        >
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              {whyChooseUsHeading || `Why ${label} Businesses Choose Us`}
+            </h2>
+            {whyChooseUsText ? (
+              <p className="text-white/70 leading-relaxed max-w-xl">
                 {whyChooseUsText}
               </p>
-            </>
-          ) : (
-            <>
-              <p className="text-white/60 leading-relaxed mb-12 max-w-2xl mx-auto">
-                The same standards we hold ourselves to on every engagement,{" "}
-                {label.toLowerCase()} included.
-              </p>
-              <ul className="grid sm:grid-cols-2 gap-5 text-left">
-                {trustPoints.map((point) => (
-                  <li
-                    key={point}
-                    className="group flex items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/20"
-                  >
-                    <CheckCircle2
-                      size={18}
-                      className="text-[#40A2D8] shrink-0 mt-0.5 transition-colors duration-300 group-hover:text-white"
-                    />
-                    <span className="text-white/70 text-sm leading-relaxed transition-colors duration-300 group-hover:text-white">
-                      {point}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </>
+            ) : (
+              <>
+                <p className="text-white/60 leading-relaxed mb-12 max-w-2xl mx-auto">
+                  The same standards we hold ourselves to on every engagement,{" "}
+                  {label.toLowerCase()} included.
+                </p>
+                <ul className="grid sm:grid-cols-2 gap-5 text-left">
+                  {trustPoints.map((point) => (
+                    <li
+                      key={point}
+                      className="group flex items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/20"
+                    >
+                      <CheckCircle2
+                        size={18}
+                        className="text-[#40A2D8] shrink-0 mt-0.5 transition-colors duration-300 group-hover:text-white"
+                      />
+                      <span className="text-white/70 text-sm leading-relaxed transition-colors duration-300 group-hover:text-white">
+                        {point}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
+          {whyChooseUsText && heroImage && (
+            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
+              <Image
+                src={heroImage}
+                alt={whyChooseUsHeading || `Why ${label} businesses choose BizzBuzz Creations`}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
           )}
         </div>
       </section>

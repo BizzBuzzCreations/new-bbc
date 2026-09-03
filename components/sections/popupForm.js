@@ -161,7 +161,7 @@ export default function ConsultationPopup({ content }) {
               </li>
               <li>
                 <Image
-                  src="/ISO.png"
+                  src="/iso.png"
                   width={80}
                   height={80}
                   alt="ISO Partner"

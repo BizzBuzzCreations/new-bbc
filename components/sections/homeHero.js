@@ -27,20 +27,25 @@ export default function HomeHero({ content }) {
           blank section. */}
       <link rel="preload" as="video" href="/hero-sec.webm" type="video/webm" />
 
-      <div className="relative overflow-hidden min-h-[90vh] text-white flex flex-col justify-center pb-30 -mt-14 pt-14 md:-mt-[72px] md:pt-[72px]">
-        {/* Background video — no poster image. A poster always flashes
-            up front (that's what a poster is: shown immediately, then
-            swapped out once the video has a decoded frame ready), which
-            read as a jarring photo-then-video glitch. Dropping it leaves
-            a plain black frame for that instant instead, which blends
-            straight into the section's own dark scrim/background. */}
+      <div className="relative overflow-hidden min-h-[90vh] text-white flex flex-col justify-center pb-30 -mt-14 pt-14 md:-mt-[72px] md:pt-[72px] bg-black">
+        {/* Background video — desktop/tablet only. On mobile there's no
+            room for a full-bleed video behind the text without it either
+            looking cramped or getting cropped oddly, so mobile gets a
+            plain black background instead and the same video shows lower
+            down as its own contained box (below). No poster image on the
+            desktop video — a poster always flashes up front (that's what
+            a poster is: shown immediately, then swapped out once the
+            video has a decoded frame ready), which read as a jarring
+            photo-then-video glitch. Dropping it leaves a plain black
+            frame for that instant instead, which blends straight into
+            the section's own dark scrim/background. */}
         <video
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
-          className="absolute inset-0 w-full h-full object-cover bg-black"
+          className="hidden md:block absolute inset-0 w-full h-full object-cover bg-black"
         >
           <source src="/hero-sec.webm" type="video/webm" />
           <source src="/Sequence 01 1.mp4" type="video/mp4" />
@@ -91,6 +96,29 @@ export default function HomeHero({ content }) {
           >
             {subtext}
           </motion.p>
+
+          {/* Mobile-only — the same background video, but as its own
+              contained box between the paragraph and the CTA button,
+              instead of playing full-bleed behind the text. */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ ...reveal, delay: 0.38 }}
+            className="md:hidden relative w-full max-w-sm aspect-video rounded-2xl overflow-hidden shadow-xl mb-8"
+          >
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              className="absolute inset-0 w-full h-full object-cover bg-black"
+            >
+              <source src="/hero-sec.webm" type="video/webm" />
+              <source src="/Sequence 01 1.mp4" type="video/mp4" />
+            </video>
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}

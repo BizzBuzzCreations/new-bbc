@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Crown,
@@ -32,29 +33,29 @@ const DEFAULT_FOUNDERS = [
 
 const LEADER_ICONS = [Search, Megaphone, Palette, Code2, Bot, Briefcase];
 const DEFAULT_LEADERS = [
-  { role: "Head of SEO & Growth", dept: "SEO" },
-  { role: "Paid Media Lead", dept: "Paid Ads" },
-  { role: "Creative & Brand Director", dept: "Creative" },
-  { role: "Web Development Lead", dept: "Engineering" },
-  { role: "AI & Automation Lead", dept: "AI & Automation" },
-  { role: "Business Consultancy Lead", dept: "Consultancy" },
+  { name: "Abhay Sharma", role: "Head of SEO & Growth", dept: "SEO" },
+  { name: "Kautic Jaiswal", role: "Paid Media Lead", dept: "Paid Ads" },
+  { name: "Swapnil Singh", role: "Creative & Brand Director", dept: "Creative" },
+  { name: "Shruti Singh", role: "Web Development Lead", dept: "Engineering" },
+  { name: "Aley Saiyyadah Rizvi", role: "AI & Automation Lead", dept: "AI & Automation" },
+  { name: "Md. Shameem", role: "Business Consultancy Lead", dept: "Consultancy" },
 ];
 
-// Real BizzBuzz team photos (same assets already used elsewhere on the
-// site — the hero and the About page's "Our Story" section), not
-// fabricated department photos.
+// Real BizzBuzz team photos — /teamPic.webp and /banner.png don't exist
+// in /public (both rendered as broken image icons); swapped for a real
+// office photo already used elsewhere on the site.
 const DEFAULT_TEAM_GROUPS = [
   {
     title: "Meet Our BPO Team",
     tagline: "The People Keeping Every Customer Interaction Moving",
     desc: "Our BPO team handles customer support, lead follow-ups, communication, and day-to-day customer interactions, helping businesses stay responsive while creating smoother experiences for their customers.",
-    image: "/teamPic.webp",
+    image: "/image-1.jpg",
   },
   {
     title: "Meet Our R&D Team",
     tagline: "Exploring What’s Next in Digital",
     desc: "Our R&D team researches and tests emerging technologies across AI search, SEO, automation, digital tools, and evolving search behaviour. Their work helps us turn new developments into practical strategies and smarter solutions for the businesses we serve.",
-    image: "/banner.png",
+    image: "/image-1.jpg",
   },
 ];
 
@@ -112,7 +113,7 @@ const fadeUp = (i) => ({
   transition: { duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] },
 });
 
-function RoleCard({
+export function RoleCard({
   icon: Icon,
   name,
   role,
@@ -362,9 +363,15 @@ export default function TeamGrids({ content } = {}) {
                     <h3 className="text-base md:text-lg font-semibold text-[#40A2D8] mb-4">
                       {group.tagline}
                     </h3>
-                    <p className="text-white/60 leading-relaxed">
+                    <p className="text-white/60 leading-relaxed mb-6">
                       {group.desc}
                     </p>
+                    <Link
+                      href={i === 0 ? "/our-team/bpo-team" : "/our-team/rnd-team"}
+                      className="inline-flex items-center gap-2 bg-[#0B60B0] hover:bg-white text-white hover:text-black text-sm font-semibold px-6 py-3 rounded-full transition-colors duration-300 w-fit"
+                    >
+                      Our Team
+                    </Link>
                   </motion.div>
 
                   <motion.div
