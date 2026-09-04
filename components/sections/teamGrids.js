@@ -134,6 +134,11 @@ export function RoleCard({
   // BPO/R&D team grids only want LinkedIn on the back — Founders/Leaders
   // keep both, unchanged.
   showInstagram = true,
+  // Optional real headshot — when set, this replaces the generic
+  // icon-in-a-circle placeholder with an actual photo filling the same
+  // image area. Most roles still use the icon since a real photo isn't
+  // available for everyone yet.
+  photo,
 }) {
   const isXl = size === "xl";
   const isLarge = size === "large" || isXl;
@@ -169,15 +174,19 @@ export function RoleCard({
               whichever grid (Founders, Leaders) they're used in. */}
           <div className="[backface-visibility:hidden] rounded-2xl border border-white/10 bg-white/5 overflow-hidden shadow-sm">
             <div
-              className={`${isLarge ? "aspect-[4/3]" : "aspect-square"} flex items-center justify-center bg-white/5`}
+              className={`relative ${photo ? "aspect-[3/4]" : isLarge ? "aspect-[4/3]" : "aspect-square"} flex items-center justify-center bg-white/5`}
             >
-              <div
-                className={`flex items-center justify-center rounded-full bg-white/10 text-[#40A2D8] ${
-                  isXl ? "w-28 h-28" : isLarge ? "w-20 h-20" : "w-16 h-16"
-                }`}
-              >
-                <Icon size={isXl ? 48 : isLarge ? 34 : 28} />
-              </div>
+              {photo ? (
+                <Image src={photo} alt={name || role} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover object-top" />
+              ) : (
+                <div
+                  className={`flex items-center justify-center rounded-full bg-white/10 text-[#40A2D8] ${
+                    isXl ? "w-28 h-28" : isLarge ? "w-20 h-20" : "w-16 h-16"
+                  }`}
+                >
+                  <Icon size={isXl ? 48 : isLarge ? 34 : 28} />
+                </div>
+              )}
             </div>
             <div className={isXl ? "p-6" : "p-4"}>
               {dept && (
@@ -240,15 +249,19 @@ export function RoleCard({
       className="group rounded-2xl border border-white/10 bg-white/5 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-black/40"
     >
       <div
-        className={`${isLarge ? "aspect-[4/3]" : "aspect-square"} flex items-center justify-center bg-white/5`}
+        className={`relative ${photo ? "aspect-[3/4]" : isLarge ? "aspect-[4/3]" : "aspect-square"} flex items-center justify-center bg-white/5`}
       >
-        <div
-          className={`flex items-center justify-center rounded-full bg-white/10 text-[#40A2D8] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#0B60B0] group-hover:text-white ${
-            isXl ? "w-28 h-28" : isLarge ? "w-20 h-20" : "w-16 h-16"
-          }`}
-        >
-          <Icon size={isXl ? 48 : isLarge ? 34 : 28} />
-        </div>
+        {photo ? (
+          <Image src={photo} alt={name || role} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover object-top" />
+        ) : (
+          <div
+            className={`flex items-center justify-center rounded-full bg-white/10 text-[#40A2D8] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#0B60B0] group-hover:text-white ${
+              isXl ? "w-28 h-28" : isLarge ? "w-20 h-20" : "w-16 h-16"
+            }`}
+          >
+            <Icon size={isXl ? 48 : isLarge ? 34 : 28} />
+          </div>
+        )}
       </div>
       <div className={isXl ? "p-6" : "p-4"}>
         {dept && (

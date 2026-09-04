@@ -15,9 +15,9 @@ const RND_TEAM = [
   { icon: Search, name: "Md. Shaquib", role: "SEO Specialist" },
   { icon: PenTool, name: "Khushi Gupta", role: "Content Writer & SEO Executive" },
   { icon: Palette, name: "Mudit Srivastava", role: "Graphic Designer & Video Editor" },
-  { icon: Code2, name: "Kushmal Arora", role: "Full Stack Developer" },
+  { icon: Code2, name: "Kushmal Arora", role: "Full Stack Developer", photo: "/team-images/Kushmal.jpg" },
   { icon: Terminal, name: "Shashwat Upadhayay", role: "DevOps Engineer" },
-  { icon: Settings, name: "Tejash Yadav", role: "DevOps Engineer" },
+  { icon: Settings, name: "Tejash Yadav", role: "DevOps Engineer", photo: "/team-images/Tejash.jpg" },
 ];
 
 // Two explicit rows (4 then 3) instead of one 3-column grid — a single
@@ -32,12 +32,13 @@ export default function RndTeamGrid() {
   return (
     <div className="flex flex-col gap-8">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-        {ROW_1.map(({ icon: Icon, name, role }, i) => (
+        {ROW_1.map(({ icon: Icon, name, role, photo }, i) => (
           <RoleCard
             key={i}
             icon={Icon}
             name={name}
             role={role}
+            photo={photo}
             index={i}
             size="xl"
             showInstagram={false}
@@ -46,12 +47,13 @@ export default function RndTeamGrid() {
         ))}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:w-3/4 mx-auto">
-        {ROW_2.map(({ icon: Icon, name, role }, i) => (
+        {ROW_2.map(({ icon: Icon, name, role, photo }, i) => (
           <RoleCard
             key={i + 4}
             icon={Icon}
             name={name}
             role={role}
+            photo={photo}
             index={i + 4}
             size="xl"
             showInstagram={false}
