@@ -1,12 +1,17 @@
 "use client";
 
-import { Search, PenTool, Palette, Code2, Terminal, Settings } from "lucide-react";
+import { BarChart3, Search, PenTool, Palette, Code2, Terminal, Settings } from "lucide-react";
 import { RoleCard } from "@/components/sections/teamGrids";
 
 // Icon components live here (inside a "use client" file) rather than
 // being passed in as props from the page.js Server Component — see
 // bpoTeamGrid.js for why.
+//
+// Back to the same flippable dark-box card style used by the BPO team
+// grid and the Founders section (RoleCard) — was briefly a circular-ring
+// layout, reverted here per request, content unchanged either way.
 const RND_TEAM = [
+  { icon: BarChart3, name: "Paridhi Verma", role: "Data Analyst" },
   { icon: Search, name: "Md. Shaquib", role: "SEO Specialist" },
   { icon: PenTool, name: "Khushi Gupta", role: "Content Writer & SEO Executive" },
   { icon: Palette, name: "Mudit Srivastava", role: "Graphic Designer & Video Editor" },
@@ -15,21 +20,45 @@ const RND_TEAM = [
   { icon: Settings, name: "Tejash Yadav", role: "DevOps Engineer" },
 ];
 
+// Two explicit rows (4 then 3) instead of one 3-column grid — a single
+// `lg:grid-cols-3` on 7 cards lands on 3+3+1, which reads as broken;
+// splitting into a fixed 4-across row and a 3-across row (width-matched
+// to the same column track via `lg:w-3/4 mx-auto`) keeps it a clean
+// 4-then-3 every time — same treatment as the Leaders section.
+const ROW_1 = RND_TEAM.slice(0, 4);
+const ROW_2 = RND_TEAM.slice(4);
+
 export default function RndTeamGrid() {
   return (
-    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      {RND_TEAM.map(({ icon: Icon, name, role }, i) => (
-        <RoleCard
-          key={i}
-          icon={Icon}
-          name={name}
-          role={role}
-          index={i}
-          size="xl"
-          showInstagram={false}
-          flip
-        />
-      ))}
+    <div className="flex flex-col gap-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        {ROW_1.map(({ icon: Icon, name, role }, i) => (
+          <RoleCard
+            key={i}
+            icon={Icon}
+            name={name}
+            role={role}
+            index={i}
+            size="xl"
+            showInstagram={false}
+            flip
+          />
+        ))}
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:w-3/4 mx-auto">
+        {ROW_2.map(({ icon: Icon, name, role }, i) => (
+          <RoleCard
+            key={i + 4}
+            icon={Icon}
+            name={name}
+            role={role}
+            index={i + 4}
+            size="xl"
+            showInstagram={false}
+            flip
+          />
+        ))}
+      </div>
     </div>
   );
 }

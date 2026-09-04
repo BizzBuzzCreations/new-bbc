@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
@@ -97,17 +98,21 @@ export default function IndustriesShowcase({ content }) {
             stacked into one long, undifferentiated list of 15 names. Tap
             (not just hover) a name to preview it. */}
         <div className="md:hidden">
-          <div className="relative w-full h-56 rounded-2xl overflow-hidden border border-white/10 bg-linear-to-br from-[#0B60B0]/20 to-[#40A2D8]/10 flex items-center justify-center mb-8">
+          <div className="relative w-full h-56 rounded-2xl overflow-hidden border border-white/10 bg-linear-to-br from-[#0B60B0]/20 to-[#40A2D8]/10 mb-8">
             <AnimatePresence mode="wait">
               <motion.div
                 key={current.label}
-                initial={{ opacity: 0, scale: 0.85 }}
+                initial={{ opacity: 0, scale: 1.05 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.85 }}
+                exit={{ opacity: 0, scale: 1.05 }}
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                className="w-24 h-24 rounded-full bg-white/10 border border-white/15 flex items-center justify-center"
+                className="absolute inset-0"
               >
-                <Icon size={44} className="text-[#40A2D8]" />
+                <Image src={current.image} alt={current.label} fill sizes="100vw" className="object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                <span className="absolute bottom-3 left-3 flex items-center justify-center w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/20 text-[#40A2D8]">
+                  <Icon size={20} />
+                </span>
               </motion.div>
             </AnimatePresence>
           </div>
@@ -141,18 +146,31 @@ export default function IndustriesShowcase({ content }) {
 
         {/* Desktop / tablet: original 3-column layout, unchanged. */}
         <div className="hidden md:grid md:grid-cols-[260px_1fr_1fr_1fr] lg:grid-cols-[280px_140px_140px_140px_minmax(300px,1fr)] gap-x-8 lg:gap-x-10 gap-y-10 items-center">
-          {/* Active industry visual */}
-          <div className="relative w-full h-56 md:h-[380px] rounded-2xl overflow-hidden border border-white/10 bg-linear-to-br from-[#0B60B0]/20 to-[#40A2D8]/10 flex items-center justify-center">
+          {/* Active industry visual — the real photo for whichever
+              industry is hovered/focused, crossfading in on change (was
+              just a generic icon in a circle before, the same for every
+              industry). */}
+          <div className="relative w-full h-56 md:h-[380px] rounded-2xl overflow-hidden border border-white/10 bg-linear-to-br from-[#0B60B0]/20 to-[#40A2D8]/10">
             <AnimatePresence mode="wait">
               <motion.div
                 key={current.label}
-                initial={{ opacity: 0, scale: 0.85 }}
+                initial={{ opacity: 0, scale: 1.05 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.85 }}
+                exit={{ opacity: 0, scale: 1.05 }}
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-white/10 border border-white/15 flex items-center justify-center"
+                className="absolute inset-0"
               >
-                <Icon size={44} className="text-[#40A2D8]" />
+                <Image
+                  src={current.image}
+                  alt={current.label}
+                  fill
+                  sizes="(max-width: 1024px) 260px, 280px"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                <span className="absolute bottom-3 left-3 flex items-center justify-center w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/20 text-[#40A2D8]">
+                  <Icon size={20} />
+                </span>
               </motion.div>
             </AnimatePresence>
           </div>

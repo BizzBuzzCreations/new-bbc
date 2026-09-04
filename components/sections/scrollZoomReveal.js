@@ -32,25 +32,44 @@ export default function ScrollZoomReveal() {
     offset: ["start start", "end end"],
   });
 
-  // Slow build for the first half, fast rush for the rest — an
-  // accelerating zoom reads much closer to a "flying through the text"
-  // effect than a constant-speed scale ever could.
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 4, 22]);
-  const blur = useTransform(scrollYProgress, [0.5, 1], [0, 6]);
+  // Slow build then a fast rush — but critically, the growth now finishes
+  // by 40% of the scroll, the same point the headline hits opacity 0
+  // below. Previously scale kept climbing all the way to 22x, and blur
+  // kept climbing too, clear through to 100% of scroll — meaning that
+  // whole back half of the scroll was spent continuously recomputing and
+  // repainting a massive (up to ~22x), GPU-heavy blurred layer that was
+  // fully invisible (opacity 0) the entire time. That's exactly what was
+  // reading as the stats content "gradually disappearing": the browser
+  // straining to composite that invisible layer every frame was dragging
+  // the whole frame's brightness/render down along with it. Once scale
+  // and blur stop changing (clamped after 0.4, same as opacity), there's
+  // nothing left animating in that invisible layer for the rest of the
+  // scroll, so the stats block renders clean and undisturbed.
+  const scale = useTransform(scrollYProgress, [0, 0.2, 0.4], [1, 4, 10]);
+  const blur = useTransform(scrollYProgress, [0.2, 0.4], [0, 6]);
   const filter = useTransform(blur, (v) => `blur(${v}px)`);
   // Hidden at the very top of the section, fades in as the user scrolls
   // (growing at the same time via `scale` above), then fades back out
-  // right at the end as it finishes zooming past frame.
-  const textOpacity = useTransform(scrollYProgress, [0, 0.2, 0.85, 1], [0, 1, 1, 0]);
+  // early — by 40% of the scroll — so the remaining 60% of this (now
+  // longer, 400vh) container is free for the stats block below to sit
+  // fully visible and static for a good long stretch, instead of only
+  // flashing on right before the pin releases.
+  const textOpacity = useTransform(scrollYProgress, [0, 0.1, 0.3, 0.4], [0, 1, 1, 0]);
 
-  // The side panels fade out early (by 30% of the scroll) so they're
-  // gone well before the zoom text grows large enough to reach that same
-  // screen area — no z-index layering needed, they simply aren't there
-  // anymore by the time it would matter.
-  const chromeOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  // Side panels + stats block now share this ONE opacity value instead of
+  // each running on its own separate timeline. They used to be staggered
+  // (panels visible early then fading out by 30%, stats fading in later
+  // around 35-45%) which made it possible for the two to independently
+  // drift out of sync — panels reading as "gone"/non-interactive at
+  // exactly the moment the stats content was on screen. Sharing one
+  // value means they always appear and stay together: fades in right as
+  // the headline fades out (0.3-0.4), then holds at full opacity with no
+  // further keyframe all the way to the end — nothing left to make it
+  // (or the panel buttons) fade or stop responding to clicks afterward.
+  const contentOpacity = useTransform(scrollYProgress, [0.3, 0.4], [0, 1]);
 
   return (
-    <div ref={containerRef} className="relative h-[300vh] bg-black">
+    <div ref={containerRef} className="relative h-[400vh] bg-black">
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
         {/* Same moving-particle backdrop used behind the contact form. */}
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
@@ -73,7 +92,7 @@ export default function ScrollZoomReveal() {
             there isn't room next to the centered heading on narrower
             screens without the two colliding. */}
         <motion.div
-          style={{ opacity: chromeOpacity }}
+          style={{ opacity: contentOpacity }}
           className="hidden lg:flex absolute left-10 xl:left-20 top-1/2 -translate-y-1/2 flex-col gap-3 w-56"
         >
           {QUICK_LINKS.map(({ icon: Icon, label, href }) => (
@@ -94,14 +113,17 @@ export default function ScrollZoomReveal() {
         {/* Right panel — heading + short blurb. Same lg-and-up visibility
             as the left panel. */}
         <motion.div
-          style={{ opacity: chromeOpacity }}
+          style={{ opacity: contentOpacity }}
           className="hidden lg:block absolute right-10 xl:right-20 top-1/2 -translate-y-1/2 w-72 text-right"
         >
           <h3 className="text-lg font-bold text-white mb-3">Who We Are</h3>
           <p className="text-sm text-white/60 leading-relaxed mb-5">
-            A full-stack digital marketing and business solutions agency
-            based in Prayagraj, India — serving clients across India, the
-            UK, and worldwide with real strategy, not guesswork.
+            BizzBuzz Creations is a digital marketing and business solutions
+            agency helping businesses in Prayagraj (Allahabad), across India,
+            and international markets build a stronger digital presence. We
+            understand that every business has different goals, audiences,
+            and challenges, so we focus on practical solutions rather than
+            one-size-fits-all marketing.
           </p>
           <Link href="/about" className="inline-block">
             <button className="animated-button whitespace-nowrap">
@@ -122,7 +144,7 @@ export default function ScrollZoomReveal() {
             fading back out right as it finishes zooming past frame. */}
         <div className="relative flex flex-col items-center text-center px-6">
           <motion.p
-            style={{ opacity: chromeOpacity }}
+            style={{ opacity: contentOpacity }}
             className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3 lg:hidden"
           >
             Who We Are
@@ -130,7 +152,7 @@ export default function ScrollZoomReveal() {
 
           <motion.div
             style={{ scale, opacity: textOpacity, filter }}
-            className="relative will-change-transform"
+            className="relative will-change-transform pointer-events-none"
           >
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white/80 leading-tight whitespace-nowrap">
               Know More
@@ -138,6 +160,43 @@ export default function ScrollZoomReveal() {
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#40A2D8] leading-tight whitespace-nowrap">
               About Us
             </h2>
+          </motion.div>
+
+          {/* A CSS `scale()` transform enlarges an element's actual
+              hit-testing area along with its visual size, not just how it
+              looks — so once this headline scaled up (to 4x-10x), its
+              invisible bounding box was silently covering a huge portion
+              of the screen, including the left/right panels, and
+              swallowing every click aimed at them even though nothing was
+              visible there. `pointer-events-none` above stops it from
+              ever intercepting clicks, fixing the panel buttons.
+
+              This block sits in the exact same centered spot, absolutely
+              positioned so it doesn't push into the headline's own layout
+              flow — fades in together with the side panels (both on
+              `contentOpacity` now) right as the headline finishes fading
+              out, then holds there, static, for the rest of the scroll. */}
+          <motion.div
+            style={{ opacity: contentOpacity }}
+            className="absolute inset-0 flex flex-col items-center justify-center gap-6 sm:gap-10 pointer-events-none"
+          >
+            <div className="flex items-center gap-8 sm:gap-14">
+              {[
+                { value: "90+", label: "Projects Delivered" },
+                { value: "50+", label: "Happy Clients" },
+                { value: "20+", label: "Industries Served" },
+              ].map(({ value, label }) => (
+                <div key={label} className="text-center">
+                  <p className="text-2xl sm:text-4xl font-bold text-[#40A2D8]">{value}</p>
+                  <p className="text-[10px] sm:text-xs uppercase tracking-widest text-white/60 mt-1 whitespace-nowrap">
+                    {label}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <p className="text-sm sm:text-base text-white/70 max-w-md text-center px-4">
+              One team, every capability — built to help your business grow.
+            </p>
           </motion.div>
         </div>
       </div>
