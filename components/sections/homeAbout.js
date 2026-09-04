@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function HomeAbout({ content }) {
@@ -10,47 +11,68 @@ export default function HomeAbout({ content }) {
   const buttonText = content?.aboutButtonText || "Learn More";
   const backgroundImage = content?.aboutBackgroundImage || "/building.jpg";
 
-  return (
-    <section className="relative overflow-hidden min-h-[460px] sm:min-h-[500px] md:min-h-[560px] flex items-center">
-      {/* Background photo — fades from solid white behind the text (left)
-          into the photo itself (right), same idea as the reference. */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `url('${backgroundImage}')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage:
-            "radial-gradient(rgba(11,96,176,0.1) 1px, transparent 1px), linear-gradient(90deg, #ffffff 0%, #ffffff 42%, rgba(255,255,255,0.82) 58%, rgba(255,255,255,0.25) 82%, rgba(255,255,255,0) 100%)",
-          backgroundSize: "22px 22px, 100% 100%",
-        }}
-      />
+  const button = (
+    <Link href="/about" aria-label="Learn more about BizzBuzz Creations" className="inline-block">
+      <button className="relative cursor-pointer border-2 border-white text-white px-6 py-3 rounded-lg overflow-hidden group">
+        <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition duration-300"></span>
+        <span className="relative z-10 group-hover:text-black">{buttonText}</span>
+      </button>
+    </Link>
+  );
 
-      <div className="relative w-full px-6 md:px-12 lg:px-24 py-16">
-        <div className="max-w-xl md:text-start text-center mx-auto md:mx-0">
-          <p className="text-gray-900">{eyebrow}</p>
-          <h2 className="md:text-4xl text-3xl font-bold mb-4">
-            {heading}
-          </h2>
-          <p className="max-w-lg mb-6 text-gray-900">{paragraph}</p>
-          <Link
-            href="/about"
-            aria-label="Learn more about BizzBuzz Creations"
-            className="inline-block"
-          >
-            <button className="relative cursor-pointer border-2 border-gray-900 text-gray-900 px-6 py-3 rounded-lg overflow-hidden group">
-              <span className="absolute inset-0 bg-gray-900 transform -translate-x-full group-hover:translate-x-0 transition duration-300"></span>
-              <span className="relative z-10 group-hover:text-white">
-                {buttonText}
-              </span>
-            </button>
-          </Link>
+  return (
+    <section className="relative overflow-hidden bg-black">
+      {/* Desktop/tablet only. The gradient and the photo are drawn as
+          plain siblings sized to the SAME container (not two independent
+          CSS background layers — that's what broke the fade earlier: a
+          gradient's `background-size: contain` just fills the whole
+          positioning area since gradients have no intrinsic size, so it
+          never actually matched the photo's own contain-computed box).
+          The image box is now full-bleed to the right edge of the
+          viewport (`flex-1`, no right padding/max-width, no rounded
+          corners on that edge) instead of sitting in a padded, capped
+          column with black space to its right — only the text column on
+          the left keeps its own padding. */}
+      <div className="hidden md:flex relative min-h-[620px] lg:min-h-[700px] items-stretch">
+        <div className="relative z-10 flex items-center max-w-2xl shrink-0 pl-12 lg:pl-24 pr-10">
+          <div>
+            <p className="text-white/60">{eyebrow}</p>
+            <h2 className="text-4xl font-bold mb-4 text-[#40A2D8]">{heading}</h2>
+            <p className="max-w-xl mb-6 text-white/80">{paragraph}</p>
+            {button}
+          </div>
         </div>
+
+        <div className="relative flex-1">
+          <Image
+            src={backgroundImage}
+            alt="BizzBuzz Creations office"
+            fill
+            sizes="60vw"
+            className="object-cover"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(90deg, #000000 0%, rgba(0,0,0,0.85) 15%, rgba(0,0,0,0.4) 35%, rgba(0,0,0,0) 60%)",
+            }}
+            aria-hidden="true"
+          />
+        </div>
+      </div>
+
+      {/* Mobile only — plain stacked layout, no fade needed: heading,
+          then the photo as its own boxed block, then the paragraph and
+          button below it. */}
+      <div className="md:hidden px-6 py-16 text-center">
+        <p className="text-white/60">{eyebrow}</p>
+        <h2 className="text-3xl font-bold mb-6 text-[#40A2D8]">{heading}</h2>
+        <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-lg mb-6">
+          <Image src={backgroundImage} alt="BizzBuzz Creations office" fill sizes="100vw" className="object-cover" />
+        </div>
+        <p className="max-w-lg mx-auto mb-6 text-white/80">{paragraph}</p>
+        {button}
       </div>
     </section>
   );

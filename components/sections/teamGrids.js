@@ -18,6 +18,7 @@ import {
   FlaskConical,
   Linkedin,
   Instagram,
+  ArrowRight,
 } from "lucide-react";
 
 // Role-based structure rather than invented individual profiles with
@@ -126,6 +127,9 @@ export function RoleCard({
   flip = false,
   linkedin,
   instagram,
+  // BPO/R&D team grids only want LinkedIn on the back — Founders/Leaders
+  // keep both, unchanged.
+  showInstagram = true,
 }) {
   const isXl = size === "xl";
   const isLarge = size === "large" || isXl;
@@ -207,16 +211,18 @@ export function RoleCard({
               >
                 <Linkedin size={19} />
               </a>
-              <a
-                href={instagram || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${name || role} on Instagram`}
-                onClick={(e) => e.stopPropagation()}
-                className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 text-[#40A2D8] hover:bg-white hover:text-[#0B60B0] transition-colors duration-300"
-              >
-                <Instagram size={19} />
-              </a>
+              {showInstagram && (
+                <a
+                  href={instagram || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${name || role} on Instagram`}
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 text-[#40A2D8] hover:bg-white hover:text-[#0B60B0] transition-colors duration-300"
+                >
+                  <Instagram size={19} />
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -329,7 +335,7 @@ export default function TeamGrids({ content } = {}) {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {leaders.map((l, i) => (
-              <RoleCard key={i} {...l} index={i} flip />
+              <RoleCard key={i} {...l} index={i} size="xl" showInstagram={false} flip />
             ))}
           </div>
         </div>
@@ -368,9 +374,12 @@ export default function TeamGrids({ content } = {}) {
                     </p>
                     <Link
                       href={i === 0 ? "/our-team/bpo-team" : "/our-team/rnd-team"}
-                      className="inline-flex items-center gap-2 bg-[#0B60B0] hover:bg-white text-white hover:text-black text-sm font-semibold px-6 py-3 rounded-full transition-colors duration-300 w-fit"
+                      className="group/btn inline-flex items-center gap-2.5 bg-[#0B60B0] hover:bg-white text-white hover:text-black text-sm font-semibold pl-6 pr-5 py-3.5 rounded-full shadow-lg shadow-[#0B60B0]/20 hover:shadow-xl hover:shadow-black/20 transition-all duration-300 w-fit"
                     >
                       Our Team
+                      <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white/15 group-hover/btn:bg-black/10 transition-all duration-300 group-hover/btn:translate-x-0.5">
+                        <ArrowRight size={13} />
+                      </span>
                     </Link>
                   </motion.div>
 
