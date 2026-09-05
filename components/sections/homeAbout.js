@@ -9,7 +9,7 @@ export default function HomeAbout({ content }) {
     content?.aboutParagraph ||
     "BizzBuzz Creations is a digital marketing and business solutions agency helping businesses in Prayagraj (Allahabad), across India, and international markets build a stronger digital presence. We understand that every business has different goals, audiences, and challenges, so we focus on practical solutions rather than one-size-fits-all marketing. Our expertise covers SEO, local SEO, Google Ads, social media marketing, website development, content marketing, AI solutions, and marketing automation. From improving search visibility and generating qualified leads to building better websites and streamlining business processes, we bring multiple digital capabilities under one team. Our goal is simple: help businesses reach the right audience, create meaningful opportunities, and build a digital presence that supports long-term growth.";
   const buttonText = content?.aboutButtonText || "Learn More";
-  const backgroundImage = content?.aboutBackgroundImage || "/building.jpg";
+  const backgroundImage = content?.aboutBackgroundImage || "/bbc-building.png";
 
   const button = (
     <Link href="/about" aria-label="Learn more about BizzBuzz Creations" className="inline-block">
@@ -44,6 +44,10 @@ export default function HomeAbout({ content }) {
         </div>
 
         <div className="relative flex-1">
+          {/* New front-on, symmetric shot of the building — the BBC/
+              BizzBuzz signage sits centered rather than off to one side,
+              so this goes back to plain center cropping (no left/right
+              position nudging needed like the previous angled photo). */}
           <Image
             src={backgroundImage}
             alt="BizzBuzz Creations office"
@@ -51,25 +55,53 @@ export default function HomeAbout({ content }) {
             sizes="60vw"
             className="object-cover"
           />
+          {/* Left-edge fade, smoothed into many more stops instead of a
+              few big jumps — the old 4-stop version read as a flat block
+              of black with a visible "edge" where it cut off into the
+              photo. This eases through gradually (roughly matching an
+              ease-out curve) and finishes later, at 52%, so the
+              black-to-photo transition looks like a natural falloff
+              rather than a hard wall. No right-side fade needed — this
+              shot doesn't have a neighbouring building crowding that
+              edge like the previous photo did. */}
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(90deg, #000000 0%, rgba(0,0,0,0.85) 15%, rgba(0,0,0,0.4) 35%, rgba(0,0,0,0) 60%)",
+                "linear-gradient(90deg, #000000 0%, rgba(0,0,0,0.98) 6%, rgba(0,0,0,0.94) 12%, rgba(0,0,0,0.85) 18%, rgba(0,0,0,0.7) 24%, rgba(0,0,0,0.52) 30%, rgba(0,0,0,0.35) 36%, rgba(0,0,0,0.2) 42%, rgba(0,0,0,0.09) 47%, rgba(0,0,0,0) 52%)",
             }}
             aria-hidden="true"
           />
         </div>
       </div>
 
-      {/* Mobile only — plain stacked layout, no fade needed: heading,
-          then the photo as its own boxed block, then the paragraph and
-          button below it. */}
+      {/* Mobile only — plain stacked layout: heading, then the photo as
+          its own boxed block, then the paragraph and button below it.
+          Same left-edge fade as the desktop version now added here too,
+          instead of the raw uncropped photo. */}
       <div className="md:hidden px-6 py-16 text-center">
         <p className="text-white/60">{eyebrow}</p>
         <h2 className="text-3xl font-bold mb-6 text-[#40A2D8]">{heading}</h2>
         <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-lg mb-6">
-          <Image src={backgroundImage} alt="BizzBuzz Creations office" fill sizes="100vw" className="object-cover" />
+          {/* Anchored to the right now (was centered) — cropping more
+              off the left side of the photo so the BBC signage board,
+              which sits toward the right of the building's facade,
+              stays fully in frame on the narrower mobile box. */}
+          <Image
+            src={backgroundImage}
+            alt="BizzBuzz Creations office"
+            fill
+            sizes="100vw"
+            className="object-cover object-right"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(90deg, #000000 0%, rgba(0,0,0,0.98) 6%, rgba(0,0,0,0.94) 12%, rgba(0,0,0,0.85) 18%, rgba(0,0,0,0.7) 24%, rgba(0,0,0,0.52) 30%, rgba(0,0,0,0.35) 36%, rgba(0,0,0,0.2) 42%, rgba(0,0,0,0.09) 47%, rgba(0,0,0,0) 52%)",
+            }}
+            aria-hidden="true"
+          />
         </div>
         <p className="max-w-lg mx-auto mb-6 text-white/80">{paragraph}</p>
         {button}

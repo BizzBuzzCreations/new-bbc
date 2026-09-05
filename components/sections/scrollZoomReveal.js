@@ -69,7 +69,10 @@ export default function ScrollZoomReveal() {
   const contentOpacity = useTransform(scrollYProgress, [0.3, 0.4], [0, 1]);
 
   return (
-    <div ref={containerRef} className="relative h-[400vh] bg-black">
+    // Skipped entirely on mobile (`hidden md:block`) — the WhatsApp-sized
+    // 400vh scroll-jack + particle canvas reads as a lot of empty
+    // scrolling on a small screen, so this section is desktop/tablet only.
+    <div ref={containerRef} className="relative h-[400vh] bg-black hidden md:block">
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
         {/* Same moving-particle backdrop used behind the contact form. */}
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">

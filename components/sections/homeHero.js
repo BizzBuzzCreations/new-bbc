@@ -60,7 +60,7 @@ export default function HomeHero({ content }) {
           }}
         />
 
-        <div className="relative z-10 2xl:px-20 px-5 md:pt-20 pt-24 max-w-3xl">
+        <div className="relative z-10 2xl:px-20 px-5 md:pt-20 pt-6 max-w-3xl">
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
