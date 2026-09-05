@@ -193,6 +193,7 @@ export default async function HowWeWorkPage() {
     content?.hwwHeroParagraph ||
     "No vague promises, no \"we'll figure it out as we go.\" Every project at BizzBuzz Creations follows the same structured process of audit, strategy, execution, and reporting — so you always know what's happening, why it's happening, and what results to expect.";
   const heroCtaText = content?.hwwHeroCtaText || "See How It Works";
+  const heroImage = content?.hwwHeroImage || "/how we work and function.png";
 
   const principlesHeading = content?.principlesHeading || "The Principles That Power Every Client Partnership";
   const principlesParagraph =
@@ -249,26 +250,26 @@ export default async function HowWeWorkPage() {
 
   return (
     <>
-      {/* Hero */}
-      <section
-        className="relative overflow-hidden min-h-[440px] sm:min-h-[500px] flex items-center pt-20 pb-16 px-6 md:px-12 lg:px-24"
-        style={{ background: "#050b16" }}
-      >
+      {/* Hero — full-bleed photo (same treatment as the FAQ hero): the
+          image is already designed with a dark-to-photo gradient built
+          in, laid down as a plain background with a matching black
+          overlay, text sitting in the solid-black portion on the left.
+          Replaces the previous two conic-gradient decorative blobs. */}
+      <section className="relative overflow-hidden min-h-[440px] sm:min-h-[500px] flex items-center pt-20 pb-16 px-6 md:px-12 lg:px-24 bg-black">
         <div
-          className="absolute inset-0 opacity-80"
+          className="absolute inset-0"
           style={{
-            background:
-              "conic-gradient(from 200deg at 75% 10%, transparent, rgba(64,162,216,0.6), transparent 35%)",
+            backgroundImage: `url('${heroImage}')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
-          aria-hidden="true"
         />
         <div
-          className="absolute inset-0 opacity-50"
+          className="absolute inset-0"
           style={{
             background:
-              "conic-gradient(from 30deg at 15% 95%, transparent, rgba(124,58,237,0.5), transparent 30%)",
+              "linear-gradient(90deg, #000000 0%, #000000 38%, rgba(0,0,0,0.82) 55%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0) 100%)",
           }}
-          aria-hidden="true"
         />
 
         <div className="relative max-w-3xl">

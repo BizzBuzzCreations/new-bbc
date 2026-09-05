@@ -41,7 +41,7 @@ const DEFAULT_LEADERS = [
   { name: "Kautic Jaiswal", role: "Process Manager" },
   { name: "Swapnil Singh", role: "Team Leader" },
   { name: "Shruti Singh", role: "Organizational Manager" },
-  { name: "Aley Saiyyadah Rizvi", role: "HR" },
+  { name: "Aley Saiyyadah Rizvi", role: "HR", photo: "/team-images/aley.jpeg" },
   { name: "Md. Shameem", role: "IT Manager" },
   { name: "Ankit Kumar Yadav", role: "Accounts and Management" },
 ];
@@ -152,7 +152,7 @@ export function RoleCard({
     return (
       <motion.div
         {...fadeUp(index)}
-        className="group [perspective:1500px] cursor-pointer"
+        className="group [perspective:1500px] cursor-pointer h-full"
         onClick={() => setFlipped((f) => !f)}
         role="button"
         tabIndex={0}
@@ -164,17 +164,26 @@ export function RoleCard({
           }
         }}
       >
+        {/* `h-full` on every layer down to the front face (grid's default
+            `align-items: stretch` already makes the outer card fill the
+            row's tallest neighbor — but a plain block child doesn't
+            inherit that height unless each one explicitly fills its
+            parent) so every card in a row ends up the exact same total
+            height, whatever the name/role wraps to. The photo itself
+            stays a fixed, undistorted aspect ratio either way — only the
+            text area's bottom whitespace grows or shrinks to absorb the
+            difference, instead of the box itself varying in height. */}
         <div
-          className={`relative transition-transform duration-700 ease-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] ${
+          className={`relative h-full transition-transform duration-700 ease-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] ${
             flipped ? "[transform:rotateY(180deg)]" : ""
           }`}
         >
           {/* Front — identical markup to the non-flip card below, just
               sized the same way via isXl/isLarge so flip cards match
               whichever grid (Founders, Leaders) they're used in. */}
-          <div className="[backface-visibility:hidden] rounded-2xl border border-white/10 bg-white/5 overflow-hidden shadow-sm">
+          <div className="h-full flex flex-col [backface-visibility:hidden] rounded-2xl border border-white/10 bg-white/5 overflow-hidden shadow-sm">
             <div
-              className={`relative ${photo ? "aspect-[3/4]" : isLarge ? "aspect-[4/3]" : "aspect-square"} flex items-center justify-center bg-white/5`}
+              className={`relative shrink-0 ${photo ? "aspect-[3/4]" : isLarge ? "aspect-[4/3]" : "aspect-square"} flex items-center justify-center bg-white/5`}
             >
               {photo ? (
                 <Image src={photo} alt={name || role} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover object-top" />
@@ -188,7 +197,7 @@ export function RoleCard({
                 </div>
               )}
             </div>
-            <div className={isXl ? "p-6" : "p-4"}>
+            <div className={`flex-1 flex flex-col justify-center ${isXl ? "p-6" : "p-4"}`}>
               {dept && (
                 <p className={`font-bold uppercase tracking-wide text-[#40A2D8] mb-1 ${isXl ? "text-sm" : "text-xs"}`}>
                   {dept}
@@ -246,10 +255,10 @@ export function RoleCard({
   return (
     <motion.div
       {...fadeUp(index)}
-      className="group rounded-2xl border border-white/10 bg-white/5 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-black/40"
+      className="group h-full flex flex-col rounded-2xl border border-white/10 bg-white/5 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-black/40"
     >
       <div
-        className={`relative ${photo ? "aspect-[3/4]" : isLarge ? "aspect-[4/3]" : "aspect-square"} flex items-center justify-center bg-white/5`}
+        className={`relative shrink-0 ${photo ? "aspect-[3/4]" : isLarge ? "aspect-[4/3]" : "aspect-square"} flex items-center justify-center bg-white/5`}
       >
         {photo ? (
           <Image src={photo} alt={name || role} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover object-top" />
@@ -263,7 +272,7 @@ export function RoleCard({
           </div>
         )}
       </div>
-      <div className={isXl ? "p-6" : "p-4"}>
+      <div className={`flex-1 flex flex-col justify-center ${isXl ? "p-6" : "p-4"}`}>
         {dept && (
           <p className={`font-bold uppercase tracking-wide text-[#40A2D8] mb-1 ${isXl ? "text-sm" : "text-xs"}`}>
             {dept}

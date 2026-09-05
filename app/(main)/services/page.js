@@ -178,6 +178,7 @@ export default async function ServicesIndexPage() {
     "SEO, ads, web development and automation — one roof, one team, wherever your customers are.";
   const heroButtonText = content?.servicesHeroButtonText || "Explore Our Services";
   const heroSecondaryButtonText = content?.servicesHeroSecondaryButtonText || "Get a Free Consultation";
+  const heroImage = content?.servicesHeroImage || "/services.png";
 
   const gridHeading = content?.servicesGridHeading || "Explore Our Digital Growth Services";
   const gridSubtext = content?.servicesGridSubtext || "Choose the services that match your goals, or combine multiple solutions to support different areas of your business.";
@@ -217,81 +218,77 @@ export default async function ServicesIndexPage() {
 
   return (
     <>
-      {/* Hero */}
-      <section
-        className="relative overflow-hidden pt-24 md:pt-28 pb-20 px-6 md:px-12 lg:px-24 text-white"
-        style={{ background: "radial-gradient(circle at top, #0d1b2e, #000000)" }}
-      >
+      {/* Hero — full-bleed photo (same treatment as the FAQ hero): the
+          image itself is already designed with a dark-to-photo gradient
+          built in, so it's laid down as a plain background with a
+          matching black-to-transparent overlay on top, text sitting in
+          the solid-black portion on the left. Replaces the previous
+          radial-gradient background + coded 6-icon floating grid. */}
+      <section className="relative overflow-hidden min-h-[520px] sm:min-h-[560px] flex items-center pt-24 md:pt-28 pb-20 px-6 md:px-12 lg:px-24 text-white bg-black">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url('${heroImage}')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(90deg, #000000 0%, #000000 38%, rgba(0,0,0,0.82) 55%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0) 100%)",
+          }}
+        />
 
-        <div className="relative max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
-              {heroHeading}
-            </h1>
-            <p className="text-white/70 leading-relaxed mb-9 max-w-lg">
-              {heroParagraph}
-            </p>
-            <div className="flex flex-wrap items-center gap-4">
-              <Link href="#services-grid" className="inline-block">
-                <button className="animated-button animated-button-lg whitespace-nowrap">
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="arr-2"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-                  </svg>
-                  <span className="text">{heroButtonText}</span>
-                  <span className="circle"></span>
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="arr-1"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-                  </svg>
-                </button>
-              </Link>
-              <Link href="/contact" className="inline-block">
-                <button className="animated-button animated-button-lg whitespace-nowrap">
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="arr-2"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-                  </svg>
-                  <span className="text">{heroSecondaryButtonText}</span>
-                  <span className="circle"></span>
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="arr-1"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-                  </svg>
-                </button>
-              </Link>
-            </div>
-          </div>
-
-          {/* Real services, laid out as a small floating grid instead of a
-              fabricated 3D render */}
-          <div className="relative hidden lg:grid grid-cols-3 gap-4">
-            {services.slice(0, 6).map((service, i) => {
-              const Icon = service.icon;
-              return (
-                <div
-                  key={service.key}
-                  className={`flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 shadow-xl backdrop-blur-sm ${
-                    i % 2 === 0 ? "translate-y-3" : "-translate-y-3"
-                  }`}
-                  style={{ aspectRatio: "1 / 1" }}
+        <div className="relative max-w-2xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
+            {heroHeading}
+          </h1>
+          <p className="text-white/70 leading-relaxed mb-9 max-w-lg">
+            {heroParagraph}
+          </p>
+          <div className="flex flex-wrap items-center gap-4">
+            <Link href="#services-grid" className="inline-block">
+              <button className="animated-button animated-button-lg whitespace-nowrap">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="arr-2"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <Icon size={28} className="text-[#40A2D8]" />
-                </div>
-              );
-            })}
+                  <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                </svg>
+                <span className="text">{heroButtonText}</span>
+                <span className="circle"></span>
+                <svg
+                  viewBox="0 0 24 24"
+                  className="arr-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                </svg>
+              </button>
+            </Link>
+            <Link href="/contact" className="inline-block">
+              <button className="animated-button animated-button-lg whitespace-nowrap">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="arr-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                </svg>
+                <span className="text">{heroSecondaryButtonText}</span>
+                <span className="circle"></span>
+                <svg
+                  viewBox="0 0 24 24"
+                  className="arr-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                </svg>
+              </button>
+            </Link>
           </div>
         </div>
       </section>
