@@ -12,7 +12,7 @@ const DEFAULT_SLIDES = [
   "/image-2.jpg",
   "/image-5.webp",
   "/image-4.webp",
-  "/teamPic.webp",
+  "/raw-image.png",
 ];
 
 const SLIDE_DURATION = 4500;

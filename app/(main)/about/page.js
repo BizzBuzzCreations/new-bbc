@@ -56,7 +56,7 @@ export default async function About() {
 
   const storyHeading = content?.storyHeading || "Our Story";
   const storySubheading = content?.storySubheading || "From Local Projects to Global Ambition";
-  const storyImage = content?.storyImage || "/banner.png";
+  const storyImage = content?.storyImage || "/raw-image.png";
   const storyParagraphOne =
     content?.storyParagraphOne ||
     "Every big journey starts somewhere. Ours began in Prayagraj (Allahabad), India, with a simple belief: marketing shouldn't feel like guesswork.";

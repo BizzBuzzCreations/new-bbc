@@ -21,7 +21,7 @@ const DEFAULT_ROWS = [
   {
     title: "We Grow Together",
     body: "We believe great work comes from continuous learning and shared growth. Our team works on real campaigns, explores new digital strategies, and keeps developing the skills needed to deliver better marketing results for businesses in India and worldwide.",
-    img: "/teamPic.webp",
+    img: "/raw-image.png",
     imageSide: "right",
     imageSize: "small",
   },

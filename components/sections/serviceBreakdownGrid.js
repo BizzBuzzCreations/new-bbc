@@ -42,8 +42,15 @@ function FlipCard({ number, title, desc, ctaText, services }) {
           className="[grid-area:1/1] self-start [backface-visibility:hidden] rounded-2xl p-6 border border-white/10 bg-white/[0.03] cursor-pointer"
         >
           <p className="text-xs font-bold text-[#40A2D8] mb-2">{number}</p>
-          <h3 className="font-bold text-lg text-white mb-3">{title}</h3>
-          <p className="text-sm leading-relaxed text-white/60 mb-5">{desc}</p>
+          {/* min-h sized for 2 lines each, same fix as the non-flip
+              variant below — each card's height here is independently
+              measured via `frontRef.current.offsetHeight` (not a shared
+              CSS grid row), so a shorter title/description naturally
+              measured shorter than a longer one, making the cards look
+              uneven. This gives every card's front face the same
+              baseline height regardless of how much text it holds. */}
+          <h3 className="font-bold text-lg text-white mb-3 min-h-[3.5rem]">{title}</h3>
+          <p className="text-sm leading-relaxed text-white/60 mb-5 min-h-[2.75rem]">{desc}</p>
           <span
             aria-expanded={open}
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#40A2D8]"
@@ -125,8 +132,15 @@ export default function ServiceBreakdownGrid({ items, flip = false }) {
             className="rounded-2xl p-6 border border-white/10 bg-white/[0.03] transition-colors duration-300"
           >
             <p className="text-xs font-bold text-[#40A2D8] mb-2">{number}</p>
-            <h3 className="font-bold text-lg text-white mb-3">{title}</h3>
-            <p className="text-sm leading-relaxed text-white/60 mb-5">
+            {/* min-h sized for 2 lines each — with `items-start` above
+                keeping an opened card from stretching its row neighbor,
+                the collapsed cards had nothing else forcing them to match
+                each other's height, so a 1-line title/description ended
+                up visibly shorter than a 2-line one. This gives every
+                collapsed card the same footprint regardless of how much
+                its title/desc actually wraps. */}
+            <h3 className="font-bold text-lg text-white mb-3 min-h-[3.5rem]">{title}</h3>
+            <p className="text-sm leading-relaxed text-white/60 mb-5 min-h-[2.75rem]">
               {desc}
             </p>
             <button

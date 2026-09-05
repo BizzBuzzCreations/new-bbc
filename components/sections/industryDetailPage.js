@@ -94,11 +94,18 @@ export default function IndustryDetailPage({
           sub-service pages' heroImage) when supplied; otherwise the plain
           gradient hero. These industry photos are all a uniform 1440x504
           (~2.86:1) crop — desktop's aspect-ratio matches that closely so
-          object-fit: cover needs almost no vertical crop. */}
+          object-fit: cover needs almost no vertical crop.
+
+          On mobile, the full-bleed background version is hidden entirely
+          (`hidden md:block` below) — at narrow widths the photo mostly
+          just sat dimmed behind the gradient with the text stacked over
+          it, hard to make out. Instead, mobile gets its own boxed copy of
+          the same image as a plain in-flow block between the paragraph
+          and the CTA button (`md:hidden` further down). */}
       <section
         className={
           heroImage
-            ? "relative min-h-[50vh] md:min-h-0 md:aspect-[20/7] flex items-center overflow-hidden pt-28 md:pt-32 pb-20 px-6 md:px-12 lg:px-24 text-white"
+            ? "relative md:aspect-[20/7] flex items-center overflow-hidden pt-28 md:pt-32 pb-20 px-6 md:px-12 lg:px-24 text-white"
             : "relative overflow-hidden pt-28 md:pt-32 pb-20 px-6 md:px-12 lg:px-24 text-white"
         }
         style={
@@ -108,7 +115,7 @@ export default function IndustryDetailPage({
         }
       >
         {heroImage && (
-          <>
+          <div className="hidden md:block">
             <Image
               src={heroImage}
               alt=""
@@ -125,7 +132,17 @@ export default function IndustryDetailPage({
               }}
               aria-hidden="true"
             />
-          </>
+          </div>
+        )}
+        {/* Mobile background — plain, no photo, so the section reads as a
+            simple dark hero rather than an empty gradient with nothing
+            behind it once the full-bleed photo above is hidden. */}
+        {heroImage && (
+          <div
+            className="absolute inset-0 md:hidden"
+            style={{ background: "radial-gradient(circle at top, #0d1b2e, #000000)" }}
+            aria-hidden="true"
+          />
         )}
 
         <div className="relative max-w-3xl">
@@ -135,6 +152,11 @@ export default function IndustryDetailPage({
           <p className="text-white/70 leading-relaxed mb-9 max-w-2xl">
             {heroDescription || description}
           </p>
+          {heroImage && (
+            <div className="md:hidden relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-lg mb-9">
+              <Image src={heroImage} alt="" fill sizes="100vw" className="object-cover object-top" />
+            </div>
+          )}
           <Link href="/contact" className="inline-block max-w-full">
             {/* whitespace-nowrap only from sm up — on mobile the long,
                 per-industry CTA text (e.g. "Get a Free Entertainment

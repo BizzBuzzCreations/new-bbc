@@ -4,8 +4,8 @@ import { mergeSubServiceContent } from "@/lib/subServiceContentRegistry";
 import { getPageContent } from "@/actions/pageContentActions";
 
 export const metadata = {
-  title: "Local & City-Based Ad Campaigns | BizzBuzz Creations",
-  description: "BizzBuzz Creations runs local and city-based ad campaigns that bring nearby customers across India and worldwide.",
+  title: "ChatGPT & AI Platform Ads Agency | BizzBuzz Creations",
+  description: "BizzBuzz Creations is a ChatGPT ads agency running AI platform advertising campaigns for businesses in India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/paid-marketing/local-city-based-ad-campaigns"
   }

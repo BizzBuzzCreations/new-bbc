@@ -31,7 +31,7 @@ const ROW_2 = RND_TEAM.slice(4);
 export default function RndTeamGrid() {
   return (
     <div className="flex flex-col gap-8">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {ROW_1.map(({ icon: Icon, name, role, photo, linkedin }, i) => (
           <RoleCard
             key={i}

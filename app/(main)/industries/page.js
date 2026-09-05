@@ -146,9 +146,13 @@ export default async function IndustriesIndexPage() {
           overlay, text sitting in the solid-black portion on the left.
           Replaces the previous radial-gradient background + coded
           icon-badge cluster. */}
-      <section className="relative overflow-hidden min-h-[520px] sm:min-h-[560px] flex items-center pt-28 md:pt-32 pb-20 px-6 md:px-12 lg:px-24 text-white bg-black">
+      <section className="relative overflow-hidden md:min-h-[560px] flex items-center pt-28 md:pt-32 pb-20 px-6 md:px-12 lg:px-24 text-white bg-black">
+        {/* Full-bleed version — desktop/tablet only. On mobile this sat
+            dimmed behind the gradient with text stacked on top, hard to
+            actually see; mobile instead gets its own boxed copy of the
+            same image between the paragraph and the CTA button below. */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 hidden md:block"
           style={{
             backgroundImage: `url('${heroImage}')`,
             backgroundSize: "cover",
@@ -156,7 +160,7 @@ export default async function IndustriesIndexPage() {
           }}
         />
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 hidden md:block"
           style={{
             background:
               "linear-gradient(90deg, #000000 0%, #000000 38%, rgba(0,0,0,0.82) 55%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0) 100%)",
@@ -173,6 +177,14 @@ export default async function IndustriesIndexPage() {
           <p className="text-white/70 leading-relaxed mb-9 max-w-lg">
             {heroParagraph}
           </p>
+          <div
+            className="md:hidden relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-lg mb-9"
+            style={{
+              backgroundImage: `url('${heroImage}')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
           <Link href="/services" className="inline-block">
             <button className="animated-button animated-button-lg whitespace-nowrap">
               <svg

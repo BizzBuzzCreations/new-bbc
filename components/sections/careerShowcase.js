@@ -67,7 +67,7 @@ export function CareerJoinTeam({ content } = {}) {
   const ctaText = content?.careerJoinCtaText || "Apply Now";
   const image1 = content?.careerJoinImage1 || "/image-5.webp";
   const image2 = content?.careerJoinImage2 || "/image-4.webp";
-  const image3 = content?.careerJoinImage3 || "/teamPic.webp";
+  const image3 = content?.careerJoinImage3 || "/raw-image.png";
 
   // The image grid is rendered twice on purpose: once inline for mobile
   // (between the tagline and the paragraph, matching the requested

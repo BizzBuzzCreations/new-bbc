@@ -89,7 +89,7 @@ const SERVICE_LINKS = [
       { label: "Performance Marketing & ROI Campaigns", href: "/paid-marketing/performance-marketing-roi-campaigns" },
       { label: "Lead Generation Campaigns", href: "/paid-marketing/lead-generation-campaigns" },
       { label: "E-commerce & Retargeting Ads", href: "/paid-marketing/ecommerce-retargeting-ads" },
-      { label: "Local & City-Based Ad Campaigns", href: "/paid-marketing/local-city-based-ad-campaigns" },
+      { label: "ChatGPT & AI Platform Ads Service", href: "/paid-marketing/local-city-based-ad-campaigns" },
     ],
   },
   {

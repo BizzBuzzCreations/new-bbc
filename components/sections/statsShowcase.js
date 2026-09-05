@@ -25,7 +25,7 @@ const STATS = [
     label: "One Team, Multiple Capabilities",
     description:
       "Get SEO, Google Ads, social media marketing, web development, AI, automation, and BPO support from one connected digital team.",
-    visual: { type: "image", src: "/teamPic.webp", alt: "BizzBuzz Creations team at work" },
+    visual: { type: "image", src: "/raw-image.png", alt: "BizzBuzz Creations team at work" },
   },
   {
     tag: "Why It's Different",

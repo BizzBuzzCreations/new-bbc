@@ -365,7 +365,7 @@ export default function TeamGrids({ content } = {}) {
               3-across row (width-matched to the same column track via
               `lg:w-3/4 mx-auto`) keeps it a clean 4-then-3 every time. */}
           <div className="flex flex-col gap-6">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {leaders.slice(0, 4).map((l, i) => (
                 <RoleCard key={i} {...l} index={i} size="xl" showInstagram={false} flip />
               ))}

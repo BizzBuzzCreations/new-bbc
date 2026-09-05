@@ -38,7 +38,7 @@ const DEFAULT_YEARS = [
     year: "2026",
     title: "Where We Are Today",
     body: "Today, we continue building smarter digital marketing, SEO, branding, content, social media, and web strategies, helping businesses strengthen their online presence and grow with confidence.",
-    img: "/teamPic.webp",
+    img: "/raw-image.png",
   },
 ];
 
