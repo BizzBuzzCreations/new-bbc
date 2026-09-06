@@ -47,7 +47,7 @@ export default function RndTeamGrid() {
           />
         ))}
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:w-3/4 mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:w-3/4 lg:mx-auto">
         {ROW_2.map(({ icon: Icon, name, role, photo, linkedin }, i) => (
           <RoleCard
             key={i + 4}

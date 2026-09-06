@@ -76,9 +76,12 @@ export default function HomeAbout({ content }) {
       </div>
 
       {/* Mobile only — plain stacked layout: heading, then the photo as
-          its own boxed block, then the paragraph and button below it.
-          Same left-edge fade as the desktop version now added here too,
-          instead of the raw uncropped photo. */}
+          its own boxed block, then the paragraph and button below it. No
+          fade overlay here — that left-edge gradient exists on desktop
+          only to blend the full-bleed photo into the black background
+          beside the text column; on mobile the photo is its own rounded
+          boxed card with nothing to blend into, so the fade just darkened
+          the shot for no reason. */}
       <div className="md:hidden px-6 py-16 text-center">
         <p className="text-white/60">{eyebrow}</p>
         <h2 className="text-3xl font-bold mb-6 text-[#40A2D8]">{heading}</h2>
@@ -93,14 +96,6 @@ export default function HomeAbout({ content }) {
             fill
             sizes="100vw"
             className="object-cover object-right"
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(90deg, #000000 0%, rgba(0,0,0,0.98) 6%, rgba(0,0,0,0.94) 12%, rgba(0,0,0,0.85) 18%, rgba(0,0,0,0.7) 24%, rgba(0,0,0,0.52) 30%, rgba(0,0,0,0.35) 36%, rgba(0,0,0,0.2) 42%, rgba(0,0,0,0.09) 47%, rgba(0,0,0,0) 52%)",
-            }}
-            aria-hidden="true"
           />
         </div>
         <p className="max-w-lg mx-auto mb-6 text-white/80">{paragraph}</p>

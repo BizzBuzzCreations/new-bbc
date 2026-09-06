@@ -370,7 +370,7 @@ export default function TeamGrids({ content } = {}) {
                 <RoleCard key={i} {...l} index={i} size="xl" showInstagram={false} flip />
               ))}
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:w-3/4 mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:w-3/4 lg:mx-auto">
               {leaders.slice(4).map((l, i) => (
                 <RoleCard key={i + 4} {...l} index={i + 4} size="xl" showInstagram={false} flip />
               ))}

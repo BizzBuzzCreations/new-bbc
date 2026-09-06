@@ -149,14 +149,14 @@ export default function IndustryDetailPage({
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
             {heroTitle || `${label} Digital Marketing Services`}
           </h1>
-          <p className="text-white/70 leading-relaxed mb-9 max-w-2xl">
-            {heroDescription || description}
-          </p>
           {heroImage && (
             <div className="md:hidden relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-lg mb-9">
               <Image src={heroImage} alt="" fill sizes="100vw" className="object-cover object-top" />
             </div>
           )}
+          <p className="text-white/70 leading-relaxed mb-9 max-w-2xl">
+            {heroDescription || description}
+          </p>
           <Link href="/contact" className="inline-block max-w-full">
             {/* whitespace-nowrap only from sm up — on mobile the long,
                 per-industry CTA text (e.g. "Get a Free Entertainment
@@ -476,7 +476,14 @@ export default function IndustryDetailPage({
           every other industry still gets. When whyChooseUsText is set,
           this is a plain two-column layout — content on the left, the
           same per-industry heroImage as its own boxed photo on the right
-          (not a full-bleed background behind the text anymore). */}
+          (not a full-bleed background behind the text anymore).
+
+          On mobile the photo instead renders inline between the heading
+          and the paragraph (heading -> image -> paragraph), matching the
+          hero section's mobile order above — so the desktop-only image
+          block further down is hidden on mobile (`hidden md:block`) and a
+          second, mobile-only copy (`md:hidden`) sits right after the
+          heading. */}
       <section className="bg-[#050505] py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
         <div
           className={
@@ -489,6 +496,17 @@ export default function IndustryDetailPage({
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
               {whyChooseUsHeading || `Why ${label} Businesses Choose Us`}
             </h2>
+            {whyChooseUsText && heroImage && (
+              <div className="md:hidden relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-lg mb-6">
+                <Image
+                  src={heroImage}
+                  alt={whyChooseUsHeading || `Why ${label} businesses choose BizzBuzz Creations`}
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                />
+              </div>
+            )}
             {whyChooseUsText ? (
               <p className="text-white/70 leading-relaxed max-w-xl">
                 {whyChooseUsText}
@@ -519,7 +537,7 @@ export default function IndustryDetailPage({
             )}
           </div>
           {whyChooseUsText && heroImage && (
-            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
+            <div className="hidden md:block relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
               <Image
                 src={heroImage}
                 alt={whyChooseUsHeading || `Why ${label} businesses choose BizzBuzz Creations`}

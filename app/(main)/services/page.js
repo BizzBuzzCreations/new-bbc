@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowUpRight,
   Users,
@@ -223,10 +224,18 @@ export default async function ServicesIndexPage() {
           built in, so it's laid down as a plain background with a
           matching black-to-transparent overlay on top, text sitting in
           the solid-black portion on the left. Replaces the previous
-          radial-gradient background + coded 6-icon floating grid. */}
+          radial-gradient background + coded 6-icon floating grid.
+
+          On mobile, the full-bleed background version is hidden entirely
+          (`hidden md:block` below) — same treatment as the other hero
+          sections across the site: at narrow widths the photo mostly just
+          sat dimmed behind the gradient with the text stacked over it,
+          hard to make out. Instead, mobile gets its own boxed copy of the
+          same image as a plain in-flow block between the paragraph and
+          the CTA buttons (`md:hidden` further down). */}
       <section className="relative overflow-hidden min-h-[520px] sm:min-h-[560px] flex items-center pt-24 md:pt-28 pb-20 px-6 md:px-12 lg:px-24 text-white bg-black">
         <div
-          className="absolute inset-0"
+          className="hidden md:block absolute inset-0"
           style={{
             backgroundImage: `url('${heroImage}')`,
             backgroundSize: "cover",
@@ -234,11 +243,19 @@ export default async function ServicesIndexPage() {
           }}
         />
         <div
-          className="absolute inset-0"
+          className="hidden md:block absolute inset-0"
           style={{
             background:
               "linear-gradient(90deg, #000000 0%, #000000 38%, rgba(0,0,0,0.82) 55%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0) 100%)",
           }}
+        />
+        {/* Mobile background — plain, no photo, so the section reads as a
+            simple dark hero rather than an empty gradient with nothing
+            behind it once the full-bleed photo above is hidden. */}
+        <div
+          className="absolute inset-0 md:hidden"
+          style={{ background: "radial-gradient(circle at top, #0d1b2e, #000000)" }}
+          aria-hidden="true"
         />
 
         <div className="relative max-w-2xl">
@@ -248,6 +265,17 @@ export default async function ServicesIndexPage() {
           <p className="text-white/70 leading-relaxed mb-9 max-w-lg">
             {heroParagraph}
           </p>
+          {/* /services.png is a very wide (3.45:1), mostly-empty-on-the-
+              left desktop background photo — the icon grid it actually
+              shows sits only in its right ~35%. Cropping the box to that
+              ratio (and object-cover to it) just squeezed the icons into
+              a sliver or, matched 1:1, left a wall of dead black space.
+              /services-hero-mobile.png is a pre-cropped copy showing only
+              the icon-grid portion — full icons, no dead space, no
+              cutoff — sized to its own real 680x550 aspect ratio here. */}
+          <div className="md:hidden relative w-full max-w-sm mx-auto aspect-[680/550] rounded-2xl overflow-hidden shadow-lg mb-9">
+            <Image src="/services-hero-mobile.png" alt="" fill sizes="100vw" className="object-contain" />
+          </div>
           <div className="flex flex-wrap items-center gap-4">
             <Link href="#services-grid" className="inline-block">
               <button className="animated-button animated-button-lg whitespace-nowrap">

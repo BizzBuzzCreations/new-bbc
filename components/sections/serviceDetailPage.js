@@ -124,7 +124,7 @@ export default function ServiceDetailPage({
         }
       >
         {heroImage && (
-          <>
+          <div className="hidden md:block">
             <Image
               src={heroImage}
               alt=""
@@ -141,7 +141,17 @@ export default function ServiceDetailPage({
               }}
               aria-hidden="true"
             />
-          </>
+          </div>
+        )}
+        {/* Mobile background — plain, no photo, so the section reads as a
+            simple dark hero rather than an empty gradient with nothing
+            behind it once the full-bleed photo above is hidden. */}
+        {heroImage && (
+          <div
+            className="absolute inset-0 md:hidden"
+            style={{ background: "radial-gradient(circle at top, #0d1b2e, #000000)" }}
+            aria-hidden="true"
+          />
         )}
 
         <div className="relative max-w-3xl">
@@ -154,6 +164,11 @@ export default function ServiceDetailPage({
           <p className="text-white/70 leading-relaxed mb-9 max-w-2xl">
             {heroDescription || description}
           </p>
+          {heroImage && (
+            <div className="md:hidden relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-lg mb-9">
+              <Image src={heroImage} alt="" fill sizes="100vw" className="object-cover object-top" />
+            </div>
+          )}
           {/* whitespace-nowrap only from sm up — on mobile a long CTA
               forced this button (and, since nothing here constrained its
               width, the whole hero content column) wider than the

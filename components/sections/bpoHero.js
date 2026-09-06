@@ -5,25 +5,41 @@ import Link from "next/link";
 // (large background photo, dark-to-transparent gradient so the headline
 // stays legible on the left). Uses the same /bpo.jpg photo already in
 // the repo; no new image, no changed copy.
+//
+// On mobile, the full-bleed background version is hidden entirely
+// (`hidden md:block` below) — same reasoning as the industry pages' hero:
+// at narrow widths the photo mostly just sat dimmed behind the gradient
+// with the text stacked over it, hard to make out. Instead, mobile gets
+// its own boxed copy of the same image as a plain in-flow block between
+// the paragraph and the CTA button (`md:hidden` further down).
 export default function BpoHero({ heading, description, img, ctaText = "Start Now" }) {
   return (
     <section className="relative min-h-[85vh] flex items-center overflow-hidden -mt-14 md:-mt-[72px] pt-36 md:pt-44 pb-20 px-6 md:px-12 lg:px-24">
-      <Image
-        src={img}
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-center"
-      />
-
-      {/* Gradient — dark/legible on the left, image visible on the right */}
+      <div className="hidden md:block">
+        <Image
+          src={img}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        {/* Gradient — dark/legible on the left, image visible on the right */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(100deg, rgba(5,11,22,0.94) 0%, rgba(11,96,176,0.85) 42%, rgba(11,96,176,0.25) 70%, transparent 100%)",
+          }}
+          aria-hidden="true"
+        />
+      </div>
+      {/* Mobile background — plain, no photo, so the section reads as a
+          simple dark hero rather than an empty gradient with nothing
+          behind it once the full-bleed photo above is hidden. */}
       <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(100deg, rgba(5,11,22,0.94) 0%, rgba(11,96,176,0.85) 42%, rgba(11,96,176,0.25) 70%, transparent 100%)",
-        }}
+        className="absolute inset-0 md:hidden"
+        style={{ background: "radial-gradient(circle at top, #0d1b2e, #000000)" }}
         aria-hidden="true"
       />
 
@@ -34,6 +50,9 @@ export default function BpoHero({ heading, description, img, ctaText = "Start No
         <p className="text-white/80 leading-relaxed mb-9 max-w-xl">
           {description}
         </p>
+        <div className="md:hidden relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-lg mb-9">
+          <Image src={img} alt="" fill sizes="100vw" className="object-cover object-center" />
+        </div>
         <div className="flex flex-wrap gap-4">
           {/* whitespace-nowrap only from sm up — on mobile a long CTA
               like "Get a Free Business Consulting Session" forced this
