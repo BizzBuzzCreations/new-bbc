@@ -102,11 +102,15 @@ export default function IndustryDetailPage({
           it, hard to make out. Instead, mobile gets its own boxed copy of
           the same image as a plain in-flow block between the paragraph
           and the CTA button (`md:hidden` further down). */}
+      {/* pt-10 on mobile (was pt-28) — that much top padding under a
+          sticky nav that already occupies its own space in the flow was
+          just leaving a large empty gap before the heading; md keeps its
+          original spacing. */}
       <section
         className={
           heroImage
-            ? "relative md:aspect-[20/7] flex items-center overflow-hidden pt-28 md:pt-32 pb-20 px-6 md:px-12 lg:px-24 text-white"
-            : "relative overflow-hidden pt-28 md:pt-32 pb-20 px-6 md:px-12 lg:px-24 text-white"
+            ? "relative md:aspect-[20/7] flex items-center overflow-hidden pt-10 md:pt-32 pb-12 md:pb-20 px-6 md:px-12 lg:px-24 text-white"
+            : "relative overflow-hidden pt-10 md:pt-32 pb-12 md:pb-20 px-6 md:px-12 lg:px-24 text-white"
         }
         style={
           heroImage

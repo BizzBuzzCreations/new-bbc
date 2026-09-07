@@ -49,15 +49,6 @@ export default async function WebDevelopment() {
               className="object-cover"
             />
             <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
-            <div
               className="absolute inset-0"
               style={{
                 background:
@@ -83,15 +74,6 @@ export default async function WebDevelopment() {
                 fill
                 sizes="100vw"
                 className="object-cover"
-              />
-              <div
-                className="absolute inset-0 opacity-30"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                  backgroundSize: "18px 18px",
-                }}
-                aria-hidden="true"
               />
               <div
                 className="absolute inset-0"

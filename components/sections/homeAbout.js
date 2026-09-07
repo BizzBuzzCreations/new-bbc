@@ -75,29 +75,14 @@ export default function HomeAbout({ content }) {
         </div>
       </div>
 
-      {/* Mobile only — plain stacked layout: heading, then the photo as
-          its own boxed block, then the paragraph and button below it. No
-          fade overlay here — that left-edge gradient exists on desktop
-          only to blend the full-bleed photo into the black background
-          beside the text column; on mobile the photo is its own rounded
-          boxed card with nothing to blend into, so the fade just darkened
-          the shot for no reason. */}
+      {/* Mobile only — plain stacked layout: heading, paragraph, button.
+          No photo here — the building photo is desktop-only now (it was
+          a boxed block between the heading and paragraph before, by
+          request removed for mobile so only the heading and paragraph
+          carry the section). */}
       <div className="md:hidden px-6 py-16 text-center">
         <p className="text-white/60">{eyebrow}</p>
         <h2 className="text-3xl font-bold mb-6 text-[#40A2D8]">{heading}</h2>
-        <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-lg mb-6">
-          {/* Anchored to the right now (was centered) — cropping more
-              off the left side of the photo so the BBC signage board,
-              which sits toward the right of the building's facade,
-              stays fully in frame on the narrower mobile box. */}
-          <Image
-            src={backgroundImage}
-            alt="BizzBuzz Creations office"
-            fill
-            sizes="100vw"
-            className="object-cover object-right"
-          />
-        </div>
         <p className="max-w-lg mx-auto mb-6 text-white/80">{paragraph}</p>
         {button}
       </div>

@@ -629,11 +629,11 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="text-2xl font-semibold text-white shrink-0">
           <Image
-            src="/bbc-new-logo.png"
+            src="/bbc-logo.png"
             alt="BizzBuzz Creations logo"
             className="h-8 md:h-10 w-auto"
-            width={198}
-            height={60}
+            width={192}
+            height={100}
           />
         </Link>
 

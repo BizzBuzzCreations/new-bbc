@@ -105,17 +105,18 @@ export default function ServiceDetailPage({
           These hero photos are all a wide 2.18:1 crop — on desktop the
           section's aspect-ratio is set to (nearly) match that, so
           object-fit: cover needs almost no vertical crop and the
-          subject's head never gets cut off; min-h alone (a viewport-
-          height-based size, unrelated to the photo's own proportions)
-          was forcing a much wider effective ratio on large screens,
-          which is what kept clipping the top no matter how it was
-          tuned. Mobile keeps a plain min-height since there's no width
-          budget to keep the full photo in frame there anyway. */}
+          subject's head never gets cut off. Mobile no longer shows that
+          full-bleed photo at all (a boxed copy sits in the text column
+          instead, further down) so there's no min-height left to reserve
+          for it there — the old min-h-[50vh] plus pt-28 was just leaving
+          a large empty gap between the nav and the heading; mobile now
+          gets a plain, modest pt-10 and lets the content set its own
+          height. */}
       <section
         className={
           heroImage
-            ? "relative min-h-[50vh] md:min-h-0 md:aspect-[2.18/1] flex items-center overflow-hidden pt-28 md:pt-32 pb-20 px-6 md:px-12 lg:px-24 text-white"
-            : "relative overflow-hidden pt-28 md:pt-32 pb-20 px-6 md:px-12 lg:px-24 text-white"
+            ? "relative md:aspect-[2.18/1] flex items-center overflow-hidden pt-10 md:pt-32 pb-12 md:pb-20 px-6 md:px-12 lg:px-24 text-white"
+            : "relative overflow-hidden pt-10 md:pt-32 pb-12 md:pb-20 px-6 md:px-12 lg:px-24 text-white"
         }
         style={
           heroImage

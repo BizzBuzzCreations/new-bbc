@@ -233,7 +233,12 @@ export default async function ServicesIndexPage() {
           hard to make out. Instead, mobile gets its own boxed copy of the
           same image as a plain in-flow block between the paragraph and
           the CTA buttons (`md:hidden` further down). */}
-      <section className="relative overflow-hidden min-h-[520px] sm:min-h-[560px] flex items-center pt-24 md:pt-28 pb-20 px-6 md:px-12 lg:px-24 text-white bg-black">
+      {/* min-h now kicks in from md up and mobile's top padding is a much
+          lighter pt-10 (was min-h-[520px] unconditional + pt-24) — that
+          combo was forcing a tall, vertically-centered box on mobile too,
+          leaving a large empty gap between the nav and the heading before
+          any content appeared. */}
+      <section className="relative overflow-hidden md:min-h-[520px] flex items-center pt-10 md:pt-28 pb-12 md:pb-20 px-6 md:px-12 lg:px-24 text-white bg-black">
         <div
           className="hidden md:block absolute inset-0"
           style={{

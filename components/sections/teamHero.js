@@ -12,7 +12,7 @@ export default function TeamHero({ content } = {}) {
 
   return (
     <section
-      className="relative overflow-hidden pt-28 md:pt-32 pb-16 md:pb-20 px-6 md:px-12 lg:px-24 text-white"
+      className="relative overflow-hidden pt-10 md:pt-32 pb-12 md:pb-20 px-6 md:px-12 lg:px-24 text-white"
       style={{
         background:
           "linear-gradient(120deg, #050b16 0%, #0B60B0 30%, #050b16 75%)",

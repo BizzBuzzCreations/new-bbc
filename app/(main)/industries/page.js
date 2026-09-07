@@ -146,7 +146,11 @@ export default async function IndustriesIndexPage() {
           overlay, text sitting in the solid-black portion on the left.
           Replaces the previous radial-gradient background + coded
           icon-badge cluster. */}
-      <section className="relative overflow-hidden md:min-h-[560px] flex items-center pt-28 md:pt-32 pb-20 px-6 md:px-12 lg:px-24 text-white bg-black">
+      {/* pt-10 on mobile (was pt-28) — that much top padding under a
+          sticky nav that already occupies its own space in the flow was
+          just leaving a large empty gap before the heading; md keeps its
+          original spacing. */}
+      <section className="relative overflow-hidden md:min-h-[560px] flex items-center pt-10 md:pt-32 pb-12 md:pb-20 px-6 md:px-12 lg:px-24 text-white bg-black">
         {/* Full-bleed version — desktop/tablet only. On mobile this sat
             dimmed behind the gradient with text stacked on top, hard to
             actually see; mobile instead gets its own boxed copy of the

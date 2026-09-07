@@ -49,16 +49,6 @@ export default async function BPO() {
               sizes="440px"
               className="object-cover"
             />
-            {/* Dotted texture overlay — matches the hero treatment */}
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "18px 18px",
-              }}
-              aria-hidden="true"
-            />
             {/* Gradient fade — matches the hero treatment */}
             <div
               className="absolute inset-0"
@@ -86,15 +76,6 @@ export default async function BPO() {
                 fill
                 sizes="100vw"
                 className="object-cover"
-              />
-              <div
-                className="absolute inset-0 opacity-30"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                  backgroundSize: "18px 18px",
-                }}
-                aria-hidden="true"
               />
               <div
                 className="absolute inset-0"

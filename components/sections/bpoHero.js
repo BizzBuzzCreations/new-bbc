@@ -12,9 +12,17 @@ import Link from "next/link";
 // with the text stacked over it, hard to make out. Instead, mobile gets
 // its own boxed copy of the same image as a plain in-flow block between
 // the paragraph and the CTA button (`md:hidden` further down).
+// min-h-[85vh]/-mt/pt-36 only kick in from md up now — that combo existed
+// to pull the hero under the sticky navbar so the full-bleed photo could
+// bleed up behind it, plus a tall forced height so the photo had room to
+// breathe. Mobile no longer shows that photo (see the boxed copy below
+// instead), so there's nothing to bleed under the nav for and no reason to
+// reserve 85vh — it was just leaving a large empty gap between the nav and
+// the heading. Mobile now gets a plain, modest pt-10 with no negative
+// margin or forced height.
 export default function BpoHero({ heading, description, img, ctaText = "Start Now" }) {
   return (
-    <section className="relative min-h-[85vh] flex items-center overflow-hidden -mt-14 md:-mt-[72px] pt-36 md:pt-44 pb-20 px-6 md:px-12 lg:px-24">
+    <section className="relative md:min-h-[85vh] flex items-center overflow-hidden pt-10 md:-mt-[72px] md:pt-44 pb-12 md:pb-20 px-6 md:px-12 lg:px-24">
       <div className="hidden md:block">
         <Image
           src={img}
