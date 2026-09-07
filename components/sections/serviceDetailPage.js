@@ -331,7 +331,10 @@ export default function ServiceDetailPage({
 
       {/* Locality / positioning statement — optional, only rendered when
           localityText is supplied. Left-aligned copy with a matching
-          image on the right, same image on every sub-service page. */}
+          image on the right — the same heroImage each sub-service page
+          already uses at the top of the page, instead of the previous
+          shared generic /image-2.jpg every page showed regardless of
+          topic. */}
       {localityText && (
         <section className="bg-[#050505] py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center">
@@ -341,12 +344,10 @@ export default function ServiceDetailPage({
               </h2>
               {/* Mobile only — image between the heading and the
                   paragraph (was rendering after the paragraph, since the
-                  desktop image lives in the second grid column below).
-                  /why-choose-image.png doesn't exist in /public — was a
-                  broken image icon; swapped for a real photo. */}
+                  desktop image lives in the second grid column below). */}
               <div className="md:hidden relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg mb-6">
                 <Image
-                  src="/image-2.jpg"
+                  src={heroImage}
                   alt={localityHeading || "Why businesses choose us"}
                   fill
                   sizes="100vw"
@@ -359,7 +360,7 @@ export default function ServiceDetailPage({
             </div>
             <div className="hidden md:block relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
               <Image
-                src="/image-2.jpg"
+                src={heroImage}
                 alt={localityHeading || "Why businesses choose us"}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
