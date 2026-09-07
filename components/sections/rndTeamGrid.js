@@ -16,7 +16,7 @@ const RND_TEAM = [
   { icon: PenTool, name: "Khushi Gupta", role: "Content Writer & SEO Executive", photo: "/team-images/khushi.jpeg", linkedin: "https://www.linkedin.com/in/khushi-gupta-8675a7339/" },
   { icon: Palette, name: "Mudit Srivastava", role: "Graphic Designer & Video Editor", photo: "/team-images/mudit.png", linkedin: "https://www.linkedin.com/in/mudit-srivastava-a4086320b/" },
   { icon: Code2, name: "Kushmal Arora", role: "Full Stack Developer", photo: "/team-images/Kushmal.jpg", linkedin: "https://www.linkedin.com/in/kushmalarora017/" },
-  { icon: Terminal, name: "Shashwat Upadhayay", role: "DevOps Engineer", photo: "/team-images/shashwat.jpg", linkedin: "https://www.linkedin.com/in/shashwat-upadhyay-swtu/" },
+  { icon: Terminal, name: "Shashwat Upadhayay", role: "DevOps Engineer", photo: "/team-images/shashwat.png", linkedin: "https://www.linkedin.com/in/shashwat-upadhyay-swtu/" },
   { icon: Settings, name: "Tejash Yadav", role: "DevOps Engineer", photo: "/team-images/Tejash.jpg", linkedin: "https://www.linkedin.com/in/tejashh/" },
 ];
 
