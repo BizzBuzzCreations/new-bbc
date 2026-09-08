@@ -2,17 +2,10 @@
 
 import {
   Headset,
-  Wrench,
-  MessageCircle,
-  Mail,
-  PhoneIncoming,
-  PhoneOutgoing,
-  Keyboard,
-  FileText,
-  UserCheck,
-  CheckCircle2,
   Users,
-  Settings,
+  Award,
+  ShieldCheck,
+  Target,
 } from "lucide-react";
 import { RoleCard } from "@/components/sections/teamGrids";
 
@@ -23,56 +16,36 @@ import { RoleCard } from "@/components/sections/teamGrids";
 // first time around with a "Functions cannot be passed directly to
 // Client Components" error.
 //
-// The 12 role titles/icons below are the real roles on the BPO team;
-// with 24 named people and no individual role assigned to each by name,
-// each role is used for two people (cycled twice) rather than inventing
-// new titles.
-const BPO_ROLES = [
-  { icon: Headset, role: "Customer Support Executive" },
-  { icon: Wrench, role: "Technical Support Specialist" },
-  { icon: MessageCircle, role: "Live Chat Support Agent" },
-  { icon: Mail, role: "Email Support Executive" },
-  { icon: PhoneIncoming, role: "Inbound Call Executive" },
-  { icon: PhoneOutgoing, role: "Outbound Call Executive" },
-  { icon: Keyboard, role: "Data Entry Specialist" },
-  { icon: FileText, role: "Back Office Executive" },
-  { icon: UserCheck, role: "Virtual Assistant" },
-  { icon: CheckCircle2, role: "Quality Analyst" },
-  { icon: Users, role: "Team Lead — Customer Support" },
-  { icon: Settings, role: "Operations Coordinator" },
-];
+// The real 18-person BPO roster, each with their actual role (not a
+// cycled generic title) — replaces the previous 24-name placeholder list.
+const ROLE_ICONS = {
+  "Customer Support Executive": Headset,
+  Advisor: Users,
+  "Senior Advisor": Award,
+  "Compliance Manager": ShieldCheck,
+  "Strategy Manager": Target,
+};
 
-const BPO_NAMES = [
-  "Abhishek Awasthi",
-  "Akanksha Pandey",
-  "Akash Singh",
-  "Aswad Abbas",
-  "Ardeen Khan",
-  "Ashish Singh",
-  "Anurag Singh Bisht",
-  "Aryan Prakash Srivatava",
-  "Digvijay Singh",
-  "Harsh Singh",
-  "Harshvardhan Tripathi",
-  "Hritik Kesarwani",
-  "Ishika Kesarwani",
-  "Karan Agarhari",
-  "Kanchi Singh",
-  "Kushal Singh",
-  "Karamjeet Kaur",
-  "Kartikae Ojha",
-  "Manasvi Gupta",
-  "Monika Sharma",
-  "Preet Yadav",
-  "Shreya Dubey",
-  "Sudhanshu Kumar Rai",
-  "Ziauddin Khan",
-];
-
-const BPO_TEAM = BPO_NAMES.map((name, i) => ({
-  name,
-  ...BPO_ROLES[i % BPO_ROLES.length],
-}));
+const BPO_TEAM = [
+  { name: "Abhishek Awasthi", role: "Customer Support Executive" },
+  { name: "Akanksha Pandey", role: "Senior Advisor" },
+  { name: "Akash Singh", role: "Advisor" },
+  { name: "Anurag Singh Bisht", role: "Advisor" },
+  { name: "Aryan Prakash Srivastava", role: "Senior Advisor" },
+  { name: "Digvijay Singh", role: "Advisor" },
+  { name: "Harsh Singh", role: "Advisor" },
+  { name: "Harshvardhan Tripathi", role: "Advisor" },
+  { name: "Hritik Kesarwani", role: "Advisor" },
+  { name: "Ishika Kesarwani", role: "Compliance Manager" },
+  { name: "Karan Agarhari", role: "Advisor" },
+  { name: "Kanchi Singh", role: "Advisor" },
+  { name: "Kushal Singh", role: "Senior Advisor" },
+  { name: "Kartikae Ojha", role: "Strategy Manager" },
+  { name: "Manasvi Gupta", role: "Advisor" },
+  { name: "Monika Sharma", role: "Advisor" },
+  { name: "Shreya Dubey", role: "Advisor" },
+  { name: "Ziauddin Khan", role: "Advisor" },
+].map((person) => ({ ...person, icon: ROLE_ICONS[person.role] }));
 
 export default function BpoTeamGrid() {
   return (
