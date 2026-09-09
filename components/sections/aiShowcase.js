@@ -32,7 +32,7 @@ export default function AiShowcase({ content }) {
     content?.aiParagraph ||
     "From AI chatbots and intelligent agents to workflow automation, AI-powered content, and AI search optimization, we help businesses in Prayagraj, across India, and worldwide put practical AI solutions to work.";
   const posterImage = content?.aiPosterImage || "/aiservice.webp";
-  const videoSrc = content?.aiVideo || "/Sequence 01 1.mp4";
+  const videoSrc = content?.aiVideo || "/ai-vid.webm";
   const buttonText = content?.aiButtonText || "Explore AI Solutions";
 
   // Icon stays fixed (structural); title + description come from the
@@ -45,8 +45,11 @@ export default function AiShowcase({ content }) {
   return (
     <section className="bg-black overflow-hidden">
       <div className="grid lg:grid-cols-2">
-        {/* Video side */}
-        <div className="relative min-h-[420px] lg:min-h-[640px]">
+        {/* Video side — order-1 (with lg:order-none to fall back to plain
+            DOM order once the 2-column desktop layout kicks in) makes sure
+            it renders above the text content on mobile explicitly, rather
+            than relying only on JSX order. */}
+        <div className="relative order-1 lg:order-none min-h-[420px] lg:min-h-[640px]">
           <video
             autoPlay
             muted
@@ -59,30 +62,33 @@ export default function AiShowcase({ content }) {
                 "polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 55%, 8% 50%, 0 45%)",
             }}
           >
-            <source src={videoSrc} type="video/mp4" />
+            <source src={videoSrc} />
+            <source src="/Sequence 01 1.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-linear-to-r from-transparent via-transparent to-black/40 lg:to-black/10" />
         </div>
 
         {/* Content side */}
-        <div className="p-8 sm:p-12 lg:p-16 flex flex-col justify-center gap-6 text-white">
+        <div className="order-2 lg:order-none p-8 sm:p-12 lg:p-16 flex flex-col justify-center gap-6 text-white">
           <h2 className="text-3xl md:text-4xl font-bold leading-tight">
             {heading}
           </h2>
 
           <p className="text-white/60 max-w-xl">{paragraph}</p>
 
-          <div className="grid sm:grid-cols-2 gap-4">
+          {/* 2x2 on every screen below lg (was sm:grid-cols-2, so phones
+              narrower than 640px fell back to 1 card per row). */}
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
             {features.map(({ icon: Icon, title, description }, i) => (
               <div
                 key={i}
-                className="group rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/20"
+                className="group rounded-2xl border border-white/10 bg-white/[0.03] p-3.5 sm:p-5 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/20"
               >
-                <div className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center mb-4 text-[#40A2D8] transition-colors duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
+                <div className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center mb-3 sm:mb-4 text-[#40A2D8] transition-colors duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
                   <Icon size={18} />
                 </div>
-                <h3 className="font-semibold mb-2 transition-colors duration-300">{title}</h3>
-                <p className="text-sm text-white/70 leading-relaxed transition-colors duration-300 group-hover:text-white/85">
+                <h3 className="font-semibold mb-2 text-sm sm:text-base transition-colors duration-300">{title}</h3>
+                <p className="text-xs sm:text-sm text-white/70 leading-relaxed transition-colors duration-300 group-hover:text-white/85">
                   {description}
                 </p>
               </div>

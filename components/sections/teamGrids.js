@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Crown,
@@ -16,6 +18,7 @@ import {
   FlaskConical,
   Linkedin,
   Instagram,
+  ArrowRight,
 } from "lucide-react";
 
 // Role-based structure rather than invented individual profiles with
@@ -29,31 +32,35 @@ const DEFAULT_FOUNDERS = [
   { name: "Utkarsh Mishra", role: "Co-Founder & Director" },
 ];
 
-const LEADER_ICONS = [Search, Megaphone, Palette, Code2, Bot, Briefcase];
+const LEADER_ICONS = [Search, Megaphone, Palette, Code2, Bot, Briefcase, Users];
+// No `dept` field on any of these — the small uppercase label that used
+// to sit above the name has been dropped entirely (RoleCard only renders
+// it when `dept` is present), leaving just the name and role/position.
 const DEFAULT_LEADERS = [
-  { role: "Head of SEO & Growth", dept: "SEO" },
-  { role: "Paid Media Lead", dept: "Paid Ads" },
-  { role: "Creative & Brand Director", dept: "Creative" },
-  { role: "Web Development Lead", dept: "Engineering" },
-  { role: "AI & Automation Lead", dept: "AI & Automation" },
-  { role: "Business Consultancy Lead", dept: "Consultancy" },
+  { name: "Abhay Sharma", role: "Compliance Manager" },
+  { name: "Kautic Jaiswal", role: "Process Manager" },
+  { name: "Swapnil Singh", role: "Team Leader" },
+  { name: "Shruti Singh", role: "Organizational Manager" },
+  { name: "Aley Saiyyadah Rizvi", role: "HR", photo: "/team-images/aley.jpeg" },
+  { name: "Md. Shameem", role: "IT Manager" },
+  { name: "Ankit Kumar Yadav", role: "Accounts and Management" },
 ];
 
-// Real BizzBuzz team photos (same assets already used elsewhere on the
-// site — the hero and the About page's "Our Story" section), not
-// fabricated department photos.
+// Real BizzBuzz team photos — /teamPic.webp and /banner.png don't exist
+// in /public (both rendered as broken image icons); swapped for a real
+// office photo already used elsewhere on the site.
 const DEFAULT_TEAM_GROUPS = [
   {
     title: "Meet Our BPO Team",
     tagline: "The People Keeping Every Customer Interaction Moving",
     desc: "Our BPO team handles customer support, lead follow-ups, communication, and day-to-day customer interactions, helping businesses stay responsive while creating smoother experiences for their customers.",
-    image: "/teamPic.webp",
+    image: "/image-1.jpg",
   },
   {
     title: "Meet Our R&D Team",
     tagline: "Exploring What’s Next in Digital",
     desc: "Our R&D team researches and tests emerging technologies across AI search, SEO, automation, digital tools, and evolving search behaviour. Their work helps us turn new developments into practical strategies and smarter solutions for the businesses we serve.",
-    image: "/banner.png",
+    image: "/image-1.jpg",
   },
 ];
 
@@ -111,7 +118,7 @@ const fadeUp = (i) => ({
   transition: { duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] },
 });
 
-function RoleCard({
+export function RoleCard({
   icon: Icon,
   name,
   role,
@@ -124,30 +131,73 @@ function RoleCard({
   flip = false,
   linkedin,
   instagram,
+  // BPO/R&D team grids only want LinkedIn on the back — Founders/Leaders
+  // keep both, unchanged.
+  showInstagram = true,
+  // Optional real headshot — when set, this replaces the generic
+  // icon-in-a-circle placeholder with an actual photo filling the same
+  // image area. Most roles still use the icon since a real photo isn't
+  // available for everyone yet.
+  photo,
 }) {
   const isXl = size === "xl";
   const isLarge = size === "large" || isXl;
+  // Desktop flips these cards on :hover, which touch devices can never
+  // trigger — so on mobile the card just sat there, front-face-only,
+  // forever. Tapping now toggles the same flip via this state, on top of
+  // (not instead of) the existing hover behavior for mouse users.
+  const [flipped, setFlipped] = useState(false);
 
   if (flip) {
     return (
-      <motion.div {...fadeUp(index)} className="group [perspective:1500px]">
-        <div className="relative transition-transform duration-700 ease-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+      <motion.div
+        {...fadeUp(index)}
+        className="group [perspective:1500px] cursor-pointer h-full"
+        onClick={() => setFlipped((f) => !f)}
+        role="button"
+        tabIndex={0}
+        aria-pressed={flipped}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setFlipped((f) => !f);
+          }
+        }}
+      >
+        {/* `h-full` on every layer down to the front face (grid's default
+            `align-items: stretch` already makes the outer card fill the
+            row's tallest neighbor — but a plain block child doesn't
+            inherit that height unless each one explicitly fills its
+            parent) so every card in a row ends up the exact same total
+            height, whatever the name/role wraps to. The photo itself
+            stays a fixed, undistorted aspect ratio either way — only the
+            text area's bottom whitespace grows or shrinks to absorb the
+            difference, instead of the box itself varying in height. */}
+        <div
+          className={`relative h-full transition-transform duration-700 ease-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] ${
+            flipped ? "[transform:rotateY(180deg)]" : ""
+          }`}
+        >
           {/* Front — identical markup to the non-flip card below, just
               sized the same way via isXl/isLarge so flip cards match
               whichever grid (Founders, Leaders) they're used in. */}
-          <div className="[backface-visibility:hidden] rounded-2xl border border-white/10 bg-white/5 overflow-hidden shadow-sm">
+          <div className="h-full flex flex-col [backface-visibility:hidden] rounded-2xl border border-white/10 bg-white/5 overflow-hidden shadow-sm">
             <div
-              className={`${isLarge ? "aspect-[4/3]" : "aspect-square"} flex items-center justify-center bg-white/5`}
+              className={`relative shrink-0 ${photo ? "aspect-[3/4]" : isLarge ? "aspect-[4/3]" : "aspect-square"} flex items-center justify-center bg-white/5`}
             >
-              <div
-                className={`flex items-center justify-center rounded-full bg-white/10 text-[#40A2D8] ${
-                  isXl ? "w-28 h-28" : isLarge ? "w-20 h-20" : "w-16 h-16"
-                }`}
-              >
-                <Icon size={isXl ? 48 : isLarge ? 34 : 28} />
-              </div>
+              {photo ? (
+                <Image src={photo} alt={name || role} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover object-top" />
+              ) : (
+                <div
+                  className={`flex items-center justify-center rounded-full bg-white/10 text-[#40A2D8] ${
+                    isXl ? "w-28 h-28" : isLarge ? "w-20 h-20" : "w-16 h-16"
+                  }`}
+                >
+                  <Icon size={isXl ? 48 : isLarge ? 34 : 28} />
+                </div>
+              )}
             </div>
-            <div className={isXl ? "p-6" : "p-4"}>
+            <div className={`flex-1 flex flex-col justify-center ${isXl ? "p-6" : "p-4"}`}>
               {dept && (
                 <p className={`font-bold uppercase tracking-wide text-[#40A2D8] mb-1 ${isXl ? "text-sm" : "text-xs"}`}>
                   {dept}
@@ -178,19 +228,23 @@ function RoleCard({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${name || role} on LinkedIn`}
+                onClick={(e) => e.stopPropagation()}
                 className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 text-[#40A2D8] hover:bg-white hover:text-[#0B60B0] transition-colors duration-300"
               >
                 <Linkedin size={19} />
               </a>
-              <a
-                href={instagram || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${name || role} on Instagram`}
-                className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 text-[#40A2D8] hover:bg-white hover:text-[#0B60B0] transition-colors duration-300"
-              >
-                <Instagram size={19} />
-              </a>
+              {showInstagram && (
+                <a
+                  href={instagram || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${name || role} on Instagram`}
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 text-[#40A2D8] hover:bg-white hover:text-[#0B60B0] transition-colors duration-300"
+                >
+                  <Instagram size={19} />
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -201,20 +255,24 @@ function RoleCard({
   return (
     <motion.div
       {...fadeUp(index)}
-      className="group rounded-2xl border border-white/10 bg-white/5 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-black/40"
+      className="group h-full flex flex-col rounded-2xl border border-white/10 bg-white/5 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-black/40"
     >
       <div
-        className={`${isLarge ? "aspect-[4/3]" : "aspect-square"} flex items-center justify-center bg-white/5`}
+        className={`relative shrink-0 ${photo ? "aspect-[3/4]" : isLarge ? "aspect-[4/3]" : "aspect-square"} flex items-center justify-center bg-white/5`}
       >
-        <div
-          className={`flex items-center justify-center rounded-full bg-white/10 text-[#40A2D8] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#0B60B0] group-hover:text-white ${
-            isXl ? "w-28 h-28" : isLarge ? "w-20 h-20" : "w-16 h-16"
-          }`}
-        >
-          <Icon size={isXl ? 48 : isLarge ? 34 : 28} />
-        </div>
+        {photo ? (
+          <Image src={photo} alt={name || role} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover object-top" />
+        ) : (
+          <div
+            className={`flex items-center justify-center rounded-full bg-white/10 text-[#40A2D8] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#0B60B0] group-hover:text-white ${
+              isXl ? "w-28 h-28" : isLarge ? "w-20 h-20" : "w-16 h-16"
+            }`}
+          >
+            <Icon size={isXl ? 48 : isLarge ? 34 : 28} />
+          </div>
+        )}
       </div>
-      <div className={isXl ? "p-6" : "p-4"}>
+      <div className={`flex-1 flex flex-col justify-center ${isXl ? "p-6" : "p-4"}`}>
         {dept && (
           <p className={`font-bold uppercase tracking-wide text-[#40A2D8] mb-1 ${isXl ? "text-sm" : "text-xs"}`}>
             {dept}
@@ -301,10 +359,22 @@ export default function TeamGrids({ content } = {}) {
             </p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {leaders.map((l, i) => (
-              <RoleCard key={i} {...l} index={i} flip />
-            ))}
+          {/* Two explicit rows (4 then 3) instead of one 3-column grid —
+              a single `lg:grid-cols-3` on 7 cards lands on 3+3+1, which
+              reads as broken; splitting into a fixed 4-across row and a
+              3-across row (width-matched to the same column track via
+              `lg:w-3/4 mx-auto`) keeps it a clean 4-then-3 every time. */}
+          <div className="flex flex-col gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {leaders.slice(0, 4).map((l, i) => (
+                <RoleCard key={i} {...l} index={i} size="xl" showInstagram={false} flip />
+              ))}
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:w-3/4 lg:mx-auto">
+              {leaders.slice(4).map((l, i) => (
+                <RoleCard key={i + 4} {...l} index={i + 4} size="xl" showInstagram={false} flip />
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -329,7 +399,7 @@ export default function TeamGrids({ content } = {}) {
                 >
                   <motion.div
                     {...fadeUp(i)}
-                    className={imageFirst ? "md:order-2" : ""}
+                    className={`order-2 ${imageFirst ? "md:order-2" : "md:order-1"}`}
                   >
                     <h2 className="text-xl md:text-2xl font-bold text-white mb-2">
                       {group.title}
@@ -337,15 +407,24 @@ export default function TeamGrids({ content } = {}) {
                     <h3 className="text-base md:text-lg font-semibold text-[#40A2D8] mb-4">
                       {group.tagline}
                     </h3>
-                    <p className="text-white/60 leading-relaxed">
+                    <p className="text-white/60 leading-relaxed mb-6">
                       {group.desc}
                     </p>
+                    <Link
+                      href={i === 0 ? "/our-team/bpo-team" : "/our-team/rnd-team"}
+                      className="group/btn inline-flex items-center gap-2.5 bg-[#0B60B0] hover:bg-white text-white hover:text-black text-sm font-semibold pl-6 pr-5 py-3.5 rounded-full shadow-lg shadow-[#0B60B0]/20 hover:shadow-xl hover:shadow-black/20 transition-all duration-300 w-fit"
+                    >
+                      Our Team
+                      <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white/15 group-hover/btn:bg-black/10 transition-all duration-300 group-hover/btn:translate-x-0.5">
+                        <ArrowRight size={13} />
+                      </span>
+                    </Link>
                   </motion.div>
 
                   <motion.div
                     {...fadeUp(i + 1)}
-                    className={`relative aspect-[16/10] rounded-3xl overflow-hidden shadow-lg ${
-                      imageFirst ? "md:order-1" : ""
+                    className={`relative order-1 aspect-[16/10] rounded-3xl overflow-hidden shadow-lg ${
+                      imageFirst ? "md:order-1" : "md:order-2"
                     }`}
                   >
                     <Image

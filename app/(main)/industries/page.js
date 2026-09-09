@@ -21,7 +21,6 @@ import {
 import CTA from "@/components/sections/CTA";
 import CaseStudies from "@/components/sections/caseStudies";
 import CertificationsCarousel from "@/components/sections/certificationsCarousel";
-import IndustriesHeroBadges from "@/components/sections/industriesHeroBadges";
 import DarkFAQSection from "@/components/sections/darkFAQSection";
 import { getPageContent } from "@/actions/pageContentActions";
 
@@ -47,23 +46,29 @@ const INDUSTRY_ICONS = [
 
 // Each card links straight to that industry's own dedicated /industries
 // page (not a generic service page), so clicking "Healthcare" lands on
-// the Healthcare industry page, and so on for all 15.
+// the Healthcare industry page, and so on for all 15. `image` is each
+// industry's own real photo (the same ones used on that industry's own
+// hero section) — was previously a generic pool of 11 photos cycled
+// across all 15 cards via index modulo, unrelated to which industry a
+// card actually was, and two of those 11 (/banner.png, /teamPic.webp)
+// don't even exist in /public, so a couple of cards always rendered a
+// broken image regardless of which industry landed on that slot.
 const DEFAULT_INDUSTRY_CARDS = [
-  { title: "Healthcare", description: "Build a stronger healthcare presence with digital marketing, SEO, and websites designed to connect with patients.", linkText: "Learn More", linkHref: "/industries/healthcare" },
-  { title: "Finance", description: "Strengthen your finance brand with digital strategies that build visibility, trust, engagement, and qualified customer opportunities.", linkText: "Learn More", linkHref: "/industries/finance" },
-  { title: "Restaurant", description: "Attract more diners with local SEO, social media, and digital marketing strategies built for restaurant growth.", linkText: "Learn More", linkHref: "/industries/restaurant" },
-  { title: "Wearables", description: "Grow your wearable technology brand with digital strategies that improve visibility, engagement, and online customer discovery.", linkText: "Learn More", linkHref: "/industries/wearables" },
-  { title: "Entertainment", description: "Reach wider audiences with creative digital marketing, social media, and content strategies built for entertainment brands.", linkText: "Learn More", linkHref: "/industries/entertainment" },
-  { title: "Travel", description: "Increase bookings and brand visibility with SEO, digital marketing, and engaging online experiences for travel businesses.", linkText: "Learn More", linkHref: "/industries/travel" },
-  { title: "Fitness", description: "Build a stronger fitness brand with digital marketing strategies that attract members, increase visibility, and drive growth.", linkText: "Learn More", linkHref: "/industries/fitness" },
-  { title: "Education", description: "Connect with students and learners through SEO, digital marketing, and websites designed for educational businesses.", linkText: "Learn More", linkHref: "/industries/education" },
-  { title: "Real Estate", description: "Generate more property leads with SEO, digital marketing, and conversion-focused websites built for real estate businesses.", linkText: "Learn More", linkHref: "/industries/real-estate" },
-  { title: "E-commerce", description: "Grow your online store with SEO, digital marketing, and conversion-focused strategies designed for e-commerce success.", linkText: "Learn More", linkHref: "/industries/ecommerce" },
-  { title: "Events", description: "Build event awareness and increase registrations with social media, digital marketing, and engaging online campaigns.", linkText: "Learn More", linkHref: "/industries/events" },
-  { title: "Manufacturing", description: "Strengthen your manufacturing business with digital strategies that improve visibility, reach buyers, and generate qualified leads.", linkText: "Learn More", linkHref: "/industries/manufacturing" },
-  { title: "Fashion & Apparel", description: "Build a stronger fashion brand with social media, digital marketing, and e-commerce strategies that turn attention into growth.", linkText: "Learn More", linkHref: "/industries/fashion-apparel" },
-  { title: "Gaming", description: "Reach gaming audiences with engaging digital marketing, social media, and content strategies built around player communities.", linkText: "Learn More", linkHref: "/industries/gaming" },
-  { title: "Construction", description: "Generate qualified leads and strengthen your online presence with SEO, digital marketing, and conversion-focused web solutions.", linkText: "Learn More", linkHref: "/industries/construction" },
+  { title: "Healthcare", description: "Build a stronger healthcare presence with digital marketing, SEO, and websites designed to connect with patients.", linkText: "Learn More", linkHref: "/industries/healthcare", image: "/Healthcare.png" },
+  { title: "Finance", description: "Strengthen your finance brand with digital strategies that build visibility, trust, engagement, and qualified customer opportunities.", linkText: "Learn More", linkHref: "/industries/finance", image: "/Finance.png" },
+  { title: "Restaurant", description: "Attract more diners with local SEO, social media, and digital marketing strategies built for restaurant growth.", linkText: "Learn More", linkHref: "/industries/restaurant", image: "/Restaurant.png" },
+  { title: "Wearables", description: "Grow your wearable technology brand with digital strategies that improve visibility, engagement, and online customer discovery.", linkText: "Learn More", linkHref: "/industries/wearables", image: "/wearables.png" },
+  { title: "Entertainment", description: "Reach wider audiences with creative digital marketing, social media, and content strategies built for entertainment brands.", linkText: "Learn More", linkHref: "/industries/entertainment", image: "/Entertainment.png" },
+  { title: "Travel", description: "Increase bookings and brand visibility with SEO, digital marketing, and engaging online experiences for travel businesses.", linkText: "Learn More", linkHref: "/industries/travel", image: "/Travel.png" },
+  { title: "Fitness", description: "Build a stronger fitness brand with digital marketing strategies that attract members, increase visibility, and drive growth.", linkText: "Learn More", linkHref: "/industries/fitness", image: "/fitness.png" },
+  { title: "Education", description: "Connect with students and learners through SEO, digital marketing, and websites designed for educational businesses.", linkText: "Learn More", linkHref: "/industries/education", image: "/Education.png" },
+  { title: "Real Estate", description: "Generate more property leads with SEO, digital marketing, and conversion-focused websites built for real estate businesses.", linkText: "Learn More", linkHref: "/industries/real-estate", image: "/Real estate.png" },
+  { title: "E-commerce", description: "Grow your online store with SEO, digital marketing, and conversion-focused strategies designed for e-commerce success.", linkText: "Learn More", linkHref: "/industries/ecommerce", image: "/ecommerce.png" },
+  { title: "Events", description: "Build event awareness and increase registrations with social media, digital marketing, and engaging online campaigns.", linkText: "Learn More", linkHref: "/industries/events", image: "/Events.png" },
+  { title: "Manufacturing", description: "Strengthen your manufacturing business with digital strategies that improve visibility, reach buyers, and generate qualified leads.", linkText: "Learn More", linkHref: "/industries/manufacturing", image: "/Manufacturing.png" },
+  { title: "Fashion & Apparel", description: "Build a stronger fashion brand with social media, digital marketing, and e-commerce strategies that turn attention into growth.", linkText: "Learn More", linkHref: "/industries/fashion-apparel", image: "/Fashion.png" },
+  { title: "Gaming", description: "Reach gaming audiences with engaging digital marketing, social media, and content strategies built around player communities.", linkText: "Learn More", linkHref: "/industries/gaming", image: "/Gaming.png" },
+  { title: "Construction", description: "Generate qualified leads and strengthen your online presence with SEO, digital marketing, and conversion-focused web solutions.", linkText: "Learn More", linkHref: "/industries/construction", image: "/Construction.png" },
 ];
 
 // Industries page FAQs — questions specific to working across industries.
@@ -109,23 +114,6 @@ export const metadata = {
   },
 };
 
-// Same real photo pool reused across the site (individual industry pages,
-// homepage shuffle grid) — no stock photography, no fabricated client
-// logos or awards.
-const DEFAULT_CARD_IMAGES = [
-  "/image-1.jpg",
-  "/image-2.jpg",
-  "/banner.png",
-  "/image-3.jpg",
-  "/image-4.webp",
-  "/image-5.webp",
-  "/image-6.jpg",
-  "/image-7.jpg",
-  "/image-8.jpg",
-  "/image-9.jpg",
-  "/teamPic.webp",
-];
-
 export default async function IndustriesIndexPage() {
   const content = await getPageContent("industries");
 
@@ -135,14 +123,11 @@ export default async function IndustriesIndexPage() {
     content?.industriesHeroParagraph ||
     "Every industry has different goals, audiences, and challenges. We create tailored digital marketing, BPO, and web solutions that fit the way your business works.";
   const heroButtonText = content?.industriesHeroButtonText || "Explore Our Solutions";
+  const heroImage = content?.industriesHeroImage || "/industries.png";
 
   const gridEyebrow = content?.industriesGridEyebrow || "";
   const gridHeading = content?.industriesGridHeading || "Delivering Value Across Every Major Industry";
   const gridSubtext = content?.industriesGridSubtext || "Real challenges, real solutions — pick your industry below to see how we approach it.";
-  const CARD_IMAGES =
-    content?.industriesCardImages?.length > 0
-      ? content.industriesCardImages.map((i) => i.src)
-      : DEFAULT_CARD_IMAGES;
 
   const certHeading = content?.industriesCertHeading || "Certified & Recognized By";
   const certSubtext = content?.industriesCertSubtext || "Real credentials that back up how we work, not just what we say.";
@@ -155,39 +140,75 @@ export default async function IndustriesIndexPage() {
 
   return (
     <>
-      {/* Hero */}
-      <section
-        className="relative overflow-hidden pt-28 md:pt-32 pb-20 px-6 md:px-12 lg:px-24 text-white"
-        style={{ background: "radial-gradient(circle at top, #0d1b2e, #000000)" }}
-      >
+      {/* Hero — full-bleed photo (same treatment as the FAQ hero): the
+          image is already designed with a dark-to-photo gradient built
+          in, laid down as a plain background with a matching black
+          overlay, text sitting in the solid-black portion on the left.
+          Replaces the previous radial-gradient background + coded
+          icon-badge cluster. */}
+      {/* pt-10 on mobile (was pt-28) — that much top padding under a
+          sticky nav that already occupies its own space in the flow was
+          just leaving a large empty gap before the heading; md keeps its
+          original spacing. */}
+      <section className="relative overflow-hidden md:min-h-[560px] flex items-center pt-10 md:pt-32 pb-12 md:pb-20 px-6 md:px-12 lg:px-24 text-white bg-black">
+        {/* Full-bleed version — desktop/tablet only. On mobile this sat
+            dimmed behind the gradient with text stacked on top, hard to
+            actually see; mobile instead gets its own boxed copy of the
+            same image between the paragraph and the CTA button below. */}
         <div
-          className="absolute top-1/4 right-[8%] w-[420px] h-[420px] rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
+          className="absolute inset-0 hidden md:block"
+          style={{
+            backgroundImage: `url('${heroImage}')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <div
+          className="absolute inset-0 hidden md:block"
+          style={{
+            background:
+              "linear-gradient(90deg, #000000 0%, #000000 38%, rgba(0,0,0,0.82) 55%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0) 100%)",
+          }}
         />
 
-        <div className="relative max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-4">
-              {heroEyebrow}
-            </p>
-            <h1 className="text-4xl sm:text-5xl font-bold mb-6 leading-tight">
-              {heroHeading}
-            </h1>
-            <p className="text-white/70 leading-relaxed mb-9 max-w-lg">
-              {heroParagraph}
-            </p>
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-2 bg-[#0B60B0] hover:bg-[#0d72cf] text-white text-sm font-semibold px-7 py-3.5 rounded-full shadow-lg shadow-[#0B60B0]/30 transition"
-            >
-              {heroButtonText}
-              <ArrowUpRight size={16} />
-            </Link>
-          </div>
-
-          {/* Real industries we serve, not fabricated client logos */}
-          <IndustriesHeroBadges />
+        <div className="relative max-w-2xl">
+          <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-4">
+            {heroEyebrow}
+          </p>
+          <h1 className="text-4xl sm:text-5xl font-bold mb-6 leading-tight">
+            {heroHeading}
+          </h1>
+          <p className="text-white/70 leading-relaxed mb-9 max-w-lg">
+            {heroParagraph}
+          </p>
+          <div
+            className="md:hidden relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-lg mb-9"
+            style={{
+              backgroundImage: `url('${heroImage}')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+          <Link href="/services" className="inline-block">
+            <button className="animated-button animated-button-lg whitespace-nowrap">
+              <svg
+                viewBox="0 0 24 24"
+                className="arr-2"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
+              <span className="text">{heroButtonText}</span>
+              <span className="circle"></span>
+              <svg
+                viewBox="0 0 24 24"
+                className="arr-1"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
+            </button>
+          </Link>
         </div>
       </section>
 
@@ -215,7 +236,7 @@ export default async function IndustriesIndexPage() {
                 >
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <Image
-                      src={CARD_IMAGES[i % CARD_IMAGES.length]}
+                      src={card.image}
                       alt={card.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"

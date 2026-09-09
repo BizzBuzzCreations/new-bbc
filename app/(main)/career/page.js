@@ -2,8 +2,9 @@ import { getAllJobs } from "@/actions/serverActions";
 import CareerHero from "@/components/sections/careerHero";
 import { CareerWhyUs, CareerJoinTeam } from "@/components/sections/careerShowcase";
 import CTA from "@/components/sections/CTA";
-import { ArrowUpRight, Briefcase, MapPin, Clock } from "lucide-react";
+import { Briefcase } from "lucide-react";
 import { getPageContent } from "@/actions/pageContentActions";
+import JobCard from "@/components/ui/jobCard";
 
 export const metadata = {
   title: "Careers at BizzBuzz Creations | Digital Marketing Jobs & Internships",
@@ -62,54 +63,9 @@ export default async function Career() {
             </div>
           ) : (
             <div className="space-y-6">
-              {jobsData.map((job, i) => {
-                const days = getDaysSincePosted(job.createdAt);
-                return (
-                  <div
-                    key={i}
-                    className="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-black/40"
-                  >
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between mb-4">
-                      <div>
-                        <h3 className="text-lg font-bold text-white mb-1">
-                          {job.title}
-                        </h3>
-                        <span className="text-xs text-white/40">
-                          Posted {days === 0 ? "today" : `${days} day${days === 1 ? "" : "s"} ago`}
-                        </span>
-                      </div>
-                      <a
-                        href={job.applyForm}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 shrink-0 bg-[#0B60B0] hover:bg-white text-white hover:text-black text-sm font-semibold px-5 py-2.5 rounded-full transition-colors duration-300 w-fit"
-                      >
-                        Apply Now
-                        <ArrowUpRight size={15} />
-                      </a>
-                    </div>
-
-                    <p className="text-sm text-white/60 leading-relaxed whitespace-pre-line mb-5">
-                      {job.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2">
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 text-[#40A2D8] px-3 py-1.5 text-xs font-semibold">
-                        <Briefcase size={13} />
-                        {job.department}
-                      </span>
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 text-[#40A2D8] px-3 py-1.5 text-xs font-semibold">
-                        <MapPin size={13} />
-                        {job.location}
-                      </span>
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 text-[#40A2D8] px-3 py-1.5 text-xs font-semibold">
-                        <Clock size={13} />
-                        {job.experience}
-                      </span>
-                    </div>
-                  </div>
-                );
-              })}
+              {jobsData.map((job, i) => (
+                <JobCard key={i} job={job} days={getDaysSincePosted(job.createdAt)} />
+              ))}
             </div>
           )}
         </div>

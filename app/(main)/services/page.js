@@ -1,7 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowUpRight,
-  ChevronRight,
   Users,
   ShieldCheck,
   FileSignature,
@@ -16,6 +16,7 @@ import CTA from "@/components/sections/CTA";
 import Particles from "@/components/ui/Particles";
 import ServiceScenariosCarousel from "@/components/sections/serviceScenariosCarousel";
 import DarkFAQSection from "@/components/sections/darkFAQSection";
+import HighlightCard from "@/components/ui/highlightCard";
 import { SERVICES } from "@/lib/industriesData";
 import { getPageContent } from "@/actions/pageContentActions";
 
@@ -178,6 +179,7 @@ export default async function ServicesIndexPage() {
     "SEO, ads, web development and automation — one roof, one team, wherever your customers are.";
   const heroButtonText = content?.servicesHeroButtonText || "Explore Our Services";
   const heroSecondaryButtonText = content?.servicesHeroSecondaryButtonText || "Get a Free Consultation";
+  const heroImage = content?.servicesHeroImage || "/services.png";
 
   const gridHeading = content?.servicesGridHeading || "Explore Our Digital Growth Services";
   const gridSubtext = content?.servicesGridSubtext || "Choose the services that match your goals, or combine multiple solutions to support different areas of your business.";
@@ -217,72 +219,109 @@ export default async function ServicesIndexPage() {
 
   return (
     <>
-      {/* Hero */}
-      <section
-        className="relative overflow-hidden pt-24 md:pt-28 pb-20 px-6 md:px-12 lg:px-24 text-white"
-        style={{ background: "radial-gradient(circle at top, #0d1b2e, #000000)" }}
-      >
+      {/* Hero — full-bleed photo (same treatment as the FAQ hero): the
+          image itself is already designed with a dark-to-photo gradient
+          built in, so it's laid down as a plain background with a
+          matching black-to-transparent overlay on top, text sitting in
+          the solid-black portion on the left. Replaces the previous
+          radial-gradient background + coded 6-icon floating grid.
+
+          On mobile, the full-bleed background version is hidden entirely
+          (`hidden md:block` below) — same treatment as the other hero
+          sections across the site: at narrow widths the photo mostly just
+          sat dimmed behind the gradient with the text stacked over it,
+          hard to make out. Instead, mobile gets its own boxed copy of the
+          same image as a plain in-flow block between the paragraph and
+          the CTA buttons (`md:hidden` further down). */}
+      {/* min-h now kicks in from md up and mobile's top padding is a much
+          lighter pt-10 (was min-h-[520px] unconditional + pt-24) — that
+          combo was forcing a tall, vertically-centered box on mobile too,
+          leaving a large empty gap between the nav and the heading before
+          any content appeared. */}
+      <section className="relative overflow-hidden md:min-h-[520px] flex items-center pt-10 md:pt-28 pb-12 md:pb-20 px-6 md:px-12 lg:px-24 text-white bg-black">
         <div
-          className="absolute top-10 -right-24 w-[420px] h-[420px] rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-          aria-hidden="true"
+          className="hidden md:block absolute inset-0"
+          style={{
+            backgroundImage: `url('${heroImage}')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
         />
         <div
-          className="absolute bottom-0 -left-24 w-80 h-80 rounded-full blur-3xl opacity-15 pointer-events-none"
-          style={{ background: "radial-gradient(circle, #40A2D8, transparent 70%)" }}
+          className="hidden md:block absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(90deg, #000000 0%, #000000 38%, rgba(0,0,0,0.82) 55%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0) 100%)",
+          }}
+        />
+        {/* Mobile background — plain, no photo, so the section reads as a
+            simple dark hero rather than an empty gradient with nothing
+            behind it once the full-bleed photo above is hidden. */}
+        <div
+          className="absolute inset-0 md:hidden"
+          style={{ background: "radial-gradient(circle at top, #0d1b2e, #000000)" }}
           aria-hidden="true"
         />
 
-        <div className="relative max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <div className="flex items-center gap-1.5 text-sm text-white/50 mb-6">
-              <Link href="/" className="hover:text-[#40A2D8] transition">
-                Home
-              </Link>
-              <ChevronRight size={14} />
-              <span className="font-semibold text-[#40A2D8]">Services</span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
-              {heroHeading}
-            </h1>
-            <p className="text-white/70 leading-relaxed mb-9 max-w-lg">
-              {heroParagraph}
-            </p>
-            <div className="flex flex-wrap items-center gap-4">
-              <Link
-                href="#services-grid"
-                className="inline-flex items-center gap-2 bg-[#0B60B0] hover:bg-[#0d72cf] text-white text-sm font-semibold px-7 py-3.5 rounded-full shadow-lg shadow-[#0B60B0]/30 transition"
-              >
-                {heroButtonText}
-                <ArrowUpRight size={16} />
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 border border-white/30 hover:bg-white/10 text-white text-sm font-semibold px-7 py-3.5 rounded-full transition"
-              >
-                {heroSecondaryButtonText}
-                <ArrowUpRight size={16} />
-              </Link>
-            </div>
+        <div className="relative max-w-2xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
+            {heroHeading}
+          </h1>
+          <p className="text-white/70 leading-relaxed mb-9 max-w-lg">
+            {heroParagraph}
+          </p>
+          {/* /services.png is a very wide (3.45:1), mostly-empty-on-the-
+              left desktop background photo — the icon grid it actually
+              shows sits only in its right ~35%. Cropping the box to that
+              ratio (and object-cover to it) just squeezed the icons into
+              a sliver or, matched 1:1, left a wall of dead black space.
+              /services-hero-mobile.png is a pre-cropped copy showing only
+              the icon-grid portion — full icons, no dead space, no
+              cutoff — sized to its own real 680x550 aspect ratio here. */}
+          <div className="md:hidden relative w-full max-w-sm mx-auto aspect-[680/550] rounded-2xl overflow-hidden shadow-lg mb-9">
+            <Image src="/services-hero-mobile.png" alt="" fill sizes="100vw" className="object-contain" />
           </div>
-
-          {/* Real services, laid out as a small floating grid instead of a
-              fabricated 3D render */}
-          <div className="relative hidden lg:grid grid-cols-3 gap-4">
-            {services.slice(0, 6).map((service, i) => {
-              const Icon = service.icon;
-              return (
-                <div
-                  key={service.key}
-                  className={`flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 shadow-xl backdrop-blur-sm ${
-                    i % 2 === 0 ? "translate-y-3" : "-translate-y-3"
-                  }`}
-                  style={{ aspectRatio: "1 / 1" }}
+          <div className="flex flex-wrap items-center gap-4">
+            <Link href="#services-grid" className="inline-block">
+              <button className="animated-button animated-button-lg whitespace-nowrap">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="arr-2"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <Icon size={28} className="text-[#40A2D8]" />
-                </div>
-              );
-            })}
+                  <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                </svg>
+                <span className="text">{heroButtonText}</span>
+                <span className="circle"></span>
+                <svg
+                  viewBox="0 0 24 24"
+                  className="arr-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                </svg>
+              </button>
+            </Link>
+            <Link href="/contact" className="inline-block">
+              <button className="animated-button animated-button-lg whitespace-nowrap">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="arr-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                </svg>
+                <span className="text">{heroSecondaryButtonText}</span>
+                <span className="circle"></span>
+                <svg
+                  viewBox="0 0 24 24"
+                  className="arr-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                </svg>
+              </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -347,17 +386,23 @@ export default async function ServicesIndexPage() {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {engagementFeatures.map(({ icon: Icon, title, desc }, i) => (
-              <div
-                key={i}
-                className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/20"
-              >
-                <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-white/10 text-[#40A2D8] mb-4 transition-all duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
-                  <Icon size={20} />
-                </span>
-                <h3 className="font-bold text-white mb-2">{title}</h3>
-                <p className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85">
-                  {desc}
-                </p>
+              <div key={i} className="relative">
+                {/* Mobile-only connector — sits only in the gap above this
+                    card (never over its body/icon). A full-height spine
+                    behind the cards (the previous approach) still showed
+                    through the icon since the card's own background is
+                    too transparent to hide anything placed behind it. */}
+                {i > 0 && (
+                  <span
+                    className="sm:hidden absolute left-[46px] -top-6 h-6 w-px"
+                    style={{
+                      backgroundImage:
+                        "repeating-linear-gradient(to bottom, rgba(64,162,216,0.4) 0px, rgba(64,162,216,0.4) 4px, transparent 4px, transparent 12px)",
+                    }}
+                    aria-hidden="true"
+                  />
+                )}
+                <HighlightCard icon={<Icon size={20} />} title={title} desc={desc} />
               </div>
             ))}
           </div>

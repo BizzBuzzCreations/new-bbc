@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CheckCircle2, ArrowUpRight } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import CTA from "@/components/sections/CTA";
 import DarkFAQSection from "@/components/sections/darkFAQSection";
 import NumberedDeliverablesCarousel from "@/components/sections/numberedDeliverablesCarousel";
 import ServiceBreakdownGrid from "@/components/sections/serviceBreakdownGrid";
 import RoadmapCarousel from "@/components/sections/roadmapCarousel";
+import CapabilityCard from "@/components/ui/capabilityCard";
 
 // Shared template every /industries/<slug> dedicated page renders through
 // — the exact structure originally built for Healthcare, now generic so
@@ -16,7 +17,7 @@ const CERTIFICATIONS = [
   { src: "/clutch.png", alt: "Clutch — Verified Partner" },
   { src: "/CDL.png", alt: "Certified Google Ads Partner" },
   { src: "/GA.png", alt: "Certified Google Analytics Partner" },
-  { src: "/ISO.png", alt: "ISO Certified" },
+  { src: "/iso.png", alt: "ISO Certified" },
 ];
 
 export default function IndustryDetailPage({
@@ -30,6 +31,9 @@ export default function IndustryDetailPage({
   heroTitle,
   heroDescription,
   heroCtaText,
+  // Optional hero image — real per-industry photos, all a uniform
+  // 1440x504 (~2.86:1) crop, sourced from lib/industryPageContent.js.
+  heroImage,
   capabilities,
   // Optional override for the capabilities section's small eyebrow
   // heading — defaults to "Built for Every Corner of {label}".
@@ -86,41 +90,104 @@ export default function IndustryDetailPage({
 }) {
   return (
     <>
-      {/* Hero */}
+      {/* Hero — full-bleed background photo (same treatment used for the
+          sub-service pages' heroImage) when supplied; otherwise the plain
+          gradient hero. These industry photos are all a uniform 1440x504
+          (~2.86:1) crop — desktop's aspect-ratio matches that closely so
+          object-fit: cover needs almost no vertical crop.
+
+          On mobile, the full-bleed background version is hidden entirely
+          (`hidden md:block` below) — at narrow widths the photo mostly
+          just sat dimmed behind the gradient with the text stacked over
+          it, hard to make out. Instead, mobile gets its own boxed copy of
+          the same image as a plain in-flow block between the paragraph
+          and the CTA button (`md:hidden` further down). */}
+      {/* pt-10 on mobile (was pt-28) — that much top padding under a
+          sticky nav that already occupies its own space in the flow was
+          just leaving a large empty gap before the heading; md keeps its
+          original spacing. */}
       <section
-        className="relative overflow-hidden pt-28 md:pt-32 pb-20 px-6 md:px-12 lg:px-24 text-white"
-        style={{
-          background: "radial-gradient(circle at top, #0d1b2e, #000000)",
-        }}
+        className={
+          heroImage
+            ? "relative md:aspect-[20/7] flex items-center overflow-hidden pt-10 md:pt-32 pb-12 md:pb-20 px-6 md:px-12 lg:px-24 text-white"
+            : "relative overflow-hidden pt-10 md:pt-32 pb-12 md:pb-20 px-6 md:px-12 lg:px-24 text-white"
+        }
+        style={
+          heroImage
+            ? undefined
+            : { background: "radial-gradient(circle at top, #0d1b2e, #000000)" }
+        }
       >
-        <div
-          className="absolute top-10 -right-20 w-[420px] h-[420px] rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{
-            background: "radial-gradient(circle, #0B60B0, transparent 70%)",
-          }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute bottom-0 -left-24 w-80 h-80 rounded-full blur-3xl opacity-15 pointer-events-none"
-          style={{
-            background: "radial-gradient(circle, #40A2D8, transparent 70%)",
-          }}
-          aria-hidden="true"
-        />
+        {heroImage && (
+          <div className="hidden md:block">
+            <Image
+              src={heroImage}
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-top"
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(100deg, rgba(5,11,22,0.94) 0%, rgba(11,96,176,0.85) 42%, rgba(11,96,176,0.25) 70%, transparent 100%)",
+              }}
+              aria-hidden="true"
+            />
+          </div>
+        )}
+        {/* Mobile background — plain, no photo, so the section reads as a
+            simple dark hero rather than an empty gradient with nothing
+            behind it once the full-bleed photo above is hidden. */}
+        {heroImage && (
+          <div
+            className="absolute inset-0 md:hidden"
+            style={{ background: "radial-gradient(circle at top, #0d1b2e, #000000)" }}
+            aria-hidden="true"
+          />
+        )}
 
         <div className="relative max-w-3xl">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
             {heroTitle || `${label} Digital Marketing Services`}
           </h1>
+          {heroImage && (
+            <div className="md:hidden relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-lg mb-9">
+              <Image src={heroImage} alt="" fill sizes="100vw" className="object-cover object-top" />
+            </div>
+          )}
           <p className="text-white/70 leading-relaxed mb-9 max-w-2xl">
             {heroDescription || description}
           </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 bg-[#0B60B0] hover:bg-[#0d72cf] text-white text-sm font-semibold px-7 py-3.5 rounded-full shadow-lg shadow-[#0B60B0]/30 transition"
-          >
-            {heroCtaText || "Book Your Free Consultation"}
-            <ArrowUpRight size={16} />
+          <Link href="/contact" className="inline-block max-w-full">
+            {/* whitespace-nowrap only from sm up — on mobile the long,
+                per-industry CTA text (e.g. "Get a Free Entertainment
+                Marketing Audit") was forcing the button wider than the
+                viewport and getting cut off at the screen edge. Letting it
+                wrap to two lines on narrow screens fixes that; nowrap stays
+                on larger screens where the text always fits on one line
+                anyway (and where :hover — the reason nowrap was added — is
+                actually reachable with a mouse). */}
+            <button className="animated-button animated-button-lg whitespace-normal text-center sm:whitespace-nowrap">
+              <svg
+                viewBox="0 0 24 24"
+                className="arr-2"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
+              <span className="text">{heroCtaText || "Book Your Free Consultation"}</span>
+              <span className="circle"></span>
+              <svg
+                viewBox="0 0 24 24"
+                className="arr-1"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
+            </button>
           </Link>
         </div>
       </section>
@@ -128,45 +195,38 @@ export default function IndustryDetailPage({
       {/* Core capabilities */}
       <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-center gap-4 mb-14">
-            <span className="h-px w-10 bg-white/20" />
-            <p className="text-xs font-bold uppercase tracking-widest text-white">
+          {/* Flanking lines hidden on mobile — at a fixed 80px each, they
+              squeezed a multi-word uppercase heading into a much narrower
+              column (forcing extra wrapping) and sat vertically centered
+              against the resulting 3-line block instead of framing it
+              cleanly. Reappear from sm up, where there's room for them
+              beside a heading that mostly stays on one or two lines. */}
+          <div className="flex items-center justify-center gap-4 mb-14 text-center">
+            <span className="hidden sm:block h-px w-20 bg-white/20" />
+            <p className="text-xl md:text-2xl font-bold uppercase tracking-widest text-white">
               {capabilitiesHeading || `Built for Every Corner of ${label}`}
             </p>
-            <span className="h-px w-10 bg-white/20" />
+            <span className="hidden sm:block h-px w-20 bg-white/20" />
           </div>
 
           {/* items-start: without it, CSS grid stretches every card in a
               row to match the tallest one, so hovering a card to expand
               its description (capabilitiesHoverReveal) visibly stretches
               its row-neighbors too, even though nothing about them
-              actually changed. */}
+              actually changed. Since that rules out stretch-based equal
+              heights, the title itself gets a fixed min-h (below) so a
+              one-line title and a two-line title still produce the same
+              collapsed card height across every industry (all 15 use
+              capabilitiesHoverReveal). */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
             {capabilities.map(({ icon: CapIcon, title, desc }) => (
-              <div
+              <CapabilityCard
                 key={title}
-                className="group rounded-2xl p-6 border border-white/10 bg-white/[0.03] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/20"
-              >
-                <span className="flex items-center justify-center w-11 h-11 rounded-xl mb-4 bg-white/10 text-[#40A2D8] transition-colors duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
-                  <CapIcon size={20} />
-                </span>
-                <h3
-                  className={`font-bold text-white ${capabilitiesHoverReveal ? "" : "mb-2"}`}
-                >
-                  {title}
-                </h3>
-                {capabilitiesHoverReveal ? (
-                  <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out">
-                    <p className="overflow-hidden text-sm leading-relaxed text-white/60 pt-2 transition-colors duration-300 group-hover:text-white/85">
-                      {desc}
-                    </p>
-                  </div>
-                ) : (
-                  <p className="text-sm leading-relaxed text-white/60 transition-colors duration-300 group-hover:text-white/85">
-                    {desc}
-                  </p>
-                )}
-              </div>
+                icon={<CapIcon size={20} />}
+                title={title}
+                desc={desc}
+                hoverReveal={capabilitiesHoverReveal}
+              />
             ))}
           </div>
         </div>
@@ -417,39 +477,79 @@ export default function IndustryDetailPage({
       {/* Why choose us — replaced with a single custom heading + paragraph
           when whyChooseUsText is supplied (e.g. Healthcare's local-market
           positioning copy); otherwise the generic trustPoints checklist
-          every other industry still gets. */}
+          every other industry still gets. When whyChooseUsText is set,
+          this is a plain two-column layout — content on the left, the
+          same per-industry heroImage as its own boxed photo on the right
+          (not a full-bleed background behind the text anymore).
+
+          On mobile the photo instead renders inline between the heading
+          and the paragraph (heading -> image -> paragraph), matching the
+          hero section's mobile order above — so the desktop-only image
+          block further down is hidden on mobile (`hidden md:block`) and a
+          second, mobile-only copy (`md:hidden`) sits right after the
+          heading. */}
       <section className="bg-[#050505] py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
-        <div className={whyChooseUsText ? "max-w-4xl" : "max-w-4xl mx-auto text-center"}>
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-            {whyChooseUsHeading || `Why ${label} Businesses Choose Us`}
-          </h2>
-          {whyChooseUsText ? (
-            <p className="text-white/70 leading-relaxed max-w-3xl">
-              {whyChooseUsText}
-            </p>
-          ) : (
-            <>
-              <p className="text-white/60 leading-relaxed mb-12 max-w-2xl mx-auto">
-                The same standards we hold ourselves to on every engagement,{" "}
-                {label.toLowerCase()} included.
+        <div
+          className={
+            whyChooseUsText
+              ? "max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center"
+              : "max-w-4xl mx-auto text-center"
+          }
+        >
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              {whyChooseUsHeading || `Why ${label} Businesses Choose Us`}
+            </h2>
+            {whyChooseUsText && heroImage && (
+              <div className="md:hidden relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-lg mb-6">
+                <Image
+                  src={heroImage}
+                  alt={whyChooseUsHeading || `Why ${label} businesses choose BizzBuzz Creations`}
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                />
+              </div>
+            )}
+            {whyChooseUsText ? (
+              <p className="text-white/70 leading-relaxed max-w-xl">
+                {whyChooseUsText}
               </p>
-              <ul className="grid sm:grid-cols-2 gap-5 text-left">
-                {trustPoints.map((point) => (
-                  <li
-                    key={point}
-                    className="group flex items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/20"
-                  >
-                    <CheckCircle2
-                      size={18}
-                      className="text-[#40A2D8] shrink-0 mt-0.5 transition-colors duration-300 group-hover:text-white"
-                    />
-                    <span className="text-white/70 text-sm leading-relaxed transition-colors duration-300 group-hover:text-white">
-                      {point}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </>
+            ) : (
+              <>
+                <p className="text-white/60 leading-relaxed mb-12 max-w-2xl mx-auto">
+                  The same standards we hold ourselves to on every engagement,{" "}
+                  {label.toLowerCase()} included.
+                </p>
+                <ul className="grid sm:grid-cols-2 gap-5 text-left">
+                  {trustPoints.map((point) => (
+                    <li
+                      key={point}
+                      className="group flex items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/20"
+                    >
+                      <CheckCircle2
+                        size={18}
+                        className="text-[#40A2D8] shrink-0 mt-0.5 transition-colors duration-300 group-hover:text-white"
+                      />
+                      <span className="text-white/70 text-sm leading-relaxed transition-colors duration-300 group-hover:text-white">
+                        {point}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
+          {whyChooseUsText && heroImage && (
+            <div className="hidden md:block relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
+              <Image
+                src={heroImage}
+                alt={whyChooseUsHeading || `Why ${label} businesses choose BizzBuzz Creations`}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
           )}
         </div>
       </section>
@@ -466,21 +566,26 @@ export default function IndustryDetailPage({
                   "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(120, 180, 255, 0.25), transparent 70%), #000000",
               }}
             >
-              <div className="py-8 md:py-10 px-10 z-10 text-white">
+              <div className="py-8 md:py-10 px-6 md:px-10 z-10 text-white">
                 <h2 className="md:text-3xl text-2xl font-bold mb-5">
                   {ctaHeading}
                 </h2>
                 <p className="max-w-3xl text-white/70 mb-8">{ctaText}</p>
-                <div className="flex flex-wrap gap-4">
+                {/* Stacked, full-width buttons on mobile (was flex-wrap,
+                    which — squeezed by the card's own padding — wrapped
+                    the two pills into an untidy layout) instead of forcing
+                    two side-by-side pills into too little width; back to
+                    a normal side-by-side row from sm up. */}
+                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-black text-sm font-semibold px-7 py-3.5 rounded-full transition"
+                    className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-white hover:bg-gray-100 text-black text-sm font-semibold px-7 py-3.5 rounded-full transition"
                   >
                     {ctaPrimaryText}
                   </Link>
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 border border-white/50 hover:bg-white/10 text-white text-sm font-semibold px-7 py-3.5 rounded-full transition"
+                    className="inline-flex items-center justify-center gap-2 w-full sm:w-auto border border-white/50 hover:bg-white/10 text-white text-sm font-semibold px-7 py-3.5 rounded-full transition"
                   >
                     {ctaSecondaryText}
                   </Link>

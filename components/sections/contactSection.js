@@ -108,20 +108,6 @@ export default function ContactSection({ content }) {
           (in the section's own padding), while the card sits fully
           opaque on top (z-10) — no motion shows through the form. */}
       <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
-        <div
-          className="absolute top-10 left-[10%] w-80 h-80 rounded-full blur-3xl opacity-40"
-          style={{
-            background: "radial-gradient(circle, #40A2D8, transparent 70%)",
-            animation: "blob-float-a 14s ease-in-out infinite",
-          }}
-        />
-        <div
-          className="absolute bottom-10 right-[10%] w-96 h-96 rounded-full blur-3xl opacity-40"
-          style={{
-            background: "radial-gradient(circle, #0B60B0, transparent 70%)",
-            animation: "blob-float-b 16s ease-in-out infinite",
-          }}
-        />
         {/* moveParticlesOnHover intentionally left off: this whole layer
             is pointer-events-none (so it never blocks clicks anywhere in
             the section), which also means it can't receive the mousemove
@@ -139,10 +125,10 @@ export default function ContactSection({ content }) {
 
       <div className="max-w-6xl mx-auto relative z-10 rounded-3xl overflow-hidden shadow-xl grid lg:grid-cols-2 border border-gray-200">
         {/* Left: dark info panel — semi-transparent so the animated
-            particle backdrop stays faintly visible through it. */}
-        <div className="relative bg-black/60 backdrop-blur-sm text-white p-8 sm:p-10 lg:p-12 overflow-hidden">
+            particle backdrop stays clearly visible through it. */}
+        <div className="relative bg-black/40 backdrop-blur-sm text-white p-8 sm:p-10 lg:p-12 overflow-hidden">
           <div
-            className="absolute inset-0 opacity-70"
+            className="absolute inset-0 opacity-40"
             style={{
               background:
                 "radial-gradient(circle at 15% 15%, rgba(11,96,176,0.55), transparent 55%), radial-gradient(circle at 85% 75%, rgba(64,162,216,0.4), transparent 55%)",

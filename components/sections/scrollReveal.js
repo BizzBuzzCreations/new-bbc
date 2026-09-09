@@ -34,6 +34,19 @@ function isExcluded(el) {
   return false;
 }
 
+// A `.grid` with only 1-2 children is almost always a layout grid (e.g.
+// a sidebar + a content column), not a repeating card list — this is
+// what caused a real bug: a sidebar+content grid's tall content column
+// got treated as one giant reveal candidate and stayed permanently
+// hidden, since so large an element could never satisfy an area-based
+// visibility threshold. Only grids with 3+ children are treated as
+// "card grids" worth revealing one-by-one. Headings aren't subject to
+// this check — it only applies to grid-item candidates.
+function isLayoutGridChild(el) {
+  const parent = el.parentElement;
+  return parent && parent.children.length < 3;
+}
+
 export default function ScrollReveal() {
   const pathname = usePathname();
 
@@ -47,7 +60,9 @@ export default function ScrollReveal() {
         document.querySelectorAll(
           'main :is(.grid, [class*="grid-cols"]) > *',
         ),
-      ).filter((el) => !el.dataset.revealed && !isExcluded(el));
+      ).filter(
+        (el) => !el.dataset.revealed && !isExcluded(el) && !isLayoutGridChild(el),
+      );
 
       const headings = Array.from(
         document.querySelectorAll("main section h1, main section h2, main section h3"),
@@ -93,7 +108,14 @@ export default function ScrollReveal() {
             observer.unobserve(el);
           });
         },
-        { threshold: 0.1, rootMargin: "0px 0px -10% 0px" },
+        // threshold: 0 (not a percentage) — matches framer-motion's own
+        // whileInView semantics, where rootMargin alone controls the
+        // trigger boundary. A percentage threshold requires that share
+        // of the *element's own* area to be visible, which a very tall
+        // element (e.g. a long stacked content column) might never
+        // reach — exactly what caused it to stay invisible on the FAQ
+        // page.
+        { threshold: 0, rootMargin: "0px 0px -10% 0px" },
       );
 
       candidates.forEach((el) => {

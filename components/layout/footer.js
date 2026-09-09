@@ -15,7 +15,7 @@ const CATEGORY_LINKS = [
   { label: "Start Your Career with Us", href: "/career" },
   { label: "FAQ", href: "/faq" },
 ];
-
+ 
 const SERVICE_LINKS = [
   { label: "BPO Service", href: "/bpo-services" },
   { label: "Website Development", href: "/web-development" },
@@ -102,7 +102,7 @@ const SOCIALS = [
 
 function FooterColumn({ title, links, viewMoreHref }) {
   return (
-    <div>
+    <div className="min-w-0">
       <h4 className="text-sm font-semibold text-white mb-5">{title}</h4>
       <ul className="space-y-3">
         {links.map((link) => (
@@ -132,6 +132,7 @@ function FooterColumn({ title, links, viewMoreHref }) {
 export default function Footer() {
   return (
     <footer
+      data-no-reveal
       className="text-white pt-8 pb-8 px-6 md:px-8"
       style={{
         background: "linear-gradient(180deg, #000000 0%, #000000 70%, #0B60B0 130%)",
@@ -142,10 +143,10 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8 mb-6">
           <div className="max-w-md">
             <Image
-              src="/bbc-new-logo.png"
+              src="/bbc-logo.png"
               alt="BizzBuzz Creations logo"
-              width={220}
-              height={67}
+              width={836}
+              height={189}
               className="mb-4 h-10 w-auto"
             />
             <p className="text-sm text-gray-400 mb-5 leading-relaxed">
@@ -292,7 +293,11 @@ export default function Footer() {
 
         <div className="mt-16 pt-6 border-t border-zinc-800">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-            <div className="flex flex-wrap gap-x-6 gap-y-2 mb-4 md:mb-0">
+            {/* 2x2 grid on mobile (was flex-wrap, which broke into an
+                odd 3-then-1 wrap depending on label widths) — a clean
+                2-per-row grid instead. Reverts to a plain inline row from
+                sm up, where all four labels comfortably fit on one line. */}
+            <div className="grid grid-cols-2 gap-x-6 gap-y-3 mb-4 sm:flex sm:flex-wrap sm:gap-y-2 md:mb-0">
               <Link
                 href="/privacy-policy"
                 className="text-xs text-gray-300 hover:text-gray-200"

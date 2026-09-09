@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
@@ -14,6 +15,13 @@ const COL_SIZE = Math.ceil(INDUSTRIES.length / 3);
 const COLUMN_ONE = INDUSTRIES.slice(0, COL_SIZE);
 const COLUMN_TWO = INDUSTRIES.slice(COL_SIZE, COL_SIZE * 2);
 const COLUMN_THREE = INDUSTRIES.slice(COL_SIZE * 2);
+
+// Mobile gets its own 2-column split (8 + 7) instead of the desktop's
+// 3-column layout stacking into one long undifferentiated list on narrow
+// screens.
+const MOBILE_COL_SIZE = Math.ceil(INDUSTRIES.length / 2);
+const MOBILE_COLUMN_ONE = INDUSTRIES.slice(0, MOBILE_COL_SIZE);
+const MOBILE_COLUMN_TWO = INDUSTRIES.slice(MOBILE_COL_SIZE);
 
 // Short hover descriptions specific to this homepage showcase — kept
 // separate from each industry's own page description (industriesData.js),
@@ -56,6 +64,7 @@ export default function IndustriesShowcase({ content }) {
             <button
               onMouseEnter={() => setActive(index)}
               onFocus={() => setActive(index)}
+              onClick={() => setActive(index)}
               className={`block w-full text-left py-1.5 text-lg font-medium transition-colors cursor-pointer ${
                 index === active ? "text-[#40A2D8]" : "text-white/40 hover:text-white/70"
               }`}
@@ -70,11 +79,6 @@ export default function IndustriesShowcase({ content }) {
 
   return (
     <section id="industries" className="relative overflow-hidden bg-black py-20 px-6 md:px-12 lg:px-24">
-      <div
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full blur-3xl opacity-15 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #0B60B0, transparent 70%)" }}
-        aria-hidden="true"
-      />
 
       <div className="relative max-w-6xl mx-auto">
         <div className="text-center mb-14">
@@ -89,19 +93,84 @@ export default function IndustriesShowcase({ content }) {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-[260px_1fr_1fr_1fr] lg:grid-cols-[280px_140px_140px_140px_minmax(300px,1fr)] gap-x-8 lg:gap-x-10 gap-y-10 items-center">
-          {/* Active industry visual */}
-          <div className="relative w-full h-56 md:h-[380px] rounded-2xl overflow-hidden border border-white/10 bg-linear-to-br from-[#0B60B0]/20 to-[#40A2D8]/10 flex items-center justify-center">
+        {/* Mobile: a clean 2-column name grid (8 + 7) instead of the
+            desktop's 3-column layout, which on a single-column mobile grid
+            stacked into one long, undifferentiated list of 15 names. Tap
+            (not just hover) a name to preview it. */}
+        <div className="md:hidden">
+          <div className="relative w-full h-56 rounded-2xl overflow-hidden border border-white/10 bg-linear-to-br from-[#0B60B0]/20 to-[#40A2D8]/10 mb-8">
             <AnimatePresence mode="wait">
               <motion.div
                 key={current.label}
-                initial={{ opacity: 0, scale: 0.85 }}
+                initial={{ opacity: 0, scale: 1.05 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.85 }}
+                exit={{ opacity: 0, scale: 1.05 }}
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-white/10 border border-white/15 flex items-center justify-center"
+                className="absolute inset-0"
               >
-                <Icon size={44} className="text-[#40A2D8]" />
+                <Image src={current.image} alt={current.label} fill sizes="100vw" className="object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                <span className="absolute bottom-3 left-3 flex items-center justify-center w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/20 text-[#40A2D8]">
+                  <Icon size={20} />
+                </span>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          <div className="grid grid-cols-2 gap-x-8 gap-y-2 mb-8">
+            {renderColumn(MOBILE_COLUMN_ONE, 0)}
+            {renderColumn(MOBILE_COLUMN_TWO, MOBILE_COL_SIZE)}
+          </div>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current.label}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <p className="text-white text-sm leading-relaxed mb-6">
+                {currentDescription}
+              </p>
+              <Link
+                href={`/industries/${current.slug}`}
+                className="inline-flex items-center gap-1.5 border border-white text-white hover:bg-white hover:text-black rounded-full px-5 py-2.5 text-sm font-semibold transition w-fit"
+              >
+                Know More
+                <ArrowUpRight size={16} />
+              </Link>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Desktop / tablet: original 3-column layout, unchanged. */}
+        <div className="hidden md:grid md:grid-cols-[260px_1fr_1fr_1fr] lg:grid-cols-[280px_140px_140px_140px_minmax(300px,1fr)] gap-x-8 lg:gap-x-10 gap-y-10 items-center">
+          {/* Active industry visual — the real photo for whichever
+              industry is hovered/focused, crossfading in on change (was
+              just a generic icon in a circle before, the same for every
+              industry). */}
+          <div className="relative w-full h-56 md:h-[380px] rounded-2xl overflow-hidden border border-white/10 bg-linear-to-br from-[#0B60B0]/20 to-[#40A2D8]/10">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current.label}
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.05 }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={current.image}
+                  alt={current.label}
+                  fill
+                  sizes="(max-width: 1024px) 260px, 280px"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                <span className="absolute bottom-3 left-3 flex items-center justify-center w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/20 text-[#40A2D8]">
+                  <Icon size={20} />
+                </span>
               </motion.div>
             </AnimatePresence>
           </div>
