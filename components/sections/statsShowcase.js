@@ -25,7 +25,11 @@ const STATS = [
     label: "One Team, Multiple Capabilities",
     description:
       "Get SEO, Google Ads, social media marketing, web development, AI, automation, and BPO support from one connected digital team.",
-    visual: { type: "image", src: "/raw-image.png", alt: "BizzBuzz Creations team at work" },
+    visual: {
+      type: "image",
+      src: "/oneteam-multiplecapability.jpg",
+      alt: "One team, multiple capabilities",
+    },
   },
   {
     tag: "Why It's Different",
@@ -33,7 +37,11 @@ const STATS = [
     label: "Solutions Built Around You",
     description:
       "We consider your industry, audience, market, and business needs to recommend digital solutions that fit your objectives.",
-    visual: { type: "logos" },
+    visual: {
+      type: "image",
+      src: "/solutionbuiltaroundyou.jpg",
+      alt: "Solutions built around you",
+    },
   },
   {
     tag: "Why It's Different",
@@ -43,8 +51,8 @@ const STATS = [
       "Know what's included, what we're working on, and what to expect through straightforward communication and practical recommendations.",
     visual: {
       type: "image",
-      src: "/About-Us-Collage-scaled.webp",
-      alt: "BizzBuzz Creations client work",
+      src: "/clearfromdayone.jpg",
+      alt: "Clear from day one",
     },
   },
   {
@@ -53,7 +61,11 @@ const STATS = [
     label: "Built to Adapt With You",
     description:
       "Start with the services you need today and expand into SEO, advertising, technology, automation, or business support as your needs evolve.",
-    visual: { type: "icons" },
+    visual: {
+      type: "image",
+      src: "/builttoadaptwithyou.webp",
+      alt: "Built to adapt with you",
+    },
   },
 ];
 

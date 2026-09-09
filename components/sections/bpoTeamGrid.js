@@ -27,12 +27,12 @@ const ROLE_ICONS = {
 };
 
 const BPO_TEAM = [
-  { name: "Abhishek Awasthi", role: "Customer Support Executive" },
-  { name: "Akanksha Pandey", role: "Senior Advisor", photo: "/team-images/akanksha.jpeg" },
+  { name: "Abhishek Awasthi", role: "Customer Support Executive", photo: "/person-image.jpg" },
+  { name: "Akanksha Pandey", role: "Senior Advisor", photo: "/person-image.jpg" },
   { name: "Akash Singh", role: "Advisor", photo: "/team-images/akash.jpeg" },
-  { name: "Anurag Singh Bisht", role: "Advisor", photo: "/team-images/anurag.jpeg" },
+  { name: "Anurag Singh Bisht", role: "Advisor", photo: "/person-image.jpg" },
   { name: "Aryan Prakash Srivastava", role: "Senior Advisor", photo: "/team-images/aryan.jpeg" },
-  { name: "Digvijay Singh", role: "Advisor" },
+  { name: "Digvijay Singh", role: "Advisor", photo: "/person-image.jpg" },
   { name: "Harsh Singh", role: "Advisor", photo: "/team-images/harsh.jpeg" },
   { name: "Harshvardhan Tripathi", role: "Advisor", photo: "/team-images/harshvardhan.jpeg" },
   { name: "Hritik Kesarwani", role: "Advisor", photo: "/team-images/hritik.jpeg" },
@@ -40,11 +40,11 @@ const BPO_TEAM = [
   { name: "Karan Agarhari", role: "Advisor", photo: "/team-images/karan.jpeg" },
   { name: "Kanchi Singh", role: "Advisor", photo: "/team-images/kanchi.jpeg" },
   { name: "Kushal Singh", role: "Senior Advisor", photo: "/team-images/kushal.jpeg" },
-  { name: "Kartikae Ojha", role: "Strategy Manager" },
+  { name: "Kartikae Ojha", role: "Strategy Manager", photo: "/person-image.jpg" },
   { name: "Manasvi Gupta", role: "Advisor", photo: "/team-images/manasvi.jpeg" },
   { name: "Monika Sharma", role: "Advisor", photo: "/team-images/monika.jpeg" },
   { name: "Shreya Dubey", role: "Advisor", photo: "/team-images/shreya.jpeg" },
-  { name: "Ziauddin Khan", role: "Advisor" },
+  { name: "Ziauddin Khan", role: "Advisor", photo: "/person-image.jpg" },
 ].map((person) => ({ ...person, icon: ROLE_ICONS[person.role] }));
 
 export default function BpoTeamGrid() {
