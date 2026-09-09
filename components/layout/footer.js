@@ -15,7 +15,7 @@ const CATEGORY_LINKS = [
   { label: "Start Your Career with Us", href: "/career" },
   { label: "FAQ", href: "/faq" },
 ];
-
+ 
 const SERVICE_LINKS = [
   { label: "BPO Service", href: "/bpo-services" },
   { label: "Website Development", href: "/web-development" },
@@ -145,8 +145,8 @@ export default function Footer() {
             <Image
               src="/bbc-logo.png"
               alt="BizzBuzz Creations logo"
-              width={192}
-              height={100}
+              width={836}
+              height={189}
               className="mb-4 h-10 w-auto"
             />
             <p className="text-sm text-gray-400 mb-5 leading-relaxed">

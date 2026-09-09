@@ -632,8 +632,8 @@ export default function Navbar() {
             src="/bbc-logo.png"
             alt="BizzBuzz Creations logo"
             className="h-8 md:h-10 w-auto"
-            width={192}
-            height={100}
+            width={836}
+            height={189}
           />
         </Link>
 
