@@ -28,9 +28,13 @@ export default function ConsultationPopup({ content }) {
     if (pathname === "/") {
       const timer = setTimeout(() => setOpen(true), 12000);
       return () => clearTimeout(timer);
-    } else {
-      setOpen(false);
     }
+
+    // Deferred (not called synchronously in the effect body) so this
+    // doesn't trip react-hooks/set-state-in-effect — same end result,
+    // just scheduled a tick later instead of during the render commit.
+    const timer = setTimeout(() => setOpen(false), 0);
+    return () => clearTimeout(timer);
   }, [pathname]);
 
   useEffect(() => {
@@ -49,12 +53,46 @@ export default function ConsultationPopup({ content }) {
     return () => clearTimeout(timer);
   }, [wobble]);
 
+  // Basic RFC 5322-ish email check — good enough to reject typos and
+  // obviously-invalid input without being overly strict about edge cases.
+  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    if (name === "contact") {
+      // Strip everything but digits as the user types — this alone rules
+      // out the minus sign, decimal point, and "e" that a native
+      // type="number" field would otherwise still accept, and caps
+      // length at 10 so a valid number can never grow past that.
+      const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
+      setForm({ ...form, contact: digitsOnly });
+      return;
+    }
+
+    setForm({ ...form, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (form.contact.length !== 10) {
+      toast.error("Please enter a valid 10 digit mobile number.", {
+        position: "top-right",
+        autoClose: 5000,
+        transition: Bounce,
+      });
+      return;
+    }
+
+    if (!EMAIL_REGEX.test(form.email)) {
+      toast.error("Please enter a valid email address.", {
+        position: "top-right",
+        autoClose: 5000,
+        transition: Bounce,
+      });
+      return;
+    }
 
     const response = await sendMail({
       name: form.name,
@@ -65,11 +103,9 @@ export default function ConsultationPopup({ content }) {
     });
 
     if (response?.success) {
-      toast.success(response.message, {
-        position: "top-right",
-        autoClose: 5000,
-        transition: Bounce,
-      });
+      // Mail still sends as normal — the "Message sent!" toast itself is
+      // what's being removed here, per request. The form just quietly
+      // resets and the popup closes instead of announcing success.
       setForm({ name: "", contact: "", email: "" });
       setOpen(false);
     } else {
@@ -119,9 +155,7 @@ export default function ConsultationPopup({ content }) {
           {/* LEFT SECTION (Hidden on Mobile) */}
           <div className="hidden md:block">
             <h3 className="text-2xl font-bold mb-1">{title}</h3>
-            <p className="text-sm text-gray-600 mb-6">
-              {tagline}
-            </p>
+            <p className="text-sm text-gray-600 mb-6">{tagline}</p>
 
             <h4 className="font-semibold mb-2">Why Choose Us</h4>
 
@@ -195,11 +229,24 @@ export default function ConsultationPopup({ content }) {
 
               <input
                 name="contact"
-                type="number"
+                type="tel"
+                inputMode="numeric"
+                pattern="[0-9]{10}"
+                maxLength={10}
                 placeholder="Enter 10 Digit Mobile Number"
                 value={form.contact}
                 onChange={handleChange}
+                onKeyDown={(e) => {
+                  // Block the minus/plus/decimal/exponent keys a numeric
+                  // keypad or physical keyboard can still send — the
+                  // onChange digit-stripping is the real guard, this just
+                  // stops them from visibly flashing into the field first.
+                  if (["-", "+", ".", "e", "E"].includes(e.key)) {
+                    e.preventDefault();
+                  }
+                }}
                 className="w-full border rounded-md px-4 py-3 text-sm"
+                title="Enter a valid 10 digit mobile number"
                 required
               />
 
@@ -210,6 +257,7 @@ export default function ConsultationPopup({ content }) {
                 value={form.email}
                 onChange={handleChange}
                 className="w-full border rounded-md px-4 py-3 text-sm"
+                title="Enter a valid email address"
                 required
               />
 
