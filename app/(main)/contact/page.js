@@ -41,7 +41,10 @@ export default async function Contact() {
           gap before JoinTeamCTA. Same particle backdrop as the rest of
           the page, continuing the effect through this section too. */}
       <div className="relative bg-black pt-16 overflow-hidden">
-        <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+        <div
+          className="absolute inset-0 z-0 pointer-events-none"
+          aria-hidden="true"
+        >
           <Particles
             particleColors={["#40A2D8", "#0B60B0", "#8fd0f2", "#ffffff"]}
             particleCount={180}

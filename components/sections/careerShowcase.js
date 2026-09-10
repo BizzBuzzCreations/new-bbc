@@ -12,7 +12,7 @@ export function CareerWhyUs({ content } = {}) {
   const paragraph =
     content?.careerWhyUsParagraph ||
     "We're a growing agency with roots in Prayagraj, India, and clients across the world. From day one, you'll work on real challenges across digital marketing, technology, design, and strategy — building practical skills instead of simply following a checklist. We value people who stay curious, take initiative, share ideas, and want to keep getting better. Your growth matters here, because when our people grow, BizzBuzz Creations grows too.";
-  const image = content?.careerWhyUsImage || "/image-2.jpg";
+  const image = content?.careerWhyUsImage || "/team-5.jpeg";
 
   const photo = (
     <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
@@ -65,8 +65,9 @@ export function CareerJoinTeam({ content } = {}) {
   const points = pointsRaw.map((p, i) => ({ ...p, icon: JOIN_TEAM_ICONS[i % JOIN_TEAM_ICONS.length] }));
   const ctaText = content?.careerJoinCtaText || "Apply Now";
   const image1 = content?.careerJoinImage1 || "/image-5.webp";
-  const image2 = content?.careerJoinImage2 || "/image-4.webp";
-  const image3 = content?.careerJoinImage3 || "/image-2.jpg";
+  const image2 = content?.careerJoinImage2 || "/team-14.jpeg";
+  const image3 = content?.careerJoinImage3 || "/team-5.jpeg";
+  const image4 = content?.careerJoinImage4 || "/team-11.jpeg";
 
   // The image grid is rendered twice on purpose: once inline for mobile
   // (between the tagline and the paragraph, matching the requested
@@ -77,8 +78,8 @@ export function CareerJoinTeam({ content } = {}) {
   // content differently per breakpoint without CSS `order` fighting the
   // two-column grid placement.
   const imageGrid = (
-    <div className="grid grid-cols-2 gap-4">
-      <div className="relative row-span-2 rounded-2xl overflow-hidden shadow-lg aspect-[3/4]">
+    <div className="grid grid-cols-2 grid-rows-2 gap-4">
+      <div className="relative rounded-2xl overflow-hidden shadow-lg aspect-square">
         <Image
           src={image1}
           alt="The BizzBuzz Creations team celebrating together"
@@ -100,6 +101,15 @@ export function CareerJoinTeam({ content } = {}) {
         <Image
           src={image3}
           alt="The BizzBuzz Creations team"
+          fill
+          sizes="(max-width: 768px) 50vw, 25vw"
+          className="object-cover"
+        />
+      </div>
+      <div className="relative rounded-2xl overflow-hidden shadow-lg aspect-square">
+        <Image
+          src={image4}
+          alt="The BizzBuzz Creations team at work"
           fill
           sizes="(max-width: 768px) 50vw, 25vw"
           className="object-cover"

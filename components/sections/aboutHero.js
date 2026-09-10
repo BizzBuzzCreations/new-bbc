@@ -9,15 +9,15 @@ import { RICH_TEXT_CLASS, richTextHTML } from "@/components/ui/richText";
 const reveal = { duration: 0.8, ease: [0.16, 1, 0.3, 1] };
 
 const DEFAULT_GRID_IMAGES = [
-  { id: 1, src: "/image-1.jpg" },
-  { id: 2, src: "/image-2.jpg" },
-  { id: 3, src: "/image-3.jpg" },
-  { id: 4, src: "/image-4.webp" },
+  { id: 1, src: "/team-11.jpeg" },
+  { id: 2, src: "/team-6.jpeg" },
+  { id: 3, src: "/team-1.jpeg" },
+  { id: 4, src: "/image-3.jpg" },
   { id: 5, src: "/image-5.webp" },
-  { id: 6, src: "/image-6.jpg" },
-  { id: 7, src: "/image-7.jpg" },
-  { id: 8, src: "/image-8.jpg" },
-  { id: 9, src: "/image-9.jpg" },
+  { id: 6, src: "/image-9.jpg" },
+  { id: 7, src: "/team-12.jpeg" },
+  { id: 8, src: "/image-3.jpg" },
+  { id: 9, src: "/team-14.jpeg" },
 ];
 
 export default function AboutHero({ content }) {

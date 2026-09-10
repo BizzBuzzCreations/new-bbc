@@ -9,10 +9,10 @@ import RichText from "@/components/ui/richText";
 // the site) auto-advancing behind the hero text, instead of one static
 // background image.
 const DEFAULT_SLIDES = [
-  "/image-7.jpg",
-  "/image-2.jpg",
-  "/image-7.jpg",
-  "/image-2.jpg",
+  "/team-images/team-5.jpeg",
+  "/team-images/team-13.jpeg",
+  "/team-8.jpeg",
+  "/team-images/team-2.jpeg",
 ];
 
 const SLIDE_DURATION = 4500;
