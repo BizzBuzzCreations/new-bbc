@@ -202,7 +202,9 @@ export async function getAllSubmissions() {
 
   await connectDB();
   try {
-    const submissions = await Submission.find({}).lean();
+    const submissions = await Submission.find({})
+      .sort({ createdAt: -1 }) // newest first
+      .lean();
     const plainSubmissions = submissions.map((sub) => ({
       ...sub,
       _id: sub._id.toString(), // ✅ convert ObjectId
@@ -219,6 +221,27 @@ export async function getAllSubmissions() {
     return {
       success: false,
       message: "Failed to fetch submissions.",
+    };
+  }
+}
+
+// Function to delete a form submission
+export async function deleteSubmission({ id }) {
+  const unauthorized = await requireAdmin();
+  if (unauthorized) return unauthorized;
+
+  await connectDB();
+  try {
+    await Submission.findByIdAndDelete(id);
+    return {
+      success: true,
+      message: "Submission deleted successfully.",
+    };
+  } catch (error) {
+    console.error("Delete submission failed:", error);
+    return {
+      success: false,
+      message: "Failed to delete submission.",
     };
   }
 }
@@ -264,9 +287,11 @@ export async function getAllComments(slug) {
       // comments (with a slug) stay public for the blog page's own use.
       const unauthorized = await requireAdmin();
       if (unauthorized) return unauthorized;
-      comments = await Comment.find({}).lean();
+      comments = await Comment.find({}).sort({ createdAt: -1 }).lean(); // newest first
     } else {
-      comments = await Comment.find({ blog: slug }).lean();
+      comments = await Comment.find({ blog: slug })
+        .sort({ createdAt: -1 }) // newest first
+        .lean();
     }
 
     const plainComments = comments.map((com) => ({

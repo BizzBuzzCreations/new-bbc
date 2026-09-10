@@ -9,11 +9,14 @@ import {
   getAllComments,
   getAllSubmissions,
   deleteComment,
+  deleteSubmission,
 } from "@/actions/serverActions";
 import { logout } from "@/actions/authActions";
 import DashboardBlogs from "@/components/sections/dashboardBlogs";
 import DashboardContent from "@/components/sections/dashboardContent";
 import DashboardIndustries from "@/components/sections/dashboardIndustries";
+import DashboardServices from "@/components/sections/dashboardServices";
+import DashboardSubServices from "@/components/sections/dashboardSubServices";
 
 const NAV_ITEMS = [
   { id: "overview", label: "Overview", icon: GridIcon },
@@ -23,6 +26,18 @@ const NAV_ITEMS = [
   { id: "submissions", label: "Submissions", icon: InboxIcon },
   { id: "content", label: "Website Content", icon: PageIcon },
   { id: "industries", label: "Industries Pages", icon: IndustriesIcon },
+  { id: "services", label: "Services Pages", icon: ServicesIcon },
+  { id: "subservices", label: "Sub-Service Pages", icon: SubServicesIcon },
+];
+
+// Non-admin (regular) users only get editing access to these — everything
+// else (jobs, comments, submissions, overview stats) stays admin-only.
+const USER_ACCESSIBLE_TABS = [
+  "blogs",
+  "content",
+  "industries",
+  "services",
+  "subservices",
 ];
 
 function timeAgo(dateString) {
@@ -46,7 +61,11 @@ export default function Dashboard({ role = "user", name = "" }) {
   const isAdmin = role === "admin";
   const router = useRouter();
   const searchParams = useSearchParams();
-  const initialTab = isAdmin ? searchParams.get("tab") || "overview" : "blogs";
+  const initialTab = isAdmin
+    ? searchParams.get("tab") || "overview"
+    : USER_ACCESSIBLE_TABS.includes(searchParams.get("tab"))
+      ? searchParams.get("tab")
+      : "blogs";
   const [activeTab, setActiveTab] = useState(initialTab);
   const [jobs, setJobs] = useState([]);
   const [comments, setComments] = useState([]);
@@ -58,7 +77,7 @@ export default function Dashboard({ role = "user", name = "" }) {
 
   const visibleNavItems = isAdmin
     ? NAV_ITEMS
-    : NAV_ITEMS.filter((item) => item.id === "blogs");
+    : NAV_ITEMS.filter((item) => USER_ACCESSIBLE_TABS.includes(item.id));
 
   const handleLogout = async () => {
     await logout();
@@ -143,6 +162,30 @@ export default function Dashboard({ role = "user", name = "" }) {
       setComments((prev) => prev.filter((item) => item._id !== id));
     }
   };
+
+  const handleDeleteSubmission = async (id) => {
+    const response = await deleteSubmission({ id });
+    if (response?.success) {
+      setSubmissions((prev) => prev.filter((item) => item._id !== id));
+    }
+  };
+
+  // Newest first — latest query/comment on top, oldest at the bottom.
+  const sortedComments = useMemo(
+    () =>
+      [...comments].sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+      ),
+    [comments],
+  );
+
+  const sortedSubmissions = useMemo(
+    () =>
+      [...submissions].sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+      ),
+    [submissions],
+  );
 
   const stats = [
     {
@@ -371,7 +414,7 @@ export default function Dashboard({ role = "user", name = "" }) {
             </h2>
 
             <div className="flex flex-col gap-3">
-              {comments.map((comment) => (
+              {sortedComments.map((comment) => (
                 <div
                   key={comment._id}
                   className="rounded-xl border border-slate-100 bg-slate-50 px-4 py-3"
@@ -391,12 +434,14 @@ export default function Dashboard({ role = "user", name = "" }) {
                         {timeAgo(comment.createdAt)}
                       </p>
                     </div>
-                    <button
-                      className="rounded-md bg-red-50 px-3 py-1 text-sm text-red-500"
-                      onClick={() => handleDeleteComment(comment._id)}
-                    >
-                      Delete
-                    </button>
+                    {isAdmin && (
+                      <button
+                        className="rounded-md bg-red-50 px-3 py-1 text-sm text-red-500 shrink-0"
+                        onClick={() => handleDeleteComment(comment._id)}
+                      >
+                        Delete
+                      </button>
+                    )}
                   </div>
                 </div>
               ))}
@@ -411,7 +456,7 @@ export default function Dashboard({ role = "user", name = "" }) {
             </h2>
 
             <div className="flex flex-col gap-3">
-              {submissions.map((submission) => (
+              {sortedSubmissions.map((submission) => (
                 <div
                   key={submission._id}
                   className="rounded-xl border border-slate-100 bg-slate-50 px-4 py-3"
@@ -434,9 +479,19 @@ export default function Dashboard({ role = "user", name = "" }) {
                         Phone: {submission.phone}
                       </p>
                     </div>
-                    <button className="rounded-md bg-green-50 px-3 py-1 text-sm text-green-500">
-                      {timeAgo(submission.createdAt)}
-                    </button>
+                    <div className="flex shrink-0 flex-col items-end gap-2">
+                      <span className="rounded-md bg-green-50 px-3 py-1 text-sm text-green-500">
+                        {timeAgo(submission.createdAt)}
+                      </span>
+                      {isAdmin && (
+                        <button
+                          className="rounded-md bg-red-50 px-3 py-1 text-sm text-red-500"
+                          onClick={() => handleDeleteSubmission(submission._id)}
+                        >
+                          Delete
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -447,6 +502,10 @@ export default function Dashboard({ role = "user", name = "" }) {
         {activeTab === "content" && <DashboardContent />}
 
         {activeTab === "industries" && <DashboardIndustries />}
+
+        {activeTab === "services" && <DashboardServices />}
+
+        {activeTab === "subservices" && <DashboardSubServices />}
 
         {showAddJob && (
           <div
@@ -659,6 +718,42 @@ function IndustriesIcon({ size = 18 }) {
       <path d="M9 21v-6h6v6" />
       <path d="M9 10h.01" />
       <path d="M15 10h.01" />
+    </svg>
+  );
+}
+
+function ServicesIcon({ size = 18 }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
+      <rect x="2" y="7" width="20" height="14" rx="2" />
+      <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+      <line x1="2" y1="13" x2="22" y2="13" />
+    </svg>
+  );
+}
+
+function SubServicesIcon({ size = 18 }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
+      <circle cx="6" cy="6" r="2.5" />
+      <circle cx="6" cy="18" r="2.5" />
+      <circle cx="18" cy="12" r="2.5" />
+      <path d="M8.2 7.1L15.8 10.9" />
+      <path d="M8.2 16.9L15.8 13.1" />
     </svg>
   );
 }

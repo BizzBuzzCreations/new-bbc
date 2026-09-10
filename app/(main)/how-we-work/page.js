@@ -188,62 +188,97 @@ const DEFAULT_FAQS = [
 export default async function HowWeWorkPage() {
   const content = await getPageContent("how-we-work");
 
-  const heroHeading = content?.hwwHeroHeading || "We Don't Wing It. Here's Our Process";
-  const heroSubheading = content?.hwwHeroSubheading || "A Clear, Repeatable System Behind Every Campaign We Run";
+  const heroHeading =
+    content?.hwwHeroHeading || "We Don't Wing It. Here's Our Process";
+  const heroSubheading =
+    content?.hwwHeroSubheading ||
+    "A Clear, Repeatable System Behind Every Campaign We Run";
   const heroParagraph =
     content?.hwwHeroParagraph ||
     "No vague promises, no \"we'll figure it out as we go.\" Every project at BizzBuzz Creations follows the same structured process of audit, strategy, execution, and reporting — so you always know what's happening, why it's happening, and what results to expect.";
   const heroCtaText = content?.hwwHeroCtaText || "See How It Works";
   const heroImage = content?.hwwHeroImage || "/how we work and function.png";
 
-  const principlesHeading = content?.principlesHeading || "The Principles That Power Every Client Partnership";
+  const principlesHeading =
+    content?.principlesHeading ||
+    "The Principles That Power Every Client Partnership";
   const principlesParagraph =
     content?.principlesParagraph ||
     "No complicated playbooks or hidden processes. Just six principles that shape how we communicate, collaborate, execute, and grow with every client.";
-  const principlesRaw = content?.principles?.length > 0 ? content.principles : DEFAULT_PRINCIPLES;
-  const principles = principlesRaw.map((p, i) => ({ ...p, icon: PRINCIPLE_ICONS[i % PRINCIPLE_ICONS.length] }));
+  const principlesRaw =
+    content?.principles?.length > 0 ? content.principles : DEFAULT_PRINCIPLES;
+  const principles = principlesRaw.map((p, i) => ({
+    ...p,
+    icon: PRINCIPLE_ICONS[i % PRINCIPLE_ICONS.length],
+  }));
 
-  const roadmapHeading = content?.hwwRoadmapHeading || "Our 5-Step Engagement Roadmap";
-  const roadmapStepsRaw = content?.hwwRoadmapSteps?.length > 0 ? content.hwwRoadmapSteps : DEFAULT_ROADMAP_STEPS;
-  const roadmapSteps = roadmapStepsRaw.map((s, i) => ({ number: i + 1, title: s.title, desc: s.desc }));
+  const roadmapHeading =
+    content?.hwwRoadmapHeading || "Our 5-Step Engagement Roadmap";
+  const roadmapStepsRaw =
+    content?.hwwRoadmapSteps?.length > 0
+      ? content.hwwRoadmapSteps
+      : DEFAULT_ROADMAP_STEPS;
+  const roadmapSteps = roadmapStepsRaw.map((s, i) => ({
+    number: i + 1,
+    title: s.title,
+    desc: s.desc,
+  }));
 
-  const toolsHeading = content?.toolsHeading || "The Tools Behind Every Strategy";
+  const toolsHeading =
+    content?.toolsHeading || "The Tools Behind Every Strategy";
   const toolsParagraph =
     content?.toolsParagraph ||
     "We combine industry-leading platforms with our own in-house systems to plan, execute, and track every campaign with precision.";
   const toolsRaw = content?.tools?.length > 0 ? content.tools : DEFAULT_TOOLS;
-  const tools = toolsRaw.map((t, i) => ({ ...t, icon: TOOL_ICONS[i % TOOL_ICONS.length] }));
+  const tools = toolsRaw.map((t, i) => ({
+    ...t,
+    icon: TOOL_ICONS[i % TOOL_ICONS.length],
+  }));
 
-  const onboardingHeading = content?.onboardingHeading || "What to Expect, and When";
+  const onboardingHeading =
+    content?.onboardingHeading || "What to Expect, and When";
   const onboardingParagraph =
     content?.onboardingParagraph ||
     "Every business is different, but here's a realistic timeline for how our process typically unfolds.";
 
-  const expectationsHeading = content?.expectationsHeading || "What You Can Expect";
+  const expectationsHeading =
+    content?.expectationsHeading || "What You Can Expect";
   const expectationsSubheading =
     content?.expectationsSubheading ||
     "Clear Communication. Accountable Execution. Continuous Improvement.";
   const expectationsParagraph =
     content?.expectationsParagraph ||
     "Working with BizzBuzz Creations means knowing where your project stands, what we're working toward, and how we're improving it along the way.";
-  const expectationsRaw = content?.expectations?.length > 0 ? content.expectations : DEFAULT_EXPECTATIONS;
-  const expectations = expectationsRaw.map((e, i) => ({ ...e, icon: EXPECTATION_ICONS[i % EXPECTATION_ICONS.length] }));
+  const expectationsRaw =
+    content?.expectations?.length > 0
+      ? content.expectations
+      : DEFAULT_EXPECTATIONS;
+  const expectations = expectationsRaw.map((e, i) => ({
+    ...e,
+    icon: EXPECTATION_ICONS[i % EXPECTATION_ICONS.length],
+  }));
 
-  const industriesHeading = content?.hwwIndustriesHeading || "Industries We Apply This Process To";
-  const industriesSubheading = content?.hwwIndustriesSubheading || "One Process. Every Industry.";
+  const industriesHeading =
+    content?.hwwIndustriesHeading || "Industries We Apply This Process To";
+  const industriesSubheading =
+    content?.hwwIndustriesSubheading || "One Process. Every Industry.";
   const industriesParagraph =
     content?.hwwIndustriesParagraph ||
     "This same structured process — discover, strategize, execute, optimize, and report — powers digital growth across every industry we work with, from healthcare and real estate to e-commerce, education, and beyond.";
 
-  const categoriesHeading = content?.categoriesHeading || "Everything Your Business Needs to Grow Digitally";
+  const categoriesHeading =
+    content?.categoriesHeading ||
+    "Everything Your Business Needs to Grow Digitally";
   const categoriesParagraph =
     content?.categoriesParagraph ||
     "One connected team across marketing, technology, automation, and business growth.";
 
   const faqHeading = content?.hwwFaqHeading || "Frequently Asked Questions";
-  const faqs = content?.hwwFaqItems?.length > 0 ? content.hwwFaqItems : DEFAULT_FAQS;
+  const faqs =
+    content?.hwwFaqItems?.length > 0 ? content.hwwFaqItems : DEFAULT_FAQS;
 
-  const ctaHeading = content?.ctaHeading || "Ready to See This Process Work for Your Business?";
+  const ctaHeading =
+    content?.ctaHeading || "Ready to See This Process Work for Your Business?";
   const ctaParagraph =
     content?.ctaParagraph ||
     "No guesswork, no vague timelines — just a clear process built to turn strategy into measurable growth. Book a free consultation and see exactly how we'd approach your business.";
@@ -280,7 +315,11 @@ export default async function HowWeWorkPage() {
           <h2 className="text-lg sm:text-xl font-semibold text-[#8fd0f2] mb-6">
             {heroSubheading}
           </h2>
-          <RichText as="p" text={heroParagraph} className="text-white/70 leading-relaxed mb-8 max-w-xl" />
+          <RichText
+            as="p"
+            text={heroParagraph}
+            className="text-white/70 leading-relaxed mb-8 max-w-xl"
+          />
           <a href="/contact" className="inline-block">
             <button className="animated-button animated-button-lg whitespace-nowrap">
               <svg
@@ -310,7 +349,11 @@ export default async function HowWeWorkPage() {
           <h2 className="text-2xl md:text-3xl font-bold mb-4 max-w-2xl">
             {principlesHeading}
           </h2>
-          <RichText as="p" text={principlesParagraph} className="text-white/70 max-w-2xl mb-14" />
+          <RichText
+            as="p"
+            text={principlesParagraph}
+            className="text-white/70 max-w-2xl mb-14"
+          />
 
           <div className="grid sm:grid-cols-2 gap-5">
             {principles.map(({ icon: Icon, title, tagline, desc }, i) => (
@@ -341,7 +384,11 @@ export default async function HowWeWorkPage() {
                     <h3 className="font-bold text-lg mb-1.5 transition-colors duration-300 group-hover:text-black">
                       {tagline}
                     </h3>
-                    <RichText as="p" text={desc} className="text-white/70 text-sm leading-relaxed transition-colors duration-300 group-hover:text-gray-600" />
+                    <RichText
+                      as="p"
+                      text={desc}
+                      className="text-white/70 text-sm leading-relaxed transition-colors duration-300 group-hover:text-gray-600"
+                    />
                   </div>
                 </div>
               </div>
@@ -366,7 +413,11 @@ export default async function HowWeWorkPage() {
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
             {toolsHeading}
           </h2>
-          <RichText as="p" text={toolsParagraph} className="text-white/70 leading-relaxed max-w-2xl mb-14" />
+          <RichText
+            as="p"
+            text={toolsParagraph}
+            className="text-white/70 leading-relaxed max-w-2xl mb-14"
+          />
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {tools.map(({ icon: Icon, title, desc }, i) => (
@@ -378,7 +429,11 @@ export default async function HowWeWorkPage() {
                   <Icon size={20} />
                 </span>
                 <h3 className="font-bold text-white mb-2">{title}</h3>
-                <RichText as="p" text={desc} className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85" />
+                <RichText
+                  as="p"
+                  text={desc}
+                  className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85"
+                />
               </div>
             ))}
           </div>
@@ -391,7 +446,11 @@ export default async function HowWeWorkPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 max-w-2xl">
             {onboardingHeading}
           </h2>
-          <RichText as="p" text={onboardingParagraph} className="text-white/60 max-w-2xl mb-14 leading-relaxed" />
+          <RichText
+            as="p"
+            text={onboardingParagraph}
+            className="text-white/60 max-w-2xl mb-14 leading-relaxed"
+          />
 
           <OnboardingCarousel content={content} />
         </div>
@@ -406,7 +465,11 @@ export default async function HowWeWorkPage() {
           <h3 className="text-lg font-semibold text-[#40A2D8] mb-4">
             {expectationsSubheading}
           </h3>
-          <RichText as="p" text={expectationsParagraph} className="text-white/60 max-w-2xl mx-auto mb-14 leading-relaxed" />
+          <RichText
+            as="p"
+            text={expectationsParagraph}
+            className="text-white/60 max-w-2xl mx-auto mb-14 leading-relaxed"
+          />
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
             {expectations.map(({ icon: Icon, title, desc }, i) => (
@@ -418,7 +481,11 @@ export default async function HowWeWorkPage() {
                   <Icon size={20} />
                 </span>
                 <h4 className="font-bold text-white mb-2">{title}</h4>
-                <RichText as="p" text={desc} className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85" />
+                <RichText
+                  as="p"
+                  text={desc}
+                  className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85"
+                />
               </div>
             ))}
           </div>
@@ -434,7 +501,11 @@ export default async function HowWeWorkPage() {
           <h3 className="text-lg font-semibold text-[#40A2D8] mb-4">
             {industriesSubheading}
           </h3>
-          <RichText as="p" text={industriesParagraph} className="text-white/60 max-w-2xl mx-auto mb-2 leading-relaxed" />
+          <RichText
+            as="p"
+            text={industriesParagraph}
+            className="text-white/60 max-w-2xl mx-auto mb-2 leading-relaxed"
+          />
           <p className="text-white/50 text-sm mb-10"></p>
 
           {/* Mobile: a strict 3-column grid (5 rows for 15 industries)
@@ -465,7 +536,11 @@ export default async function HowWeWorkPage() {
           <h2 className="text-2xl md:text-3xl font-bold mb-4 max-w-2xl">
             {categoriesHeading}
           </h2>
-          <RichText as="p" text={categoriesParagraph} className="text-white/60 max-w-2xl mb-10 leading-relaxed" />
+          <RichText
+            as="p"
+            text={categoriesParagraph}
+            className="text-white/60 max-w-2xl mb-10 leading-relaxed"
+          />
 
           <CategoriesShowcase />
         </div>
@@ -505,7 +580,11 @@ export default async function HowWeWorkPage() {
             <h3 className="md:text-3xl text-2xl font-bold mb-5">
               {ctaHeading}
             </h3>
-            <RichText as="p" text={ctaParagraph} className="max-w-3xl text-white/70 mb-8" />
+            <RichText
+              as="p"
+              text={ctaParagraph}
+              className="max-w-3xl text-white/70 mb-8"
+            />
             {/* Full width on mobile (was inline-flex sized to content,
                 which — combined with the card's own padding — left so
                 little room the label wrapped mid-phrase onto two lines);
