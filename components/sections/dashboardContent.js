@@ -8,6 +8,7 @@ import {
   uploadContentVideo,
 } from "@/actions/pageContentActions";
 import { PAGE_CONTENT_REGISTRY } from "@/lib/pageContentRegistry";
+import InlineRichEditor from "@/components/ui/inlineRichEditor";
 
 function MediaField({ value, onChange, label, kind }) {
   const [uploading, setUploading] = useState(false);
@@ -73,14 +74,11 @@ function MediaField({ value, onChange, label, kind }) {
 
 function FieldControl({ field, value, onChange }) {
   if (field.type === "textarea") {
-    return (
-      <textarea
-        rows={3}
-        value={value ?? ""}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm outline-none focus:border-slate-400"
-      />
-    );
+    // Bold + internal/external link, actually rendered on the live page
+    // (via components/ui/richText.js) instead of sitting there as plain
+    // text — the toolbar above the box is all that changed; existing
+    // plain-text values still load and save exactly as before.
+    return <InlineRichEditor value={value} onChange={onChange} />;
   }
   if (field.type === "image" || field.type === "video") {
     return (

@@ -5,6 +5,7 @@ import { sendMail } from "@/actions/serverActions";
 import { toast, Bounce } from "react-toastify";
 import { Eye, Users, FileText, Paperclip } from "lucide-react";
 import Particles from "@/components/ui/Particles";
+import RichText from "@/components/ui/richText";
 
 // Icons stay code-driven (design), matched positionally to whichever
 // steps are saved.
@@ -138,9 +139,7 @@ export default function ContactSection({ content }) {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
               {heading}
             </h2>
-            <p className="text-white/70 mb-10 max-w-md">
-              {paragraph}
-            </p>
+            <RichText as="p" text={paragraph} className="text-white/70 mb-10 max-w-md" />
 
             <div className="grid sm:grid-cols-3 gap-4">
               {steps.map(({ icon: Icon, title, description }, i) => (

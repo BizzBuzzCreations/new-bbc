@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 import { ShuffleGrid } from "@/components/ui/shuffle-grid";
+import { RICH_TEXT_CLASS, richTextHTML } from "@/components/ui/richText";
 
 const reveal = { duration: 0.8, ease: [0.16, 1, 0.3, 1] };
 
@@ -35,7 +36,7 @@ export default function AboutHero({ content }) {
 
   return (
     <div
-      className="min-h-[90vh] md:pt-50 pt-30 lg:text-left text-center text-white gap-10 flex 2xl:px-15 px-5 lg:flex-row flex-col justify-center items-center bg-gray-100 pb-30 mb-10"
+      className="md:min-h-[90vh] pt-10 md:pt-32 md:-mt-[72px] lg:text-left text-center text-white gap-10 flex 2xl:px-15 px-5 lg:flex-row flex-col justify-center items-center bg-gray-100 pb-12 md:pb-20"
       style={{
         background: "radial-gradient(circle at top, #1c1c1c, #000000)",
       }}
@@ -61,22 +62,29 @@ export default function AboutHero({ content }) {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...reveal, delay: 0.3 }}
-          className="max-w-xl mb-10"
-        >
-          {paragraph}
-        </motion.p>
+          className={`max-w-xl mb-10 ${RICH_TEXT_CLASS}`}
+          dangerouslySetInnerHTML={richTextHTML(paragraph)}
+        />
+        {/* flex-col + text-left on mobile: the two stats can each wrap to
+            2 lines, and with items-center + inherited text-center from
+            the hero root, the checkmark ended up vertically centered
+            against a centered (ragged) text block — pinned to the left
+            edge of a box whose second line drifted toward the middle,
+            reading as a disconnected, floating icon. items-start +
+            explicit text-left keeps the icon level with the first line,
+            same as the FAQ accordion fix. Row layout returns at sm/lg. */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...reveal, delay: 0.45 }}
-          className="flex flex-wrap justify-center lg:justify-start items-center gap-x-6 gap-y-2"
+          className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start items-start sm:items-center gap-x-6 gap-y-3 text-left"
         >
-          <div className="flex items-center gap-2">
-            <CheckCircle className="text-green-500" size={18} />
+          <div className="flex items-start gap-2">
+            <CheckCircle className="text-green-500 shrink-0 mt-0.5" size={18} />
             <span>{stat1}</span>
           </div>
-          <div className="flex items-center gap-2">
-            <CheckCircle className="text-green-500" size={18} />
+          <div className="flex items-start gap-2">
+            <CheckCircle className="text-green-500 shrink-0 mt-0.5" size={18} />
             <span>{stat2}</span>
           </div>
         </motion.div>
@@ -86,19 +94,32 @@ export default function AboutHero({ content }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...reveal, delay: 0.6 }}
         >
-          <Link
-            href="/services"
-            className="inline-flex items-center justify-center gap-2 mx-auto lg:mx-0 bg-white hover:bg-black text-black hover:text-white text-sm font-semibold px-7 py-3.5 rounded-full border-2 border-white transition-colors duration-300 w-fit"
-          >
-            {buttonText}
-            <svg
-              viewBox="0 0 24 24"
-              className="w-4 h-4 shrink-0"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-            >
-              <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-            </svg>
+          <Link href="/services" className="inline-block mx-auto lg:mx-0">
+            {/* animated-button-lg: the default circle-reveal only grows to
+                220px, which doesn't reach the edges of a button this wide
+                — leaving the outer text sitting on the still-dark
+                background while the middle sits on white, which is what
+                was showing up as garbled/illegible text on hover. The
+                -lg variant grows the circle to 700px, comfortably
+                covering the whole button regardless of text length. */}
+            <button className="animated-button animated-button-lg whitespace-nowrap">
+              <svg
+                viewBox="0 0 24 24"
+                className="arr-2"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
+              <span className="text">{buttonText}</span>
+              <span className="circle"></span>
+              <svg
+                viewBox="0 0 24 24"
+                className="arr-1"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
+            </button>
           </Link>
         </motion.div>
       </div>

@@ -4,6 +4,7 @@ import * as React from "react";
 import { HelpCircle, MessageCircle, ChevronDown } from "lucide-react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { cn } from "@/lib/utils";
+import RichText from "@/components/ui/richText";
 
 const CustomAccordion = AccordionPrimitive.Root;
 
@@ -13,27 +14,52 @@ const CustomAccordionItem = React.forwardRef(({ className, ...props }, ref) => (
 CustomAccordionItem.displayName = "CustomAccordionItem";
 
 const CustomAccordionTrigger = React.forwardRef(
-  ({ className, children, ...props }, ref) => (
+  (
+    {
+      className,
+      iconClassName,
+      questionTextClassName,
+      chevronWrapClassName,
+      chevronClassName,
+      children,
+      ...props
+    },
+    ref,
+  ) => (
     <AccordionPrimitive.Header className="flex">
       <AccordionPrimitive.Trigger
         ref={ref}
         className={cn(
-          "group flex flex-1 items-center justify-between gap-4 rounded-2xl border border-gray-100 p-4 text-left",
-          "bg-white transition-all hover:bg-gray-50/70 hover:shadow-md",
+          "group flex flex-1 items-center justify-between gap-4 rounded-2xl border border-[#0B60B0]/25 p-4 text-left",
+          "bg-white transition-all hover:bg-gray-50/70 hover:border-[#0B60B0]/50 hover:shadow-md",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-900/20",
-          "data-[state=open]:shadow-md",
+          "data-[state=open]:border-[#0B60B0]/60 data-[state=open]:shadow-md",
           className,
         )}
         {...props}
       >
-        <div className="flex items-center gap-4">
-          <HelpCircle className="h-5 w-5 text-gray-600" />
-          <span className="text-lg font-medium text-zinc-700 tracking-wide">
+        {/* items-start (not items-center) — a 3-4 line question was
+            vertically centering the "?" icon against the whole paragraph,
+            leaving it floating awkwardly beside the middle line instead of
+            sitting next to the first line, like a normal list icon. */}
+        <div className="flex items-start gap-3">
+          <HelpCircle className={cn("h-5 w-5 mt-0.5 shrink-0 text-gray-600", iconClassName)} />
+          <span
+            className={cn(
+              "text-lg font-medium text-zinc-700 tracking-wide",
+              questionTextClassName,
+            )}
+          >
             {children}
           </span>
         </div>
-        <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-gray-200 transition-transform group-hover:scale-105 group-data-[state=open]:rotate-180">
-          <ChevronDown className="h-4 w-4 text-gray-800" />
+        <div
+          className={cn(
+            "flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-gray-200 transition-transform group-hover:scale-105 group-data-[state=open]:rotate-180",
+            chevronWrapClassName,
+          )}
+        >
+          <ChevronDown className={cn("h-4 w-4 text-gray-800", chevronClassName)} />
         </div>
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
@@ -42,7 +68,18 @@ const CustomAccordionTrigger = React.forwardRef(
 CustomAccordionTrigger.displayName = "CustomAccordionTrigger";
 
 const CustomAccordionContent = React.forwardRef(
-  ({ className, children, ...props }, ref) => (
+  (
+    {
+      className,
+      answerClassName,
+      answerTextClassName,
+      answerIconWrapClassName,
+      answerIconClassName,
+      children,
+      ...props
+    },
+    ref,
+  ) => (
     <AccordionPrimitive.Content
       ref={ref}
       className={cn(
@@ -52,13 +89,23 @@ const CustomAccordionContent = React.forwardRef(
       )}
       {...props}
     >
-      <div className="mt-4 ml-14">
-        <div className="flex items-start gap-4 rounded-2xl bg-white p-4 shadow-md transition-all">
-          <span className="flex-1 text-md leading-relaxed text-gray-600">
+      <div className="mt-4 ml-0 sm:ml-14">
+        <div
+          className={cn(
+            "flex items-start gap-4 rounded-2xl bg-white p-4 shadow-md transition-all",
+            answerClassName,
+          )}
+        >
+          <span className={cn("flex-1 text-md leading-relaxed text-gray-600", answerTextClassName)}>
             {children}
           </span>
-          <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gray-100 transition-transform hover:scale-105">
-            <MessageCircle className="h-5 w-5 text-gray-700" />
+          <div
+            className={cn(
+              "flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gray-100 transition-transform hover:scale-105",
+              answerIconWrapClassName,
+            )}
+          >
+            <MessageCircle className={cn("h-5 w-5 text-gray-700", answerIconClassName)} />
           </div>
         </div>
       </div>
@@ -73,6 +120,15 @@ export function FAQSection({
   defaultValue,
   className,
   headingClassName,
+  triggerClassName,
+  iconClassName,
+  questionTextClassName,
+  chevronWrapClassName,
+  chevronClassName,
+  answerClassName,
+  answerTextClassName,
+  answerIconWrapClassName,
+  answerIconClassName,
 }) {
   return (
     <div className={className}>
@@ -87,8 +143,23 @@ export function FAQSection({
       >
         {faqs.map((faq, index) => (
           <CustomAccordionItem key={index} value={`item-${index}`}>
-            <CustomAccordionTrigger>{faq.question}</CustomAccordionTrigger>
-            <CustomAccordionContent>{faq.answer}</CustomAccordionContent>
+            <CustomAccordionTrigger
+              className={triggerClassName}
+              iconClassName={iconClassName}
+              questionTextClassName={questionTextClassName}
+              chevronWrapClassName={chevronWrapClassName}
+              chevronClassName={chevronClassName}
+            >
+              {faq.question}
+            </CustomAccordionTrigger>
+            <CustomAccordionContent
+              answerClassName={answerClassName}
+              answerTextClassName={answerTextClassName}
+              answerIconWrapClassName={answerIconWrapClassName}
+              answerIconClassName={answerIconClassName}
+            >
+              <RichText text={faq.answer} />
+            </CustomAccordionContent>
           </CustomAccordionItem>
         ))}
       </CustomAccordion>

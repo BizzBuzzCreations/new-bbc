@@ -3,6 +3,7 @@
 import Link from "next/link";
 import React from "react";
 import { motion } from "framer-motion";
+import { RICH_TEXT_CLASS, richTextHTML } from "@/components/ui/richText";
 
 const reveal = { duration: 0.8, ease: [0.16, 1, 0.3, 1] };
 
@@ -17,34 +18,33 @@ export default function HomeHero({ content }) {
 
   return (
     <>
-      {/* Resource hint — tells the browser to start fetching the (large,
-          ~13MB) hero video immediately, in parallel with everything else,
-          instead of waiting for it to be discovered here in the render
-          tree. Without this the video could take a moment to have any
-          frame ready, during which the poster (previously pointing at a
-          file that didn't exist in /public, so nothing rendered at all)
-          was the only thing standing between the video element and a
-          blank section. */}
-      <link rel="preload" as="video" href="/hero-sec.webm" type="video/webm" />
-
       <div className="relative overflow-hidden min-h-[90vh] text-white flex flex-col justify-center pb-30 -mt-14 pt-14 md:-mt-[72px] md:pt-[72px] bg-black">
         {/* Background video — desktop/tablet only. On mobile there's no
             room for a full-bleed video behind the text without it either
             looking cramped or getting cropped oddly, so mobile gets a
-            plain black background instead and the same video shows lower
-            down as its own contained box (below). No poster image on the
-            desktop video — a poster always flashes up front (that's what
-            a poster is: shown immediately, then swapped out once the
+            plain black background instead (below) rather than a second,
+            duplicate download of the same large file.
+
+            preload="metadata" (not "auto", and no forced <link rel=preload>
+            hint) — this file is a large, uncompressed source (~13MB); auto/
+            preload forced the browser to fetch and prioritize the whole
+            thing ahead of the rest of the page on every visit, which is
+            exactly the kind of thing that reads as the site "lagging" on
+            first load. autoPlay still starts it as soon as enough has
+            buffered — it just no longer competes for bandwidth with
+            everything else at the very top of the load. No poster image on
+            the desktop video — a poster always flashes up front (that's
+            what a poster is: shown immediately, then swapped out once the
             video has a decoded frame ready), which read as a jarring
-            photo-then-video glitch. Dropping it leaves a plain black
-            frame for that instant instead, which blends straight into
-            the section's own dark scrim/background. */}
+            photo-then-video glitch. Dropping it leaves a plain black frame
+            for that instant instead, which blends straight into the
+            section's own dark scrim/background. */}
         <video
           autoPlay
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           className="hidden md:block absolute inset-0 w-full h-full object-cover bg-black"
         >
           <source src="/hero-sec.webm" type="video/webm" />
@@ -92,14 +92,17 @@ export default function HomeHero({ content }) {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...reveal, delay: 0.3 }}
-            className="max-w-xl mb-10"
-          >
-            {subtext}
-          </motion.p>
+            className={`max-w-xl mb-10 ${RICH_TEXT_CLASS}`}
+            dangerouslySetInnerHTML={richTextHTML(subtext)}
+          />
 
           {/* Mobile-only — the same background video, but as its own
               contained box between the paragraph and the CTA button,
-              instead of playing full-bleed behind the text. */}
+              instead of playing full-bleed behind the text.
+              preload="metadata" (was "auto") — on mobile, the most
+              bandwidth- and data-plan-constrained visitors, forcing this
+              large file to fully buffer was the single biggest thing
+              standing between "page interactive" and everything else. */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -111,7 +114,7 @@ export default function HomeHero({ content }) {
               muted
               loop
               playsInline
-              preload="auto"
+              preload="metadata"
               className="absolute inset-0 w-full h-full object-cover bg-black"
             >
               <source src="/hero-sec.webm" type="video/webm" />

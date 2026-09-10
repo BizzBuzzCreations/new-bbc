@@ -18,6 +18,7 @@ import CTA from "@/components/sections/CTA";
 import LatestBlogs from "@/components/sections/latestBlogs";
 import DarkFAQSection from "@/components/sections/darkFAQSection";
 import { getPageContent } from "@/actions/pageContentActions";
+import RichText from "@/components/ui/richText";
 
 export const metadata = {
   title: "Digital Marketing Guides & Resources | BizzBuzz Creations",
@@ -166,9 +167,7 @@ export default async function GuidesPage() {
                     <h3 className="font-bold text-white mt-1 mb-1.5 leading-snug transition-colors duration-300 group-hover:text-[#40A2D8]">
                       {title}
                     </h3>
-                    <p className="text-sm text-white/60 leading-relaxed">
-                      {body}
-                    </p>
+                    <RichText as="p" text={body} className="text-sm text-white/60 leading-relaxed" />
                   </div>
                 </Link>
               ))}
@@ -194,9 +193,7 @@ export default async function GuidesPage() {
               <h3 className="relative z-10 font-bold text-xl leading-snug mb-3">
                 {sidebarHeading}
               </h3>
-              <p className="relative z-10 text-sm text-white/80 leading-relaxed mb-7">
-                {sidebarParagraph}
-              </p>
+              <RichText as="p" text={sidebarParagraph} className="relative z-10 text-sm text-white/80 leading-relaxed mb-7" />
 
               <div className="relative z-10 flex flex-col gap-3">
                 <Link

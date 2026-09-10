@@ -10,6 +10,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import Particles from "@/components/ui/Particles";
+import RichText from "@/components/ui/richText";
 
 // Icons and hrefs stay code-driven (design/routing), matched positionally
 // to whichever cards are saved.
@@ -74,9 +75,7 @@ export default function MarketingCTA({ content }) {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
               {heading}
             </h2>
-            <p className="text-white/70 mb-10 max-w-md leading-relaxed">
-              {paragraph}
-            </p>
+            <RichText as="p" text={paragraph} className="text-white/70 mb-10 max-w-md leading-relaxed" />
             <Link
               href="#contact-form"
               className="inline-flex items-center gap-2 bg-white hover:bg-black text-[#0B60B0] text-sm font-semibold px-6 py-3.5 rounded-full transition-colors duration-300 self-start w-fit shadow-lg mb-12"
@@ -89,9 +88,7 @@ export default function MarketingCTA({ content }) {
               {trustLines.map((line, i) => (
                 <div key={i} className="flex items-start gap-3">
                   <ShieldCheck size={18} className="text-[#8fd0f2] shrink-0 mt-0.5" />
-                  <p className="text-sm text-white/70 leading-relaxed">
-                    {line}
-                  </p>
+                  <RichText as="p" text={line} className="text-sm text-white/70 leading-relaxed" />
                 </div>
               ))}
             </div>
@@ -129,9 +126,11 @@ export default function MarketingCTA({ content }) {
                 <h3 className="font-bold text-white mb-2 transition-colors duration-300">
                   {title}
                 </h3>
-                <p className="text-sm text-white/60 leading-relaxed mb-4 transition-colors duration-300 group-hover:text-white/85">
-                  {description}
-                </p>
+                <RichText
+                  as="p"
+                  text={description}
+                  className="text-sm text-white/60 leading-relaxed mb-4 transition-colors duration-300 group-hover:text-white/85"
+                />
                 <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#40A2D8] transition-colors duration-300 group-hover:text-white">
                   {ctaText}
                   <ArrowUpRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

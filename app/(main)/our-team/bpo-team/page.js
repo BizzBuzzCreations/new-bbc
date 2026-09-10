@@ -1,4 +1,5 @@
 import BpoTeamGrid from "@/components/sections/bpoTeamGrid";
+import { getPageContent } from "@/actions/pageContentActions";
 
 export const metadata = {
   title: "Meet Our BPO Team | BizzBuzz Creations",
@@ -9,14 +10,16 @@ export const metadata = {
   },
 };
 
-export default function BpoTeamPage() {
+export default async function BpoTeamPage() {
+  const content = await getPageContent("bpo-team");
+
   return (
     <div className="bg-black min-h-screen pt-20 md:pt-24 pb-16">
       <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24">
         <h1 className="text-3xl md:text-4xl font-bold text-white text-center mb-10">
-          Meet Our BPO Team
+          {content?.bpoTeamHeading || "Meet Our BPO Team"}
         </h1>
-        <BpoTeamGrid />
+        <BpoTeamGrid content={content} />
       </div>
 
       {/* Full-width (edge-to-edge) divider between the cards and the

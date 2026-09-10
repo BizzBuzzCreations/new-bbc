@@ -89,23 +89,48 @@ export default function Recognitions({ content }) {
               <li
                 key={item.org}
                 onMouseEnter={() => setActive(i)}
-                className={`group flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-6 rounded-2xl border px-6 py-5 cursor-default transition-all duration-300 ${
+                onClick={() => setActive(i)}
+                // onClick (not just onMouseEnter) — the featured badge on
+                // the right is desktop-only now (see below); the item's
+                // own logo already shows inline, but the tap still keeps
+                // this row's :active/border state showing which one was
+                // last picked, on both touch and mouse.
+                className={`group flex items-center justify-between gap-3 sm:gap-6 rounded-2xl border px-4 sm:px-6 py-4 sm:py-5 cursor-pointer sm:cursor-default transition-all duration-300 ${
                   active === i
                     ? "border-[#40A2D8]/50 bg-[#0B60B0]/[0.08] shadow-lg shadow-[#0B60B0]/10"
                     : "border-white/10 bg-white/[0.02] hover:border-white/20 hover:bg-white/[0.04]"
                 }`}
               >
-                <span className="flex items-center gap-3 font-bold text-lg shrink-0">
+                {/* Real badge logo, always visible — on mobile there's no
+                    hover to reveal the featured panel on the right (that
+                    panel is hidden below lg entirely now), so this is the
+                    only place a mobile visitor ever sees the actual
+                    Clutch/Google/ISO badge rather than a generic trophy
+                    icon standing in for all four. */}
+                <span className="flex items-center gap-3 min-w-0">
                   <span
-                    className={`flex items-center justify-center w-8 h-8 rounded-full shrink-0 transition-colors duration-300 ${
-                      active === i ? "bg-[#0B60B0] text-white" : "bg-white/10 text-white/40"
+                    className={`relative flex items-center justify-center w-10 h-10 rounded-full shrink-0 bg-white p-1.5 transition-colors duration-300 ${
+                      active === i ? "ring-2 ring-[#40A2D8]" : ""
                     }`}
                   >
-                    <Trophy size={16} />
+                    <Image src={item.badge} alt={item.alt} fill sizes="40px" className="object-contain p-1.5" />
                   </span>
-                  {item.org} <span className="text-white/40 font-medium">— {item.status}</span>
+                  <span className="min-w-0">
+                    <span className="block font-bold text-white leading-snug">
+                      {item.org}{" "}
+                      <span className="text-white/40 font-medium">— {item.status}</span>
+                    </span>
+                    {/* Description sits directly under the name on mobile
+                        (was a separate right-aligned column that only made
+                        sense once the row was wide enough for sm:flex-row —
+                        below that it just added extra wrapped lines with no
+                        clear relationship to the name above it). */}
+                    <span className="block sm:hidden text-sm text-white/60 leading-relaxed mt-0.5">
+                      {item.title}
+                    </span>
+                  </span>
                 </span>
-                <span className="text-base text-white/70 sm:text-right leading-relaxed">
+                <span className="hidden sm:block text-base text-white/70 text-right leading-relaxed shrink-0 max-w-[45%]">
                   {item.title}
                 </span>
               </li>
@@ -113,9 +138,12 @@ export default function Recognitions({ content }) {
           </ul>
         </div>
 
-        {/* Featured badge — grows and gets a trophy pop-in whenever a row
-            above is hovered. */}
-        <div className="relative flex justify-center items-center h-[260px] sm:h-[340px] px-8">
+        {/* Featured badge — desktop only now. On mobile this relied on
+            :hover to switch, which touch devices never trigger, so it
+            just sat frozen on the first item; the real per-item logos in
+            the list above (added for mobile) make this panel redundant
+            screen space there anyway. */}
+        <div className="relative hidden lg:flex justify-center items-center h-[260px] sm:h-[340px] px-8">
           <AnimatePresence mode="wait">
             <motion.div
               key={current.org}

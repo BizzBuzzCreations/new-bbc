@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Particles from "@/components/ui/Particles";
+import RichText from "@/components/ui/richText";
 import {
   MoveRight,
   Rocket,
@@ -135,9 +136,11 @@ export default function OurServices({ content }) {
         <h2 className="relative z-10 md:text-4xl text-3xl font-bold mb-10 text-center text-white">
           {heading}
         </h2>
-        <p className="relative z-10 text-lg text-white/60 text-center mb-20 max-w-2xl mx-auto px-4">
-          {subtext}
-        </p>
+        <RichText
+          as="p"
+          text={subtext}
+          className="relative z-10 text-lg text-white/60 text-center mb-20 max-w-2xl mx-auto px-4"
+        />
 
         <div className="relative z-10 flex flex-wrap sm:p-0 p-2 max-w-6xl mx-auto gap-10 items-center justify-center">
           {displayServices.map((service) => {

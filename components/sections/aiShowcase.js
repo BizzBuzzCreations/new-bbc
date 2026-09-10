@@ -1,5 +1,9 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Bot, Workflow, Sparkles, Radar, ArrowUpRight } from "lucide-react";
+import RichText from "@/components/ui/richText";
 
 // Real categories from the /ai-solutions service page — kept consistent
 // with what BizzBuzz Creations actually offers instead of inventing claims.
@@ -31,7 +35,10 @@ export default function AiShowcase({ content }) {
   const paragraph =
     content?.aiParagraph ||
     "From AI chatbots and intelligent agents to workflow automation, AI-powered content, and AI search optimization, we help businesses in Prayagraj, across India, and worldwide put practical AI solutions to work.";
-  const posterImage = content?.aiPosterImage || "/aiservice.webp";
+  // /aiservice.webp doesn't exist in /public — was a broken poster
+  // reference (silently masked before by the video always loading fast
+  // enough to cover it up); using an existing, on-brand AI photo instead.
+  const posterImage = content?.aiPosterImage || "/AI solutions 2.png";
   const videoSrc = content?.aiVideo || "/ai-vid.webm";
   const buttonText = content?.aiButtonText || "Explore AI Solutions";
 
@@ -42,6 +49,36 @@ export default function AiShowcase({ content }) {
     return override ? { ...feature, ...override } : feature;
   });
 
+  // This video is a large (~33MB), uncompressed source file. Loading it
+  // unconditionally on every homepage visit — even for people who never
+  // scroll this far — was a major contributor to the site feeling slow to
+  // load. The poster image (already in place) covers the section
+  // perfectly well on its own; the actual <source> (and therefore the
+  // download) is only attached once the section scrolls near the
+  // viewport, via IntersectionObserver, with a 400px rootMargin so it has
+  // a head start before it's actually visible.
+  const videoWrapRef = useRef(null);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+
+  useEffect(() => {
+    const el = videoWrapRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") {
+      setShouldLoadVideo(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoadVideo(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "400px 0px" },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="bg-black overflow-hidden">
       <div className="grid lg:grid-cols-2">
@@ -49,22 +86,41 @@ export default function AiShowcase({ content }) {
             DOM order once the 2-column desktop layout kicks in) makes sure
             it renders above the text content on mobile explicitly, rather
             than relying only on JSX order. */}
-        <div className="relative order-1 lg:order-none min-h-[420px] lg:min-h-[640px]">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster={posterImage}
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{
-              clipPath:
-                "polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 55%, 8% 50%, 0 45%)",
-            }}
-          >
-            <source src={videoSrc} />
-            <source src="/Sequence 01 1.mp4" type="video/mp4" />
-          </video>
+        <div
+          ref={videoWrapRef}
+          className="relative order-1 lg:order-none min-h-[420px] lg:min-h-[640px]"
+        >
+          {shouldLoadVideo ? (
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              poster={posterImage}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{
+                clipPath:
+                  "polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 55%, 8% 50%, 0 45%)",
+              }}
+            >
+              <source src={videoSrc} />
+              <source src="/Sequence 01 1.mp4" type="video/mp4" />
+            </video>
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element -- this
+            // section already ships the poster as a plain background
+            // ahead of the (much heavier) video; no next/image benefit
+            // here since it's swapped out immediately once observed.
+            <img
+              src={posterImage}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{
+                clipPath:
+                  "polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 55%, 8% 50%, 0 45%)",
+              }}
+            />
+          )}
           <div className="absolute inset-0 bg-linear-to-r from-transparent via-transparent to-black/40 lg:to-black/10" />
         </div>
 
@@ -74,7 +130,7 @@ export default function AiShowcase({ content }) {
             {heading}
           </h2>
 
-          <p className="text-white/60 max-w-xl">{paragraph}</p>
+          <RichText as="p" text={paragraph} className="text-white/60 max-w-xl" />
 
           {/* 2x2 on every screen below lg (was sm:grid-cols-2, so phones
               narrower than 640px fell back to 1 card per row). */}

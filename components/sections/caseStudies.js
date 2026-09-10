@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import RichText from "@/components/ui/richText";
 import {
   Headset,
   Bot,
@@ -155,9 +156,7 @@ export default function CaseStudies({ content }) {
       <h2 className="md:text-4xl text-3xl font-bold text-center mb-3">
         {heading}
       </h2>
-      <p className="text-center text-white/60 max-w-xl mx-auto mb-16 px-4">
-        {subtext}
-      </p>
+      <RichText as="p" text={subtext} className="text-center text-white/60 max-w-xl mx-auto mb-16 px-4" />
 
       {/* Card carousel */}
       <div

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import slugify from "slugify";
 import { createBlog, updateBlog, uploadBlogImage } from "@/actions/blogActions";
 import RichTextEditor from "@/components/ui/richTextEditor";
+import InlineRichEditor from "@/components/ui/inlineRichEditor";
 import { Plus, Trash2 } from "lucide-react";
 
 const CATEGORIES = [
@@ -228,13 +229,16 @@ export default function BlogEditor({ initialData = null }) {
           />
         </div>
 
-        <textarea
-          className="rounded-lg border border-slate-200 px-4 py-2.5 text-sm outline-none"
-          rows={2}
-          placeholder="Short excerpt (shown on blog cards)"
-          value={form.excerpt}
-          onChange={(e) => setForm((prev) => ({ ...prev, excerpt: e.target.value }))}
-        />
+        <div>
+          <label className="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-400">
+            Short excerpt (shown on blog cards)
+          </label>
+          <InlineRichEditor
+            value={form.excerpt}
+            onChange={(value) => setForm((prev) => ({ ...prev, excerpt: value }))}
+            rows={2}
+          />
+        </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
@@ -270,12 +274,10 @@ export default function BlogEditor({ initialData = null }) {
           <label className="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-400">
             Author description / bio
           </label>
-          <textarea
-            className="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-sm outline-none"
-            rows={2}
-            placeholder="Shown under the article, next to the author's name"
+          <InlineRichEditor
             value={form.authorBio}
-            onChange={(e) => setForm((prev) => ({ ...prev, authorBio: e.target.value }))}
+            onChange={(value) => setForm((prev) => ({ ...prev, authorBio: value }))}
+            rows={2}
           />
         </div>
 

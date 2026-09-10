@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import RichText from "@/components/ui/richText";
 
 // Real BizzBuzz office/team photos (same assets already used elsewhere on
 // the site) auto-advancing behind the hero text, instead of one static
@@ -10,9 +11,8 @@ import Link from "next/link";
 const DEFAULT_SLIDES = [
   "/image-7.jpg",
   "/image-2.jpg",
-  "/image-5.webp",
-  "/image-4.webp",
-  "/raw-image.png",
+  "/image-7.jpg",
+  "/image-2.jpg",
 ];
 
 const SLIDE_DURATION = 4500;
@@ -40,7 +40,10 @@ export default function CareerHero({ content } = {}) {
     <section className="relative overflow-hidden min-h-[420px] sm:min-h-[480px] flex items-center pt-10 md:pt-20">
       {SLIDES.map((src, i) => (
         <div
-          key={src}
+          // Index, not src — slides can (and now do, by request) repeat the
+          // same image, and a duplicate key across siblings is what React
+          // was warning about ("two children with the same key, /image-7.jpg").
+          key={i}
           className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
           style={{ opacity: i === active ? 1 : 0 }}
           aria-hidden={i !== active}
@@ -72,9 +75,7 @@ export default function CareerHero({ content } = {}) {
         <h2 className="text-white/90 text-lg sm:text-xl font-semibold mb-4">
           {subheading}
         </h2>
-        <p className="text-white/70 max-w-lg leading-relaxed mb-8">
-          {paragraph}
-        </p>
+        <RichText as="p" text={paragraph} className="text-white/70 max-w-lg leading-relaxed mb-8" />
         <Link href="/contact" className="inline-block">
           <button className="animated-button animated-button-lg whitespace-nowrap">
             <svg

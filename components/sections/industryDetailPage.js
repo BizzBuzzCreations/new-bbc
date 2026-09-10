@@ -7,6 +7,7 @@ import NumberedDeliverablesCarousel from "@/components/sections/numberedDelivera
 import ServiceBreakdownGrid from "@/components/sections/serviceBreakdownGrid";
 import RoadmapCarousel from "@/components/sections/roadmapCarousel";
 import CapabilityCard from "@/components/ui/capabilityCard";
+import RichText from "@/components/ui/richText";
 
 // Shared template every /industries/<slug> dedicated page renders through
 // — the exact structure originally built for Healthcare, now generic so
@@ -158,9 +159,11 @@ export default function IndustryDetailPage({
               <Image src={heroImage} alt="" fill sizes="100vw" className="object-cover object-top" />
             </div>
           )}
-          <p className="text-white/70 leading-relaxed mb-9 max-w-2xl">
-            {heroDescription || description}
-          </p>
+          <RichText
+            as="p"
+            text={heroDescription || description}
+            className="text-white/70 leading-relaxed mb-9 max-w-2xl"
+          />
           <Link href="/contact" className="inline-block max-w-full">
             {/* whitespace-nowrap only from sm up — on mobile the long,
                 per-industry CTA text (e.g. "Get a Free Entertainment
@@ -297,9 +300,7 @@ export default function IndustryDetailPage({
                         <h3 className="text-xl font-bold text-white mb-3">
                           {title}
                         </h3>
-                        <p className="text-white/60 text-sm leading-relaxed">
-                          {desc}
-                        </p>
+                        <RichText as="p" text={desc} className="text-white/60 text-sm leading-relaxed" />
                       </div>
                     </div>
                   );
@@ -388,9 +389,7 @@ export default function IndustryDetailPage({
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 max-w-2xl">
               {spectrumHeading}
             </h2>
-            <p className="text-white/60 max-w-2xl mb-14 leading-relaxed">
-              {spectrumSubtitle}
-            </p>
+            <RichText as="p" text={spectrumSubtitle} className="text-white/60 max-w-2xl mb-14 leading-relaxed" />
 
             <div className="grid md:grid-cols-3 gap-6">
               {spectrumServices.map((item) => (
@@ -409,9 +408,7 @@ export default function IndustryDetailPage({
                   </div>
                   <div className="p-6">
                     <h3 className="font-bold text-white mb-2">{item.title}</h3>
-                    <p className="text-sm text-white/60 leading-relaxed">
-                      {item.desc}
-                    </p>
+                    <RichText as="p" text={item.desc} className="text-sm text-white/60 leading-relaxed" />
                   </div>
                 </div>
               ))}
@@ -428,9 +425,7 @@ export default function IndustryDetailPage({
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 max-w-2xl">
               Who We Help
             </h2>
-            <p className="text-white/60 max-w-2xl mb-14 leading-relaxed">
-              {whoWeHelpSubtitle}
-            </p>
+            <RichText as="p" text={whoWeHelpSubtitle} className="text-white/60 max-w-2xl mb-14 leading-relaxed" />
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {whoWeHelp.map(({ icon: WhoIcon, title, desc }) => (
@@ -442,9 +437,11 @@ export default function IndustryDetailPage({
                     <WhoIcon size={20} />
                   </span>
                   <h3 className="font-bold text-white mb-2 text-sm">{title}</h3>
-                  <p className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85">
-                    {desc}
-                  </p>
+                  <RichText
+                    as="p"
+                    text={desc}
+                    className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85"
+                  />
                 </div>
               ))}
             </div>
@@ -512,9 +509,7 @@ export default function IndustryDetailPage({
               </div>
             )}
             {whyChooseUsText ? (
-              <p className="text-white/70 leading-relaxed max-w-xl">
-                {whyChooseUsText}
-              </p>
+              <RichText as="p" text={whyChooseUsText} className="text-white/70 leading-relaxed max-w-xl" />
             ) : (
               <>
                 <p className="text-white/60 leading-relaxed mb-12 max-w-2xl mx-auto">
@@ -570,7 +565,7 @@ export default function IndustryDetailPage({
                 <h2 className="md:text-3xl text-2xl font-bold mb-5">
                   {ctaHeading}
                 </h2>
-                <p className="max-w-3xl text-white/70 mb-8">{ctaText}</p>
+                <RichText as="p" text={ctaText} className="max-w-3xl text-white/70 mb-8" />
                 {/* Stacked, full-width buttons on mobile (was flex-wrap,
                     which — squeezed by the card's own padding — wrapped
                     the two pills into an untidy layout) instead of forcing

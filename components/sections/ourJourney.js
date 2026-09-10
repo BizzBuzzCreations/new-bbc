@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import RichText from "@/components/ui/richText";
 
 // "A Decade of Digital Excellence" style timeline, scoped to BizzBuzz's
 // actual span (2022–2026). Copy here is deliberately general — it reuses
@@ -14,7 +15,7 @@ const DEFAULT_YEARS = [
     year: "2022",
     title: "Building the Foundation",
     body: "We began our journey with a focus on digital marketing, creative branding, and online business growth, helping brands establish a stronger and more meaningful digital presence.",
-    img: "/image-7.jpg",
+    img: "/image-2.jpg",
   },
   {
     year: "2023",
@@ -26,19 +27,19 @@ const DEFAULT_YEARS = [
     year: "2024",
     title: "Strengthening Our Approach",
     body: "Our focus evolved toward result-driven digital marketing strategies, combining SEO, content, social media, branding, and web solutions to help businesses build visibility and connect with their audiences.",
-    img: "/image-5.webp",
+    img: "/image-2.jpg",
   },
   {
     year: "2025",
     title: "Growing Digital Possibilities",
     body: "We continued refining our digital marketing and SEO strategies, focusing on stronger brand visibility, engaging content, effective online campaigns, and sustainable digital growth across different business needs.",
-    img: "/image-4.webp",
+    img: "/image-2.jpg",
   },
   {
     year: "2026",
     title: "Where We Are Today",
     body: "Today, we continue building smarter digital marketing, SEO, branding, content, social media, and web strategies, helping businesses strengthen their online presence and grow with confidence.",
-    img: "/raw-image.png",
+    img: "/image-2.jpg",
   },
 ];
 
@@ -94,9 +95,7 @@ export default function OurJourney({ content }) {
             </span>
             <div className="max-w-md mt-8 mx-auto sm:mx-0 sm:ml-auto text-center sm:text-left">
               <h3 className="text-white font-bold text-xl mb-3">{current.title}</h3>
-              <p className="text-base text-white/60 leading-relaxed">
-                {current.body}
-              </p>
+              <RichText as="p" text={current.body} className="text-base text-white/60 leading-relaxed" />
             </div>
           </div>
         </div>

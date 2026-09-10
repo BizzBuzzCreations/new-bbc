@@ -27,35 +27,45 @@ const ROLE_ICONS = {
 };
 
 const BPO_TEAM = [
-  { name: "Abhishek Awasthi", role: "Customer Support Executive" },
-  { name: "Akanksha Pandey", role: "Senior Advisor" },
-  { name: "Akash Singh", role: "Advisor" },
-  { name: "Anurag Singh Bisht", role: "Advisor" },
-  { name: "Aryan Prakash Srivastava", role: "Senior Advisor" },
-  { name: "Digvijay Singh", role: "Advisor" },
-  { name: "Harsh Singh", role: "Advisor" },
-  { name: "Harshvardhan Tripathi", role: "Advisor" },
-  { name: "Hritik Kesarwani", role: "Advisor" },
-  { name: "Ishika Kesarwani", role: "Compliance Manager" },
-  { name: "Karan Agarhari", role: "Advisor" },
-  { name: "Kanchi Singh", role: "Advisor" },
-  { name: "Kushal Singh", role: "Senior Advisor" },
-  { name: "Kartikae Ojha", role: "Strategy Manager" },
-  { name: "Manasvi Gupta", role: "Advisor" },
-  { name: "Monika Sharma", role: "Advisor" },
-  { name: "Shreya Dubey", role: "Advisor" },
-  { name: "Ziauddin Khan", role: "Advisor" },
+  { name: "Abhishek Awasthi", role: "Customer Support Executive", photo: "/person-image.jpg" },
+  { name: "Akanksha Pandey", role: "Senior Advisor", photo: "/person-image.jpg" },
+  { name: "Akash Singh", role: "Advisor", photo: "/team-images/akash.jpeg" },
+  { name: "Anurag Singh Bisht", role: "Advisor", photo: "/person-image.jpg" },
+  { name: "Aryan Prakash Srivastava", role: "Senior Advisor", photo: "/team-images/aryan.jpeg" },
+  { name: "Digvijay Singh", role: "Advisor", photo: "/person-image.jpg" },
+  { name: "Harsh Singh", role: "Advisor", photo: "/team-images/harsh.jpeg" },
+  { name: "Harshvardhan Tripathi", role: "Advisor", photo: "/team-images/harshvardhan.jpeg" },
+  { name: "Hritik Kesarwani", role: "Advisor", photo: "/team-images/hritik.jpeg" },
+  { name: "Ishika Kesarwani", role: "Compliance Manager", photo: "/team-images/ishika.jpeg" },
+  { name: "Karan Agarhari", role: "Advisor", photo: "/team-images/karan.jpeg" },
+  { name: "Kanchi Singh", role: "Advisor", photo: "/team-images/kanchi.jpeg" },
+  { name: "Kushal Singh", role: "Senior Advisor", photo: "/team-images/kushal.jpeg" },
+  { name: "Kartikae Ojha", role: "Strategy Manager", photo: "/person-image.jpg" },
+  { name: "Manasvi Gupta", role: "Advisor", photo: "/team-images/manasvi.jpeg" },
+  { name: "Monika Sharma", role: "Advisor", photo: "/team-images/monika.jpeg" },
+  { name: "Shreya Dubey", role: "Advisor", photo: "/team-images/shreya.jpeg" },
+  { name: "Ziauddin Khan", role: "Advisor", photo: "/person-image.jpg" },
 ].map((person) => ({ ...person, icon: ROLE_ICONS[person.role] }));
 
-export default function BpoTeamGrid() {
+export default function BpoTeamGrid({ content } = {}) {
+  const savedTeam = content?.bpoTeamMembers?.length > 0 ? content.bpoTeamMembers : null;
+  // ROLE_ICONS[role] falls back to undefined for a role an admin typed
+  // that isn't one of the 5 known titles — RoleCard just shows the photo
+  // with no icon fallback in that case, which is harmless since every
+  // current member already has a real photo.
+  const team = savedTeam
+    ? savedTeam.map((person) => ({ ...person, icon: ROLE_ICONS[person.role] }))
+    : BPO_TEAM;
+
   return (
     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      {BPO_TEAM.map(({ icon: Icon, name, role }, i) => (
+      {team.map(({ icon: Icon, name, role, photo }, i) => (
         <RoleCard
           key={i}
           icon={Icon}
           name={name}
           role={role}
+          photo={photo}
           index={i}
           size="xl"
           showInstagram={false}

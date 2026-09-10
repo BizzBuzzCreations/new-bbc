@@ -159,7 +159,7 @@ export default function Footer() {
                   key={social.name}
                   href={social.href}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer"  
                   aria-label={social.name}
                   className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center hover:border-[#40A2D8] hover:bg-white/5 transition-colors"
                 >

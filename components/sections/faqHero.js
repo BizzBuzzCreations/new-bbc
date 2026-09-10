@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import RichText from "@/components/ui/richText";
 
 // FAQ page hero — same full-bleed-photo treatment as HomeAbout's building
 // shot: the question-mark graphic spans the whole section as a background
@@ -66,9 +67,7 @@ export default function FaqHero({ content } = {}) {
           <h2 className="mt-4 text-lg sm:text-xl font-semibold text-[#40A2D8]">
             {subheading}
           </h2>
-          <p className="mt-6 text-white/60 max-w-lg leading-relaxed">
-            {paragraph}
-          </p>
+          <RichText as="p" text={paragraph} className="mt-6 text-white/60 max-w-lg leading-relaxed" />
           <div className="md:hidden relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-lg mt-6">
             <Image src={backgroundImage} alt="" fill sizes="100vw" className="object-cover object-center" />
           </div>

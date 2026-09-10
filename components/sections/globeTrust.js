@@ -1,5 +1,6 @@
 import Globe from "@/components/ui/globe";
 import Particles from "@/components/ui/Particles";
+import RichText from "@/components/ui/richText";
 
 // BizzBuzz's two real offices (same coordinates as the address cards on
 // /contact) — marked on the globe instead of a placeholder location.
@@ -48,9 +49,11 @@ export default function GlobeTrust({ content }) {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             {heading}
           </h2>
-          <p className="hidden md:block text-sm text-white/60 leading-relaxed">
-            {paragraph}
-          </p>
+          <RichText
+            as="p"
+            text={paragraph}
+            className="hidden md:block text-sm text-white/60 leading-relaxed"
+          />
         </div>
 
         {/* Interactive 3D globe — real dot-mapped world map (Three.js +
@@ -77,9 +80,11 @@ export default function GlobeTrust({ content }) {
         </div>
 
         {/* Mobile-only paragraph, placed after the globe. */}
-        <p className="md:hidden max-w-sm sm:max-w-md text-sm text-white/60 leading-relaxed">
-          {paragraph}
-        </p>
+        <RichText
+          as="p"
+          text={paragraph}
+          className="md:hidden max-w-sm sm:max-w-md text-sm text-white/60 leading-relaxed"
+        />
       </div>
     </section>
   );
