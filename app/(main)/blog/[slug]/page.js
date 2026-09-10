@@ -3,6 +3,7 @@ import { getFeaturedImage } from "@/lib/getFeaturedImage";
 import { extractTableOfContents } from "@/lib/extractTableOfContents";
 import { sanitizeBlogContent } from "@/lib/sanitizeBlogContent";
 import BlogContactForm from "@/components/sections/blogContactForm";
+import RichText from "@/components/ui/richText";
 import { FAQSection } from "@/components/ui/faq-accordion";
 import CTA from "@/components/sections/CTA";
 import { User, ImageOff } from "lucide-react";
@@ -200,9 +201,7 @@ export default async function SingleBlog({ params }) {
           </div>
 
           {/* Author Bio */}
-          <p className="text-gray-600 leading-relaxed text-sm">
-            {post?.authorBio}
-          </p>
+          <RichText as="p" text={post?.authorBio} className="text-gray-600 leading-relaxed text-sm" />
         </div>
       </div>
 

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import RichText from "@/components/ui/richText";
 import {
   Crown,
   Users,
@@ -331,9 +332,7 @@ export default function TeamGrids({ content } = {}) {
             <h3 className="text-lg font-semibold text-[#40A2D8] mb-4">
               {foundersSubheading}
             </h3>
-            <p className="text-white/60 max-w-2xl mx-auto leading-relaxed">
-              {foundersParagraph}
-            </p>
+            <RichText as="p" text={foundersParagraph} className="text-white/60 max-w-2xl mx-auto leading-relaxed" />
           </motion.div>
 
           <div className="grid sm:grid-cols-2 max-w-3xl mx-auto gap-8">
@@ -354,9 +353,7 @@ export default function TeamGrids({ content } = {}) {
             <h3 className="text-lg font-semibold text-[#40A2D8] mb-4">
               {leadersSubheading}
             </h3>
-            <p className="text-white/60 max-w-xl mx-auto leading-relaxed">
-              {leadersParagraph}
-            </p>
+            <RichText as="p" text={leadersParagraph} className="text-white/60 max-w-xl mx-auto leading-relaxed" />
           </motion.div>
 
           {/* Two explicit rows (4 then 3) instead of one 3-column grid —
@@ -407,9 +404,7 @@ export default function TeamGrids({ content } = {}) {
                     <h3 className="text-base md:text-lg font-semibold text-[#40A2D8] mb-4">
                       {group.tagline}
                     </h3>
-                    <p className="text-white/60 leading-relaxed mb-6">
-                      {group.desc}
-                    </p>
+                    <RichText as="p" text={group.desc} className="text-white/60 leading-relaxed mb-6" />
                     <Link
                       href={i === 0 ? "/our-team/bpo-team" : "/our-team/rnd-team"}
                       className="group/btn inline-flex items-center gap-2.5 bg-[#0B60B0] hover:bg-white text-white hover:text-black text-sm font-semibold pl-6 pr-5 py-3.5 rounded-full shadow-lg shadow-[#0B60B0]/20 hover:shadow-xl hover:shadow-black/20 transition-all duration-300 w-fit"
@@ -465,9 +460,7 @@ export default function TeamGrids({ content } = {}) {
                   <Icon size={22} />
                 </span>
                 <h4 className="font-bold text-white mb-2">{title}</h4>
-                <p className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85">
-                  {desc}
-                </p>
+                <RichText as="p" text={desc} className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85" />
               </motion.div>
             ))}
           </div>
@@ -497,9 +490,7 @@ export default function TeamGrids({ content } = {}) {
                 <h3 className="font-bold text-white mb-2 transition-colors duration-300">
                   {title}
                 </h3>
-                <p className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85">
-                  {desc}
-                </p>
+                <RichText as="p" text={desc} className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85" />
               </div>
             ))}
           </div>

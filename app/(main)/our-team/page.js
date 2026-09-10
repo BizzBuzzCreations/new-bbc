@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import TeamHero from "@/components/sections/teamHero";
+import RichText from "@/components/ui/richText";
 import TeamGrids from "@/components/sections/teamGrids";
 import ContactSection from "@/components/sections/contactSection";
 import { getPageContent } from "@/actions/pageContentActions";
@@ -57,9 +58,7 @@ export default async function OurTeamPage() {
             <h2 className="md:text-3xl text-2xl font-bold mb-5">
               {ctaHeading}
             </h2>
-            <p className="max-w-3xl mb-8 text-white/70">
-              {ctaParagraph}
-            </p>
+            <RichText as="p" text={ctaParagraph} className="max-w-3xl mb-8 text-white/70" />
 
             <div className="flex flex-wrap gap-8">
               <div>

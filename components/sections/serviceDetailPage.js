@@ -7,6 +7,7 @@ import NumberedDeliverablesCarousel from "@/components/sections/numberedDelivera
 import ServiceBreakdownGrid from "@/components/sections/serviceBreakdownGrid";
 import RoadmapCarousel from "@/components/sections/roadmapCarousel";
 import CapabilityCard from "@/components/ui/capabilityCard";
+import RichText from "@/components/ui/richText";
 
 // Shared template every dedicated /<service-hub>/<slug> page renders
 // through — the same rich layout used for /industries/<slug> pages
@@ -166,9 +167,11 @@ export default function ServiceDetailPage({
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
             {heroTitle || `${label} Services`}
           </h1>
-          <p className="text-white/70 leading-relaxed mb-9 max-w-2xl">
-            {heroDescription || description}
-          </p>
+          <RichText
+            as="p"
+            text={heroDescription || description}
+            className="text-white/70 leading-relaxed mb-9 max-w-2xl"
+          />
           {heroImage && (
             <div className="md:hidden relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-lg mb-9">
               <Image src={heroImage} alt="" fill sizes="100vw" className="object-cover object-top" />
@@ -305,9 +308,7 @@ export default function ServiceDetailPage({
                         <h3 className="text-xl font-bold text-white mb-3">
                           {title}
                         </h3>
-                        <p className="text-white/60 text-sm leading-relaxed">
-                          {desc}
-                        </p>
+                        <RichText as="p" text={desc} className="text-white/60 text-sm leading-relaxed" />
                       </div>
                     </div>
                   );
@@ -360,9 +361,7 @@ export default function ServiceDetailPage({
                   className="object-cover"
                 />
               </div>
-              <p className="text-white/70 leading-relaxed max-w-xl">
-                {localityText}
-              </p>
+              <RichText as="p" text={localityText} className="text-white/70 leading-relaxed max-w-xl" />
             </div>
             <div className="hidden md:block relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
               <Image
@@ -438,9 +437,7 @@ export default function ServiceDetailPage({
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 max-w-2xl">
               {spectrumHeading}
             </h2>
-            <p className="text-white/60 max-w-2xl mb-14 leading-relaxed">
-              {spectrumSubtitle}
-            </p>
+            <RichText as="p" text={spectrumSubtitle} className="text-white/60 max-w-2xl mb-14 leading-relaxed" />
 
             <div className="grid md:grid-cols-3 gap-6">
               {spectrumServices.map((item) => (
@@ -459,9 +456,7 @@ export default function ServiceDetailPage({
                   </div>
                   <div className="p-6">
                     <h3 className="font-bold text-white mb-2">{item.title}</h3>
-                    <p className="text-sm text-white/60 leading-relaxed">
-                      {item.desc}
-                    </p>
+                    <RichText as="p" text={item.desc} className="text-sm text-white/60 leading-relaxed" />
                   </div>
                 </div>
               ))}
@@ -478,9 +473,7 @@ export default function ServiceDetailPage({
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 max-w-2xl">
               Who We Help
             </h2>
-            <p className="text-white/60 max-w-2xl mb-14 leading-relaxed">
-              {whoWeHelpSubtitle}
-            </p>
+            <RichText as="p" text={whoWeHelpSubtitle} className="text-white/60 max-w-2xl mb-14 leading-relaxed" />
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {whoWeHelp.map(({ icon: WhoIcon, title, desc }) => (
@@ -492,9 +485,11 @@ export default function ServiceDetailPage({
                     <WhoIcon size={20} />
                   </span>
                   <h3 className="font-bold text-white mb-2 text-sm">{title}</h3>
-                  <p className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85">
-                    {desc}
-                  </p>
+                  <RichText
+                    as="p"
+                    text={desc}
+                    className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85"
+                  />
                 </div>
               ))}
             </div>
@@ -534,9 +529,7 @@ export default function ServiceDetailPage({
             {whyChooseUsHeading || `Why Businesses Choose Us for ${label}`}
           </h2>
           {whyChooseUsText ? (
-            <p className="text-white/70 leading-relaxed max-w-3xl mx-auto">
-              {whyChooseUsText}
-            </p>
+            <RichText as="p" text={whyChooseUsText} className="text-white/70 leading-relaxed max-w-3xl mx-auto" />
           ) : (
             <>
               <p className="text-white/60 leading-relaxed mb-12 max-w-2xl mx-auto">
@@ -580,7 +573,7 @@ export default function ServiceDetailPage({
                 <h2 className="md:text-3xl text-2xl font-bold mb-5">
                   {ctaHeading}
                 </h2>
-                <p className="max-w-3xl text-white/70 mb-8">{ctaText}</p>
+                <RichText as="p" text={ctaText} className="max-w-3xl text-white/70 mb-8" />
                 {/* Stacked, full-width buttons on mobile (was flex-wrap,
                     which — squeezed by the card's own padding — wrapped
                     the two pills into an untidy layout) instead of forcing

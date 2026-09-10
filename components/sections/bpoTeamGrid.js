@@ -47,10 +47,19 @@ const BPO_TEAM = [
   { name: "Ziauddin Khan", role: "Advisor", photo: "/person-image.jpg" },
 ].map((person) => ({ ...person, icon: ROLE_ICONS[person.role] }));
 
-export default function BpoTeamGrid() {
+export default function BpoTeamGrid({ content } = {}) {
+  const savedTeam = content?.bpoTeamMembers?.length > 0 ? content.bpoTeamMembers : null;
+  // ROLE_ICONS[role] falls back to undefined for a role an admin typed
+  // that isn't one of the 5 known titles — RoleCard just shows the photo
+  // with no icon fallback in that case, which is harmless since every
+  // current member already has a real photo.
+  const team = savedTeam
+    ? savedTeam.map((person) => ({ ...person, icon: ROLE_ICONS[person.role] }))
+    : BPO_TEAM;
+
   return (
     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      {BPO_TEAM.map(({ icon: Icon, name, role, photo }, i) => (
+      {team.map(({ icon: Icon, name, role, photo }, i) => (
         <RoleCard
           key={i}
           icon={Icon}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import RichText from "@/components/ui/richText";
 
 // "A Decade of Digital Excellence" style timeline, scoped to BizzBuzz's
 // actual span (2022–2026). Copy here is deliberately general — it reuses
@@ -94,9 +95,7 @@ export default function OurJourney({ content }) {
             </span>
             <div className="max-w-md mt-8 mx-auto sm:mx-0 sm:ml-auto text-center sm:text-left">
               <h3 className="text-white font-bold text-xl mb-3">{current.title}</h3>
-              <p className="text-base text-white/60 leading-relaxed">
-                {current.body}
-              </p>
+              <RichText as="p" text={current.body} className="text-base text-white/60 leading-relaxed" />
             </div>
           </div>
         </div>

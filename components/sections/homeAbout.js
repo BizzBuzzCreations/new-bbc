@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import RichText from "@/components/ui/richText";
 
 export default function HomeAbout({ content }) {
   const eyebrow = content?.aboutEyebrow || "About Us";
@@ -38,7 +39,7 @@ export default function HomeAbout({ content }) {
           <div>
             <p className="text-white/60">{eyebrow}</p>
             <h2 className="text-4xl font-bold mb-4 text-[#40A2D8]">{heading}</h2>
-            <p className="max-w-xl mb-6 text-white/80">{paragraph}</p>
+            <RichText as="p" text={paragraph} className="max-w-xl mb-6 text-white/80" />
             {button}
           </div>
         </div>
@@ -83,7 +84,7 @@ export default function HomeAbout({ content }) {
       <div className="md:hidden px-6 py-16 text-center">
         <p className="text-white/60">{eyebrow}</p>
         <h2 className="text-3xl font-bold mb-6 text-[#40A2D8]">{heading}</h2>
-        <p className="max-w-lg mx-auto mb-6 text-white/80">{paragraph}</p>
+        <RichText as="p" text={paragraph} className="max-w-lg mx-auto mb-6 text-white/80" />
         {button}
       </div>
     </section>

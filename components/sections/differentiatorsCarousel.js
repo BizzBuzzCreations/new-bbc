@@ -2,6 +2,7 @@
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 import "@splidejs/react-splide/css";
+import RichText from "@/components/ui/richText";
 
 const DEFAULT_DIFFERENTIATORS = [
   {
@@ -69,7 +70,7 @@ const DifferentiatorsCarousel = ({ items }) => {
             <h3 className="font-bold text-lg mb-2 text-white transition-colors duration-300 group-hover:text-[#40A2D8]">
               {item.title}
             </h3>
-            <p className="leading-relaxed text-white/60">{item.desc}</p>
+            <RichText as="p" text={item.desc} className="leading-relaxed text-white/60" />
           </div>
         </SplideSlide>
       ))}

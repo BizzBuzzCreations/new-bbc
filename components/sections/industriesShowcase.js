@@ -6,6 +6,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { INDUSTRIES } from "@/lib/industriesData";
+import RichText from "@/components/ui/richText";
 
 // Static three-column list of every industry — no scroll-jacking. Hover
 // (or focus) any name to swap the visual + description; no more scrolling
@@ -88,9 +89,7 @@ export default function IndustriesShowcase({ content }) {
           <h2 className="text-3xl md:text-4xl font-bold text-white max-w-2xl mx-auto">
             {heading}
           </h2>
-          <p className="text-white/60 max-w-2xl mx-auto mt-4">
-            {subtext}
-          </p>
+          <RichText as="p" text={subtext} className="text-white/60 max-w-2xl mx-auto mt-4" />
         </div>
 
         {/* Mobile: a clean 2-column name grid (8 + 7) instead of the

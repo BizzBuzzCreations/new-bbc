@@ -18,6 +18,7 @@ import AboutFAQ from "@/components/sections/AboutFAQ";
 import DifferentiatorsCarousel from "@/components/sections/differentiatorsCarousel";
 import TrustAdvantage from "@/components/sections/trustAdvantage";
 import RoadmapTimeline from "@/components/sections/roadmapTimeline";
+import RichText from "@/components/ui/richText";
 import AboutCulture from "@/components/sections/aboutCulture";
 import OurJourney from "@/components/sections/ourJourney";
 import { getPageContent } from "@/actions/pageContentActions";
@@ -123,9 +124,11 @@ export default async function About() {
           <Image src={storyImage} alt="team" width={500} height={500} />
           <div className="text-white">
             <h2 className="text-white"><b>{storySubheading}</b></h2>
-            <p className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white/70 whitespace-pre-line">
-              {storyParagraphOne}
-            </p>
+            <RichText
+              as="p"
+              text={storyParagraphOne}
+              className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white/70 whitespace-pre-line"
+            />
             <p className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white/70 whitespace-pre-line">
               {storyParagraphTwoIsDefault ? (
                 <>
@@ -138,7 +141,7 @@ export default async function About() {
                   serving businesses across India, the UK, the US, and beyond.
                 </>
               ) : (
-                storyParagraphTwo
+                <RichText text={storyParagraphTwo} />
               )}
             </p>
             <p className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white/70 whitespace-pre-line">
@@ -156,12 +159,14 @@ export default async function About() {
                   achieve meaningful digital growth.
                 </>
               ) : (
-                storyParagraphThree
+                <RichText text={storyParagraphThree} />
               )}
             </p>
-            <p className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white/70 whitespace-pre-line">
-              {storyParagraphFour}
-            </p>
+            <RichText
+              as="p"
+              text={storyParagraphFour}
+              className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white/70 whitespace-pre-line"
+            />
           </div>
         </div>
       </div>
@@ -186,9 +191,11 @@ export default async function About() {
               <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-center text-white">
                 {missionTitle}
               </h3>
-              <p className="text-base sm:text-lg leading-relaxed text-center max-w-xl mx-auto mb-4 text-white/60">
-                {missionText}
-              </p>
+              <RichText
+                as="p"
+                text={missionText}
+                className="text-base sm:text-lg leading-relaxed text-center max-w-xl mx-auto mb-4 text-white/60"
+              />
             </div>
             <div className="group relative flex flex-col items-center rounded-2xl border-2 border-white/10 bg-white/5 p-6 sm:p-8 text-center shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-2xl hover:shadow-black/40">
               <div className="mb-4 sm:mb-5 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-white/10 text-[#40A2D8] transition-colors duration-300 group-hover:bg-[#0B60B0] group-hover:text-white">
@@ -198,9 +205,11 @@ export default async function About() {
               <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-center text-white">
                 {visionTitle}
               </h3>
-              <p className="text-base sm:text-lg leading-relaxed text-center max-w-xl mx-auto mb-4 text-white/60">
-                {visionText}
-              </p>
+              <RichText
+                as="p"
+                text={visionText}
+                className="text-base sm:text-lg leading-relaxed text-center max-w-xl mx-auto mb-4 text-white/60"
+              />
             </div>
           </div>
 
@@ -237,9 +246,11 @@ export default async function About() {
                   <h4 className="text-lg font-semibold mb-2 text-center text-white">
                     {value.title}
                   </h4>
-                  <p className="text-sm leading-relaxed text-center text-white/60">
-                    {value.description}
-                  </p>
+                  <RichText
+                    as="p"
+                    text={value.description}
+                    className="text-sm leading-relaxed text-center text-white/60"
+                  />
                 </div>
               </div>
             ))}
@@ -257,9 +268,11 @@ export default async function About() {
           <h2 className="text-3xl font-bold mb-10 text-center text-white">
             {differentiatorsHeading}
           </h2>
-          <p className="text-center max-w-4xl mx-auto mb-10 text-white/70">
-            {differentiatorsSubtext}
-          </p>
+          <RichText
+            as="p"
+            text={differentiatorsSubtext}
+            className="text-center max-w-4xl mx-auto mb-10 text-white/70"
+          />
           <DifferentiatorsCarousel items={content?.differentiatorItems} />
         </div>
       </div>
@@ -275,9 +288,11 @@ export default async function About() {
         <h3 className="text-xl font-semibold mb-4 text-center text-[#40A2D8]">
           {roadmapSubheading}
         </h3>
-        <p className="text-lg leading-relaxed text-center max-w-2xl mx-auto mb-16 text-white/70">
-          {roadmapIntro}
-        </p>
+        <RichText
+          as="p"
+          text={roadmapIntro}
+          className="text-lg leading-relaxed text-center max-w-2xl mx-auto mb-16 text-white/70"
+        />
 
         {/* Desktop: flowing zig-zag timeline */}
         <div className="hidden lg:block">
@@ -297,16 +312,18 @@ export default async function About() {
                   <h4 className="font-bold text-lg mb-2 text-white">
                     Step {step.number}: {step.title}
                   </h4>
-                  <p className="leading-relaxed text-white/60">{step.desc}</p>
+                  <RichText as="p" text={step.desc} className="leading-relaxed text-white/60" />
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <p className="text-lg leading-relaxed text-center max-w-3xl mx-auto mt-16 font-medium text-white/70">
-          {roadmapClosing}
-        </p>
+        <RichText
+          as="p"
+          text={roadmapClosing}
+          className="text-lg leading-relaxed text-center max-w-3xl mx-auto mt-16 font-medium text-white/70"
+        />
       </div>
 
       {/* Why Businesses Across India Trust Us */}
@@ -314,15 +331,19 @@ export default async function About() {
         <h2 className="text-3xl font-bold mb-5 text-center text-white">
           {trustHeading}
         </h2>
-        <p className="text-lg leading-relaxed text-center max-w-3xl mx-auto mb-12 text-white/70">
-          {trustIntro}
-        </p>
+        <RichText
+          as="p"
+          text={trustIntro}
+          className="text-lg leading-relaxed text-center max-w-3xl mx-auto mb-12 text-white/70"
+        />
 
         <TrustAdvantage content={content} />
 
-        <p className="text-lg leading-relaxed text-center max-w-3xl mx-auto mt-12 font-medium text-white/70">
-          {trustClosing}
-        </p>
+        <RichText
+          as="p"
+          text={trustClosing}
+          className="text-lg leading-relaxed text-center max-w-3xl mx-auto mt-12 font-medium text-white/70"
+        />
       </div>
 
       {/* FAQ's */}

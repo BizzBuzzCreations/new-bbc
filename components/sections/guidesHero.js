@@ -1,4 +1,5 @@
 import Link from "next/link";
+import RichText from "@/components/ui/richText";
 
 // Full-bleed photo hero (same treatment as the FAQ/Services/Industries/How
 // We Work heroes): the image is already designed with a dark-to-photo
@@ -36,9 +37,7 @@ export default function GuidesHero({ content } = {}) {
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-5">
           {heading}
         </h1>
-        <p className="text-white/80 max-w-xl mb-8 leading-relaxed">
-          {paragraph}
-        </p>
+        <RichText as="p" text={paragraph} className="text-white/80 max-w-xl mb-8 leading-relaxed" />
         <div className="flex flex-wrap items-center gap-4">
           <Link href="#all-guides" className="inline-block">
             <button className="animated-button animated-button-lg whitespace-nowrap">

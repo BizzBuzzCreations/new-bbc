@@ -8,6 +8,7 @@ import {
   uploadContentVideo,
 } from "@/actions/pageContentActions";
 import { INDUSTRY_CONTENT_REGISTRY } from "@/lib/industryContentRegistry";
+import InlineRichEditor from "@/components/ui/inlineRichEditor";
 
 // Identical field controls to DashboardContent (components/sections/dashboardContent.js)
 // — kept as a separate copy rather than a shared import so this section
@@ -74,14 +75,7 @@ function MediaField({ value, onChange, label, kind }) {
 
 function FieldControl({ field, value, onChange }) {
   if (field.type === "textarea") {
-    return (
-      <textarea
-        rows={3}
-        value={value ?? ""}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm outline-none focus:border-slate-400"
-      />
-    );
+    return <InlineRichEditor value={value} onChange={onChange} />;
   }
   if (field.type === "image" || field.type === "video") {
     return (

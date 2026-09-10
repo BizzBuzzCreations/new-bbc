@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import RichText from "@/components/ui/richText";
 
 // Real BizzBuzz office/team photos (same assets already used elsewhere on
 // the site) auto-advancing behind the hero text, instead of one static
@@ -74,9 +75,7 @@ export default function CareerHero({ content } = {}) {
         <h2 className="text-white/90 text-lg sm:text-xl font-semibold mb-4">
           {subheading}
         </h2>
-        <p className="text-white/70 max-w-lg leading-relaxed mb-8">
-          {paragraph}
-        </p>
+        <RichText as="p" text={paragraph} className="text-white/70 max-w-lg leading-relaxed mb-8" />
         <Link href="/contact" className="inline-block">
           <button className="animated-button animated-button-lg whitespace-nowrap">
             <svg

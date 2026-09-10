@@ -20,15 +20,27 @@ const RND_TEAM = [
   { icon: Settings, name: "Tejash Yadav", role: "DevOps Engineer", photo: "/team-images/Tejash.jpg", linkedin: "https://www.linkedin.com/in/tejashh/" },
 ];
 
+// Icon pool for the dashboard-editable roster — cycled positionally by
+// index (not tied to a specific role name) since an admin can rename
+// roles or add/remove people from the dashboard list; the icon is only
+// ever a fallback anyway (RoleCard shows it in place of a photo, and
+// every current member already has one).
+const ICON_POOL = [BarChart3, Search, PenTool, Palette, Code2, Terminal, Settings];
+
 // Two explicit rows (4 then 3) instead of one 3-column grid — a single
 // `lg:grid-cols-3` on 7 cards lands on 3+3+1, which reads as broken;
 // splitting into a fixed 4-across row and a 3-across row (width-matched
 // to the same column track via `lg:w-3/4 mx-auto`) keeps it a clean
 // 4-then-3 every time — same treatment as the Leaders section.
-const ROW_1 = RND_TEAM.slice(0, 4);
-const ROW_2 = RND_TEAM.slice(4);
+export default function RndTeamGrid({ content } = {}) {
+  const savedTeam = content?.rndTeamMembers?.length > 0 ? content.rndTeamMembers : null;
+  const team = (savedTeam || RND_TEAM).map((person, i) => ({
+    ...person,
+    icon: savedTeam ? ICON_POOL[i % ICON_POOL.length] : person.icon,
+  }));
+  const ROW_1 = team.slice(0, 4);
+  const ROW_2 = team.slice(4);
 
-export default function RndTeamGrid() {
   return (
     <div className="flex flex-col gap-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

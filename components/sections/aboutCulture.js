@@ -1,4 +1,5 @@
 import Image from "next/image";
+import RichText from "@/components/ui/richText";
 
 // Zig-zag culture section — real BizzBuzz facts and real office/team
 // photos already used elsewhere on the site (career page, homepage
@@ -33,7 +34,7 @@ function TextPanel({ title, body }) {
       <h3 className="text-xl font-bold text-white mb-4 transition-colors duration-300 group-hover:text-[#40A2D8]">
         {title}
       </h3>
-      <p className="text-white/70 leading-relaxed">{body}</p>
+      <RichText as="p" text={body} className="text-white/70 leading-relaxed" />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { sendMail } from "@/actions/serverActions";
 import { SendHorizontal } from "lucide-react";
 import React, { useState } from "react";
 import { toast, Bounce } from "react-toastify";
+import RichText from "@/components/ui/richText";
 
 export default function CTA({ content } = {}) {
   const heading = content?.ctaHeading || "Get Free Consultancy Now!";
@@ -70,9 +71,7 @@ export default function CTA({ content } = {}) {
             <h2 className="md:text-3xl text-2xl font-bold mb-5">
               {heading}
             </h2>
-            <p className="max-w-3xl">
-              {paragraph}
-            </p>
+            <RichText as="p" text={paragraph} className="max-w-3xl" />
             <form action={handleSubmit}>
               {/* Full width on mobile instead of a fixed 250px box (the
                   label was also text-black on this section's black

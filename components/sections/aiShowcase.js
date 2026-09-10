@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Bot, Workflow, Sparkles, Radar, ArrowUpRight } from "lucide-react";
+import RichText from "@/components/ui/richText";
 
 // Real categories from the /ai-solutions service page — kept consistent
 // with what BizzBuzz Creations actually offers instead of inventing claims.
@@ -129,7 +130,7 @@ export default function AiShowcase({ content }) {
             {heading}
           </h2>
 
-          <p className="text-white/60 max-w-xl">{paragraph}</p>
+          <RichText as="p" text={paragraph} className="text-white/60 max-w-xl" />
 
           {/* 2x2 on every screen below lg (was sm:grid-cols-2, so phones
               narrower than 640px fell back to 1 card per row). */}

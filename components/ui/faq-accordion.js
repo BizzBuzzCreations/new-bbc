@@ -4,6 +4,7 @@ import * as React from "react";
 import { HelpCircle, MessageCircle, ChevronDown } from "lucide-react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { cn } from "@/lib/utils";
+import RichText from "@/components/ui/richText";
 
 const CustomAccordion = AccordionPrimitive.Root;
 
@@ -157,7 +158,7 @@ export function FAQSection({
               answerIconWrapClassName={answerIconWrapClassName}
               answerIconClassName={answerIconClassName}
             >
-              {faq.answer}
+              <RichText text={faq.answer} />
             </CustomAccordionContent>
           </CustomAccordionItem>
         ))}

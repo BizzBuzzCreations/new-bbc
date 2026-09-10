@@ -4,6 +4,7 @@ import { FAQSection } from "@/components/ui/faq-accordion";
 import OnboardingCarousel from "@/components/sections/onboardingCarousel";
 import CategoriesShowcase from "@/components/sections/categoriesShowcase";
 import { INDUSTRIES } from "@/lib/industriesData";
+import RichText from "@/components/ui/richText";
 import { getPageContent } from "@/actions/pageContentActions";
 import {
   Eye,
@@ -279,9 +280,7 @@ export default async function HowWeWorkPage() {
           <h2 className="text-lg sm:text-xl font-semibold text-[#8fd0f2] mb-6">
             {heroSubheading}
           </h2>
-          <p className="text-white/70 leading-relaxed mb-8 max-w-xl">
-            {heroParagraph}
-          </p>
+          <RichText as="p" text={heroParagraph} className="text-white/70 leading-relaxed mb-8 max-w-xl" />
           <a href="/contact" className="inline-block">
             <button className="animated-button animated-button-lg whitespace-nowrap">
               <svg
@@ -311,9 +310,7 @@ export default async function HowWeWorkPage() {
           <h2 className="text-2xl md:text-3xl font-bold mb-4 max-w-2xl">
             {principlesHeading}
           </h2>
-          <p className="text-white/70 max-w-2xl mb-14">
-            {principlesParagraph}
-          </p>
+          <RichText as="p" text={principlesParagraph} className="text-white/70 max-w-2xl mb-14" />
 
           <div className="grid sm:grid-cols-2 gap-5">
             {principles.map(({ icon: Icon, title, tagline, desc }, i) => (
@@ -344,9 +341,7 @@ export default async function HowWeWorkPage() {
                     <h3 className="font-bold text-lg mb-1.5 transition-colors duration-300 group-hover:text-black">
                       {tagline}
                     </h3>
-                    <p className="text-white/70 text-sm leading-relaxed transition-colors duration-300 group-hover:text-gray-600">
-                      {desc}
-                    </p>
+                    <RichText as="p" text={desc} className="text-white/70 text-sm leading-relaxed transition-colors duration-300 group-hover:text-gray-600" />
                   </div>
                 </div>
               </div>
@@ -371,9 +366,7 @@ export default async function HowWeWorkPage() {
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
             {toolsHeading}
           </h2>
-          <p className="text-white/70 leading-relaxed max-w-2xl mb-14">
-            {toolsParagraph}
-          </p>
+          <RichText as="p" text={toolsParagraph} className="text-white/70 leading-relaxed max-w-2xl mb-14" />
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {tools.map(({ icon: Icon, title, desc }, i) => (
@@ -385,9 +378,7 @@ export default async function HowWeWorkPage() {
                   <Icon size={20} />
                 </span>
                 <h3 className="font-bold text-white mb-2">{title}</h3>
-                <p className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85">
-                  {desc}
-                </p>
+                <RichText as="p" text={desc} className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85" />
               </div>
             ))}
           </div>
@@ -400,9 +391,7 @@ export default async function HowWeWorkPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 max-w-2xl">
             {onboardingHeading}
           </h2>
-          <p className="text-white/60 max-w-2xl mb-14 leading-relaxed">
-            {onboardingParagraph}
-          </p>
+          <RichText as="p" text={onboardingParagraph} className="text-white/60 max-w-2xl mb-14 leading-relaxed" />
 
           <OnboardingCarousel content={content} />
         </div>
@@ -417,9 +406,7 @@ export default async function HowWeWorkPage() {
           <h3 className="text-lg font-semibold text-[#40A2D8] mb-4">
             {expectationsSubheading}
           </h3>
-          <p className="text-white/60 max-w-2xl mx-auto mb-14 leading-relaxed">
-            {expectationsParagraph}
-          </p>
+          <RichText as="p" text={expectationsParagraph} className="text-white/60 max-w-2xl mx-auto mb-14 leading-relaxed" />
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
             {expectations.map(({ icon: Icon, title, desc }, i) => (
@@ -431,9 +418,7 @@ export default async function HowWeWorkPage() {
                   <Icon size={20} />
                 </span>
                 <h4 className="font-bold text-white mb-2">{title}</h4>
-                <p className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85">
-                  {desc}
-                </p>
+                <RichText as="p" text={desc} className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85" />
               </div>
             ))}
           </div>
@@ -449,9 +434,7 @@ export default async function HowWeWorkPage() {
           <h3 className="text-lg font-semibold text-[#40A2D8] mb-4">
             {industriesSubheading}
           </h3>
-          <p className="text-white/60 max-w-2xl mx-auto mb-2 leading-relaxed">
-            {industriesParagraph}
-          </p>
+          <RichText as="p" text={industriesParagraph} className="text-white/60 max-w-2xl mx-auto mb-2 leading-relaxed" />
           <p className="text-white/50 text-sm mb-10"></p>
 
           {/* Mobile: a strict 3-column grid (5 rows for 15 industries)
@@ -482,9 +465,7 @@ export default async function HowWeWorkPage() {
           <h2 className="text-2xl md:text-3xl font-bold mb-4 max-w-2xl">
             {categoriesHeading}
           </h2>
-          <p className="text-white/60 max-w-2xl mb-10 leading-relaxed">
-            {categoriesParagraph}
-          </p>
+          <RichText as="p" text={categoriesParagraph} className="text-white/60 max-w-2xl mb-10 leading-relaxed" />
 
           <CategoriesShowcase />
         </div>
@@ -524,9 +505,7 @@ export default async function HowWeWorkPage() {
             <h3 className="md:text-3xl text-2xl font-bold mb-5">
               {ctaHeading}
             </h3>
-            <p className="max-w-3xl text-white/70 mb-8">
-              {ctaParagraph}
-            </p>
+            <RichText as="p" text={ctaParagraph} className="max-w-3xl text-white/70 mb-8" />
             {/* Full width on mobile (was inline-flex sized to content,
                 which — combined with the card's own padding — left so
                 little room the label wrapped mid-phrase onto two lines);

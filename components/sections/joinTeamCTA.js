@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Mail } from "lucide-react";
+import RichText from "@/components/ui/richText";
 
 export default function JoinTeamCTA({ content }) {
   const eyebrow = content?.joinTeamEyebrow || "We’re Always Looking for Great Talent";
@@ -48,9 +49,7 @@ export default function JoinTeamCTA({ content }) {
           <h2 className="text-3xl sm:text-4xl font-bold text-black mb-3">
             {heading}
           </h2>
-          <p className="text-black/60 mb-8 max-w-sm">
-            {paragraph}
-          </p>
+          <RichText as="p" text={paragraph} className="text-black/60 mb-8 max-w-sm" />
 
           {/* Desktop/tablet: buttons stay right under the paragraph, in
               their own text column, same as before. */}

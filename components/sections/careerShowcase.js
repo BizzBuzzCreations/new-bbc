@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { GraduationCap, Target, TrendingUp } from "lucide-react";
+import RichText from "@/components/ui/richText";
 
 // "Why Work With Us" + "Join The Team" — real BizzBuzz office/team photos
 // throughout (same assets already used in the homepage's shuffle grid and
@@ -38,9 +39,7 @@ export function CareerWhyUs({ content } = {}) {
               on the left, photo on the right) is unchanged. */}
           <div className="mb-6 md:hidden">{photo}</div>
 
-          <p className="text-white/60 leading-relaxed">
-            {paragraph}
-          </p>
+          <RichText as="p" text={paragraph} className="text-white/60 leading-relaxed" />
         </div>
 
         <div className="hidden md:block">{photo}</div>
@@ -122,9 +121,7 @@ export function CareerJoinTeam({ content } = {}) {
 
           <div className="mb-8 md:hidden">{imageGrid}</div>
 
-          <p className="text-white/60 leading-relaxed mb-8">
-            {paragraph}
-          </p>
+          <RichText as="p" text={paragraph} className="text-white/60 leading-relaxed mb-8" />
 
           <div className="space-y-5 mb-8">
             {points.map(({ icon: Icon, title, desc }, i) => (
@@ -134,9 +131,7 @@ export function CareerJoinTeam({ content } = {}) {
                 </span>
                 <div>
                   <h3 className="font-semibold text-white mb-1">{title}</h3>
-                  <p className="text-sm text-white/60 leading-relaxed">
-                    {desc}
-                  </p>
+                  <RichText as="p" text={desc} className="text-sm text-white/60 leading-relaxed" />
                 </div>
               </div>
             ))}

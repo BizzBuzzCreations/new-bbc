@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 import { ShuffleGrid } from "@/components/ui/shuffle-grid";
+import { RICH_TEXT_CLASS, richTextHTML } from "@/components/ui/richText";
 
 const reveal = { duration: 0.8, ease: [0.16, 1, 0.3, 1] };
 
@@ -61,10 +62,9 @@ export default function AboutHero({ content }) {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...reveal, delay: 0.3 }}
-          className="max-w-xl mb-10"
-        >
-          {paragraph}
-        </motion.p>
+          className={`max-w-xl mb-10 ${RICH_TEXT_CLASS}`}
+          dangerouslySetInnerHTML={richTextHTML(paragraph)}
+        />
         {/* flex-col + text-left on mobile: the two stats can each wrap to
             2 lines, and with items-center + inherited text-center from
             the hero root, the checkmark ended up vertically centered

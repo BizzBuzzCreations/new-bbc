@@ -1,6 +1,7 @@
 import Link from "next/link";
 import BpoHero from "@/components/sections/bpoHero";
 import Image from "next/image";
+import RichText from "@/components/ui/richText";
 import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
 import RoadmapCarousel from "@/components/sections/roadmapCarousel";
 import BpoWeAre from "@/components/sections/bpoWeAre";
@@ -86,12 +87,8 @@ export default async function BPO() {
                 aria-hidden="true"
               />
             </div>
-            <p className="text-white/70 leading-relaxed mb-4">
-              {content.introParagraphOne}
-            </p>
-            <p className="text-white/70 leading-relaxed">
-              {content.introParagraphTwo}
-            </p>
+            <RichText as="p" text={content.introParagraphOne} className="text-white/70 leading-relaxed mb-4" />
+            <RichText as="p" text={content.introParagraphTwo} className="text-white/70 leading-relaxed" />
           </div>
         </div>
       </section>
@@ -117,9 +114,7 @@ export default async function BPO() {
           <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-2">
             {content.roadmapHeading}
           </h2>
-          <p className="text-white/60 text-center max-w-2xl mx-auto mb-14">
-            {content.roadmapSubtext}
-          </p>
+          <RichText as="p" text={content.roadmapSubtext} className="text-white/60 text-center max-w-2xl mx-auto mb-14" />
           <RoadmapCarousel steps={content.roadmapSteps} />
         </div>
       </section>
@@ -151,9 +146,7 @@ export default async function BPO() {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 text-center">
             {content.trustHeading}
           </h2>
-          <p className="text-white/60 text-center max-w-2xl mx-auto mb-12">
-            {content.trustSubtext}
-          </p>
+          <RichText as="p" text={content.trustSubtext} className="text-white/60 text-center max-w-2xl mx-auto mb-12" />
           <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
             <div>
               {/* /why-choose-image.png doesn't exist in /public — was
@@ -170,12 +163,8 @@ export default async function BPO() {
                   className="object-cover"
                 />
               </div>
-              <p className="text-white/70 leading-relaxed mb-4">
-                {content.trustParagraphOne}
-              </p>
-              <p className="text-white/70 leading-relaxed">
-                {content.trustParagraphTwo}
-              </p>
+              <RichText as="p" text={content.trustParagraphOne} className="text-white/70 leading-relaxed mb-4" />
+              <RichText as="p" text={content.trustParagraphTwo} className="text-white/70 leading-relaxed" />
             </div>
             <div className="hidden md:block relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
               <Image
@@ -207,9 +196,7 @@ export default async function BPO() {
             <h3 className="text-base font-semibold text-[#40A2D8] mb-5">
               {content.ctaTagline}
             </h3>
-            <p className="max-w-3xl text-white/70 mb-8">
-              {content.ctaParagraph}
-            </p>
+            <RichText as="p" text={content.ctaParagraph} className="max-w-3xl text-white/70 mb-8" />
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/contact"

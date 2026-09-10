@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import RichText from "@/components/ui/richText";
 
 export default function RoadmapTimeline({ steps, dark = false }) {
   const containerRef = useRef(null);
@@ -101,7 +102,7 @@ export default function RoadmapTimeline({ steps, dark = false }) {
               <h4 className={`font-bold text-lg mb-2 ${dark ? "text-white" : "text-gray-900"}`}>
                 Step {step.number}: {step.title}
               </h4>
-              <p className={`leading-relaxed ${dark ? "text-white/60" : "text-gray-600"}`}>{step.desc}</p>
+              <RichText as="p" text={step.desc} className={`leading-relaxed ${dark ? "text-white/60" : "text-gray-600"}`} />
             </div>
           );
           return (

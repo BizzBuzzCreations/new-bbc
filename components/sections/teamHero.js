@@ -1,4 +1,5 @@
 import Link from "next/link";
+import RichText from "@/components/ui/richText";
 
 // Dark gradient backdrop — no photo, just the intro copy and CTA.
 export default function TeamHero({ content } = {}) {
@@ -27,9 +28,7 @@ export default function TeamHero({ content } = {}) {
         </h2>
 
         <div className="flex flex-col gap-6">
-          <p className="text-sm sm:text-base text-white/85 max-w-xl leading-relaxed">
-            {paragraph}
-          </p>
+          <RichText as="p" text={paragraph} className="text-sm sm:text-base text-white/85 max-w-xl leading-relaxed" />
           <Link href="#meet-our-team" className="inline-block w-fit">
             <button className="animated-button animated-button-lg whitespace-nowrap">
               <svg
