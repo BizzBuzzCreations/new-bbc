@@ -24,16 +24,37 @@ export default function ConsultationPopup({ content }) {
 
   const pathname = usePathname();
 
+  // Once shown, never again — even across page navigations or a fresh
+  // visit later (localStorage survives both, unlike component/session
+  // state), so this genuinely only ever pops up the first time.
+  const POPUP_SHOWN_KEY = "bbc_consultation_popup_shown";
+
   useEffect(() => {
-    if (pathname === "/") {
-      const timer = setTimeout(() => setOpen(true), 12000);
+    if (pathname !== "/") {
+      // Deferred (not called synchronously in the effect body) so this
+      // doesn't trip react-hooks/set-state-in-effect — same end result,
+      // just scheduled a tick later instead of during the render commit.
+      const timer = setTimeout(() => setOpen(false), 0);
       return () => clearTimeout(timer);
     }
 
-    // Deferred (not called synchronously in the effect body) so this
-    // doesn't trip react-hooks/set-state-in-effect — same end result,
-    // just scheduled a tick later instead of during the render commit.
-    const timer = setTimeout(() => setOpen(false), 0);
+    let alreadyShown = false;
+    try {
+      alreadyShown = localStorage.getItem(POPUP_SHOWN_KEY) === "true";
+    } catch {
+      // Private-browsing/storage-blocked — fall back to showing it once
+      // per page load rather than crashing.
+    }
+    if (alreadyShown) return;
+
+    const timer = setTimeout(() => {
+      setOpen(true);
+      try {
+        localStorage.setItem(POPUP_SHOWN_KEY, "true");
+      } catch {
+        // Ignore — worst case it can show again next visit.
+      }
+    }, 5000);
     return () => clearTimeout(timer);
   }, [pathname]);
 

@@ -318,10 +318,10 @@ export default function AllBLogs() {
                   setPosts(9);
                   setShowAll(true);
                 }}
-                className="relative mb-5 cursor-pointer border-2 border-gray-900 text-gray-900 px-6 py-3 rounded-lg overflow-hidden group"
+                className="relative mb-5 cursor-pointer border-2 border-white text-white px-6 py-3 rounded-lg overflow-hidden group"
               >
-                <span className="absolute inset-0 bg-gray-900 transform -translate-x-full group-hover:translate-x-0 transition duration-300"></span>
-                <span className="relative z-10 group-hover:text-white">
+                <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition duration-300"></span>
+                <span className="relative z-10 group-hover:text-black">
                   View all blogs
                 </span>
               </button>
