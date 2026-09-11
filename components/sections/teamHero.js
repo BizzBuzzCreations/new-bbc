@@ -1,7 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
 import RichText from "@/components/ui/richText";
 
-// Dark gradient backdrop — no photo, just the intro copy and CTA.
+// Real team photo as a full-bleed backdrop, with the same dark
+// gradient laid over it so the copy stays readable — same treatment
+// already used on the career page hero.
 export default function TeamHero({ content } = {}) {
   const heading = content?.teamHeroHeading || "The Humans Behind the Hustle";
   const subheading =
@@ -10,16 +13,27 @@ export default function TeamHero({ content } = {}) {
     content?.teamHeroParagraph ||
     "Meet the marketers, strategists, designers, developers, and digital specialists behind BizzBuzz Creations. Our team brings together diverse expertise to build smarter digital strategies and meaningful growth for businesses across Prayagraj, India, and worldwide.";
   const ctaText = content?.teamHeroCtaText || "Meet the Team";
+  const heroImage = content?.teamHeroImage || "/team-images/team-hero.png";
 
   return (
-    <section
-      className="relative overflow-hidden pt-10 md:pt-32 pb-12 md:pb-20 px-6 md:px-12 lg:px-24 text-white"
-      style={{
-        background:
-          "linear-gradient(120deg, #050b16 0%, #0B60B0 30%, #050b16 75%)",
-      }}
-    >
-      <div className="max-w-6xl mx-auto">
+    <section className="relative overflow-hidden pt-10 md:pt-32 pb-12 md:pb-20 px-6 md:px-12 lg:px-24 text-white">
+      <Image
+        src={heroImage}
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover"
+      />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(120deg, rgba(5,11,22,0.92) 0%, rgba(11,96,176,0.75) 30%, rgba(5,11,22,0.92) 75%)",
+        }}
+      />
+
+      <div className="relative max-w-6xl mx-auto">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 leading-tight max-w-2xl">
           {heading}
         </h1>

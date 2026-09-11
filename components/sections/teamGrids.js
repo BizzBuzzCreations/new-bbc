@@ -29,8 +29,8 @@ import {
 // positionally to whichever cards are saved.
 const FOUNDER_ICONS = [Crown, Users];
 const DEFAULT_FOUNDERS = [
-  { name: "Abheuday Mishra", role: "Founder & CEO", photo: "/person-image.jpg" },
-  { name: "Utkarsh Mishra", role: "Co-Founder & Director", photo: "/team-images/utkarsh.jpg" },
+  { name: "Abheuday Mishra", role: "Founder & CEO", photo: "/team-images/abheuday.png", linkedin: "https://www.linkedin.com/in/abheuday-mishra?utm_source=share_via&utm_content=profile&utm_medium=member_android" },
+  { name: "Utkarsh Mishra", role: "Co-Founder & Director", photo: "/team-images/utkarsh.jpg", linkedin: "https://www.linkedin.com/in/utkarsh-mishra-293ba1209?utm_source=share_via&utm_content=profile&utm_medium=member_android" },
 ];
 
 const LEADER_ICONS = [Search, Megaphone, Palette, Code2, Bot, Briefcase, Users];
@@ -132,8 +132,9 @@ export function RoleCard({
   flip = false,
   linkedin,
   instagram,
-  // BPO/R&D team grids only want LinkedIn on the back — Founders/Leaders
-  // keep both, unchanged.
+  // Only the Founders keep LinkedIn on the back now — every other grid
+  // (Leaders, BPO, R&D) flips to just the name + role, no social icons.
+  showLinkedin = true,
   showInstagram = true,
   // Optional real headshot — when set, this replaces the generic
   // icon-in-a-circle placeholder with an actual photo filling the same
@@ -223,30 +224,34 @@ export function RoleCard({
             <h3 className="font-bold text-white text-xl leading-snug">
               {name || role}
             </h3>
-            <div className="flex items-center gap-4">
-              <a
-                href={linkedin || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${name || role} on LinkedIn`}
-                onClick={(e) => e.stopPropagation()}
-                className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 text-[#40A2D8] hover:bg-white hover:text-[#0B60B0] transition-colors duration-300"
-              >
-                <Linkedin size={19} />
-              </a>
-              {showInstagram && (
-                <a
-                  href={instagram || "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${name || role} on Instagram`}
-                  onClick={(e) => e.stopPropagation()}
-                  className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 text-[#40A2D8] hover:bg-white hover:text-[#0B60B0] transition-colors duration-300"
-                >
-                  <Instagram size={19} />
-                </a>
-              )}
-            </div>
+            {(showLinkedin || showInstagram) && (
+              <div className="flex items-center gap-4">
+                {showLinkedin && (
+                  <a
+                    href={linkedin || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${name || role} on LinkedIn`}
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 text-[#40A2D8] hover:bg-white hover:text-[#0B60B0] transition-colors duration-300"
+                  >
+                    <Linkedin size={19} />
+                  </a>
+                )}
+                {showInstagram && (
+                  <a
+                    href={instagram || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${name || role} on Instagram`}
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 text-[#40A2D8] hover:bg-white hover:text-[#0B60B0] transition-colors duration-300"
+                  >
+                    <Instagram size={19} />
+                  </a>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </motion.div>
@@ -337,7 +342,7 @@ export default function TeamGrids({ content } = {}) {
 
           <div className="grid sm:grid-cols-2 max-w-3xl mx-auto gap-8">
             {founders.map((f, i) => (
-              <RoleCard key={i} {...f} index={i} size="xl" flip />
+              <RoleCard key={i} {...f} index={i} size="xl" showInstagram={false} flip />
             ))}
           </div>
         </div>
@@ -364,12 +369,12 @@ export default function TeamGrids({ content } = {}) {
           <div className="flex flex-col gap-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {leaders.slice(0, 4).map((l, i) => (
-                <RoleCard key={i} {...l} index={i} size="xl" showInstagram={false} flip />
+                <RoleCard key={i} {...l} index={i} size="xl" showLinkedin={false} showInstagram={false} flip />
               ))}
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:w-3/4 lg:mx-auto">
               {leaders.slice(4).map((l, i) => (
-                <RoleCard key={i + 4} {...l} index={i + 4} size="xl" showInstagram={false} flip />
+                <RoleCard key={i + 4} {...l} index={i + 4} size="xl" showLinkedin={false} showInstagram={false} flip />
               ))}
             </div>
           </div>

@@ -28,7 +28,7 @@ const ROLE_ICONS = {
 
 const BPO_TEAM = [
   { name: "Abhishek Awasthi", role: "Customer Support Executive", photo: "/person-image.jpg" },
-  { name: "Akanksha Pandey", role: "Senior Advisor", photo: "/person-image.jpg" },
+  { name: "Akanksha Pandey", role: "Senior Advisor", photo: "/team-images/akanksha.jpg" },
   { name: "Akash Singh", role: "Advisor", photo: "/team-images/akash.jpeg" },
   { name: "Anurag Singh Bisht", role: "Advisor", photo: "/person-image.jpg" },
   { name: "Aryan Prakash Srivastava", role: "Senior Advisor", photo: "/team-images/aryan.jpeg" },
@@ -68,6 +68,7 @@ export default function BpoTeamGrid({ content } = {}) {
           photo={photo}
           index={i}
           size="xl"
+          showLinkedin={false}
           showInstagram={false}
           flip
         />
