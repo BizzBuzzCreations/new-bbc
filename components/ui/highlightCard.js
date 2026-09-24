@@ -38,7 +38,7 @@ export default function HighlightCard({ icon, title, desc }) {
         text={desc}
         noLink
         className={`text-sm leading-relaxed transition-colors duration-300 group-hover:text-white/85 ${
-          active ? "text-white/85" : "text-white/60"
+          active ? "text-white" : "text-white"
         }`}
       />
     </button>

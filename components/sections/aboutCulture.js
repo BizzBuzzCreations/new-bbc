@@ -34,7 +34,7 @@ function TextPanel({ title, body }) {
       <h3 className="text-xl font-bold text-white mb-4 transition-colors duration-300 group-hover:text-[#40A2D8]">
         {title}
       </h3>
-      <RichText as="p" text={body} className="text-white/70 leading-relaxed" />
+      <RichText as="p" text={body} className="text-white leading-relaxed" />
     </div>
   );
 }

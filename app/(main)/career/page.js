@@ -44,7 +44,7 @@ export default async function Career() {
           <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-3">
             {openPositionsHeading}
           </h2>
-          <p className="text-center text-white/60 mb-12">
+          <p className="text-center text-white mb-12">
             {jobsData.length > 0
               ? `${jobsData.length} role${jobsData.length === 1 ? "" : "s"} currently open`
               : "No open roles right now — check back soon"}
@@ -53,10 +53,10 @@ export default async function Career() {
           {jobsData.length === 0 ? (
             <div className="rounded-2xl border border-white/10 bg-white/5 p-10 text-center shadow-sm">
               <Briefcase className="mx-auto mb-4 text-white/30" size={36} />
-              <p className="text-white/60 mb-1">
+              <p className="text-white mb-1">
                 We don&rsquo;t have any open positions posted at the moment.
               </p>
-              <p className="text-sm text-white/40">
+              <p className="text-sm text-white">
                 Check back soon, or reach out through our{" "}
                 <a href="/contact" className="text-[#40A2D8] hover:underline">
                   contact page

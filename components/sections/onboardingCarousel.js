@@ -82,7 +82,7 @@ export default function OnboardingCarousel({ content } = {}) {
             <h3 className="font-bold text-white mb-2 transition-colors duration-300 group-hover:text-[#40A2D8]">
               {title}
             </h3>
-            <RichText as="p" text={desc} className="text-sm text-white/60 leading-relaxed" />
+            <RichText as="p" text={desc} className="text-sm text-white leading-relaxed" />
           </div>
         </SplideSlide>
       ))}

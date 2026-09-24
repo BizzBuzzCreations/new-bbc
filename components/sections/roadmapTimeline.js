@@ -102,7 +102,7 @@ export default function RoadmapTimeline({ steps, dark = false }) {
               <h4 className={`font-bold text-lg mb-2 ${dark ? "text-white" : "text-gray-900"}`}>
                 Step {step.number}: {step.title}
               </h4>
-              <RichText as="p" text={step.desc} className={`leading-relaxed ${dark ? "text-white/60" : "text-gray-600"}`} />
+              <RichText as="p" text={step.desc} className={`leading-relaxed ${dark ? "text-white" : "text-gray-600"}`} />
             </div>
           );
           return (

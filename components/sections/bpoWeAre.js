@@ -10,7 +10,7 @@ export default function BpoWeAre({ title, description, points = [] }) {
       <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
         {title}
       </h2>
-      <RichText as="p" text={description} className="text-white/70 leading-relaxed max-w-3xl mb-8" />
+      <RichText as="p" text={description} className="text-white leading-relaxed max-w-3xl mb-8" />
       <p className="font-semibold text-white mb-8">We are:</p>
 
       <div className="grid sm:grid-cols-2 gap-x-12">
@@ -25,7 +25,7 @@ export default function BpoWeAre({ title, description, points = [] }) {
               {number}
             </span>
             <h3 className="font-bold text-white mt-2 mb-2">{pointTitle}</h3>
-            <RichText as="p" text={pointDescription} className="text-sm text-white/70 leading-relaxed" />
+            <RichText as="p" text={pointDescription} className="text-sm text-white leading-relaxed" />
           </div>
         ))}
       </div>

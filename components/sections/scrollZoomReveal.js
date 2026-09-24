@@ -100,7 +100,7 @@ export default function ScrollZoomReveal() {
             <Link
               key={label}
               href={href}
-              className="group flex items-center gap-3 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm px-5 py-3 text-sm font-semibold text-white/80 transition-all duration-300 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:text-white"
+              className="group flex items-center gap-3 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:text-white"
             >
               <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white/10 text-[#40A2D8] transition-colors duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
                 <Icon size={15} />
@@ -118,7 +118,7 @@ export default function ScrollZoomReveal() {
           className="hidden lg:block absolute left-10 xl:left-20 top-1/2 -translate-y-1/2 w-72 text-left"
         >
           <h3 className="text-lg font-bold text-white mb-3">Who We Are</h3>
-          <p className="text-sm text-white/60 leading-relaxed mb-5">
+          <p className="text-sm text-white leading-relaxed mb-5">
             BizzBuzz Creations is a digital marketing and business solutions
             agency helping businesses in Prayagraj (Allahabad), across India,
             and international markets build a stronger digital presence. We
@@ -155,7 +155,7 @@ export default function ScrollZoomReveal() {
             style={{ scale, opacity: textOpacity }}
             className="relative will-change-transform pointer-events-none"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white/80 leading-tight whitespace-nowrap">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight whitespace-nowrap">
               Know More
             </h2>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#40A2D8] leading-tight whitespace-nowrap">
@@ -189,13 +189,13 @@ export default function ScrollZoomReveal() {
               ].map(({ value, label }) => (
                 <div key={label} className="text-center">
                   <p className="text-2xl sm:text-4xl font-bold text-[#40A2D8]">{value}</p>
-                  <p className="text-[10px] sm:text-xs uppercase tracking-widest text-white/60 mt-1 whitespace-nowrap">
+                  <p className="text-[10px] sm:text-xs uppercase tracking-widest text-white mt-1 whitespace-nowrap">
                     {label}
                   </p>
                 </div>
               ))}
             </div>
-            <p className="text-sm sm:text-base text-white/70 max-w-md text-center px-4">
+            <p className="text-sm sm:text-base text-white max-w-md text-center px-4">
               One team, every capability — built to help your business grow.
             </p>
           </motion.div>

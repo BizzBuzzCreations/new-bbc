@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import ImageExtension from "@tiptap/extension-image";
-import { uploadBlogImage } from "@/actions/blogActions";
+import { uploadFileDirect } from "@/lib/directUpload";
 import { sanitizeBlogContent } from "@/lib/sanitizeBlogContent";
 import TypedLinkInputRule from "@/components/ui/typedLinkInputRule";
 import {
@@ -75,9 +75,7 @@ export default function RichTextEditor({ content, onChange }) {
     e.target.value = "";
     if (!file || !editor) return;
 
-    const formData = new FormData();
-    formData.append("file", file);
-    const res = await uploadBlogImage(formData);
+    const res = await uploadFileDirect(file, "bizzbuzz-blog");
 
     if (res?.success) {
       editor.chain().focus().setImage({ src: res.url }).run();

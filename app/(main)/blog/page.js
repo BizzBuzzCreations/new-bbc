@@ -43,7 +43,7 @@ export default async function Blogs() {
         <h1 className="md:text-4xl text-3xl font-bold text-white">
           Our Latest Blogs
         </h1>
-        <p className="text-lg text-white/60">
+        <p className="text-lg text-white">
           Explore, discover, and find inspiration through these exciting Blogs.
         </p>
       </div>
@@ -79,7 +79,7 @@ export default async function Blogs() {
                   )}
                 </Link>
                 <div className="relative mt-5">
-                  <p className="uppercase font-semibold text-xs mb-2.5 text-white/50 transition-colors duration-300 group-hover:text-[#40A2D8]">
+                  <p className="uppercase font-semibold text-xs mb-2.5 text-white transition-colors duration-300 group-hover:text-[#40A2D8]">
                     {new Date(e?.publishedAt).toLocaleDateString("en-US", {
                       month: "short",
                       day: "numeric",
@@ -95,13 +95,13 @@ export default async function Blogs() {
                       {e?.title}
                     </h2>
                   </Link>
-                  <p className="text-white/60 transition-colors duration-300 group-hover:text-[#40A2D8]">
+                  <p className="text-white transition-colors duration-300 group-hover:text-[#40A2D8]">
                     {truncateHTML(e?.excerpt, 150)}
                   </p>
 
                   <Link
                     href={`/blog/${e?.slug}`}
-                    className="font-medium underline text-white/70 transition-colors duration-300 group-hover:text-[#40A2D8]"
+                    className="font-medium underline text-white transition-colors duration-300 group-hover:text-[#40A2D8]"
                     aria-label={`Read more about ${e?.title}`}
                   >
                     Read More

@@ -139,7 +139,7 @@ export default function ContactSection({ content }) {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
               {heading}
             </h2>
-            <RichText as="p" text={paragraph} className="text-white/70 mb-10 max-w-md" />
+            <RichText as="p" text={paragraph} className="text-white mb-10 max-w-md" />
 
             <div className="grid sm:grid-cols-3 gap-4">
               {steps.map(({ icon: Icon, title, description }, i) => (
@@ -149,7 +149,7 @@ export default function ContactSection({ content }) {
                 >
                   <Icon size={18} className="text-[#40A2D8] mb-3" />
                   <h3 className="font-semibold text-sm mb-2">{title}</h3>
-                  <RichText as="p" text={description} className="text-xs text-white/60 leading-relaxed" />
+                  <RichText as="p" text={description} className="text-xs text-white leading-relaxed" />
                 </div>
               ))}
             </div>

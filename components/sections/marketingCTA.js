@@ -76,7 +76,7 @@ export default function MarketingCTA({ content }) {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
               {heading}
             </h2>
-            <RichText as="p" text={paragraph} className="text-white/70 mb-10 max-w-md leading-relaxed" />
+            <RichText as="p" text={paragraph} className="text-white mb-10 max-w-md leading-relaxed" />
             <div className="mb-12">
               <AnimatedButton href="#contact-form">{buttonText}</AnimatedButton>
             </div>
@@ -85,7 +85,7 @@ export default function MarketingCTA({ content }) {
               {trustLines.map((line, i) => (
                 <div key={i} className="flex items-start gap-3">
                   <ShieldCheck size={18} className="text-[#8fd0f2] shrink-0 mt-0.5" />
-                  <RichText as="p" text={line} className="text-sm text-white/70 leading-relaxed" />
+                  <RichText as="p" text={line} className="text-sm text-white leading-relaxed" />
                 </div>
               ))}
             </div>
@@ -126,7 +126,7 @@ export default function MarketingCTA({ content }) {
                 <RichText
                   as="p"
                   text={description}
-                  className="text-sm text-white/60 leading-relaxed mb-4 transition-colors duration-300 group-hover:text-white/85"
+                  className="text-sm text-white leading-relaxed mb-4 transition-colors duration-300 group-hover:text-white/85"
                 />
                 <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#40A2D8] transition-colors duration-300 group-hover:text-white">
                   {ctaText}

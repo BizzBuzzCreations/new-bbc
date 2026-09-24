@@ -185,7 +185,7 @@ export default async function IndustriesIndexPage() {
           <h1 className="text-4xl sm:text-5xl font-bold mb-6 leading-tight">
             {heroHeading}
           </h1>
-          <p className="text-white/70 leading-relaxed mb-9 max-w-lg">
+          <p className="text-white leading-relaxed mb-9 max-w-lg">
             {heroParagraph}
           </p>
           <div
@@ -228,7 +228,7 @@ export default async function IndustriesIndexPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-white max-w-2xl mb-4">
             {gridHeading}
           </h2>
-          <p className="text-white/60 max-w-2xl mb-14 leading-relaxed">
+          <p className="text-white max-w-2xl mb-14 leading-relaxed">
             {gridSubtext}
           </p>
 
@@ -257,7 +257,7 @@ export default async function IndustriesIndexPage() {
                       }}
                       aria-hidden="true"
                     />
-                    <span className="absolute top-3 right-3 text-[11px] font-bold text-white/70">
+                    <span className="absolute top-3 right-3 text-[11px] font-bold text-white">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="absolute bottom-3 left-3 flex items-center gap-2">
@@ -276,7 +276,7 @@ export default async function IndustriesIndexPage() {
                       as="p"
                       text={card.description}
                       noLink
-                      className="text-sm text-white/60 leading-relaxed line-clamp-2"
+                      className="text-sm text-white leading-relaxed line-clamp-2"
                     />
                     <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#40A2D8] mt-3 transition-colors duration-300 group-hover:text-white">
                       {card.linkText}
@@ -301,7 +301,7 @@ export default async function IndustriesIndexPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
             {certHeading}
           </h2>
-          <p className="text-white/60 max-w-xl mx-auto mb-14 leading-relaxed">
+          <p className="text-white max-w-xl mx-auto mb-14 leading-relaxed">
             {certSubtext}
           </p>
           <CertificationsCarousel />

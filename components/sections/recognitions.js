@@ -95,7 +95,7 @@ export default function Recognitions({ content }) {
             <RichText
               as="p"
               text={paragraph}
-              className="text-white/60 text-center lg:text-left max-w-xl mx-auto lg:mx-0 mb-8"
+              className="text-white text-center lg:text-left max-w-xl mx-auto lg:mx-0 mb-8"
             />
           )}
 
@@ -141,19 +141,19 @@ export default function Recognitions({ content }) {
                   <span className="min-w-0">
                     <span className="block font-bold text-white leading-snug">
                       {item.org}{" "}
-                      <span className="text-white/40 font-medium">— {item.status}</span>
+                      <span className="text-white font-medium">— {item.status}</span>
                     </span>
                     {/* Description sits directly under the name on mobile
                         (was a separate right-aligned column that only made
                         sense once the row was wide enough for sm:flex-row —
                         below that it just added extra wrapped lines with no
                         clear relationship to the name above it). */}
-                    <span className="block sm:hidden text-sm text-white/60 leading-relaxed mt-0.5">
+                    <span className="block sm:hidden text-sm text-white leading-relaxed mt-0.5">
                       {item.title}
                     </span>
                   </span>
                 </span>
-                <span className="hidden sm:block text-base text-white/70 text-right leading-relaxed shrink-0 max-w-[45%]">
+                <span className="hidden sm:block text-base text-white text-right leading-relaxed shrink-0 max-w-[45%]">
                   {item.title}
                 </span>
               </li>

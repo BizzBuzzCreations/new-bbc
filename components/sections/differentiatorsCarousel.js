@@ -70,7 +70,7 @@ const DifferentiatorsCarousel = ({ items }) => {
             <h3 className="font-bold text-lg mb-2 text-white transition-colors duration-300 group-hover:text-[#40A2D8]">
               {item.title}
             </h3>
-            <RichText as="p" text={item.desc} className="leading-relaxed text-white/60" />
+            <RichText as="p" text={item.desc} className="leading-relaxed text-white" />
           </div>
         </SplideSlide>
       ))}

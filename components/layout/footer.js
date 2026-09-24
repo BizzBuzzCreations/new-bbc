@@ -79,6 +79,7 @@ const OFFICES = [
   {
     Flag: IndiaFlag,
     country: "India",
+    tag: "Headquarters",
     address: (
       <>
         43/33, Tej Bahdur Sapru Rd,
@@ -92,6 +93,7 @@ const OFFICES = [
   {
     Flag: UKFlag,
     country: "United Kingdom",
+    href: "/en-uk/digital-marketing-services-in-uk",
     address: (
       <>
         3 Thornham St,
@@ -142,7 +144,7 @@ function FooterColumn({ title, links, viewMoreHref }) {
           <li key={link.href}>
             <Link
               href={link.href}
-              className="text-sm text-gray-400 hover:text-[#40A2D8] transition-colors"
+              className="text-sm text-white hover:text-[#40A2D8] transition-colors"
             >
               {link.label}
             </Link>
@@ -182,7 +184,7 @@ export default function Footer() {
               height={189}
               className="mb-4 h-10 w-auto"
             />
-            <p className="text-sm text-gray-400 mb-5 leading-relaxed">
+            <p className="text-sm text-white mb-5 leading-relaxed">
               Digital marketing, branding, and BPO solutions built for
               business growth.
             </p>
@@ -227,7 +229,7 @@ export default function Footer() {
                 />
                 <div className="leading-tight">
                   <p className="text-xs font-semibold text-white">Clutch</p>
-                  <p className="text-[11px] text-gray-400">Verified Partner</p>
+                  <p className="text-[11px] text-white">Verified Partner</p>
                 </div>
               </div>
               <div className="flex items-center gap-2 bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3">
@@ -240,7 +242,7 @@ export default function Footer() {
                 />
                 <div className="leading-tight">
                   <p className="text-xs font-semibold text-white">Google Partner</p>
-                  <p className="text-[11px] text-gray-400">Certified</p>
+                  <p className="text-[11px] text-white">Certified</p>
                 </div>
               </div>
             </div>
@@ -248,33 +250,33 @@ export default function Footer() {
             {/* Quick contact — number, mail, timings only (no address,
                 the office card below already covers that). */}
             <div>
-              <h4 className="text-xs font-semibold uppercase tracking-wide text-white/50 mb-4 mt-2">
+              <h4 className="text-xs font-semibold uppercase tracking-wide text-white mb-4 mt-2">
                 Get In Touch
               </h4>
               <div className="flex flex-col gap-4 text-sm">
                 <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
                   <a
                     href="tel:+918115585285"
-                    className="flex items-center gap-2 text-gray-300 hover:text-[#40A2D8] transition-colors"
+                    className="flex items-center gap-2 text-white hover:text-[#40A2D8] transition-colors"
                   >
                     <Phone size={15} className="text-[#40A2D8] shrink-0" />
                     +91 8115585285,
                   </a>
                   <a
                     href="tel:+4407862608652"
-                    className="text-gray-300 hover:text-[#40A2D8] transition-colors"
+                    className="text-white hover:text-[#40A2D8] transition-colors"
                   >
                     +44 07862 608652
                   </a>
                 </div>
                 <a
                   href="mailto:info@bizzbuzzcreations.com"
-                  className="flex items-center gap-2 text-gray-300 hover:text-[#40A2D8] transition-colors"
+                  className="flex items-center gap-2 text-white hover:text-[#40A2D8] transition-colors"
                 >
                   <Mail size={15} className="text-[#40A2D8] shrink-0" />
                   info@bizzbuzzcreations.com
                 </a>
-                <div className="flex items-center gap-2 text-gray-300">
+                <div className="flex items-center gap-2 text-white">
                   <Clock size={15} className="text-[#40A2D8] shrink-0" />
                   Mon - Sat: 12:00 PM - 8:00 PM
                 </div>
@@ -286,10 +288,14 @@ export default function Footer() {
         {/* Office address cards — India + UK, side by side from sm up
             (stacked on mobile). */}
         <div className="grid gap-6 mb-6 max-w-3xl sm:grid-cols-2">
-          {OFFICES.map(({ Flag, country, address }) => (
-            <div
+          {OFFICES.map(({ Flag, country, tag, address, href }) => {
+            // Offices with an href (UK) link to their regional page.
+            const Card = href ? Link : "div";
+            return (
+            <Card
               key={country}
-              className="rounded-2xl border border-white/15 bg-white/[0.03] p-6 hover:border-[#40A2D8]/50 hover:bg-white/[0.05] transition-colors"
+              {...(href ? { href } : {})}
+              className="block rounded-2xl border border-white/15 bg-white/[0.03] p-6 hover:border-[#40A2D8]/50 hover:bg-white/[0.05] transition-colors"
             >
               <div className="flex items-center gap-3 mb-4">
                 <span className="w-9 h-9 rounded-full overflow-hidden shrink-0 ring-1 ring-white/20">
@@ -297,14 +303,21 @@ export default function Footer() {
                 </span>
                 <span className="font-semibold text-white text-base">
                   {country}
+                  {tag && (
+                    <>
+                      <span className="mx-2 text-white/40">|</span>
+                      <span className="font-medium text-[#8fd0f2]">({tag})</span>
+                    </>
+                  )}
                 </span>
               </div>
               <p className="text-sm text-[#8fd0f2] leading-relaxed flex gap-2.5">
                 <MapPin size={16} className="shrink-0 mt-0.5 text-[#40A2D8]" />
                 <span>{address}</span>
               </p>
-            </div>
-          ))}
+            </Card>
+            );
+          })}
         </div>
 
         <div className="border-t border-white/10 mb-12" />
@@ -334,30 +347,30 @@ export default function Footer() {
             <div className="grid grid-cols-2 gap-x-6 gap-y-3 mb-4 sm:flex sm:flex-wrap sm:gap-y-2 md:mb-0">
               <Link
                 href="/privacy-policy"
-                className="text-xs text-gray-300 hover:text-gray-200"
+                className="text-xs text-white hover:text-[#40A2D8]"
               >
                 Privacy Policy
               </Link>
               <Link
                 href="/cookie-policy"
-                className="text-xs text-gray-300 hover:text-gray-200"
+                className="text-xs text-white hover:text-[#40A2D8]"
               >
                 Cookie Policy
               </Link>
               <Link
                 href="/disclaimer"
-                className="text-xs text-gray-300 hover:text-gray-200"
+                className="text-xs text-white hover:text-[#40A2D8]"
               >
                 Disclaimer
               </Link>
               <Link
                 href="/terms-and-conditions"
-                className="text-xs text-gray-300 hover:text-gray-200"
+                className="text-xs text-white hover:text-[#40A2D8]"
               >
                 Terms &amp; Conditions
               </Link>
             </div>
-            <div className="text-xs text-gray-300">
+            <div className="text-xs text-white">
               © {new Date().getFullYear()}, BizzBuzz Creations. All Rights
               Reserved.
             </div>

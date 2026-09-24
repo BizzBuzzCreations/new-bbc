@@ -4,11 +4,13 @@ import { SendHorizontal } from "lucide-react";
 import React, { useState } from "react";
 import { toast, Bounce } from "react-toastify";
 import RichText from "@/components/ui/richText";
+import CtaSideImage from "@/components/ui/ctaSideImage";
 
 // `white` — used only on individual blog post pages
 // (app/(main)/blog/[slug]/page.js): the section around the card stays white,
 // but the CTA card itself is black (same card as every other page).
 export default function CTA({ content, white = false } = {}) {
+  const image = content?.ctaImage || "";
   const heading = content?.ctaHeading || "Get Free Consultancy Now!";
   const paragraph =
     content?.ctaParagraph ||
@@ -64,7 +66,7 @@ export default function CTA({ content, white = false } = {}) {
     <>
       <div className={`${white ? "bg-white" : "bg-black"} px-5 py-10 scroll-mt-34`} id="CTA">
         <div
-          className={`rounded-3xl border-2 md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto container border-[#0B60B0] ${
+          className={`md:flex md:items-stretch rounded-3xl border-2 md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto container border-[#0B60B0] ${
             white ? "shadow-lg shadow-black/20" : "shadow-lg shadow-black"
           }`}
           style={{
@@ -72,7 +74,7 @@ export default function CTA({ content, white = false } = {}) {
               "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(120, 180, 255, 0.25), transparent 70%), #000000",
           }}
         >
-          <div className="py-8 md:py-10 px-6 md:px-10 z-10 text-white">
+          <div className="flex-1 min-w-0 py-8 md:py-10 px-6 md:px-10 z-10 text-white">
             <h2 className="md:text-3xl text-2xl font-bold mb-5">
               {heading}
             </h2>
@@ -113,6 +115,7 @@ export default function CTA({ content, white = false } = {}) {
               </div>
             </form>
           </div>
+            <CtaSideImage src={image} />
         </div>
       </div>
 

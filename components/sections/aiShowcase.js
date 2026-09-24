@@ -122,7 +122,7 @@ export default function AiShowcase({ content }) {
             {heading}
           </h2>
 
-          <RichText as="p" text={paragraph} className="text-white/60 max-w-xl" />
+          <RichText as="p" text={paragraph} className="text-white max-w-xl" />
 
           {/* 2x2 on every screen below lg (was sm:grid-cols-2, so phones
               narrower than 640px fell back to 1 card per row). */}
@@ -136,7 +136,7 @@ export default function AiShowcase({ content }) {
                   <Icon size={18} />
                 </div>
                 <h3 className="font-semibold mb-2 text-sm sm:text-base transition-colors duration-300">{title}</h3>
-                <p className="text-xs sm:text-sm text-white/70 leading-relaxed transition-colors duration-300 group-hover:text-white/85">
+                <p className="text-xs sm:text-sm text-white leading-relaxed transition-colors duration-300 group-hover:text-white/85">
                   {description}
                 </p>
               </div>

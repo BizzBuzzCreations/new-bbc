@@ -52,7 +52,7 @@ export default function BpoWhyChooseDark({ cards = DEFAULT_CARDS }) {
                 <RichText
                   as="p"
                   text={desc}
-                  className="text-sm text-white/60 transition-colors duration-300 group-hover:text-white/90"
+                  className="text-sm text-white transition-colors duration-300 group-hover:text-white/90"
                 />
               </div>
             ))}

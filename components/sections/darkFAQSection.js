@@ -14,7 +14,7 @@ export default function DarkFAQSection({
           <h2 className="text-3xl font-bold text-center text-white mb-2">
             {heading}
           </h2>
-          <p className="text-white/60 text-center mb-10">{subheading}</p>
+          <p className="text-white text-center mb-10">{subheading}</p>
         </div>
       )}
       <FAQSection
@@ -28,7 +28,7 @@ export default function DarkFAQSection({
         chevronWrapClassName="bg-white/10"
         chevronClassName="text-white"
         answerClassName="bg-white/5 border border-[#0B60B0]/30 shadow-none"
-        answerTextClassName="text-white/70"
+        answerTextClassName="text-white"
         answerIconWrapClassName="bg-white/10"
         answerIconClassName="text-[#40A2D8]"
       />

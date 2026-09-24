@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import TeamHero from "@/components/sections/teamHero";
 import RichText from "@/components/ui/richText";
+import CtaSideImage from "@/components/ui/ctaSideImage";
 import TeamGrids from "@/components/sections/teamGrids";
 import ContactSection from "@/components/sections/contactSection";
 import { getPageContent } from "@/actions/pageContentActions";
@@ -51,17 +52,17 @@ export default async function OurTeamPage() {
           treatment as it, with two audiences instead of an email form. */}
       <div className="bg-black px-5 py-10 scroll-mt-34">
         <div
-          className="rounded-3xl border-2 border-[#0B60B0] shadow-lg shadow-black md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto container"
+          className="md:flex md:items-stretch rounded-3xl border-2 border-[#0B60B0] shadow-lg shadow-black md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto container"
           style={{
             background:
               "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(120, 180, 255, 0.25), transparent 70%), #000000",
           }}
         >
-          <div className="py-8 md:py-10 px-10 z-10 text-white">
+          <div className="flex-1 min-w-0 py-8 md:py-10 px-10 z-10 text-white">
             <h2 className="md:text-3xl text-2xl font-bold mb-5">
               {ctaHeading}
             </h2>
-            <RichText as="p" text={ctaParagraph} className="max-w-3xl mb-8 text-white/70" />
+            <RichText as="p" text={ctaParagraph} className="max-w-3xl mb-8 text-white" />
 
             <div className="flex flex-wrap gap-8">
               <div>
@@ -90,6 +91,7 @@ export default async function OurTeamPage() {
               </div>
             </div>
           </div>
+          <CtaSideImage src={content?.teamCtaImage} />
         </div>
       </div>
 

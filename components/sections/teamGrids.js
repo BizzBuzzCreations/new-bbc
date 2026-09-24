@@ -209,7 +209,7 @@ export function RoleCard({
                   {name}
                 </h3>
               )}
-              <p className={`text-white/60 leading-snug ${isXl ? "text-base" : "font-bold text-white text-sm"}`}>
+              <p className={`text-white leading-snug ${isXl ? "text-base" : "font-bold text-white text-sm"}`}>
                 {role}
               </p>
             </div>
@@ -296,7 +296,7 @@ export function RoleCard({
             {name}
           </h3>
         )}
-        <p className={`text-white/60 leading-snug ${isXl ? "text-base" : "font-bold text-white text-sm"}`}>
+        <p className={`text-white leading-snug ${isXl ? "text-base" : "font-bold text-white text-sm"}`}>
           {role}
         </p>
       </div>
@@ -344,7 +344,7 @@ export default function TeamGrids({ content } = {}) {
             <h3 className="text-lg font-semibold text-[#40A2D8] mb-4">
               {foundersSubheading}
             </h3>
-            <RichText as="p" text={foundersParagraph} className="text-white/60 max-w-2xl mx-auto leading-relaxed" />
+            <RichText as="p" text={foundersParagraph} className="text-white max-w-2xl mx-auto leading-relaxed" />
           </motion.div>
 
           <div className="grid sm:grid-cols-2 max-w-3xl mx-auto gap-8">
@@ -365,7 +365,7 @@ export default function TeamGrids({ content } = {}) {
             <h3 className="text-lg font-semibold text-[#40A2D8] mb-4">
               {leadersSubheading}
             </h3>
-            <RichText as="p" text={leadersParagraph} className="text-white/60 max-w-xl mx-auto leading-relaxed" />
+            <RichText as="p" text={leadersParagraph} className="text-white max-w-xl mx-auto leading-relaxed" />
           </motion.div>
 
           {/* Two explicit rows (4 then 3) instead of one 3-column grid —
@@ -416,7 +416,7 @@ export default function TeamGrids({ content } = {}) {
                     <h3 className="text-base md:text-lg font-semibold text-[#40A2D8] mb-4">
                       {group.tagline}
                     </h3>
-                    <RichText as="p" text={group.desc} className="text-white/60 leading-relaxed mb-6" />
+                    <RichText as="p" text={group.desc} className="text-white leading-relaxed mb-6" />
                     <AnimatedButton href={i === 0 ? "/our-team/bpo-team" : "/our-team/rnd-team"} size="sm">
                       Our Team
                     </AnimatedButton>
@@ -466,7 +466,7 @@ export default function TeamGrids({ content } = {}) {
                   <Icon size={22} />
                 </span>
                 <h4 className="font-bold text-white mb-2">{title}</h4>
-                <RichText as="p" text={desc} className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85" />
+                <RichText as="p" text={desc} className="text-sm text-white leading-relaxed transition-colors duration-300 group-hover:text-white/85" />
               </motion.div>
             ))}
           </div>
@@ -496,7 +496,7 @@ export default function TeamGrids({ content } = {}) {
                 <h3 className="font-bold text-white mb-2 transition-colors duration-300">
                   {title}
                 </h3>
-                <RichText as="p" text={desc} className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85" />
+                <RichText as="p" text={desc} className="text-sm text-white leading-relaxed transition-colors duration-300 group-hover:text-white/85" />
               </div>
             ))}
           </div>

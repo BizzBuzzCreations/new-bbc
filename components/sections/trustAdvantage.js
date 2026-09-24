@@ -51,7 +51,7 @@ export default function TrustAdvantage({ content }) {
               <h3 className="text-white font-bold text-lg mb-2">
                 {item.title}
               </h3>
-              <RichText as="p" text={item.desc} className="text-white/90 text-sm leading-relaxed" />
+              <RichText as="p" text={item.desc} className="text-white text-sm leading-relaxed" />
             </div>
           </div>
         );

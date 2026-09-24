@@ -43,7 +43,7 @@ export default function GlobeTrust({ content }) {
             desktop keeps its original text-column / globe side-by-side
             layout untouched. */}
         <div className="max-w-sm sm:max-w-md md:max-w-lg">
-          <p className="text-lg sm:text-xl text-white/70 font-light mb-1">
+          <p className="text-lg sm:text-xl text-white font-light mb-1">
             {eyebrow}
           </p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
@@ -52,7 +52,7 @@ export default function GlobeTrust({ content }) {
           <RichText
             as="p"
             text={paragraph}
-            className="hidden md:block text-sm text-white/60 leading-relaxed"
+            className="hidden md:block text-sm text-white leading-relaxed"
           />
         </div>
 
@@ -83,7 +83,7 @@ export default function GlobeTrust({ content }) {
         <RichText
           as="p"
           text={paragraph}
-          className="md:hidden max-w-sm sm:max-w-md text-sm text-white/60 leading-relaxed"
+          className="md:hidden max-w-sm sm:max-w-md text-sm text-white leading-relaxed"
         />
       </div>
     </section>

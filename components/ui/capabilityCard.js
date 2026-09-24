@@ -28,7 +28,7 @@ export default function CapabilityCard({ icon, title, desc, hoverReveal }) {
         <RichText
           as="p"
           text={desc}
-          className="text-sm leading-relaxed text-white/60 transition-colors duration-300 group-hover:text-white/85"
+          className="text-sm leading-relaxed text-white transition-colors duration-300 group-hover:text-white/85"
         />
       </div>
     );
@@ -65,7 +65,7 @@ export default function CapabilityCard({ icon, title, desc, hoverReveal }) {
           text={desc}
           noLink
           className={`overflow-hidden text-sm leading-relaxed pt-2 transition-colors duration-300 group-hover:text-white/85 ${
-            open ? "text-white/85" : "text-white/60"
+            open ? "text-white" : "text-white"
           }`}
         />
       </div>

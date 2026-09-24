@@ -22,7 +22,7 @@ export default function JobCard({ job, days }) {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between mb-4">
         <div>
           <h3 className="text-lg font-bold text-white mb-1">{job.title}</h3>
-          <span className="text-xs text-white/40">
+          <span className="text-xs text-white">
             Posted {days === 0 ? "today" : `${days} day${days === 1 ? "" : "s"} ago`}
           </span>
         </div>
@@ -33,7 +33,7 @@ export default function JobCard({ job, days }) {
         </div>
       </div>
 
-      <p className="text-sm text-white/60 leading-relaxed whitespace-pre-line mb-2">
+      <p className="text-sm text-white leading-relaxed whitespace-pre-line mb-2">
         {expanded ? description : preview}
       </p>
       {isLong && (

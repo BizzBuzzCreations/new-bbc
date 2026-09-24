@@ -156,7 +156,7 @@ export default function CaseStudies({ content }) {
       <h2 className="md:text-4xl text-3xl font-bold text-center mb-3">
         {heading}
       </h2>
-      <RichText as="p" text={subtext} className="text-center text-white/60 max-w-xl mx-auto mb-16 px-4" />
+      <RichText as="p" text={subtext} className="text-center text-white max-w-xl mx-auto mb-16 px-4" />
 
       {/* Card carousel */}
       <div
@@ -216,7 +216,7 @@ export default function CaseStudies({ content }) {
               <RichText
                 as="p"
                 text={client.tagline}
-                className={`text-sm ${isActive ? "text-white/90" : "text-white/50"}`}
+                className={`text-sm ${isActive ? "text-white" : "text-white"}`}
               />
             </motion.div>
           );

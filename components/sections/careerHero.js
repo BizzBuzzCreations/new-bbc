@@ -72,10 +72,10 @@ export default function CareerHero({ content } = {}) {
         <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4">
           {heading}
         </h1>
-        <h2 className="text-white/90 text-lg sm:text-xl font-semibold mb-4">
+        <h2 className="text-white text-lg sm:text-xl font-semibold mb-4">
           {subheading}
         </h2>
-        <RichText as="p" text={paragraph} className="text-white/70 max-w-lg leading-relaxed mb-8" />
+        <RichText as="p" text={paragraph} className="text-white max-w-lg leading-relaxed mb-8" />
         <Link href="/contact" className="inline-block">
           <button className="animated-button animated-button-lg whitespace-nowrap">
             <svg

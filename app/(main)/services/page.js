@@ -168,7 +168,7 @@ function ServiceCard({ service, description, buttonText }) {
         as="p"
         text={description}
         noLink
-        className="text-sm text-white/60 leading-relaxed line-clamp-3 mb-4 transition-colors duration-300 group-hover:text-white/85"
+        className="text-sm text-white leading-relaxed line-clamp-3 mb-4 transition-colors duration-300 group-hover:text-white/85"
       />
       {buttonText && (
         <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#40A2D8] transition-colors duration-300 group-hover:text-white">
@@ -293,7 +293,7 @@ export default async function ServicesIndexPage() {
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
             {heroHeading}
           </h1>
-          <p className="text-white/70 leading-relaxed mb-9 max-w-lg">
+          <p className="text-white leading-relaxed mb-9 max-w-lg">
             {heroParagraph}
           </p>
           {/* /services.png is a very wide (3.45:1), mostly-empty-on-the-
@@ -371,7 +371,7 @@ export default async function ServicesIndexPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-3">
             {gridHeading}
           </h2>
-          <p className="text-center text-white/60 max-w-xl mx-auto mb-14">
+          <p className="text-center text-white max-w-xl mx-auto mb-14">
             {gridSubtext}
           </p>
 
@@ -406,7 +406,7 @@ export default async function ServicesIndexPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-4">
             {engagementHeading}
           </h2>
-          <p className="text-white/60 text-center max-w-xl mx-auto mb-14 leading-relaxed">
+          <p className="text-white text-center max-w-xl mx-auto mb-14 leading-relaxed">
             {engagementSubtext}
           </p>
 
@@ -444,7 +444,7 @@ export default async function ServicesIndexPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
             {scenariosHeading}
           </h2>
-          <p className="text-white/60 max-w-xl mx-auto leading-relaxed">
+          <p className="text-white max-w-xl mx-auto leading-relaxed">
             {scenariosSubtext}
           </p>
         </div>
@@ -467,7 +467,7 @@ export default async function ServicesIndexPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-3">
             {whyChooseHeading}
           </h2>
-          <RichText as="p" text={whyChooseSubtext} className="text-center text-white/60 max-w-xl mx-auto mb-14" />
+          <RichText as="p" text={whyChooseSubtext} className="text-center text-white max-w-xl mx-auto mb-14" />
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {whyChooseItems.map(({ icon: Icon, title, description }, i) => (
@@ -482,7 +482,7 @@ export default async function ServicesIndexPage() {
                 <RichText
                   as="p"
                   text={description}
-                  className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85"
+                  className="text-sm text-white leading-relaxed transition-colors duration-300 group-hover:text-white/85"
                 />
               </div>
             ))}

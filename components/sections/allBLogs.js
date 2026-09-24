@@ -224,7 +224,7 @@ export default function AllBLogs() {
               >
                 <ArrowLeft />
               </button>
-              <p className="text-white/60">
+              <p className="text-white">
                 Page {currPage} of {totalPages}
               </p>
               <button
@@ -299,7 +299,7 @@ export default function AllBLogs() {
                     )}
                   </Link>
                   <div className="relative mt-5">
-                    <p className="uppercase font-semibold text-xs mb-2.5 text-white/50 transition-colors duration-300 group-hover:text-[#40A2D8]">
+                    <p className="uppercase font-semibold text-xs mb-2.5 text-white transition-colors duration-300 group-hover:text-[#40A2D8]">
                       {new Date(e?.publishedAt).toLocaleDateString("en-US", {
                         month: "short",
                         day: "numeric",
@@ -315,13 +315,13 @@ export default function AllBLogs() {
                         {e?.title}
                       </h2>
                     </Link>
-                    <p className="text-white/60 transition-colors duration-300 group-hover:text-[#40A2D8]">
+                    <p className="text-white transition-colors duration-300 group-hover:text-[#40A2D8]">
                       {truncateHTML(e?.excerpt, 150)}
                     </p>
 
                     <Link
                       href={`/blog/${e?.slug}`}
-                      className="font-medium underline text-white/70 transition-colors duration-300 group-hover:text-[#40A2D8]"
+                      className="font-medium underline text-white transition-colors duration-300 group-hover:text-[#40A2D8]"
                       aria-label={`Read more about ${e?.title}`}
                     >
                       Read More
@@ -361,7 +361,7 @@ export default function AllBLogs() {
                 >
                   <ArrowLeft />
                 </button>
-                <p className="text-white/60">
+                <p className="text-white">
                   Page {currPage} of {totalPages}
                 </p>
                 <button

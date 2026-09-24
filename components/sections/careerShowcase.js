@@ -40,7 +40,7 @@ export function CareerWhyUs({ content } = {}) {
               on the left, photo on the right) is unchanged. */}
           <div className="mb-6 md:hidden">{photo}</div>
 
-          <RichText as="p" text={paragraph} className="text-white/60 leading-relaxed" />
+          <RichText as="p" text={paragraph} className="text-white leading-relaxed" />
         </div>
 
         <div className="hidden md:block">{photo}</div>
@@ -132,7 +132,7 @@ export function CareerJoinTeam({ content } = {}) {
 
           <div className="mb-8 md:hidden">{imageGrid}</div>
 
-          <RichText as="p" text={paragraph} className="text-white/60 leading-relaxed mb-8" />
+          <RichText as="p" text={paragraph} className="text-white leading-relaxed mb-8" />
 
           <div className="space-y-5 mb-8">
             {points.map(({ icon: Icon, title, desc }, i) => (
@@ -142,7 +142,7 @@ export function CareerJoinTeam({ content } = {}) {
                 </span>
                 <div>
                   <h3 className="font-semibold text-white mb-1">{title}</h3>
-                  <RichText as="p" text={desc} className="text-sm text-white/60 leading-relaxed" />
+                  <RichText as="p" text={desc} className="text-sm text-white leading-relaxed" />
                 </div>
               </div>
             ))}

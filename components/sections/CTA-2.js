@@ -38,7 +38,7 @@ export default function CTA2() {
           </div>
 
           <Sparkles
-            className="hidden sm:block absolute bottom-4 right-6 text-white/60"
+            className="hidden sm:block absolute bottom-4 right-6 text-white"
             size={26}
           />
         </div>

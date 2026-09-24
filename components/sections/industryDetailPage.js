@@ -8,6 +8,7 @@ import ServiceBreakdownGrid from "@/components/sections/serviceBreakdownGrid";
 import RoadmapCarousel from "@/components/sections/roadmapCarousel";
 import CapabilityCard from "@/components/ui/capabilityCard";
 import RichText from "@/components/ui/richText";
+import CtaSideImage from "@/components/ui/ctaSideImage";
 
 // Shared template every /industries/<slug> dedicated page renders through
 // — the exact structure originally built for Healthcare, now generic so
@@ -88,6 +89,7 @@ export default function IndustryDetailPage({
   ctaText,
   ctaPrimaryText,
   ctaSecondaryText,
+  ctaImage,
 }) {
   return (
     <>
@@ -162,7 +164,7 @@ export default function IndustryDetailPage({
           <RichText
             as="p"
             text={heroDescription || description}
-            className="text-white/70 leading-relaxed mb-9 max-w-2xl"
+            className="text-white leading-relaxed mb-9 max-w-2xl"
           />
           <Link href="/contact" className="inline-block max-w-full">
             {/* whitespace-nowrap only from sm up — on mobile the long,
@@ -300,7 +302,7 @@ export default function IndustryDetailPage({
                         <h3 className="text-xl font-bold text-white mb-3">
                           {title}
                         </h3>
-                        <RichText as="p" text={desc} className="text-white/60 text-sm leading-relaxed" />
+                        <RichText as="p" text={desc} className="text-white text-sm leading-relaxed" />
                       </div>
                     </div>
                   );
@@ -340,11 +342,11 @@ export default function IndustryDetailPage({
                 }}
               >
                 <p className="text-3xl font-bold text-white mb-1">90+</p>
-                <p className="text-white/70 text-sm">Projects Delivered</p>
+                <p className="text-white text-sm">Projects Delivered</p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col justify-end min-h-[150px]">
                 <p className="text-3xl font-bold text-white mb-1">50+</p>
-                <p className="text-white/70 text-sm">
+                <p className="text-white text-sm">
                   Clients Across India &amp; the UK
                 </p>
               </div>
@@ -355,12 +357,12 @@ export default function IndustryDetailPage({
                 }}
               >
                 <p className="text-3xl font-bold text-white mb-1">20+</p>
-                <p className="text-white/70 text-sm">Industries Served</p>
+                <p className="text-white text-sm">Industries Served</p>
               </div>
             </div>
 
             <div className="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8">
-              <p className="text-sm font-semibold text-white/70 mb-6">
+              <p className="text-sm font-semibold text-white mb-6">
                 Certified &amp; Recognized By
               </p>
               <div className="flex flex-wrap items-center gap-8 sm:gap-12">
@@ -389,7 +391,7 @@ export default function IndustryDetailPage({
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 max-w-2xl">
               {spectrumHeading}
             </h2>
-            <RichText as="p" text={spectrumSubtitle} className="text-white/60 max-w-2xl mb-14 leading-relaxed" />
+            <RichText as="p" text={spectrumSubtitle} className="text-white max-w-2xl mb-14 leading-relaxed" />
 
             <div className="grid md:grid-cols-3 gap-6">
               {spectrumServices.map((item) => (
@@ -408,7 +410,7 @@ export default function IndustryDetailPage({
                   </div>
                   <div className="p-6">
                     <h3 className="font-bold text-white mb-2">{item.title}</h3>
-                    <RichText as="p" text={item.desc} className="text-sm text-white/60 leading-relaxed" />
+                    <RichText as="p" text={item.desc} className="text-sm text-white leading-relaxed" />
                   </div>
                 </div>
               ))}
@@ -425,7 +427,7 @@ export default function IndustryDetailPage({
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 max-w-2xl">
               Who We Help
             </h2>
-            <RichText as="p" text={whoWeHelpSubtitle} className="text-white/60 max-w-2xl mb-14 leading-relaxed" />
+            <RichText as="p" text={whoWeHelpSubtitle} className="text-white max-w-2xl mb-14 leading-relaxed" />
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {whoWeHelp.map(({ icon: WhoIcon, title, desc }) => (
@@ -440,7 +442,7 @@ export default function IndustryDetailPage({
                   <RichText
                     as="p"
                     text={desc}
-                    className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85"
+                    className="text-sm text-white leading-relaxed transition-colors duration-300 group-hover:text-white/85"
                   />
                 </div>
               ))}
@@ -458,7 +460,7 @@ export default function IndustryDetailPage({
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 max-w-2xl">
               What You Get
             </h2>
-            <p className="text-white/60 max-w-2xl mb-14 leading-relaxed">
+            <p className="text-white max-w-2xl mb-14 leading-relaxed">
               Concrete pieces that work together — not a vague bundle of
               &ldquo;digital marketing services.&rdquo;
             </p>
@@ -509,10 +511,10 @@ export default function IndustryDetailPage({
               </div>
             )}
             {whyChooseUsText ? (
-              <RichText as="p" text={whyChooseUsText} className="text-white/70 leading-relaxed max-w-xl" />
+              <RichText as="p" text={whyChooseUsText} className="text-white leading-relaxed max-w-xl" />
             ) : (
               <>
-                <p className="text-white/60 leading-relaxed mb-12 max-w-2xl mx-auto">
+                <p className="text-white leading-relaxed mb-12 max-w-2xl mx-auto">
                   The same standards we hold ourselves to on every engagement,{" "}
                   {label.toLowerCase()} included.
                 </p>
@@ -526,7 +528,7 @@ export default function IndustryDetailPage({
                         size={18}
                         className="text-[#40A2D8] shrink-0 mt-0.5 transition-colors duration-300 group-hover:text-white"
                       />
-                      <span className="text-white/70 text-sm leading-relaxed transition-colors duration-300 group-hover:text-white">
+                      <span className="text-white text-sm leading-relaxed transition-colors duration-300 group-hover:text-white">
                         {point}
                       </span>
                     </li>
@@ -555,17 +557,17 @@ export default function IndustryDetailPage({
               pointing to /contact, instead of the shared email-form CTA. */}
           <div className="bg-black px-5 py-10 scroll-mt-34" id="CTA">
             <div
-              className="rounded-3xl border-2 border-[#0B60B0] shadow-lg shadow-black md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto container"
+              className="md:flex md:items-stretch rounded-3xl border-2 border-[#0B60B0] shadow-lg shadow-black md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto container"
               style={{
                 background:
                   "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(120, 180, 255, 0.25), transparent 70%), #000000",
               }}
             >
-              <div className="py-8 md:py-10 px-6 md:px-10 z-10 text-white">
+              <div className="flex-1 min-w-0 py-8 md:py-10 px-6 md:px-10 z-10 text-white">
                 <h2 className="md:text-3xl text-2xl font-bold mb-5">
                   {ctaHeading}
                 </h2>
-                <RichText as="p" text={ctaText} className="max-w-3xl text-white/70 mb-8" />
+                <RichText as="p" text={ctaText} className="max-w-3xl text-white mb-8" />
                 {/* Stacked, full-width buttons on mobile (was flex-wrap,
                     which — squeezed by the card's own padding — wrapped
                     the two pills into an untidy layout) instead of forcing
@@ -586,6 +588,7 @@ export default function IndustryDetailPage({
                   </Link>
                 </div>
               </div>
+              <CtaSideImage src={ctaImage} />
             </div>
           </div>
 
@@ -596,7 +599,7 @@ export default function IndustryDetailPage({
           </div>
         </>
       ) : (
-        <CTA />
+        <CTA content={{ ctaImage }} />
       )}
     </>
   );

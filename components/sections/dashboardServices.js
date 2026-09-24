@@ -4,11 +4,10 @@ import { useEffect, useState } from "react";
 import {
   getPageContent,
   savePageContent,
-  uploadContentImage,
-  uploadContentVideo,
 } from "@/actions/pageContentActions";
 import { SERVICE_CONTENT_REGISTRY } from "@/lib/serviceContentRegistry";
 import { getPageMeta } from "@/lib/pageContentRegistry";
+import { uploadFileDirect } from "@/lib/directUpload";
 import InlineRichEditor from "@/components/ui/inlineRichEditor";
 import MediaLibraryButton from "@/components/sections/mediaLibrary";
 
@@ -24,9 +23,7 @@ function MediaField({ value, onChange, label, kind }) {
     if (!file) return;
     setUploading(true);
     try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const res = await (isVideo ? uploadContentVideo(formData) : uploadContentImage(formData));
+      const res = await uploadFileDirect(file, "bizzbuzz-page-content");
       if (res?.success) {
         onChange(res.url);
       } else {

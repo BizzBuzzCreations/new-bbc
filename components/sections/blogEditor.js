@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import slugify from "slugify";
-import { createBlog, updateBlog, uploadBlogImage } from "@/actions/blogActions";
+import { createBlog, updateBlog } from "@/actions/blogActions";
+import { uploadFileDirect } from "@/lib/directUpload";
 import RichTextEditor from "@/components/ui/richTextEditor";
 import InlineRichEditor from "@/components/ui/inlineRichEditor";
 import { Plus, Trash2 } from "lucide-react";
@@ -84,9 +85,7 @@ export default function BlogEditor({ initialData = null }) {
 
     setUploadingImage(true);
     try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const res = await uploadBlogImage(formData);
+      const res = await uploadFileDirect(file, "bizzbuzz-blog");
       if (res?.success) {
         setForm((prev) => ({ ...prev, featuredImage: res.url }));
       } else {

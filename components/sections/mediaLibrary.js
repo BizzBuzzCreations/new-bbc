@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react";
 import {
   getMediaLibrary,
-  uploadMediaLibraryAsset,
+  recordMediaLibraryAsset,
   deleteMediaLibraryAsset,
 } from "@/actions/mediaLibraryActions";
+import { uploadFileDirect } from "@/lib/directUpload";
 
 // Shared across all 4 content dashboard tabs (Website Content, Industries,
 // Services, Sub-Services) — a single button that opens a reusable media
@@ -53,9 +54,10 @@ function MediaLibraryModal({ onClose }) {
     if (!file) return;
     setUploading(true);
     try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const res = await uploadMediaLibraryAsset(formData);
+      const uploaded = await uploadFileDirect(file, "bizzbuzz-media-library");
+      const res = uploaded.success
+        ? await recordMediaLibraryAsset(uploaded)
+        : uploaded;
       if (res?.success) {
         // Prepend the real returned asset — visible immediately, and
         // every file already in the grid stays exactly as it was.

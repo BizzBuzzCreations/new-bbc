@@ -513,7 +513,7 @@ export default function FaqTopics({ content } = {}) {
             viewport on mobile instead of letting overflow-x-auto scroll
             internally. */}
         <div className="min-w-0 lg:sticky lg:top-24 lg:self-start bg-black px-2 md:px-4 py-2 lg:py-0">
-          <p className="text-xs font-bold uppercase tracking-widest text-white/50 mb-6 px-2">
+          <p className="text-xs font-bold uppercase tracking-widest text-white mb-6 px-2">
           </p>
           {/* Mobile: smaller, snap-scrolling pills — the full-size desktop
               pills (icon + full label, generous padding) only fit about
@@ -531,7 +531,7 @@ export default function FaqTopics({ content } = {}) {
                   className={`group snap-start shrink-0 flex items-center gap-2 lg:gap-3 text-left pl-3 pr-3.5 lg:pl-4 lg:pr-4 py-2.5 lg:py-3.5 rounded-xl text-xs lg:text-sm font-medium whitespace-nowrap lg:whitespace-normal transition-all duration-300 border ${
                     isActive
                       ? "bg-[#0B60B0] text-white border-[#40A2D8] shadow-lg shadow-[#0B60B0]/30"
-                      : "text-white/60 border-transparent hover:text-white hover:bg-white/5 hover:border-white/10"
+                      : "text-white border-transparent hover:text-white hover:bg-white/5 hover:border-white/10"
                   }`}
                 >
                   <span

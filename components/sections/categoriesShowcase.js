@@ -59,7 +59,7 @@ export default function CategoriesShowcase() {
             className={`text-sm font-medium rounded-full px-4 py-2.5 text-center transition-all duration-300 border ${
               active === key
                 ? "bg-[#0B60B0] border-[#0B60B0] text-white shadow-lg shadow-[#0B60B0]/30"
-                : "border-white/15 text-white/70 hover:border-white/40 hover:text-white hover:bg-white/5"
+                : "border-white/15 text-white hover:border-white/40 hover:text-white hover:bg-white/5"
             }`}
           >
             {label}
@@ -80,7 +80,7 @@ export default function CategoriesShowcase() {
                   {activeDetail.tagline}
                 </p>
               )}
-              <p className="text-white/70 text-sm leading-relaxed max-w-2xl">
+              <p className="text-white text-sm leading-relaxed max-w-2xl">
                 {activeDetail?.desc}
               </p>
             </div>

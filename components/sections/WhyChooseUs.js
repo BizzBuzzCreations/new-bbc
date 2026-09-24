@@ -45,7 +45,7 @@ export default function WhyChooseUs({ dark = false, content }) {
           <RichText
             as="p"
             text={feature.description}
-            className={`text-sm transition-colors duration-300 group-hover:text-white/80 ${dark ? "text-white/60" : ""}`}
+            className={`text-sm transition-colors duration-300 group-hover:text-white/80 ${dark ? "text-white" : ""}`}
           />
         </div>
       ))}

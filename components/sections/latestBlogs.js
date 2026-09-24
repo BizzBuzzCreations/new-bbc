@@ -26,7 +26,7 @@ export default async function LatestBlogs({ dark = false }) {
         <h2 className={`md:text-4xl text-3xl font-bold mb-3 ${dark ? "text-white" : "text-black"}`}>
           Our Latest Blogs
         </h2>
-        <p className={`max-w-xl mx-auto ${dark ? "text-white/60" : "text-gray-600"}`}>
+        <p className={`max-w-xl mx-auto ${dark ? "text-white" : "text-gray-600"}`}>
           Explore, discover, and find inspiration through these exciting
           blogs.
         </p>
@@ -84,7 +84,7 @@ export default async function LatestBlogs({ dark = false }) {
                       day: "numeric",
                       year: "numeric",
                     })}
-                    <span className={`font-normal normal-case ${dark ? "text-white/30" : "text-gray-300"}`}>
+                    <span className={`font-normal normal-case ${dark ? "text-white" : "text-gray-300"}`}>
                       · by {e?.author}
                     </span>
                   </p>
@@ -99,7 +99,7 @@ export default async function LatestBlogs({ dark = false }) {
                       {e?.title}
                     </h3>
                   </Link>
-                  <p className={`text-sm leading-relaxed mb-4 ${dark ? "text-white/60" : "text-gray-600"}`}>
+                  <p className={`text-sm leading-relaxed mb-4 ${dark ? "text-white" : "text-gray-600"}`}>
                     {truncateHTML(e?.excerpt, 130)}
                   </p>
 

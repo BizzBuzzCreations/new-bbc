@@ -147,7 +147,7 @@ export default async function GuidesPage() {
             <h2 className="text-2xl md:text-3xl font-bold mb-1">
               {allGuidesHeading}
             </h2>
-            <p className="text-white/40 text-sm mb-8">
+            <p className="text-white text-sm mb-8">
               {guides.length} guides
             </p>
 
@@ -170,7 +170,7 @@ export default async function GuidesPage() {
                     <h3 className="font-bold text-white mt-1 mb-1.5 leading-snug transition-colors duration-300 group-hover:text-[#40A2D8]">
                       {title}
                     </h3>
-                    <RichText as="p" text={body} className="text-sm text-white/60 leading-relaxed" />
+                    <RichText as="p" text={body} className="text-sm text-white leading-relaxed" />
                   </div>
                 </Link>
               ))}
@@ -196,7 +196,7 @@ export default async function GuidesPage() {
               <h3 className="relative z-10 font-bold text-xl leading-snug mb-3">
                 {sidebarHeading}
               </h3>
-              <RichText as="p" text={sidebarParagraph} className="relative z-10 text-sm text-white/80 leading-relaxed mb-7" />
+              <RichText as="p" text={sidebarParagraph} className="relative z-10 text-sm text-white leading-relaxed mb-7" />
 
               <div className="relative z-10 flex flex-col gap-3">
                 <AnimatedButton href="/contact" size="sm" className="w-full">

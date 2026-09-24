@@ -21,7 +21,7 @@ export default function BpoServicesGrid({
         {title}
       </h2>
       {subheading && (
-        <RichText as="p" text={subheading} className="text-white/60 text-center max-w-2xl mx-auto mt-3 mb-10" />
+        <RichText as="p" text={subheading} className="text-white text-center max-w-2xl mx-auto mt-3 mb-10" />
       )}
       {!subheading && <div className="mb-10" />}
       <div className="grid sm:grid-cols-2 gap-6">
@@ -59,7 +59,7 @@ export default function BpoServicesGrid({
                 as="p"
                 text={description}
                 noLink={Boolean(href)}
-                className="text-sm text-white/70 leading-relaxed"
+                className="text-sm text-white leading-relaxed"
               />
               {href && (
                 <span className="inline-block mt-3 text-sm font-semibold text-[#40A2D8] group-hover:text-white transition-colors duration-300">

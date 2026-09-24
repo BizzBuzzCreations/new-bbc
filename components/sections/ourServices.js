@@ -139,7 +139,7 @@ export default function OurServices({ content }) {
         <RichText
           as="p"
           text={subtext}
-          className="relative z-10 text-lg text-white/60 text-center mb-20 max-w-2xl mx-auto px-4"
+          className="relative z-10 text-lg text-white text-center mb-20 max-w-2xl mx-auto px-4"
         />
 
         <div className="relative z-10 flex flex-wrap sm:p-0 p-2 max-w-6xl mx-auto gap-10 items-center justify-center">
@@ -162,7 +162,7 @@ export default function OurServices({ content }) {
                     <h3 className="text-lg font-semibold text-white transition-colors duration-300 group-hover:text-white">
                       {service.heading}
                     </h3>
-                    <p className="mt-1 text-sm text-white/60 transition-colors duration-300 group-hover:text-white/85">
+                    <p className="mt-1 text-sm text-white transition-colors duration-300 group-hover:text-white/85">
                       <b>{service.subheading}</b>
                       <br />
                       {service.description}

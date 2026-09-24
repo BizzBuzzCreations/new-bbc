@@ -82,6 +82,44 @@ export async function uploadMediaLibraryAsset(formData) {
   }
 }
 
+// Saves the DB record for a file the browser already uploaded straight to
+// Cloudinary (lib/directUpload.js) — only the URL/publicId pass through
+// here, so file size is no longer capped by the Server Action body limit.
+export async function recordMediaLibraryAsset({ url, publicId, resourceType }) {
+  const unauthorized = await requireSession();
+  if (unauthorized) return unauthorized;
+
+  try {
+    if (!url?.startsWith("https://res.cloudinary.com/") || !publicId) {
+      return { success: false, message: "Invalid upload." };
+    }
+
+    const session = await getSession();
+
+    await connectDB();
+    const doc = await MediaAsset.create({
+      url,
+      publicId,
+      resourceType: resourceType === "video" ? "video" : "image",
+      uploadedBy: session?.username || session?.name || "",
+    });
+
+    return {
+      success: true,
+      asset: {
+        id: String(doc._id),
+        url: doc.url,
+        publicId: doc.publicId,
+        resourceType: doc.resourceType,
+        createdAt: doc.createdAt,
+      },
+    };
+  } catch (error) {
+    console.error("Record media asset failed:", error);
+    return { success: false, message: "Upload saved to Cloudinary but failed to add to the library." };
+  }
+}
+
 // Removes both the DB record and the underlying Cloudinary file — best
 // effort on the Cloudinary side (a failed remote delete still removes it
 // from the library list rather than leaving the admin stuck).

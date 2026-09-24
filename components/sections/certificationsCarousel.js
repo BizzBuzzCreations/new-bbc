@@ -62,7 +62,7 @@ export default function CertificationsCarousel() {
               <p className="font-bold text-white transition-colors duration-300 group-hover:text-black">
                 {cert.label}
               </p>
-              <p className="text-sm text-white/50 transition-colors duration-300 group-hover:text-gray-600">
+              <p className="text-sm text-white transition-colors duration-300 group-hover:text-gray-600">
                 {cert.sub}
               </p>
             </div>

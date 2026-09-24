@@ -95,7 +95,7 @@ export default function OurJourney({ content }) {
             </span>
             <div className="max-w-md mt-8 mx-auto sm:mx-0 sm:ml-auto text-center sm:text-left">
               <h3 className="text-white font-bold text-xl mb-3">{current.title}</h3>
-              <RichText as="p" text={current.body} className="text-base text-white/60 leading-relaxed" />
+              <RichText as="p" text={current.body} className="text-base text-white leading-relaxed" />
             </div>
           </div>
         </div>

@@ -19,7 +19,7 @@ export default function ServiceCard({
     >
       {Icon ? (
         <Icon
-          className="z-50 h-5 w-5 absolute top-3 right-3 text-white/70 transition duration-1000 group-hover:scale-[2] group-hover:rotate-[410deg] group-hover:-translate-y-3 group-hover:translate-x-3"
+          className="z-50 h-5 w-5 absolute top-3 right-3 text-white transition duration-1000 group-hover:scale-[2] group-hover:rotate-[410deg] group-hover:-translate-y-3 group-hover:translate-x-3"
         />
       ) : (
         <img
@@ -47,7 +47,7 @@ export default function ServiceCard({
         )}
         <div className="flex flex-col transition duration-300 group-hover:-translate-x-2">
           <div
-            className="relative text-md font-semibold text-gray-100 cursor-pointer 
+            className="relative text-md font-semibold text-white cursor-pointer 
                                         after:transition-[width] after:ease-in-out after:duration-700 
                                         after:absolute after:bg-gradient-to-r after:from-gray-100/30
                                         after:via-gray-100/10 after:to-transparent after:origin-left 
@@ -56,13 +56,13 @@ export default function ServiceCard({
           >
             {heading}
           </div>
-          <RichText as="p" text={description} className="text-xs text-gray-50/70 text-balance" />
+          <RichText as="p" text={description} className="text-xs text-white text-balance" />
           {points && points.length > 0 && (
             <>
-              <p className="text-xs font-bold text-gray-50 mt-2">
+              <p className="text-xs font-bold text-white mt-2">
                 What we do:
               </p>
-              <ul className="text-xs text-gray-50/70 list-disc pl-4 mt-1 space-y-0.5">
+              <ul className="text-xs text-white list-disc pl-4 mt-1 space-y-0.5">
                 {points.map((point) => (
                   <li key={point}>{point}</li>
                 ))}
@@ -70,7 +70,7 @@ export default function ServiceCard({
             </>
           )}
           {footer && (
-            <RichText as="p" text={footer} className="text-xs text-gray-50/70 text-balance mt-2" />
+            <RichText as="p" text={footer} className="text-xs text-white text-balance mt-2" />
           )}
         </div>
       </div>

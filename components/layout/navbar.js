@@ -553,7 +553,7 @@ function MobileAccordion({
                           <Link
                             href={sub.href}
                             onClick={onNavigate}
-                            className="block p-2 text-xs text-white/75 hover:bg-white/10 hover:text-white rounded"
+                            className="block p-2 text-xs text-white hover:bg-white/10 hover:text-white rounded"
                           >
                             {sub.label}
                           </Link>

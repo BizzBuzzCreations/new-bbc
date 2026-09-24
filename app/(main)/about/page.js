@@ -130,9 +130,9 @@ export default async function About() {
             <RichText
               as="p"
               text={storyParagraphOne}
-              className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white/70 whitespace-pre-line"
+              className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white whitespace-pre-line"
             />
-            <p className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white/70 whitespace-pre-line">
+            <p className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white whitespace-pre-line">
               {storyParagraphTwoIsDefault ? (
                 <>
                   BizzBuzz Creations started with a small team of marketers, designers, and
@@ -147,7 +147,7 @@ export default async function About() {
                 <RichText text={storyParagraphTwo} />
               )}
             </p>
-            <p className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white/70 whitespace-pre-line">
+            <p className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white whitespace-pre-line">
               {storyParagraphThreeIsDefault ? (
                 <>
                   Today, we bring together strategy, creativity, technology,{" "}
@@ -168,7 +168,7 @@ export default async function About() {
             <RichText
               as="p"
               text={storyParagraphFour}
-              className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white/70 whitespace-pre-line"
+              className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white whitespace-pre-line"
             />
           </div>
         </div>
@@ -197,7 +197,7 @@ export default async function About() {
               <RichText
                 as="p"
                 text={missionText}
-                className="text-base sm:text-lg leading-relaxed text-center max-w-xl mx-auto mb-4 text-white/60"
+                className="text-base sm:text-lg leading-relaxed text-center max-w-xl mx-auto mb-4 text-white"
               />
             </div>
             <div className="group relative flex flex-col items-center rounded-2xl border-2 border-white/10 bg-white/5 p-6 sm:p-8 text-center shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-2xl hover:shadow-black/40">
@@ -211,7 +211,7 @@ export default async function About() {
               <RichText
                 as="p"
                 text={visionText}
-                className="text-base sm:text-lg leading-relaxed text-center max-w-xl mx-auto mb-4 text-white/60"
+                className="text-base sm:text-lg leading-relaxed text-center max-w-xl mx-auto mb-4 text-white"
               />
             </div>
           </div>
@@ -252,7 +252,7 @@ export default async function About() {
                   <RichText
                     as="p"
                     text={value.description}
-                    className="text-sm leading-relaxed text-center text-white/60"
+                    className="text-sm leading-relaxed text-center text-white"
                   />
                 </div>
               </div>
@@ -274,7 +274,7 @@ export default async function About() {
           <RichText
             as="p"
             text={differentiatorsSubtext}
-            className="text-center max-w-4xl mx-auto mb-10 text-white/70"
+            className="text-center max-w-4xl mx-auto mb-10 text-white"
           />
           <DifferentiatorsCarousel items={content?.differentiatorItems} />
         </div>
@@ -294,7 +294,7 @@ export default async function About() {
         <RichText
           as="p"
           text={roadmapIntro}
-          className="text-lg leading-relaxed text-center max-w-2xl mx-auto mb-16 text-white/70"
+          className="text-lg leading-relaxed text-center max-w-2xl mx-auto mb-16 text-white"
         />
 
         {/* Desktop: flowing zig-zag timeline */}
@@ -315,7 +315,7 @@ export default async function About() {
                   <h4 className="font-bold text-lg mb-2 text-white">
                     Step {step.number}: {step.title}
                   </h4>
-                  <RichText as="p" text={step.desc} className="leading-relaxed text-white/60" />
+                  <RichText as="p" text={step.desc} className="leading-relaxed text-white" />
                 </div>
               </div>
             ))}
@@ -325,7 +325,7 @@ export default async function About() {
         <RichText
           as="p"
           text={roadmapClosing}
-          className="text-lg leading-relaxed text-center max-w-3xl mx-auto mt-16 font-medium text-white/70"
+          className="text-lg leading-relaxed text-center max-w-3xl mx-auto mt-16 font-medium text-white"
         />
       </div>
 
@@ -337,7 +337,7 @@ export default async function About() {
         <RichText
           as="p"
           text={trustIntro}
-          className="text-lg leading-relaxed text-center max-w-3xl mx-auto mb-12 text-white/70"
+          className="text-lg leading-relaxed text-center max-w-3xl mx-auto mb-12 text-white"
         />
 
         <TrustAdvantage content={content} />
@@ -345,7 +345,7 @@ export default async function About() {
         <RichText
           as="p"
           text={trustClosing}
-          className="text-lg leading-relaxed text-center max-w-3xl mx-auto mt-12 font-medium text-white/70"
+          className="text-lg leading-relaxed text-center max-w-3xl mx-auto mt-12 font-medium text-white"
         />
       </div>
 

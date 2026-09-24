@@ -43,9 +43,9 @@ export default function HomeAbout({ content }) {
       <div className="hidden md:flex relative min-h-[620px] lg:min-h-[700px] items-stretch">
         <div className="relative z-10 flex items-center max-w-2xl shrink-0 pl-12 lg:pl-24 pr-10">
           <div>
-            <p className="text-white/60">{eyebrow}</p>
+            <p className="text-white">{eyebrow}</p>
             <h2 className="text-4xl font-bold mb-4 text-[#40A2D8]">{heading}</h2>
-            <RichText as="p" text={paragraph} className="max-w-xl mb-6 text-white/80" />
+            <RichText as="p" text={paragraph} className="max-w-xl mb-6 text-white" />
             {button}
           </div>
         </div>
@@ -88,9 +88,9 @@ export default function HomeAbout({ content }) {
           request removed for mobile so only the heading and paragraph
           carry the section). */}
       <div className="md:hidden px-6 py-16 text-center">
-        <p className="text-white/60">{eyebrow}</p>
+        <p className="text-white">{eyebrow}</p>
         <h2 className="text-3xl font-bold mb-6 text-[#40A2D8]">{heading}</h2>
-        <RichText as="p" text={paragraph} className="max-w-lg mx-auto mb-6 text-white/80" />
+        <RichText as="p" text={paragraph} className="max-w-lg mx-auto mb-6 text-white" />
         {button}
       </div>
     </section>

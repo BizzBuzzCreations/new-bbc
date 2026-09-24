@@ -56,7 +56,7 @@ export default function BpoHero({ heading, description, img, ctaText = "Start No
         <h1 className="text-white text-3xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">
           {heading}
         </h1>
-        <RichText as="p" text={description} className="text-white/80 leading-relaxed mb-9 max-w-xl" />
+        <RichText as="p" text={description} className="text-white leading-relaxed mb-9 max-w-xl" />
         <div className="md:hidden relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-lg mb-9">
           <Image src={img} alt="" fill sizes="100vw" className="object-cover object-center" />
         </div>

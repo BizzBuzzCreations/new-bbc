@@ -51,7 +51,7 @@ function FlipCard({ number, title, desc, ctaText, services }) {
               uneven. This gives every card's front face the same
               baseline height regardless of how much text it holds. */}
           <h3 className="font-bold text-lg text-white mb-3 min-h-[3.5rem]">{title}</h3>
-          <RichText as="p" text={desc} className="text-sm leading-relaxed text-white/60 mb-5 min-h-[2.75rem]" />
+          <RichText as="p" text={desc} className="text-sm leading-relaxed text-white mb-5 min-h-[2.75rem]" />
           <span
             aria-expanded={open}
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#40A2D8]"
@@ -73,7 +73,7 @@ function FlipCard({ number, title, desc, ctaText, services }) {
             {services.map((service) => (
               <span
                 key={service}
-                className="flex items-center justify-center text-center min-h-[52px] text-xs font-medium text-white/70 bg-white/5 border border-white/10 rounded-lg px-3 py-2 leading-snug transition-colors duration-200 hover:bg-[#0B60B0] hover:border-[#0B60B0] hover:text-white cursor-default"
+                className="flex items-center justify-center text-center min-h-[52px] text-xs font-medium text-white bg-white/5 border border-white/10 rounded-lg px-3 py-2 leading-snug transition-colors duration-200 hover:bg-[#0B60B0] hover:border-[#0B60B0] hover:text-white cursor-default"
               >
                 {service}
               </span>
@@ -141,7 +141,7 @@ export default function ServiceBreakdownGrid({ items, flip = false }) {
                 collapsed card the same footprint regardless of how much
                 its title/desc actually wraps. */}
             <h3 className="font-bold text-lg text-white mb-3 min-h-[3.5rem]">{title}</h3>
-            <RichText as="p" text={desc} className="text-sm leading-relaxed text-white/60 mb-5 min-h-[2.75rem]" />
+            <RichText as="p" text={desc} className="text-sm leading-relaxed text-white mb-5 min-h-[2.75rem]" />
             <button
               type="button"
               onClick={() => setOpenIndex(open ? null : i)}
@@ -163,7 +163,7 @@ export default function ServiceBreakdownGrid({ items, flip = false }) {
                 {services.map((service) => (
                   <span
                     key={service}
-                    className="flex items-center justify-center text-center min-h-[52px] text-xs font-medium text-white/70 bg-white/5 border border-white/10 rounded-lg px-3 py-2 leading-snug transition-colors duration-200 hover:bg-[#0B60B0] hover:border-[#0B60B0] hover:text-white cursor-default"
+                    className="flex items-center justify-center text-center min-h-[52px] text-xs font-medium text-white bg-white/5 border border-white/10 rounded-lg px-3 py-2 leading-snug transition-colors duration-200 hover:bg-[#0B60B0] hover:border-[#0B60B0] hover:text-white cursor-default"
                   >
                     {service}
                   </span>

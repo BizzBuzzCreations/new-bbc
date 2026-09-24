@@ -67,7 +67,7 @@ export default function FaqHero({ content } = {}) {
           <h2 className="mt-4 text-lg sm:text-xl font-semibold text-[#40A2D8]">
             {subheading}
           </h2>
-          <RichText as="p" text={paragraph} className="mt-6 text-white/60 max-w-lg leading-relaxed" />
+          <RichText as="p" text={paragraph} className="mt-6 text-white max-w-lg leading-relaxed" />
           <div className="md:hidden relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-lg mt-6">
             <Image src={backgroundImage} alt="" fill sizes="100vw" className="object-cover object-center" />
           </div>

@@ -60,7 +60,7 @@ export default function GuidesHero({ content } = {}) {
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-5">
           {heading}
         </h1>
-        <RichText as="p" text={paragraph} className="text-white/80 max-w-xl mb-8 leading-relaxed" />
+        <RichText as="p" text={paragraph} className="text-white max-w-xl mb-8 leading-relaxed" />
         <div className="md:hidden relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-lg mb-8">
           <div
             className="absolute inset-0"

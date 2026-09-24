@@ -127,7 +127,7 @@ export default function HomeHero({ content, showWordmark = true, heroMediaChoice
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...reveal, delay: 0.22 }}
-            className="text-lg md:text-xl font-semibold text-white/90 mt-4 mb-4"
+            className="text-lg md:text-xl font-semibold text-white mt-4 mb-4"
           >
             {subheading}
           </motion.h2>

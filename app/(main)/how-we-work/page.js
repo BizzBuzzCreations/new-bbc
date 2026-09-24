@@ -5,6 +5,7 @@ import OnboardingCarousel from "@/components/sections/onboardingCarousel";
 import CategoriesShowcase from "@/components/sections/categoriesShowcase";
 import { INDUSTRIES } from "@/lib/industriesData";
 import RichText from "@/components/ui/richText";
+import CtaSideImage from "@/components/ui/ctaSideImage";
 import { getPageContent } from "@/actions/pageContentActions";
 import { buildPageMetadata } from "@/lib/pageMetadata";
 import {
@@ -325,7 +326,7 @@ export default async function HowWeWorkPage() {
           <RichText
             as="p"
             text={heroParagraph}
-            className="text-white/70 leading-relaxed mb-8 max-w-xl"
+            className="text-white leading-relaxed mb-8 max-w-xl"
           />
           <a href="/contact" className="inline-block">
             <button className="animated-button animated-button-lg whitespace-nowrap">
@@ -359,7 +360,7 @@ export default async function HowWeWorkPage() {
           <RichText
             as="p"
             text={principlesParagraph}
-            className="text-white/70 max-w-2xl mb-14"
+            className="text-white max-w-2xl mb-14"
           />
 
           <div className="grid sm:grid-cols-2 gap-5">
@@ -394,7 +395,7 @@ export default async function HowWeWorkPage() {
                     <RichText
                       as="p"
                       text={desc}
-                      className="text-white/70 text-sm leading-relaxed transition-colors duration-300 group-hover:text-gray-600"
+                      className="text-white text-sm leading-relaxed transition-colors duration-300 group-hover:text-gray-600"
                     />
                   </div>
                 </div>
@@ -423,7 +424,7 @@ export default async function HowWeWorkPage() {
           <RichText
             as="p"
             text={toolsParagraph}
-            className="text-white/70 leading-relaxed max-w-2xl mb-14"
+            className="text-white leading-relaxed max-w-2xl mb-14"
           />
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -439,7 +440,7 @@ export default async function HowWeWorkPage() {
                 <RichText
                   as="p"
                   text={desc}
-                  className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85"
+                  className="text-sm text-white leading-relaxed transition-colors duration-300 group-hover:text-white/85"
                 />
               </div>
             ))}
@@ -456,7 +457,7 @@ export default async function HowWeWorkPage() {
           <RichText
             as="p"
             text={onboardingParagraph}
-            className="text-white/60 max-w-2xl mb-14 leading-relaxed"
+            className="text-white max-w-2xl mb-14 leading-relaxed"
           />
 
           <OnboardingCarousel content={content} />
@@ -475,7 +476,7 @@ export default async function HowWeWorkPage() {
           <RichText
             as="p"
             text={expectationsParagraph}
-            className="text-white/60 max-w-2xl mx-auto mb-14 leading-relaxed"
+            className="text-white max-w-2xl mx-auto mb-14 leading-relaxed"
           />
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
@@ -491,7 +492,7 @@ export default async function HowWeWorkPage() {
                 <RichText
                   as="p"
                   text={desc}
-                  className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85"
+                  className="text-sm text-white leading-relaxed transition-colors duration-300 group-hover:text-white/85"
                 />
               </div>
             ))}
@@ -511,9 +512,9 @@ export default async function HowWeWorkPage() {
           <RichText
             as="p"
             text={industriesParagraph}
-            className="text-white/60 max-w-2xl mx-auto mb-2 leading-relaxed"
+            className="text-white max-w-2xl mx-auto mb-2 leading-relaxed"
           />
-          <p className="text-white/50 text-sm mb-10"></p>
+          <p className="text-white text-sm mb-10"></p>
 
           {/* Mobile: a strict 3-column grid (5 rows for 15 industries)
               instead of flex-wrap, which let differently-sized pills wrap
@@ -524,7 +525,7 @@ export default async function HowWeWorkPage() {
               <Link
                 key={slug}
                 href={`/industries/${slug}`}
-                className="group inline-flex min-w-0 items-center gap-1.5 sm:gap-2 rounded-full border border-white/15 bg-white/5 px-2.5 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-sm font-medium text-white/80 text-center transition-all duration-300 hover:-translate-y-0.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:text-white hover:shadow-lg hover:shadow-black/40"
+                className="group inline-flex min-w-0 items-center gap-1.5 sm:gap-2 rounded-full border border-white/15 bg-white/5 px-2.5 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-sm font-medium text-white text-center transition-all duration-300 hover:-translate-y-0.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:text-white hover:shadow-lg hover:shadow-black/40"
               >
                 <Icon
                   size={14}
@@ -546,7 +547,7 @@ export default async function HowWeWorkPage() {
           <RichText
             as="p"
             text={categoriesParagraph}
-            className="text-white/60 max-w-2xl mb-10 leading-relaxed"
+            className="text-white max-w-2xl mb-10 leading-relaxed"
           />
 
           <CategoriesShowcase />
@@ -567,7 +568,7 @@ export default async function HowWeWorkPage() {
           chevronWrapClassName="bg-white/10"
           chevronClassName="text-white"
           answerClassName="bg-white/5 border border-[#0B60B0]/30 shadow-none"
-          answerTextClassName="text-white/70"
+          answerTextClassName="text-white"
           answerIconWrapClassName="bg-white/10"
           answerIconClassName="text-[#40A2D8]"
         />
@@ -577,20 +578,20 @@ export default async function HowWeWorkPage() {
           visual treatment as it, with a button instead of an email form. */}
       <div className="bg-black px-5 pt-4 pb-10 scroll-mt-34" id="CTA">
         <div
-          className="rounded-3xl border-2 border-[#0B60B0] shadow-lg shadow-black md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto container"
+          className="md:flex md:items-stretch rounded-3xl border-2 border-[#0B60B0] shadow-lg shadow-black md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto container"
           style={{
             background:
               "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(120, 180, 255, 0.25), transparent 70%), #000000",
           }}
         >
-          <div className="py-8 md:py-10 px-6 md:px-10 z-10 text-white">
+          <div className="flex-1 min-w-0 py-8 md:py-10 px-6 md:px-10 z-10 text-white">
             <h3 className="md:text-3xl text-2xl font-bold mb-5">
               {ctaHeading}
             </h3>
             <RichText
               as="p"
               text={ctaParagraph}
-              className="max-w-3xl text-white/70 mb-8"
+              className="max-w-3xl text-white mb-8"
             />
             {/* Full width on mobile (was inline-flex sized to content,
                 which — combined with the card's own padding — left so
@@ -603,6 +604,7 @@ export default async function HowWeWorkPage() {
               {ctaButtonText}
             </Link>
           </div>
+          <CtaSideImage src={content?.ctaImage} />
         </div>
       </div>
 

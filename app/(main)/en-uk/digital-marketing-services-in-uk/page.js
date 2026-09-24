@@ -8,6 +8,7 @@ import StatsShowcase from "@/components/sections/statsShowcase";
 import WhoWeAreBox from "@/components/sections/whoWeAreBox";
 import AiShowcase from "@/components/sections/aiShowcase";
 import Reviews from "@/components/sections/reviews";
+import VideoTestimonial from "@/components/sections/videoTestimonial";
 import WhatMAkesUs from "@/components/sections/whatMakesUs";
 import Recognitions from "@/components/sections/recognitions";
 import IndustriesShowcase from "@/components/sections/industriesShowcase";
@@ -69,6 +70,7 @@ export default async function DigitalMarketingServicesInUk() {
       <Recognitions content={content} />
       <IndustriesShowcase content={content} />
       <Reviews content={content} />
+      <VideoTestimonial content={content} />
       <LatestBlogs dark />
       <div className="bg-black pt-10">
         <FAQ content={content} />

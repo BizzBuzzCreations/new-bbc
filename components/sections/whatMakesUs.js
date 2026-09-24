@@ -62,7 +62,7 @@ export default function WhatMAkesUs({ content }) {
         <h2 className="text-3xl md:text-4xl font-bold mb-2 max-w-4xl text-white">
           {heading}
         </h2>
-        <p className="text-lg text-white/60 max-w-2xl mb-10">
+        <p className="text-lg text-white max-w-2xl mb-10">
           <b className="text-[#40A2D8]">{subtext}</b>
         </p>
       </div>
@@ -88,7 +88,7 @@ export default function WhatMAkesUs({ content }) {
                   className={`absolute -top-4 right-4 flex items-center justify-center w-7 h-7 rounded-full text-[11px] font-bold transition-colors duration-300 ${
                     step.accent
                       ? "bg-[#40A2D8] text-white"
-                      : "bg-white/10 text-white/60 group-hover:bg-white group-hover:text-[#0B60B0]"
+                      : "bg-white/10 text-white group-hover:bg-white group-hover:text-[#0B60B0]"
                   }`}
                 >
                   {i + 1}
@@ -102,7 +102,7 @@ export default function WhatMAkesUs({ content }) {
                 <RichText
                   as="p"
                   text={step.description}
-                  className="text-xs text-white/50 leading-relaxed transition-colors duration-300 group-hover:text-white/85"
+                  className="text-xs text-white leading-relaxed transition-colors duration-300 group-hover:text-white/85"
                 />
               </div>
 
@@ -127,7 +127,7 @@ export default function WhatMAkesUs({ content }) {
               key={step.title}
               className="group relative flex flex-col items-center text-center rounded-2xl border border-white/10 bg-white/[0.03] px-4 pt-7 pb-5 transition-all duration-300 hover:border-[#0B60B0] hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/30"
             >
-              <span className="absolute -top-3 right-4 flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-[11px] font-bold text-white/60">
+              <span className="absolute -top-3 right-4 flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-[11px] font-bold text-white">
                 {i + 1}
               </span>
               <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3 bg-white/10 text-[#40A2D8] transition-all duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
@@ -137,7 +137,7 @@ export default function WhatMAkesUs({ content }) {
               <RichText
                 as="p"
                 text={step.description}
-                className="text-xs text-white/50 transition-colors duration-300 group-hover:text-white/85"
+                className="text-xs text-white transition-colors duration-300 group-hover:text-white/85"
               />
             </div>
           );

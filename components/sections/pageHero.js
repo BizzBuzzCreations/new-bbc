@@ -17,7 +17,7 @@ export default function PageHero({ label, title, subtitle }) {
         {title}
       </h1>
       {subtitle && (
-        <p className="text-white/60 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-white max-w-2xl mx-auto leading-relaxed">
           {subtitle}
         </p>
       )}

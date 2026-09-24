@@ -2,6 +2,7 @@ import Link from "next/link";
 import BpoHero from "@/components/sections/bpoHero";
 import Image from "next/image";
 import RichText from "@/components/ui/richText";
+import CtaSideImage from "@/components/ui/ctaSideImage";
 import BpoServicesGrid from "@/components/sections/bpoServicesGrid";
 import RoadmapCarousel from "@/components/sections/roadmapCarousel";
 import BpoWeAre from "@/components/sections/bpoWeAre";
@@ -85,8 +86,8 @@ export default async function AISolutions() {
                 aria-hidden="true"
               />
             </div>
-            <RichText as="p" text={content.introParagraphOne} className="text-white/70 leading-relaxed mb-4" />
-            <RichText as="p" text={content.introParagraphTwo} className="text-white/70 leading-relaxed" />
+            <RichText as="p" text={content.introParagraphOne} className="text-white leading-relaxed mb-4" />
+            <RichText as="p" text={content.introParagraphTwo} className="text-white leading-relaxed" />
           </div>
         </div>
       </section>
@@ -110,7 +111,7 @@ export default async function AISolutions() {
           <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-2">
             {content.roadmapHeading}
           </h2>
-          <RichText as="p" text={content.roadmapSubtext} className="text-white/60 text-center max-w-2xl mx-auto mb-14" />
+          <RichText as="p" text={content.roadmapSubtext} className="text-white text-center max-w-2xl mx-auto mb-14" />
           <RoadmapCarousel steps={content.roadmapSteps} />
         </div>
       </section>
@@ -140,7 +141,7 @@ export default async function AISolutions() {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 text-center">
             {content.trustHeading}
           </h2>
-          <RichText as="p" text={content.trustSubtext} className="text-white/60 text-center max-w-2xl mx-auto mb-12" />
+          <RichText as="p" text={content.trustSubtext} className="text-white text-center max-w-2xl mx-auto mb-12" />
           <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
             <div>
               <div className="md:hidden relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg mb-6">
@@ -152,8 +153,8 @@ export default async function AISolutions() {
                   className="object-cover"
                 />
               </div>
-              <RichText as="p" text={content.trustParagraphOne} className="text-white/70 leading-relaxed mb-4" />
-              <RichText as="p" text={content.trustParagraphTwo} className="text-white/70 leading-relaxed" />
+              <RichText as="p" text={content.trustParagraphOne} className="text-white leading-relaxed mb-4" />
+              <RichText as="p" text={content.trustParagraphTwo} className="text-white leading-relaxed" />
             </div>
             <div className="hidden md:block relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
               <Image
@@ -172,20 +173,20 @@ export default async function AISolutions() {
           to /contact, instead of the shared email-form CTA. */}
       <div className="bg-black px-5 py-10 scroll-mt-34" id="CTA">
         <div
-          className="rounded-3xl border-2 border-[#0B60B0] shadow-lg shadow-black md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto container"
+          className="md:flex md:items-stretch rounded-3xl border-2 border-[#0B60B0] shadow-lg shadow-black md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto container"
           style={{
             background:
               "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(120, 180, 255, 0.25), transparent 70%), #000000",
           }}
         >
-          <div className="py-8 md:py-10 px-10 z-10 text-white">
+          <div className="flex-1 min-w-0 py-8 md:py-10 px-10 z-10 text-white">
             <h2 className="md:text-3xl text-2xl font-bold mb-2">
               {content.ctaHeading}
             </h2>
             <h3 className="text-base font-semibold text-[#40A2D8] mb-5">
               {content.ctaTagline}
             </h3>
-            <RichText as="p" text={content.ctaParagraph} className="max-w-3xl text-white/70 mb-8" />
+            <RichText as="p" text={content.ctaParagraph} className="max-w-3xl text-white mb-8" />
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/contact"
@@ -201,6 +202,7 @@ export default async function AISolutions() {
               </Link>
             </div>
           </div>
+          <CtaSideImage src={content.ctaImage} />
         </div>
       </div>
 

@@ -722,9 +722,9 @@ export default function Globe({
   if (error) {
     return (
       <div style={containerStyle} className={className}>
-        <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-white/50 text-sm">
+        <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-white text-sm">
           <p>Couldn&rsquo;t load the globe</p>
-          <p className="text-xs text-white/30">{error}</p>
+          <p className="text-xs text-white">{error}</p>
         </div>
       </div>
     );

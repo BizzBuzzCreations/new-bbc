@@ -55,7 +55,7 @@ export default function ServiceScenariosCarousel({ items }) {
                 <p className="text-white font-semibold leading-snug mb-3">
                   {question}
                 </p>
-                <p className="text-sm text-white/50 leading-relaxed mb-6">
+                <p className="text-sm text-white leading-relaxed mb-6">
                   {detail}
                 </p>
               </div>

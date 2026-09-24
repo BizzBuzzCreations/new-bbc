@@ -51,7 +51,7 @@ export default function RoadmapCarousel({ steps }) {
             <RichText
               as="p"
               text={desc}
-              className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/85"
+              className="text-sm text-white leading-relaxed transition-colors duration-300 group-hover:text-white/85"
             />
           </div>
         </SplideSlide>
