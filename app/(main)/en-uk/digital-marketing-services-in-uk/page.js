@@ -48,7 +48,7 @@ export async function generateMetadata() {
       // from here into the rest of the site via any link a bot might
       // otherwise assume exists on a normal landing page.
       index: true,
-      follow: false,
+      follow: true,
     },
   });
 }
