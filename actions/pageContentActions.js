@@ -14,6 +14,28 @@ async function requireSession() {
   return null;
 }
 
+// Local /public images whose filenames contained "&" were renamed to use
+// "and" — the production next/image optimizer returns 400 for any local
+// path with "&" in it. Saved dashboard content can still hold the old
+// paths (a save stores every field, defaults included), so rewrite them
+// on read instead of requiring a database migration.
+const OLD_AMP_IMAGE = /^\/[^?#]*&[^?#]*\.(png|webp|jpe?g)$/i;
+
+function fixRenamedImagePaths(value) {
+  if (typeof value === "string") {
+    return OLD_AMP_IMAGE.test(value)
+      ? value.replace(/ & /g, " and ").replace(/&/g, "and")
+      : value;
+  }
+  if (Array.isArray(value)) return value.map(fixRenamedImagePaths);
+  if (value && Object.getPrototypeOf(value) === Object.prototype) {
+    return Object.fromEntries(
+      Object.entries(value).map(([k, v]) => [k, fixRenamedImagePaths(v)]),
+    );
+  }
+  return value;
+}
+
 // Public read — merges saved overrides on top of the real default copy,
 // so a page that's never been edited renders exactly as it always has.
 export async function getPageContent(pageKey) {
@@ -21,7 +43,7 @@ export async function getPageContent(pageKey) {
   try {
     await connectDB();
     const doc = await PageContent.findOne({ pageKey }).lean();
-    return { ...defaults, ...(doc?.fields || {}) };
+    return { ...defaults, ...fixRenamedImagePaths(doc?.fields || {}) };
   } catch (error) {
     console.error("Get page content failed:", error);
     return defaults;

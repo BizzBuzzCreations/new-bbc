@@ -39,6 +39,13 @@ const nextConfig = {
         destination: "/marketing-automation",
         permanent: true,
       },
+      // Old AI section poster that never existed in /public (can still be
+      // referenced by saved dashboard content or crawler caches).
+      {
+        source: "/aiservice.webp",
+        destination: "/AI solutions 2.png",
+        permanent: true,
+      },
       ...generateBlogRedirects(),
     ];
   },
