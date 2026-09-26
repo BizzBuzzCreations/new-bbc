@@ -79,7 +79,9 @@ const OFFSET_STYLE = {
   4: { x: 770, rotate: 24, scale: 0.5, opacity: 0.15, zIndex: 2 },
 };
 
-export default function CaseStudies({ content }) {
+// `plainLogos` — UK landing page only: slightly larger logos with no white
+// circle behind them (the homepage keeps the white badge).
+export default function CaseStudies({ content, plainLogos = false }) {
   const heading = content?.caseStudiesHeading || "Powered by What We Build";
   const subtext =
     content?.caseStudiesSubtext ||
@@ -195,19 +197,35 @@ export default function CaseStudies({ content }) {
                   : "bg-white/6 border-white/10"
               }`}
             >
-              <div className="w-11 h-11 rounded-full bg-white flex items-center justify-center overflow-hidden shrink-0 mb-4">
+              <div
+                className={`rounded-full flex items-center justify-center overflow-hidden shrink-0 mb-4 ${
+                  plainLogos ? "w-14 h-14" : "w-11 h-11 bg-white"
+                }`}
+              >
                 {client.logo ? (
                   <Image
                     src={client.logo}
                     alt={client.name}
-                    width={40}
-                    height={40}
-                    className="object-contain w-9 h-9"
+                    width={plainLogos ? 56 : 40}
+                    height={plainLogos ? 56 : 40}
+                    // Some uploaded logos are a colored circle on a solid
+                    // white square (not transparent) — zooming slightly
+                    // inside the round clip crops that white ring away.
+                    className={
+                      plainLogos
+                        ? "w-14 h-14 object-cover scale-[1.22]"
+                        : "object-contain w-9 h-9"
+                    }
                   />
                 ) : (
                   (() => {
                     const CardIcon = CARD_ICONS[index % CARD_ICONS.length];
-                    return <CardIcon size={20} className="text-[#0B60B0]" />;
+                    return (
+                      <CardIcon
+                        size={plainLogos ? 28 : 20}
+                        className={plainLogos ? "text-white" : "text-[#0B60B0]"}
+                      />
+                    );;
                   })()
                 )}
               </div>

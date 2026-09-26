@@ -205,12 +205,17 @@ function wrap(value, width) {
 export default function StatsShowcase({ content }) {
   const heading = content?.statsHeading || "Here’s Why Our Way of Working Is Different";
 
-  // Visuals (image/logos/icons) stay fixed — structural — only the
-  // tag/number/label/description text comes from the saved override,
-  // matched by position.
+  // Text and the card image come from the saved override, matched by
+  // position; a card with no uploaded image keeps its built-in photo.
   const stats = STATS.map((stat, i) => {
     const override = content?.statCards?.[i];
-    return override ? { ...stat, ...override } : stat;
+    if (!override) return stat;
+    const { image, ...text } = override;
+    return {
+      ...stat,
+      ...text,
+      visual: image ? { type: "image", src: image, alt: text.label || stat.label } : stat.visual,
+    };
   });
 
   const trackRef = useRef(null);
