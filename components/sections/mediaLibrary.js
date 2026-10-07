@@ -86,7 +86,7 @@ function MediaLibraryModal({ onClose }) {
   };
 
   const handleDelete = async (id) => {
-    if (!confirm("Remove this file from the media library?")) return;
+    if (!confirm("Are you sure, you want to delete this?")) return;
     const prevAssets = assets;
     setAssets((list) => list.filter((a) => a.id !== id));
     const res = await deleteMediaLibraryAsset(id);

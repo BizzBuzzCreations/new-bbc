@@ -46,6 +46,8 @@ const USER_ACCESSIBLE_TABS = [
   "subservices",
   "outsideLocation",
   "submissions",
+  "comments",
+  "seoTools",
 ];
 
 function timeAgo(dateString) {
@@ -136,6 +138,9 @@ export default function Dashboard({ role = "user", name = "" }) {
       getAllSubmissions().then((res) => {
         if (res?.success) setSubmissions(res.data || []);
       });
+      getAllComments().then((res) => {
+        if (res?.success) setComments(res.data || []);
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -201,6 +206,7 @@ export default function Dashboard({ role = "user", name = "" }) {
   };
 
   const handleDeleteJob = async (id) => {
+    if (!window.confirm("Are you sure, you want to delete this?")) return;
     const response = await deleteJob({ id });
     if (response?.success) {
       setJobs((prev) => prev.filter((job) => job._id !== id));
@@ -208,6 +214,7 @@ export default function Dashboard({ role = "user", name = "" }) {
   };
 
   const handleDeleteComment = async (id) => {
+    if (!window.confirm("Are you sure, you want to delete this?")) return;
     const response = await deleteComment({ id });
     if (response?.success) {
       setComments((prev) => prev.filter((item) => item._id !== id));
@@ -215,6 +222,7 @@ export default function Dashboard({ role = "user", name = "" }) {
   };
 
   const handleDeleteSubmission = async (id) => {
+    if (!window.confirm("Are you sure, you want to delete this?")) return;
     const response = await deleteSubmission({ id });
     if (response?.success) {
       setSubmissions((prev) => prev.filter((item) => item._id !== id));
@@ -493,7 +501,7 @@ export default function Dashboard({ role = "user", name = "" }) {
                         {timeAgo(comment.createdAt)}
                       </p>
                     </div>
-                    {isAdmin && (
+                    {(
                       <button
                         className="rounded-md bg-red-50 px-3 py-1 text-sm text-red-500 shrink-0"
                         onClick={() => handleDeleteComment(comment._id)}
@@ -553,7 +561,7 @@ export default function Dashboard({ role = "user", name = "" }) {
                       <span className="rounded-md bg-green-50 px-3 py-1 text-sm text-green-500">
                         {timeAgo(submission.createdAt)}
                       </span>
-                      {isAdmin && (
+                      {(
                         <button
                           className="rounded-md bg-red-50 px-3 py-1 text-sm text-red-500"
                           onClick={() => handleDeleteSubmission(submission._id)}
@@ -579,7 +587,7 @@ export default function Dashboard({ role = "user", name = "" }) {
 
         {activeTab === "outsideLocation" && <DashboardOutsideLocation />}
 
-        {isAdmin && activeTab === "seoTools" && <DashboardSeoTools />}
+        {activeTab === "seoTools" && <DashboardSeoTools />}
 
         {showAddJob && (
           <div

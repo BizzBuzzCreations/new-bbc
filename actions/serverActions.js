@@ -328,8 +328,7 @@ export async function deleteJob({ id }) {
 
 // Function to get all submissions
 export async function getAllSubmissions() {
-  // View access only — any logged-in user (not just admin) can see
-  // submissions now. Deleting one still requires admin (see below).
+  // Any logged-in user (not just admin) can view and delete submissions.
   const unauthorized = await requireSession();
   if (unauthorized) return unauthorized;
 
@@ -363,7 +362,7 @@ export async function getAllSubmissions() {
 
 // Function to delete a form submission
 export async function deleteSubmission({ id }) {
-  const unauthorized = await requireAdmin();
+  const unauthorized = await requireSession();
   if (unauthorized) return unauthorized;
 
   await connectDB();
@@ -419,9 +418,9 @@ export async function getAllComments(slug) {
   try {
     let comments = null;
     if (!slug) {
-      // Bulk "every comment on the site" view is admin-only; per-post
-      // comments (with a slug) stay public for the blog page's own use.
-      const unauthorized = await requireAdmin();
+      // Bulk "every comment on the site" view needs a login (any role);
+      // per-post comments (with a slug) stay public for the blog page.
+      const unauthorized = await requireSession();
       if (unauthorized) return unauthorized;
       comments = await Comment.find({}).sort({ createdAt: -1 }).lean(); // newest first
     } else {
@@ -452,7 +451,7 @@ export async function getAllComments(slug) {
 
 //Function to delete a comment
 export async function deleteComment({ id }) {
-  const unauthorized = await requireAdmin();
+  const unauthorized = await requireSession();
   if (unauthorized) return unauthorized;
 
   await connectDB();

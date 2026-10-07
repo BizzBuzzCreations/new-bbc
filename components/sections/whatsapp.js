@@ -1,6 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 // Loaded lazily and only after the page is idle — the widget isn't needed
 // for first paint, and keeping it out of the main bundle cuts JS parse time
@@ -12,6 +13,7 @@ const FloatingWhatsApp = dynamic(
 
 export default function Whatsapp() {
   const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const show = () => setMounted(true);
@@ -23,7 +25,8 @@ export default function Whatsapp() {
     return () => window.clearTimeout(t);
   }, []);
 
-  if (!mounted) return null;
+  // No chat widget inside the admin/writer dashboard.
+  if (!mounted || pathname?.startsWith("/admin")) return null;
 
   return (
     <FloatingWhatsApp

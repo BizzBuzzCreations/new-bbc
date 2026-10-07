@@ -30,7 +30,7 @@ export default function DashboardBlogs() {
   }, [blogs, searchQuery]);
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Delete this post? This cannot be undone.")) return;
+    if (!window.confirm("Are you sure, you want to delete this?")) return;
     const res = await deleteBlog(id);
     if (res?.success) {
       setBlogs((prev) => prev.filter((blog) => blog._id !== id));

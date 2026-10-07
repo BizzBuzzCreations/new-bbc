@@ -75,7 +75,7 @@ export default function RedirectManager({ pagePath = null }) {
   };
 
   const handleDelete = async (row) => {
-    if (!window.confirm(`Delete the redirect ${row.from} → ${row.to}?`)) return;
+    if (!window.confirm("Are you sure, you want to delete this?")) return;
     setError("");
     const res = await deleteRedirect(row.id);
     if (res?.success) setAll((prev) => prev.filter((r) => r.id !== row.id));

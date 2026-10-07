@@ -127,7 +127,9 @@ function ImageInput({ value, onChange }) {
           {value && (
             <button
               type="button"
-              onClick={() => onChange("")}
+              onClick={() => {
+                if (window.confirm("Are you sure, you want to delete this?")) onChange("");
+              }}
               className="text-xs font-semibold text-red-500"
             >
               Remove
@@ -660,7 +662,10 @@ export default function SeoPanel({ pageKey, page, values, onChange }) {
                   </div>
                   <button
                     type="button"
-                    onClick={() => setHreflang(hreflang.filter((_, idx) => idx !== i))}
+                    onClick={() => {
+                      if (window.confirm("Are you sure, you want to delete this?"))
+                        setHreflang(hreflang.filter((_, idx) => idx !== i));
+                    }}
                     className="rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs font-semibold text-red-500 hover:bg-red-50"
                   >
                     Remove

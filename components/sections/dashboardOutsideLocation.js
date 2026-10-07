@@ -85,7 +85,9 @@ function MediaField({ value, onChange, label, kind }) {
       {value && (
         <button
           type="button"
-          onClick={() => onChange("")}
+          onClick={() => {
+            if (window.confirm("Are you sure, you want to delete this?")) onChange("");
+          }}
           className="rounded-lg border border-red-200 bg-white px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50"
         >
           Remove
@@ -168,6 +170,7 @@ function ListField({ field, items, onChange }) {
   };
 
   const removeItem = (index) => {
+    if (!window.confirm("Are you sure, you want to delete this?")) return;
     onChange(list.filter((_, i) => i !== index));
   };
 
@@ -291,11 +294,8 @@ export default function DashboardOutsideLocation() {
   };
 
   const handleDelete = async () => {
-    const label = created.find((p) => p.pageKey === pageKey)?.label || "this page";
     if (
-      !window.confirm(
-        `Delete "${label}"? The page and everything saved on it will be removed from the website. This can't be undone.`,
-      )
+      !window.confirm("Are you sure, you want to delete this?")
     ) {
       return;
     }

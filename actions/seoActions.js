@@ -17,18 +17,6 @@ async function requireSession() {
   return session ? null : { success: false, message: "Unauthorized." };
 }
 
-// robots.txt and the sitemap decide what Google can see at all, so only
-// admins may change them (page-level SEO stays open to every dashboard
-// user, same as the rest of the page content).
-async function requireAdmin() {
-  const session = await getSession();
-  if (!session) return { success: false, message: "Unauthorized." };
-  if (session.role !== "admin") {
-    return { success: false, message: "Only admins can change this." };
-  }
-  return null;
-}
-
 const plain = (doc) => ({
   id: String(doc._id),
   from: doc.from,
@@ -109,7 +97,7 @@ export async function deleteRedirect(id) {
 // ---- robots.txt -----------------------------------------------------------
 
 export async function getRobotsSettings() {
-  const denied = await requireAdmin();
+  const denied = await requireSession();
   if (denied) return denied;
   try {
     await connectDB();
@@ -130,7 +118,7 @@ export async function getRobotsSettings() {
 
 // mode "auto" goes back to the built-in default; "custom" serves `text`.
 export async function saveRobotsSettings({ mode, text }) {
-  const denied = await requireAdmin();
+  const denied = await requireSession();
   if (denied) return denied;
   try {
     if (mode !== "auto" && mode !== "custom") {
@@ -161,7 +149,7 @@ export async function saveRobotsSettings({ mode, text }) {
 // ---- XML sitemap ----------------------------------------------------------
 
 export async function getSitemapSettings() {
-  const denied = await requireAdmin();
+  const denied = await requireSession();
   if (denied) return denied;
   try {
     await connectDB();
@@ -181,7 +169,7 @@ export async function getSitemapSettings() {
 }
 
 export async function saveSitemapSettings({ mode, xml }) {
-  const denied = await requireAdmin();
+  const denied = await requireSession();
   if (denied) return denied;
   try {
     if (mode !== "auto" && mode !== "custom") {
@@ -215,7 +203,7 @@ export async function saveSitemapSettings({ mode, xml }) {
 // One row per dashboard-editable page, with its current sitemap/index
 // status — drives the include/exclude table in Sitemap & Robots.
 export async function getSitemapPages() {
-  const denied = await requireAdmin();
+  const denied = await requireSession();
   if (denied) return denied;
   try {
     await connectDB();
@@ -241,7 +229,7 @@ export async function getSitemapPages() {
 }
 
 export async function setSitemapInclude(pageKey, include) {
-  const denied = await requireAdmin();
+  const denied = await requireSession();
   if (denied) return denied;
   try {
     if (!PAGE_PATHS[pageKey]) {

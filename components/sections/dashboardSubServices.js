@@ -124,6 +124,7 @@ function ListField({ field, items, onChange }) {
   };
 
   const removeItem = (index) => {
+    if (!window.confirm("Are you sure, you want to delete this?")) return;
     onChange(list.filter((_, i) => i !== index));
   };
 
