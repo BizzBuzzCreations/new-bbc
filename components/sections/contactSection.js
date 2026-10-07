@@ -67,7 +67,10 @@ export default function ContactSection({ content }) {
   const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name } = e.target;
+    let { value } = e.target;
+    // Phone: digits only, max 10 (no letters, "-", "+", spaces).
+    if (name === "contact") value = value.replace(/\D/g, "").slice(0, 10);
     setForm((f) => ({ ...f, [name]: value }));
   };
 
@@ -216,6 +219,8 @@ export default function ContactSection({ content }) {
                   id="email"
                   name="email"
                   type="email"
+                  pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)*\.[a-zA-Z]{2,}"
+                  title="Enter a valid email address, e.g. name@example.com"
                   value={form.email}
                   onChange={handleChange}
                   className={inputClasses}
@@ -255,6 +260,10 @@ export default function ContactSection({ content }) {
                 name="contact"
                 type="tel"
                 inputMode="numeric"
+                pattern="[0-9]{10}"
+                minLength={10}
+                maxLength={10}
+                title="Enter a 10-digit mobile number"
                 value={form.contact}
                 onChange={handleChange}
                 className={inputClasses}

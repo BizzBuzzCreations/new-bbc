@@ -4,6 +4,7 @@ import Job from "@/models/jobs";
 import Submission from "@/models/submissions";
 import Comment from "@/models/comments";
 import { Resend } from "resend";
+import dns from "node:dns/promises";
 import { getSession } from "@/actions/authActions";
 import { revalidatePath } from "next/cache";
 
@@ -36,9 +37,46 @@ const ATTACHMENT_TYPES = {
   docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 };
 
+const EMAIL_RE = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,}$/;
+const DISPOSABLE_DOMAINS = new Set([
+  "mailinator.com", "tempmail.com", "temp-mail.org", "10minutemail.com", "guerrillamail.com",
+  "yopmail.com", "trashmail.com", "sharklasers.com", "getnada.com", "throwawaymail.com",
+  "maildrop.cc", "fakeinbox.com", "dispostable.com", "mailnesia.com", "tempail.com",
+  "test.com", "example.com", "abc.com", "xyz.com",
+]);
+
+// Real-looking address whose domain can actually receive mail (has MX/A).
+async function isGenuineEmail(email) {
+  const value = String(email || "").trim().toLowerCase();
+  if (!EMAIL_RE.test(value) || value.includes("..")) return false;
+  const domain = value.split("@")[1];
+  if (DISPOSABLE_DOMAINS.has(domain)) return false;
+  try {
+    const mx = await dns.resolveMx(domain);
+    if (mx.length > 0) return true;
+  } catch (err) {
+    // Only a definite "no such domain / no mail records" rejects; a DNS
+    // timeout on our side shouldn't block a real visitor.
+    if (err?.code !== "ENOTFOUND" && err?.code !== "ENODATA") return true;
+  }
+  try {
+    return (await dns.resolve4(domain)).length > 0;
+  } catch {
+    return false;
+  }
+}
+
 // `attachment` (optional) = { name, base64 } from the contact form.
 export async function sendMail({ name, email, subject, text, contact, attachment }) {
   const now = Date.now();
+
+  if (!(await isGenuineEmail(email))) {
+    return { success: false, message: "Please enter a valid, genuine email address." };
+  }
+  contact = String(contact || "").trim();
+  if (!/^\d{10}$/.test(contact)) {
+    return { success: false, message: "Contact number must be exactly 10 digits." };
+  }
 
   let file = null;
   if (attachment?.base64) {
@@ -74,8 +112,22 @@ export async function sendMail({ name, email, subject, text, contact, attachment
   await connectDB();
 
   try {
-    // Send email
-    const { data, error } = await resend.emails.send({
+    // Store the submission first so the enquiry (and its attachment) is
+    // never lost, even if the notification email below fails — it still
+    // shows up in the dashboard Submissions tab.
+    const newSub = new Submission({
+      name,
+      email,
+      subject,
+      phone: contact,
+      message: text,
+      ...(file && { attachment: file }),
+    });
+    await newSub.save();
+    lastRequestMap.set(key, now);
+
+    // Notification email (best effort)
+    const { error } = await resend.emails.send({
       from: "BizzBuzz Website <contact@bizzbuzzcreations.com>",
       to: process.env.SITE_MAIL_RECIEVER,
       replyTo: email,
@@ -100,22 +152,7 @@ export async function sendMail({ name, email, subject, text, contact, attachment
     });
     if (error) {
       console.error("EMAIL ERROR:", error);
-      return { success: false, message: "Email failed to send" };
     }
-
-    lastRequestMap.set(key, now);
-
-    // Store submission in database
-    const newSub = new Submission({
-      name,
-      email,
-      subject,
-      phone: contact,
-      message: text,
-      ...(file && { attachment: file }),
-    });
-
-    await newSub.save();
 
     return {
       success: true,
