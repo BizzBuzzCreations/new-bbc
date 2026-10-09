@@ -22,7 +22,7 @@ import {
 // as a separate copy rather than a shared import so this section can
 // evolve independently since it drives a generated registry, not the
 // hand-authored one.
-function MediaField({ value, onChange, label, kind }) {
+function MediaField({ value, onChange, label, kind, allowRemove }) {
   const [uploading, setUploading] = useState(false);
   const isVideo = kind === "video";
 
@@ -75,6 +75,15 @@ function MediaField({ value, onChange, label, kind }) {
           }}
         />
       </label>
+      {allowRemove && value && (
+        <button
+          type="button"
+          onClick={() => onChange("")}
+          className="rounded-lg border border-red-200 bg-white px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50"
+        >
+          Remove {isVideo ? "Video" : "Image"}
+        </button>
+      )}
     </div>
   );
 }
@@ -90,6 +99,7 @@ function FieldControl({ field, value, onChange }) {
         onChange={onChange}
         label={field.label}
         kind={field.type}
+        allowRemove={/cta/i.test(field.key || "")}
       />
     );
   }

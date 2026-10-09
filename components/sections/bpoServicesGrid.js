@@ -25,7 +25,7 @@ export default function BpoServicesGrid({
       )}
       {!subheading && <div className="mb-10" />}
       <div className="grid sm:grid-cols-2 gap-6">
-        {items.map(({ icon: Icon, heading, description, href }) => {
+        {items.map(({ icon: Icon, heading, description, href, linkText = "Learn more →" }) => {
           const Wrapper = href ? Link : "div";
           const wrapperProps = href ? { href } : {};
           return (
@@ -61,9 +61,9 @@ export default function BpoServicesGrid({
                 noLink={Boolean(href)}
                 className="text-sm text-white leading-relaxed"
               />
-              {href && (
+              {href && linkText && (
                 <span className="inline-block mt-3 text-sm font-semibold text-[#40A2D8] group-hover:text-white transition-colors duration-300">
-                  Learn more →
+                  {linkText}
                 </span>
               )}
             </div>

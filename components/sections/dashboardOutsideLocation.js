@@ -136,6 +136,7 @@ function FieldControl({ field, value, onChange }) {
         onChange={onChange}
         label={field.label}
         kind={field.type}
+        allowRemove={/cta/i.test(field.key || "")}
       />
     );
   }

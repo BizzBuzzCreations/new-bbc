@@ -23,6 +23,7 @@ const ibmPlexSans = IBM_Plex_Sans({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://bizzbuzzcreations.com"),
   title: "Best Digital Marketing Agency in India | Bizz Buzz Creations",
   description:
     "Grow your business with Bizz Buzz Creations – India’s top digital marketing and BPO company. We offer SEO, SMM, and lead generation services.",
