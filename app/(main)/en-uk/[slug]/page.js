@@ -25,7 +25,7 @@ export async function generateMetadata({ params }) {
     description:
       "BizzBuzz Creations offers full digital marketing services — SEO, Google Ads, social media & web development.",
     alternates: {
-      canonical: `https://bizzbuzzcreations.com/en-uk/${page.slug}`,
+      canonical: `https://bizzbuzzcreations.com${page.path}`,
     },
     robots: { index: true, follow: true },
   });

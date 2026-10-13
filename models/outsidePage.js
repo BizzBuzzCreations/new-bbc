@@ -9,6 +9,10 @@ const outsidePageSchema = new mongoose.Schema(
     slug: { type: String, required: true, unique: true, index: true },
     pageKey: { type: String, required: true, unique: true },
     label: { type: String, required: true },
+    // Public URL path visitors use (e.g. "/en-ca/my-page" or "/my-page").
+    // Empty = the default "/en-uk/<slug>". The real route is always
+    // /en-uk/<slug>; proxy.js rewrites this path onto it.
+    path: { type: String, default: "" },
   },
   { timestamps: true },
 );

@@ -8,6 +8,7 @@ import {
 import {
   createOutsidePage,
   deleteOutsidePage,
+  updateOutsidePageUrl,
   listOutsidePages,
 } from "@/actions/outsidePageActions";
 import { OUTSIDE_LOCATION_REGISTRY } from "@/lib/outsideLocationRegistry";
@@ -249,6 +250,11 @@ export default function DashboardOutsideLocation() {
   const [formOpen, setFormOpen] = useState(false);
   const [newName, setNewName] = useState("");
   const [newSlug, setNewSlug] = useState("");
+  const [newPrefix, setNewPrefix] = useState("en-uk");
+  // Edit-URL panel for an already created page.
+  const [editPrefix, setEditPrefix] = useState("");
+  const [editSlug, setEditSlug] = useState("");
+  const [urlMsg, setUrlMsg] = useState("");
   const [slugEdited, setSlugEdited] = useState(false);
   const [formError, setFormError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -268,7 +274,26 @@ export default function DashboardOutsideLocation() {
     ...created.map((p) => ({ key: p.pageKey, label: p.label })),
   ];
   const isCreatedPage = created.some((p) => p.pageKey === pageKey);
-  const livePath = originalPathFor(pageKey);
+  const createdPage = created.find((p) => p.pageKey === pageKey);
+  const livePath = createdPage?.path || originalPathFor(pageKey);
+
+  // Load the current prefix/slug into the edit boxes when the page changes.
+  useEffect(() => {
+    const parts = (createdPage?.path || "").split("/").filter(Boolean);
+    const timer = setTimeout(() => {
+      setEditSlug(parts.length ? parts[parts.length - 1] : "");
+      setEditPrefix(parts.slice(0, -1).join("/"));
+      setUrlMsg("");
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [createdPage?.path, pageKey]);
+
+  const cleanPart = (text) =>
+    text
+      .toLowerCase()
+      .replace(/[^a-z0-9/-]+/g, "-")
+      .replace(/-{2,}/g, "-")
+      .replace(/^-+/, "");
 
   const slugify = (text) =>
     text
@@ -280,7 +305,7 @@ export default function DashboardOutsideLocation() {
   const handleCreate = async () => {
     setFormError("");
     setBusy(true);
-    const res = await createOutsidePage({ label: newName, slug: newSlug });
+    const res = await createOutsidePage({ label: newName, slug: newSlug, prefix: newPrefix });
     setBusy(false);
     if (!res?.success) {
       setFormError(res?.message || "Failed to create the page.");
@@ -291,7 +316,21 @@ export default function DashboardOutsideLocation() {
     setFormOpen(false);
     setNewName("");
     setNewSlug("");
+    setNewPrefix("en-uk");
     setSlugEdited(false);
+  };
+
+  const handleUpdateUrl = async () => {
+    setUrlMsg("");
+    setBusy(true);
+    const res = await updateOutsidePageUrl({ pageKey, prefix: editPrefix, slug: editSlug });
+    setBusy(false);
+    if (!res?.success) {
+      setUrlMsg(res?.message || "Failed to update the URL.");
+      return;
+    }
+    setCreated((prev) => prev.map((p) => (p.pageKey === pageKey ? res.page : p)));
+    setUrlMsg("URL updated — the old URL now redirects to the new one.");
   };
 
   const handleDelete = async () => {
@@ -414,9 +453,9 @@ export default function DashboardOutsideLocation() {
             The new page gets exactly the same structure and starting content as
             the UK page — every section, in the same order. Edit its content,
             SEO and sections here afterwards. It lives at{" "}
-            <b>/en-uk/&lt;url-slug&gt;</b>.
+            <b>/&lt;prefix&gt;/&lt;url-slug&gt;</b> — the prefix starts as en-uk but you can change or clear it.
           </p>
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-3">
             <div>
               <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-slate-400">
                 Page name
@@ -429,6 +468,18 @@ export default function DashboardOutsideLocation() {
                   setNewName(e.target.value);
                   if (!slugEdited) setNewSlug(slugify(e.target.value));
                 }}
+                className="w-full rounded-lg border border-slate-200 bg-white px-3.5 py-2.5 text-sm outline-none focus:border-slate-400"
+              />
+            </div>
+            <div>
+              <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-slate-400">
+                URL prefix (optional)
+              </label>
+              <input
+                type="text"
+                value={newPrefix}
+                placeholder="en-uk (leave empty for none)"
+                onChange={(e) => setNewPrefix(cleanPart(e.target.value))}
                 className="w-full rounded-lg border border-slate-200 bg-white px-3.5 py-2.5 text-sm outline-none focus:border-slate-400"
               />
             </div>
@@ -447,7 +498,7 @@ export default function DashboardOutsideLocation() {
                 className="w-full rounded-lg border border-slate-200 bg-white px-3.5 py-2.5 text-sm outline-none focus:border-slate-400"
               />
               <p className="mt-1 text-xs text-slate-400">
-                Live URL: https://bizzbuzzcreations.com/en-uk/{newSlug || "…"}
+                Live URL: https://bizzbuzzcreations.com/{newPrefix ? `${newPrefix.replace(/\/+$/, "")}/` : ""}{newSlug || "…"}
               </p>
             </div>
           </div>
@@ -486,6 +537,44 @@ export default function DashboardOutsideLocation() {
               Delete this page
             </button>
           )}
+        </div>
+      )}
+
+      {isCreatedPage && (
+        <div className="mb-5 rounded-xl border border-slate-100 bg-slate-50/60 p-4">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400">
+            Edit page URL
+          </p>
+          <div className="flex flex-wrap items-end gap-3">
+            <div className="min-w-[160px]">
+              <label className="mb-1 block text-xs text-slate-400">Prefix (empty = none)</label>
+              <input
+                type="text"
+                value={editPrefix}
+                onChange={(e) => setEditPrefix(cleanPart(e.target.value))}
+                placeholder="en-uk"
+                className="w-full rounded-lg border border-slate-200 bg-white px-3.5 py-2.5 text-sm outline-none focus:border-slate-400"
+              />
+            </div>
+            <div className="min-w-[240px] flex-1">
+              <label className="mb-1 block text-xs text-slate-400">Slug</label>
+              <input
+                type="text"
+                value={editSlug}
+                onChange={(e) => setEditSlug(slugify(e.target.value))}
+                className="w-full rounded-lg border border-slate-200 bg-white px-3.5 py-2.5 text-sm outline-none focus:border-slate-400"
+              />
+            </div>
+            <button
+              type="button"
+              onClick={handleUpdateUrl}
+              disabled={busy || !editSlug}
+              className="rounded-[10px] bg-linear-to-br from-indigo-500 to-violet-500 px-5 py-2.5 text-sm font-semibold text-white disabled:opacity-60"
+            >
+              Update URL
+            </button>
+          </div>
+          {urlMsg && <p className="mt-2 text-xs text-slate-500">{urlMsg}</p>}
         </div>
       )}
 
