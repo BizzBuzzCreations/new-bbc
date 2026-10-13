@@ -36,5 +36,7 @@ export async function proxy(request) {
 export const config = {
   // Skip Next internals, the dashboard, API routes and anything with a
   // file extension (images, scripts, robots.txt, sitemap.xml, ...).
-  matcher: ["/((?!_next/|admin|api/|.*\..*).*)"],
+  // Double backslash: in a plain JS string "\." collapses to "." and the
+  // pattern would then exclude every path.
+  matcher: ["/((?!_next/|admin|api/|.*\\..*).*)"],
 };
