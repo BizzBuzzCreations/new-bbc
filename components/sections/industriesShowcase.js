@@ -52,6 +52,7 @@ export default function IndustriesShowcase({ content }) {
   const subtext =
     content?.industriesSubtext ||
     "From healthcare and finance to e-commerce, travel, education, and manufacturing, we deliver digital marketing, SEO, web development, and technology solutions tailored to how your industry works.";
+  const buttonText = content?.industriesButtonText || "Know More";
   const [active, setActive] = useState(0);
   const current = INDUSTRIES[active];
   const Icon = current.icon;
@@ -150,7 +151,7 @@ export default function IndustriesShowcase({ content }) {
                 aria-label={`Know more about ${current.label}`}
                 className="inline-flex items-center gap-1.5 border border-white text-white hover:bg-white hover:text-black rounded-full px-5 py-2.5 text-sm font-semibold transition w-fit"
               >
-                Know More
+                {buttonText}
                 <ArrowUpRight size={16} />
               </Link>
             </motion.div>
@@ -211,7 +212,7 @@ export default function IndustriesShowcase({ content }) {
                   href={`/industries/${current.slug}`}
                   className="inline-flex items-center gap-1.5 border border-white text-white hover:bg-white hover:text-black rounded-full px-5 py-2.5 text-sm font-semibold transition w-fit"
                 >
-                  Know More
+                  {buttonText}
                   <ArrowUpRight size={16} />
                 </Link>
               </motion.div>

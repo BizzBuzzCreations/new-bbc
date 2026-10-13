@@ -16,6 +16,9 @@ export default function CTA({ content, white = false } = {}) {
     content?.ctaParagraph ||
     "Ready to grow your business with trusted digital marketing services in UP? Contact Bizz Buzz Creations today and let’s build your success story together.";
 
+  const emailLabel = content?.ctaEmailLabel || "Email Address";
+  const emailPlaceholder = content?.ctaEmailPlaceholder || "your@email.com";
+
   const [formData, setFormData] = useState({
     email: "",
   });
@@ -88,7 +91,7 @@ export default function CTA({ content, white = false } = {}) {
                   htmlFor="email"
                   className="block text-lg font-medium mb-2 text-white"
                 >
-                  Email Address
+                  {emailLabel}
                 </label>
                 <input
                   onChange={handleChange}
@@ -96,7 +99,7 @@ export default function CTA({ content, white = false } = {}) {
                   type="email"
                   id="email"
                   className="w-full px-4 py-3 text-black border border-gray-300 rounded-full focus:outline-none focus:border-black text-lg"
-                  placeholder="your@email.com"
+                  placeholder={emailPlaceholder}
                   required
                 />
                 <button

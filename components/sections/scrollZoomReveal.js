@@ -25,7 +25,33 @@ const QUICK_LINKS = [
 // the text scales up purely as a function of how far they've scrolled.
 // The pin releases right as the zoom finishes, so the next section
 // scrolls straight in on top of it with no dead gap in between.
-export default function ScrollZoomReveal() {
+export default function ScrollZoomReveal({ content } = {}) {
+  const line1 = content?.zoomLine1 || "Know More";
+  const line2 = content?.zoomLine2 || "About Us";
+  const whoHeading = content?.zoomWhoHeading || "Who We Are";
+  const whoText =
+    content?.zoomWhoText ||
+    "BizzBuzz Creations is a digital marketing and business solutions agency helping businesses in Prayagraj (Allahabad), across India, and international markets build a stronger digital presence. We understand that every business has different goals, audiences, and challenges, so we focus on practical solutions rather than one-size-fits-all marketing.";
+  const buttonText = content?.zoomButtonText || "Learn Our Story";
+  const buttonLink = content?.zoomButtonLink || "/about";
+  const tagline =
+    content?.zoomTagline || "One team, every capability — built to help your business grow.";
+  const stats = content?.zoomStats?.length
+    ? content.zoomStats
+    : [
+        { value: "90+", label: "Projects Delivered" },
+        { value: "50+", label: "Happy Clients" },
+        { value: "20+", label: "Industries Served" },
+      ];
+  // Icons are structural: matched by position to the built-in buttons.
+  const quickLinks = content?.zoomQuickLinks?.length
+    ? content.zoomQuickLinks.map((q, i) => ({
+        icon: QUICK_LINKS[i % QUICK_LINKS.length].icon,
+        label: q.label,
+        href: q.href || "#",
+      }))
+    : QUICK_LINKS;
+
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -98,7 +124,7 @@ export default function ScrollZoomReveal() {
           style={{ opacity: contentOpacity }}
           className="hidden lg:flex absolute right-10 xl:right-20 top-1/2 -translate-y-1/2 flex-col gap-3 w-56"
         >
-          {QUICK_LINKS.map(({ icon: Icon, label, href }) => (
+          {quickLinks.map(({ icon: Icon, label, href }) => (
             <Link
               key={label}
               href={href}
@@ -119,21 +145,16 @@ export default function ScrollZoomReveal() {
           style={{ opacity: contentOpacity }}
           className="hidden lg:block absolute left-10 xl:left-20 top-1/2 -translate-y-1/2 w-72 text-left"
         >
-          <h3 className="text-lg font-bold text-white mb-3">Who We Are</h3>
+          <h3 className="text-lg font-bold text-white mb-3">{whoHeading}</h3>
           <p className="text-sm text-white leading-relaxed mb-5">
-            BizzBuzz Creations is a digital marketing and business solutions
-            agency helping businesses in Prayagraj (Allahabad), across India,
-            and international markets build a stronger digital presence. We
-            understand that every business has different goals, audiences,
-            and challenges, so we focus on practical solutions rather than
-            one-size-fits-all marketing.
+            {whoText}
           </p>
-          <Link href="/about" className="inline-block">
+          <Link href={buttonLink} className="inline-block">
             <button className="animated-button whitespace-nowrap">
               <svg viewBox="0 0 24 24" className="arr-2" xmlns="http://www.w3.org/2000/svg">
                 <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
               </svg>
-              <span className="text">Learn Our Story</span>
+              <span className="text">{buttonText}</span>
               <span className="circle"></span>
               <svg viewBox="0 0 24 24" className="arr-1" xmlns="http://www.w3.org/2000/svg">
                 <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
@@ -155,7 +176,7 @@ export default function ScrollZoomReveal() {
             style={{ opacity: contentOpacity }}
             className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3 lg:hidden"
           >
-            Who We Are
+            {whoHeading}
           </motion.p>
 
           {/* The zoom grows the real font size instead of CSS-scaling a
@@ -171,10 +192,10 @@ export default function ScrollZoomReveal() {
               className="relative"
             >
               <h2 className="text-[1em] font-bold text-white leading-tight whitespace-nowrap">
-                Know More
+                {line1}
               </h2>
               <h2 className="text-[1.6em] font-bold text-[#40A2D8] leading-tight whitespace-nowrap">
-                About Us
+                {line2}
               </h2>
             </motion.div>
           </div>
@@ -198,11 +219,7 @@ export default function ScrollZoomReveal() {
             className="absolute inset-0 flex flex-col items-center justify-center gap-6 sm:gap-10 pointer-events-none"
           >
             <div className="flex items-center gap-8 sm:gap-14">
-              {[
-                { value: "90+", label: "Projects Delivered" },
-                { value: "50+", label: "Happy Clients" },
-                { value: "20+", label: "Industries Served" },
-              ].map(({ value, label }) => (
+              {stats.map(({ value, label }) => (
                 <div key={label} className="text-center">
                   <p className="text-2xl sm:text-4xl font-bold text-[#40A2D8]">{value}</p>
                   <p className="text-[10px] sm:text-xs uppercase tracking-widest text-white mt-1 whitespace-nowrap">
@@ -212,7 +229,7 @@ export default function ScrollZoomReveal() {
               ))}
             </div>
             <p className="text-sm sm:text-base text-white max-w-md text-center px-4">
-              One team, every capability — built to help your business grow.
+              {tagline}
             </p>
           </motion.div>
         </div>

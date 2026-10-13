@@ -84,7 +84,7 @@ export default async function Home() {
       {/* Scroll-pinned "Know More About Us" zoom-text transition — releases
           straight into AiShowcase below with no divider/gap in between, so
           the pin lets go right as the next section is already there. */}
-      <ScrollZoomReveal />
+      {!hidden.has("scrollZoom") && <ScrollZoomReveal content={content} />}
 
       {/* AI showcase — video + AI services split section */}
       {!hidden.has("aiShowcase") && <AiShowcase content={content} />}
@@ -101,7 +101,7 @@ export default async function Home() {
       {/* Reviews section */}
       {!hidden.has("reviews") && <Reviews content={content} />}
 
-      <LatestBlogs dark />
+      {!hidden.has("latestBlogs") && <LatestBlogs dark content={content} />}
 
       <div className="bg-black pt-10">
         {/* FAQ section */}

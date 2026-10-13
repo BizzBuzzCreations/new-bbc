@@ -6,7 +6,12 @@ import { ImageOff, ArrowUpRight, CalendarDays } from "lucide-react";
 import AnimatedButton from "@/components/ui/animatedButton";
 
 // `dark` is opt-in, passed by pages that want the all-black section run.
-export default async function LatestBlogs({ dark = false }) {
+export default async function LatestBlogs({ dark = false, content }) {
+  const heading = content?.blogsHeading || "Our Latest Blogs";
+  const subtext = content?.blogsSubtext || "Explore, discover, and find inspiration through these exciting blogs.";
+  const readMore = content?.blogsReadMoreText || "Read More";
+  const buttonText = content?.blogsButtonText || "View All Blogs";
+  const buttonLink = content?.blogsButtonLink || "/blog";
   const res = await getLatestThreeBlogsMongo();
   const blogs = res.data || [];
 
@@ -24,11 +29,10 @@ export default async function LatestBlogs({ dark = false }) {
         <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">
         </p>
         <h2 className={`md:text-4xl text-3xl font-bold mb-3 ${dark ? "text-white" : "text-black"}`}>
-          Our Latest Blogs
+          {heading}
         </h2>
         <p className={`max-w-xl mx-auto ${dark ? "text-white" : "text-gray-600"}`}>
-          Explore, discover, and find inspiration through these exciting
-          blogs.
+          {subtext}
         </p>
       </div>
 
@@ -114,7 +118,7 @@ export default async function LatestBlogs({ dark = false }) {
                     }`}
                     aria-label={`Read more about ${e?.title}`}
                   >
-                    Read More
+                    {readMore}
                     <span className="sr-only"> about {e?.title}</span>
                     <ArrowUpRight size={14} />
                   </Link>
@@ -127,8 +131,8 @@ export default async function LatestBlogs({ dark = false }) {
           {/* `dark` picks which background this section is rendered on —
               same white-ring/blue-ring split as everywhere else the home
               hero's button effect is reused. */}
-          <AnimatedButton href="/blog" variant={dark ? "white" : "blue"} size="sm">
-            View All Blogs
+          <AnimatedButton href={buttonLink} variant={dark ? "white" : "blue"} size="sm">
+            {buttonText}
           </AnimatedButton>
         </div>
       </div>

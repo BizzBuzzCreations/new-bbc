@@ -13,7 +13,8 @@ export default function HomeAbout({ content, separated = false }) {
   const paragraph =
     content?.aboutParagraph ||
     "BizzBuzz Creations is a digital marketing and business solutions agency helping businesses in Prayagraj (Allahabad), across India, and international markets build a stronger digital presence. We understand that every business has different goals, audiences, and challenges, so we focus on practical solutions rather than one-size-fits-all marketing. Our expertise covers SEO, local SEO, Google Ads, social media marketing, website development, content marketing, AI solutions, and marketing automation. From improving search visibility and generating qualified leads to building better websites and streamlining business processes, we bring multiple digital capabilities under one team. Our goal is simple: help businesses reach the right audience, create meaningful opportunities, and build a digital presence that supports long-term growth.";
-  const buttonText = content?.aboutButtonText || "Learn More";
+  const buttonText = content?.aboutButtonText || "Know More About Us";
+  const buttonLink = content?.aboutButtonLink || "/contact";
   // "/bbc-building.png" was the old default — a dashboard save stores
   // every field, defaults included, so a saved copy of it is treated as
   // "never customised" and gets the new default photo instead.
@@ -24,7 +25,7 @@ export default function HomeAbout({ content, separated = false }) {
       : savedBackground;
 
   const button = (
-    <Link href="/about" aria-label="Learn more about BizzBuzz Creations" className="inline-block max-w-full">
+    <Link href={buttonLink} aria-label={buttonText} className="inline-block max-w-full">
       <button className="animated-button animated-button-lg whitespace-nowrap">
         <svg viewBox="0 0 24 24" className="arr-2" xmlns="http://www.w3.org/2000/svg">
           <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>

@@ -41,6 +41,7 @@ export default function HomeHero({
     content?.heroSubtext ||
     "Looking for a trusted digital marketing agency in Prayagraj that helps your business generate more leads, increase website traffic, and grow revenue? Welcome to BizzBuzz Creations.";
   const ctaText = content?.heroCtaText || "Get Free Consultation";
+  const ctaLink = content?.heroCtaLink || "/contact";
   const chosenVideo = heroMediaChoice ? content?.heroVideo : "";
   const chosenImage = heroMediaChoice && !chosenVideo ? content?.heroPosterImage : "";
 
@@ -273,7 +274,7 @@ export default function HomeHero({
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...reveal, delay: 0.45 }}
           >
-            <Link href="/contact" className="inline-block max-w-full">
+            <Link href={ctaLink} className="inline-block max-w-full">
               <button className="animated-button animated-button-lg whitespace-nowrap">
                 <svg
                   viewBox="0 0 24 24"
