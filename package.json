@@ -29,7 +29,7 @@
     "jsonwebtoken": "^9.0.3",
     "lucide-react": "^0.560.0",
     "mongoose": "^9.10.2",
-    "next": "16.3.6",
+    "next": "16.3.8",
     "ogl": "^1.0.11",
     "react": "19.2.1",
     "react-dom": "19.2.1",
@@ -43,7 +43,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "eslint": "^9",
-    "eslint-config-next": "16.3.6",
+    "eslint-config-next": "16.3.8",
     "tailwindcss": "^4"
   },
   "overrides": {
