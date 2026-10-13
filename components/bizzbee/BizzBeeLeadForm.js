@@ -6,7 +6,7 @@ import { CheckCircle2, Loader2 } from "lucide-react";
 import { SERVICES_FOR_LEAD_FORM } from "@/lib/bizzbee/config";
 
 const field =
-  "w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/40 focus:border-[#40A2D8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#40A2D8]/60";
+  "w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-base sm:text-sm text-white placeholder:text-white/40 focus:border-[#40A2D8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#40A2D8]/60";
 const label = "mb-1 block text-xs font-semibold text-white/80";
 
 // Enquiry form shown inside the chat. Posts to /api/bizzbee/lead (our own

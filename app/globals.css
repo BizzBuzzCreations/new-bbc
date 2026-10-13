@@ -743,53 +743,6 @@ a.animated-button {
   transition: transform 0.12s ease-out;
   will-change: transform;
 }
-.bizzbee-robot-roam {
-  transform-style: preserve-3d;
-}
-@media (prefers-reduced-motion: no-preference) {
-  /* Constant 3D "roaming": drift side to side, swing toward and away from the
-     viewer (translateZ), and turn left/right (rotateY). */
-  @keyframes bizzbee-roam {
-    0% {
-      transform: translate3d(-10px, 0, 0) rotateY(-26deg) rotateX(5deg) rotateZ(-3deg);
-    }
-    25% {
-      transform: translate3d(0, -12px, 46px) rotateY(0deg) rotateX(-4deg) rotateZ(0deg);
-    }
-    50% {
-      transform: translate3d(10px, -4px, 0) rotateY(26deg) rotateX(5deg) rotateZ(3deg);
-    }
-    75% {
-      transform: translate3d(0, -14px, 46px) rotateY(0deg) rotateX(-5deg) rotateZ(0deg);
-    }
-    100% {
-      transform: translate3d(-10px, 0, 0) rotateY(-26deg) rotateX(5deg) rotateZ(-3deg);
-    }
-  }
-  @keyframes bizzbee-floor {
-    0%,
-    50%,
-    100% {
-      transform: scale(1);
-      opacity: 0.9;
-    }
-    25%,
-    75% {
-      transform: scale(0.6);
-      opacity: 0.45;
-    }
-  }
-  .bizzbee-robot-roam {
-    animation: bizzbee-roam 6.5s ease-in-out infinite;
-  }
-  .bizzbee-robot-shadow {
-    animation: bizzbee-floor 6.5s ease-in-out infinite;
-  }
-  .bizzbee-fab:hover .bizzbee-robot-roam,
-  .bizzbee-fab:hover .bizzbee-robot-shadow {
-    animation-duration: 2.6s;
-  }
-}
 @media (prefers-reduced-motion: no-preference) {
   .bizzbee-fab {
     animation: bizzbee-pop 0.45s ease-out both, bizzbee-float 3.2s ease-in-out 1s infinite;

@@ -9,12 +9,15 @@ import Image from "next/image";
 //
 // - lottie-web is imported dynamically (after the page is idle), so it is not
 //   part of the initial bundle; until it loads, the static logo shows.
-// - 3D: the robot constantly "roams" in 3D (CSS keyframes: drifts, swings
-//   toward/away from the viewer, turns left and right) over a floor shadow
-//   that shrinks and grows with it, and also tilts toward the pointer.
+// - The robot's own animation (hovering up and down, blinking, the shadow
+//   breathing) ALWAYS plays — it is small and is the button's identity.
+// - On top of that, the robot drifts around, hops and turns in 3D, leans, and
+//   tilts toward the pointer. Those extra movements are driven from script
+//   (Web Animations API), not from stylesheet keyframes, and are switched off
+//   for visitors who ask their system for reduced motion.
 // - Movable: drag it anywhere on screen (the position is remembered for the
 //   tab). A plain click (no drag) opens / minimizes the chat.
-// - Reduced motion: still frame, no roaming, no tilt.
+// - While the chat is open it is static and not draggable.
 const POS_KEY = "bizzbee-fab-pos";
 
 const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
@@ -24,6 +27,9 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
   const wrapRef = useRef(null);
   const stageRef = useRef(null);
   const lottieBox = useRef(null);
+  const roamEl = useRef(null);
+  const animRef = useRef(null); // the Lottie instance
+  const anims = useRef([]); // Web Animations (roam + lean), so hover can speed them up
   const [ready, setReady] = useState(false);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [offset, setOffset] = useState({ x: 0, y: 0 }); // drag offset from the default corner
@@ -46,25 +52,24 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
     } catch {}
   }, []);
 
-  // Load the Lottie animation (lazy).
+  // Load the Lottie animation (lazy). It always plays.
   useEffect(() => {
     let anim;
     let cancelled = false;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     import("lottie-web").then((mod) => {
       if (cancelled || !lottieBox.current) return;
-      anim = mod.default.loadAnimation({
+      anim = animRef.current = mod.default.loadAnimation({
         container: lottieBox.current,
         renderer: "svg",
         loop: true,
-        autoplay: !reduced,
-        path: "/bizzbee-robot.json",
+        autoplay: true,
+        path: "/bizzbee-robot.json?v=5", // ?v busts the browser cache when the artwork changes
         rendererSettings: { preserveAspectRatio: "xMidYMid meet", progressiveLoad: true },
       });
       anim.addEventListener("DOMLoaded", () => {
         if (cancelled) return;
-        if (reduced) anim.goToAndStop(10, true);
+        anim.play();
         setReady(true);
       });
     });
@@ -72,10 +77,73 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
     return () => {
       cancelled = true;
       anim?.destroy();
+      animRef.current = null;
     };
   }, []);
 
+  // Extra motion (drift / hop / turn, and a lean) via the Web Animations API.
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const list = [];
+    if (roamEl.current?.animate) {
+      list.push(
+        roamEl.current.animate(
+          [
+            { transform: "translate3d(0,0,0) rotateY(0deg) rotateZ(0deg)", offset: 0 },
+            { transform: "translate3d(12px,-14px,24px) rotateY(18deg) rotateZ(3deg)", offset: 0.12 },
+            { transform: "translate3d(16px,2px,0) rotateY(8deg) rotateZ(-2deg)", offset: 0.25 },
+            { transform: "translate3d(2px,-22px,30px) rotateY(-6deg) rotateZ(0deg)", offset: 0.38 }, // hop
+            { transform: "translate3d(-6px,3px,0) rotateY(-14deg) rotateZ(3deg)", offset: 0.46 }, // land
+            { transform: "translate3d(-16px,-10px,18px) rotateY(-20deg) rotateZ(-3deg)", offset: 0.62 },
+            { transform: "translate3d(-6px,4px,0) rotateY(10deg) rotateZ(2deg)", offset: 0.8 },
+            { transform: "translate3d(0,0,0) rotateY(0deg) rotateZ(0deg)", offset: 1 },
+          ],
+          { duration: 8000, iterations: Infinity, easing: "ease-in-out" },
+        ),
+      );
+    }
+    if (lottieBox.current?.animate) {
+      list.push(
+        lottieBox.current.animate(
+          [
+            { transform: "translateY(0) rotate(-3deg)" },
+            { transform: "translateY(-5px) rotate(3deg)" },
+            { transform: "translateY(0) rotate(-3deg)" },
+          ],
+          { duration: 2400, iterations: Infinity, easing: "ease-in-out" },
+        ),
+      );
+    }
+    anims.current = list;
+    return () => {
+      list.forEach((a) => a.cancel());
+      anims.current = [];
+    };
+  }, []);
+
+  const setSpeed = (rate) => anims.current.forEach((a) => (a.playbackRate = rate));
+
+  // While the chat is open the robot is static: all motion stops (it rests at
+  // a neutral pose), it can't be dragged, and it doesn't tilt. Minimizing the
+  // chat brings the motion and dragging back.
+  useEffect(() => {
+    if (expanded) {
+      anims.current.forEach((a) => {
+        a.pause();
+        a.currentTime = 0;
+      });
+      animRef.current?.goToAndStop(40, true);
+      setTilt({ x: 0, y: 0 });
+      drag.current.active = false;
+      setDragging(false);
+    } else {
+      anims.current.forEach((a) => a.play());
+      animRef.current?.play();
+    }
+  }, [expanded, ready]);
+
   const onDown = (e) => {
+    if (expanded) return; // not draggable while the chat is open
     if (e.button !== undefined && e.button !== 0) return;
     const rect = wrapRef.current?.getBoundingClientRect();
     drag.current = { active: true, moved: false, sx: e.clientX, sy: e.clientY, start: offsetRef.current, rect };
@@ -118,7 +186,7 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
       setOffset({ x: d.start.x + cdx, y: d.start.y + cdy });
       return;
     }
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (expanded || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const r = stageRef.current?.getBoundingClientRect();
     if (!r) return;
     const px = (e.clientX - r.left) / r.width - 0.5; // -0.5 … 0.5
@@ -130,13 +198,13 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
   return (
     <div
       ref={wrapRef}
-      className="fixed bottom-2 right-3 z-[9990]"
+      className="fixed bottom-2 right-2 z-[9990] pb-[env(safe-area-inset-bottom)] sm:right-3"
       style={{ transform: `translate3d(${offset.x}px, ${offset.y}px, 0)` }}
     >
       {showTip && (
         <div
           role="status"
-          className="bizzbee-enter absolute right-full top-1/2 mr-2 w-[200px] -translate-y-1/2 rounded-2xl rounded-r-md bg-white px-3.5 py-2.5 pr-8 text-xs font-medium text-[#0a2540] shadow-xl"
+          className="bizzbee-enter absolute bottom-full right-1 mb-1 w-[190px] rounded-2xl rounded-br-md bg-white sm:bottom-auto sm:right-full sm:top-1/2 sm:mb-0 sm:mr-2 sm:w-[200px] sm:-translate-y-1/2 sm:rounded-br-2xl sm:rounded-r-md px-3.5 py-2.5 pr-8 text-xs font-medium text-[#0a2540] shadow-xl"
         >
           Hi! 👋 Not sure which service you need? Ask BizzBee.
           <button
@@ -157,42 +225,48 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
         onPointerUp={onUp}
         onPointerCancel={onUp}
         onPointerMove={onMove}
-        onPointerLeave={resetTilt}
+        onPointerEnter={() => !expanded && setSpeed(2.2)}
+        onPointerLeave={() => {
+          resetTilt();
+          setSpeed(1);
+        }}
         onBlur={resetTilt}
         aria-label={expanded ? "Minimize BizzBee AI assistant" : "Open BizzBee AI assistant"}
         aria-expanded={expanded}
-        title="Ask BizzBee AI (drag to move)"
+        title={expanded ? "Minimize BizzBee AI" : "Ask BizzBee AI (drag to move)"}
         aria-haspopup="dialog"
-        className={`bizzbee-fab relative block h-[128px] w-[156px] touch-none select-none ${dragging ? "cursor-grabbing" : "cursor-pointer"} focus:outline-none focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8] [perspective:520px]`}
+        className={`bizzbee-fab relative block h-[104px] w-[127px] touch-none sm:h-[128px] sm:w-[156px] select-none ${dragging ? "cursor-grabbing" : "cursor-pointer"} focus:outline-none focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8] [perspective:520px]`}
       >
-        {/* Floor shadow: shrinks and softens as the robot lifts toward you */}
-        <span
-          className="bizzbee-robot-shadow pointer-events-none absolute bottom-1 left-[38px] h-3 w-20 rounded-full bg-black/45 blur-[6px]"
-          aria-hidden="true"
-        />
         <span
           ref={stageRef}
           className="bizzbee-fab-stage block h-full w-full"
           style={{ transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }}
         >
-          <span className="bizzbee-robot-roam block h-full w-full">
+          {/* Just the robot (no background shape); it drifts around on its
+              own, and a light halo keeps its black outline readable on dark
+              pages. */}
+          <span ref={roamEl} className="relative block h-full w-full [transform-style:preserve-3d]">
             {/* Static logo until the animation has loaded */}
             {!ready && (
               <Image
-                src="/bizzbee-ai.png"
+                src="/bizzbee-logo.png"
                 alt=""
                 width={160}
                 height={160}
                 sizes="96px"
                 priority
-                className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 object-contain"
+                className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 rounded-full object-cover"
                 draggable={false}
               />
             )}
             <span
               ref={lottieBox}
               aria-hidden="true"
-              className={`pointer-events-none block h-full w-full [filter:drop-shadow(0_8px_10px_rgba(0,0,0,0.45))] transition-opacity duration-300 ${ready ? "opacity-100" : "opacity-0"}`}
+              className={`pointer-events-none absolute inset-0 block transition-opacity duration-300 ${ready ? "opacity-100" : "opacity-0"}`}
+              style={{
+                filter:
+                  "drop-shadow(0 10px 10px rgba(0,0,0,0.5))",
+              }}
             />
           </span>
         </span>

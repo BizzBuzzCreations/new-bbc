@@ -300,11 +300,11 @@ export default function BizzBeeChatWindow({ onClose, visible = true }) {
       role="dialog"
       aria-label="BizzBee AI website assistant"
       onKeyDown={onKeyDown}
-      className={`bizzbee-panel fixed inset-x-3 bottom-[9.5rem] z-[10000] ${visible ? "flex" : "hidden"} h-[min(640px,calc(100dvh-12rem))] flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a] text-white shadow-2xl shadow-black/60 sm:inset-x-auto sm:right-5 sm:w-[390px]`}
+      className={`bizzbee-panel fixed inset-x-2 bottom-[7.5rem] mb-[env(safe-area-inset-bottom)] z-[10000] ${visible ? "flex" : "hidden"} h-[min(640px,calc(100dvh-9.5rem))] flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a] text-white shadow-2xl shadow-black/60 sm:inset-x-auto sm:right-5 sm:bottom-[9.5rem] sm:h-[min(640px,calc(100dvh-12rem))] sm:w-[390px]`}
     >
       {/* Header */}
       <div className="flex items-center gap-3 bg-linear-to-r from-[#0B60B0] to-[#40A2D8] px-4 py-3">
-        <Image src="/bizzbee-ai.png" alt="" width={88} height={88} sizes="44px" className="h-11 w-11 shrink-0 object-contain" />
+        <Image src="/bizzbee-logo.png" alt="" width={88} height={88} sizes="44px" className="h-11 w-11 shrink-0 rounded-full object-cover" />
         <div className="min-w-0 flex-1 leading-tight">
           <p className="text-base font-bold">BizzBee AI</p>
           <p className="text-xs text-white/90">AI Assistant</p>
@@ -521,7 +521,7 @@ export default function BizzBeeChatWindow({ onClose, visible = true }) {
             rows={1}
             maxLength={BIZZBEE.maxMessageChars}
             placeholder="Type your question…"
-            className="max-h-28 min-h-[40px] flex-1 resize-none rounded-2xl border border-white/15 bg-white/5 px-3.5 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-[#40A2D8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#40A2D8]/60"
+            className="max-h-28 min-h-[40px] flex-1 resize-none rounded-2xl border border-white/15 bg-white/5 px-3.5 py-2.5 text-base sm:text-sm text-white placeholder:text-white/40 focus:border-[#40A2D8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#40A2D8]/60"
           />
           <button
             type="submit"
