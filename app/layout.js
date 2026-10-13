@@ -3,7 +3,7 @@ import "./globals.css";
 import Script from "next/script";
 import { ToastContainer, Bounce } from "react-toastify";
 import FlowbiteInit from "@/components/sections/FlowbiteInit";
-import Whatsapp from "@/components/sections/whatsapp";
+import BizzBeeWidget from "@/components/bizzbee/BizzBeeWidget";
 import AllScripts from "@/components/sections/allScripts";
 import ClickSpark from "@/components/ui/ClickSpark";
 import ScrollReveal from "@/components/sections/scrollReveal";
@@ -54,7 +54,7 @@ export default function RootLayout({ children }) {
         className={`${firaSans.variable} ${ibmPlexSans.variable} antialiased`}
         suppressHydrationWarning
       >
-        <Whatsapp />
+        <BizzBeeWidget />
         <FlowbiteInit />
         <ScrollReveal />
         <main>{children}</main>

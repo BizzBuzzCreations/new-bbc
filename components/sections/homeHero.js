@@ -193,7 +193,10 @@ export default function HomeHero({
           >
             {subheading}
           </motion.h2>
-          <motion.p
+          {/* A <div>, not a <p>: the dashboard editor saves this text wrapped in
+              its own <p>…</p>, and a <p> inside a <p> is invalid HTML — the
+              browser splits it and React reports a hydration mismatch. */}
+          <motion.div
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...reveal, delay: 0.3 }}

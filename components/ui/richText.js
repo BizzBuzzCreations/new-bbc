@@ -58,8 +58,14 @@ export default function RichText({ text, as: Tag = "span", className, noLink, ..
   const html = sanitizeInlineRich(text, { noLink, scopeClass });
   if (!html) return null;
 
+  // Saved rich text can itself contain <p> blocks (the editor wraps text in
+  // them). A <p> inside a <p> is invalid HTML — the browser splits it and
+  // React throws a hydration error — so a "p" wrapper renders as a <div>
+  // (same look: Tailwind's reset gives both zero default margins).
+  const Wrapper = Tag === "p" ? "div" : Tag;
+
   return (
-    <Tag
+    <Wrapper
       className={`${RICH_TEXT_CLASS}${scopeClass ? ` ${scopeClass}` : ""} ${className || ""}`}
       dangerouslySetInnerHTML={{ __html: html }}
       {...rest}

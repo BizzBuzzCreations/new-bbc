@@ -662,3 +662,140 @@ a.animated-button {
     text-align: center;
   }
 }
+
+/* BizzBee chat widget — motion is skipped entirely for visitors who ask
+   their system for reduced motion. */
+.bizzbee-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: #40a2d8;
+  opacity: 0.5;
+}
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes bizzbee-pop {
+    from {
+      opacity: 0;
+      transform: translateY(12px) scale(0.92);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes bizzbee-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-3px);
+    }
+  }
+  @keyframes bizzbee-dots {
+    0%,
+    80%,
+    100% {
+      opacity: 0.3;
+      transform: translateY(0);
+    }
+    40% {
+      opacity: 1;
+      transform: translateY(-3px);
+    }
+  }
+  .bizzbee-enter {
+    animation: bizzbee-pop 0.45s ease-out both;
+  }
+  .bizzbee-panel {
+    animation: bizzbee-pop 0.25s ease-out both;
+  }
+  .bizzbee-float {
+    animation: bizzbee-pop 0.45s ease-out both, bizzbee-float 3.2s ease-in-out 1s infinite;
+  }
+  .bizzbee-float:hover {
+    animation-play-state: paused;
+  }
+  .bizzbee-dot {
+    animation: bizzbee-dots 1s infinite ease-in-out;
+  }
+}
+
+/* BizzBee launcher: just the round logo image (transparent PNG) — no
+   button background, ring or edge behind it. A soft drop-shadow follows the
+   circle's shape. Hover grows it slightly, press shrinks it. */
+.bizzbee-fab {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  transition: transform 0.15s ease;
+}
+.bizzbee-fab:hover {
+  transform: scale(1.08);
+}
+.bizzbee-fab:active {
+  transform: scale(0.95);
+}
+/* The robot tilts toward the pointer (rotation is set from JS). */
+.bizzbee-fab-stage {
+  transform-style: preserve-3d;
+  transition: transform 0.12s ease-out;
+  will-change: transform;
+}
+.bizzbee-robot-roam {
+  transform-style: preserve-3d;
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* Constant 3D "roaming": drift side to side, swing toward and away from the
+     viewer (translateZ), and turn left/right (rotateY). */
+  @keyframes bizzbee-roam {
+    0% {
+      transform: translate3d(-10px, 0, 0) rotateY(-26deg) rotateX(5deg) rotateZ(-3deg);
+    }
+    25% {
+      transform: translate3d(0, -12px, 46px) rotateY(0deg) rotateX(-4deg) rotateZ(0deg);
+    }
+    50% {
+      transform: translate3d(10px, -4px, 0) rotateY(26deg) rotateX(5deg) rotateZ(3deg);
+    }
+    75% {
+      transform: translate3d(0, -14px, 46px) rotateY(0deg) rotateX(-5deg) rotateZ(0deg);
+    }
+    100% {
+      transform: translate3d(-10px, 0, 0) rotateY(-26deg) rotateX(5deg) rotateZ(-3deg);
+    }
+  }
+  @keyframes bizzbee-floor {
+    0%,
+    50%,
+    100% {
+      transform: scale(1);
+      opacity: 0.9;
+    }
+    25%,
+    75% {
+      transform: scale(0.6);
+      opacity: 0.45;
+    }
+  }
+  .bizzbee-robot-roam {
+    animation: bizzbee-roam 6.5s ease-in-out infinite;
+  }
+  .bizzbee-robot-shadow {
+    animation: bizzbee-floor 6.5s ease-in-out infinite;
+  }
+  .bizzbee-fab:hover .bizzbee-robot-roam,
+  .bizzbee-fab:hover .bizzbee-robot-shadow {
+    animation-duration: 2.6s;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bizzbee-fab {
+    animation: bizzbee-pop 0.45s ease-out both, bizzbee-float 3.2s ease-in-out 1s infinite;
+  }
+  .bizzbee-fab:hover,
+  .bizzbee-fab:active {
+    animation: none;
+  }
+}

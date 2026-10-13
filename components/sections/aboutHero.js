@@ -58,7 +58,7 @@ export default function AboutHero({ content }) {
         >
           {subheading}
         </motion.h2>
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...reveal, delay: 0.3 }}
