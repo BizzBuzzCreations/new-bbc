@@ -3,8 +3,10 @@ import { BIZZBEE } from "@/lib/bizzbee/config";
 import { validateChatPayload } from "@/lib/bizzbee/sanitize";
 import { checkRateLimit, clientIp, isSameOrigin } from "@/lib/bizzbee/rateLimit";
 import { retrieve, pageContext } from "@/lib/bizzbee/knowledge";
+import { refreshDynamicKnowledge } from "@/lib/bizzbee/dynamicKnowledge";
 import { STABLE_SYSTEM_PROMPT, buildDynamicContext } from "@/lib/bizzbee/systemPrompt";
 import { localAnswer } from "@/lib/bizzbee/localAnswer";
+import { directAnswer } from "@/lib/bizzbee/directAnswer";
 import { SUGGESTED_QUESTIONS } from "@/lib/bizzbee/config";
 
 export const runtime = "nodejs";
@@ -87,6 +89,13 @@ export async function POST(request) {
   if (parsed.error) return json({ error: "bad_request", message: parsed.error }, 400);
   const { messages, page } = parsed;
 
+  // Blog posts and job openings (cached; never throws).
+  await refreshDynamicKnowledge();
+
+  // One specific person / role / industry — a precise reply with only what was asked.
+  const direct = directAnswer(messages);
+  if (direct) return textStream(direct, { "X-BizzBee-Mode": "direct" });
+
   // No API key: answer from the site's stored content instead.
   const anthropic = getClient();
   if (!anthropic) {
@@ -97,7 +106,7 @@ export async function POST(request) {
   // like "how much does it cost?").
   const userTurns = messages.filter((m) => m.role === "user");
   const query = [userTurns.at(-1)?.content, userTurns.at(-2)?.content].filter(Boolean).join(" ");
-  const chunks = retrieve(query, { page });
+  const chunks = retrieve(query, { page, limit: 8, maxChars: 1200 });
   const system = [
     { type: "text", text: STABLE_SYSTEM_PROMPT, cache_control: { type: "ephemeral" } },
     { type: "text", text: buildDynamicContext({ chunks, current: pageContext(page) }) },

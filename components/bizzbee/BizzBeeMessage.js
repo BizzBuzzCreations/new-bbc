@@ -6,7 +6,7 @@ import { LEAD_FORM_TOKEN } from "@/lib/bizzbee/config";
 
 // Renders a chat message as React elements — never as raw HTML — so model
 // output (or a visitor's own text) can't inject markup or scripts. Supports
-// just: **bold**, "- " bullet lists, and [text](href) links, where a link is
+// just: **bold**, "- " bullet lists, "1." numbered lists, and [text](href) links, where a link is
 // only clickable if resolveLink() accepts it (verified site routes + the
 // official contact channels); anything else is shown as plain text.
 
@@ -58,15 +58,20 @@ export default function BizzBeeMessage({ role, content }) {
   const lines = text.split("\n");
   const blocks = [];
   let list = null;
+  let listKind = null;
 
   lines.forEach((line, i) => {
     const bullet = line.match(/^\s*[-*•]\s+(.*)$/);
-    if (bullet) {
-      if (!list) {
+    const numbered = line.match(/^\s*\d+[.)]\s+(.*)$/);
+    const item = bullet || numbered;
+    if (item) {
+      const kind = bullet ? "ul" : "ol";
+      if (!list || listKind !== kind) {
         list = [];
-        blocks.push({ type: "ul", items: list, key: i });
+        listKind = kind;
+        blocks.push({ type: kind, items: list, key: i });
       }
-      list.push(bullet[1]);
+      list.push(item[1]);
     } else {
       list = null;
       if (line.trim()) blocks.push({ type: "p", text: line, key: i });
@@ -76,14 +81,22 @@ export default function BizzBeeMessage({ role, content }) {
   return (
     <div className="space-y-2 break-words [overflow-wrap:anywhere]">
       {blocks.map((b) =>
-        b.type === "ul" ? (
-          <ul key={b.key} className="list-disc space-y-1 pl-5 marker:text-[#40A2D8]">
-            {b.items.map((item, j) => (
-              <li key={j}>
-                <Inline text={item} />
-              </li>
-            ))}
-          </ul>
+        b.type === "ul" || b.type === "ol" ? (
+          (() => {
+            const Tag = b.type;
+            return (
+              <Tag
+                key={b.key}
+                className={`${b.type === "ul" ? "list-disc" : "list-decimal"} space-y-1.5 pl-5 marker:text-[#40A2D8]`}
+              >
+                {b.items.map((item, j) => (
+                  <li key={j}>
+                    <Inline text={item} />
+                  </li>
+                ))}
+              </Tag>
+            );
+          })()
         ) : (
           <p key={b.key}>
             <Inline text={b.text} />
