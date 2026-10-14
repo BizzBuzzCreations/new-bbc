@@ -16,7 +16,7 @@ export default function NotFound() {
       className="min-h-screen flex flex-col justify-center items-center px-4 py-6 text-center"
     >
       <NotFoundAnimation />
-      <h2 className="mt-2 text-3xl font-bold text-slate-900 mb-2">Page Not Found!</h2>
+      <h2 className="mt-4 text-3xl font-bold text-slate-900 mb-2">Page Not Found!</h2>
       <p className="mb-6 text-slate-700">
         Oops! The page you&apos;re looking for doesn&apos;t exist. Don&apos;t
         worry, return to the home page.

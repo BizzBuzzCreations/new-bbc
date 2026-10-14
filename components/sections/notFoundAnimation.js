@@ -8,7 +8,8 @@ import { useEffect, useRef, useState } from "react";
 //
 // - lottie-web is imported dynamically, so it stays out of the initial bundle.
 // - If it fails to load, the GIF itself is shown instead.
-// - Visitors who ask their system for reduced motion get the first frame.
+// - It always plays (like the GIF does). It is a small decorative loop, and it
+//   must not freeze just because the system has animations turned off.
 export default function NotFoundAnimation() {
   const box = useRef(null);
   const [failed, setFailed] = useState(false);
@@ -16,7 +17,6 @@ export default function NotFoundAnimation() {
   useEffect(() => {
     let anim;
     let cancelled = false;
-    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
     import("lottie-web")
       .then((mod) => {
@@ -25,12 +25,13 @@ export default function NotFoundAnimation() {
           container: box.current,
           renderer: "svg",
           loop: true,
-          autoplay: !reduce,
+          autoplay: true,
           path: "/404-blue.json",
           rendererSettings: { preserveAspectRatio: "xMidYMid meet", progressiveLoad: true },
         });
+        // Make sure it is running once the artwork is in the page.
         anim.addEventListener("DOMLoaded", () => {
-          if (!cancelled && reduce) anim.goToAndStop(0, true);
+          if (!cancelled) anim.play();
         });
         anim.addEventListener("data_failed", () => !cancelled && setFailed(true));
       })
@@ -44,7 +45,7 @@ export default function NotFoundAnimation() {
 
   return (
     <div
-      className="relative aspect-square w-[min(92vw,660px,58vh)]"
+      className="relative aspect-square w-[min(98vw,900px,68vh)] -mt-[3%] -mb-[3%]"
       role="img"
       aria-label="Oops! 404 — page not found. A robot showing an error screen."
     >
