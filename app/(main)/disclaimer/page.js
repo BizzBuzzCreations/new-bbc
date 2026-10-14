@@ -11,8 +11,8 @@ export const metadata = {
 export default function DisclaimerPage() {
   return (
     <>
-      <div className="container mx-auto px-5 md:px-20 py-40">
-        <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-2xl p-8 md:p-12">
+      <div className="bg-gray-100 px-4 md:px-10 py-10 md:py-14">
+        <div className="max-w-4xl mx-auto bg-white rounded-2xl border border-gray-200 ring-1 ring-black/5 shadow-[0_12px_40px_-8px_rgba(15,23,42,0.18),0_4px_12px_rgba(15,23,42,0.08)] p-6 sm:p-8 md:p-12">
           <h1 className="text-3xl font-bold mb-2 text-gray-900">Disclaimer</h1>
           <p className="text-sm text-gray-500 mb-6">Last Updated: 24 August 2026</p>
 

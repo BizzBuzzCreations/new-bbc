@@ -136,7 +136,7 @@ export async function uploadContentVideo(formData) {
   const unauthorized = await requireSession();
   if (unauthorized) return unauthorized;
 
-  try {
+  try {    
     const file = formData.get("file");
     if (!file) return { success: false, message: "No file provided." };
 

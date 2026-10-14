@@ -68,7 +68,8 @@ export default function BizzBeeChatWindow({ onClose, visible = true }) {
     fetch("/api/bizzbee/chat")
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => {
-        if (!cancelled && Array.isArray(d?.suggestions)) setSuggestions(d.suggestions);
+        if (!cancelled && Array.isArray(d?.suggestions))
+          setSuggestions(d.suggestions);
       })
       .catch(() => {});
     return () => {
@@ -304,7 +305,14 @@ export default function BizzBeeChatWindow({ onClose, visible = true }) {
     >
       {/* Header */}
       <div className="flex items-center gap-3 bg-linear-to-r from-[#0B60B0] to-[#40A2D8] px-4 py-3">
-        <Image src="/bizzbee-logo.png" alt="" width={88} height={88} sizes="44px" className="h-11 w-11 shrink-0 rounded-full object-cover" />
+        <Image
+          src="/bizzbee-logo.png"
+          alt=""
+          width={88}
+          height={88}
+          sizes="44px"
+          className="h-11 w-11 shrink-0 rounded-full object-cover"
+        />
         <div className="min-w-0 flex-1 leading-tight">
           <p className="text-base font-bold">BizzBee AI</p>
           <p className="text-xs text-white/90">AI Assistant</p>
@@ -358,13 +366,19 @@ export default function BizzBeeChatWindow({ onClose, visible = true }) {
               <BizzBeeMessage role="assistant" content={WELCOME} />
             </div>
             <div className="absolute inset-0" aria-hidden="true">
-              <BizzBeeMessage role="assistant" content={typing ? `${typed}▍` : typed} />
+              <BizzBeeMessage
+                role="assistant"
+                content={typing ? `${typed}▍` : typed}
+              />
             </div>
           </div>
         </Bubble>
 
         {messages.length === 0 && suggestions.length > 0 && (
-          <div className="flex flex-wrap gap-2 pt-1" aria-label="Suggested questions">
+          <div
+            className="flex flex-wrap gap-2 pt-1"
+            aria-label="Suggested questions"
+          >
             {suggestions.slice(0, chipsShown).map((q) => (
               <button
                 key={q}
@@ -540,7 +554,9 @@ export default function BizzBeeChatWindow({ onClose, visible = true }) {
 function Bubble({ role, children }) {
   const mine = role === "user";
   return (
-    <div className={`bizzbee-enter flex ${mine ? "justify-end" : "justify-start"}`}>
+    <div
+      className={`bizzbee-enter flex ${mine ? "justify-end" : "justify-start"}`}
+    >
       <div
         className={`max-w-[88%] rounded-2xl px-3.5 py-2.5 ${
           mine
