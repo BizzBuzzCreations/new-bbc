@@ -36,8 +36,9 @@ function textStream(text, headers = {}) {
   return new Response(
     new ReadableStream({
       async start(controller) {
-        for (let i = 0; i < text.length; i += 4) {
-          controller.enqueue(encoder.encode(text.slice(i, i + 4)));
+        const chars = Array.from(text); // whole characters, so emoji are never split
+        for (let i = 0; i < chars.length; i += 4) {
+          controller.enqueue(encoder.encode(chars.slice(i, i + 4).join("")));
           await new Promise((r) => setTimeout(r, 12));
         }
         controller.close();
