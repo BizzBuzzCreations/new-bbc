@@ -121,8 +121,8 @@ export default function IndustryDetailPage({
       <section
         className={
           heroImage
-            ? "relative min-h-screen flex items-center overflow-hidden pt-10 md:pt-32 pb-12 md:pb-20 px-6 md:px-12 lg:px-24 text-white"
-            : "relative min-h-screen flex items-center overflow-hidden pt-10 md:pt-32 pb-12 md:pb-20 px-6 md:px-12 lg:px-24 text-white"
+            ? "relative md:min-h-screen flex items-center overflow-hidden pt-4 md:pt-32 pb-12 md:pb-20 px-6 md:px-12 lg:px-24 text-white"
+            : "relative md:min-h-screen flex items-center overflow-hidden pt-4 md:pt-32 pb-12 md:pb-20 px-6 md:px-12 lg:px-24 text-white"
         }
         style={
           heroImage
