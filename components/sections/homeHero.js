@@ -73,7 +73,7 @@ export default function HomeHero({
 
   return (
     <>
-      <div className="relative overflow-hidden min-h-screen text-white flex flex-col justify-center pb-30 -mt-14 pt-14 md:-mt-[72px] md:pt-[72px] bg-black">
+      <div className="relative overflow-hidden md:min-h-screen text-white flex flex-col justify-center pb-10 md:pb-30 -mt-14 pt-14 md:-mt-[72px] md:pt-[72px] bg-black">
         {/* Background video — desktop/tablet only. On mobile there's no
             room for a full-bleed video behind the text without it either
             looking cramped or getting cropped oddly, so mobile gets a
@@ -163,12 +163,12 @@ export default function HomeHero({
           />
         )}
 
-        <div className="relative z-10 2xl:px-20 px-5 md:pt-20 pt-6 max-w-3xl">
+        <div className="relative z-10 2xl:px-20 px-5 md:pt-20 pt-4 max-w-3xl flex flex-col md:block">
           <motion.h1
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={reveal}
-            className="md:text-3xl xl:text-4xl text-xl font-bold mb-4"
+            className="md:text-3xl xl:text-4xl text-xl font-bold mb-3 md:mb-4"
           >
             {heading}
           </motion.h1>
@@ -177,7 +177,7 @@ export default function HomeHero({
               initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ ...reveal, delay: 0.15 }}
-              className="animated-text"
+              className="animated-text order-first md:order-none mb-2 md:mb-0"
               viewBox="0 0 1320 220"
             >
               <text x="0" y="50%" dy=".35em" textAnchor="start">
@@ -189,7 +189,7 @@ export default function HomeHero({
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...reveal, delay: 0.22 }}
-            className="text-lg md:text-xl font-semibold text-white mt-4 mb-4"
+            className="text-lg md:text-xl font-semibold hidden md:block text-white mt-2 md:mt-4 mb-3 md:mb-4"
           >
             {subheading}
           </motion.h2>
@@ -200,7 +200,7 @@ export default function HomeHero({
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...reveal, delay: 0.3 }}
-            className={`max-w-xl mb-10 ${RICH_TEXT_CLASS} ${richTextScopeClass(subtext)}`}
+            className={`max-w-xl mb-6 md:mb-10 ${RICH_TEXT_CLASS} ${richTextScopeClass(subtext)}`}
             dangerouslySetInnerHTML={richTextHTML(subtext)}
           />
 
@@ -216,7 +216,7 @@ export default function HomeHero({
               initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ ...reveal, delay: 0.38 }}
-              className="md:hidden relative w-full max-w-sm aspect-video rounded-2xl overflow-hidden shadow-xl mb-8"
+              className="md:hidden relative w-full max-w-sm aspect-video rounded-2xl overflow-hidden shadow-xl mb-6 md:mb-8"
             >
               {heroMediaChoice ? (
                 chosenVideo ? (

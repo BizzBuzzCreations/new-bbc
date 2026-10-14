@@ -16,7 +16,7 @@ export default function GuidesHero({ content } = {}) {
   const heroImage = content?.guidesHeroImage || "/guide.jpg";
 
   return (
-    <section className="relative overflow-hidden min-h-screen flex items-center py-24 md:py-28 px-5 md:px-10 lg:px-16 text-white bg-black">
+    <section className="relative overflow-hidden md:min-h-screen flex items-center pt-4 pb-12 md:py-28 px-5 md:px-10 lg:px-16 text-white bg-black">
       {/* Full-bleed background — desktop/tablet only. On mobile this used
           to cover the entire hero behind the heading/paragraph/buttons,
           making the text hard to read against a busy photo; mobile now
