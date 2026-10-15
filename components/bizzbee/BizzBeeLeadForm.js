@@ -4,6 +4,7 @@ import { useId, useState } from "react";
 import Link from "next/link";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { SERVICES_FOR_LEAD_FORM } from "@/lib/bizzbee/config";
+import { emailProblem, phoneProblem } from "@/lib/bizzbee/leadValidation";
 
 const field =
   "w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-base sm:text-sm text-white placeholder:text-white/40 focus:border-[#40A2D8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#40A2D8]/60";
@@ -39,9 +40,10 @@ export default function BizzBeeLeadForm({ onDone, onCancel, defaultService = "" 
 
     // Client-side checks (the server repeats all of them).
     if (values.name.trim().length < 2) return setError("Please enter your name.");
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(values.email.trim())) return setError("Please enter a valid email address.");
-    const phone = values.phone.replace(/[\s()+-]/g, "");
-    if (phone && !/^\d{7,15}$/.test(phone)) return setError("Phone number should be 7–15 digits, or leave it blank.");
+    const emailError = emailProblem(values.email);
+    if (emailError) return setError(emailError);
+    const phoneError = phoneProblem(values.phone);
+    if (phoneError) return setError(phoneError);
     if (values.description.trim().length < 10) return setError("Please add a short description of what you need.");
     if (!values.consent) return setError("Please accept the privacy consent to continue.");
 
@@ -98,7 +100,18 @@ export default function BizzBeeLeadForm({ onDone, onCancel, defaultService = "" 
       </div>
       <div>
         <label htmlFor={`${uid}-phone`} className={label}>Phone (optional)</label>
-        <input id={`${uid}-phone`} type="tel" inputMode="tel" className={field} value={values.phone} onChange={set("phone")} maxLength={20} autoComplete="tel" />
+        <input
+          id={`${uid}-phone`}
+          type="tel"
+          inputMode="numeric"
+          pattern="[0-9]{10}"
+          placeholder="10-digit mobile number"
+          className={field}
+          value={values.phone}
+          onChange={(e) => setValues((v) => ({ ...v, phone: e.target.value.replace(/\D/g, "").slice(0, 10) }))}
+          maxLength={10}
+          autoComplete="tel-national"
+        />
       </div>
       <div>
         <label htmlFor={`${uid}-service`} className={label}>Service of interest</label>

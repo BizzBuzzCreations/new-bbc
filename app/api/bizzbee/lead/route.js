@@ -4,6 +4,7 @@ import connectDB from "@/db/connect";
 import Submission from "@/models/submissions";
 import { BIZZBEE, SERVICES_FOR_LEAD_FORM } from "@/lib/bizzbee/config";
 import { cleanText } from "@/lib/bizzbee/sanitize";
+import { emailProblem, phoneProblem } from "@/lib/bizzbee/leadValidation";
 import { checkRateLimit, clientIp, isSameOrigin } from "@/lib/bizzbee/rateLimit";
 
 export const runtime = "nodejs";
@@ -84,15 +85,16 @@ export async function POST(request) {
   const service = SERVICES_FOR_LEAD_FORM.includes(body?.service) ? body.service : "";
   const description = cleanText(body?.description, 1200);
   const preferred = ["Email", "Phone call", "WhatsApp"].includes(body?.preferred) ? body.preferred : "";
-  const phoneDigits = String(body?.phone ?? "").replace(/[\s()+-]/g, "");
+  const phoneDigits = String(body?.phone ?? "").trim();
 
   if (name.length < 2) return json({ success: false, message: "Please enter your name." }, 400);
+  const emailError = emailProblem(email);
+  if (emailError) return json({ success: false, message: emailError }, 400);
   if (!(await isGenuineEmail(email))) {
-    return json({ success: false, message: "Please enter a valid email address." }, 400);
+    return json({ success: false, message: "That email address doesn't look real — please use a working email." }, 400);
   }
-  if (phoneDigits && !/^\d{7,15}$/.test(phoneDigits)) {
-    return json({ success: false, message: "Phone number should be 7–15 digits (or leave it blank)." }, 400);
-  }
+  const phoneError = phoneProblem(phoneDigits);
+  if (phoneError) return json({ success: false, message: phoneError }, 400);
   if (description.length < 10) {
     return json({ success: false, message: "Please add a short description of what you need." }, 400);
   }
