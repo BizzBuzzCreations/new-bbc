@@ -148,10 +148,10 @@ export async function generateMetadata() {
 const SERVICE_BG_IMAGES = {
   seo: "/services-bg-image/seo.webp",
   smm: "/services-bg-image/social-media-marketing.webp",
-  paidAds: "/services-bg-image/google-ads-paid-marketing.jpg",
+  paidAds: "/services-bg-image/google-ads-paid-marketing.webp",
   webDev: "/services-bg-image/website-development.webp",
   bpo: "/services-bg-image/bpo-customer-support.webp",
-  ai: "/services-bg-image/ai-solutions.webp",
+  ai: "/services-bg-image/ai-solution.webp",
   automation: "/services-bg-image/marketing-automation.webp",
   consultancy: "/services-bg-image/business-consultancy.webp",
 };
