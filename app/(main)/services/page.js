@@ -144,13 +144,42 @@ export async function generateMetadata() {
 });
 }
 
+// Background photo for each service card, keyed by SERVICES[key].
+const SERVICE_BG_IMAGES = {
+  seo: "/services-bg-image/seo.webp",
+  smm: "/services-bg-image/social-media-marketing.webp",
+  paidAds: "/services-bg-image/google-ads-paid-marketing.jpg",
+  webDev: "/services-bg-image/website-development.webp",
+  bpo: "/services-bg-image/bpo-customer-support.webp",
+  ai: "/services-bg-image/ai-solutions.webp",
+  automation: "/services-bg-image/marketing-automation.webp",
+  consultancy: "/services-bg-image/business-consultancy.webp",
+};
+
 function ServiceCard({ service, description, buttonText }) {
   const Icon = service.icon;
+  const bgImage = SERVICE_BG_IMAGES[service.key];
   return (
     <Link
       href={service.href}
-      className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/20"
+      className="group relative isolate overflow-hidden rounded-2xl border border-white/10 bg-black p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-[#0B60B0]/20"
     >
+      {bgImage && (
+        <>
+          <Image
+            src={bgImage}
+            alt=""
+            fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="-z-20 object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          {/* Dark scrim keeps the text readable; the card colour does not change on hover. */}
+          <div
+            className="absolute inset-0 -z-10 bg-gradient-to-b from-black/75 via-black/70 to-black/85"
+            aria-hidden="true"
+          />
+        </>
+      )}
       <div className="flex items-center justify-between mb-4">
         <span className="flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 text-[#40A2D8] transition-colors duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
           <Icon size={22} />
