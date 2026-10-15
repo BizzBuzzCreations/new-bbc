@@ -94,7 +94,7 @@ export async function POST(request) {
   await refreshDynamicKnowledge();
 
   // One specific person / role / industry — a precise reply with only what was asked.
-  const direct = directAnswer(messages);
+  const direct = directAnswer(messages, page);
   if (direct) return textStream(direct, { "X-BizzBee-Mode": "direct" });
 
   // No API key: answer from the site's stored content instead.
