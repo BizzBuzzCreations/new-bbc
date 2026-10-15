@@ -156,9 +156,10 @@ const SERVICE_BG_IMAGES = {
   consultancy: "/services-bg-image/business-consultancy.webp",
 };
 
-function ServiceCard({ service, description, buttonText }) {
+function ServiceCard({ service, description, buttonText, image }) {
   const Icon = service.icon;
-  const bgImage = SERVICE_BG_IMAGES[service.key];
+  // Image saved in the dashboard wins; otherwise the built-in one for this service.
+  const bgImage = image || SERVICE_BG_IMAGES[service.key];
   return (
     <Link
       href={service.href}
@@ -419,17 +420,17 @@ export default async function ServicesIndexPage() {
           <div className="space-y-6">
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {services.slice(0, 3).map((service) => (
-                <ServiceCard key={service.key} service={service} description={serviceDetailsByKey[service.key]?.description} buttonText={serviceDetailsByKey[service.key]?.buttonText} />
+                <ServiceCard key={service.key} service={service} description={serviceDetailsByKey[service.key]?.description} buttonText={serviceDetailsByKey[service.key]?.buttonText} image={serviceDetailsByKey[service.key]?.image} />
               ))}
             </div>
             <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
               {services.slice(3, 5).map((service) => (
-                <ServiceCard key={service.key} service={service} description={serviceDetailsByKey[service.key]?.description} buttonText={serviceDetailsByKey[service.key]?.buttonText} />
+                <ServiceCard key={service.key} service={service} description={serviceDetailsByKey[service.key]?.description} buttonText={serviceDetailsByKey[service.key]?.buttonText} image={serviceDetailsByKey[service.key]?.image} />
               ))}
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {services.slice(5, 8).map((service) => (
-                <ServiceCard key={service.key} service={service} description={serviceDetailsByKey[service.key]?.description} buttonText={serviceDetailsByKey[service.key]?.buttonText} />
+                <ServiceCard key={service.key} service={service} description={serviceDetailsByKey[service.key]?.description} buttonText={serviceDetailsByKey[service.key]?.buttonText} image={serviceDetailsByKey[service.key]?.image} />
               ))}
             </div>
           </div>

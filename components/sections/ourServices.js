@@ -182,7 +182,8 @@ export default function OurServices({ content }) {
         <div className="relative z-10 flex flex-wrap sm:p-0 p-2 max-w-6xl mx-auto gap-10 items-center justify-center">
           {displayServices.map((service) => {
             const Icon = service.icon;
-            const bgImage = SERVICE_BG_IMAGES[service.href];
+            // Image saved in the dashboard wins; otherwise the built-in one for this service.
+            const bgImage = service.image || SERVICE_BG_IMAGES[service.href];
             return (
               <div
                 key={service.heading}
