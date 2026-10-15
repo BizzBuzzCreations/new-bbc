@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Particles from "@/components/ui/Particles";
 import RichText from "@/components/ui/richText";
 import { resolveIcon } from "@/lib/iconOptions";
@@ -90,6 +91,18 @@ const services = [
   },
 ];
 
+// Background picture for each card, keyed by the service page it links to.
+const SERVICE_BG_IMAGES = {
+  "/bpo-services": "/home-service-bg/bpo-service.webp",
+  "/web-development": "/home-service-bg/website-design.webp",
+  "/search-engine-optimization": "/home-service-bg/seo.webp",
+  "/social-media-marketing": "/home-service-bg/social-media.webp",
+  "/paid-marketing": "/home-service-bg/google-ads.webp",
+  "/ai-solutions": "/home-service-bg/ai-automation.webp",
+  "/marketing-automation": "/home-service-bg/marketing-automation.webp",
+  "/business-consultancy": "/home-service-bg/business-consulting.webp",
+};
+
 export default function OurServices({ content }) {
   const heading =
     content?.servicesHeading || "Digital Marketing & Business Solutions";
@@ -169,24 +182,41 @@ export default function OurServices({ content }) {
         <div className="relative z-10 flex flex-wrap sm:p-0 p-2 max-w-6xl mx-auto gap-10 items-center justify-center">
           {displayServices.map((service) => {
             const Icon = service.icon;
+            const bgImage = SERVICE_BG_IMAGES[service.href];
             return (
               <div
                 key={service.heading}
-                className="group relative max-w-lg overflow-hidden rounded-2xl border border-white/10 hover:border-[#0B60B0] bg-white/5 hover:bg-[#0B60B0] p-6 transition-all duration-300 hover:shadow-xl hover:shadow-[#0B60B0]/30 hover:scale-105 cursor-pointer"
+                className="group relative isolate max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-black p-6 cursor-pointer transition-all duration-300 ease-out hover:scale-105 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/60 hover:z-20"
               >
+                {bgImage && (
+                  <>
+                    <Image
+                      src={bgImage}
+                      alt=""
+                      fill
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                      className="-z-20 object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                    />
+                    {/* Dark scrim keeps the text readable; the card only grows a little on hover; its colour never changes. */}
+                    <div
+                      className="absolute inset-0 -z-10 bg-gradient-to-b from-black/75 via-black/70 to-black/85"
+                      aria-hidden="true"
+                    />
+                  </>
+                )}
                 {/* Content */}
                 <div className="flex items-start gap-4">
                   {/* Icon */}
-                  <div className="text-4xl text-[#40A2D8] p-4 transition-all duration-500 group-hover:bg-white/15 group-hover:text-white rounded-full">
+                  <div className="text-4xl text-[#40A2D8] p-4 rounded-full transition-transform duration-300 group-hover:scale-110">
                     <Icon size={28} />
                   </div>
 
                   {/* Text */}
                   <div>
-                    <h3 className="text-lg font-semibold text-white transition-colors duration-300 group-hover:text-white">
+                    <h3 className="text-lg font-semibold text-white">
                       {service.heading}
                     </h3>
-                    <p className="mt-1 text-sm text-white transition-colors duration-300 group-hover:text-white/85">
+                    <p className="mt-1 text-sm text-white">
                       <b>{service.subheading}</b>
                       <br />
                       {service.description}
@@ -194,7 +224,7 @@ export default function OurServices({ content }) {
                     {/* Button */}
                     <div className="mt-6">
                       <Link href={service.href} className="inline-block">
-                        <button className="rounded-lg py-2 flex gap-2 items-center text-sm font-medium text-[#40A2D8] transition group-hover:text-white">
+                        <button className="rounded-lg py-2 flex gap-2 items-center text-sm font-medium text-[#40A2D8]">
                           {service.buttonText} <MoveRight size={16} />
                         </button>
                       </Link>
