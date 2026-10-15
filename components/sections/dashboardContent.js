@@ -73,7 +73,7 @@ function MediaField({ value, onChange, label, kind, allowRemove }) {
           }}
         />
       </label>
-      {allowRemove && value && (
+      {allowRemove && value !== "" && (
         <button
           type="button"
           onClick={() => onChange("")}
@@ -101,7 +101,7 @@ function FieldControl({ field, value, onChange }) {
         onChange={onChange}
         label={field.label}
         kind={field.type}
-        allowRemove={/cta/i.test(field.key || "")}
+        allowRemove={field.removable || /cta/i.test(field.key || "")}
       />
     );
   }

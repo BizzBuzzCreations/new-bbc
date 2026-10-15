@@ -91,17 +91,17 @@ const services = [
   },
 ];
 
-// Background picture for each card, keyed by the service page it links to.
-const SERVICE_BG_IMAGES = {
-  "/bpo-services": "/home-service-bg/01-bpo-service.webp",
-  "/web-development": "/home-service-bg/02-website-design.webp",
-  "/search-engine-optimization": "/home-service-bg/03-seo.webp",
-  "/social-media-marketing": "/home-service-bg/04-social-media.webp",
-  "/paid-marketing": "/home-service-bg/05-google-ads.webp",
-  "/ai-solutions": "/home-service-bg/06-ai-automation.webp",
-  "/marketing-automation": "/home-service-bg/07-marketing-automation.webp",
-  "/business-consultancy": "/home-service-bg/08-business-consulting.webp",
-};
+// Built-in background picture for each card, in the same order as `services`.
+const SERVICE_BG_IMAGES = [
+  "/home-service-bg/01-bpo-service.webp",
+  "/home-service-bg/02-website-design.webp",
+  "/home-service-bg/03-seo.webp",
+  "/home-service-bg/04-social-media.webp",
+  "/home-service-bg/05-google-ads.webp",
+  "/home-service-bg/06-ai-automation.webp",
+  "/home-service-bg/07-marketing-automation.webp",
+  "/home-service-bg/08-business-consulting.webp",
+];
 
 export default function OurServices({ content }) {
   const heading =
@@ -116,11 +116,13 @@ export default function OurServices({ content }) {
   // (its registry adds those two fields); everywhere else they're never
   // saved, so the built-in icon and link always win.
   const displayServices = services.map((service, i) => {
+    // A saved `image` (even "" = removed in the dashboard) wins over the built-in one.
+    const base = { ...service, image: SERVICE_BG_IMAGES[i] };
     const override = content?.serviceCards?.[i];
-    if (!override) return service;
+    if (!override) return base;
     const { icon, buttonLink, ...text } = override;
     return {
-      ...service,
+      ...base,
       ...text,
       icon: resolveIcon(icon, service.icon),
       href: buttonLink || service.href,
@@ -182,8 +184,7 @@ export default function OurServices({ content }) {
         <div className="relative z-10 flex flex-wrap sm:p-0 p-2 max-w-6xl mx-auto gap-10 items-center justify-center">
           {displayServices.map((service) => {
             const Icon = service.icon;
-            // Image saved in the dashboard wins; otherwise the built-in one for this service.
-            const bgImage = service.image || SERVICE_BG_IMAGES[service.href];
+            const bgImage = service.image;
             return (
               <div
                 key={service.heading}

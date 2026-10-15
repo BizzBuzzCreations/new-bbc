@@ -30,7 +30,7 @@ import { ICON_OPTIONS } from "@/lib/iconOptions";
 // — kept as a separate copy rather than a shared import so this section
 // can evolve independently since it drives a generated registry, not the
 // hand-authored one.
-function MediaField({ value, onChange, label, kind }) {
+function MediaField({ value, onChange, label, kind, removable }) {
   const [uploading, setUploading] = useState(false);
   const isVideo = kind === "video";
 
@@ -83,7 +83,7 @@ function MediaField({ value, onChange, label, kind }) {
           }}
         />
       </label>
-      {value && (
+      {(value || (removable && value !== "")) && (
         <button
           type="button"
           onClick={() => {
@@ -137,7 +137,7 @@ function FieldControl({ field, value, onChange }) {
         onChange={onChange}
         label={field.label}
         kind={field.type}
-        allowRemove={/cta/i.test(field.key || "")}
+        removable={field.removable}
       />
     );
   }

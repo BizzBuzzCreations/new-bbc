@@ -158,8 +158,8 @@ const SERVICE_BG_IMAGES = {
 
 function ServiceCard({ service, description, buttonText, image }) {
   const Icon = service.icon;
-  // Image saved in the dashboard wins; otherwise the built-in one for this service.
-  const bgImage = image || SERVICE_BG_IMAGES[service.key];
+  // A saved image (even "" = removed in the dashboard) wins over the built-in one.
+  const bgImage = image ?? SERVICE_BG_IMAGES[service.key];
   return (
     <Link
       href={service.href}
