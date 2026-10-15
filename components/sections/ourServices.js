@@ -186,7 +186,7 @@ export default function OurServices({ content }) {
             return (
               <div
                 key={service.heading}
-                className="group relative isolate max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-black p-6 cursor-pointer transition-all duration-300 ease-out hover:scale-105 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/60 hover:z-20"
+                className="group relative isolate max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-black p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-[#0B60B0]/20"
               >
                 {bgImage && (
                   <>
@@ -195,9 +195,9 @@ export default function OurServices({ content }) {
                       alt=""
                       fill
                       sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                      className="-z-20 object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                      className="-z-20 object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    {/* Dark scrim keeps the text readable; the card only grows a little on hover; its colour never changes. */}
+                    {/* Dark scrim keeps the text readable; the card itself keeps its image on hover: it lifts, the border glows blue and the icon turns white. */}
                     <div
                       className="absolute inset-0 -z-10 bg-gradient-to-b from-black/75 via-black/70 to-black/85"
                       aria-hidden="true"
@@ -207,7 +207,7 @@ export default function OurServices({ content }) {
                 {/* Content */}
                 <div className="flex items-start gap-4">
                   {/* Icon */}
-                  <div className="text-4xl text-[#40A2D8] p-4 rounded-full transition-transform duration-300 group-hover:scale-110">
+                  <div className="text-4xl text-[#40A2D8] p-4 rounded-full transition-colors duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
                     <Icon size={28} />
                   </div>
 
@@ -216,7 +216,7 @@ export default function OurServices({ content }) {
                     <h3 className="text-lg font-semibold text-white">
                       {service.heading}
                     </h3>
-                    <p className="mt-1 text-sm text-white">
+                    <p className="mt-1 text-sm text-white transition-colors duration-300 group-hover:text-white/85">
                       <b>{service.subheading}</b>
                       <br />
                       {service.description}
@@ -224,7 +224,7 @@ export default function OurServices({ content }) {
                     {/* Button */}
                     <div className="mt-6">
                       <Link href={service.href} className="inline-block">
-                        <button className="rounded-lg py-2 flex gap-2 items-center text-sm font-medium text-[#40A2D8]">
+                        <button className="rounded-lg py-2 flex gap-2 items-center text-sm font-medium text-[#40A2D8] transition-colors duration-300 group-hover:text-white">
                           {service.buttonText} <MoveRight size={16} />
                         </button>
                       </Link>
