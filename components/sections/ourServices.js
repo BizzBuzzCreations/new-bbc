@@ -93,14 +93,14 @@ const services = [
 
 // Background picture for each card, keyed by the service page it links to.
 const SERVICE_BG_IMAGES = {
-  "/bpo-services": "/home-service-bg/bpo-service.webp",
-  "/web-development": "/home-service-bg/website-design.webp",
-  "/search-engine-optimization": "/home-service-bg/seo.webp",
-  "/social-media-marketing": "/home-service-bg/social-media.webp",
-  "/paid-marketing": "/home-service-bg/google-ads.webp",
-  "/ai-solutions": "/home-service-bg/ai-automation.webp",
-  "/marketing-automation": "/home-service-bg/marketing-automation.webp",
-  "/business-consultancy": "/home-service-bg/business-consulting.webp",
+  "/bpo-services": "/home-service-bg/01-bpo-service.webp",
+  "/web-development": "/home-service-bg/02-website-design.webp",
+  "/search-engine-optimization": "/home-service-bg/03-seo.webp",
+  "/social-media-marketing": "/home-service-bg/04-social-media.webp",
+  "/paid-marketing": "/home-service-bg/05-google-ads.webp",
+  "/ai-solutions": "/home-service-bg/06-ai-automation.webp",
+  "/marketing-automation": "/home-service-bg/07-marketing-automation.webp",
+  "/business-consultancy": "/home-service-bg/08-business-consulting.webp",
 };
 
 export default function OurServices({ content }) {
