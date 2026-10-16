@@ -20,6 +20,7 @@ import DashboardServices from "@/components/sections/dashboardServices";
 import DashboardSubServices from "@/components/sections/dashboardSubServices";
 import DashboardOutsideLocation from "@/components/sections/dashboardOutsideLocation";
 import DashboardSeoTools from "@/components/sections/dashboardSeoTools";
+import DashboardLegal from "@/components/sections/dashboardLegal";
 
 const NAV_ITEMS = [
   { id: "overview", label: "Overview", icon: GridIcon },
@@ -33,6 +34,7 @@ const NAV_ITEMS = [
   { id: "subservices", label: "Sub-Service Pages", icon: SubServicesIcon },
   { id: "outsideLocation", label: "Outside Location Page", icon: OutsideLocationIcon },
   { id: "seoTools", label: "Sitemap & Robots", icon: SeoToolsIcon },
+  { id: "legal", label: "Legal Pages", icon: LegalIcon },
 ];
 
 // Non-admin (regular) users only get access to these — everything else
@@ -48,6 +50,7 @@ const USER_ACCESSIBLE_TABS = [
   "submissions",
   "comments",
   "seoTools",
+  "legal",
 ];
 
 function timeAgo(dateString) {
@@ -589,6 +592,8 @@ export default function Dashboard({ role = "user", name = "" }) {
 
         {activeTab === "seoTools" && <DashboardSeoTools />}
 
+        {activeTab === "legal" && <DashboardLegal />}
+
         {showAddJob && (
           <div
             className="fixed inset-0 z-100 flex items-center justify-center bg-slate-900/55 backdrop-blur-sm"
@@ -877,6 +882,25 @@ function SeoToolsIcon({ size = 18 }) {
       <path d="M21 21l-4.3-4.3" />
       <path d="M8 11h6" />
       <path d="M11 8v6" />
+    </svg>
+  );
+}
+
+function LegalIcon({ size = 18 }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
+      <path d="M12 3v18" />
+      <path d="M5 21h14" />
+      <path d="M4 7h16" />
+      <path d="M7 7l-3 7a3 3 0 0 0 6 0L7 7z" />
+      <path d="M17 7l-3 7a3 3 0 0 0 6 0l-3-7z" />
     </svg>
   );
 }

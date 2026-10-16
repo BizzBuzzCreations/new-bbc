@@ -303,9 +303,11 @@ export default async function IndustriesIndexPage() {
       )}
 
       {/* Case studies — real BizzBuzz clients */}
+      {!hidden.has("caseStudies") && (
       <div className="border-t border-white/10">
-        <CaseStudies />
+        <CaseStudies content={content} />
       </div>
+      )}
 
       {/* Certifications carousel */}
       {!hidden.has("industriesCertifications") && (

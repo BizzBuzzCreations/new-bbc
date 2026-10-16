@@ -55,6 +55,7 @@ export default async function OurTeamPage() {
           contactHeroParagraph: content?.teamContactParagraph,
           contactFormHeading: content?.teamContactFormHeading,
           contactFormButtonText: content?.teamContactFormButtonText,
+          contactSteps: content?.teamContactSteps,
         }}
       />
       </>

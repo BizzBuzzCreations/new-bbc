@@ -233,7 +233,7 @@ export default async function GuidesPage() {
       )}
 
       {/* Latest blogs — real, live content from the blog */}
-      <LatestBlogs dark />
+      {!hidden.has("latestBlogs") && <LatestBlogs dark content={content} />}
 
       {/* CTA — just above the footer */}
       {!hidden.has("cta") && (
