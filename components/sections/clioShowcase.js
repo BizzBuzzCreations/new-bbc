@@ -118,10 +118,10 @@ export default function ClioShowcase({ content }) {
               <source src="/Sequence 01 1.mp4" type="video/mp4" />
             </video>
           ) : (
-            // eslint-disable-next-line @next/next/no-img-element -- this
-            // section already ships the poster as a plain background
-            // ahead of the (much heavier) video; no next/image benefit
-            // here since it's swapped out immediately once observed.
+            // This section already ships the poster as a plain background ahead of
+            // the (much heavier) video; no next/image benefit since it's swapped out
+            // immediately once observed.
+            // eslint-disable-next-line @next/next/no-img-element
             <img
               src={posterImage}
               alt=""

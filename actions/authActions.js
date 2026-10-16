@@ -1,16 +1,33 @@
 "use server";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import bcrypt from "bcryptjs";
 import connectDB from "@/db/connect";
 import User from "@/models/user";
+import { checkRateLimit, clientIp } from "@/lib/bizzbee/rateLimit";
 import { signSession, verifySession, SESSION_COOKIE, SESSION_MAX_AGE } from "@/lib/auth";
 
+const LOGIN_WINDOW = [{ windowMs: 15 * 60_000, max: 8 }];
+
 export async function login(username, password) {
-  await connectDB();
   try {
     if (!username || !password) {
       return { success: false, message: "Username and password are required." };
     }
+    username = String(username);
+    password = String(password);
+    if (username.length > 100 || password.length > 200) {
+      return { success: false, message: "Invalid username or password." };
+    }
+
+    // Brute-force guard: attempts are limited per IP and per username.
+    const ip = clientIp({ headers: await headers() });
+    const byIp = checkRateLimit(`login-ip:${ip}`, LOGIN_WINDOW);
+    const byUser = checkRateLimit(`login-user:${username.trim().toLowerCase()}`, LOGIN_WINDOW);
+    if (!byIp.ok || !byUser.ok) {
+      return { success: false, message: "Too many login attempts. Please try again in a few minutes." };
+    }
+
+    await connectDB();
 
     const user = await User.findOne({ username: username.trim() });
     if (!user) {

@@ -7,9 +7,18 @@ import { Resend } from "resend";
 import dns from "node:dns/promises";
 import { getSession } from "@/actions/authActions";
 import { revalidatePath } from "next/cache";
+import { headers } from "next/headers";
+import { checkRateLimit, clientIp } from "@/lib/bizzbee/rateLimit";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 const lastRequestMap = new Map();
+
+const esc = (s) =>
+  String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+
+// Rate-limit key for the visitor calling a public Server Action.
+async function visitorIp() {
+  return clientIp({ headers: await headers() });
+}
 
 async function requireAdmin() {
   const session = await getSession();
@@ -70,6 +79,22 @@ async function isGenuineEmail(email) {
 export async function sendMail({ name, email, subject, text, contact, attachment }) {
   const now = Date.now();
 
+  const limit = checkRateLimit(`contact:${await visitorIp()}`, [
+    { windowMs: 60_000, max: 3 },
+    { windowMs: 3_600_000, max: 10 },
+  ]);
+  if (!limit.ok) {
+    return { success: false, message: "Too many messages. Please try again a little later." };
+  }
+
+  name = String(name || "").trim();
+  subject = String(subject || "").trim();
+  text = String(text || "").trim();
+  email = String(email || "").trim();
+  if (name.length > 100 || email.length > 150 || subject.length > 200 || text.length > 5000) {
+    return { success: false, message: "One of the fields is too long." };
+  }
+
   if (!(await isGenuineEmail(email))) {
     return { success: false, message: "Please enter a valid, genuine email address." };
   }
@@ -127,6 +152,7 @@ export async function sendMail({ name, email, subject, text, contact, attachment
     lastRequestMap.set(key, now);
 
     // Notification email (best effort)
+    const resend = new Resend(process.env.RESEND_API_KEY);
     const { error } = await resend.emails.send({
       from: "BizzBuzz Website <contact@bizzbuzzcreations.com>",
       to: process.env.SITE_MAIL_RECIEVER,
@@ -136,12 +162,12 @@ export async function sendMail({ name, email, subject, text, contact, attachment
       html: `
     <div style="font-family: Arial, sans-serif; background:#f4f7fb; padding:20px;">
       <div style="max-width:600px; margin:0 auto; background:#ffffff; border-radius:8px; padding:20px;">
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Contact:</strong> ${contact}</p>
+        <p><strong>Name:</strong> ${esc(name)}</p>
+        <p><strong>Email:</strong> ${esc(email)}</p>
+        <p><strong>Contact:</strong> ${esc(contact)}</p>
         <hr style="margin:15px 0;" />
         <p><strong>Message:</strong></p>
-        <p style="line-height:1.6;">${text}</p>
+        <p style="line-height:1.6; white-space:pre-wrap;">${esc(text)}</p>
         <hr />
         <p style="font-size:12px; color:#888;">
           This message was sent from your website contact form.
@@ -383,7 +409,9 @@ export async function deleteSubmission({ id }) {
 
 // Function to post comment
 export async function postComment(name, message, blog) {
-  await connectDB();
+  name = String(name || "").trim();
+  message = String(message || "").trim();
+  blog = String(blog || "").trim();
 
   if (!name || !message || !blog) {
     return {
@@ -391,6 +419,19 @@ export async function postComment(name, message, blog) {
       message: "All fields are required.",
     };
   }
+  if (name.length > 100 || message.length > 2000 || blog.length > 200) {
+    return { success: false, message: "Name or comment is too long." };
+  }
+
+  const limit = checkRateLimit(`comment:${await visitorIp()}`, [
+    { windowMs: 60_000, max: 3 },
+    { windowMs: 3_600_000, max: 15 },
+  ]);
+  if (!limit.ok) {
+    return { success: false, message: "Too many comments. Please try again a little later." };
+  }
+
+  await connectDB();
   try {
     const newComment = new Comment({
       name,

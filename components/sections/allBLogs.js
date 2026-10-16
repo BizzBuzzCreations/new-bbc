@@ -108,6 +108,8 @@ export default function AllBLogs() {
     Cookies.set("blogShowAll", showAll, { expires: 1 / 24 });
     Cookies.set("selectedCat", JSON.stringify(selected), { expires: 1 / 24 });
     return () => clearTimeout(timer);
+    // getBlogs is re-created every render; re-running on it would loop.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showAll, currPage, posts, selected]);
 
   function truncateHTML(html, limit = 120) {
@@ -284,6 +286,7 @@ export default function AllBLogs() {
                     className="block overflow-hidden rounded-xl aspect-[1.91/1] bg-white/10"
                   >
                     {featuredImage ? (
+                      // eslint-disable-next-line @next/next/no-img-element -- user/dashboard-supplied URL (Cloudinary etc.), not a fixed host
                       <img
                         src={optimizedImageUrl(featuredImage, 640)}
                         srcSet={imageSrcSet(featuredImage, [400, 640, 900])}

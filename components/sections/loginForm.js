@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { login } from "@/actions/authActions";
@@ -34,10 +35,13 @@ export default function LoginForm() {
         className="w-full max-w-sm rounded-2xl border border-slate-100 bg-white p-8 shadow-sm"
       >
         <div className="mb-6 flex justify-center">
-          <img
+          <Image
             src="/BBC Dark Logo.png"
             alt="BizzBuzz Creations"
-            className="h-12 object-contain"
+            width={200}
+            height={48}
+            priority
+            className="h-12 w-auto object-contain"
           />
         </div>
         <h1 className="mb-6 text-center text-xl font-extrabold text-slate-900">

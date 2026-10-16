@@ -22,6 +22,7 @@ export default function ServiceCard({
           className="z-50 h-5 w-5 absolute top-3 right-3 text-white transition duration-1000 group-hover:scale-[2] group-hover:rotate-[410deg] group-hover:-translate-y-3 group-hover:translate-x-3"
         />
       ) : (
+        // eslint-disable-next-line @next/next/no-img-element -- user/dashboard-supplied URL (Cloudinary etc.), not a fixed host
         <img
           className="z-50 h-5 w-5 absolute top-3 right-3 rounded-full outline outline-gray-100/15 transition duration-1000 group-hover:scale-[2] group-hover:rotate-[410deg] group-hover:-translate-y-3 group-hover:translate-x-3"
           height="20"
@@ -37,6 +38,7 @@ export default function ServiceCard({
             <Icon className="h-8 w-8 text-white" />
           </div>
         ) : (
+          // eslint-disable-next-line @next/next/no-img-element -- user/dashboard-supplied URL (Cloudinary etc.), not a fixed host
           <img
             className="h-16 w-16 rounded-2xl object-contain shadow-md border border-gray-100/20 transition duration-300 group-hover:scale-95"
             height="64"

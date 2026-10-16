@@ -62,7 +62,7 @@ export default function CommentSidebar({ slug }) {
       if (res?.success) setComments(res?.data);
     };
     fetchAllComments();
-  }, []);
+  }, [slug]);
 
   const handlePost = async () => {
     if (!name.trim() || !text.trim()) {

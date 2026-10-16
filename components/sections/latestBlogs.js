@@ -56,6 +56,7 @@ export default async function LatestBlogs({ dark = false, content }) {
                   className={`block overflow-hidden aspect-[1.91/1] ${dark ? "bg-white/10" : "bg-gray-100"}`}
                 >
                   {featuredImage ? (
+                    // eslint-disable-next-line @next/next/no-img-element -- user/dashboard-supplied URL (Cloudinary etc.), not a fixed host
                     <img
                       src={optimizedImageUrl(featuredImage, 640)}
                       srcSet={imageSrcSet(featuredImage, [400, 640, 900])}

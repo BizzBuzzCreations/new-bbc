@@ -285,6 +285,7 @@ export default function BlogEditor({ initialData = null }) {
             Featured image
           </label>
           {form.featuredImage && (
+            // eslint-disable-next-line @next/next/no-img-element -- user/dashboard-supplied URL (Cloudinary etc.), not a fixed host
             <img
               src={form.featuredImage}
               alt="Featured"

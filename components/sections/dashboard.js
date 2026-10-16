@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import Image from "next/image";
 import {
   publishJob,
   updateJob,
@@ -32,7 +33,11 @@ const NAV_ITEMS = [
   { id: "industries", label: "Industries Pages", icon: IndustriesIcon },
   { id: "services", label: "Services Pages", icon: ServicesIcon },
   { id: "subservices", label: "Sub-Service Pages", icon: SubServicesIcon },
-  { id: "outsideLocation", label: "Outside Location Page", icon: OutsideLocationIcon },
+  {
+    id: "outsideLocation",
+    label: "Outside Location Page",
+    icon: OutsideLocationIcon,
+  },
   { id: "seoTools", label: "Sitemap & Robots", icon: SeoToolsIcon },
   { id: "legal", label: "Legal Pages", icon: LegalIcon },
 ];
@@ -291,11 +296,13 @@ export default function Dashboard({ role = "user", name = "" }) {
         style={{ width: sidebarOpen ? 240 : 72 }}
       >
         <div className="flex shrink-0 items-center gap-2.5 border-b border-slate-800 px-5 pb-7">
-          <div className="flex h-[50px] w-[200px] shrink-0 items-center justify-center overflow-hidden rounded-[10px]">
-            <img
+          <div className="relative flex h-[50px] w-[200px] shrink-0 items-center justify-center overflow-hidden rounded-[10px]">
+            <Image
               src="/bbc logo white.png"
               alt="BizzBuzz Creations Logo"
-              className="h-full w-full object-contain"
+              fill
+              sizes="200px"
+              className="object-contain"
             />
           </div>
         </div>
@@ -339,7 +346,9 @@ export default function Dashboard({ role = "user", name = "" }) {
             <h1 className="text-2xl font-extrabold text-slate-900">
               {isAdmin ? "Admin Dashboard" : "Blog Dashboard"}
             </h1>
-            {name && <p className="text-sm text-slate-400">Logged in as {name}</p>}
+            {name && (
+              <p className="text-sm text-slate-400">Logged in as {name}</p>
+            )}
           </div>
 
           <div className="flex items-center gap-2.5">
@@ -364,35 +373,35 @@ export default function Dashboard({ role = "user", name = "" }) {
         </div>
 
         {isAdmin && (
-        <div className="grid grid-cols-1 gap-[18px] md:grid-cols-2 xl:grid-cols-3">
-          {stats.map((s) => {
-            const Icon = s.icon;
-            return (
-              <div
-                key={s.label}
-                className="rounded-2xl border border-slate-100 bg-white px-6 py-[22px] shadow-[0_1px_3px_rgba(0,0,0,0.06)]"
-              >
-                <div className="flex items-start justify-between">
-                  <div>
-                    <p className="mb-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-slate-400">
-                      {s.label}
-                    </p>
-                    <p className="mb-0.5 text-[36px] font-extrabold tracking-[-1px] text-slate-900">
-                      {s.value}
-                    </p>
-                    <p className="text-xs text-slate-400">{s.sub}</p>
-                  </div>
-                  <div
-                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
-                    style={{ background: s.bg, color: s.color }}
-                  >
-                    <Icon size={22} />
+          <div className="grid grid-cols-1 gap-[18px] md:grid-cols-2 xl:grid-cols-3">
+            {stats.map((s) => {
+              const Icon = s.icon;
+              return (
+                <div
+                  key={s.label}
+                  className="rounded-2xl border border-slate-100 bg-white px-6 py-[22px] shadow-[0_1px_3px_rgba(0,0,0,0.06)]"
+                >
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <p className="mb-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-slate-400">
+                        {s.label}
+                      </p>
+                      <p className="mb-0.5 text-[36px] font-extrabold tracking-[-1px] text-slate-900">
+                        {s.value}
+                      </p>
+                      <p className="text-xs text-slate-400">{s.sub}</p>
+                    </div>
+                    <div
+                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+                      style={{ background: s.bg, color: s.color }}
+                    >
+                      <Icon size={22} />
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
         )}
 
         {activeTab === "blogs" && <DashboardBlogs />}
@@ -504,14 +513,14 @@ export default function Dashboard({ role = "user", name = "" }) {
                         {timeAgo(comment.createdAt)}
                       </p>
                     </div>
-                    {(
+                    {
                       <button
                         className="rounded-md bg-red-50 px-3 py-1 text-sm text-red-500 shrink-0"
                         onClick={() => handleDeleteComment(comment._id)}
                       >
                         Delete
                       </button>
-                    )}
+                    }
                   </div>
                 </div>
               ))}
@@ -564,14 +573,14 @@ export default function Dashboard({ role = "user", name = "" }) {
                       <span className="rounded-md bg-green-50 px-3 py-1 text-sm text-green-500">
                         {timeAgo(submission.createdAt)}
                       </span>
-                      {(
+                      {
                         <button
                           className="rounded-md bg-red-50 px-3 py-1 text-sm text-red-500"
                           onClick={() => handleDeleteSubmission(submission._id)}
                         >
                           Delete
                         </button>
-                      )}
+                      }
                     </div>
                   </div>
                 </div>

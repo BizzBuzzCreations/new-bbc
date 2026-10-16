@@ -57,10 +57,6 @@ export default function OurJourney({ content }) {
     return () => clearInterval(id);
   }, [YEARS.length]);
 
-  useEffect(() => {
-    if (active >= YEARS.length) setActive(0);
-  }, [YEARS.length, active]);
-
   const current = YEARS[active] || YEARS[0];
 
   return (

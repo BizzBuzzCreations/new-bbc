@@ -1,4 +1,4 @@
-import generateBlogRedirects from "./lib/blogRedirects.js";
+import generateBlogRedirects from "./lib/blogRedirects.mjs";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

@@ -65,6 +65,7 @@ export default async function Blogs() {
                   className="block overflow-hidden rounded-xl aspect-[1.91/1] bg-white/10"
                 >
                   {featuredImage ? (
+                    // eslint-disable-next-line @next/next/no-img-element -- user/dashboard-supplied URL (Cloudinary etc.), not a fixed host
                     <img
                       src={featuredImage}
                       className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"

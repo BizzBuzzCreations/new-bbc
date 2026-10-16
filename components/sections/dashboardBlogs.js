@@ -17,7 +17,16 @@ export default function DashboardBlogs() {
   };
 
   useEffect(() => {
-    fetchBlogs();
+    let cancelled = false;
+    (async () => {
+      const res = await getAllBlogsAdmin();
+      if (cancelled) return;
+      if (res?.success) setBlogs(res.data || []);
+      setLoading(false);
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const filteredBlogs = useMemo(() => {
