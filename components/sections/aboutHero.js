@@ -36,17 +36,20 @@ export default function AboutHero({ content }) {
 
   return (
     <div
-      className="min-h-screen pt-10 md:pt-32 md:-mt-[72px] lg:text-left text-center text-white gap-10 flex 2xl:px-15 px-5 lg:flex-row flex-col justify-center items-center bg-gray-100 pb-12 md:pb-20"
+      className="min-h-screen pt-10 md:pt-32 md:-mt-[72px] lg:text-left text-center text-white gap-10 max-md:gap-6 flex 2xl:px-15 px-5 lg:flex-row flex-col justify-center items-center bg-gray-100 pb-12 md:pb-20"
       style={{
         background: "radial-gradient(circle at top, #1c1c1c, #000000)",
       }}
     >
-      <div>
+      {/* Mobile only: the text wrapper is `contents` so its children and the
+          image grid become siblings and can be ordered as heading →
+          paragraph → grid → stats → button. md+ is unchanged. */}
+      <div className="max-md:contents">
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={reveal}
-          className="md:text-3xl xl:text-4xl text-xl font-bold mb-4"
+          className="md:text-3xl xl:text-4xl text-xl font-bold mb-4 max-md:mb-0 max-md:order-1"
         >
           {heading}
         </motion.h1>
@@ -54,7 +57,7 @@ export default function AboutHero({ content }) {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...reveal, delay: 0.15 }}
-          className="md:text-3xl xl:text-2xl text-xl font-bold mb-4"
+          className="md:text-3xl xl:text-2xl text-xl font-bold mb-4 max-md:hidden"
         >
           {subheading}
         </motion.h2>
@@ -62,7 +65,7 @@ export default function AboutHero({ content }) {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...reveal, delay: 0.3 }}
-          className={`max-w-xl mb-10 ${RICH_TEXT_CLASS} ${richTextScopeClass(paragraph)}`}
+          className={`max-w-xl mb-10 max-md:mb-0 max-md:order-2 ${RICH_TEXT_CLASS} ${richTextScopeClass(paragraph)}`}
           dangerouslySetInnerHTML={richTextHTML(paragraph)}
         />
         {/* flex-col + text-left on mobile: the two stats can each wrap to
@@ -77,7 +80,7 @@ export default function AboutHero({ content }) {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...reveal, delay: 0.45 }}
-          className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start items-start sm:items-center gap-x-6 gap-y-3 text-left"
+          className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start items-start sm:items-center gap-x-6 gap-y-3 text-left max-md:order-4"
         >
           <div className="flex items-start gap-2">
             <CheckCircle className="text-green-500 shrink-0 mt-0.5" size={18} />
@@ -88,11 +91,12 @@ export default function AboutHero({ content }) {
             <span>{stat2}</span>
           </div>
         </motion.div>
-        <br></br>
+        <br className="max-md:hidden"></br>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...reveal, delay: 0.6 }}
+          className="max-md:order-5 max-md:w-full"
         >
           <Link href="/services" className="inline-block mx-auto lg:mx-0">
             {/* animated-button-lg: the default circle-reveal only grows to
@@ -127,7 +131,7 @@ export default function AboutHero({ content }) {
         initial={{ opacity: 0, scale: 0.92, y: 24 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ ...reveal, delay: 0.2 }}
-        className="w-full max-w-2xl"
+        className="w-full max-w-2xl max-md:order-3"
       >
         <ShuffleGrid images={gridImages} className="h-[420px] md:h-[620px]" />
       </motion.div>
