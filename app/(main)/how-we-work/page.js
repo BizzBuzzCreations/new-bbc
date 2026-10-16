@@ -305,9 +305,28 @@ export default async function HowWeWorkPage() {
           heights. */}
       {!hidden.has("hwwHero") && (
       <>
-      <section className="relative overflow-hidden min-h-[440px] sm:min-h-[500px] md:min-h-screen flex items-center pt-20 pb-16 px-6 md:px-12 lg:px-24 bg-black">
+      <section className="relative overflow-hidden md:min-h-screen flex max-md:flex-col items-center max-md:items-stretch md:pt-20 max-md:pb-12 md:pb-16 md:px-12 lg:px-24 bg-black">
+        {/* Mobile only: the hero art is a wide 1897x562 banner, so using it as
+            a cover background on the tall mobile section upscaled it ~3x and
+            looked blurry. On mobile it's now its own short block (scaled
+            down, so sharp) with the text below; md+ keeps the background. */}
+        <div className="md:hidden relative w-full h-60 mt-0">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={heroImage}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover object-right"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 40%, #000000 100%)",
+            }}
+          />
+        </div>
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 max-md:hidden"
           style={{
             backgroundImage: `url('${heroImage}')`,
             backgroundSize: "cover",
@@ -315,14 +334,14 @@ export default async function HowWeWorkPage() {
           }}
         />
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 max-md:hidden"
           style={{
             background:
               "linear-gradient(90deg, #000000 0%, #000000 38%, rgba(0,0,0,0.82) 55%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0) 100%)",
           }}
         />
 
-        <div className="relative max-w-3xl">
+        <div className="relative max-w-3xl max-md:px-6 max-md:-mt-4">
           <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4">
             {heroHeading}
           </h1>
@@ -550,18 +569,20 @@ export default async function HowWeWorkPage() {
               instead of flex-wrap, which let differently-sized pills wrap
               unevenly (2, then 1, then 2...) into a ragged layout. Desktop
               keeps the original centered flex-wrap flow. */}
-          <div className="grid grid-cols-3 justify-items-center gap-2 sm:flex sm:flex-wrap sm:justify-center sm:gap-3">
+          <div className="grid grid-cols-3 gap-3 sm:flex sm:flex-wrap sm:justify-center">
             {INDUSTRY_LINKS.map(({ slug, label, icon: Icon }) => (
               <Link
                 key={slug}
                 href={`/industries/${slug}`}
-                className="group inline-flex min-w-0 items-center gap-1.5 sm:gap-2 rounded-full border border-white/15 bg-white/5 px-2.5 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-sm font-medium text-white text-center transition-all duration-300 hover:-translate-y-0.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:text-white hover:shadow-lg hover:shadow-black/40"
+                className="group flex sm:inline-flex min-w-0 flex-col sm:flex-row items-center justify-center gap-2 rounded-2xl sm:rounded-full border border-white/15 bg-white/5 px-2 sm:px-5 py-4 sm:py-2.5 text-xs sm:text-sm leading-tight font-medium text-white text-center transition-all duration-300 hover:-translate-y-0.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:text-white hover:shadow-lg hover:shadow-black/40"
               >
-                <Icon
-                  size={14}
-                  className="shrink-0 text-[#40A2D8] transition-colors duration-300 group-hover:text-white"
-                />
-                <span className="truncate">{label}</span>
+                <span className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 sm:w-auto sm:h-auto sm:bg-transparent sm:rounded-none">
+                  <Icon
+                    size={20}
+                    className="shrink-0 text-[#40A2D8] transition-colors duration-300 group-hover:text-white sm:w-[14px] sm:h-[14px]"
+                  />
+                </span>
+                <span className="sm:truncate">{label}</span>
               </Link>
             ))}
           </div>
