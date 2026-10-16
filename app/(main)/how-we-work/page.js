@@ -305,7 +305,7 @@ export default async function HowWeWorkPage() {
           heights. */}
       {!hidden.has("hwwHero") && (
       <>
-      <section className="relative overflow-hidden min-h-[560px] sm:min-h-[500px] md:min-h-screen flex items-center pt-24 pb-16 px-6 md:pt-20 md:px-12 lg:px-24 bg-black">
+      <section className="relative overflow-hidden sm:min-h-[500px] md:min-h-screen flex items-start md:items-center pt-8 pb-12 px-6 sm:pt-24 sm:pb-16 md:pt-20 md:px-12 lg:px-24 bg-black">
         {/* Mobile: the image sits behind the content (object-right keeps the
             photo's subject in view) with a dark scrim so the text stays
             readable; md+ uses the background-image version below. */}
