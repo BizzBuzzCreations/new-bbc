@@ -1,4 +1,4 @@
-import { Fira_Sans, IBM_Plex_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Script from "next/script";
 import { ToastContainer, Bounce } from "react-toastify";
@@ -8,16 +8,24 @@ import AllScripts from "@/components/sections/allScripts";
 import ClickSpark from "@/components/ui/ClickSpark";
 import ScrollReveal from "@/components/sections/scrollReveal";
 
-const firaSans = Fira_Sans({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
+// Self-hosted (public/fonts) instead of next/font/google: the Google loader
+// fetches fonts at build time, and the build server can't always reach
+// fonts.googleapis.com — which fails the whole build.
+const firaSans = localFont({
+  src: [
+    { path: "../public/fonts/fira-sans-400.woff2", weight: "400", style: "normal" },
+    { path: "../public/fonts/fira-sans-600.woff2", weight: "600", style: "normal" },
+    { path: "../public/fonts/fira-sans-700.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-fira",
   display: "swap",
 });
 
-const ibmPlexSans = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+// IBM Plex Sans is a variable font — one file covers weights 300–600.
+const ibmPlexSans = localFont({
+  src: [
+    { path: "../public/fonts/ibm-plex-sans-var.woff2", weight: "300 600", style: "normal" },
+  ],
   variable: "--font-ibm",
   display: "swap",
 });
