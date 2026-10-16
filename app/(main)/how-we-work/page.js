@@ -305,12 +305,11 @@ export default async function HowWeWorkPage() {
           heights. */}
       {!hidden.has("hwwHero") && (
       <>
-      <section className="relative overflow-hidden md:min-h-screen flex max-md:flex-col items-center max-md:items-stretch md:pt-20 max-md:pb-12 md:pb-16 md:px-12 lg:px-24 bg-black">
-        {/* Mobile only: the hero art is a wide 1897x562 banner, so using it as
-            a cover background on the tall mobile section upscaled it ~3x and
-            looked blurry. On mobile it's now its own short block (scaled
-            down, so sharp) with the text below; md+ keeps the background. */}
-        <div className="md:hidden relative w-full h-60 mt-0">
+      <section className="relative overflow-hidden min-h-[560px] sm:min-h-[500px] md:min-h-screen flex items-center pt-24 pb-16 px-6 md:pt-20 md:px-12 lg:px-24 bg-black">
+        {/* Mobile: the image sits behind the content (object-right keeps the
+            photo's subject in view) with a dark scrim so the text stays
+            readable; md+ uses the background-image version below. */}
+        <div className="md:hidden absolute inset-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={heroImage}
@@ -321,7 +320,7 @@ export default async function HowWeWorkPage() {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 40%, #000000 100%)",
+                "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.85) 100%)",
             }}
           />
         </div>
@@ -341,7 +340,7 @@ export default async function HowWeWorkPage() {
           }}
         />
 
-        <div className="relative max-w-3xl max-md:px-6 max-md:-mt-4">
+        <div className="relative max-w-3xl">
           <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4">
             {heroHeading}
           </h1>
