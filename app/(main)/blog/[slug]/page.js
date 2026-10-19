@@ -3,6 +3,7 @@ import { cache } from "react";
 import { getFeaturedImage, optimizedImageUrl, imageSrcSet } from "@/lib/getFeaturedImage";
 import { extractTableOfContents } from "@/lib/extractTableOfContents";
 import { sanitizeBlogContent } from "@/lib/sanitizeBlogContent";
+import { removeDeadWordpressImages } from "@/lib/removeDeadWordpressImages";
 import BlogContactForm from "@/components/sections/blogContactForm";
 import RichText from "@/components/ui/richText";
 import { FAQSection } from "@/components/ui/faq-accordion";
@@ -76,7 +77,7 @@ export default async function SingleBlog({ params }) {
     day: "numeric",
   });
 
-  const rawContent = sanitizeBlogContent(post?.content);
+  const rawContent = removeDeadWordpressImages(sanitizeBlogContent(post?.content));
   const { html: extractedHtml, toc } = extractTableOfContents(rawContent);
   // Images inside the article body sit below the fold — lazy-load them so
   // they don't compete with the featured image (the LCP element).
