@@ -568,9 +568,13 @@ export default function FaqTopics({ content } = {}) {
             >
               <FAQSection
                 heading={topic.label}
+                // Dashboard "Topic Description" — it was saved but never
+                // shown anywhere; now a short line under the topic title.
+                description={topic.description}
+                descriptionClassName="text-sm md:text-base text-gray-600 leading-relaxed mb-5 md:mb-8"
                 faqs={topic.faqs}
                 defaultValue="item-0"
-                headingClassName="text-xl md:text-3xl font-bold text-black mb-5 md:mb-8"
+                headingClassName={`text-xl md:text-3xl font-bold text-black ${topic.description ? "mb-2" : "mb-5 md:mb-8"}`}
                 triggerClassName={TRIGGER_HOVER}
                 questionTextClassName="text-base md:text-lg"
               />
