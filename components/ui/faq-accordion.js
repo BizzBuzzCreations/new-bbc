@@ -116,6 +116,10 @@ CustomAccordionContent.displayName = "CustomAccordionContent";
 
 export function FAQSection({
   heading,
+  // Optional short line under the heading (FAQ page topics); nothing
+  // renders when it's empty, so other uses are unchanged.
+  description,
+  descriptionClassName,
   faqs,
   defaultValue,
   className,
@@ -134,6 +138,9 @@ export function FAQSection({
     <div className={className}>
       {heading && (
         <h2 className={headingClassName}>{heading}</h2>
+      )}
+      {description && (
+        <RichText as="p" text={description} className={descriptionClassName} />
       )}
       <CustomAccordion
         type="single"
