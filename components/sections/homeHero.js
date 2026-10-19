@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { RICH_TEXT_CLASS, richTextHTML, richTextScopeClass } from "@/components/ui/richText";
+import { getImageProps } from "next/image";
 import { optimizedImageUrl, imageSrcSet } from "@/lib/getFeaturedImage";
 
 const reveal = { duration: 0.8, ease: [0.16, 1, 0.3, 1] };
@@ -14,6 +15,24 @@ const reveal = { duration: 0.8, ease: [0.16, 1, 0.3, 1] };
 // full-bleed + mobile box) get the same right-sized WebP/AVIF srcset and
 // sizes, so the browser resolves them to one URL and downloads it once.
 const HERO_IMAGE_WIDTHS = [640, 828, 1200, 1920];
+
+// Cloudinary uploads are resized by Cloudinary; a local /public path (e.g.
+// the field's default, /image-1.jpg — 3.4MB) goes through Next's image
+// optimizer instead, which the plain <img> otherwise bypassed.
+function heroImageSource(src) {
+  if (!src) return {};
+  if (src.includes("res.cloudinary.com")) {
+    return {
+      src: optimizedImageUrl(src, 1920),
+      srcSet: imageSrcSet(src, HERO_IMAGE_WIDTHS),
+    };
+  }
+  if (src.startsWith("/")) {
+    const { props } = getImageProps({ src, alt: "", width: 1920, height: 1080, sizes: "100vw" });
+    return { src: props.src, srcSet: props.srcSet };
+  }
+  return { src };
+}
 
 // `showWordmark` — the big outlined "BizzBuzz Creations" SVG text below
 // the heading. Defaults on (the real homepage); the Outside Location page
@@ -52,6 +71,7 @@ export default function HomeHero({
   const ctaLink = content?.heroCtaLink || "/contact";
   const chosenVideo = heroMediaChoice ? content?.heroVideo : "";
   const chosenImage = heroMediaChoice && !chosenVideo ? content?.heroPosterImage : "";
+  const heroImage = heroImageSource(chosenImage);
 
   // Mobile PageSpeed: the page used to render BOTH <video> elements (the
   // desktop one is only display:none on phones, which still fetches it) and
@@ -119,8 +139,8 @@ export default function HomeHero({
             {chosenImage && (
               // eslint-disable-next-line @next/next/no-img-element
               <img
-                src={optimizedImageUrl(chosenImage, 1920)}
-                srcSet={imageSrcSet(chosenImage, HERO_IMAGE_WIDTHS)}
+                src={heroImage.src}
+                srcSet={heroImage.srcSet}
                 sizes="100vw"
                 alt=""
                 decoding="async"
@@ -246,8 +266,8 @@ export default function HomeHero({
                 ) : (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
-                    src={optimizedImageUrl(chosenImage, 1920)}
-                    srcSet={imageSrcSet(chosenImage, HERO_IMAGE_WIDTHS)}
+                    src={heroImage.src}
+                    srcSet={heroImage.srcSet}
                     sizes="100vw"
                     alt=""
                     fetchPriority="high"

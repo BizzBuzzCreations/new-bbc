@@ -28,6 +28,11 @@ function fixRenamedImagePaths(value) {
     // Poster was converted to WebP (541KB -> 47KB); saved copies of the
     // old default path get the new file.
     if (value === "/AI solutions 2.png") return "/AI solutions 2.webp";
+    // Old default hero video — the file was removed from /public, but pages
+    // saved before that still hold the path. On Outside Location pages the
+    // video wins over the image, so this dead path blanked the hero; read
+    // it as "no video" so the image shows.
+    if (value === "/Sequence 01 1.mp4") return "";
     return OLD_AMP_IMAGE.test(value)
       ? value.replace(/ & /g, " and ").replace(/&/g, "and")
       : value;
