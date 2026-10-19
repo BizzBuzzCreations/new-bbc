@@ -6,7 +6,6 @@ import { ArrowLeft, ArrowRight, ImageOff } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Cookies from "js-cookie";
-import he from "he";
 import AnimatedButton from "@/components/ui/animatedButton";
 
 export default function AllBLogs() {
@@ -112,11 +111,19 @@ export default function AllBLogs() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showAll, currPage, posts, selected]);
 
+  // The browser's own HTML parser strips the tags and decodes entities
+  // (&amp;, &rsquo;, ...) — this used the `he` library, which shipped its
+  // whole ~2,000-entity table to every visitor of /blog. Posts are only
+  // fetched client-side (blogs starts empty), so this never runs on the
+  // server; the guard is just a safety net there.
   function truncateHTML(html, limit = 120) {
       if (!html) return "";
-  
-      const text = he.decode(html.replace(/<[^>]*>/g, "")); // remove HTML tags
-  
+
+      const text =
+        typeof DOMParser === "undefined"
+          ? html.replace(/<[^>]*>/g, "")
+          : new DOMParser().parseFromString(html, "text/html").body.textContent || "";
+
       return text.length > limit ? text.slice(0, limit) + "..." : text;
     }
 

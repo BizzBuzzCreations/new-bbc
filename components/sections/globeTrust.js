@@ -1,4 +1,6 @@
-import Globe from "@/components/ui/globe";
+// Lazy wrapper, not ./globe directly — keeps three.js out of the /contact
+// route bundle so other pages' links to /contact don't prefetch it.
+import Globe from "@/components/ui/lazyGlobe";
 import Particles from "@/components/ui/Particles";
 import RichText from "@/components/ui/richText";
 

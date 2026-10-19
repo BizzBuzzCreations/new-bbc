@@ -20,6 +20,9 @@ const ClickSpark = ({
 }) => {
   const canvasRef = useRef(null);
   const sparksRef = useRef([]);
+  // Set by the draw effect below; the click handler calls it to wake the
+  // loop up.
+  const startLoopRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -56,7 +59,12 @@ const ClickSpark = ({
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
 
-    let animationId;
+    // Only runs while there are sparks to draw. It used to run every frame
+    // forever — clearing a full-screen canvas 60 times a second on every
+    // page even when nobody had clicked, which was constant main-thread
+    // and rendering work on phones. A click starts it; it stops itself
+    // after the last spark fades.
+    let animationId = null;
 
     const draw = (timestamp) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -88,13 +96,21 @@ const ClickSpark = ({
         return true;
       });
 
-      animationId = requestAnimationFrame(draw);
+      // The clearRect above already wiped the last frame, so stopping
+      // here leaves the canvas empty.
+      animationId =
+        sparksRef.current.length > 0 ? requestAnimationFrame(draw) : null;
     };
 
-    animationId = requestAnimationFrame(draw);
+    startLoopRef.current = () => {
+      if (animationId === null) animationId = requestAnimationFrame(draw);
+    };
+    // Sparks from a click that landed before this effect (re)ran.
+    if (sparksRef.current.length > 0) startLoopRef.current();
 
     return () => {
-      cancelAnimationFrame(animationId);
+      startLoopRef.current = null;
+      if (animationId !== null) cancelAnimationFrame(animationId);
     };
   }, [sparkColor, sparkSize, sparkRadius, duration, easeFunc, extraScale]);
 
@@ -111,6 +127,7 @@ const ClickSpark = ({
         startTime: now,
       }));
       sparksRef.current.push(...newSparks);
+      startLoopRef.current?.();
     };
 
     document.addEventListener("click", handleClick, true);

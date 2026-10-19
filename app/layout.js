@@ -2,7 +2,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Script from "next/script";
 import { ToastContainer, Bounce } from "react-toastify";
-import FlowbiteInit from "@/components/sections/FlowbiteInit";
 import BizzBeeWidget from "@/components/bizzbee/BizzBeeWidget";
 import AllScripts from "@/components/sections/allScripts";
 import ClickSpark from "@/components/ui/ClickSpark";
@@ -69,8 +68,12 @@ export default function RootLayout({ children }) {
         className={`${firaSans.variable} ${ibmPlexSans.variable} antialiased`}
         suppressHydrationWarning
       >
+        {/* No Flowbite JS (was FlowbiteInit, running initFlowbite() on
+            every page): nothing on the site uses a Flowbite JS component
+            (no data-modal-toggle/data-dropdown-toggle etc.), so it was
+            ~30KB of parse/execute per page for nothing. Flowbite's CSS
+            (globals.css) is still used and stays. */}
         <BizzBeeWidget />
-        <FlowbiteInit />
         <ScrollReveal />
         <main>{children}</main>
         <ClickSpark
