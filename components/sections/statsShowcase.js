@@ -191,8 +191,10 @@ function WaveMask({ position = "top" }) {
 // the marquee math below can compute exact loop distances.
 const CARD_WIDTH = 300;
 const GAP = 20;
-const SET_WIDTH = STATS.length * (CARD_WIDTH + GAP);
 const SPEED = 0.6; // px per frame, roughly matching the site's other marquees
+// The strip must stay wider than the widest screen plus one full set, so
+// it can loop without a visible gap however few cards there are.
+const MIN_STRIP_WIDTH = 2600;
 
 // Wrap `value` into the range (-width, 0] so the strip can scroll infinitely
 // in either direction without ever visibly jumping.
@@ -205,18 +207,26 @@ function wrap(value, width) {
 export default function StatsShowcase({ content }) {
   const heading = content?.statsHeading || "Here’s Why Our Way of Working Is Different";
 
-  // Text and the card image come from the saved override, matched by
-  // position; a card with no uploaded image keeps its built-in photo.
-  const stats = STATS.map((stat, i) => {
-    const override = content?.statCards?.[i];
-    if (!override) return stat;
-    const { image, ...text } = override;
-    return {
-      ...stat,
-      ...text,
-      visual: image ? { type: "image", src: image, alt: text.label || stat.label } : stat.visual,
-    };
-  });
+  // The dashboard's card list drives the strip — adding or removing a card
+  // there now adds/removes it here (it used to always show exactly the 4
+  // built-in cards and ignore any beyond them). A card with no uploaded
+  // image falls back to one of the built-in photos, by position.
+  const saved = content?.statCards;
+  const stats =
+    saved?.length > 0
+      ? saved.map((card, i) => {
+          const base = STATS[i % STATS.length];
+          const { image, ...text } = card;
+          return {
+            ...base,
+            ...text,
+            visual: image ? { type: "image", src: image, alt: text.label || base.label } : base.visual,
+          };
+        })
+      : STATS;
+
+  const setWidth = stats.length * (CARD_WIDTH + GAP);
+  const copies = Math.max(3, Math.ceil(MIN_STRIP_WIDTH / setWidth) + 1);
 
   const trackRef = useRef(null);
   const offsetRef = useRef(0);
@@ -233,7 +243,7 @@ export default function StatsShowcase({ content }) {
       if (!draggingRef.current && !hoveringRef.current) {
         offsetRef.current -= SPEED;
       }
-      offsetRef.current = wrap(offsetRef.current, SET_WIDTH);
+      offsetRef.current = wrap(offsetRef.current, setWidth);
       if (trackRef.current) {
         trackRef.current.style.transform = `translateX(${offsetRef.current}px)`;
       }
@@ -241,7 +251,9 @@ export default function StatsShowcase({ content }) {
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, []);
+    // Restarts only if the card count changes; the scroll position lives in
+    // offsetRef, so it carries on from where it was.
+  }, [setWidth]);
 
   const handlePointerDown = (e) => {
     draggingRef.current = true;
@@ -286,10 +298,11 @@ export default function StatsShowcase({ content }) {
           className="flex"
           style={{ gap: `${GAP}px`, willChange: "transform" }}
         >
-          {/* The set is repeated 3x so there's always a full extra set of
-              cards on either side of the visible window to scroll into,
-              regardless of drag distance or viewport width. */}
-          {[...stats, ...stats, ...stats].map((stat, i) => (
+          {/* The set is repeated (3x, or more when there are only a few
+              cards) so there's always a full extra set of cards on either
+              side of the visible window to scroll into, regardless of drag
+              distance or viewport width. */}
+          {Array.from({ length: copies }, () => stats).flat().map((stat, i) => (
             <div
               key={`${stat.label}-${i}`}
               className="flex flex-col h-[460px] shrink-0 rounded-2xl overflow-hidden bg-white shadow-xl"
