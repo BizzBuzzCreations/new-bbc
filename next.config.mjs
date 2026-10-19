@@ -28,6 +28,12 @@ const nextConfig = {
     serverActions: {
       bodySizeLimit: "10mb",
     },
+    // Build workers. The default is "CPU count - 1": Hostinger's build
+    // machine reports 64 CPUs, so Next started 63 workers for "Collecting
+    // page data", exceeded the container's thread limit and crashed
+    // ("OS can't spawn worker thread ... os error 11", SIGABRT). 4 is Next's
+    // own fallback and plenty for this site's ~100 pages. Build-time only.
+    cpus: 4,
   },
   // /public files (images, videos, fonts) were served with max-age=0, so
   // every repeat visit re-downloaded them ("Use efficient cache lifetimes").
