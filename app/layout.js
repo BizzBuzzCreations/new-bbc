@@ -2,7 +2,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Script from "next/script";
 import { ToastContainer, Bounce } from "react-toastify";
-import FlowbiteInit from "@/components/sections/FlowbiteInit";
 import BizzBeeWidget from "@/components/bizzbee/BizzBeeWidget";
 import AllScripts from "@/components/sections/allScripts";
 import ClickSpark from "@/components/ui/ClickSpark";
@@ -56,14 +55,25 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Dashboard uploads (hero images, blog covers, CTA images) are
+            served from Cloudinary — on several pages the mobile LCP image.
+            Opening that connection (DNS + TCP + TLS) while the HTML is still
+            arriving, instead of after the <img> is found, takes it off the
+            LCP. A plain tag, not ReactDOM.preconnect(): that becomes an HTTP
+            Link header, which is dropped on cached (ISR) pages. */}
+        <link rel="preconnect" href="https://res.cloudinary.com" />
         <AllScripts />
       </head>
       <body
         className={`${firaSans.variable} ${ibmPlexSans.variable} antialiased`}
         suppressHydrationWarning
       >
+        {/* No Flowbite JS (was FlowbiteInit, running initFlowbite() on
+            every page): nothing on the site uses a Flowbite JS component
+            (no data-modal-toggle/data-dropdown-toggle etc.), so it was
+            ~30KB of parse/execute per page for nothing. Flowbite's CSS
+            (globals.css) is still used and stays. */}
         <BizzBeeWidget />
-        <FlowbiteInit />
         <ScrollReveal />
         <main>{children}</main>
         <ClickSpark

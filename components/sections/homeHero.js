@@ -4,8 +4,16 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { RICH_TEXT_CLASS, richTextHTML, richTextScopeClass } from "@/components/ui/richText";
+import { optimizedImageUrl, imageSrcSet } from "@/lib/getFeaturedImage";
 
 const reveal = { duration: 0.8, ease: [0.16, 1, 0.3, 1] };
+
+// The dashboard-chosen hero image (Outside Location pages) is a raw
+// Cloudinary upload — the UK page's was a 2.1MB PNG, its mobile LCP
+// element (~26s LCP on a throttled phone). Both copies (desktop
+// full-bleed + mobile box) get the same right-sized WebP/AVIF srcset and
+// sizes, so the browser resolves them to one URL and downloads it once.
+const HERO_IMAGE_WIDTHS = [640, 828, 1200, 1920];
 
 // `showWordmark` — the big outlined "BizzBuzz Creations" SVG text below
 // the heading. Defaults on (the real homepage); the Outside Location page
@@ -111,9 +119,12 @@ export default function HomeHero({
             {chosenImage && (
               // eslint-disable-next-line @next/next/no-img-element
               <img
-                src={chosenImage}
+                src={optimizedImageUrl(chosenImage, 1920)}
+                srcSet={imageSrcSet(chosenImage, HERO_IMAGE_WIDTHS)}
+                sizes="100vw"
                 alt=""
                 decoding="async"
+                fetchPriority="high"
                 className="hidden md:block absolute inset-0 w-full h-full object-cover bg-black"
               />
             )}
@@ -235,8 +246,11 @@ export default function HomeHero({
                 ) : (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
-                    src={chosenImage}
+                    src={optimizedImageUrl(chosenImage, 1920)}
+                    srcSet={imageSrcSet(chosenImage, HERO_IMAGE_WIDTHS)}
+                    sizes="100vw"
                     alt=""
+                    fetchPriority="high"
                     className="absolute inset-0 w-full h-full object-cover bg-black"
                   />
                 )
@@ -244,7 +258,10 @@ export default function HomeHero({
                 <>
                   {/* Poster paints instantly (37KB); the 540KB mobile
                       video fades over it once mounted after page load.
-                      The full 4MB desktop file is never sent to phones. */}
+                      The full 4MB desktop file is never sent to phones.
+                      It's the mobile LCP element, so fetchPriority="high"
+                      — otherwise it queued at Low priority behind ~20 JS
+                      chunks on slow connections. */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/hero-sec-poster.webp"
@@ -252,6 +269,7 @@ export default function HomeHero({
                     width={800}
                     height={321}
                     decoding="async"
+                    fetchPriority="high"
                     className="absolute inset-0 w-full h-full object-cover bg-black"
                   />
                   {mediaMode === "mobile" && (

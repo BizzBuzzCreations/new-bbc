@@ -6,6 +6,11 @@ import { CheckCircle } from "lucide-react";
 import { ShuffleGrid } from "@/components/ui/shuffle-grid";
 import { RICH_TEXT_CLASS, richTextHTML, richTextScopeClass } from "@/components/ui/richText";
 
+// The text blocks use initial={false} (same as HomeHero): starting them at
+// opacity 0 server-renders them invisible, so on phones the paragraph —
+// this page's LCP element — couldn't paint until all the JS had loaded and
+// the fade had run (~8s LCP on a mid-range phone). The image grid isn't
+// the LCP element, so it keeps its fade-in.
 const reveal = { duration: 0.8, ease: [0.16, 1, 0.3, 1] };
 
 const DEFAULT_GRID_IMAGES = [
@@ -46,7 +51,7 @@ export default function AboutHero({ content }) {
           paragraph → grid → stats → button. md+ is unchanged. */}
       <div className="max-md:contents">
         <motion.h1
-          initial={{ opacity: 0, y: 24 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={reveal}
           className="md:text-3xl xl:text-4xl text-xl font-bold mb-4 max-md:mb-0 max-md:order-1"
@@ -54,7 +59,7 @@ export default function AboutHero({ content }) {
           {heading}
         </motion.h1>
         <motion.h2
-          initial={{ opacity: 0, y: 24 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...reveal, delay: 0.15 }}
           className="md:text-3xl xl:text-2xl text-xl font-bold mb-4 max-md:hidden"
@@ -62,7 +67,7 @@ export default function AboutHero({ content }) {
           {subheading}
         </motion.h2>
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...reveal, delay: 0.3 }}
           className={`max-w-xl mb-10 max-md:mb-0 max-md:order-2 ${RICH_TEXT_CLASS} ${richTextScopeClass(paragraph)}`}
@@ -77,7 +82,7 @@ export default function AboutHero({ content }) {
             explicit text-left keeps the icon level with the first line,
             same as the FAQ accordion fix. Row layout returns at sm/lg. */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...reveal, delay: 0.45 }}
           className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start items-start sm:items-center gap-x-6 gap-y-3 text-left max-md:order-4"
@@ -93,7 +98,7 @@ export default function AboutHero({ content }) {
         </motion.div>
         <br className="max-md:hidden"></br>
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...reveal, delay: 0.6 }}
           className="max-md:order-5 max-md:w-full"

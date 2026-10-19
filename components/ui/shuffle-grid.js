@@ -1,7 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { getImageProps } from "next/image";
 import { useEffect, useRef, useState } from "react";
+
+// The tiles are CSS backgrounds, which bypass next/image — the About hero
+// was downloading ~3.6MB of raw team JPEGs (400-700KB each) on load,
+// starving the page's JS/fonts on phones (~20s LCP). getImageProps gives
+// the optimizer URL instead: a tile is at most ~224px wide, so width 200
+// yields its 2x (640w) WebP/AVIF, ~30-40KB each.
+const tileUrl = (src) =>
+  src ? getImageProps({ src, alt: "", width: 200, height: 200 }).props.src : "";
 
 const shuffle = (array) => {
   let currentIndex = array.length,
@@ -28,7 +37,7 @@ const renderSquares = (list) => {
       transition={{ duration: 1.5, type: "spring" }}
       className="w-full h-full rounded-md overflow-hidden bg-neutral-800"
       style={{
-        backgroundImage: `url(${sq.src})`,
+        backgroundImage: `url("${tileUrl(sq.src)}")`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

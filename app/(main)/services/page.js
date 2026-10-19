@@ -341,7 +341,10 @@ export default async function ServicesIndexPage() {
               the icon-grid portion — full icons, no dead space, no
               cutoff — sized to its own real 680x550 aspect ratio here. */}
           <div className="md:hidden relative w-full max-w-sm mx-auto aspect-[680/550] rounded-2xl overflow-hidden shadow-lg mb-9">
-            <Image src="/services-hero-mobile.png" alt="" fill sizes="100vw" className="object-contain" />
+            {/* Mobile LCP element — eager + high priority (next/image is
+                lazy by default). "1px" from md up: the box is display:none
+                there, and an eager image still downloads when hidden. */}
+            <Image src="/services-hero-mobile.png" alt="" fill sizes="(max-width: 767px) 100vw, 1px" loading="eager" fetchPriority="high" className="object-contain" />
           </div>
           <div className="flex flex-wrap items-center gap-4">
             <Link href="#services-grid" className="inline-block">

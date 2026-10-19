@@ -136,7 +136,8 @@ export default function IndustryDetailPage({
               src={heroImage}
               alt=""
               fill
-              priority
+              preload
+              fetchPriority="high"
               sizes="100vw"
               className="object-cover object-top"
             />
@@ -166,8 +167,11 @@ export default function IndustryDetailPage({
             {heroTitle || `${label} Digital Marketing Services`}
           </h1>
           {heroImage && (
+            // Mobile LCP element — eager + high priority (next/image is lazy
+            // by default). Same src + sizes as the desktop image, so both
+            // resolve to one URL and it downloads once.
             <div className="md:hidden relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-lg mb-9">
-              <Image src={heroImage} alt="" fill sizes="100vw" className="object-cover object-top" />
+              <Image src={heroImage} alt="" fill sizes="100vw" loading="eager" fetchPriority="high" className="object-cover object-top" />
             </div>
           )}
           <RichText

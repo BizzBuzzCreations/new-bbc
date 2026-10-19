@@ -68,8 +68,12 @@ export default function FaqHero({ content } = {}) {
             {subheading}
           </h2>
           <RichText as="p" text={paragraph} className="mt-6 text-white max-w-lg leading-relaxed" />
+          {/* Mobile LCP element — eager + high priority (next/image is lazy
+              by default). "1px" from md up: this box is display:none there,
+              and an eager image still downloads when hidden, so it should
+              pick the smallest file instead of a full-width one. */}
           <div className="md:hidden relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-lg mt-6">
-            <Image src={backgroundImage} alt="" fill sizes="100vw" className="object-cover object-center" />
+            <Image src={backgroundImage} alt="" fill sizes="(max-width: 767px) 100vw, 1px" loading="eager" fetchPriority="high" className="object-cover object-center" />
           </div>
           <Link href="/contact" className="inline-block mt-8">
             <button className="animated-button animated-button-lg whitespace-nowrap">

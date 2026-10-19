@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { LayoutDashboard, PhoneOutgoing, BellRing, Bot } from "lucide-react";
 import RichText from "@/components/ui/richText";
+import { optimizedImageUrl } from "@/lib/getFeaturedImage";
 import AnimatedButton from "@/components/ui/animatedButton";
 
 // Praxistence — the CRM platform behind Clio AI. Copy is kept to what its
@@ -39,7 +40,8 @@ export default function PraxistenceShowcase({ content }) {
   // /aiservice.webp doesn't exist in /public — was a broken poster
   // reference (silently masked before by the video always loading fast
   // enough to cover it up); using an existing, on-brand AI photo instead.
-  const posterImage = content?.praxistencePosterImage || "/AI solutions 2.webp";
+  // Right-sized WebP/AVIF when it's a dashboard (Cloudinary) upload.
+  const posterImage = optimizedImageUrl(content?.praxistencePosterImage || "/AI solutions 2.webp", 1200);
   const videoSrc = content?.praxistenceVideo || "/praxis-vid.webm";
   const buttonLink = content?.praxistenceButtonLink || "https://praxistence.com/";
   const buttonText = content?.praxistenceButtonText || "Explore Praxistence";
@@ -121,6 +123,8 @@ export default function PraxistenceShowcase({ content }) {
             <img
               src={posterImage}
               alt=""
+              loading="lazy"
+              decoding="async"
               className="absolute inset-0 w-full h-full object-cover"
             />
           )}

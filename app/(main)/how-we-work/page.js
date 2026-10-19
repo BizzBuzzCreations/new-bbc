@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import RoadmapTimeline from "@/components/sections/roadmapTimeline";
 import { FAQSection } from "@/components/ui/faq-accordion";
 import OnboardingCarousel from "@/components/sections/onboardingCarousel";
@@ -309,12 +310,21 @@ export default async function HowWeWorkPage() {
         {/* Mobile: the image sits behind the content (object-right keeps the
             photo's subject in view) with a dark scrim so the text stays
             readable; md+ uses the background-image version below. */}
+        {/* next/image (was a plain <img> of the raw ~700KB PNG — the mobile
+            LCP element): served as WebP/AVIF at ~23KB instead. sizes is
+            the banner's full source width, not 100vw — object-cover in
+            this tall box renders it several times wider than the screen,
+            and anything smaller looked blurry. The optimizer never
+            upscales, so this always gets the full-resolution file. */}
         <div className="md:hidden absolute inset-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={heroImage}
             alt=""
-            className="absolute inset-0 w-full h-full object-cover object-right"
+            fill
+            sizes="1900px"
+            loading="eager"
+            fetchPriority="high"
+            className="object-cover object-right"
           />
           <div
             className="absolute inset-0"

@@ -29,7 +29,8 @@ export default function BpoHero({ heading, description, img, ctaText = "Start No
           src={img}
           alt=""
           fill
-          priority
+          preload
+          fetchPriority="high"
           sizes="100vw"
           className="object-cover object-center"
         />
@@ -57,8 +58,13 @@ export default function BpoHero({ heading, description, img, ctaText = "Start No
           {heading}
         </h1>
         <RichText as="p" text={description} className="text-white leading-relaxed mb-9 max-w-xl" />
+        {/* This boxed copy is the mobile LCP element, so it loads eagerly
+            at high priority (next/image defaults to lazy, which made phones
+            wait for layout before even requesting it). Same src + sizes as
+            the desktop image above, so the browser resolves both to the
+            same URL and downloads it once. */}
         <div className="md:hidden relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-lg mb-9">
-          <Image src={img} alt="" fill sizes="100vw" className="object-cover object-center" />
+          <Image src={img} alt="" fill sizes="100vw" loading="eager" fetchPriority="high" className="object-cover object-center" />
         </div>
         <div className="flex flex-wrap gap-4">
           {/* whitespace-nowrap only from sm up — on mobile a long CTA
