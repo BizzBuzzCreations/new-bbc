@@ -142,7 +142,13 @@ export default async function About() {
               text={storyParagraphOne}
               className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white whitespace-pre-line"
             />
-            <p className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white whitespace-pre-line">
+            {/* <div>, not <p> (same look — Tailwind resets both): a saved
+                override is wrapped in its own <p> by the editor, and a <p>
+                inside a <p> made the browser split it, failing hydration for
+                the whole page (React error #418) — the page re-rendered on
+                the client, re-painting the hero late (a second LCP). Same
+                reason RichText's as="p" renders a <div>. */}
+            <div className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white whitespace-pre-line">
               {storyParagraphTwoIsDefault ? (
                 <>
                   BizzBuzz Creations started with a small team of marketers, designers, and
@@ -156,8 +162,8 @@ export default async function About() {
               ) : (
                 <RichText text={storyParagraphTwo} />
               )}
-            </p>
-            <p className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white whitespace-pre-line">
+            </div>
+            <div className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white whitespace-pre-line">
               {storyParagraphThreeIsDefault ? (
                 <>
                   Today, we bring together strategy, creativity, technology,{" "}
@@ -174,7 +180,7 @@ export default async function About() {
               ) : (
                 <RichText text={storyParagraphThree} />
               )}
-            </p>
+            </div>
             <RichText
               as="p"
               text={storyParagraphFour}

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { PhoneCall, CalendarCheck, UserRoundCheck, Gauge } from "lucide-react";
 import RichText from "@/components/ui/richText";
+import { optimizedImageUrl } from "@/lib/getFeaturedImage";
 import AnimatedButton from "@/components/ui/animatedButton";
 
 // Clio AI (our voice sales agent) — features taken from its product docs
@@ -42,7 +43,8 @@ export default function AiShowcase({ content }) {
   // /aiservice.webp doesn't exist in /public — was a broken poster
   // reference (silently masked before by the video always loading fast
   // enough to cover it up); using an existing, on-brand AI photo instead.
-  const posterImage = content?.aiPosterImage || "/AI solutions 2.webp";
+  // Right-sized WebP/AVIF when it's a dashboard (Cloudinary) upload.
+  const posterImage = optimizedImageUrl(content?.aiPosterImage || "/AI solutions 2.webp", 1200);
   const videoSrc = content?.aiVideo || "/ai-vid.webm";
   const buttonLink = content?.aiButtonLink || "https://clio.praxistence.com/";
   const buttonText = content?.aiButtonText || "Explore Clio AI";
@@ -124,6 +126,8 @@ export default function AiShowcase({ content }) {
             <img
               src={posterImage}
               alt=""
+              loading="lazy"
+              decoding="async"
               className="absolute inset-0 w-full h-full object-cover"
             />
           )}

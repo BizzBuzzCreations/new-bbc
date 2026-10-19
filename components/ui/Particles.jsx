@@ -199,7 +199,7 @@ const Particles = ({
 
     const particles = new Mesh(gl, { mode: gl.POINTS, geometry, program });
 
-    let animationFrameId;
+    let animationFrameId = null;
     let lastTime = performance.now();
     let elapsed = 0;
 
@@ -228,15 +228,35 @@ const Particles = ({
       renderer.render({ scene: particles, camera });
     };
 
-    animationFrameId = requestAnimationFrame(update);
+    // Only animate while on screen. This loop used to render every frame
+    // forever, even scrolled far out of view — several of these on one page
+    // (Contact has three, plus the globe) kept the main thread busy enough
+    // to make taps feel slow on phones (INP). lastTime is reset on resume
+    // so the animation picks up where it left off instead of jumping.
+    const start = () => {
+      if (animationFrameId !== null) return;
+      lastTime = performance.now();
+      animationFrameId = requestAnimationFrame(update);
+    };
+    const stop = () => {
+      if (animationFrameId === null) return;
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = null;
+    };
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => (entry.isIntersecting ? start() : stop()),
+      { rootMargin: "100px" },
+    );
+    visibilityObserver.observe(container);
 
     return () => {
       window.removeEventListener("resize", resize);
       resizeObserver.disconnect();
+      visibilityObserver.disconnect();
       if (moveParticlesOnHover) {
         container.removeEventListener("mousemove", handleMouseMove);
       }
-      cancelAnimationFrame(animationFrameId);
+      stop();
       if (container.contains(gl.canvas)) {
         container.removeChild(gl.canvas);
       }

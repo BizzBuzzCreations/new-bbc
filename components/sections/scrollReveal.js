@@ -47,6 +47,16 @@ function isLayoutGridChild(el) {
   return parent && parent.children.length < 3;
 }
 
+// Anything already on screen when this runs was server-rendered and has
+// already painted, so hiding it just makes it blink out and fade back in
+// (e.g. every hero <h1>). Worse for Core Web Vitals: when the JS is cached
+// and runs before the first paint, it hid the hero heading/cards — often
+// the page's LCP element — until the fade, delaying LCP. Only content
+// below the fold gets the scroll reveal.
+function isInInitialViewport(el) {
+  return el.getBoundingClientRect().top < window.innerHeight;
+}
+
 export default function ScrollReveal() {
   const pathname = usePathname();
 
@@ -68,7 +78,11 @@ export default function ScrollReveal() {
         document.querySelectorAll("main section h1, main section h2, main section h3"),
       ).filter((el) => !el.dataset.revealed && !isExcluded(el));
 
-      const candidates = [...gridItems, ...headings];
+      // All rect reads happen here, before any style writes below, so this
+      // is a single layout pass rather than one per element.
+      const candidates = [...gridItems, ...headings].filter(
+        (el) => !isInInitialViewport(el),
+      );
       if (candidates.length === 0) return;
 
       // Callback is inlined (not a factory taking `observer` as an

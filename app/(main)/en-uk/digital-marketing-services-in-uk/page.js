@@ -32,4 +32,7 @@ export default function DigitalMarketingServicesInUk() {
   return <OutsideLocationPage pageKey="outside-location-uk" />;
 }
 
-export const dynamic = "force-dynamic";
+// Cached (ISR) like the rest of the site — it was force-dynamic, so every
+// visit waited on a full MongoDB render (~1.2s server response vs ~0.3s
+// for cached pages). Dashboard saves revalidate it straight away.
+export const revalidate = 60;

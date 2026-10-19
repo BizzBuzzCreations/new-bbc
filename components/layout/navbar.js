@@ -634,6 +634,9 @@ export default function Navbar() {
             className="h-8 md:h-10 w-auto"
             width={836}
             height={189}
+            // Always above the fold — next/image's default lazy loading
+            // made it wait for layout before even being requested.
+            loading="eager"
           />
         </Link>
 

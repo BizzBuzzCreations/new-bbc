@@ -56,6 +56,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Dashboard uploads (hero images, blog covers, CTA images) are
+            served from Cloudinary — on several pages the mobile LCP image.
+            Opening that connection (DNS + TCP + TLS) while the HTML is still
+            arriving, instead of after the <img> is found, takes it off the
+            LCP. A plain tag, not ReactDOM.preconnect(): that becomes an HTTP
+            Link header, which is dropped on cached (ISR) pages. */}
+        <link rel="preconnect" href="https://res.cloudinary.com" />
         <AllScripts />
       </head>
       <body

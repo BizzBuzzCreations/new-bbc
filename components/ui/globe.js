@@ -606,14 +606,28 @@ export default function Globe({
       }
     };
 
+    // Only animate while on screen: with auto-rotation on, this loop used
+    // to render every frame forever, even scrolled out of view, keeping the
+    // main thread busy (slow taps on phones / INP).
+    let inView = false;
     const startAnimation = () => {
-      if (animationFrameId === null) {
+      if (inView && animationFrameId === null) {
         animationFrameId = requestAnimationFrame(animate);
       }
     };
-    if (rotationSpeed !== 0) {
-      startAnimation();
-    }
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.isIntersecting;
+        if (inView) {
+          startAnimation();
+        } else if (animationFrameId !== null) {
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = null;
+        }
+      },
+      { rootMargin: "100px" },
+    );
+    visibilityObserver.observe(container);
 
     const handleMouseDown = (event) => {
       isDragging = true;
@@ -674,6 +688,7 @@ export default function Globe({
 
     return () => {
       if (animationFrameId !== null) cancelAnimationFrame(animationFrameId);
+      visibilityObserver.disconnect();
       canvas.removeEventListener("mousedown", handleMouseDown);
       canvas.removeEventListener("mousemove", handleMouseMoveHover);
       resizeObserver.disconnect();

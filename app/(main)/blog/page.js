@@ -1,5 +1,5 @@
 import { getLatestThreeBlogsMongo } from "@/actions/blogActions";
-import { getFeaturedImage } from "@/lib/getFeaturedImage";
+import { getFeaturedImage, optimizedImageUrl, imageSrcSet } from "@/lib/getFeaturedImage";
 import AllBLogs from "@/components/sections/allBLogs";
 import CTA from "@/components/sections/CTA";
 import Link from "next/link";
@@ -65,9 +65,19 @@ export default async function Blogs() {
                   className="block overflow-hidden rounded-xl aspect-[1.91/1] bg-white/10"
                 >
                   {featuredImage ? (
+                    // Right-sized WebP/AVIF instead of the raw multi-MB
+                    // upload (this was a ~30s mobile LCP). Only the first
+                    // card can be above the fold on phones, so it's the only
+                    // eager/high one; the rest are low priority so they
+                    // don't split the bandwidth the first (LCP) image needs.
                     // eslint-disable-next-line @next/next/no-img-element -- user/dashboard-supplied URL (Cloudinary etc.), not a fixed host
                     <img
-                      src={featuredImage}
+                      src={optimizedImageUrl(featuredImage, 640)}
+                      srcSet={imageSrcSet(featuredImage, [400, 640, 900])}
+                      sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 400px"
+                      loading={index === 0 ? "eager" : "lazy"}
+                      fetchPriority={index === 0 ? "high" : "low"}
+                      decoding="async"
                       className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
                       alt={e?.title}
                     />

@@ -31,12 +31,29 @@ export default function TeamHero({ content } = {}) {
 
   const [active, setActive] = useState(0);
 
+  // The hidden slides are opacity:0, which still counts as "visible" for
+  // lazy loading — so every slide downloaded at once, competing with the
+  // first one (the mobile LCP image). They now mount once the page has
+  // loaded, and the carousel only starts advancing after that, so it never
+  // fades to a slide that isn't there yet.
+  const [restReady, setRestReady] = useState(false);
   useEffect(() => {
+    const ready = () => setRestReady(true);
+    if (document.readyState === "complete") {
+      const t = setTimeout(ready, 0);
+      return () => clearTimeout(t);
+    }
+    window.addEventListener("load", ready, { once: true });
+    return () => window.removeEventListener("load", ready);
+  }, []);
+
+  useEffect(() => {
+    if (!restReady) return;
     const id = setInterval(() => {
       setActive((prev) => (prev + 1) % SLIDES.length);
     }, SLIDE_DURATION);
     return () => clearInterval(id);
-  }, [SLIDES.length]);
+  }, [SLIDES.length, restReady]);
 
   return (
     <section className="relative overflow-hidden min-h-screen flex items-center pt-10 md:pt-32 pb-12 md:pb-20 px-6 md:px-12 lg:px-24 text-white">
@@ -49,14 +66,17 @@ export default function TeamHero({ content } = {}) {
           style={{ opacity: i === active ? 1 : 0 }}
           aria-hidden={i !== active}
         >
-          <Image
-            src={src}
-            alt=""
-            fill
-            sizes="100vw"
-            priority={i === 0}
-            className="object-cover"
-          />
+          {(i === 0 || restReady) && (
+            <Image
+              src={src}
+              alt=""
+              fill
+              sizes="100vw"
+              preload={i === 0}
+              fetchPriority={i === 0 ? "high" : undefined}
+              className="object-cover"
+            />
+          )}
         </div>
       ))}
       <div

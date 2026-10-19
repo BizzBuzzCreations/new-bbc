@@ -29,12 +29,28 @@ export default function CareerHero({ content } = {}) {
 
   const [active, setActive] = useState(0);
 
+  // Same as TeamHero: the opacity:0 slides still count as "visible" for
+  // lazy loading, so all of them downloaded at once alongside the first
+  // (LCP) slide. They mount once the page has loaded, and the carousel
+  // only starts advancing after that.
+  const [restReady, setRestReady] = useState(false);
   useEffect(() => {
+    const ready = () => setRestReady(true);
+    if (document.readyState === "complete") {
+      const t = setTimeout(ready, 0);
+      return () => clearTimeout(t);
+    }
+    window.addEventListener("load", ready, { once: true });
+    return () => window.removeEventListener("load", ready);
+  }, []);
+
+  useEffect(() => {
+    if (!restReady) return;
     const id = setInterval(() => {
       setActive((prev) => (prev + 1) % SLIDES.length);
     }, SLIDE_DURATION);
     return () => clearInterval(id);
-  }, [SLIDES.length]);
+  }, [SLIDES.length, restReady]);
 
   return (
     <section className="relative overflow-hidden min-h-screen flex items-center pt-10 md:pt-20">
@@ -48,14 +64,17 @@ export default function CareerHero({ content } = {}) {
           style={{ opacity: i === active ? 1 : 0 }}
           aria-hidden={i !== active}
         >
-          <Image
-            src={src}
-            alt=""
-            fill
-            sizes="100vw"
-            priority={i === 0}
-            className="object-cover"
-          />
+          {(i === 0 || restReady) && (
+            <Image
+              src={src}
+              alt=""
+              fill
+              sizes="100vw"
+              preload={i === 0}
+              fetchPriority={i === 0 ? "high" : undefined}
+              className="object-cover"
+            />
+          )}
         </div>
       ))}
       <div
