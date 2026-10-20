@@ -1,29 +1,34 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { X, Phone, MessageCircle } from "lucide-react";
 import { sendMail } from "@/actions/serverActions";
 import { toast, Bounce } from "react-toastify";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { markEnquired, markPopupDismissed, markPopupShown, popupAllowed } from "@/lib/enquiryFlag";
 
 // The real homepage and the Outside Location page both render this
-// component (see their own page.js files) — was hardcoded to only ever
-// show on exactly "/", so it silently never appeared on the Outside
-// Location page at all, no matter how long you waited. Module-level (not
-// inside the component) so its reference stays stable across renders —
-// otherwise the effect below would need it in its dependency array and
-// re-run on every render.
+// component (see their own page.js files). Module-level so its reference
+// stays stable across renders.
 const POPUP_PAGES = ["/", "/en-uk/digital-marketing-services-in-uk"];
+const SCROLL_TRIGGER = 0.6;
 
+// Consultation popup. No timer: it opens once the visitor has scrolled 60%
+// of the page, or (desktop) when the mouse leaves through the top of the
+// window. At most once per session, not again for 7 days after it's
+// closed, and never after a successful enquiry from any form on the site
+// (lib/enquiryFlag.js). Removing the "popup" section in the dashboard
+// turns it off completely (the page doesn't render it).
 export default function ConsultationPopup({ content }) {
   const headerTitle = content?.popupHeaderTitle || "Book Your Consultation Now";
   const title = content?.popupTitle || "BizzBuzz Creations";
   const tagline = content?.popupTagline || "Innovate and Integrate Everyday";
 
   const [open, setOpen] = useState(false);
-  const [wobble, setWobble] = useState(false);
-  const ref = useRef(null);
+  const dialogRef = useRef(null);
+  const firstFieldRef = useRef(null);
+  const returnFocusRef = useRef(null);
 
   const [form, setForm] = useState({
     name: "",
@@ -34,38 +39,73 @@ export default function ConsultationPopup({ content }) {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Opens 10s after every load of one of POPUP_PAGES — including a
-    // refresh. (It used to remember a "shown once" flag in localStorage,
-    // which is why it never came back after the first time.) Trailing
-    // slash trimmed so "/en-uk/…/" still matches.
+    // Trailing slash trimmed so "/en-uk/…/" still matches.
     const path = pathname === "/" ? "/" : pathname?.replace(/\/+$/, "");
-    if (!POPUP_PAGES.includes(path)) {
-      // Deferred (not called synchronously in the effect body) so this
-      // doesn't trip react-hooks/set-state-in-effect — same end result,
-      // just scheduled a tick later instead of during the render commit.
-      const timer = setTimeout(() => setOpen(false), 0);
-      return () => clearTimeout(timer);
-    }
+    if (!POPUP_PAGES.includes(path) || !popupAllowed()) return;
 
-    const timer = setTimeout(() => setOpen(true), 10000);
-    return () => clearTimeout(timer);
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (max > 0 && window.scrollY / max >= SCROLL_TRIGGER) show();
+    };
+    // Exit intent: only for a real mouse, leaving through the top edge.
+    const onMouseOut = (e) => {
+      if (!e.relatedTarget && e.clientY <= 0) show();
+    };
+    const cleanup = () => {
+      window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("mouseout", onMouseOut);
+    };
+    function show() {
+      cleanup();
+      if (!popupAllowed()) return;
+      markPopupShown();
+      returnFocusRef.current = document.activeElement;
+      setOpen(true);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    if (window.matchMedia("(pointer: fine)").matches) document.addEventListener("mouseout", onMouseOut);
+    // The visitor may already be past the trigger before this runs (a jump
+    // link, a restored scroll position, or a scroll before hydration).
+    onScroll();
+    return cleanup;
   }, [pathname]);
 
+  const close = useCallback(({ dismissed = true } = {}) => {
+    setOpen(false);
+    if (dismissed) markPopupDismissed();
+    // Back to wherever the visitor was before the popup took focus.
+    const el = returnFocusRef.current;
+    if (el && typeof el.focus === "function" && document.contains(el)) el.focus({ preventScroll: true });
+  }, []);
+
+  // While open: focus the first field, keep Tab inside the dialog, Esc closes.
   useEffect(() => {
-    if (!wobble || !ref.current) return;
-
-    const el = ref.current;
-    el.classList.remove("wobble");
-    void el.offsetWidth;
-    el.classList.add("wobble");
-
-    const timer = setTimeout(() => {
-      el.classList.remove("wobble");
-      setWobble(false);
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [wobble]);
+    if (!open) return;
+    firstFieldRef.current?.focus({ preventScroll: true });
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        close();
+        return;
+      }
+      if (e.key !== "Tab" || !dialogRef.current) return;
+      const items = [...dialogRef.current.querySelectorAll("a[href], button, input, textarea, select")].filter(
+        (el) => !el.disabled && el.getClientRects().length > 0,
+      );
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open, close]);
 
   // Basic RFC 5322-ish email check — good enough to reject typos and
   // obviously-invalid input without being overly strict about edge cases.
@@ -120,8 +160,9 @@ export default function ConsultationPopup({ content }) {
       // Mail still sends as normal — the "Message sent!" toast itself is
       // what's being removed here, per request. The form just quietly
       // resets and the popup closes instead of announcing success.
+      markEnquired();
       setForm({ name: "", contact: "", email: "" });
-      setOpen(false);
+      close({ dismissed: false });
     } else {
       toast.error(response.message, {
         position: "top-right",
@@ -132,8 +173,10 @@ export default function ConsultationPopup({ content }) {
   };
 
   return (
+    // `inert` while closed: the faded-out dialog stays in the DOM for the
+    // transition but can't be tabbed into or read out.
     <div
-      onClick={() => setWobble(true)}
+      inert={!open}
       className={`fixed inset-0 z-50 flex justify-center items-center transition-all duration-500
         ${
           open
@@ -141,24 +184,27 @@ export default function ConsultationPopup({ content }) {
             : "opacity-0 -translate-y-4 pointer-events-none"
         }`}
     >
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+      {/* Overlay — clicking it closes the popup */}
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => close()} aria-hidden="true"></div>
 
       {/* Popup */}
       <div
-        ref={ref}
-        onClick={(e) => e.stopPropagation()}
-        className="relative mx-5 z-10 w-full max-w-4xl bg-white rounded-xl shadow-xl overflow-hidden"
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="consultation-popup-title"
+        className="relative mx-5 z-10 w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white rounded-xl shadow-xl"
       >
         {/* Header */}
         <div className="relative bg-black py-4 text-center">
-          <h2 className="text-white text-sm  sm:text-lg font-semibold">
+          <h2 id="consultation-popup-title" className="text-white text-sm  sm:text-lg font-semibold">
             {headerTitle}
           </h2>
           <button
-            onClick={() => setOpen(false)}
+            type="button"
+            onClick={() => close()}
             className="cursor-pointer absolute right-3 top-2 p-2 text-white hover:scale-115 transition"
-            aria-label="close popup"
+            aria-label="Close"
           >
             <X size={20} />
           </button>
@@ -232,8 +278,11 @@ export default function ConsultationPopup({ content }) {
           <div className="md:border-l md:border-dashed md:pl-8">
             <form onSubmit={handleSubmit} className="space-y-4">
               <input
+                ref={firstFieldRef}
                 name="name"
                 type="text"
+                aria-label="Your name"
+                autoComplete="name"
                 placeholder="Your Name"
                 value={form.name}
                 onChange={handleChange}
@@ -247,6 +296,8 @@ export default function ConsultationPopup({ content }) {
                 inputMode="numeric"
                 pattern="[0-9]{10}"
                 maxLength={10}
+                aria-label="Mobile number (10 digits)"
+                autoComplete="tel-national"
                 placeholder="Enter 10 Digit Mobile Number"
                 value={form.contact}
                 onChange={handleChange}
@@ -267,6 +318,8 @@ export default function ConsultationPopup({ content }) {
               <input
                 name="email"
                 type="email"
+                aria-label="Email address"
+                autoComplete="email"
                 placeholder="Enter your Email"
                 value={form.email}
                 onChange={handleChange}
@@ -283,24 +336,24 @@ export default function ConsultationPopup({ content }) {
               </button>
             </form>
 
+            {/* Styled links (a <button> inside a link is invalid). */}
             <div className="flex gap-4 mt-6">
-              <a href="tel:+918115585285" className="flex-1">
-                <button className="cursor-pointer w-full flex items-center justify-center gap-2 border border-black py-3 rounded-md text-sm hover:bg-black hover:text-white transition">
-                  <Phone size={16} />
-                  Call now
-                </button>
+              <a
+                href="tel:+918115585285"
+                className="flex-1 flex items-center justify-center gap-2 border border-black py-3 rounded-md text-sm hover:bg-black hover:text-white transition"
+              >
+                <Phone size={16} />
+                Call now
               </a>
 
               <a
                 href="https://wa.me/+918115585285"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1"
+                className="flex-1 flex items-center justify-center gap-2 border border-green-700 text-green-700 py-3 rounded-md text-sm hover:bg-green-700 hover:text-white transition"
               >
-                <button className="cursor-pointer w-full flex items-center justify-center gap-2 border border-green-700 text-green-700 py-3 rounded-md text-sm hover:bg-green-700 hover:text-white transition">
-                  <MessageCircle size={16} />
-                  WhatsApp
-                </button>
+                <MessageCircle size={16} />
+                WhatsApp
               </a>
             </div>
           </div>

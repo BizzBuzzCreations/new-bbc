@@ -5,16 +5,17 @@ import React, { useState } from "react";
 import { toast, Bounce } from "react-toastify";
 import RichText from "@/components/ui/richText";
 import CtaSideImage from "@/components/ui/ctaSideImage";
+import { markEnquired } from "@/lib/enquiryFlag";
 
 // `white` — used only on individual blog post pages
 // (app/(main)/blog/[slug]/page.js): the section around the card stays white,
 // but the CTA card itself is black (same card as every other page).
 export default function CTA({ content, white = false } = {}) {
   const image = content?.ctaImage || "";
-  const heading = content?.ctaHeading || "Get Free Consultancy Now!";
+  const heading = content?.ctaHeading || "Get a Free Consultation";
   const paragraph =
     content?.ctaParagraph ||
-    "Ready to grow your business with trusted digital marketing services in UP? Contact Bizz Buzz Creations today and let’s build your success story together.";
+    "Ready to grow your business with trusted digital marketing services in UP? Contact BizzBuzz Creations today and let’s build your success story together.";
 
   const emailLabel = content?.ctaEmailLabel || "Email Address";
   const emailPlaceholder = content?.ctaEmailPlaceholder || "your@email.com";
@@ -40,6 +41,7 @@ export default function CTA({ content, white = false } = {}) {
     });
 
     if (response?.success) {
+      markEnquired(); // the consultation popup won't ask again
       toast.success(response.message, {
         position: "top-right",
         autoClose: 5000,

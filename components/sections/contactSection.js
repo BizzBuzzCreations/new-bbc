@@ -5,6 +5,7 @@ import { sendMail } from "@/actions/serverActions";
 import { toast, Bounce } from "react-toastify";
 import { Eye, Users, FileText, Paperclip } from "lucide-react";
 import RichText from "@/components/ui/richText";
+import { markEnquired } from "@/lib/enquiryFlag";
 
 // Icons stay code-driven (design), matched positionally to whichever
 // steps are saved.
@@ -126,6 +127,7 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
     setSubmitting(false);
 
     if (response?.success) {
+      markEnquired(); // the consultation popup won't ask again
       toast.success(response.message, toastOptions);
       setForm({ name: "", email: "", subject: "", contact: "", message: "" });
       setFile(null);

@@ -2,6 +2,7 @@
 import { sendMail } from "@/actions/serverActions";
 import React, { useState } from "react";
 import { toast, Bounce } from "react-toastify";
+import { markEnquired } from "@/lib/enquiryFlag";
 
 export default function BlogContactForm() {
   const [formData, setFormData] = useState({
@@ -30,6 +31,7 @@ export default function BlogContactForm() {
     setSubmitting(false);
 
     if (response?.success) {
+      markEnquired(); // the consultation popup won't ask again
       toast.success(response.message, {
         position: "top-right",
         autoClose: 5000,

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { SERVICES_FOR_LEAD_FORM } from "@/lib/bizzbee/config";
 import { emailProblem, phoneProblem } from "@/lib/bizzbee/leadValidation";
+import { markEnquired } from "@/lib/enquiryFlag";
 
 const field =
   "w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-base sm:text-sm text-white placeholder:text-white/40 focus:border-[#40A2D8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#40A2D8]/60";
@@ -56,6 +57,7 @@ export default function BizzBeeLeadForm({ onDone, onCancel, defaultService = "" 
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.success) {
+        markEnquired(); // the consultation popup won't ask again
         setDoneMessage(data.message || "Thanks! Your enquiry has been sent.");
         setStatus("done");
         onDone?.(data.message);
