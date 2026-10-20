@@ -102,7 +102,7 @@ export default function WhatMAkesUs({ content, className = "" }) {
                 data-step={i}
                 data-steps={displaySteps.length}
                 data-active="false"
-                className={`group relative z-10 flex flex-col items-center text-center rounded-2xl border border-white/10 bg-[#0a0a0a] px-4 pt-6 pb-5 transition-all duration-500 hover:-translate-y-1.5 hover:border-[#0B60B0] hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/30 data-[active=true]:border-[#40A2D8]/70 data-[active=true]:shadow-lg data-[active=true]:shadow-[#0B60B0]/25`}
+                className={`group relative z-10 flex flex-col items-center text-center rounded-2xl border border-white/10 bg-[#0a0a0a] px-4 pt-6 pb-5 transition-all duration-500 hover:-translate-y-1.5 hover:border-[#0B60B0] hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/30 data-[active=true]:border-[#40A2D8]/70 data-[active=true]:shadow-lg data-[active=true]:shadow-[#0B60B0]/25 scale-[0.96] data-[active=true]:scale-100 motion-reduce:scale-100`}
               >
                 <span
                   className={`absolute -top-4 right-4 flex items-center justify-center w-7 h-7 rounded-full text-[11px] font-bold transition-colors duration-300 ${
@@ -113,7 +113,7 @@ export default function WhatMAkesUs({ content, className = "" }) {
                 >
                   {i + 1}
                 </span>
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 text-[#40A2D8] mb-4 transition-all duration-500 group-data-[active=true]:bg-[#0B60B0]/40 group-data-[active=true]:text-white group-hover:bg-white group-hover:text-[#0B60B0] group-hover:scale-110">
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 text-[#40A2D8] mb-4 transition-all duration-500 group-data-[active=true]:bg-[#0B60B0]/40 group-data-[active=true]:text-white scale-90 group-data-[active=true]:scale-100 motion-reduce:scale-100 group-hover:bg-white group-hover:text-[#0B60B0] group-hover:scale-110">
                   <Icon size={20} />
                 </div>
                 <h3 className="font-bold text-sm leading-snug text-white mb-2">
@@ -127,8 +127,9 @@ export default function WhatMAkesUs({ content, className = "" }) {
               </div>
 
               {!isLast && (
-                <div className="relative z-10 flex items-center justify-center" aria-hidden="true">
-                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-black border border-[#40A2D8]/50 text-[#40A2D8] shrink-0">
+                <div className="group relative z-10 flex items-center justify-center" aria-hidden="true" data-step={i + 0.5} data-steps={displaySteps.length} data-active="false">
+                  {/* fills blue once the progress line passes it */}
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-black border border-[#40A2D8]/50 text-[#40A2D8] shrink-0 transition-colors duration-500 group-data-[active=true]:bg-[#0B60B0] group-data-[active=true]:border-[#40A2D8] group-data-[active=true]:text-white">
                     <ArrowRight size={14} />
                   </div>
                 </div>
@@ -148,12 +149,12 @@ export default function WhatMAkesUs({ content, className = "" }) {
               data-step={i}
               data-steps={displaySteps.length}
               data-active="false"
-              className="group relative flex flex-col items-center text-center rounded-2xl border border-white/10 bg-white/[0.03] px-4 pt-7 pb-5 transition-all duration-500 hover:border-[#0B60B0] hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/30 data-[active=true]:border-[#40A2D8]/70 data-[active=true]:shadow-lg data-[active=true]:shadow-[#0B60B0]/25"
+              className="group relative flex flex-col items-center text-center rounded-2xl border border-white/10 bg-white/[0.03] px-4 pt-7 pb-5 transition-all duration-500 hover:border-[#0B60B0] hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/30 data-[active=true]:border-[#40A2D8]/70 data-[active=true]:shadow-lg data-[active=true]:shadow-[#0B60B0]/25 scale-[0.96] data-[active=true]:scale-100 motion-reduce:scale-100"
             >
               <span className="absolute -top-3 right-4 flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-[11px] font-bold text-white transition-colors duration-500 group-data-[active=true]:bg-[#40A2D8]">
                 {i + 1}
               </span>
-              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3 bg-white/10 text-[#40A2D8] transition-all duration-500 group-data-[active=true]:bg-[#0B60B0]/40 group-data-[active=true]:text-white group-hover:bg-white group-hover:text-[#0B60B0]">
+              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3 bg-white/10 text-[#40A2D8] transition-all duration-500 group-data-[active=true]:bg-[#0B60B0]/40 group-data-[active=true]:text-white scale-90 group-data-[active=true]:scale-100 motion-reduce:scale-100 group-hover:bg-white group-hover:text-[#0B60B0]">
                 <Icon size={20} />
               </div>
               <h3 className="font-semibold text-sm mb-2 text-white">{step.title}</h3>

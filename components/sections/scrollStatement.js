@@ -1,14 +1,14 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-// One big statement line whose words light up, one after another, as the
-// visitor scrolls past it — the homepage's replacement for the old pinned
-// "Know More About Us" zoom. Nothing is pinned and nothing moves by itself:
-// the brightness simply follows the scroll position (scroll back up and it
-// dims again). Words start grey (still readable — about 4.3:1 on black,
+// One big statement line whose words rise into place, come into focus and
+// light up, one after another, as the visitor scrolls past it — the
+// homepage's replacement for the old pinned "Know More About Us" zoom.
+// Nothing is pinned and nothing moves by itself: each word simply follows
+// the scroll position (scroll back up and it settles back). Words start grey (still readable — about 4.3:1 on black,
 // enough for text this large) and turn white; the part after the dash turns
 // brand blue. Reduced motion: shown fully lit straight away.
 // Uses the saved scroll-zoom fields (tagline, button), so earlier edits carry over.
@@ -60,17 +60,21 @@ export default function ScrollStatement({ content }) {
       <div className="mx-auto max-w-5xl text-center">
         <h2 ref={ref} className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-6xl">
           {words.map(({ w, accent: isAccent }, i) => (
-            <span
-              key={i}
-              data-word
-              data-lit="false"
-              className={`transition-colors duration-300 text-white/45 ${
-                isAccent ? "data-[lit=true]:text-[#40A2D8]" : "data-[lit=true]:text-white"
-              }`}
-            >
-              {w}
+            <React.Fragment key={i}>
+              {/* Unlit: grey, a little low and soft-focus; lit: in place,
+                  sharp, white (or blue). The space sits outside the span so
+                  inline-block doesn't swallow it. */}
+              <span
+                data-word
+                data-lit="false"
+                className={`inline-block translate-y-[0.3em] blur-[2px] text-white/45 transition-[color,translate,filter] duration-500 ease-out data-[lit=true]:translate-y-0 data-[lit=true]:blur-none motion-reduce:translate-y-0 motion-reduce:blur-none ${
+                  isAccent ? "data-[lit=true]:text-[#40A2D8]" : "data-[lit=true]:text-white"
+                }`}
+              >
+                {w}
+              </span>
               {i < words.length - 1 ? " " : ""}
-            </span>
+            </React.Fragment>
           ))}
         </h2>
         {buttonText && buttonLink && (

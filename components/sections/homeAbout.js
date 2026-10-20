@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import RichText from "@/components/ui/richText";
+import Parallax from "@/components/ui/parallax";
 
 // `separated` — off by default (real homepage unchanged). The Outside
 // Location page passes it to fade the photo's top edge into black and
@@ -71,18 +72,22 @@ export default function HomeAbout({ content, separated = false }) {
           </div>
         </div>
 
-        <div className="relative flex-1">
+        <div className="relative flex-1 overflow-hidden">
           {/* New front-on, symmetric shot of the building — the BBC/
               BizzBuzz signage sits centered rather than off to one side,
               so this goes back to plain center cropping (no left/right
               position nudging needed like the previous angled photo). */}
-          <Image
-            src={backgroundImage}
-            alt="BizzBuzz Creations office"
-            fill
-            sizes="60vw"
-            className="object-cover"
-          />
+          {/* Drifts slightly slower than the page while scrolling (depth);
+              the extra 96px above and below covers the drift. */}
+          <Parallax className="absolute inset-x-0 -inset-y-24" strength={0.08}>
+            <Image
+              src={backgroundImage}
+              alt="BizzBuzz Creations office"
+              fill
+              sizes="60vw"
+              className="object-cover"
+            />
+          </Parallax>
           {/* Left-edge fade, smoothed into many more stops instead of a
               few big jumps — the old 4-stop version read as a flat block
               of black with a visible "edge" where it cut off into the
