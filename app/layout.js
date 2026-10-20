@@ -31,9 +31,9 @@ const ibmPlexSans = localFont({
 
 export const metadata = {
   metadataBase: new URL("https://bizzbuzzcreations.com"),
-  title: "Best Digital Marketing Agency in India | Bizz Buzz Creations",
+  title: "Best Digital Marketing Agency in India | BizzBuzz Creations",
   description:
-    "Grow your business with Bizz Buzz Creations – India’s top digital marketing and BPO company. We offer SEO, SMM, and lead generation services.",
+    "Grow your business with BizzBuzz Creations – India’s top digital marketing and BPO company. We offer SEO, SMM, and lead generation services.",
   // Site-wide default for the small "site name" Google shows next to the
   // favicon in search results (og:site_name) — every page inherits this
   // unless its own generateMetadata sets its own `openGraph.siteName`.

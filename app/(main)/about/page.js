@@ -101,7 +101,7 @@ export default async function About() {
     `In a market flooded with agencies promising "guaranteed rankings," we chose a different path — building sustainable digital growth systems instead of chasing quick wins.`;
 
   const roadmapHeading = content?.roadmapHeading || "How Our Digital Marketing Process Works";
-  const roadmapSubheading = content?.roadmapSubheading || "The Bizzbuzz Growth Blueprint";
+  const roadmapSubheading = content?.roadmapSubheading || "The BizzBuzz Growth Blueprint";
   const roadmapIntro =
     content?.roadmapIntro ||
     "We follow a structured, repeatable process that has helped us deliver consistent results across 90+ projects.";
@@ -114,10 +114,10 @@ export default async function About() {
   const trustHeading = content?.trustHeading || "Why Businesses Choose BizzBuzz Creations";
   const trustIntro =
     content?.trustIntro ||
-    "If you're looking for a digital marketing agency that treats your business like a long-term partnership — not a one-off project — Bizzbuzz Creations is built for that.";
+    "If you're looking for a digital marketing agency that treats your business like a long-term partnership — not a one-off project — BizzBuzz Creations is built for that.";
   const trustClosing =
     content?.trustClosing ||
-    "If you're looking for a digital marketing agency that treats your business like a long-term partnership — not a one-off project — Bizzbuzz Creations is built for that.";
+    "If you're looking for a digital marketing agency that treats your business like a long-term partnership — not a one-off project — BizzBuzz Creations is built for that.";
 
   return (
     <>

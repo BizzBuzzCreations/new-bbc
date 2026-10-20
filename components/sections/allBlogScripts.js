@@ -293,12 +293,12 @@ export default function AllBlogScripts({ slug }) {
   "description": "Traffic report misleading data is becoming common. Learn why SEO traffic is dropping, how AI search affects clicks, and what metrics matter now.",
   "author": {
     "@type": "Organization",
-    "name": "Bizzbuzz Creations",
+    "name": "BizzBuzz Creations",
     "url": "https://www.bizzbuzzcreations.com"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Bizzbuzz Creations",
+    "name": "BizzBuzz Creations",
     "logo": {
       "@type": "ImageObject",
       "url": "https://www.bizzbuzzcreations.com/logo.png"
@@ -434,12 +434,12 @@ export default function AllBlogScripts({ slug }) {
   "image": "https://bizzbuzzcreations.com/images/seo-cost-india-2026-featured-image.png",
   "author": {
     "@type": "Organization",
-    "name": "Bizzbuzz Creations",
+    "name": "BizzBuzz Creations",
     "url": "https://bizzbuzzcreations.com/"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Bizzbuzz Creations",
+    "name": "BizzBuzz Creations",
     "logo": {
       "@type": "ImageObject",
       "url": "https://bizzbuzzcreations.com/images/logo.png"

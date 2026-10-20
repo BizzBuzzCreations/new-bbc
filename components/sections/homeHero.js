@@ -67,7 +67,7 @@ export default function HomeHero({
   const subtext =
     content?.heroSubtext ||
     "Looking for a trusted digital marketing agency in Prayagraj that helps your business generate more leads, increase website traffic, and grow revenue? Welcome to BizzBuzz Creations.";
-  const ctaText = content?.heroCtaText || "Get Free Consultation";
+  const ctaText = content?.heroCtaText || "Get a Free Consultation";
   const ctaLink = content?.heroCtaLink || "/contact";
   const chosenVideo = heroMediaChoice ? content?.heroVideo : "";
   const chosenImage = heroMediaChoice && !chosenVideo ? content?.heroPosterImage : "";

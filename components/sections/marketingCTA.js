@@ -44,7 +44,7 @@ export default function MarketingCTA({ content }) {
   const paragraph =
     content?.marketingCtaParagraph ||
     "Whether you're launching, scaling, or ready for a fresh marketing direction, tell us what you're working on. We'll show you the smartest way forward.";
-  const buttonText = content?.marketingCtaButtonText || "Get Free Consultation Now";
+  const buttonText = content?.marketingCtaButtonText || "Get a Free Consultation";
   const trustLinesRaw = content?.marketingCtaTrustLines?.length > 0 ? content.marketingCtaTrustLines : DEFAULT_TRUST_LINES;
   const trustLines = trustLinesRaw.map((t) => t.text);
   // "/building.jpg" was the old default — a dashboard save stores every
