@@ -7,8 +7,8 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 
 export async function generateMetadata() {
   return buildPageMetadata("subservice-search-engine-optimization-semantic-seo-topical-authority", {
-  title: "Semantic SEO & Topical Authority Services | BizzBuzz Creations",
-  description: "Semantic SEO and topical authority services in India — build your website into a trusted authority within your niche through content clusters and entity SEO, by BizzBuzz Creations.",
+  title: "Semantic SEO & Topical Authority | BizzBuzz Creations",
+  description: "Semantic SEO and topical authority services in India: build your site into a trusted niche authority with content clusters and entity SEO by BizzBuzz Creations.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/search-engine-optimization/semantic-seo-topical-authority"
   }

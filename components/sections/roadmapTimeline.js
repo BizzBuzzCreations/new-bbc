@@ -99,9 +99,11 @@ export default function RoadmapTimeline({ steps, dark = false }) {
                   : "border border-black bg-white hover:border-blue-400 hover:shadow-xl hover:shadow-blue-100"
               }`}
             >
-              <h4 className={`font-bold text-lg mb-2 ${dark ? "text-white" : "text-gray-900"}`}>
+              {/* <h3>: sits directly under the section's <h2> on How We Work
+                  (an <h4> skipped a level there). */}
+              <h3 className={`font-bold text-lg mb-2 ${dark ? "text-white" : "text-gray-900"}`}>
                 Step {step.number}: {step.title}
-              </h4>
+              </h3>
               <RichText as="p" text={step.desc} className={`leading-relaxed ${dark ? "text-white" : "text-gray-600"}`} />
             </div>
           );

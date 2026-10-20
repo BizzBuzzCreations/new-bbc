@@ -117,7 +117,7 @@ export default function OurJourney({ content }) {
                 </span>
                 <span
                   className={`text-xs sm:text-sm transition-colors duration-300 ${
-                    i === active ? "text-white font-bold" : "text-white/40"
+                    i === active ? "text-white font-bold" : "text-white/60"
                   }`}
                 >
                   {y.year}

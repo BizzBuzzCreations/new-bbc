@@ -138,7 +138,7 @@ function FooterColumn({ title, links, viewMoreHref }) {
       {viewMoreHref && (
         <Link
           href={viewMoreHref}
-          className="inline-flex items-center gap-1 text-sm text-[#40A2D8] hover:text-white mt-4 underline underline-offset-4 transition-colors"
+          className="inline-flex items-center gap-1 py-1 text-sm text-[#40A2D8] hover:text-white mt-4 underline underline-offset-4 transition-colors"
         >
           View More
           <ArrowUpRight size={14} />
@@ -244,21 +244,21 @@ export default function Footer() {
                 <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
                   <a
                     href="tel:+918115585285"
-                    className="flex items-center gap-2 text-white hover:text-[#40A2D8] transition-colors"
+                    className="flex items-center gap-2 py-1 text-white hover:text-[#40A2D8] transition-colors"
                   >
                     <Phone size={15} className="text-[#40A2D8] shrink-0" />
                     +91 8115585285,
                   </a>
                   <a
                     href="tel:+4407862608652"
-                    className="text-white hover:text-[#40A2D8] transition-colors"
+                    className="py-1 text-white hover:text-[#40A2D8] transition-colors"
                   >
                     +44 07862 608652
                   </a>
                 </div>
                 <a
                   href="mailto:info@bizzbuzzcreations.com"
-                  className="flex items-center gap-2 text-white hover:text-[#40A2D8] transition-colors"
+                  className="flex items-center gap-2 py-1 text-white hover:text-[#40A2D8] transition-colors"
                 >
                   <Mail size={15} className="text-[#40A2D8] shrink-0" />
                   info@bizzbuzzcreations.com
@@ -352,25 +352,25 @@ export default function Footer() {
             <div className="grid grid-cols-2 gap-x-6 gap-y-3 mb-4 sm:flex sm:flex-wrap sm:gap-y-2 md:mb-0">
               <Link
                 href="/privacy-policy"
-                className="text-xs text-white hover:text-[#40A2D8]"
+                className="inline-block py-1 text-xs text-white hover:text-[#40A2D8]"
               >
                 Privacy Policy
               </Link>
               <Link
                 href="/cookie-policy"
-                className="text-xs text-white hover:text-[#40A2D8]"
+                className="inline-block py-1 text-xs text-white hover:text-[#40A2D8]"
               >
                 Cookie Policy
               </Link>
               <Link
                 href="/disclaimer"
-                className="text-xs text-white hover:text-[#40A2D8]"
+                className="inline-block py-1 text-xs text-white hover:text-[#40A2D8]"
               >
                 Disclaimer
               </Link>
               <Link
                 href="/terms-and-conditions"
-                className="text-xs text-white hover:text-[#40A2D8]"
+                className="inline-block py-1 text-xs text-white hover:text-[#40A2D8]"
               >
                 Terms &amp; Conditions
               </Link>

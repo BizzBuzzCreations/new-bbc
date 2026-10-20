@@ -47,9 +47,9 @@ const DEFAULT_ROADMAP_STEPS = [
 
 export async function generateMetadata() {
   return buildPageMetadata("about", {
-  title: "About BizzBuzz Creations | Digital Marketing Agency in Prayagraj",
+  title: "About BizzBuzz Creations, Prayagraj Digital Marketing Agency",
   description:
-    "Meet BizzBuzz Creations, a digital marketing agency in Prayagraj helping businesses across India and worldwide grow through SEO, paid ads, social media, web and digital strategy.",
+    "Meet BizzBuzz Creations, a digital marketing agency in Prayagraj helping businesses in India and worldwide grow with SEO, paid ads, social media and web design.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/about",
   },
@@ -389,11 +389,16 @@ export default async function About() {
 
         <TrustAdvantage content={content} />
 
-        <RichText
-          as="p"
-          text={trustClosing}
-          className="text-lg leading-relaxed text-center max-w-3xl mx-auto mt-12 font-medium text-white"
-        />
+        {/* Only when it says something different — the default (and the
+            saved dashboard copy) repeated the intro sentence word for word,
+            so visitors read the same line above and below the cards. */}
+        {trustClosing && trustClosing.trim() !== trustIntro.trim() && (
+          <RichText
+            as="p"
+            text={trustClosing}
+            className="text-lg leading-relaxed text-center max-w-3xl mx-auto mt-12 font-medium text-white"
+          />
+        )}
       </div>
       </>
       )}

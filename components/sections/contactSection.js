@@ -45,7 +45,13 @@ const MAX_FILE_BYTES = 4 * 1024 * 1024;
 const inputClasses =
   "w-full border border-gray-300 focus:border-[#0B60B0] rounded-lg outline-none px-4 py-2.5 text-sm transition";
 
-export default function ContactSection({ content }) {
+// `headingLevel` — the /contact page passes "h1" (it's that page's main
+// heading; the page had no <h1> at all). Our Team reuses this section below
+// its own hero <h1>, so it keeps the default "h2".
+export default function ContactSection({ content, headingLevel = "h2" }) {
+  const Heading = headingLevel;
+  // Sub-headings sit one level below whichever heading the section uses.
+  const SubHeading = headingLevel === "h1" ? "h2" : "h3";
   const heading = content?.contactHeroHeading || "Let’s Turn Your Digital Goals Into a Growth Plan";
   const paragraph =
     content?.contactHeroParagraph ||
@@ -163,9 +169,9 @@ export default function ContactSection({ content }) {
             }}
           />
           <div className="relative">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+            <Heading className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
               {heading}
-            </h2>
+            </Heading>
             <RichText as="p" text={paragraph} className="text-white mb-10 max-w-md" />
 
             <div className="grid sm:grid-cols-3 gap-4">
@@ -175,7 +181,7 @@ export default function ContactSection({ content }) {
                   className="rounded-2xl border border-white/10 bg-white/5 p-4"
                 >
                   <Icon size={18} className="text-[#40A2D8] mb-3" />
-                  <h3 className="font-semibold text-sm mb-2">{title}</h3>
+                  <SubHeading className="font-semibold text-sm mb-2">{title}</SubHeading>
                   <RichText as="p" text={description} className="text-xs text-white leading-relaxed" />
                 </div>
               ))}
@@ -186,9 +192,9 @@ export default function ContactSection({ content }) {
         {/* Right: form — fully opaque now that the animation lives behind
             the card instead of inside it. */}
         <div className="relative bg-white p-8 lg:p-10">
-          <h3 className="font-semibold text-lg text-black mb-6">
+          <SubHeading className="font-semibold text-lg text-black mb-6">
             {formHeading}
-          </h3>
+          </SubHeading>
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="grid sm:grid-cols-2 gap-5">
               <div>

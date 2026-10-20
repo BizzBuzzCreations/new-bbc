@@ -229,9 +229,11 @@ export default function ServiceDetailPage({
               it cleanly. Reappear from sm up, where there's room. */}
           <div className="flex items-center justify-center gap-4 mb-14 text-center">
             <span className="hidden sm:block h-px w-14 bg-white/20" />
-            <p className="text-sm md:text-base font-bold uppercase tracking-widest text-white">
+            {/* <h2> (not <p>): it heads the capability cards' <h3>s, so the
+                page doesn't jump from the hero <h1> straight to <h3>. */}
+            <h2 className="text-sm md:text-base font-bold uppercase tracking-widest text-white">
               {capabilitiesHeading || "What's Included"}
-            </p>
+            </h2>
             <span className="hidden sm:block h-px w-14 bg-white/20" />
           </div>
 
@@ -319,7 +321,7 @@ export default function ServiceDetailPage({
                             : "md:col-start-2 md:pl-14"
                         }
                       >
-                        <span className="block text-4xl md:text-5xl font-bold text-[#0B60B0]/40 mb-2">
+                        <span className="block text-4xl md:text-5xl font-bold text-[#0B60B0] mb-2">
                           {number}
                         </span>
                         <h3 className="text-xl font-bold text-white mb-3">

@@ -211,7 +211,7 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
             type="button"
             onClick={onDismissTip}
             aria-label="Dismiss tip"
-            className="absolute right-1.5 top-1.5 rounded-full p-1 text-[#0a2540]/60 hover:text-[#0a2540] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0B60B0]"
+            className="absolute right-1 top-1 rounded-full p-1.5 text-[#0a2540]/60 hover:text-[#0a2540] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0B60B0]"
           >
             <X size={12} />
           </button>

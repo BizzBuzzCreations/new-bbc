@@ -114,7 +114,7 @@ export default async function LatestBlogs({ dark = false, content }) {
 
                   <Link
                     href={`/blog/${e?.slug}`}
-                    className={`inline-flex items-center gap-1.5 text-sm font-semibold hover:underline ${
+                    className={`inline-flex items-center gap-1.5 py-1 text-sm font-semibold hover:underline ${
                       dark ? "text-[#40A2D8]" : "text-[#0B60B0]"
                     }`}
                     aria-label={`Read more about ${e?.title}`}

@@ -68,15 +68,17 @@ const CLIENTS = [
 // Visual offset (distance from the active card) -> position/scale/rotation.
 // Covers every position from -3 to +4 so, with 8 total clients, the whole
 // ring stays visible at once instead of a couple of cards hiding off-screen.
+// Opacity never goes below 0.5: the card text is white, and at 0.3 it fell
+// to 2.4:1 contrast (WCAG AA needs 4.5:1); 0.5 gives about 5.2:1.
 const OFFSET_STYLE = {
   0: { x: 0, rotate: 0, scale: 1, opacity: 1, zIndex: 30 },
   1: { x: 230, rotate: 10, scale: 0.86, opacity: 0.85, zIndex: 20 },
   "-1": { x: -230, rotate: -10, scale: 0.86, opacity: 0.85, zIndex: 20 },
   2: { x: 430, rotate: 16, scale: 0.72, opacity: 0.5, zIndex: 10 },
   "-2": { x: -430, rotate: -16, scale: 0.72, opacity: 0.5, zIndex: 10 },
-  3: { x: 610, rotate: 20, scale: 0.6, opacity: 0.3, zIndex: 5 },
-  "-3": { x: -610, rotate: -20, scale: 0.6, opacity: 0.3, zIndex: 5 },
-  4: { x: 770, rotate: 24, scale: 0.5, opacity: 0.15, zIndex: 2 },
+  3: { x: 610, rotate: 20, scale: 0.6, opacity: 0.5, zIndex: 5 },
+  "-3": { x: -610, rotate: -20, scale: 0.6, opacity: 0.5, zIndex: 5 },
+  4: { x: 770, rotate: 24, scale: 0.5, opacity: 0.5, zIndex: 2 },
 };
 
 // `plainLogos` — UK landing page only: slightly larger logos with no white

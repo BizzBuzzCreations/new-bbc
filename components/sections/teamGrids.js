@@ -142,7 +142,11 @@ export function RoleCard({
   // image area. Most roles still use the icon since a real photo isn't
   // available for everyone yet.
   photo,
+  // The BPO and R&D pages put these cards straight under the page <h1>,
+  // so they pass "h2"; everywhere else a section <h2> sits above them.
+  headingLevel = "h3",
 }) {
+  const Heading = headingLevel;
   const isXl = size === "xl";
   const isLarge = size === "large" || isXl;
   // Desktop flips these cards on :hover, which touch devices can never
@@ -153,19 +157,15 @@ export function RoleCard({
 
   if (flip) {
     return (
+      // Not role="button": the back face holds real links (LinkedIn), and
+      // links inside a button-role element are unreachable for screen
+      // readers (axe nested-interactive). Mouse hover / tap still flip it;
+      // keyboard users tabbing to a back-face link flip it via
+      // focus-within, so the focused link is always the visible side.
       <motion.div
         {...fadeUp(index)}
         className="group [perspective:1500px] cursor-pointer h-full"
         onClick={() => setFlipped((f) => !f)}
-        role="button"
-        tabIndex={0}
-        aria-pressed={flipped}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            setFlipped((f) => !f);
-          }
-        }}
       >
         {/* `h-full` on every layer down to the front face (grid's default
             `align-items: stretch` already makes the outer card fill the
@@ -177,7 +177,7 @@ export function RoleCard({
             text area's bottom whitespace grows or shrinks to absorb the
             difference, instead of the box itself varying in height. */}
         <div
-          className={`relative h-full transition-transform duration-700 ease-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] ${
+          className={`relative h-full transition-transform duration-700 ease-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] group-focus-within:[transform:rotateY(180deg)] ${
             flipped ? "[transform:rotateY(180deg)]" : ""
           }`}
         >
@@ -207,9 +207,9 @@ export function RoleCard({
                 </p>
               )}
               {name && (
-                <h3 className={`font-bold text-white leading-snug ${isXl ? "text-xl mb-1" : "text-sm"}`}>
+                <Heading className={`font-bold text-white leading-snug ${isXl ? "text-xl mb-1" : "text-sm"}`}>
                   {name}
-                </h3>
+                </Heading>
               )}
               <p className={`text-white leading-snug ${isXl ? "text-base" : "font-bold text-white text-sm"}`}>
                 {role}
@@ -224,9 +224,9 @@ export function RoleCard({
               names) — no point repeating the same text twice. */}
           <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-2xl border border-[#40A2D8]/40 bg-[#0B60B0]/10 flex flex-col items-center justify-center gap-5 p-6 text-center">
             <div>
-              <h3 className="font-bold text-white text-xl leading-snug">
+              <Heading className="font-bold text-white text-xl leading-snug">
                 {name || role}
-              </h3>
+              </Heading>
               {name && role && (
                 <p className="text-[#40A2D8] text-sm font-semibold mt-1">
                   {role}
@@ -294,9 +294,9 @@ export function RoleCard({
           </p>
         )}
         {name && (
-          <h3 className={`font-bold text-white leading-snug ${isXl ? "text-xl mb-1" : "text-sm"}`}>
+          <Heading className={`font-bold text-white leading-snug ${isXl ? "text-xl mb-1" : "text-sm"}`}>
             {name}
-          </h3>
+          </Heading>
         )}
         <p className={`text-white leading-snug ${isXl ? "text-base" : "font-bold text-white text-sm"}`}>
           {role}

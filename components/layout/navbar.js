@@ -662,9 +662,14 @@ export default function Navbar() {
         </nav>
 
         {/* Hamburger Button */}
+        {/* 40x40 hit area (the three bars alone were ~24x19px, under the
+            WCAG 2.2 minimum target size); -mr-2 keeps the bars where they
+            were visually. */}
         <button
-          className="md:hidden flex flex-col space-y-[5px]"
+          type="button"
+          className="md:hidden flex flex-col items-center justify-center space-y-[5px] w-10 h-10 -mr-2"
           aria-label="Toggle mobile menu"
+          aria-expanded={open}
           onClick={() => setOpen(!open)}
         >
           <span

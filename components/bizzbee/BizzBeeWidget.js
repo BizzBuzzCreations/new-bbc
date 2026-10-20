@@ -32,9 +32,13 @@ export default function BizzBeeWidget() {
     return () => window.clearTimeout(t);
   }, []);
 
-  // One-time "first visit" tooltip (per browser tab session).
+  // One-time "first visit" tooltip (per browser tab session). Not on
+  // phones: there the bubble sits right over the page content and covered
+  // hero buttons (e.g. a sub-service page's main CTA). The robot button
+  // itself stays.
   useEffect(() => {
     if (!ready) return;
+    if (window.matchMedia("(max-width: 639px)").matches) return;
     let seen = true;
     try {
       seen = sessionStorage.getItem(TIP_KEY) === "1";

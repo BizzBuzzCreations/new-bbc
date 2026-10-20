@@ -12,7 +12,7 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 
 export async function generateMetadata() {
   return buildPageMetadata("contact", {
-    title: "Contact BizzBuzz Creations | Free SEO & Marketing Consultation",
+    title: "Contact BizzBuzz Creations | Free Marketing Consultation",
     description:
       "Need more leads and sales? Contact BizzBuzz Creations for SEO, social media, and website services in Prayagraj. Get a free consultation today.",
     alternates: {
@@ -31,7 +31,7 @@ export default async function Contact() {
       <PageSeoScripts pageKey="contact" />
       {!hidden.has("contactHero") && (
       <>
-      <ContactSection content={content} />
+      <ContactSection content={content} headingLevel="h1" />
       </>
       )}
 

@@ -29,6 +29,16 @@ export function generateStaticParams() {
 // generateMetadata and the page both need the post — fetch it once.
 const getPost = cache((slug) => getBlogBySlugMongo(slug));
 
+// Search results cut descriptions at roughly 155–160 characters, and many
+// saved posts use a long excerpt here. Shorten on a word boundary so the
+// snippet ends cleanly instead of mid-word.
+function metaDescription(post) {
+  const text = (post.metaDescription || post.excerpt || "").replace(/\s+/g, " ").trim();
+  if (text.length <= 155) return text;
+  const cut = text.slice(0, 154);
+  return `${cut.slice(0, cut.lastIndexOf(" ")).replace(/[\s,;:.\-–—]+$/, "")}…`;
+}
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
 
@@ -42,7 +52,7 @@ export async function generateMetadata({ params }) {
 
   const post = res?.data;
   const title = post.metaTitle || post.title;
-  const description = post.metaDescription || post.excerpt;
+  const description = metaDescription(post);
   const image = post.ogImage || post.featuredImage;
 
   return {
@@ -90,7 +100,7 @@ export default async function SingleBlog({ params }) {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
-    description: post.metaDescription || post.excerpt,
+    description: metaDescription(post),
     ...(post.featuredImage ? { image: post.featuredImage } : {}),
     author: { "@type": "Person", name: post.author },
     publisher: {
@@ -142,12 +152,12 @@ export default async function SingleBlog({ params }) {
             <h3 className="text-sm font-bold uppercase tracking-wide text-gray-900 mb-4">
               Contents
             </h3>
-            <ol className="space-y-3">
+            <ol className="space-y-2">
               {toc.map((item, index) => (
                 <li key={item.id}>
                   <a
                     href={`#${item.id}`}
-                    className={`flex gap-2 text-sm text-gray-600 hover:text-black transition-colors ${
+                    className={`flex gap-2 py-0.5 text-sm text-gray-600 hover:text-black transition-colors ${
                       item.level === 3 ? "pl-4" : ""
                     }`}
                   >
