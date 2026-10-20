@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
+import { TestimonialCard } from "@/components/ui/testimonials-columns-1";
 import RichText from "@/components/ui/richText";
 
 const testimonials = [
@@ -42,9 +42,6 @@ export default function Reviews({ content }) {
   const heading = content?.reviewsHeading || "Customer Reviews";
   const subtext = content?.reviewsSubtext || "See what our customers have to say about us.";
   const items = content?.testimonials?.length > 0 ? content.testimonials : testimonials;
-  const firstColumn = items.slice(0, 2);
-  const secondColumn = items.slice(2, 4);
-  const thirdColumn = items.slice(4, 6);
 
   return (
     <section className="relative overflow-hidden bg-black py-20">
@@ -66,18 +63,19 @@ export default function Reviews({ content }) {
           <RichText as="p" text={subtext} className="text-center mt-5 text-white" />
         </motion.div>
 
-        <div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[740px] overflow-hidden">
-          <TestimonialsColumn testimonials={firstColumn} duration={15} />
-          <TestimonialsColumn
-            testimonials={secondColumn}
-            className="hidden md:block"
-            duration={19}
-          />
-          <TestimonialsColumn
-            testimonials={thirdColumn}
-            className="hidden lg:block"
-            duration={17}
-          />
+        {/* Still cards (they used to scroll upward in endless columns, and
+            phones only ever saw two of them): a grid from md up, and a
+            swipe row on phones with each card 85% wide so the next peeks in. */}
+        {/* Focusable + labelled so keyboard users can scroll the phone swipe row with the arrow keys. */}
+        <div
+          role="region"
+          aria-label="Customer reviews"
+          tabIndex={0}
+          className="-mx-5 md:mx-auto mt-10 flex md:grid snap-x snap-mandatory overflow-x-auto md:overflow-visible scroll-px-5 px-5 md:px-0 pb-2 md:pb-0 gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-[#40A2D8]"
+        >
+          {items.map((t, i) => (
+            <TestimonialCard key={i} {...t} className="w-[85%] shrink-0 snap-start md:w-auto" />
+          ))}
         </div>
       </div>
     </section>

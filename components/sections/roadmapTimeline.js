@@ -49,23 +49,17 @@ export default function RoadmapTimeline({ steps, dark = false }) {
 
   return (
     <div ref={containerRef} className="relative max-w-4xl mx-auto">
+      {/* Dotted connector between the steps — decorative, and still (it
+          used to flow endlessly). */}
       <svg
         className="absolute inset-0 pointer-events-none"
         width={size.width}
         height={size.height}
+        aria-hidden="true"
       >
-        <style>{`
-          @keyframes roadmapFlow {
-            to { stroke-dashoffset: -24; }
-          }
-          .roadmap-flow-path {
-            animation: roadmapFlow 3s linear infinite;
-          }
-        `}</style>
         {paths.map((d, i) => (
           <path
             key={i}
-            className="roadmap-flow-path"
             d={d}
             fill="none"
             stroke={dark ? "#40A2D8" : "#000000"}

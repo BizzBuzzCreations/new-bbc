@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import {
   Headphones,
@@ -11,6 +11,8 @@ import {
   Bot,
   Workflow,
   Handshake,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import RichText from "@/components/ui/richText";
 import AnimatedButton from "@/components/ui/animatedButton";
@@ -191,7 +193,8 @@ function WaveMask({ position = "top" }) {
 // the marquee math below can compute exact loop distances.
 const CARD_WIDTH = 300;
 const GAP = 20;
-const SPEED = 0.6; // px per frame, roughly matching the site's other marquees
+const STEP = CARD_WIDTH + GAP; // one prev/next press moves exactly one card
+const PAD = 20; // left gutter so the first card doesn't sit flush on the screen edge
 // The strip must stay wider than the widest screen plus one full set, so
 // it can loop without a visible gap however few cards there are.
 const MIN_STRIP_WIDTH = 2600;
@@ -228,32 +231,35 @@ export default function StatsShowcase({ content }) {
   const setWidth = stats.length * (CARD_WIDTH + GAP);
   const copies = Math.max(3, Math.ceil(MIN_STRIP_WIDTH / setWidth) + 1);
 
+  // The strip no longer scrolls on its own: it moves when the visitor
+  // drags it or uses the prev/next buttons (or ←/→ on them). It starts on
+  // the second copy of the set, so there is a full set to either side and
+  // the loop never shows a gap.
   const trackRef = useRef(null);
-  const offsetRef = useRef(0);
-  const hoveringRef = useRef(false);
+  const offsetRef = useRef(PAD - setWidth);
   const draggingRef = useRef(false);
   const dragStartRef = useRef({ x: 0, offset: 0 });
 
-  // Auto-scrolling marquee, driven by our own rAF loop (rather than a
-  // third-party carousel lib) so drag + hover-pause + autoplay all stay in
-  // one predictable place.
-  useEffect(() => {
-    let raf;
-    const tick = () => {
-      if (!draggingRef.current && !hoveringRef.current) {
-        offsetRef.current -= SPEED;
-      }
-      offsetRef.current = wrap(offsetRef.current, setWidth);
-      if (trackRef.current) {
-        trackRef.current.style.transform = `translateX(${offsetRef.current}px)`;
-      }
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-    // Restarts only if the card count changes; the scroll position lives in
-    // offsetRef, so it carries on from where it was.
-  }, [setWidth]);
+  const place = (offset, animate) => {
+    offsetRef.current = offset;
+    const track = trackRef.current;
+    if (!track) return;
+    track.style.transition = animate ? "transform 0.45s cubic-bezier(0.16,1,0.3,1)" : "none";
+    track.style.transform = `translateX(${offset}px)`;
+  };
+
+  // Jump (invisibly — every copy is identical) back to the middle copy,
+  // then slide one card.
+  const step = (dir) => {
+    place(wrap(offsetRef.current - PAD, setWidth) - setWidth + PAD, false);
+    void trackRef.current?.offsetWidth; // commit the jump before animating
+    place(offsetRef.current - dir * STEP, true);
+  };
+
+  const onKeyDown = (e) => {
+    if (e.key === "ArrowLeft") { e.preventDefault(); step(-1); }
+    else if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
+  };
 
   const handlePointerDown = (e) => {
     draggingRef.current = true;
@@ -262,24 +268,19 @@ export default function StatsShowcase({ content }) {
 
   const handlePointerMove = (e) => {
     if (!draggingRef.current) return;
-    offsetRef.current = dragStartRef.current.offset + (e.clientX - dragStartRef.current.x);
+    place(dragStartRef.current.offset + (e.clientX - dragStartRef.current.x), false);
   };
 
   const endDrag = () => {
+    if (!draggingRef.current) return;
     draggingRef.current = false;
+    place(wrap(offsetRef.current - PAD, setWidth) - setWidth + PAD, false);
   };
 
   return (
     <section
       className="bg-black pt-8 pb-20 overflow-hidden"
       aria-label="BizzBuzz Creations by the numbers"
-      onMouseEnter={() => {
-        hoveringRef.current = true;
-      }}
-      onMouseLeave={() => {
-        hoveringRef.current = false;
-        endDrag();
-      }}
     >
       <h2 className="text-3xl md:text-4xl font-bold text-white text-center max-w-3xl mx-auto mb-10 px-5">
         {heading}
@@ -292,11 +293,12 @@ export default function StatsShowcase({ content }) {
         onPointerMove={handlePointerMove}
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
+        onPointerLeave={endDrag}
       >
         <div
           ref={trackRef}
           className="flex"
-          style={{ gap: `${GAP}px`, willChange: "transform" }}
+          style={{ gap: `${GAP}px`, transform: `translateX(${PAD - setWidth}px)` }}
         >
           {/* The set is repeated (3x, or more when there are only a few
               cards) so there's always a full extra set of cards on either
@@ -338,6 +340,25 @@ export default function StatsShowcase({ content }) {
             </div>
           ))}
         </div>
+      </div>
+
+      <div className="mt-8 flex justify-center gap-3" onKeyDown={onKeyDown}>
+        <button
+          type="button"
+          onClick={() => step(-1)}
+          aria-label="Previous card"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-white/[0.08] text-white transition-colors duration-200 hover:border-[#0B60B0] hover:bg-[#0B60B0] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8]"
+        >
+          <ChevronLeft size={18} />
+        </button>
+        <button
+          type="button"
+          onClick={() => step(1)}
+          aria-label="Next card"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-white/[0.08] text-white transition-colors duration-200 hover:border-[#0B60B0] hover:bg-[#0B60B0] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8]"
+        >
+          <ChevronRight size={18} />
+        </button>
       </div>
     </section>
   );

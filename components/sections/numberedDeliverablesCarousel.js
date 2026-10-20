@@ -1,14 +1,12 @@
 "use client";
 
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 import "@splidejs/react-splide/css";
 import RichText from "@/components/ui/richText";
 
-// Continuously auto-scrolling (left to right) numbered-card carousel —
-// same Splide + AutoScroll setup already used for the onboarding steps
-// carousel, reused here so "What You Get" reads as a flowing strip
-// instead of a static grid.
+// Numbered-card carousel ("What You Get") — same manual Splide setup as
+// the other card carousels: prev/next buttons, ←/→ when focused, drag or
+// swipe. It no longer scrolls on its own.
 export default function NumberedDeliverablesCarousel({ items }) {
   return (
     <Splide
@@ -16,21 +14,13 @@ export default function NumberedDeliverablesCarousel({ items }) {
         type: "loop",
         perPage: 4,
         perMove: 1,
-        arrows: false,
+        arrows: true,
+        keyboard: "focused",
         pagination: false,
         gap: "1.25rem",
-        drag: "free",
-        focus: "center",
-        pauseOnHover: true,
-        pauseOnFocus: false,
+        drag: true,
         autoWidth: false,
 
-        autoScroll: {
-          speed: 0.7,
-          pauseOnHover: true,
-          pauseOnFocus: false,
-          rewind: false,
-        },
 
         breakpoints: {
           1024: { perPage: 3 },
@@ -38,8 +28,7 @@ export default function NumberedDeliverablesCarousel({ items }) {
           640: { perPage: 1 },
         },
       }}
-      extensions={{ AutoScroll }}
-      className="max-w-6xl mx-auto"
+      className="bbc-carousel max-w-6xl mx-auto"
     >
       {items.map(({ number, title, desc }) => (
         <SplideSlide key={number} className="h-auto py-2">

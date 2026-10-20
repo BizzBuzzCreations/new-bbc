@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
   Stethoscope,
   Gamepad2,
@@ -29,10 +28,10 @@ const BADGES = [
 export default function IndustriesHeroBadges() {
   return (
     <div className="relative hidden lg:block h-[420px] w-full">
-      {BADGES.map((b, i) => {
+      {BADGES.map((b) => {
         const Icon = b.icon;
         return (
-          <motion.div
+          <div
             key={b.label}
             className="absolute flex flex-col items-center justify-center gap-1.5 rounded-2xl shadow-2xl hover:scale-110 transition-transform duration-300"
             style={{
@@ -42,13 +41,6 @@ export default function IndustriesHeroBadges() {
               height: b.size,
               background: b.bg,
             }}
-            animate={{ y: [0, -14, 0] }}
-            transition={{
-              duration: 4 + (i % 3),
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 0.35,
-            }}
           >
             <Icon size={b.size * 0.28} className="text-white" />
             <span
@@ -57,7 +49,7 @@ export default function IndustriesHeroBadges() {
             >
               {b.label}
             </span>
-          </motion.div>
+          </div>
         );
       })}
     </div>

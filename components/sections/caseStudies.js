@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import RichText from "@/components/ui/richText";
@@ -12,6 +12,8 @@ import {
   Globe,
   GitBranch,
   BarChart3,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 // Real, in-house products and infrastructure BizzBuzz builds and runs
@@ -110,17 +112,12 @@ export default function CaseStudies({ content, plainLogos = false }) {
 
   const go = (dir) => setActive((prev) => (prev + dir + count) % count);
 
-  // Auto-play: keep drifting left-to-right on its own, but pause the moment
-  // the user takes over (hover, drag, or touch), and resume once they let go.
-  const [paused, setPaused] = useState(false);
-  const AUTOPLAY_DELAY = 1600;
-
-  useEffect(() => {
-    if (paused) return;
-    const id = setInterval(() => go(1), AUTOPLAY_DELAY);
-    return () => clearInterval(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paused, active, count]);
+  // No auto-play: the cards move only when the visitor asks — the
+  // prev/next buttons, ←/→ keys, dragging, or clicking a side card.
+  const onKeyDown = (e) => {
+    if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); }
+    else if (e.key === "ArrowRight") { e.preventDefault(); go(1); }
+  };
 
   // Drag-to-navigate: track the pointer manually instead of framer-motion's
   // `drag` prop, since cards need to stay click-able for direct selection.
@@ -129,7 +126,6 @@ export default function CaseStudies({ content, plainLogos = false }) {
 
   const handlePointerDown = (e) => {
     dragRef.current = { startX: e.clientX, dragging: true, moved: false };
-    setPaused(true);
   };
 
   const handlePointerMove = (e) => {
@@ -145,7 +141,6 @@ export default function CaseStudies({ content, plainLogos = false }) {
     dragRef.current.dragging = false;
     if (dx <= -DRAG_THRESHOLD) go(1);
     else if (dx >= DRAG_THRESHOLD) go(-1);
-    setPaused(false);
   };
 
   // Swallow the click that follows a drag so it doesn't also jump to
@@ -171,8 +166,6 @@ export default function CaseStudies({ content, plainLogos = false }) {
         onPointerUp={endDrag}
         onPointerLeave={endDrag}
         onPointerCancel={endDrag}
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
       >
         {clients.map((client, index) => {
           const offset = offsetOf(index);
@@ -241,6 +234,29 @@ export default function CaseStudies({ content, plainLogos = false }) {
             </motion.div>
           );
         })}
+      </div>
+
+      <div className="mt-8 flex items-center justify-center gap-3" onKeyDown={onKeyDown}>
+        <button
+          type="button"
+          onClick={() => go(-1)}
+          aria-label="Previous project"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-white/[0.08] text-white transition-colors duration-200 hover:border-[#0B60B0] hover:bg-[#0B60B0] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8]"
+        >
+          <ChevronLeft size={18} />
+        </button>
+        <button
+          type="button"
+          onClick={() => go(1)}
+          aria-label="Next project"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-white/[0.08] text-white transition-colors duration-200 hover:border-[#0B60B0] hover:bg-[#0B60B0] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8]"
+        >
+          <ChevronRight size={18} />
+        </button>
+        {/* Tells screen-reader users which card is in front after each move. */}
+        <p className="sr-only" aria-live="polite">
+          {`Project ${active + 1} of ${count}: ${clients[active]?.name || ""}`}
+        </p>
       </div>
     </section>
   );

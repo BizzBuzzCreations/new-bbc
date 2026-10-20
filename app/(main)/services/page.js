@@ -13,7 +13,6 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import CTA from "@/components/sections/CTA";
-import Particles from "@/components/ui/Particles";
 import ServiceScenariosCarousel from "@/components/sections/serviceScenariosCarousel";
 import DarkFAQSection from "@/components/sections/darkFAQSection";
 import HighlightCard from "@/components/ui/highlightCard";
@@ -397,18 +396,6 @@ export default async function ServicesIndexPage() {
       {!hidden.has("servicesGrid") && (
       <>
       <section id="services-grid" className="relative bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10 overflow-hidden">
-        {/* Same animated particle backdrop used on the contact page */}
-        <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
-          <Particles
-            particleColors={["#40A2D8", "#0B60B0", "#8fd0f2", "#ffffff"]}
-            particleCount={200}
-            particleSpread={14}
-            speed={0.08}
-            particleBaseSize={110}
-            alphaParticles={false}
-            disableRotation={false}
-          />
-        </div>
 
         <div className="relative z-10 max-w-6xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-3">

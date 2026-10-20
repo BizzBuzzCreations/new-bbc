@@ -4,7 +4,6 @@ import { useState } from "react";
 import { sendMail } from "@/actions/serverActions";
 import { toast, Bounce } from "react-toastify";
 import { Eye, Users, FileText, Paperclip } from "lucide-react";
-import Particles from "@/components/ui/Particles";
 import RichText from "@/components/ui/richText";
 
 // Icons stay code-driven (design), matched positionally to whichever
@@ -137,29 +136,8 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
 
   return (
     <section id="contact-form" className="relative overflow-hidden min-h-screen flex flex-col justify-center px-4 md:px-12 lg:px-24 py-20 bg-black">
-      {/* Animated backdrop — sits behind the whole card, not inside it.
-          Bigger than the card itself so it's visible around its edges
-          (in the section's own padding), while the card sits fully
-          opaque on top (z-10) — no motion shows through the form. */}
-      <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
-        {/* moveParticlesOnHover intentionally left off: this whole layer
-            is pointer-events-none (so it never blocks clicks anywhere in
-            the section), which also means it can't receive the mousemove
-            events that prop depends on. */}
-        <Particles
-          particleColors={["#40A2D8", "#0B60B0", "#8fd0f2", "#ffffff"]}
-          particleCount={220}
-          particleSpread={14}
-          speed={0.08}
-          particleBaseSize={110}
-          alphaParticles={false}
-          disableRotation={false}
-        />
-      </div>
-
       <div className="max-w-6xl mx-auto relative z-10 rounded-3xl overflow-hidden shadow-xl grid lg:grid-cols-2 border border-gray-200">
-        {/* Left: dark info panel — semi-transparent so the animated
-            particle backdrop stays clearly visible through it. */}
+        {/* Left: dark info panel. */}
         <div className="relative bg-black/40 backdrop-blur-sm text-white p-8 sm:p-10 lg:p-12 overflow-hidden">
           <div
             className="absolute inset-0 opacity-40"

@@ -1,13 +1,12 @@
 "use client";
 
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 import "@splidejs/react-splide/css";
 import RichText from "@/components/ui/richText";
 
-// Same auto-scrolling Splide setup as onboardingCarousel.js — cards drift
-// right-to-left, and it pauses on hover like every other auto-scroll
-// carousel on the site.
+// Same manual Splide setup as the other card carousels: prev/next
+// buttons (styled by .bbc-carousel in globals.css), ←/→ when focused, drag
+// or swipe. It no longer scrolls on its own.
 export default function RoadmapCarousel({ steps }) {
   return (
     <Splide
@@ -15,29 +14,20 @@ export default function RoadmapCarousel({ steps }) {
         type: "loop",
         perPage: 3,
         perMove: 1,
-        arrows: false,
+        arrows: true,
+        keyboard: "focused",
         pagination: false,
         gap: "1.5rem",
-        drag: "free",
-        focus: "center",
-        pauseOnHover: true,
-        pauseOnFocus: false,
+        drag: true,
         autoWidth: false,
 
-        autoScroll: {
-          speed: 0.8,
-          pauseOnHover: true,
-          pauseOnFocus: false,
-          rewind: false,
-        },
 
         breakpoints: {
           1024: { perPage: 2 },
           640: { perPage: 1 },
         },
       }}
-      extensions={{ AutoScroll }}
-      className="max-w-6xl mx-auto"
+      className="bbc-carousel max-w-6xl mx-auto"
     >
       {steps.map(({ number, title, desc }) => (
         <SplideSlide key={title} className="h-auto py-2">

@@ -482,9 +482,8 @@ export default function TeamGrids({ content } = {}) {
       </>
       )}
 
-      {/* Why It Works Together — auto-scrolling right-to-left marquee,
-          paused on hover; the list is duplicated once so the loop is
-          seamless at exactly -50%. */}
+      {/* Why It Works Together — still cards (no longer an endless
+          marquee): a grid from sm up, a swipe row on phones. */}
       {!hidden.has("whyItWorks") && (
       <>
       <section className="bg-black py-20 overflow-hidden border-t border-white/10">
@@ -495,14 +494,18 @@ export default function TeamGrids({ content } = {}) {
           {whyItWorksHeading}
         </motion.h2>
 
-        <div className="overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          {/* Focusable + labelled so keyboard users can scroll the phone swipe row. */}
           <div
-            className="flex w-max gap-6 animate-[marquee-rtl_28s_linear_infinite] hover:[animation-play-state:paused]"
+            role="region"
+            aria-label={whyItWorksHeading}
+            tabIndex={0}
+            className="flex sm:grid snap-x snap-mandatory overflow-x-auto sm:overflow-visible scroll-px-6 px-6 pb-2 sm:pb-0 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-[#40A2D8]"
           >
-            {[...whyItWorks, ...whyItWorks].map(({ title, desc }, i) => (
+            {whyItWorks.map(({ title, desc }, i) => (
               <div
                 key={i}
-                className="group shrink-0 w-[320px] rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-black/40"
+                className="group w-[85%] shrink-0 snap-start sm:w-auto rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-black/40"
               >
                 <h3 className="font-bold text-white mb-2 transition-colors duration-300">
                   {title}

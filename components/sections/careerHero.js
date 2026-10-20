@@ -44,8 +44,11 @@ export default function CareerHero({ content } = {}) {
     return () => window.removeEventListener("load", ready);
   }, []);
 
+  // Slow background crossfade — the dots still switch slides by hand.
+  // Visitors who ask for reduced motion get a still photo.
   useEffect(() => {
     if (!restReady) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const id = setInterval(() => {
       setActive((prev) => (prev + 1) % SLIDES.length);
     }, SLIDE_DURATION);

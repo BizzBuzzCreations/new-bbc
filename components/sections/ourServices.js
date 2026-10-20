@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Particles from "@/components/ui/Particles";
 import RichText from "@/components/ui/richText";
 import { resolveIcon } from "@/lib/iconOptions";
 import {
@@ -143,23 +142,8 @@ export default function OurServices({ content }) {
         className="relative py-20 overflow-hidden"
         id="services"
       >
-        {/* Same animated particle backdrop used on the contact page */}
-        <div
-          className="absolute inset-0 z-0 pointer-events-none"
-          aria-hidden="true"
-        >
-          <Particles
-            particleColors={["#40A2D8", "#0B60B0", "#8fd0f2", "#ffffff"]}
-            particleCount={200}
-            particleSpread={14}
-            speed={0.08}
-            particleBaseSize={110}
-            alphaParticles={false}
-            disableRotation={false}
-          />
-        </div>
 
-        {/* Top + bottom fades — the diamond pattern and particles used to
+        {/* Top + bottom fades — the diamond pattern used to
             stop at a hard edge against the plain-black sections above and
             below; fading them out to solid black lets this section blend
             into its neighbours instead of reading as a separate block. */}

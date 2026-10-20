@@ -3,14 +3,12 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 import "@splidejs/react-splide/css";
 import { SERVICES } from "@/lib/industriesData";
 
-// Continuously auto-scrolling (left to right) strip of problem -> service
-// cards — same Splide + AutoScroll setup already used elsewhere on the
-// site, reused here so this reads as a flowing strip instead of a static
-// grid people have to scan all at once.
+// Carousel of problem -> service cards — same manual Splide setup as the
+// other card carousels: prev/next buttons, ←/→ when focused, drag or
+// swipe. It no longer scrolls on its own.
 export default function ServiceScenariosCarousel({ items }) {
   return (
     <Splide
@@ -18,29 +16,20 @@ export default function ServiceScenariosCarousel({ items }) {
         type: "loop",
         perPage: 3,
         perMove: 1,
-        arrows: false,
+        arrows: true,
+        keyboard: "focused",
         pagination: false,
         gap: "1.5rem",
-        drag: "free",
-        focus: "center",
-        pauseOnHover: true,
-        pauseOnFocus: false,
+        drag: true,
         autoWidth: false,
 
-        autoScroll: {
-          speed: 0.7,
-          pauseOnHover: true,
-          pauseOnFocus: false,
-          rewind: false,
-        },
 
         breakpoints: {
           1024: { perPage: 2 },
           640: { perPage: 1 },
         },
       }}
-      extensions={{ AutoScroll }}
-      className="max-w-6xl mx-auto"
+      className="bbc-carousel max-w-6xl mx-auto"
     >
       {items.map(({ question, service: key, detail }, i) => {
         const service = SERVICES[key];

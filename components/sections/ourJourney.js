@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import RichText from "@/components/ui/richText";
 
@@ -43,20 +43,13 @@ const DEFAULT_YEARS = [
   },
 ];
 
-const SLIDE_DURATION = 2800;
-
 export default function OurJourney({ content }) {
   const [active, setActive] = useState(0);
   const heading = content?.journeyHeading || "Our Journey So Far";
   const YEARS = content?.journeyYears?.length > 0 ? content.journeyYears : DEFAULT_YEARS;
 
-  useEffect(() => {
-    const id = setInterval(() => {
-      setActive((prev) => (prev + 1) % YEARS.length);
-    }, SLIDE_DURATION);
-    return () => clearInterval(id);
-  }, [YEARS.length]);
-
+  // No auto-advance: the year changes only when the visitor picks one on
+  // the timeline below.
   const current = YEARS[active] || YEARS[0];
 
   return (
@@ -103,7 +96,9 @@ export default function OurJourney({ content }) {
             {YEARS.map((y, i) => (
               <button
                 key={i}
+                type="button"
                 onClick={() => setActive(i)}
+                aria-current={i === active ? "step" : undefined}
                 className="flex flex-col items-center gap-3 group"
               >
                 <span

@@ -26,17 +26,6 @@
 }
 
 /* Slow-drifting blobs for the contact form's animated backdrop. */
-/* Right-to-left infinite marquee — content is duplicated once by the
-   component using it, so this loops seamlessly at exactly -50%. */
-@keyframes marquee-rtl {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
 @keyframes blob-float-a {
   0%,
   100% {
@@ -745,5 +734,66 @@ a.animated-button {
   .bizzbee-fab:hover,
   .bizzbee-fab:active {
     animation: none;
+  }
+}
+
+/* Card carousels (Splide, `.bbc-carousel`): they no longer scroll on their
+   own, so the prev/next buttons sit centred under the cards (not on top of
+   them) as clear dark-theme controls with a 40px tap target. Order puts
+   the buttons after the track whatever order Splide inserts them in. */
+.bbc-carousel.splide {
+  display: flex;
+  flex-direction: column;
+}
+.bbc-carousel .splide__track {
+  order: 1;
+}
+.bbc-carousel .splide__arrows {
+  order: 2;
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+.bbc-carousel .splide__arrow {
+  position: static;
+  transform: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  opacity: 1;
+  background: rgb(255 255 255 / 0.08);
+  border: 1px solid rgb(255 255 255 / 0.25);
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.bbc-carousel .splide__arrow svg {
+  fill: #ffffff;
+  width: 0.9rem;
+  height: 0.9rem;
+}
+.bbc-carousel .splide__arrow:hover:not(:disabled) {
+  background: #0b60b0;
+  border-color: #0b60b0;
+  opacity: 1;
+}
+.bbc-carousel .splide__arrow:focus-visible {
+  outline: 3px solid #40a2d8;
+  outline-offset: 2px;
+}
+.bbc-carousel .splide__track:focus-visible,
+.bbc-carousel.splide:focus-visible {
+  outline: 3px solid #40a2d8;
+  outline-offset: 4px;
+}
+
+/* Visitors who ask their device for less motion: no looping or long CSS
+   animations anywhere (framer-motion is covered by MotionPreferences in
+   the root layout, and the JS-driven effects check this media query too). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
   }
 }
