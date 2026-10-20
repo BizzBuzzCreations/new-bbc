@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Search, PenTool, Rocket, BarChart3, ArrowRight } from "lucide-react";
 import RichText from "@/components/ui/richText";
+import ScrollSteps from "@/components/ui/scrollSteps";
 import { resolveIcon } from "@/lib/iconOptions";
 
 // Same 4 steps, same copy — laid out as a plain horizontal stepper (each
@@ -80,8 +81,17 @@ export default function WhatMAkesUs({ content, className = "" }) {
           so nothing can ever drift over neighboring text. All four sit
           on one line at the same height (the old up/down zigzag looked
           uneven), with the arrows centred between them. Whole card
-          lights up blue on hover — not just the title bar. */}
-      <div className="hidden md:grid w-full max-w-6xl grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-stretch gap-x-2">
+          lights up blue on hover — not just the title bar.
+          Scrolling through fills the blue line behind the row and lights
+          each step up as the line reaches it (ScrollSteps). */}
+      <ScrollSteps className="relative w-full flex flex-col items-center">
+      <div className="relative hidden md:grid w-full max-w-6xl grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-stretch gap-x-2">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-[10%] top-1/2 h-0.5 -translate-y-1/2 rounded-full bg-white/10">
+          <div
+            className="h-full origin-left rounded-full bg-gradient-to-r from-[#0B60B0] to-[#40A2D8] transition-transform duration-200 ease-out"
+            style={{ transform: "scaleX(var(--steps-progress, 0))" }}
+          />
+        </div>
         {displaySteps.map((step, i) => {
           const Icon = step.icon;
           const isLast = i === steps.length - 1;
@@ -89,18 +99,21 @@ export default function WhatMAkesUs({ content, className = "" }) {
           return (
             <React.Fragment key={step.title}>
               <div
-                className={`group relative flex flex-col items-center text-center rounded-2xl border border-white/10 bg-white/[0.03] px-4 pt-6 pb-5 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0B60B0] hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/30`}
+                data-step={i}
+                data-steps={displaySteps.length}
+                data-active="false"
+                className={`group relative z-10 flex flex-col items-center text-center rounded-2xl border border-white/10 bg-[#0a0a0a] px-4 pt-6 pb-5 transition-all duration-500 hover:-translate-y-1.5 hover:border-[#0B60B0] hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/30 data-[active=true]:border-[#40A2D8]/70 data-[active=true]:shadow-lg data-[active=true]:shadow-[#0B60B0]/25`}
               >
                 <span
                   className={`absolute -top-4 right-4 flex items-center justify-center w-7 h-7 rounded-full text-[11px] font-bold transition-colors duration-300 ${
                     step.accent
                       ? "bg-[#40A2D8] text-white"
-                      : "bg-white/10 text-white group-hover:bg-white group-hover:text-[#0B60B0]"
+                      : "bg-white/10 text-white group-data-[active=true]:bg-[#40A2D8] group-hover:bg-white group-hover:text-[#0B60B0]"
                   }`}
                 >
                   {i + 1}
                 </span>
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 text-[#40A2D8] mb-4 transition-all duration-300 group-hover:bg-white group-hover:text-[#0B60B0] group-hover:scale-110">
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 text-[#40A2D8] mb-4 transition-all duration-500 group-data-[active=true]:bg-[#0B60B0]/40 group-data-[active=true]:text-white group-hover:bg-white group-hover:text-[#0B60B0] group-hover:scale-110">
                   <Icon size={20} />
                 </div>
                 <h3 className="font-bold text-sm leading-snug text-white mb-2">
@@ -114,7 +127,7 @@ export default function WhatMAkesUs({ content, className = "" }) {
               </div>
 
               {!isLast && (
-                <div className="flex items-center justify-center" aria-hidden="true">
+                <div className="relative z-10 flex items-center justify-center" aria-hidden="true">
                   <div className="flex items-center justify-center w-8 h-8 rounded-full bg-black border border-[#40A2D8]/50 text-[#40A2D8] shrink-0">
                     <ArrowRight size={14} />
                   </div>
@@ -132,12 +145,15 @@ export default function WhatMAkesUs({ content, className = "" }) {
           return (
             <div
               key={step.title}
-              className="group relative flex flex-col items-center text-center rounded-2xl border border-white/10 bg-white/[0.03] px-4 pt-7 pb-5 transition-all duration-300 hover:border-[#0B60B0] hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/30"
+              data-step={i}
+              data-steps={displaySteps.length}
+              data-active="false"
+              className="group relative flex flex-col items-center text-center rounded-2xl border border-white/10 bg-white/[0.03] px-4 pt-7 pb-5 transition-all duration-500 hover:border-[#0B60B0] hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/30 data-[active=true]:border-[#40A2D8]/70 data-[active=true]:shadow-lg data-[active=true]:shadow-[#0B60B0]/25"
             >
-              <span className="absolute -top-3 right-4 flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-[11px] font-bold text-white">
+              <span className="absolute -top-3 right-4 flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-[11px] font-bold text-white transition-colors duration-500 group-data-[active=true]:bg-[#40A2D8]">
                 {i + 1}
               </span>
-              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3 bg-white/10 text-[#40A2D8] transition-all duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
+              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3 bg-white/10 text-[#40A2D8] transition-all duration-500 group-data-[active=true]:bg-[#0B60B0]/40 group-data-[active=true]:text-white group-hover:bg-white group-hover:text-[#0B60B0]">
                 <Icon size={20} />
               </div>
               <h3 className="font-semibold text-sm mb-2 text-white">{step.title}</h3>
@@ -150,6 +166,8 @@ export default function WhatMAkesUs({ content, className = "" }) {
           );
         })}
       </div>
+
+      </ScrollSteps>
 
       <Link href="/contact" className="relative inline-block mt-10">
         <button

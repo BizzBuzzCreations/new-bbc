@@ -3,6 +3,7 @@ import FAQ from "@/components/sections/FAQ";
 import HomeAbout from "@/components/sections/homeAbout";
 import HomeHero from "@/components/sections/homeHero";
 import OurServices from "@/components/sections/ourServices";
+import ScrollStatement from "@/components/sections/scrollStatement";
 import CaseStudies from "@/components/sections/caseStudies";
 import StatsShowcase from "@/components/sections/statsShowcase";
 import AiProductsShowcase from "@/components/sections/aiProductsShowcase";
@@ -73,6 +74,9 @@ export default async function Home() {
 
       {/* Our Services */}
       {!hidden.has("services") && <OurServices content={content} />}
+
+      {/* Statement line whose words light up as you scroll past it */}
+      {!hidden.has("statement") && <ScrollStatement content={content} />}
 
       {/* Case Studies — client work carousel */}
       {!hidden.has("caseStudies") && <CaseStudies content={content} />}
