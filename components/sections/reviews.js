@@ -44,7 +44,9 @@ export default function Reviews({ content }) {
   const items = content?.testimonials?.length > 0 ? content.testimonials : testimonials;
 
   return (
-    <section className="relative overflow-hidden bg-black py-20">
+    // id: in-page link target (e.g. a "Read Client Reviews" button saved as "#reviews");
+    // scroll-mt keeps the heading clear of the sticky navbar.
+    <section id="reviews" className="relative overflow-hidden bg-black py-20 scroll-mt-20">
 
       <div className="container mx-auto px-5 relative">
         <motion.div
