@@ -12,13 +12,11 @@ import { markEnquired, markPopupDismissed, markPopupShown, popupAllowed } from "
 // component (see their own page.js files). Module-level so its reference
 // stays stable across renders.
 const POPUP_PAGES = ["/", "/en-uk/digital-marketing-services-in-uk"];
-const SCROLL_TRIGGER = 0.6;
+const OPEN_AFTER_MS = 10000;
 
-// Consultation popup. No timer: it opens once the visitor has scrolled 60%
-// of the page, or (desktop) when the mouse leaves through the top of the
-// window. At most once per session, not again for 7 days after it's
-// closed, and never after a successful enquiry from any form on the site
-// (lib/enquiryFlag.js). Removing the "popup" section in the dashboard
+// Consultation popup. Opens 10 seconds after the page loads — at most once
+// per session, not again for 7 days after it's closed, and never after a
+// successful enquiry from any form on the site (lib/enquiryFlag.js). Removing the "popup" section in the dashboard
 // turns it off completely (the page doesn't render it).
 export default function ConsultationPopup({ content }) {
   const headerTitle = content?.popupHeaderTitle || "Book Your Consultation Now";
@@ -43,38 +41,24 @@ export default function ConsultationPopup({ content }) {
     const path = pathname === "/" ? "/" : pathname?.replace(/\/+$/, "");
     if (!POPUP_PAGES.includes(path) || !popupAllowed()) return;
 
-    const onScroll = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      if (max > 0 && window.scrollY / max >= SCROLL_TRIGGER) show();
-    };
-    // Exit intent: only for a real mouse, leaving through the top edge.
-    const onMouseOut = (e) => {
-      if (!e.relatedTarget && e.clientY <= 0) show();
-    };
-    const cleanup = () => {
-      window.removeEventListener("scroll", onScroll);
-      document.removeEventListener("mouseout", onMouseOut);
-    };
-    // Not while the visitor is busy: typing in a form field (the closing
-    // CTA box sits past the trigger point) or chatting with BizzBee. It
-    // simply tries again on a later scroll.
+    // Not while the visitor is busy: typing in a form field or chatting
+    // with BizzBee — it looks again every 5 seconds until they're not.
     const busy = () =>
       document.activeElement?.matches?.("input, textarea, select") ||
       !!document.querySelector('[aria-label="BizzBee AI website assistant"]')?.checkVisibility?.();
-    function show() {
-      if (busy()) return;
-      cleanup();
+    let timer;
+    const tryOpen = () => {
+      if (busy()) {
+        timer = window.setTimeout(tryOpen, 5000);
+        return;
+      }
       if (!popupAllowed()) return;
       markPopupShown();
       returnFocusRef.current = document.activeElement;
       setOpen(true);
-    }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    if (window.matchMedia("(pointer: fine)").matches) document.addEventListener("mouseout", onMouseOut);
-    // The visitor may already be past the trigger before this runs (a jump
-    // link, a restored scroll position, or a scroll before hydration).
-    onScroll();
-    return cleanup;
+    };
+    timer = window.setTimeout(tryOpen, OPEN_AFTER_MS);
+    return () => window.clearTimeout(timer);
   }, [pathname]);
 
   const close = useCallback(({ dismissed = true } = {}) => {
