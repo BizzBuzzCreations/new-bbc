@@ -55,7 +55,14 @@ export default function ConsultationPopup({ content }) {
       window.removeEventListener("scroll", onScroll);
       document.removeEventListener("mouseout", onMouseOut);
     };
+    // Not while the visitor is busy: typing in a form field (the closing
+    // CTA box sits past the trigger point) or chatting with BizzBee. It
+    // simply tries again on a later scroll.
+    const busy = () =>
+      document.activeElement?.matches?.("input, textarea, select") ||
+      !!document.querySelector('[aria-label="BizzBee AI website assistant"]')?.checkVisibility?.();
     function show() {
+      if (busy()) return;
       cleanup();
       if (!popupAllowed()) return;
       markPopupShown();

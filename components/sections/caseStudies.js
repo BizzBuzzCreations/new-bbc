@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import RichText from "@/components/ui/richText";
@@ -112,6 +112,27 @@ export default function CaseStudies({ content, plainLogos = false }) {
 
   const go = (dir) => setActive((prev) => (prev + dir + count) % count);
 
+  // The stage is as tall as the tallest card (plus room for the tilt), so a
+  // card with long text — e.g. the UK page's — never spills over the
+  // prev/next buttons below. Cards are centred in it vertically.
+  const stageRef = useRef(null);
+  const [stageHeight, setStageHeight] = useState(null);
+  useEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+    const measure = () => {
+      const tallest = Math.max(0, ...[...el.children].map((c) => c.offsetHeight));
+      if (tallest) setStageHeight(tallest + 40);
+    };
+    const raf = requestAnimationFrame(measure);
+    const ro = new ResizeObserver(measure);
+    [...el.children].forEach((c) => ro.observe(c));
+    return () => {
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+    };
+  }, [clients]);
+
   // No auto-play: the cards move only when the visitor asks — the
   // prev/next buttons, ←/→ keys, dragging, or clicking a side card.
   const onKeyDown = (e) => {
@@ -159,8 +180,9 @@ export default function CaseStudies({ content, plainLogos = false }) {
 
       {/* Card carousel */}
       <div
+        ref={stageRef}
         className="relative h-[300px] md:h-80 cursor-grab active:cursor-grabbing select-none"
-        style={{ touchAction: "pan-y" }}
+        style={{ touchAction: "pan-y", ...(stageHeight && { height: `${stageHeight}px` }) }}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={endDrag}
@@ -180,13 +202,14 @@ export default function CaseStudies({ content, plainLogos = false }) {
               onClick={() => handleCardClick(index)}
               animate={{
                 x: style.x,
+                y: "-50%",
                 rotate: style.rotate,
                 scale: style.scale,
                 opacity: style.opacity,
               }}
               style={{ zIndex: style.zIndex }}
               transition={{ type: "spring", stiffness: 420, damping: 32 }}
-              className={`absolute top-1/2 left-1/2 -mt-[135px] -ml-[140px] w-[280px] md:w-[300px] p-6 rounded-3xl border cursor-pointer ${
+              className={`absolute top-1/2 left-1/2 -ml-[140px] md:-ml-[150px] w-[280px] md:w-[300px] p-6 rounded-3xl border cursor-pointer ${
                 isActive
                   ? "bg-linear-to-br from-[#0B60B0] to-[#40A2D8] border-white/20 shadow-2xl"
                   : "bg-white/6 border-white/10"

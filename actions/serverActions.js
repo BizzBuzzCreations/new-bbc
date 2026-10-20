@@ -98,8 +98,11 @@ export async function sendMail({ name, email, subject, text, contact, attachment
   if (!(await isGenuineEmail(email))) {
     return { success: false, message: "Please enter a valid, genuine email address." };
   }
+  // Optional: the closing "Get a Free Consultation" box on most pages only
+  // asks for an email (it used to fail every time on this check). When a
+  // number is given, it must still be exactly 10 digits.
   contact = String(contact || "").trim();
-  if (!/^\d{10}$/.test(contact)) {
+  if (contact && !/^\d{10}$/.test(contact)) {
     return { success: false, message: "Contact number must be exactly 10 digits." };
   }
 
@@ -144,7 +147,7 @@ export async function sendMail({ name, email, subject, text, contact, attachment
       name,
       email,
       subject,
-      phone: contact,
+      phone: contact || undefined,
       message: text,
       ...(file && { attachment: file }),
     });
@@ -164,7 +167,7 @@ export async function sendMail({ name, email, subject, text, contact, attachment
       <div style="max-width:600px; margin:0 auto; background:#ffffff; border-radius:8px; padding:20px;">
         <p><strong>Name:</strong> ${esc(name)}</p>
         <p><strong>Email:</strong> ${esc(email)}</p>
-        <p><strong>Contact:</strong> ${esc(contact)}</p>
+        <p><strong>Contact:</strong> ${esc(contact || "Not given")}</p>
         <hr style="margin:15px 0;" />
         <p><strong>Message:</strong></p>
         <p style="line-height:1.6; white-space:pre-wrap;">${esc(text)}</p>
