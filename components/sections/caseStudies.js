@@ -172,7 +172,7 @@ export default function CaseStudies({ content, plainLogos = false }) {
   };
 
   return (
-    <section id="case-studies" className="bg-black text-white pt-20 pb-10 overflow-hidden">
+    <section id="case-studies" className="bg-black text-white pt-14 md:pt-20 pb-10 overflow-hidden">
       <h2 className="md:text-4xl text-3xl font-bold text-center mb-3">
         {heading}
       </h2>

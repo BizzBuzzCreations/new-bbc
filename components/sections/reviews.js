@@ -46,7 +46,7 @@ export default function Reviews({ content }) {
   return (
     // id: in-page link target (e.g. a "Read Client Reviews" button saved as "#reviews");
     // scroll-mt keeps the heading clear of the sticky navbar.
-    <section id="reviews" className="relative overflow-hidden bg-black py-20 scroll-mt-20">
+    <section id="reviews" className="relative overflow-hidden bg-black py-14 md:py-20 scroll-mt-20">
 
       <div className="container mx-auto px-5 relative">
         <motion.div

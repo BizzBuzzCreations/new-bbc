@@ -56,7 +56,17 @@ export default async function Home() {
     <>
       <PageSeoScripts pageKey="home" />
       {/* Home Hero Section */}
-      {!hidden.has("hero") && <HomeHero content={content} separated showGlow={false} />}
+      {/* Stats row under the buttons reuses the saved "Know More About Us"
+          numbers (zoomStats); the quieter second link jumps to the services. */}
+      {!hidden.has("hero") && (
+        <HomeHero
+          content={content}
+          separated
+          showGlow={false}
+          stats={content?.zoomStats}
+          secondaryCta={hidden.has("services") ? null : { text: "Explore Our Services", href: "#services" }}
+        />
+      )}
 
       {/* About section */}
       {!hidden.has("about") && <HomeAbout content={content} separated />}

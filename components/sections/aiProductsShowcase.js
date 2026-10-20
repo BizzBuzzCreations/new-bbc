@@ -126,7 +126,7 @@ export default function AiProductsShowcase({ content, clioPrefix = "ai", showCli
   if (!cards.length) return null;
 
   return (
-    <section className="bg-black py-16 px-6 md:px-12">
+    <section className="bg-black py-12 md:py-16 px-6 md:px-12">
       <div className={`mx-auto grid gap-6 lg:gap-8 ${cards.length > 1 ? "max-w-6xl md:grid-cols-2" : "max-w-2xl"}`}>
         {cards.map(({ key, ...card }) => (
           <ProductCard key={key} {...card} />

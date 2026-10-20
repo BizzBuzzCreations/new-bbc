@@ -62,7 +62,7 @@ export default function WhatMAkesUs({ content, className = "" }) {
   });
 
   return (
-    <div className={`relative overflow-hidden bg-black container py-20 mx-auto p-4 flex flex-col justify-center gap-5 items-center max-w-none ${className}`}>
+    <div className={`relative overflow-hidden bg-black container px-4 py-14 md:py-20 mx-auto flex flex-col justify-center gap-5 items-center max-w-none ${className}`}>
 
 
 
@@ -77,20 +77,19 @@ export default function WhatMAkesUs({ content, className = "" }) {
 
       {/* Desktop: horizontal stepper — every step lives in its own grid
           column (icon, card, description all inside one bordered panel),
-          so nothing can ever drift over neighboring text. A slight
-          alternating vertical offset keeps some zigzag energy without
-          resorting to absolute positioning. Whole card lights up blue
-          on hover — not just the title bar. */}
-      <div className="hidden md:grid w-full max-w-6xl grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-start gap-x-2">
+          so nothing can ever drift over neighboring text. All four sit
+          on one line at the same height (the old up/down zigzag looked
+          uneven), with the arrows centred between them. Whole card
+          lights up blue on hover — not just the title bar. */}
+      <div className="hidden md:grid w-full max-w-6xl grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-stretch gap-x-2">
         {displaySteps.map((step, i) => {
           const Icon = step.icon;
           const isLast = i === steps.length - 1;
-          const offsetDown = i % 2 === 1; // steps 2 & 4 sit a bit lower
 
           return (
             <React.Fragment key={step.title}>
               <div
-                className={`group relative flex flex-col items-center text-center rounded-2xl border border-white/10 bg-white/[0.03] px-4 pt-6 pb-5 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0B60B0] hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/30 ${offsetDown ? "mt-10" : ""}`}
+                className={`group relative flex flex-col items-center text-center rounded-2xl border border-white/10 bg-white/[0.03] px-4 pt-6 pb-5 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0B60B0] hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/30`}
               >
                 <span
                   className={`absolute -top-4 right-4 flex items-center justify-center w-7 h-7 rounded-full text-[11px] font-bold transition-colors duration-300 ${
@@ -115,7 +114,7 @@ export default function WhatMAkesUs({ content, className = "" }) {
               </div>
 
               {!isLast && (
-                <div className={`flex justify-center pt-5 ${offsetDown ? "" : "mt-10"}`}>
+                <div className="flex items-center justify-center" aria-hidden="true">
                   <div className="flex items-center justify-center w-8 h-8 rounded-full bg-black border border-[#40A2D8]/50 text-[#40A2D8] shrink-0">
                     <ArrowRight size={14} />
                   </div>

@@ -93,7 +93,7 @@ export default function IndustriesShowcase({ content }) {
   );
 
   return (
-    <section id="industries" className="relative overflow-hidden bg-black py-20 px-6 md:px-12 lg:px-24">
+    <section id="industries" className="relative overflow-hidden bg-black py-14 md:py-20 px-6 md:px-12 lg:px-24">
 
       <div className="relative max-w-6xl mx-auto">
         <div className="text-center mb-14">

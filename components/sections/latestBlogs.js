@@ -24,7 +24,7 @@ export default async function LatestBlogs({ dark = false, content }) {
       }
 
   return (
-    <section className={`py-16 md:py-20 ${dark ? "bg-black" : "bg-white"}`}>
+    <section className={`py-12 md:py-20 ${dark ? "bg-black" : "bg-white"}`}>
       <div className="text-center px-6">
         <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">
         </p>
@@ -40,7 +40,7 @@ export default async function LatestBlogs({ dark = false, content }) {
       {/* Phones: a swipeable row (each card 85% wide so the next one peeks
           in) instead of three tall cards stacked, which took over two
           screens. From md up it's the usual grid. */}
-      <div className="px-8 pt-12 mx-auto lg:max-w-screen-xl sm:max-w-xl md:max-w-full sm:px-12 md:px-16">
+      <div className="px-8 pt-8 md:pt-12 mx-auto lg:max-w-screen-xl sm:max-w-xl md:max-w-full sm:px-12 md:px-16">
         <div className="-mx-8 sm:-mx-12 md:mx-0 flex md:grid snap-x snap-mandatory overflow-x-auto md:overflow-visible scroll-px-8 sm:scroll-px-12 px-8 sm:px-12 md:px-0 pb-2 md:pb-0 gap-4 md:gap-x-8 md:gap-y-16 md:grid-cols-2 lg:grid-cols-3 mb-14">
           {blogs.length > 0 &&
             blogs.map((e, index) => {

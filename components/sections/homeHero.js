@@ -3,6 +3,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { ArrowDown } from "lucide-react";
 import { RICH_TEXT_CLASS, richTextHTML, richTextScopeClass } from "@/components/ui/richText";
 import { getImageProps } from "next/image";
 import { optimizedImageUrl, imageSrcSet } from "@/lib/getFeaturedImage";
@@ -52,6 +53,10 @@ function heroImageSource(src) {
 // app/(main)/page.js), same as the Outside Location page: fades the
 // hero's background out to black at the bottom edge instead of ending in
 // a hard line right against the next section's own photo (About Us).
+// `stats` — optional [{ value, label }] row under the buttons (homepage
+// only; editable as "Stats under the hero buttons").
+// `secondaryCta` — optional { text, href } quieter link next to the main
+// button (the homepage points it at its own services list).
 export default function HomeHero({
   content,
   showWordmark = true,
@@ -60,6 +65,8 @@ export default function HomeHero({
   // The soft light-blue glow at the top-left of the scrim — on by default
   // (UK page keeps it); the real homepage passes false to drop it.
   showGlow = true,
+  stats,
+  secondaryCta,
 }) {
   const heading = content?.heroHeading || "India’s Trusted Digital Marketing Agency";
   const subheading =
@@ -314,6 +321,7 @@ export default function HomeHero({
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...reveal, delay: 0.45 }}
+            className="flex flex-wrap items-center gap-x-6 gap-y-3"
           >
             <Link href={ctaLink} className="inline-block max-w-full">
               <button className="animated-button animated-button-lg whitespace-nowrap">
@@ -335,7 +343,33 @@ export default function HomeHero({
                 </svg>
               </button>
             </Link>
+            {secondaryCta?.text && secondaryCta?.href && (
+              <Link
+                href={secondaryCta.href}
+                className="group inline-flex items-center gap-2 py-2 text-sm md:text-base font-semibold text-white transition-colors duration-200 hover:text-[#40A2D8]"
+              >
+                {secondaryCta.text}
+                <ArrowDown size={16} className="transition-transform duration-200 group-hover:translate-y-0.5" />
+              </Link>
+            )}
           </motion.div>
+
+          {stats?.length > 0 && (
+            <motion.dl
+              initial={false}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ ...reveal, delay: 0.5 }}
+              className="mt-8 md:mt-12 grid max-w-lg border-t border-white/15 pt-5"
+              style={{ gridTemplateColumns: `repeat(${Math.min(stats.length, 4)}, minmax(0, 1fr))` }}
+            >
+              {stats.slice(0, 4).map(({ value, label }, i) => (
+                <div key={`${label}-${i}`} className="flex flex-col-reverse justify-end border-l border-white/15 px-3 first:border-l-0 first:pl-0 sm:px-5">
+                  <dt className="mt-1 text-[11px] sm:text-xs uppercase tracking-wider text-white/80 leading-snug">{label}</dt>
+                  <dd className="text-2xl md:text-3xl font-bold text-[#40A2D8]">{value}</dd>
+                </div>
+              ))}
+            </motion.dl>
+          )}
         </div>
       </div>
     </>

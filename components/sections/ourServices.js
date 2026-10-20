@@ -139,7 +139,7 @@ export default function OurServices({ content }) {
         `,
           backgroundSize: "40px 40px",
         }}
-        className="relative py-20 overflow-hidden"
+        className="relative py-14 md:py-20 overflow-hidden scroll-mt-20"
         id="services"
       >
 
@@ -174,7 +174,7 @@ export default function OurServices({ content }) {
             return (
               <div
                 key={service.heading}
-                className="group relative isolate max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-black p-5 md:p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-[#0B60B0]/20"
+                className="group relative isolate max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-black p-5 md:p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-[#0B60B0]/20 has-[a:focus-visible]:border-[#40A2D8] has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-[#40A2D8]"
               >
                 {bgImage && (
                   <>
@@ -212,13 +212,17 @@ export default function OurServices({ content }) {
                     </p>
                     {/* Button */}
                     {/* A styled link, not a <button> inside a <Link> (a button
-                        nested in a link is invalid and confuses screen readers). */}
+                        nested in a link is invalid and confuses screen readers).
+                        Its ::after covers the whole card, so a click anywhere
+                        on the card opens the service (the card already looked
+                        clickable); the arrow nudges right on hover. */}
                     <div className="mt-4 md:mt-6">
                       <Link
                         href={service.href}
-                        className="inline-flex rounded-lg py-2 gap-2 items-center text-sm font-medium text-[#40A2D8] transition-colors duration-300 group-hover:text-white"
+                        className="inline-flex rounded-lg py-2 gap-2 items-center text-sm font-medium text-[#40A2D8] transition-colors duration-300 group-hover:text-white focus:outline-none after:absolute after:inset-0 after:content-['']"
                       >
-                        {service.buttonText} <MoveRight size={16} />
+                        {service.buttonText}
+                        <MoveRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
                       </Link>
                     </div>
                   </div>
