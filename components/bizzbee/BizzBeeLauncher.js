@@ -235,7 +235,7 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
         aria-expanded={expanded}
         title={expanded ? "Minimize BizzBee AI" : "Ask BizzBee AI (drag to move)"}
         aria-haspopup="dialog"
-        className={`bizzbee-fab relative block h-[104px] w-[127px] touch-none sm:h-[128px] sm:w-[156px] select-none ${dragging ? "cursor-grabbing" : "cursor-pointer"} focus:outline-none focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8] [perspective:520px]`}
+        className={`bizzbee-fab pointer-events-none relative block h-[104px] w-[127px] touch-none sm:h-[128px] sm:w-[156px] select-none ${dragging ? "cursor-grabbing" : "cursor-pointer"} focus:outline-none focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8] [perspective:520px]`}
       >
         <span
           ref={stageRef}
@@ -246,6 +246,15 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
               own, and a light halo keeps its black outline readable on dark
               pages. */}
           <span ref={roamEl} className="relative block h-full w-full [transform-style:preserve-3d]">
+            {/* The only part that takes taps/clicks (the button itself is
+                pointer-events-none): a circle around the robot that drifts
+                with it. The button's box is much bigger than the robot so
+                it has room to roam, and its empty corners used to swallow
+                taps meant for buttons underneath, e.g. a hero CTA on a phone. */}
+            <span
+              aria-hidden="true"
+              className="pointer-events-auto absolute left-1/2 top-1/2 h-[72px] w-[72px] -translate-x-1/2 -translate-y-1/2 rounded-full sm:h-[88px] sm:w-[88px]"
+            />
             {/* Static logo until the animation has loaded */}
             {!ready && (
               <Image

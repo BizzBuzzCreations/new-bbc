@@ -20,6 +20,10 @@ export default function BizzBeeWidget() {
   // The window stays mounted once opened, so minimizing mid-reply doesn't cancel it.
   const [loaded, setLoaded] = useState(false);
   const [tip, setTip] = useState(false);
+  // Phones only show the robot once the visitor has scrolled a little: at
+  // the top of the page it sat over the hero's main buttons (the screen is
+  // too narrow for both). Desktop shows it straight away.
+  const [scrolled, setScrolled] = useState(false);
   const launcherRef = useRef(null);
 
   useEffect(() => {
@@ -30,6 +34,21 @@ export default function BizzBeeWidget() {
     }
     const t = window.setTimeout(show, 2000);
     return () => window.clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    const check = () => {
+      if (window.scrollY > 200 || !window.matchMedia("(max-width: 639px)").matches) {
+        setScrolled(true);
+        window.removeEventListener("scroll", check);
+      }
+    };
+    const t = window.setTimeout(check, 0);
+    window.addEventListener("scroll", check, { passive: true });
+    return () => {
+      window.clearTimeout(t);
+      window.removeEventListener("scroll", check);
+    };
   }, []);
 
   // One-time "first visit" tooltip (per browser tab session). Not on
@@ -75,7 +94,7 @@ export default function BizzBeeWidget() {
     window.setTimeout(() => launcherRef.current?.focus(), 0);
   }, []);
 
-  if (!ready || pathname?.startsWith("/admin")) return null;
+  if (!ready || !scrolled || pathname?.startsWith("/admin")) return null;
 
   return (
     <>

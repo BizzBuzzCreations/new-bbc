@@ -4,14 +4,11 @@ import HomeAbout from "@/components/sections/homeAbout";
 import HomeHero from "@/components/sections/homeHero";
 import OurServices from "@/components/sections/ourServices";
 import CaseStudies from "@/components/sections/caseStudies";
-import ScrollZoomReveal from "@/components/sections/scrollZoomReveal";
 import StatsShowcase from "@/components/sections/statsShowcase";
-import AiShowcase from "@/components/sections/aiShowcase";
-import PraxistenceShowcase from "@/components/sections/praxistenceShowcase";
+import AiProductsShowcase from "@/components/sections/aiProductsShowcase";
 import Reviews from "@/components/sections/reviews";
 import WhatMAkesUs from "@/components/sections/whatMakesUs";
 import IndustriesShowcase from "@/components/sections/industriesShowcase";
-import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import ConsultationPopup from "@/components/sections/popupForm";
 import LatestBlogs from "@/components/sections/latestBlogs";
 import { getPageContent } from "@/actions/pageContentActions";
@@ -74,26 +71,19 @@ export default async function Home() {
           now directly after Case Studies. */}
       {!hidden.has("stats") && <StatsShowcase content={content} />}
 
-      {/* Praxistence — same video + feature-cards split as the Clio AI section */}
-      {!hidden.has("praxistenceShowcase") && <PraxistenceShowcase content={content} />}
-
-      {/* Our Process — mobile only here, between Praxistence and Clio AI. On
-          desktop it keeps its usual spot below the AI section (copy below). */}
-      {!hidden.has("process") && <WhatMAkesUs content={content} className="md:hidden" />}
-
-      {/* Scroll-pinned "Know More About Us" zoom-text transition — releases
-          straight into AiShowcase below with no divider/gap in between, so
-          the pin lets go right as the next section is already there. */}
-      {!hidden.has("scrollZoom") && <ScrollZoomReveal content={content} />}
-
-      {/* AI showcase — video + AI services split section */}
-      {!hidden.has("aiShowcase") && <AiShowcase content={content} />}
+      {/* Our products — Clio AI and Praxistence as two cards in one
+          section. Each card can still be removed on its own from the
+          dashboard (its old section key). The scroll-zoom "Know More About
+          Us" section and "Why Businesses Continue Working With Us" were
+          dropped to shorten the page; the latter still lives on /about. */}
+      <AiProductsShowcase
+        content={content}
+        showClio={!hidden.has("aiShowcase")}
+        showPraxistence={!hidden.has("praxistenceShowcase")}
+      />
 
       {/* What Makes Us Different section */}
-      {!hidden.has("process") && <WhatMAkesUs content={content} className="max-md:hidden" />}
-
-      {/* Why choose us */}
-      {!hidden.has("whyChooseUs") && <WhyChooseUs dark content={content} />}
+      {!hidden.has("process") && <WhatMAkesUs content={content} />}
 
       {/* Industries we work with — same list as the navbar's mega-menu */}
       {!hidden.has("industries") && <IndustriesShowcase content={content} />}

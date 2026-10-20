@@ -178,17 +178,19 @@ export default function OurServices({ content }) {
         <RichText
           as="p"
           text={subtext}
-          className="relative z-10 text-lg text-white text-center mb-20 max-w-2xl mx-auto px-4"
+          className="relative z-10 text-lg text-white text-center mb-10 md:mb-20 max-w-2xl mx-auto px-4"
         />
 
-        <div className="relative z-10 flex flex-wrap sm:p-0 p-2 max-w-6xl mx-auto gap-10 items-center justify-center">
+        {/* Tighter gaps and a smaller icon circle on phones, where the cards
+            stack one per row and the 40px gaps alone added most of a screen. */}
+        <div className="relative z-10 flex flex-wrap sm:p-0 px-4 max-w-6xl mx-auto gap-4 md:gap-10 items-center justify-center">
           {displayServices.map((service) => {
             const Icon = service.icon;
             const bgImage = service.image;
             return (
               <div
                 key={service.heading}
-                className="group relative isolate max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-black p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-[#0B60B0]/20"
+                className="group relative isolate max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-black p-5 md:p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-[#0B60B0]/20"
               >
                 {bgImage && (
                   <>
@@ -208,14 +210,15 @@ export default function OurServices({ content }) {
                 )}
                 {/* Content */}
                 <div className="flex items-start gap-4">
-                  {/* Icon */}
-                  <div className="text-4xl text-[#40A2D8] p-4 rounded-full transition-colors duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
+                  {/* Icon — on phones it sits in the card's top-right corner so
+                      the text gets the full card width. */}
+                  <div className="max-md:absolute max-md:right-4 max-md:top-4 text-4xl text-[#40A2D8] p-2 md:p-4 rounded-full transition-colors duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
                     <Icon size={28} />
                   </div>
 
                   {/* Text */}
                   <div>
-                    <h3 className="text-lg font-semibold text-white">
+                    <h3 className="text-lg font-semibold text-white max-md:pr-12">
                       {service.heading}
                     </h3>
                     <p className="mt-1 text-sm text-white transition-colors duration-300 group-hover:text-white/85">
@@ -224,11 +227,14 @@ export default function OurServices({ content }) {
                       {service.description}
                     </p>
                     {/* Button */}
-                    <div className="mt-6">
-                      <Link href={service.href} className="inline-block">
-                        <button className="rounded-lg py-2 flex gap-2 items-center text-sm font-medium text-[#40A2D8] transition-colors duration-300 group-hover:text-white">
-                          {service.buttonText} <MoveRight size={16} />
-                        </button>
+                    {/* A styled link, not a <button> inside a <Link> (a button
+                        nested in a link is invalid and confuses screen readers). */}
+                    <div className="mt-4 md:mt-6">
+                      <Link
+                        href={service.href}
+                        className="inline-flex rounded-lg py-2 gap-2 items-center text-sm font-medium text-[#40A2D8] transition-colors duration-300 group-hover:text-white"
+                      >
+                        {service.buttonText} <MoveRight size={16} />
                       </Link>
                     </div>
                   </div>

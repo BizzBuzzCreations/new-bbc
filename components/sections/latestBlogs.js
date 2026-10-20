@@ -37,14 +37,17 @@ export default async function LatestBlogs({ dark = false, content }) {
       </div>
 
       {/* Latest blogs */}
+      {/* Phones: a swipeable row (each card 85% wide so the next one peeks
+          in) instead of three tall cards stacked, which took over two
+          screens. From md up it's the usual grid. */}
       <div className="px-8 pt-12 mx-auto lg:max-w-screen-xl sm:max-w-xl md:max-w-full sm:px-12 md:px-16">
-        <div className="grid gap-x-8 gap-y-12 sm:gap-y-16 md:grid-cols-2 lg:grid-cols-3 mb-14">
+        <div className="-mx-8 sm:-mx-12 md:mx-0 flex md:grid snap-x snap-mandatory overflow-x-auto md:overflow-visible scroll-px-8 sm:scroll-px-12 px-8 sm:px-12 md:px-0 pb-2 md:pb-0 gap-4 md:gap-x-8 md:gap-y-16 md:grid-cols-2 lg:grid-cols-3 mb-14">
           {blogs.length > 0 &&
             blogs.map((e, index) => {
               const featuredImage = getFeaturedImage(e);
               return (
               <div
-                className={`group rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 ${
+                className={`group w-[85%] shrink-0 snap-start md:w-auto rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 ${
                   dark
                     ? "border border-white/10 bg-white/5 hover:border-[#40A2D8]/40 hover:shadow-xl hover:shadow-black/40"
                     : "border border-gray-200 bg-white shadow-sm hover:border-[#0B60B0]/30 hover:shadow-xl"

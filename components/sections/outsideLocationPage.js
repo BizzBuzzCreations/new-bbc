@@ -6,14 +6,12 @@ import OurServices from "@/components/sections/ourServices";
 import CaseStudies from "@/components/sections/caseStudies";
 import StatsShowcase from "@/components/sections/statsShowcase";
 import WhoWeAreBox from "@/components/sections/whoWeAreBox";
-import ClioShowcase from "@/components/sections/clioShowcase";
-import PraxistenceShowcase from "@/components/sections/praxistenceShowcase";
+import AiProductsShowcase from "@/components/sections/aiProductsShowcase";
 import Reviews from "@/components/sections/reviews";
 import VideoTestimonial from "@/components/sections/videoTestimonial";
 import WhatMAkesUs from "@/components/sections/whatMakesUs";
 import Recognitions from "@/components/sections/recognitions";
 import IndustriesShowcase from "@/components/sections/industriesShowcase";
-import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import ConsultationPopup from "@/components/sections/popupForm";
 import LatestBlogs from "@/components/sections/latestBlogs";
 import { getPageContent } from "@/actions/pageContentActions";
@@ -32,7 +30,9 @@ import { hasCustomSchema } from "@/lib/seo";
 // `heroMediaChoice`) read from the dashboard's own fields; the hero's big
 // outlined "BizzBuzz Creations" wordmark is dropped (`showWordmark={false}`);
 // and the "Know More About Us" scroll-zoom section is swapped for
-// WhoWeAreBox. Each section can be switched off from the dashboard
+// WhoWeAreBox. Like the homepage, Clio AI and Praxistence share one
+// two-card section and "Why Clients Stick Around" (WhyChooseUs) was
+// dropped. Each section can be switched off from the dashboard
 // ("Remove section") — `hidden` below.
 export default async function OutsideLocationPage({ pageKey }) {
   const content = await getPageContent(pageKey);
@@ -62,11 +62,16 @@ export default async function OutsideLocationPage({ pageKey }) {
       {!hidden.has("services") && <OurServices content={content} />}
       {!hidden.has("caseStudies") && <CaseStudies content={content} plainLogos />}
       {!hidden.has("stats") && <StatsShowcase content={content} />}
-      {!hidden.has("praxistenceShowcase") && <PraxistenceShowcase content={content} />}
       {!hidden.has("whoWeAre") && <WhoWeAreBox content={content} />}
-      {!hidden.has("clioShowcase") && <ClioShowcase content={content} />}
+      {/* Clio AI (clio* fields) and Praxistence as two cards in one section;
+          each can still be removed on its own from the dashboard. */}
+      <AiProductsShowcase
+        content={content}
+        clioPrefix="clio"
+        showClio={!hidden.has("clioShowcase")}
+        showPraxistence={!hidden.has("praxistenceShowcase")}
+      />
       {!hidden.has("process") && <WhatMAkesUs content={content} />}
-      {!hidden.has("whyChooseUs") && <WhyChooseUs dark content={content} />}
       {!hidden.has("recognitions") && <Recognitions content={content} showIcons={false} />}
       {!hidden.has("industries") && <IndustriesShowcase content={content} />}
       {!hidden.has("reviews") && <Reviews content={content} />}
