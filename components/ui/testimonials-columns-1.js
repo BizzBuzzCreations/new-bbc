@@ -6,7 +6,7 @@ import RichText from "@/components/ui/richText";
 export function TestimonialCard({ text, name, role, className = "" }) {
   return (
     <div
-      className={`p-6 sm:p-8 rounded-3xl border border-gray-100 bg-white shadow-lg shadow-blue-900/10 ${className}`}
+      className={`p-6 sm:p-8 rounded-2xl border border-white/10 bg-[#0a0a0a] ${className}`}
     >
       <div className="flex items-center mb-4 space-x-1">
         {[...Array(5)].map((_, s) => (
@@ -21,7 +21,7 @@ export function TestimonialCard({ text, name, role, className = "" }) {
           </svg>
         ))}
       </div>
-      <RichText as="div" text={text} className="text-gray-600 text-sm leading-relaxed" />
+      <RichText as="div" text={text} className="text-white/80 text-sm leading-relaxed" />
       <div className="flex items-center gap-2 mt-5">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -47,10 +47,10 @@ export function TestimonialCard({ text, name, role, className = "" }) {
           ></path>
         </svg>
         <div className="flex flex-col">
-          <div className="font-medium tracking-tight leading-5 text-gray-900">
+          <div className="font-medium tracking-tight leading-5 text-white">
             {name}
           </div>
-          <div className="leading-5 text-xs text-gray-500">
+          <div className="leading-5 text-xs text-white/60">
             {role}
           </div>
         </div>

@@ -71,7 +71,7 @@ export default function CTA({ content, white = false } = {}) {
     <>
       <div className={`${white ? "bg-white" : "bg-black"} px-5 py-10 scroll-mt-34`} id="CTA">
         <div
-          className={`md:flex md:items-stretch rounded-3xl border-2 md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto container border-[#0B60B0] ${
+          className={`md:flex md:items-stretch rounded-2xl border md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto container border-[#0B60B0]/60 ${
             white ? "shadow-lg shadow-black/20" : "shadow-lg shadow-black"
           }`}
           style={{
@@ -80,7 +80,7 @@ export default function CTA({ content, white = false } = {}) {
           }}
         >
           <div className="flex-1 min-w-0 py-8 md:py-10 px-6 md:px-10 z-10 text-white">
-            <h2 className="md:text-3xl text-2xl font-bold mb-5">
+            <h2 className="md:text-3xl text-2xl font-semibold tracking-tight mb-5">
               {heading}
             </h2>
             <RichText as="p" text={paragraph} className="max-w-3xl" />

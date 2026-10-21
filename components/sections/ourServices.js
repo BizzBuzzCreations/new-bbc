@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import RichText from "@/components/ui/richText";
 import { resolveIcon } from "@/lib/iconOptions";
 import {
@@ -133,41 +132,20 @@ export default function OurServices({ content }) {
   return (
     <>
       <div
-        style={{
-          backgroundColor: "#000000",
-          backgroundImage: `
-          repeating-linear-gradient(45deg, rgba(64, 162, 216, 0.08) 0, rgba(64, 162, 216, 0.08) 1px, transparent 1px, transparent 20px),
-        repeating-linear-gradient(-45deg, rgba(64, 162, 216, 0.08) 0, rgba(64, 162, 216, 0.08) 1px, transparent 1px, transparent 20px)
-        `,
-          backgroundSize: "40px 40px",
-        }}
-        className="relative py-14 md:py-20 overflow-hidden scroll-mt-20"
+        className="relative bg-black py-14 md:py-20 overflow-hidden scroll-mt-20"
         id="services"
       >
-
-        {/* Top + bottom fades — the diamond pattern used to
-            stop at a hard edge against the plain-black sections above and
-            below; fading them out to solid black lets this section blend
-            into its neighbours instead of reading as a separate block. */}
-        <div
-          className="absolute inset-x-0 top-0 z-[1] h-40 bg-gradient-to-b from-black to-transparent pointer-events-none"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute inset-x-0 bottom-0 z-[1] h-48 bg-gradient-to-t from-black to-transparent pointer-events-none"
-          aria-hidden="true"
-        />
 
         {eyebrow && (
           <p className="relative z-10 text-xs font-bold uppercase tracking-widest text-[#40A2D8] text-center mb-3">{eyebrow}</p>
         )}
-        <h2 className="relative z-10 md:text-4xl text-3xl font-bold mb-10 text-center text-white">
+        <h2 className="relative z-10 md:text-4xl text-3xl font-semibold tracking-tight mb-4 text-center text-white">
           {heading}
         </h2>
         <RichText
           as="p"
           text={subtext}
-          className="relative z-10 text-lg text-white text-center mb-10 md:mb-20 max-w-2xl mx-auto px-4"
+          className="relative z-10 text-base md:text-lg text-white/75 text-center mb-10 md:mb-14 max-w-2xl mx-auto px-4"
         />
 
         {/* Tighter gaps and a smaller icon circle on phones, where the cards
@@ -175,28 +153,11 @@ export default function OurServices({ content }) {
         <div className="relative z-10 flex flex-wrap sm:p-0 px-4 max-w-6xl mx-auto gap-4 md:gap-10 items-center justify-center">
           {displayServices.map((service) => {
             const Icon = service.icon;
-            const bgImage = service.image;
             return (
               <div
                 key={service.heading}
-                className="group relative isolate max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-black p-5 md:p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-[#0B60B0]/20 has-[a:focus-visible]:border-[#40A2D8] has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-[#40A2D8]"
+                className="group relative isolate max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a] p-5 md:p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-[#0B60B0]/20 has-[a:focus-visible]:border-[#40A2D8] has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-[#40A2D8]"
               >
-                {bgImage && (
-                  <>
-                    <Image
-                      src={bgImage}
-                      alt=""
-                      fill
-                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                      className="-z-20 object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    {/* Dark scrim keeps the text readable; the card itself keeps its image on hover: it lifts, the border glows blue and the icon turns white. */}
-                    <div
-                      className="absolute inset-0 -z-10 bg-gradient-to-b from-black/75 via-black/70 to-black/85"
-                      aria-hidden="true"
-                    />
-                  </>
-                )}
                 {/* Content */}
                 <div className="flex items-start gap-4">
                   {/* Icon — on phones it sits in the card's top-right corner so

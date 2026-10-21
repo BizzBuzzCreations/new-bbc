@@ -28,10 +28,10 @@ export default async function LatestBlogs({ dark = false, content }) {
     <section className={`py-12 md:py-20 ${dark ? "bg-black" : "bg-white"}`}>
       <div className="text-center px-6">
         {eyebrow && <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">{eyebrow}</p>}
-        <h2 className={`md:text-4xl text-3xl font-bold mb-3 ${dark ? "text-white" : "text-black"}`}>
+        <h2 className={`md:text-4xl text-3xl font-semibold tracking-tight mb-3 ${dark ? "text-white" : "text-black"}`}>
           {heading}
         </h2>
-        <p className={`max-w-xl mx-auto ${dark ? "text-white" : "text-gray-600"}`}>
+        <p className={`max-w-xl mx-auto ${dark ? "text-white/75" : "text-gray-600"}`}>
           {subtext}
         </p>
       </div>
@@ -49,7 +49,7 @@ export default async function LatestBlogs({ dark = false, content }) {
               <div
                 className={`group w-[85%] shrink-0 snap-start md:w-auto rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 ${
                   dark
-                    ? "border border-white/10 bg-white/5 hover:border-[#40A2D8]/40 hover:shadow-xl hover:shadow-black/40"
+                    ? "border border-white/10 bg-[#0a0a0a] hover:border-[#40A2D8]/40 hover:shadow-xl hover:shadow-black/40"
                     : "border border-gray-200 bg-white shadow-sm hover:border-[#0B60B0]/30 hover:shadow-xl"
                 }`}
                 key={index}

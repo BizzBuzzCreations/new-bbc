@@ -1,8 +1,8 @@
 import React from "react";
-import Link from "next/link";
 import { Search, PenTool, Rocket, BarChart3, ArrowRight } from "lucide-react";
 import RichText from "@/components/ui/richText";
 import ScrollSteps from "@/components/ui/scrollSteps";
+import AnimatedButton from "@/components/ui/animatedButton";
 import BackgroundBeams from "@/components/ui/backgroundBeams";
 import { resolveIcon } from "@/lib/iconOptions";
 
@@ -78,12 +78,10 @@ export default function WhatMAkesUs({ content, className = "" }) {
 
       <div className="relative text-center">
         {eyebrow && <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">{eyebrow}</p>}
-        <h2 className="text-3xl md:text-4xl font-bold mb-2 max-w-4xl text-white">
+        <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-3 max-w-4xl text-white">
           {heading}
         </h2>
-        <p className="text-lg text-white max-w-2xl mb-10">
-          <b className="text-[#40A2D8]">{subtext}</b>
-        </p>
+        <p className="text-base md:text-lg text-white/75 max-w-2xl mx-auto mb-10">{subtext}</p>
       </div>
 
       {/* Desktop: horizontal stepper — every step lives in its own grid
@@ -180,29 +178,10 @@ export default function WhatMAkesUs({ content, className = "" }) {
 
       </ScrollSteps>
 
-      <Link href="/contact" className="relative inline-block mt-10">
-        <button
-          className="animated-button mx-auto"
-          style={{ backgroundColor: "#0B60B0" }}
-        >
-          <svg
-            viewBox="0 0 24 24"
-            className="arr-2"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-          </svg>
-          <span className="text">Book Your Free Audit</span>
-          <span className="circle"></span>
-          <svg
-            viewBox="0 0 24 24"
-            className="arr-1"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-          </svg>
-        </button>
-      </Link>
+      {/* Same button as every other section (was a one-off filled blue version). */}
+      <div className="relative mt-10">
+        <AnimatedButton href="/contact">Book Your Free Audit</AnimatedButton>
+      </div>
     </div>
   );
 }
