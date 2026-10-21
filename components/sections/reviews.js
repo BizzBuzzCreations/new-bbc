@@ -69,10 +69,10 @@ export default function Reviews({ content }) {
           </div>
 
           {eyebrow && <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mt-5 -mb-2">{eyebrow}</p>}
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mt-5 text-white">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tighter mt-5 text-white">
             {heading}
           </h2>
-          <RichText as="p" text={subtext} className="text-center mt-4 text-white/75" />
+          <RichText as="p" text={subtext} className="text-center mt-5 text-white" />
         </motion.div>
 
         {/* Still cards (they used to scroll upward in endless columns, and

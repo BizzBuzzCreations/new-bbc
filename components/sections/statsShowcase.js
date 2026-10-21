@@ -181,7 +181,7 @@ function WaveMask({ position = "top" }) {
       }`}
       style={{ height: WAVE_MASK_HEIGHT }}
     >
-      <path d={WAVE_MASK_PATH} fill="#0a0a0a" />
+      <path d={WAVE_MASK_PATH} fill="white" />
     </svg>
   );
 }
@@ -211,7 +211,7 @@ export default function StatsShowcase({ content }) {
   return (
     <section className="bg-black pt-8 pb-14 md:pb-20" aria-label="BizzBuzz Creations by the numbers">
       {eyebrow && <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] text-center mb-3 px-5">{eyebrow}</p>}
-      <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-white text-center max-w-3xl mx-auto mb-10 px-5">
+      <h2 className="text-3xl md:text-4xl font-bold text-white text-center max-w-3xl mx-auto mb-10 px-5">
         {heading}
       </h2>
 
@@ -228,7 +228,7 @@ export default function StatsShowcase({ content }) {
         {stats.map((stat, i) => (
           <div
             key={`${stat.label}-${i}`}
-            className="flex min-h-[460px] w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a] transition-transform duration-300 hover:-translate-y-1.5 sm:w-[300px]"
+            className="flex min-h-[460px] w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl bg-white shadow-xl transition-transform duration-300 hover:-translate-y-1.5 sm:w-[300px]"
           >
             {/* Image — on top, with a wavy white mask along its bottom
                 edge flowing into the text panel below. Fixed height so
@@ -242,18 +242,19 @@ export default function StatsShowcase({ content }) {
             {/* Text — below; the button sits at the bottom so the
                 buttons line up across the row. */}
             <div className="flex flex-1 flex-col p-5">
-              <p className="text-xs font-bold uppercase tracking-wider text-[#40A2D8] mb-2">
+              <p className="text-xs font-bold uppercase tracking-wider text-[#0B60B0] mb-2">
                 {stat.tag}
               </p>
-              <h3 className="text-lg font-semibold text-white mb-2 leading-snug">
+              <h3 className="text-lg font-bold text-gray-900 mb-2 leading-snug">
                 {stat.value} {stat.label}
               </h3>
-              <RichText as="p" text={stat.description} className="text-sm text-white/75 leading-relaxed mb-4" />
+              <RichText as="p" text={stat.description} className="text-sm text-gray-600 leading-relaxed mb-4" />
               <div className="mt-auto">
                 {/* buttonText / buttonLink are only editable on the
                     Outside Location page; elsewhere never saved. */}
                 <AnimatedButton
                   href={stat.buttonLink || "/about"}
+                  variant="blue"
                   size="sm"
                   srText={`about ${stat.value} ${stat.label}`.replace(/\s+/g, " ").trim()}
                 >

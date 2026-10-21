@@ -50,7 +50,7 @@ function withOverrides(defaults, saved) {
 
 function ProductCard({ heading, paragraph, image, features, buttonText, buttonLink }) {
   return (
-    <article className="flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a]">
+    <article className="flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]">
       {/* Fixed 16:9 frame + object-cover, so a dashboard image of any shape
           fills it without stretching. Decorative: the heading below says
           what the card is about. */}
@@ -64,7 +64,7 @@ function ProductCard({ heading, paragraph, image, features, buttonText, buttonLi
         />
       </div>
       <div className="flex flex-1 flex-col gap-5 p-6 sm:p-8 text-white">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight leading-tight">{heading}</h2>
+        <h2 className="text-2xl md:text-3xl font-bold leading-tight">{heading}</h2>
         <RichText as="div" text={paragraph} className="text-white space-y-3" />
         <ul className="grid gap-4 sm:grid-cols-2">
           {features.map(({ icon: Icon, title, description }, i) => (

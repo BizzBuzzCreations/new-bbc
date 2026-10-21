@@ -175,10 +175,10 @@ export default function CaseStudies({ content, plainLogos = false }) {
   return (
     <section id="case-studies" className="bg-black text-white pt-14 md:pt-20 pb-10 overflow-hidden">
       {eyebrow && <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] text-center mb-3">{eyebrow}</p>}
-      <h2 className="md:text-4xl text-3xl font-semibold tracking-tight text-center mb-3">
+      <h2 className="md:text-4xl text-3xl font-bold text-center mb-3">
         {heading}
       </h2>
-      <RichText as="p" text={subtext} className="text-center text-white/75 max-w-xl mx-auto mb-16 px-4" />
+      <RichText as="p" text={subtext} className="text-center text-white max-w-xl mx-auto mb-16 px-4" />
 
       {/* Card carousel */}
       <div
@@ -211,10 +211,10 @@ export default function CaseStudies({ content, plainLogos = false }) {
               }}
               style={{ zIndex: style.zIndex }}
               transition={{ type: "spring", stiffness: 420, damping: 32 }}
-              className={`absolute top-1/2 left-1/2 -ml-[140px] md:-ml-[150px] w-[280px] md:w-[300px] p-6 rounded-2xl border cursor-pointer ${
+              className={`absolute top-1/2 left-1/2 -ml-[140px] md:-ml-[150px] w-[280px] md:w-[300px] p-6 rounded-3xl border cursor-pointer ${
                 isActive
                   ? "bg-linear-to-br from-[#0B60B0] to-[#40A2D8] border-white/20 shadow-2xl"
-                  : "bg-[#0a0a0a] border-white/10"
+                  : "bg-white/6 border-white/10"
               }`}
             >
               <div

@@ -7,7 +7,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { INDUSTRIES } from "@/lib/industriesData";
 import RichText from "@/components/ui/richText";
-import AnimatedButton from "@/components/ui/animatedButton";
 
 // Static three-column list of every industry — no scroll-jacking. Hover
 // (or focus) any name to swap the visual + description; clicking a name on
@@ -101,7 +100,7 @@ export default function IndustriesShowcase({ content }) {
           <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">
             {eyebrow}
           </p>
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-white max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-white max-w-2xl mx-auto">
             {heading}
           </h2>
           <RichText as="p" text={subtext} className="text-white max-w-2xl mx-auto mt-4" />
@@ -147,9 +146,14 @@ export default function IndustriesShowcase({ content }) {
               <p className="text-white text-sm leading-relaxed mb-6">
                 {currentDescription}
               </p>
-              <AnimatedButton href={`/industries/${current.slug}`} size="sm" srText={`about ${current.label}`}>
+              <Link
+                href={`/industries/${current.slug}`}
+                aria-label={`Know more about ${current.label}`}
+                className="inline-flex items-center gap-1.5 border border-white text-white hover:bg-white hover:text-black rounded-full px-5 py-2.5 text-sm font-semibold transition w-fit"
+              >
                 {buttonText}
-              </AnimatedButton>
+                <ArrowUpRight size={16} />
+              </Link>
             </motion.div>
           </AnimatePresence>
         </div>
@@ -204,9 +208,13 @@ export default function IndustriesShowcase({ content }) {
                 <p className="text-white text-sm leading-relaxed mb-6">
                   {currentDescription}
                 </p>
-                <AnimatedButton href={`/industries/${current.slug}`} size="sm" srText={`about ${current.label}`}>
+                <Link
+                  href={`/industries/${current.slug}`}
+                  className="inline-flex items-center gap-1.5 border border-white text-white hover:bg-white hover:text-black rounded-full px-5 py-2.5 text-sm font-semibold transition w-fit"
+                >
                   {buttonText}
-                </AnimatedButton>
+                  <ArrowUpRight size={16} />
+                </Link>
               </motion.div>
             </AnimatePresence>
           </div>
