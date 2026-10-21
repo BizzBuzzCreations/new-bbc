@@ -27,7 +27,7 @@ export default function BuildV2({ content, showClio = true, showPraxistence = tr
   return (
     <section className="bg-black text-white">
       <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-24">
-        <div className="grid gap-6 md:grid-cols-2 md:gap-12">
+        <div className="reveal-stagger grid gap-6 md:grid-cols-2 md:gap-12">
           <div>
             <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
             <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
@@ -36,7 +36,7 @@ export default function BuildV2({ content, showClio = true, showPraxistence = tr
         </div>
 
         {products.length > 0 && (
-          <div className={`mt-14 grid gap-14 md:mt-20 ${products.length > 1 ? "md:grid-cols-2 md:gap-x-12 md:gap-y-0" : "max-w-2xl"}`} style={rows}>
+          <div className={`reveal-stagger mt-14 grid gap-14 md:mt-20 ${products.length > 1 ? "md:grid-cols-2 md:gap-x-12 md:gap-y-0" : "max-w-2xl"}`} style={rows}>
             {products.map((p) => (
               <article key={p.key} className="flex flex-col md:grid md:row-span-(--rows) md:grid-rows-subgrid">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-[#0a0a0a]">
@@ -63,7 +63,7 @@ export default function BuildV2({ content, showClio = true, showPraxistence = tr
         {builds.length > 0 && (
           <div className="mt-24">
             <p className="text-sm text-white/60">Also built and run in-house</p>
-            <ul className="mt-6 grid border-t border-white/10 md:grid-cols-2 md:gap-x-12">
+            <ul className="reveal-stagger mt-6 grid border-t border-white/10 md:grid-cols-2 md:gap-x-12">
               {builds.map((b, i) => (
                 <li key={`${b.name}-${i}`} className="border-b border-white/10 py-6">
                   <h3 className="text-base text-white">{b.name}</h3>

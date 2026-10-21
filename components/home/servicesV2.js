@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import RichText from "@/components/ui/richText";
 import { resolveServices } from "@/components/sections/ourServices";
+import SpotlightList from "@/components/home/spotlightList";
 
 // Services (redesign) — a bento grid of picture cards built around each
 // service's own illustration. On wide screens (xl): three rows — two wide
@@ -11,8 +12,9 @@ import { resolveServices } from "@/components/sections/ourServices";
 // its dark left side, and a small card shows the illustrated part on top
 // with the text below. Below xl: a two-column grid of small cards (phones
 // show the name and one-line promise; the description joins from sm up).
-// Hover: the border lights up, the picture grows a touch, the arrow (bottom
-// right, clear of the illustration; not on phones) fills.
+// Hover: the border lights up, a soft light follows the mouse, the picture
+// grows a touch, the arrow (bottom right, clear of the illustration; not on
+// phones) fills.
 // The whole card is the link. Same 8 services and dashboard text as before.
 const WIDE = new Set([0, 1, 6, 7]);
 const CARD_BG = "#080c18"; // the illustrations' own background, so they blend in
@@ -27,7 +29,7 @@ export default function ServicesV2({ content }) {
     <section id="services" className="scroll-mt-20 bg-black text-white">
       <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-24">
         {/* same split and gap as the cards, so the intro starts over the third card */}
-        <div className="grid gap-6 md:grid-cols-2 md:gap-4 xl:gap-5">
+        <div className="reveal-stagger grid gap-6 md:grid-cols-2 md:gap-4 xl:gap-5">
           <div>
             <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
             <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
@@ -35,13 +37,14 @@ export default function ServicesV2({ content }) {
           {subtext && <RichText as="p" text={subtext} className="self-end text-base text-white/70 md:text-lg" />}
         </div>
 
-        <ul className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 md:mt-16 xl:grid-cols-4 xl:gap-5">
+        <SpotlightList className="reveal-stagger mt-12 grid grid-cols-2 gap-3 sm:gap-4 md:mt-16 xl:grid-cols-4 xl:gap-5">
           {services.map((s, i) => {
             const wide = WIDE.has(i);
             const Icon = s.icon;
             return (
               <li
                 key={s.heading}
+                data-spotlight
                 className={`group relative overflow-hidden rounded-2xl border border-white/10 ring-[#40A2D8] transition-colors duration-300 hover:border-[#40A2D8]/50 has-[a:focus-visible]:ring-2 sm:rounded-3xl ${
                   wide ? "xl:col-span-2 xl:aspect-[512/242]" : ""
                 }`}
@@ -71,6 +74,12 @@ export default function ServicesV2({ content }) {
                   />
                 </div>
 
+                {/* the light that follows the mouse (SpotlightList sets --x / --y) */}
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  style={{ background: "radial-gradient(280px circle at var(--x, 50%) var(--y, 50%), rgba(64, 162, 216, 0.16), transparent 70%)" }}
+                />
                 <span className="absolute left-4 top-4 text-xs tabular-nums text-white/60 sm:left-5 sm:top-5">
                   {String(i + 1).padStart(2, "0")}
                 </span>
@@ -97,7 +106,7 @@ export default function ServicesV2({ content }) {
               </li>
             );
           })}
-        </ul>
+        </SpotlightList>
       </div>
     </section>
   );

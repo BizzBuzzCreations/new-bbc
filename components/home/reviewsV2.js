@@ -31,7 +31,7 @@ export default function ReviewsV2({ content }) {
 
   return (
     <section id="reviews" className="relative scroll-mt-20 overflow-hidden text-white">
-      <div className="relative mx-auto grid max-w-7xl gap-12 px-6 md:px-10 pt-16 pb-28 md:grid-cols-[2fr_3fr] md:gap-16 md:pt-24 md:pb-40">
+      <div className="reveal-stagger relative mx-auto grid max-w-7xl gap-12 px-6 md:px-10 pt-16 pb-28 md:grid-cols-[2fr_3fr] md:gap-16 md:pt-24 md:pb-40">
         <div>
           <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
           <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>

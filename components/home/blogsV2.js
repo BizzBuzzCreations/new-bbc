@@ -23,7 +23,7 @@ export default async function BlogsV2({ content }) {
   return (
     <section className="bg-black text-white">
       <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-24">
-        <div className="flex flex-wrap items-end justify-between gap-6">
+        <div className="reveal flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
             <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
@@ -32,7 +32,7 @@ export default async function BlogsV2({ content }) {
         </div>
 
         {/* Phones: a swipe row; from md up: three columns. */}
-        <div className="-mx-6 mt-14 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-6 px-6 pb-2 md:mx-0 md:mt-20 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:px-0 md:pb-0">
+        <div className="reveal-stagger -mx-6 mt-14 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-6 px-6 pb-2 md:mx-0 md:mt-20 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:px-0 md:pb-0">
           {blogs.map((b) => {
             const img = getFeaturedImage(b);
             return (

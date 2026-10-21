@@ -28,7 +28,7 @@ export default function IndustriesV2({ content }) {
   return (
     <section id="industries" className="relative scroll-mt-20 overflow-hidden text-white">
       <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-24">
-        <div className="grid gap-6 md:grid-cols-[2fr_3fr] md:items-end md:gap-16">
+        <div className="reveal-stagger grid gap-6 md:grid-cols-[2fr_3fr] md:items-end md:gap-16">
           <div>
             <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
             <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
@@ -42,7 +42,7 @@ export default function IndustriesV2({ content }) {
         </div>
 
         {/* same columns as the heading row above, so the list starts under the intro text */}
-        <div className="mt-14 grid gap-10 md:mt-20 md:grid-cols-[2fr_3fr] md:gap-16">
+        <div className="reveal-stagger mt-14 grid gap-10 md:mt-20 md:grid-cols-[2fr_3fr] md:gap-16">
           {/* The active industry: photo, name, one line, link */}
           <div className="flex gap-5 md:block md:max-w-[18rem]">
             <div className="relative aspect-[278/378] w-32 shrink-0 overflow-hidden rounded-2xl bg-[#0a0a0a] sm:w-40 md:w-full md:rounded-3xl">

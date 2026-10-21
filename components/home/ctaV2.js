@@ -41,7 +41,7 @@ export default function CtaV2({ content }) {
   return (
     <section id="CTA" className="scroll-mt-20 bg-black text-white">
       <div className="mx-auto max-w-7xl px-6 md:px-10 pt-8 pb-24 md:pt-12 md:pb-32">
-        <div className="border-t border-white/10 pt-16 md:pt-24">
+        <div className="reveal-stagger border-t border-white/10 pt-16 md:pt-24">
           <h2 className="font-display max-w-4xl text-5xl leading-[1.04] md:text-7xl">{heading}</h2>
           <RichText as="p" text={paragraph} className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 md:text-lg" />
 

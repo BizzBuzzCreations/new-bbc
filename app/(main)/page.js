@@ -61,6 +61,8 @@ export default async function Home() {
   return (
     <div data-no-reveal>
       <PageSeoScripts pageKey="home" />
+      {/* thin reading-progress line at the top (pure CSS, see globals.css) */}
+      <div aria-hidden="true" className="scroll-progress" />
       {/* Hero: the BizzBuzz Creations wordmark over the background video,
           stats and certification badges (homepage look; the shared HomeHero
           stays as it is on the UK / location pages). */}
