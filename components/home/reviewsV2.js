@@ -3,12 +3,11 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import RichText from "@/components/ui/richText";
-import BackgroundBeams from "@/components/ui/backgroundBeams";
 
 // Reviews (redesign) — one review at a time, large and quiet (GPG's "Let
 // their opinion speak for us"), with prev/next buttons. Every review stays in
 // the page (the others are just hidden), so nothing is lost for search.
-// On the shared navy block with the still beams. Moves only when asked.
+// On the shared navy block (NavyBlock). Moves only when asked.
 function Stars() {
   return (
     <div className="flex gap-1 text-[#f5b301]" aria-label="5 out of 5 stars" role="img">
@@ -32,7 +31,6 @@ export default function ReviewsV2({ content }) {
 
   return (
     <section id="reviews" className="relative scroll-mt-20 overflow-hidden text-white">
-      <BackgroundBeams still className="opacity-40" />
       <div className="relative mx-auto grid max-w-6xl gap-12 px-6 pt-16 pb-28 md:grid-cols-[2fr_3fr] md:gap-16 md:pt-24 md:pb-40">
         <div>
           <p className="text-sm text-[#40A2D8]">{eyebrow}</p>

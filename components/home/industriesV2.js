@@ -6,12 +6,11 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import RichText from "@/components/ui/richText";
-import BackgroundBeams from "@/components/ui/backgroundBeams";
 import Pill from "@/components/home/pill";
 import { INDUSTRIES } from "@/lib/industriesData";
 import { HOVER_DESCRIPTIONS } from "@/components/sections/industriesShowcase";
 
-// Industries (redesign) — on the shared navy block with the still beams: the
+// Industries (redesign) — on the shared navy block (NavyBlock): the
 // heading row, then the industry's photo + short description beside every
 // industry name as a light typographic link. Hovering (or focusing) a name
 // swaps the photo, like the old showcase. On touch screens the first tap on
@@ -28,7 +27,6 @@ export default function IndustriesV2({ content }) {
 
   return (
     <section id="industries" className="relative scroll-mt-20 overflow-hidden text-white">
-      <BackgroundBeams still className="opacity-40" />
       <div className="relative mx-auto max-w-6xl px-6 py-16 md:py-24">
         <div className="grid gap-6 md:grid-cols-[2fr_3fr] md:items-end md:gap-16">
           <div>
