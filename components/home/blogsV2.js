@@ -22,7 +22,7 @@ export default async function BlogsV2({ content }) {
 
   return (
     <section className="bg-black text-white">
-      <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-24">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
@@ -43,7 +43,7 @@ export default async function BlogsV2({ content }) {
                     <img
                       src={optimizedImageUrl(img, 640)}
                       srcSet={imageSrcSet(img, [400, 640, 900])}
-                      sizes="(max-width: 768px) 85vw, 360px"
+                      sizes="(max-width: 768px) 85vw, 380px"
                       loading="lazy"
                       decoding="async"
                       alt=""

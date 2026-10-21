@@ -15,7 +15,7 @@ export default function ServicesV2({ content }) {
 
   return (
     <section id="services" className="scroll-mt-20 bg-black text-white">
-      <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-24">
         <div className="grid gap-6 md:grid-cols-[2fr_3fr] md:gap-16">
           <div>
             <p className="text-sm text-[#40A2D8]">{eyebrow}</p>

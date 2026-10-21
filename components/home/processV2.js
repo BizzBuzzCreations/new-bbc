@@ -3,7 +3,7 @@ import RichText from "@/components/ui/richText";
 import Pill from "@/components/home/pill";
 import { resolveSteps } from "@/components/sections/whatMakesUs";
 
-// How We Work (redesign) — on the shared navy block (NavyBlock): the 4
+// How We Work (redesign) — on the shared beams background (BeamsBlock): the 4
 // steps as a timeline (GPG-style circles on a line, no boxes). Scrolling
 // through fills the line and lights each step's circle as the line reaches
 // it (ScrollSteps); on phones the steps stack and light up as they arrive.
@@ -15,7 +15,7 @@ export default function ProcessV2({ content }) {
 
   return (
     <section className="relative overflow-hidden text-white">
-      <div className="relative mx-auto max-w-6xl px-6 pt-28 pb-16 md:pt-40 md:pb-24">
+      <div className="relative mx-auto max-w-7xl px-6 md:px-10 pt-28 pb-16 md:pt-40 md:pb-24">
         <div className="grid gap-6 md:grid-cols-[2fr_3fr] md:gap-16">
           <div>
             <p className="text-sm text-[#40A2D8]">{eyebrow}</p>

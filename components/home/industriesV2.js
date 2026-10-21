@@ -10,7 +10,7 @@ import Pill from "@/components/home/pill";
 import { INDUSTRIES } from "@/lib/industriesData";
 import { HOVER_DESCRIPTIONS } from "@/components/sections/industriesShowcase";
 
-// Industries (redesign) — on the shared navy block (NavyBlock): the
+// Industries (redesign) — on the shared beams background (BeamsBlock): the
 // heading row, then the industry's photo + short description beside every
 // industry name as a light typographic link. Hovering (or focusing) a name
 // swaps the photo, like the old showcase. On touch screens the first tap on
@@ -27,7 +27,7 @@ export default function IndustriesV2({ content }) {
 
   return (
     <section id="industries" className="relative scroll-mt-20 overflow-hidden text-white">
-      <div className="relative mx-auto max-w-6xl px-6 py-16 md:py-24">
+      <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-24">
         <div className="grid gap-6 md:grid-cols-[2fr_3fr] md:items-end md:gap-16">
           <div>
             <p className="text-sm text-[#40A2D8]">{eyebrow}</p>

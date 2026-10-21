@@ -22,12 +22,12 @@ export default function AboutV2({ content, showStatement = true }) {
 
   return (
     <section className="bg-black text-white">
-      <div className="mx-auto grid max-w-6xl gap-10 px-6 py-16 md:grid-cols-2 md:gap-16 md:py-24">
+      <div className="mx-auto grid max-w-7xl gap-10 px-6 md:px-10 py-16 md:grid-cols-2 md:gap-16 md:py-24">
         <div>
           <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
           <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
           <div className="relative mt-8 aspect-[1705/922] overflow-hidden rounded-3xl bg-[#0a0a0a] md:mt-10">
-            <Image src={photo} alt="The BizzBuzz Creations team at work" fill sizes="(min-width: 1152px) 520px, (min-width: 768px) 46vw, 100vw" className="object-cover" />
+            <Image src={photo} alt="The BizzBuzz Creations team at work" fill sizes="(min-width: 1280px) 568px, (min-width: 768px) 45vw, 100vw" className="object-cover" />
           </div>
         </div>
         <div>
@@ -39,7 +39,7 @@ export default function AboutV2({ content, showStatement = true }) {
       </div>
 
       {showStatement && (
-        <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-24">
           <LightUpText text={statement} as="p" className="font-display max-w-5xl text-4xl leading-[1.1] md:text-6xl" />
         </div>
       )}

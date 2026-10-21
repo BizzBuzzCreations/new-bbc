@@ -44,7 +44,8 @@ const timings = pathData.map((_, i) => ({
 
 // `still` — no animation at all: the same coloured beams drawn once, faintly,
 // as a static texture (e.g. behind text-heavy sections like Reviews).
-export const BackgroundBeams = React.memo(function BackgroundBeams({ className, still = false }) {
+// `lineOpacity` — how visible the thin grey lines under the beams are.
+export const BackgroundBeams = React.memo(function BackgroundBeams({ className, still = false, lineOpacity = 0.03 }) {
   const ref = useRef(null);
   const inView = useInView(ref, { margin: "200px 0px" });
   const reduceMotion = useReducedMotion();
@@ -69,7 +70,7 @@ export const BackgroundBeams = React.memo(function BackgroundBeams({ className, 
         preserveAspectRatio="xMidYMid slice"
       >
         {/* Static faint paths for depth */}
-        <g opacity="0.03">
+        <g opacity={lineOpacity}>
           {pathData.map((d, i) => (
             <path key={`static-${i}`} d={d} stroke="white" strokeWidth="0.5" />
           ))}

@@ -7,7 +7,7 @@ import RichText from "@/components/ui/richText";
 // Reviews (redesign) — one review at a time, large and quiet (GPG's "Let
 // their opinion speak for us"), with prev/next buttons. Every review stays in
 // the page (the others are just hidden), so nothing is lost for search.
-// On the shared navy block (NavyBlock). Moves only when asked.
+// On the shared beams background (BeamsBlock). Moves only when asked.
 function Stars() {
   return (
     <div className="flex gap-1 text-[#f5b301]" aria-label="5 out of 5 stars" role="img">
@@ -31,7 +31,7 @@ export default function ReviewsV2({ content }) {
 
   return (
     <section id="reviews" className="relative scroll-mt-20 overflow-hidden text-white">
-      <div className="relative mx-auto grid max-w-6xl gap-12 px-6 pt-16 pb-28 md:grid-cols-[2fr_3fr] md:gap-16 md:pt-24 md:pb-40">
+      <div className="relative mx-auto grid max-w-7xl gap-12 px-6 md:px-10 pt-16 pb-28 md:grid-cols-[2fr_3fr] md:gap-16 md:pt-24 md:pb-40">
         <div>
           <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
           <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>

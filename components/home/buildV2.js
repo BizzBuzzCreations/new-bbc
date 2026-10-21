@@ -18,7 +18,7 @@ export default function BuildV2({ content, showClio = true, showPraxistence = tr
 
   return (
     <section className="bg-black text-white">
-      <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-24">
         <div className="grid gap-6 md:grid-cols-[2fr_3fr] md:gap-16">
           <div>
             <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
@@ -32,7 +32,7 @@ export default function BuildV2({ content, showClio = true, showPraxistence = tr
             {products.map((p) => (
               <article key={p.key} className="flex flex-col">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-[#0a0a0a]">
-                  <Image src={p.image} alt="" fill sizes="(min-width: 768px) 540px, 100vw" className="object-cover" />
+                  <Image src={p.image} alt="" fill sizes="(min-width: 1280px) 600px, (min-width: 768px) 48vw, 100vw" className="object-cover" />
                 </div>
                 <h3 className="font-display mt-8 text-3xl leading-tight">{p.heading}</h3>
                 <RichText as="div" text={p.paragraph} className="mt-4 space-y-3 text-base leading-relaxed text-white/70" />
