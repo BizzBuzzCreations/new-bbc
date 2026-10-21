@@ -4,14 +4,12 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import RichText from "@/components/ui/richText";
 import BackgroundBeams from "@/components/ui/backgroundBeams";
+import { NAVY_BAND } from "@/components/home/band";
 
 // Reviews (redesign) — one review at a time, large and quiet (GPG's "Let
 // their opinion speak for us"), with prev/next buttons. Every review stays in
 // the page (the others are just hidden), so nothing is lost for search.
 // Navy band with the still beams, same as before. Moves only when asked.
-const BAND =
-  "radial-gradient(70% 40% at 50% 40%, rgba(11, 96, 176, 0.2), transparent 100%), linear-gradient(to bottom, #000000 0%, #03070e 12%, #050e1a 22%, #06101f 32%, #06101f 68%, #050e1a 78%, #03070e 88%, #000000 100%)";
-
 function Stars() {
   return (
     <div className="flex gap-1 text-[#f5b301]" aria-label="5 out of 5 stars" role="img">
@@ -34,7 +32,7 @@ export default function ReviewsV2({ content }) {
   const go = (d) => setActive((a) => (a + d + items.length) % items.length);
 
   return (
-    <section id="reviews" className="relative scroll-mt-20 overflow-hidden text-white" style={{ background: BAND }}>
+    <section id="reviews" className="relative scroll-mt-20 overflow-hidden text-white" style={{ background: NAVY_BAND }}>
       <BackgroundBeams still />
       <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-28 md:grid-cols-[2fr_3fr] md:gap-16 md:py-40">
         <div>

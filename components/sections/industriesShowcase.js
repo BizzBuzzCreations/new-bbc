@@ -28,7 +28,7 @@ const MOBILE_COLUMN_TWO = INDUSTRIES.slice(MOBILE_COL_SIZE);
 // Short hover descriptions specific to this homepage showcase — kept
 // separate from each industry's own page description (industriesData.js),
 // which also drives the hero paragraph on /industries/<slug>.
-const HOVER_DESCRIPTIONS = {
+export const HOVER_DESCRIPTIONS = {
   healthcare: "Build a stronger healthcare presence with digital marketing, SEO, and websites designed to connect with patients.",
   finance: "Strengthen your finance brand with digital strategies that build visibility, trust, engagement, and qualified customer opportunities.",
   restaurant: "Attract more diners with local SEO, social media, and digital marketing strategies built for restaurant growth.",

@@ -2,15 +2,13 @@ import BackgroundBeams from "@/components/ui/backgroundBeams";
 import ScrollSteps from "@/components/ui/scrollSteps";
 import RichText from "@/components/ui/richText";
 import Pill from "@/components/home/pill";
+import { NAVY_BAND } from "@/components/home/band";
 import { resolveSteps } from "@/components/sections/whatMakesUs";
 
 // How We Work (redesign) — on the navy band with the animated beams: the 4
 // steps as a timeline (GPG-style circles on a line, no boxes). Scrolling
 // through fills the line and lights each step's circle as the line reaches
 // it (ScrollSteps); on phones the steps stack and light up as they arrive.
-const BAND =
-  "radial-gradient(70% 40% at 50% 40%, rgba(11, 96, 176, 0.2), transparent 100%), linear-gradient(to bottom, #000000 0%, #03070e 12%, #050e1a 22%, #06101f 32%, #06101f 68%, #050e1a 78%, #03070e 88%, #000000 100%)";
-
 export default function ProcessV2({ content }) {
   const eyebrow = content?.processEyebrow || "How We Work";
   const heading = content?.processHeading || "Our Process";
@@ -18,7 +16,7 @@ export default function ProcessV2({ content }) {
   const steps = resolveSteps(content);
 
   return (
-    <section className="relative overflow-hidden text-white" style={{ background: BAND }}>
+    <section className="relative overflow-hidden text-white" style={{ background: NAVY_BAND }}>
       {/* Fainter here: the steps sit straight on the background, no cards. */}
       <BackgroundBeams className="opacity-40" />
       <div className="relative mx-auto max-w-6xl px-6 py-28 md:py-40">
