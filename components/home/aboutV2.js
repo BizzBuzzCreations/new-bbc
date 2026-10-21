@@ -1,14 +1,13 @@
 import Image from "next/image";
 import RichText from "@/components/ui/richText";
-import Parallax from "@/components/ui/parallax";
 import Pill from "@/components/home/pill";
 import LightUpText from "@/components/home/lightUpText";
 
 // About (redesign) — the old About block and the separate statement line in
-// one calm section: label + heading with the team photo under it on the
-// left (the photo stretches to end level with the text), the paragraph and
-// a link on the right, then the statement lighting up word by word. On
-// phones: heading, photo, text. Same dashboard fields as before.
+// one calm section: label + heading with the whole team photo under it on
+// the left (its own shape, never cropped or enlarged, so it stays sharp),
+// the paragraph and a link on the right, then the statement lighting up
+// word by word. On phones: heading, photo, text. Same dashboard fields.
 export default function AboutV2({ content, showStatement = true }) {
   const eyebrow = content?.aboutEyebrow || "About Us";
   const heading = content?.aboutHeading || "We Are BizzBuzz Creations";
@@ -23,14 +22,12 @@ export default function AboutV2({ content, showStatement = true }) {
 
   return (
     <section className="bg-black text-white">
-      <div className="mx-auto grid max-w-6xl gap-10 px-6 py-16 md:grid-cols-[2fr_3fr] md:gap-16 md:py-24">
-        <div className="flex flex-col">
+      <div className="mx-auto grid max-w-6xl gap-10 px-6 py-16 md:grid-cols-2 md:gap-16 md:py-24">
+        <div>
           <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
           <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
-          <div className="relative mt-8 aspect-[16/10] overflow-hidden rounded-3xl md:mt-10 md:aspect-auto md:min-h-72 md:flex-1">
-            <Parallax className="absolute inset-x-0 -inset-y-10" strength={0.06}>
-              <Image src={photo} alt="The BizzBuzz Creations team at work" fill sizes="(min-width: 1152px) 420px, (min-width: 768px) 38vw, 100vw" className="object-cover object-[45%_50%]" />
-            </Parallax>
+          <div className="relative mt-8 aspect-[1705/922] overflow-hidden rounded-3xl bg-[#0a0a0a] md:mt-10">
+            <Image src={photo} alt="The BizzBuzz Creations team at work" fill sizes="(min-width: 1152px) 520px, (min-width: 768px) 46vw, 100vw" className="object-cover" />
           </div>
         </div>
         <div>
