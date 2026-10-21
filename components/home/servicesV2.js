@@ -26,7 +26,8 @@ export default function ServicesV2({ content }) {
   return (
     <section id="services" className="scroll-mt-20 bg-black text-white">
       <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-24">
-        <div className="grid gap-6 md:grid-cols-[2fr_3fr] md:gap-16">
+        {/* same split and gap as the cards, so the intro starts over the third card */}
+        <div className="grid gap-6 md:grid-cols-2 md:gap-4 xl:gap-5">
           <div>
             <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
             <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>

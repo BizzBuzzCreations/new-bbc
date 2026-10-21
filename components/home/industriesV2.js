@@ -41,9 +41,10 @@ export default function IndustriesV2({ content }) {
           </div>
         </div>
 
-        <div className="mt-14 grid gap-10 md:mt-20 md:grid-cols-[17rem_1fr] md:gap-16 lg:grid-cols-[18rem_1fr]">
+        {/* same columns as the heading row above, so the list starts under the intro text */}
+        <div className="mt-14 grid gap-10 md:mt-20 md:grid-cols-[2fr_3fr] md:gap-16">
           {/* The active industry: photo, name, one line, link */}
-          <div className="flex gap-5 md:block">
+          <div className="flex gap-5 md:block md:max-w-[18rem]">
             <div className="relative aspect-[278/378] w-32 shrink-0 overflow-hidden rounded-2xl bg-[#0a0a0a] sm:w-40 md:w-full md:rounded-3xl">
               <AnimatePresence initial={false}>
                 <motion.div

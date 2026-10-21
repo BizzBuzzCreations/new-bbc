@@ -16,7 +16,8 @@ export default function ProcessV2({ content }) {
   return (
     <section className="relative overflow-hidden text-white">
       <div className="relative mx-auto max-w-7xl px-6 md:px-10 pt-28 pb-16 md:pt-40 md:pb-24">
-        <div className="grid gap-6 md:grid-cols-[2fr_3fr] md:gap-16">
+        {/* same split and gap as the steps, so the intro starts over step 3 */}
+        <div className="grid gap-6 md:grid-cols-2 md:gap-8">
           <div>
             <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
             <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
