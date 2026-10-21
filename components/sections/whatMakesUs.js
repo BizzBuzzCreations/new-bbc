@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Search, PenTool, Rocket, BarChart3, ArrowRight } from "lucide-react";
 import RichText from "@/components/ui/richText";
 import ScrollSteps from "@/components/ui/scrollSteps";
+import BackgroundBeams from "@/components/ui/backgroundBeams";
 import { resolveIcon } from "@/lib/iconOptions";
 
 // Same 4 steps, same copy — laid out as a plain horizontal stepper (each
@@ -70,6 +71,8 @@ export default function WhatMAkesUs({ content, className = "" }) {
     <div
       style={{ background: "radial-gradient(70% 55% at 50% 0%, rgba(11, 96, 176, 0.22), transparent 70%), linear-gradient(to bottom, #000000 0%, #06101f 16%, #06101f 84%, #000000 100%)" }}
       className={`relative overflow-hidden container px-4 py-14 md:py-20 mx-auto flex flex-col justify-center gap-5 items-center max-w-none ${className}`}>
+      {/* Animated beams behind everything (decorative; pauses off-screen). */}
+      <BackgroundBeams />
 
 
 
@@ -156,7 +159,7 @@ export default function WhatMAkesUs({ content, className = "" }) {
               data-step={i}
               data-steps={displaySteps.length}
               data-active="false"
-              className="group relative flex flex-col items-center text-center rounded-2xl border border-white/10 bg-white/[0.03] px-4 pt-7 pb-5 transition-all duration-500 hover:border-[#0B60B0] hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/30 data-[active=true]:border-[#40A2D8]/70 data-[active=true]:shadow-lg data-[active=true]:shadow-[#0B60B0]/25 scale-[0.96] data-[active=true]:scale-100 motion-reduce:scale-100"
+              className="group relative flex flex-col items-center text-center rounded-2xl border border-white/10 bg-[#0a0a0a] px-4 pt-7 pb-5 transition-all duration-500 hover:border-[#0B60B0] hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/30 data-[active=true]:border-[#40A2D8]/70 data-[active=true]:shadow-lg data-[active=true]:shadow-[#0B60B0]/25 scale-[0.96] data-[active=true]:scale-100 motion-reduce:scale-100"
             >
               <span className="absolute -top-3 right-4 flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-[11px] font-bold text-white transition-colors duration-500 group-data-[active=true]:bg-[#40A2D8]">
                 {i + 1}
