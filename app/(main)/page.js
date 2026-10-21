@@ -11,6 +11,7 @@ import ReviewsV2 from "@/components/home/reviewsV2";
 import BlogsV2 from "@/components/home/blogsV2";
 import FaqV2 from "@/components/home/faqV2";
 import CtaV2 from "@/components/home/ctaV2";
+import NavyBlock from "@/components/home/band";
 import ConsultationPopup from "@/components/sections/popupForm";
 import { getPageContent } from "@/actions/pageContentActions";
 import { buildPageMetadata } from "@/lib/pageMetadata";
@@ -81,11 +82,14 @@ export default async function Home() {
         showBuilds={!hidden.has("caseStudies")}
       />
 
-      {!hidden.has("process") && <ProcessV2 content={content} />}
-
-      {!hidden.has("industries") && <IndustriesV2 content={content} />}
-
-      {!hidden.has("reviews") && <ReviewsV2 content={content} />}
+      {/* Process, Industries and Reviews share one navy background */}
+      {["process", "industries", "reviews"].some((key) => !hidden.has(key)) && (
+        <NavyBlock>
+          {!hidden.has("process") && <ProcessV2 content={content} />}
+          {!hidden.has("industries") && <IndustriesV2 content={content} />}
+          {!hidden.has("reviews") && <ReviewsV2 content={content} />}
+        </NavyBlock>
+      )}
 
       {!hidden.has("latestBlogs") && <BlogsV2 content={content} />}
 

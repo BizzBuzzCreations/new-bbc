@@ -4,12 +4,11 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import RichText from "@/components/ui/richText";
 import BackgroundBeams from "@/components/ui/backgroundBeams";
-import { NAVY_BAND } from "@/components/home/band";
 
 // Reviews (redesign) — one review at a time, large and quiet (GPG's "Let
 // their opinion speak for us"), with prev/next buttons. Every review stays in
 // the page (the others are just hidden), so nothing is lost for search.
-// Navy band with the still beams, same as before. Moves only when asked.
+// On the shared navy block with the still beams. Moves only when asked.
 function Stars() {
   return (
     <div className="flex gap-1 text-[#f5b301]" aria-label="5 out of 5 stars" role="img">
@@ -32,9 +31,9 @@ export default function ReviewsV2({ content }) {
   const go = (d) => setActive((a) => (a + d + items.length) % items.length);
 
   return (
-    <section id="reviews" className="relative scroll-mt-20 overflow-hidden text-white" style={{ background: NAVY_BAND }}>
-      <BackgroundBeams still />
-      <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-28 md:grid-cols-[2fr_3fr] md:gap-16 md:py-40">
+    <section id="reviews" className="relative scroll-mt-20 overflow-hidden text-white">
+      <BackgroundBeams still className="opacity-40" />
+      <div className="relative mx-auto grid max-w-6xl gap-12 px-6 pt-16 pb-28 md:grid-cols-[2fr_3fr] md:gap-16 md:pt-24 md:pb-40">
         <div>
           <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
           <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>

@@ -2,10 +2,9 @@ import BackgroundBeams from "@/components/ui/backgroundBeams";
 import ScrollSteps from "@/components/ui/scrollSteps";
 import RichText from "@/components/ui/richText";
 import Pill from "@/components/home/pill";
-import { NAVY_BAND } from "@/components/home/band";
 import { resolveSteps } from "@/components/sections/whatMakesUs";
 
-// How We Work (redesign) — on the navy band with the animated beams: the 4
+// How We Work (redesign) — on the shared navy block with moving beams: the 4
 // steps as a timeline (GPG-style circles on a line, no boxes). Scrolling
 // through fills the line and lights each step's circle as the line reaches
 // it (ScrollSteps); on phones the steps stack and light up as they arrive.
@@ -16,10 +15,12 @@ export default function ProcessV2({ content }) {
   const steps = resolveSteps(content);
 
   return (
-    <section className="relative overflow-hidden text-white" style={{ background: NAVY_BAND }}>
-      {/* Fainter here: the steps sit straight on the background, no cards. */}
+    <section className="relative overflow-hidden text-white">
+      {/* The same faint still beams as Industries and Reviews, plus the
+          moving ones on top. Faint: the steps sit straight on the background. */}
+      <BackgroundBeams still className="opacity-40" />
       <BackgroundBeams className="opacity-40" />
-      <div className="relative mx-auto max-w-6xl px-6 py-28 md:py-40">
+      <div className="relative mx-auto max-w-6xl px-6 pt-28 pb-16 md:pt-40 md:pb-24">
         <div className="grid gap-6 md:grid-cols-[2fr_3fr] md:gap-16">
           <div>
             <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
