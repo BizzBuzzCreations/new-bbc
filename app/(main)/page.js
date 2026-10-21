@@ -1,7 +1,7 @@
 // Homepage redesign (dark, GPG-style): its own sections in components/home/,
 // reading the same dashboard fields as before. Other pages keep using the
 // original components/sections/ versions.
-import HomeHero from "@/components/sections/homeHero";
+import HeroHome from "@/components/home/heroHome";
 import AboutV2 from "@/components/home/aboutV2";
 import ServicesV2 from "@/components/home/servicesV2";
 import BuildV2 from "@/components/home/buildV2";
@@ -61,16 +61,14 @@ export default async function Home() {
   return (
     <div data-no-reveal>
       <PageSeoScripts pageKey="home" />
-      {/* The original hero, unchanged: the BizzBuzz Creations wordmark over
-          the background video, stats and certification badges. */}
+      {/* Hero: the BizzBuzz Creations wordmark over the background video,
+          stats and certification badges (homepage look; the shared HomeHero
+          stays as it is on the UK / location pages). */}
       {!hidden.has("hero") && (
-        <HomeHero
+        <HeroHome
           content={content}
-          separated
-          showGlow={false}
           stats={content?.zoomStats}
           secondaryCta={hidden.has("services") ? null : { text: "Explore Our Services", href: "#services" }}
-          showBadges
         />
       )}
 
