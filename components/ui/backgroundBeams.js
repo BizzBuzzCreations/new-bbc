@@ -34,22 +34,33 @@ const pathData = [
   "M38 -645C38 -645 106 -240 570 -113C1034 14 1102 419 1102 419",
 ];
 
+const EDGE_FADE = "linear-gradient(to bottom, transparent 0%, #000 28%, #000 72%, transparent 100%)";
+
 // Pre-calculated timing for each beam, so they don't all move in step.
 const timings = pathData.map((_, i) => ({
   duration: 4 + (i % 5) * 0.8,
   delay: i * 0.15,
 }));
 
-export const BackgroundBeams = React.memo(function BackgroundBeams({ className }) {
+// `still` — no animation at all: the same coloured beams drawn once, faintly,
+// as a static texture (e.g. behind text-heavy sections like Reviews).
+export const BackgroundBeams = React.memo(function BackgroundBeams({ className, still = false }) {
   const ref = useRef(null);
   const inView = useInView(ref, { margin: "200px 0px" });
   const reduceMotion = useReducedMotion();
   // Unique gradient ids, so two instances on one page can't clash.
   const uid = useId().replace(/:/g, "");
-  const animate = inView && !reduceMotion;
+  const animate = !still && inView && !reduceMotion;
 
   return (
-    <div ref={ref} aria-hidden="true" className={cn("pointer-events-none absolute inset-0 h-full w-full", className)}>
+    <div
+      ref={ref}
+      aria-hidden="true"
+      className={cn("pointer-events-none absolute inset-0 h-full w-full", className)}
+      // Beams fade out towards the top and bottom edges instead of being cut
+      // off in a straight line where the section ends.
+      style={{ maskImage: EDGE_FADE, WebkitMaskImage: EDGE_FADE }}
+    >
       <svg
         className="absolute h-full w-full"
         fill="none"
@@ -63,6 +74,15 @@ export const BackgroundBeams = React.memo(function BackgroundBeams({ className }
             <path key={`static-${i}`} d={d} stroke="white" strokeWidth="0.5" />
           ))}
         </g>
+
+        {/* Still mode: every beam drawn once, faint, never moving */}
+        {still && (
+          <g opacity="0.22">
+            {pathData.map((d, i) => (
+              <path key={`still-${i}`} d={d} stroke={`url(#${uid}-gradient-${i})`} strokeWidth="1" strokeLinecap="round" />
+            ))}
+          </g>
+        )}
 
         {/* Animated gradient beams — only mounted while on screen */}
         {animate &&

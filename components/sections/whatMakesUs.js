@@ -66,10 +66,10 @@ export default function WhatMAkesUs({ content, className = "" }) {
   const eyebrow = content?.processEyebrow ?? "How We Work";
 
   return (
-    // Deep-navy band with a soft blue glow (fading to black at both edges)
+    // Deep-navy band with a soft blue glow (easing into black over ~30% at each edge)
     // so this section stands apart from the all-black ones around it.
     <div
-      style={{ background: "radial-gradient(70% 55% at 50% 0%, rgba(11, 96, 176, 0.22), transparent 70%), linear-gradient(to bottom, #000000 0%, #06101f 16%, #06101f 84%, #000000 100%)" }}
+      style={{ background: "radial-gradient(70% 40% at 50% 40%, rgba(11, 96, 176, 0.2), transparent 100%), linear-gradient(to bottom, #000000 0%, #03070e 12%, #050e1a 22%, #06101f 32%, #06101f 68%, #050e1a 78%, #03070e 88%, #000000 100%)" }}
       className={`relative overflow-hidden container px-4 py-14 md:py-20 mx-auto flex flex-col justify-center gap-5 items-center max-w-none ${className}`}>
       {/* Animated beams behind everything (decorative; pauses off-screen). */}
       <BackgroundBeams />

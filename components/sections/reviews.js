@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { TestimonialCard } from "@/components/ui/testimonials-columns-1";
 import RichText from "@/components/ui/richText";
+import BackgroundBeams from "@/components/ui/backgroundBeams";
 
 const testimonials = [
   {
@@ -47,12 +48,14 @@ export default function Reviews({ content }) {
   return (
     // id: in-page link target (e.g. a "Read Client Reviews" button saved as "#reviews");
     // scroll-mt keeps the heading clear of the sticky navbar.
-    // Deep-navy band with a soft blue glow, fading to black at both edges.
+    // Deep-navy band with a soft blue glow, easing into black over ~30% at each edge.
     <section
       id="reviews"
       className="relative overflow-hidden py-14 md:py-20 scroll-mt-20"
-      style={{ background: "radial-gradient(70% 55% at 50% 0%, rgba(11, 96, 176, 0.22), transparent 70%), linear-gradient(to bottom, #000000 0%, #06101f 16%, #06101f 84%, #000000 100%)" }}
+      style={{ background: "radial-gradient(70% 40% at 50% 40%, rgba(11, 96, 176, 0.2), transparent 100%), linear-gradient(to bottom, #000000 0%, #03070e 12%, #050e1a 22%, #06101f 32%, #06101f 68%, #050e1a 78%, #03070e 88%, #000000 100%)" }}
     >
+      {/* Same beams as Our Process, but still (no motion behind the reviews). */}
+      <BackgroundBeams still />
 
       <div className="container mx-auto px-5 relative">
         <motion.div
