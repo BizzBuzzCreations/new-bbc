@@ -1,17 +1,17 @@
-import CTA from "@/components/sections/CTA";
-import FAQ from "@/components/sections/FAQ";
-import HomeAbout from "@/components/sections/homeAbout";
-import HomeHero from "@/components/sections/homeHero";
-import OurServices from "@/components/sections/ourServices";
-import ScrollStatement from "@/components/sections/scrollStatement";
-import CaseStudies from "@/components/sections/caseStudies";
-import StatsShowcase from "@/components/sections/statsShowcase";
-import AiProductsShowcase from "@/components/sections/aiProductsShowcase";
-import Reviews from "@/components/sections/reviews";
-import WhatMAkesUs from "@/components/sections/whatMakesUs";
-import IndustriesShowcase from "@/components/sections/industriesShowcase";
+// Homepage redesign (dark, GPG-style): its own sections in components/home/,
+// reading the same dashboard fields as before. Other pages keep using the
+// original components/sections/ versions.
+import HeroV2 from "@/components/home/heroV2";
+import AboutV2 from "@/components/home/aboutV2";
+import ServicesV2 from "@/components/home/servicesV2";
+import BuildV2 from "@/components/home/buildV2";
+import ProcessV2 from "@/components/home/processV2";
+import IndustriesV2 from "@/components/home/industriesV2";
+import ReviewsV2 from "@/components/home/reviewsV2";
+import BlogsV2 from "@/components/home/blogsV2";
+import FaqV2 from "@/components/home/faqV2";
+import CtaV2 from "@/components/home/ctaV2";
 import ConsultationPopup from "@/components/sections/popupForm";
-import LatestBlogs from "@/components/sections/latestBlogs";
 import { getPageContent } from "@/actions/pageContentActions";
 import { buildPageMetadata } from "@/lib/pageMetadata";
 import PageSeoScripts from "@/components/sections/pageSeoScripts";
@@ -56,66 +56,39 @@ export default async function Home() {
   return (
     <>
       <PageSeoScripts pageKey="home" />
-      {/* Home Hero Section */}
-      {/* Stats row under the buttons reuses the saved "Know More About Us"
-          numbers (zoomStats); the quieter second link jumps to the services. */}
       {!hidden.has("hero") && (
-        <HomeHero
+        <HeroV2
           content={content}
-          separated
-          showGlow={false}
-          stats={content?.zoomStats}
-          secondaryCta={hidden.has("services") ? null : { text: "Explore Our Services", href: "#services" }}
-          showBadges
+          secondaryCta={hidden.has("services") ? null : { text: "Explore our services", href: "#services" }}
         />
       )}
 
-      {/* About section */}
-      {!hidden.has("about") && <HomeAbout content={content} separated />}
+      {/* About + the statement line (the statement can be removed on its own) */}
+      {!hidden.has("about") && <AboutV2 content={content} showStatement={!hidden.has("statement")} />}
 
-      {/* Our Services */}
-      {!hidden.has("services") && <OurServices content={content} />}
+      {!hidden.has("services") && <ServicesV2 content={content} />}
 
-      {/* Statement line whose words light up as you scroll past it */}
-      {!hidden.has("statement") && <ScrollStatement content={content} />}
-
-      {/* Case Studies — client work carousel */}
-      {!hidden.has("caseStudies") && <CaseStudies content={content} />}
-
-      {/* Stats showcase — auto-scrolling numbers/logos/services carousel —
-          now directly after Case Studies. */}
-      {!hidden.has("stats") && <StatsShowcase content={content} />}
-
-      {/* Our products — Clio AI and Praxistence as two cards in one
-          section. Each card can still be removed on its own from the
-          dashboard (its old section key). The scroll-zoom "Know More About
-          Us" section and "Why Businesses Continue Working With Us" were
-          dropped to shorten the page; the latter still lives on /about. */}
-      <AiProductsShowcase
+      {/* What We Build: Clio AI + Praxistence, then the other in-house systems
+          (the old case-study wheel). Each part keeps its own Remove switch. */}
+      <BuildV2
         content={content}
         showClio={!hidden.has("aiShowcase")}
         showPraxistence={!hidden.has("praxistenceShowcase")}
+        showBuilds={!hidden.has("caseStudies")}
       />
 
-      {/* What Makes Us Different section */}
-      {!hidden.has("process") && <WhatMAkesUs content={content} />}
+      {!hidden.has("process") && <ProcessV2 content={content} />}
 
-      {/* Industries we work with — same list as the navbar's mega-menu */}
-      {!hidden.has("industries") && <IndustriesShowcase content={content} />}
+      {!hidden.has("industries") && <IndustriesV2 content={content} />}
 
-      {/* Reviews section */}
-      {!hidden.has("reviews") && <Reviews content={content} />}
+      {!hidden.has("reviews") && <ReviewsV2 content={content} />}
 
-      {!hidden.has("latestBlogs") && <LatestBlogs dark content={content} />}
+      {!hidden.has("latestBlogs") && <BlogsV2 content={content} />}
 
-      <div className="bg-black pt-10">
-        {/* FAQ section */}
-        {!hidden.has("faq") && <FAQ content={content} />}
+      {!hidden.has("faq") && <FaqV2 content={content} />}
 
-        {/* CTA section */}
-        {!hidden.has("cta") && <CTA content={content} />}
-      </div>
-      {/* Popup form */}
+      {!hidden.has("cta") && <CtaV2 content={content} />}
+
       {!hidden.has("popup") && <ConsultationPopup content={content} />}
     </>
   );

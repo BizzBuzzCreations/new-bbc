@@ -102,19 +102,15 @@ const SERVICE_BG_IMAGES = [
   "/home-service-bg/08-business-consulting.webp",
 ];
 
-export default function OurServices({ content }) {
-  const heading =
-    content?.servicesHeading || "Digital Marketing & Business Solutions";
-  const subtext =
-    content?.servicesSubtext ||
-    "We don't believe in one-size-fits-all marketing. Our customized digital strategies help businesses attract qualified customers, increase conversions, and grow sustainably.";
-
+// The 8 services with any dashboard edits applied (shared with the
+// redesigned homepage list, components/home/servicesV2.js).
+export function resolveServices(content) {
   // Icon + href stay fixed (structural); only the copy comes from the
   // saved override, matched by position to the real service list.
   // `icon` / `buttonLink` are only editable on the Outside Location page
   // (its registry adds those two fields); everywhere else they're never
   // saved, so the built-in icon and link always win.
-  const displayServices = services.map((service, i) => {
+  return services.map((service, i) => {
     // A saved `image` (even "" = removed in the dashboard) wins over the built-in one.
     const base = { ...service, image: SERVICE_BG_IMAGES[i] };
     const override = content?.serviceCards?.[i];
@@ -127,6 +123,16 @@ export default function OurServices({ content }) {
       href: buttonLink || service.href,
     };
   });
+}
+
+export default function OurServices({ content }) {
+  const heading =
+    content?.servicesHeading || "Digital Marketing & Business Solutions";
+  const subtext =
+    content?.servicesSubtext ||
+    "We don't believe in one-size-fits-all marketing. Our customized digital strategies help businesses attract qualified customers, increase conversions, and grow sustainably.";
+
+  const displayServices = resolveServices(content);
 
   const eyebrow = content?.servicesEyebrow ?? "Our Services";
 

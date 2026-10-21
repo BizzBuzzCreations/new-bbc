@@ -48,13 +48,12 @@ const steps = [
   },
 ];
 
-export default function WhatMAkesUs({ content, className = "" }) {
-  const heading = content?.processHeading || "Our Process";
-  const subtext = content?.processSubtext || "A Proven Framework for Measurable Digital Growth.";
-
+// The 4 process steps with any dashboard edits applied (shared with the
+// redesigned homepage timeline, components/home/processV2.js).
+export function resolveSteps(content) {
   // Icon + accent stay fixed (structural); title/description come from
   // the saved override, matched by position.
-  const displaySteps = steps.map((step, i) => {
+  return steps.map((step, i) => {
     const override = content?.processSteps?.[i];
     if (!override) return step;
     // `icon` is only editable on the Outside Location page (its registry
@@ -62,6 +61,13 @@ export default function WhatMAkesUs({ content, className = "" }) {
     const { icon, ...text } = override;
     return { ...step, ...text, icon: resolveIcon(icon, step.icon) };
   });
+}
+
+export default function WhatMAkesUs({ content, className = "" }) {
+  const heading = content?.processHeading || "Our Process";
+  const subtext = content?.processSubtext || "A Proven Framework for Measurable Digital Growth.";
+
+  const displaySteps = resolveSteps(content);
 
   const eyebrow = content?.processEyebrow ?? "How We Work";
 

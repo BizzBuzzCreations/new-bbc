@@ -89,7 +89,10 @@ function ProductCard({ heading, paragraph, image, features, buttonText, buttonLi
   );
 }
 
-export default function AiProductsShowcase({ content, clioPrefix = "ai", showClio = true, showPraxistence = true }) {
+// The two product cards' content (Clio AI, Praxistence) with dashboard edits
+// and image fallbacks applied — shared with the redesigned homepage
+// (components/home/buildV2.js).
+export function productCards(content, { clioPrefix = "ai", showClio = true, showPraxistence = true } = {}) {
   const c = (key) => content?.[`${clioPrefix}${key}`];
   const usable = (src) => (src && !MISSING_IMAGES.has(src) ? src : "");
 
@@ -98,7 +101,7 @@ export default function AiProductsShowcase({ content, clioPrefix = "ai", showCli
   // Both old posters often point at the same file; give the cards different pictures.
   if (showClio && praxistenceImage === clioImage) praxistenceImage = clioImage === PRAXISTENCE_IMAGE ? CLIO_IMAGE : PRAXISTENCE_IMAGE;
 
-  const cards = [
+  return [
     showClio && {
       key: "clio",
       heading: c("HeadingMain") || "Meet Clio AI, Your AI Voice Agent",
@@ -122,6 +125,10 @@ export default function AiProductsShowcase({ content, clioPrefix = "ai", showCli
       buttonLink: content?.praxistenceButtonLink || "https://praxistence.com/",
     },
   ].filter(Boolean);
+}
+
+export default function AiProductsShowcase({ content, clioPrefix = "ai", showClio = true, showPraxistence = true }) {
+  const cards = productCards(content, { clioPrefix, showClio, showPraxistence });
 
   if (!cards.length) return null;
 
