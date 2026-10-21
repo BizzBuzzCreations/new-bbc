@@ -113,7 +113,7 @@ export default function HomeHero({
 
   return (
     <>
-      <div className="relative overflow-hidden md:min-h-screen text-white flex flex-col justify-center pb-10 md:pb-30 -mt-14 pt-14 md:-mt-[72px] md:pt-[72px] bg-black">
+      <div className="relative overflow-hidden md:min-h-screen text-white flex flex-col justify-center pb-10 md:pb-16 -mt-14 pt-14 md:-mt-[72px] md:pt-[72px] bg-black">
         {/* Background video — desktop/tablet only. On mobile there's no
             room for a full-bleed video behind the text without it either
             looking cramped or getting cropped oddly, so mobile gets a
@@ -206,12 +206,12 @@ export default function HomeHero({
           />
         )}
 
-        <div className="relative z-10 2xl:px-20 px-5 md:pt-20 pt-4 max-w-3xl flex flex-col md:block">
+        <div className="relative z-10 2xl:px-20 px-5 md:pt-20 short-screen:pt-6 pt-4 max-w-3xl flex flex-col md:block">
           <motion.h1
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={reveal}
-            className="md:text-3xl xl:text-4xl text-xl font-bold mb-3 md:mb-4"
+            className="md:text-3xl xl:text-4xl text-xl font-bold mb-3 md:mb-4 short-screen:mb-2"
           >
             {heading}
           </motion.h1>
@@ -220,7 +220,7 @@ export default function HomeHero({
               initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ ...reveal, delay: 0.15 }}
-              className="animated-text order-first md:order-none mb-2 md:mb-0"
+              className="animated-text order-first md:order-none mb-2 md:mb-0 short-screen:max-w-[480px]"
               viewBox="0 0 1320 220"
             >
               <text x="0" y="50%" dy=".35em" textAnchor="start">
@@ -232,7 +232,7 @@ export default function HomeHero({
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...reveal, delay: 0.22 }}
-            className="text-lg md:text-xl font-semibold hidden md:block text-white mt-2 md:mt-4 mb-3 md:mb-4"
+            className="text-lg md:text-xl font-semibold hidden md:block text-white mt-2 md:mt-4 mb-3 md:mb-4 short-screen:my-2"
           >
             {subheading}
           </motion.h2>
@@ -243,7 +243,7 @@ export default function HomeHero({
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...reveal, delay: 0.3 }}
-            className={`max-w-xl mb-6 md:mb-10 ${RICH_TEXT_CLASS} ${richTextScopeClass(subtext)}`}
+            className={`max-w-xl mb-6 md:mb-10 short-screen:mb-5 ${RICH_TEXT_CLASS} ${richTextScopeClass(subtext)}`}
             dangerouslySetInnerHTML={richTextHTML(subtext)}
           />
 
@@ -364,13 +364,13 @@ export default function HomeHero({
               initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ ...reveal, delay: 0.5 }}
-              className="mt-8 md:mt-12 grid max-w-lg border-t border-white/15 pt-5"
+              className="mt-8 md:mt-12 short-screen:mt-6 grid max-w-lg border-t border-white/15 pt-5 short-screen:pt-3"
               style={{ gridTemplateColumns: `repeat(${Math.min(stats.length, 4)}, minmax(0, 1fr))` }}
             >
               {stats.slice(0, 4).map(({ value, label }, i) => (
                 <div key={`${label}-${i}`} className="flex flex-col-reverse justify-end border-l border-white/15 px-3 first:border-l-0 first:pl-0 sm:px-5">
                   <dt className="mt-1 text-[11px] sm:text-xs uppercase tracking-wider text-white/80 leading-snug">{label}</dt>
-                  <dd className="text-2xl md:text-3xl font-bold text-[#40A2D8]">{value}</dd>
+                  <dd className="text-2xl md:text-3xl short-screen:text-2xl font-bold text-[#40A2D8]">{value}</dd>
                 </div>
               ))}
             </motion.dl>
@@ -381,7 +381,7 @@ export default function HomeHero({
               initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ ...reveal, delay: 0.55 }}
-              className="mt-6 grid max-w-md grid-cols-2 gap-2 sm:flex sm:max-w-none sm:flex-wrap sm:items-center sm:gap-3"
+              className="mt-6 short-screen:mt-4 grid max-w-md grid-cols-2 gap-2 sm:flex sm:max-w-none sm:flex-wrap sm:items-center sm:gap-3"
               aria-label="Certifications"
             >
               {[
