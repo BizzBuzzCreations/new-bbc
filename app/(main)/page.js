@@ -53,8 +53,12 @@ export default async function Home() {
   // Sections switched off in the dashboard (Remove section).
   const hidden = new Set(content?.hiddenSections || []);
 
+  // data-no-reveal: the site-wide scroll fade-in (ScrollReveal) hides every
+  // heading and grid item below the fold until it scrolls into view. These
+  // sections are meant to be visible straight away (they have their own
+  // light scroll effects), so they opt out.
   return (
-    <>
+    <div data-no-reveal>
       <PageSeoScripts pageKey="home" />
       {!hidden.has("hero") && (
         <HeroV2
@@ -90,7 +94,7 @@ export default async function Home() {
       {!hidden.has("cta") && <CtaV2 content={content} />}
 
       {!hidden.has("popup") && <ConsultationPopup content={content} />}
-    </>
+    </div>
   );
 }
 
