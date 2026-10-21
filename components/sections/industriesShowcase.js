@@ -47,7 +47,7 @@ const HOVER_DESCRIPTIONS = {
 };
 
 export default function IndustriesShowcase({ content }) {
-  const eyebrow = content?.industriesEyebrow || "";
+  const eyebrow = content?.industriesEyebrow || "Industries";
   const heading = content?.industriesHeading || "Digital Solutions for Businesses Across Industries";
   const subtext =
     content?.industriesSubtext ||

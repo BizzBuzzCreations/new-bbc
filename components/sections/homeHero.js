@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { RICH_TEXT_CLASS, richTextHTML, richTextScopeClass } from "@/components/ui/richText";
-import { getImageProps } from "next/image";
+import Image, { getImageProps } from "next/image";
 import { optimizedImageUrl, imageSrcSet } from "@/lib/getFeaturedImage";
 
 const reveal = { duration: 0.8, ease: [0.16, 1, 0.3, 1] };
@@ -57,6 +57,8 @@ function heroImageSource(src) {
 // only; editable as "Stats under the hero buttons").
 // `secondaryCta` — optional { text, href } quieter link next to the main
 // button (the homepage points it at its own services list).
+// `showBadges` — the Clutch / Google Partner badges (same verified ones as
+// the footer) as a small row under the stats; homepage only.
 export default function HomeHero({
   content,
   showWordmark = true,
@@ -67,6 +69,7 @@ export default function HomeHero({
   showGlow = true,
   stats,
   secondaryCta,
+  showBadges = false,
 }) {
   const heading = content?.heroHeading || "India’s Trusted Digital Marketing Agency";
   const subheading =
@@ -179,7 +182,7 @@ export default function HomeHero({
               showGlow
                 ? "radial-gradient(ellipse 80% 60% at 20% 10%, rgba(120, 180, 255, 0.25), transparent 70%), "
                 : ""
-            }linear-gradient(to right, rgba(0,0,0,0.88) 35%, rgba(0,0,0,0.45) 100%)`,
+            }linear-gradient(to right, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.9) 40%, rgba(0,0,0,0.62) 68%, rgba(0,0,0,0.4) 100%)`,
           }}
         />
 
@@ -369,6 +372,29 @@ export default function HomeHero({
                 </div>
               ))}
             </motion.dl>
+          )}
+
+          {showBadges && (
+            <motion.ul
+              initial={false}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ ...reveal, delay: 0.55 }}
+              className="mt-6 flex flex-wrap items-center gap-3"
+              aria-label="Certifications"
+            >
+              {[
+                { src: "/clutch.png", alt: "Clutch", title: "Clutch", sub: "Verified Partner" },
+                { src: "/CDL.png", alt: "Google Partner", title: "Google Partner", sub: "Certified" },
+              ].map((b) => (
+                <li key={b.title} className="flex items-center gap-2 rounded-xl border border-white/10 bg-black/40 px-3 py-2 backdrop-blur-sm">
+                  <Image src={b.src} alt={b.alt} width={28} height={28} className="h-7 w-7 shrink-0 object-contain" />
+                  <span className="leading-tight">
+                    <span className="block text-xs font-semibold text-white">{b.title}</span>
+                    <span className="block text-[11px] text-white/80">{b.sub}</span>
+                  </span>
+                </li>
+              ))}
+            </motion.ul>
           )}
         </div>
       </div>

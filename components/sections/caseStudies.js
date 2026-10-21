@@ -93,6 +93,7 @@ export default function CaseStudies({ content, plainLogos = false }) {
   const clients =
     content?.caseStudyClients?.length > 0 ? content.caseStudyClients : CLIENTS;
 
+  const eyebrow = content?.caseStudiesEyebrow ?? "What We Build";
   const [active, setActive] = useState(0);
   const count = clients.length;
 
@@ -173,6 +174,7 @@ export default function CaseStudies({ content, plainLogos = false }) {
 
   return (
     <section id="case-studies" className="bg-black text-white pt-14 md:pt-20 pb-10 overflow-hidden">
+      {eyebrow && <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] text-center mb-3">{eyebrow}</p>}
       <h2 className="md:text-4xl text-3xl font-bold text-center mb-3">
         {heading}
       </h2>

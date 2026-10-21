@@ -41,12 +41,18 @@ const testimonials = [
 export default function Reviews({ content }) {
   const heading = content?.reviewsHeading || "Customer Reviews";
   const subtext = content?.reviewsSubtext || "See what our customers have to say about us.";
+  const eyebrow = content?.reviewsEyebrow ?? "Testimonials";
   const items = content?.testimonials?.length > 0 ? content.testimonials : testimonials;
 
   return (
     // id: in-page link target (e.g. a "Read Client Reviews" button saved as "#reviews");
     // scroll-mt keeps the heading clear of the sticky navbar.
-    <section id="reviews" className="relative overflow-hidden bg-black py-14 md:py-20 scroll-mt-20">
+    // Deep-navy band with a soft blue glow, fading to black at both edges.
+    <section
+      id="reviews"
+      className="relative overflow-hidden py-14 md:py-20 scroll-mt-20"
+      style={{ background: "radial-gradient(70% 55% at 50% 0%, rgba(11, 96, 176, 0.22), transparent 70%), linear-gradient(to bottom, #000000 0%, #06101f 16%, #06101f 84%, #000000 100%)" }}
+    >
 
       <div className="container mx-auto px-5 relative">
         <motion.div
@@ -59,6 +65,7 @@ export default function Reviews({ content }) {
           <div className="flex justify-center">
           </div>
 
+          {eyebrow && <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mt-5 -mb-2">{eyebrow}</p>}
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tighter mt-5 text-white">
             {heading}
           </h2>

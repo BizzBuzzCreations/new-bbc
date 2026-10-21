@@ -128,6 +128,8 @@ export default function OurServices({ content }) {
     };
   });
 
+  const eyebrow = content?.servicesEyebrow ?? "Our Services";
+
   return (
     <>
       <div
@@ -156,6 +158,9 @@ export default function OurServices({ content }) {
           aria-hidden="true"
         />
 
+        {eyebrow && (
+          <p className="relative z-10 text-xs font-bold uppercase tracking-widest text-[#40A2D8] text-center mb-3">{eyebrow}</p>
+        )}
         <h2 className="relative z-10 md:text-4xl text-3xl font-bold mb-10 text-center text-white">
           {heading}
         </h2>

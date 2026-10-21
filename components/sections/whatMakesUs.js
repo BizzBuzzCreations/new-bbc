@@ -62,12 +62,19 @@ export default function WhatMAkesUs({ content, className = "" }) {
     return { ...step, ...text, icon: resolveIcon(icon, step.icon) };
   });
 
+  const eyebrow = content?.processEyebrow ?? "How We Work";
+
   return (
-    <div className={`relative overflow-hidden bg-black container px-4 py-14 md:py-20 mx-auto flex flex-col justify-center gap-5 items-center max-w-none ${className}`}>
+    // Deep-navy band with a soft blue glow (fading to black at both edges)
+    // so this section stands apart from the all-black ones around it.
+    <div
+      style={{ background: "radial-gradient(70% 55% at 50% 0%, rgba(11, 96, 176, 0.22), transparent 70%), linear-gradient(to bottom, #000000 0%, #06101f 16%, #06101f 84%, #000000 100%)" }}
+      className={`relative overflow-hidden container px-4 py-14 md:py-20 mx-auto flex flex-col justify-center gap-5 items-center max-w-none ${className}`}>
 
 
 
       <div className="relative text-center">
+        {eyebrow && <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">{eyebrow}</p>}
         <h2 className="text-3xl md:text-4xl font-bold mb-2 max-w-4xl text-white">
           {heading}
         </h2>

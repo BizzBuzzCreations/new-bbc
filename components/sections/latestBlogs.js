@@ -8,6 +8,7 @@ import AnimatedButton from "@/components/ui/animatedButton";
 // `dark` is opt-in, passed by pages that want the all-black section run.
 export default async function LatestBlogs({ dark = false, content }) {
   const heading = content?.blogsHeading || "Our Latest Blogs";
+  const eyebrow = content?.blogsEyebrow ?? "From Our Blog";
   const subtext = content?.blogsSubtext || "Explore, discover, and find inspiration through these exciting blogs.";
   const readMore = content?.blogsReadMoreText || "Read More";
   const buttonText = content?.blogsButtonText || "View All Blogs";
@@ -26,8 +27,7 @@ export default async function LatestBlogs({ dark = false, content }) {
   return (
     <section className={`py-12 md:py-20 ${dark ? "bg-black" : "bg-white"}`}>
       <div className="text-center px-6">
-        <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">
-        </p>
+        {eyebrow && <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">{eyebrow}</p>}
         <h2 className={`md:text-4xl text-3xl font-bold mb-3 ${dark ? "text-white" : "text-black"}`}>
           {heading}
         </h2>

@@ -66,6 +66,7 @@ export default async function Home() {
           showGlow={false}
           stats={content?.zoomStats}
           secondaryCta={hidden.has("services") ? null : { text: "Explore Our Services", href: "#services" }}
+          showBadges
         />
       )}
 

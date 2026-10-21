@@ -188,6 +188,7 @@ function WaveMask({ position = "top" }) {
 
 export default function StatsShowcase({ content }) {
   const heading = content?.statsHeading || "Here’s Why Our Way of Working Is Different";
+  const eyebrow = content?.statsEyebrow ?? "Why Us";
 
   // The dashboard's card list drives the cards — adding or removing a card
   // there now adds/removes it here (it used to always show exactly the 4
@@ -209,6 +210,7 @@ export default function StatsShowcase({ content }) {
 
   return (
     <section className="bg-black pt-8 pb-14 md:pb-20" aria-label="BizzBuzz Creations by the numbers">
+      {eyebrow && <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] text-center mb-3 px-5">{eyebrow}</p>}
       <h2 className="text-3xl md:text-4xl font-bold text-white text-center max-w-3xl mx-auto mb-10 px-5">
         {heading}
       </h2>

@@ -1,6 +1,6 @@
 "use client";
 import { sendMail } from "@/actions/serverActions";
-import { SendHorizontal } from "lucide-react";
+import { SendHorizontal, Phone, MessageCircle } from "lucide-react";
 import React, { useState } from "react";
 import { toast, Bounce } from "react-toastify";
 import RichText from "@/components/ui/richText";
@@ -119,6 +119,27 @@ export default function CTA({ content, white = false } = {}) {
                 </button>
               </div>
             </form>
+
+            {/* Or skip the form: call or WhatsApp straight away. */}
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <span className="w-full text-sm text-white/80 sm:w-auto">or talk to us now:</span>
+              <a
+                href="tel:+918115585285"
+                className="inline-flex items-center gap-2 rounded-full border border-white/30 px-5 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:border-white hover:bg-white hover:text-black"
+              >
+                <Phone size={16} />
+                Call +91 81155 85285
+              </a>
+              <a
+                href="https://wa.me/918115585285"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-[#25D366]/70 px-5 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#25D366] hover:text-black"
+              >
+                <MessageCircle size={16} />
+                WhatsApp
+              </a>
+            </div>
           </div>
             <CtaSideImage src={image} />
         </div>
