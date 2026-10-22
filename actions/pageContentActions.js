@@ -22,6 +22,7 @@ async function requireSession() {
 // paths (a save stores every field, defaults included), so rewrite them
 // on read instead of requiring a database migration.
 const OLD_AMP_IMAGE = /^\/[^?#]*&[^?#]*\.(png|webp|jpe?g)$/i;
+const HOME_SERVICE_BG_WEBP = /^\/home-service-bg\/0[1-8]-[a-z-]+\.webp$/;
 
 function fixRenamedImagePaths(value) {
   if (typeof value === "string") {
@@ -33,6 +34,9 @@ function fixRenamedImagePaths(value) {
     // video wins over the image, so this dead path blanked the hero; read
     // it as "no video" so the image shows.
     if (value === "/Sequence 01 1.mp4") return "";
+    // The homepage service-card pictures were replaced by sharper PNGs; saved
+    // cards still pointing at the old small WebPs get the new files.
+    if (HOME_SERVICE_BG_WEBP.test(value)) return value.replace(/\.webp$/, ".png");
     return OLD_AMP_IMAGE.test(value)
       ? value.replace(/ & /g, " and ").replace(/&/g, "and")
       : value;

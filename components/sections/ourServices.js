@@ -92,14 +92,14 @@ const services = [
 
 // Built-in background picture for each card, in the same order as `services`.
 const SERVICE_BG_IMAGES = [
-  "/home-service-bg/01-bpo-service.webp",
-  "/home-service-bg/02-website-design.webp",
-  "/home-service-bg/03-seo.webp",
-  "/home-service-bg/04-social-media.webp",
-  "/home-service-bg/05-google-ads.webp",
-  "/home-service-bg/06-ai-automation.webp",
-  "/home-service-bg/07-marketing-automation.webp",
-  "/home-service-bg/08-business-consulting.webp",
+  "/home-service-bg/01-bpo-service.png",
+  "/home-service-bg/02-website-design.png",
+  "/home-service-bg/03-seo.png",
+  "/home-service-bg/04-social-media.png",
+  "/home-service-bg/05-google-ads.png",
+  "/home-service-bg/06-ai-automation.png",
+  "/home-service-bg/07-marketing-automation.png",
+  "/home-service-bg/08-business-consulting.png",
 ];
 
 // The 8 services with any dashboard edits applied (shared with the
