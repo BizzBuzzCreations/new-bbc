@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, MapPin, Phone, Mail, Clock } from "lucide-react";
 import IndiaOfficeCard from "./indiaOfficeCard";
+import Pill from "@/components/home/pill";
 import OfficeSkyline from "./officeSkyline";
 
 // Same data as the navbar's dropdowns — duplicated here (rather than
@@ -142,10 +143,10 @@ function FooterColumn({ title, links, viewMoreHref }) {
       {viewMoreHref && (
         <Link
           href={viewMoreHref}
-          className="inline-flex items-center gap-1 py-1 text-sm text-[#40A2D8] hover:text-white mt-4 underline underline-offset-4 transition-colors"
+          className="group inline-flex items-center gap-1.5 py-1 text-sm font-medium text-[#40A2D8] hover:text-white mt-4 transition-colors"
         >
           View More
-          <ArrowUpRight size={14} />
+          <ArrowUpRight size={14} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </Link>
       )}
     </div>
@@ -156,11 +157,7 @@ export default function Footer() {
   return (
     <footer
       data-no-reveal
-      className="text-white pt-8 pb-0 px-6 md:px-8"
-      style={{
-        background:
-          "linear-gradient(180deg, #000000 0%, #000000 70%, #0B60B0 130%)",
-      }}
+      className="bg-black text-white pt-8 pb-6 px-6 md:px-8"
     >
       <div className="max-w-7xl mx-auto">
         {/* Brand + social row */}
@@ -348,12 +345,9 @@ export default function Footer() {
           />
           <div>
             <FooterColumn title="Resources" links={RESOURCE_LINKS} />
-            <Link
-              href="/contact"
-              className="mt-6 inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-100 text-black text-sm font-semibold rounded-full px-6 py-3 w-fit transition"
-            >
-              Get In Touch
-            </Link>
+            <div className="mt-6">
+              <Pill href="/contact" variant="solid">Get a Free Consultation</Pill>
+            </div>
           </div>
         </div>
 
@@ -396,52 +390,26 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Giant brand wordmark — the bottom ~25% of the letters is cut off
-            by the page edge, the top ~75% stays fully readable. It's a
-            plain in-flow block (no absolute positioning / negative margins
-            / z-index), so it can never overlap or sit on top of any other
-            footer content; the SVG's own viewBox does the cropping and
-            scales with the width, so the 75/25 split holds at every screen
-            size. Font metrics (Fira Sans Bold): cap height ≈ 0.69em, so at
+        {/* Brand wordmark: the whole name, drawn as a fine outline in the
+            beams' blue-to-violet (like the hero's drawn wordmark), not cut
+            off by the page edge. A plain in-flow block, so it can never
+            overlap other footer content; the SVG scales with the width.
+            Font metrics (Fira Sans Bold): cap height ≈ 0.69em, so at
             font-size 100 with the baseline at y=80 the caps span y≈11–80;
-            a viewBox height of 63 cuts at 75% of that. */}
-        <div className="mt-10 select-none" aria-hidden="true">
+            the viewBox keeps a little room above and below. */}
+        <div className="mt-12 select-none" aria-hidden="true">
           <svg
-            viewBox="-16 0 1032 63"
+            viewBox="-16 -4 1032 92"
             className="block w-full h-auto"
-            preserveAspectRatio="xMidYMin meet"
+            preserveAspectRatio="xMidYMid meet"
             xmlns="http://www.w3.org/2000/svg"
           >
             <defs>
-              {/* Embossed / neumorphic lettering: the letters themselves
-                  are cut out of the graphic (composite "out" with the
-                  text's own alpha), so whatever the footer gradient is
-                  behind them shows straight through — the text is the
-                  exact same colour as the background. What makes it
-                  readable is only a soft shadow straight below each
-                  letter (no side/top shadow), like a raised block. */}
-              <filter
-                id="footerWordmarkEmboss"
-                x="-5%"
-                y="-40%"
-                width="110%"
-                height="200%"
-                colorInterpolationFilters="sRGB"
-              >
-                <feGaussianBlur
-                  in="SourceAlpha"
-                  stdDeviation="5"
-                  result="blur"
-                />
-                <feOffset in="blur" dx="0" dy="7" result="darkOffset" />
-                <feFlood floodColor="#000000" floodOpacity="0.55" />
-                <feComposite
-                  in2="darkOffset"
-                  operator="in"
-                  result="darkShadow"
-                />
-                <feComposite in="darkShadow" in2="SourceAlpha" operator="out" />
-              </filter>
+              <linearGradient id="footerWordmarkStroke" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#40A2D8" />
+                <stop offset="50%" stopColor="#7b74f7" />
+                <stop offset="100%" stopColor="#b57cff" />
+              </linearGradient>
             </defs>
             <text
               x="0"
@@ -450,8 +418,11 @@ export default function Footer() {
               fontWeight="700"
               textLength="1000"
               lengthAdjust="spacingAndGlyphs"
-              fill="#000000"
-              filter="url(#footerWordmarkEmboss)"
+              fill="none"
+              stroke="url(#footerWordmarkStroke)"
+              strokeWidth="1"
+              vectorEffect="non-scaling-stroke"
+              strokeOpacity="0.55"
               style={{ fontFamily: "var(--font-fira), sans-serif" }}
             >
               BizzBuzz Creations
