@@ -7,6 +7,9 @@
    100% zoom, ~655px of page): the home hero tightens up so heading, buttons,
    stats and badges all fit in the first screen. */
 @custom-variant short-screen (@media (min-width: 768px) and (max-height: 860px));
+/* Screens big enough for the homepage's stacking product cards (What We
+   Build): a whole card fits below the navbar, so pinning never hides any of it. */
+@custom-variant stack-cards (@media (min-width: 1280px) and (min-height: 760px));
 
 /* Homepage redesign: big, light display type (IBM Plex Sans at 300 — the
    body font's variable file already covers it, so no extra download). */
