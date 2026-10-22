@@ -5,11 +5,11 @@ import RichText from "@/components/ui/richText";
 import Pill from "@/components/home/pill";
 import { productCards, CLIO_IMAGE } from "@/components/sections/aiProductsShowcase";
 
-// The homepage's Clio picture: the conversation illustration (transparent,
-// shown whole — "contain" — so the logo and hands are never cropped). Used
-// while the dashboard's Clio card image is still the old default; an image
-// uploaded there instead still wins.
-const CLIO_ART = "/clio-conversation.webp";
+// The homepage's Clio picture: the Clio logo + conversation illustration
+// (transparent, so no frame or backdrop behind it — it sits straight on the
+// card; shown whole, never cropped). Used while the dashboard's Clio card
+// image is still the old default; an image uploaded there instead still wins.
+const CLIO_ART = "/clio-illustration.webp";
 
 // Same fallback icons as the old in-house cards (components/sections/
 // caseStudies.js), matched by position; a dashboard logo replaces the icon.
@@ -80,15 +80,15 @@ export default function BuildV2({ content, showClio = true, showPraxistence = tr
                       <Pill href={p.buttonLink}>{p.buttonText}</Pill>
                     </div>
                   </div>
-                  <div className={`relative aspect-[4/3] overflow-hidden rounded-2xl lg:aspect-auto lg:min-h-[20rem] ${art ? "bg-white/[0.02]" : "bg-black"}`}>
-                    <Image
-                      src={art ? CLIO_ART : p.image}
-                      alt=""
-                      fill
-                      sizes="(min-width: 1024px) 520px, 100vw"
-                      className={art ? "object-contain p-4" : "object-cover"}
-                    />
-                  </div>
+                  {art ? (
+                    <div className="relative mx-auto aspect-[1082/1282] w-full max-w-[20rem] lg:aspect-auto lg:min-h-[20rem] lg:max-w-none">
+                      <Image src={CLIO_ART} alt="" fill sizes="(min-width: 1024px) 460px, 320px" className="object-contain" />
+                    </div>
+                  ) : (
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-black lg:aspect-auto lg:min-h-[20rem]">
+                      <Image src={p.image} alt="" fill sizes="(min-width: 1024px) 520px, 100vw" className="object-cover" />
+                    </div>
+                  )}
                 </article>
               );
             })}
