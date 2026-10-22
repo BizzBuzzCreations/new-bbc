@@ -12,6 +12,7 @@ import BlogsV2 from "@/components/home/blogsV2";
 import FaqV2 from "@/components/home/faqV2";
 import CtaV2 from "@/components/home/ctaV2";
 import BeamsBlock from "@/components/home/band";
+import OfficeV2 from "@/components/home/officeV2";
 import ConsultationPopup from "@/components/sections/popupForm";
 import { getPageContent } from "@/actions/pageContentActions";
 import PageSeoScripts from "@/components/sections/pageSeoScripts";
@@ -31,6 +32,11 @@ import { hasCustomSchema } from "@/lib/seo";
 // these pages have — "Why Our Way of Working Is Different" (WhyUsV2),
 // "Who We Are" (WhoWeAreV2) and the client video testimonial — in the same
 // style. Recognitions are the badges in the hero now, as on the homepage.
+// To feel local rather than a copy of the homepage: a "where we serve" line
+// above the hero heading (dashboard field, UK default) and, on the UK page,
+// the London skyline in the hero and a UK office section before the closing
+// CTA; reviews and the client video come straight after the services; the
+// homepage's in-house systems tiles are left out.
 // Each section can be switched off from the dashboard ("Remove section") —
 // `hidden` below.
 export default async function OutsideLocationPage({ pageKey }) {
@@ -61,32 +67,40 @@ export default async function OutsideLocationPage({ pageKey }) {
           content={content}
           mediaChoice
           showWordmark={false}
+          locationLine={content?.heroLocationLine || (isUk ? "Serving businesses across the United Kingdom" : "")}
+          skyline={isUk ? "london" : null}
           secondaryCta={hidden.has("services") ? null : { text: "Explore Our Services", href: "#services" }}
         />
       )}
       {!hidden.has("about") && <AboutV2 content={content} showStatement={false} />}
       {!hidden.has("services") && <ServicesV2 content={content} />}
-      {/* Clio AI (clio* fields), Praxistence and the in-house systems; each
-          part keeps its own Remove switch. */}
+      {/* Proof early: a visitor comparing agencies from abroad sees reviews
+          and the client video right after the services. */}
+      {["reviews", "videoTestimonial"].some((key) => !hidden.has(key)) && (
+        <BeamsBlock>
+          {!hidden.has("reviews") && <ReviewsV2 content={content} />}
+          {!hidden.has("videoTestimonial") && <VideoTestimonialV2 content={content} />}
+        </BeamsBlock>
+      )}
+      {/* Clio AI (clio* fields) and Praxistence, each with its own Remove
+          switch. The in-house systems tiles stay on the homepage only. */}
       <BuildV2
         content={content}
         clioPrefix="clio"
         showClio={!hidden.has("clioShowcase")}
         showPraxistence={!hidden.has("praxistenceShowcase")}
-        showBuilds={!hidden.has("caseStudies")}
+        showBuilds={false}
       />
       {!hidden.has("stats") && <WhyUsV2 content={content} />}
       {!hidden.has("whoWeAre") && <WhoWeAreV2 content={content} />}
-      {["process", "industries", "reviews", "videoTestimonial"].some((key) => !hidden.has(key)) && (
-        <BeamsBlock>
-          {!hidden.has("process") && <ProcessV2 content={content} />}
-          {!hidden.has("industries") && <IndustriesV2 content={content} />}
-          {!hidden.has("reviews") && <ReviewsV2 content={content} />}
-          {!hidden.has("videoTestimonial") && <VideoTestimonialV2 content={content} />}
-        </BeamsBlock>
-      )}
+      {/* these two have no background of their own (they're made for the beams block) */}
+      <div className="bg-black">
+        {!hidden.has("process") && <ProcessV2 content={content} />}
+        {!hidden.has("industries") && <IndustriesV2 content={content} />}
+      </div>
       <BlogsV2 content={content} />
       {!hidden.has("faq") && <FaqV2 content={content} />}
+      {isUk && <OfficeV2 />}
       {!hidden.has("cta") && <CtaV2 content={content} />}
       {!hidden.has("popup") && <ConsultationPopup content={content} />}
     </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { MapPin } from "lucide-react";
 import Image from "next/image";
 import { RICH_TEXT_CLASS, richTextHTML, richTextScopeClass } from "@/components/ui/richText";
 import Pill from "@/components/home/pill";
@@ -26,7 +27,10 @@ const BADGES = [
 // as an either/or — Background Video if set, otherwise Background Image,
 // otherwise just black — instead of the homepage's fixed video.
 // `showWordmark` (default on): the outlined "BizzBuzz Creations" wordmark.
-export default function HeroHome({ content, stats, secondaryCta, mediaChoice = false, showWordmark = true }) {
+// `locationLine` (location pages): replaces the capabilities label with a
+// "where we serve" line (also on phones). `skyline` ("london" / "india"):
+// the city skyline from the footer, faint along the hero's bottom edge.
+export default function HeroHome({ content, stats, secondaryCta, mediaChoice = false, showWordmark = true, locationLine = "", skyline = null }) {
   const heading = content?.heroHeading || "India’s Trusted Digital Marketing Agency";
   const subheading = content?.heroSubheading || "Turn Clicks Into Customers With Data-Driven Digital Marketing";
   const subtext =
@@ -84,6 +88,20 @@ export default function HeroHome({ content, stats, secondaryCta, mediaChoice = f
         className="absolute inset-0"
         style={{ background: "linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.88) 38%, rgba(0,0,0,0.55) 68%, rgba(0,0,0,0.35) 100%)" }}
       />
+      {skyline && (
+        // eslint-disable-next-line @next/next/no-img-element -- pre-sized 1x / 2x skyline files (footer's); decorative
+        <img
+          src={`/skyline-${skyline}-840.webp`}
+          srcSet={`/skyline-${skyline}-420.webp 420w, /skyline-${skyline}-840.webp 840w`}
+          sizes="(min-width: 768px) 760px, 100vw"
+          alt=""
+          width={840}
+          height={skyline === "london" ? 229 : 151}
+          loading="lazy"
+          decoding="async"
+          className="pointer-events-none absolute bottom-0 right-0 z-[1] h-auto w-full max-w-[760px] opacity-45 [mask-image:linear-gradient(to_right,transparent,#000_30%)]"
+        />
+      )}
       {/* ...and fades out into the black page at the bottom */}
       <div
         aria-hidden="true"
@@ -93,10 +111,17 @@ export default function HeroHome({ content, stats, secondaryCta, mediaChoice = f
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-4 md:px-10 md:pt-14 short-screen:pt-4">
         <div className="flex max-w-3xl flex-col md:block">
-          <p className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs text-white/80 backdrop-blur-sm md:inline-flex">
-            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[#40A2D8]" />
-            Digital Marketing · Web · AI · BPO
-          </p>
+          {locationLine ? (
+            <p className="order-first mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs text-white/85 backdrop-blur-sm md:mb-0">
+              <MapPin size={14} aria-hidden="true" className="text-[#40A2D8]" />
+              {locationLine}
+            </p>
+          ) : (
+            <p className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs text-white/80 backdrop-blur-sm md:inline-flex">
+              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[#40A2D8]" />
+              Digital Marketing · Web · AI · BPO
+            </p>
+          )}
 
           <h1 className="font-display mt-2 text-[2.4rem] leading-[1.05] sm:text-5xl md:mt-5 xl:text-6xl short-screen:text-5xl">
             {lead && <span className="text-white">{lead} </span>}

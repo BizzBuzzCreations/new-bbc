@@ -5,6 +5,7 @@ import { ArrowUpRight, MapPin, Phone, Mail, Clock } from "lucide-react";
 import IndiaOfficeCard from "./indiaOfficeCard";
 import Pill from "@/components/home/pill";
 import OfficeSkyline from "./officeSkyline";
+import { UK_OFFICE, mapsUrl } from "@/lib/offices";
 
 // Same data as the navbar's dropdowns — duplicated here (rather than
 // imported from navbar.js, which is a client component with its own
@@ -78,20 +79,17 @@ function UKFlag() {
 const OFFICES = [
   {
     Flag: UKFlag,
-    country: "United Kingdom",
+    country: UK_OFFICE.country,
     href: "/en-uk/digital-marketing-services-in-uk",
-    city: "London · UK time (GMT/BST)",
+    city: UK_OFFICE.city,
     skyline: "london",
-    maps: "3 Thornham St, London SE10 9SA, United Kingdom",
-    address: (
-      <>
-        3 Thornham St,
-        <br />
-        London SE10 9SA,
-        <br />
-        United Kingdom
-      </>
-    ),
+    maps: UK_OFFICE.maps,
+    address: UK_OFFICE.lines.map((line, i) => (
+      <React.Fragment key={line}>
+        {i > 0 && <br />}
+        {line}
+      </React.Fragment>
+    )),
   },
 ];
 
@@ -251,10 +249,10 @@ export default function Footer() {
                     +91 8115585285,
                   </a>
                   <a
-                    href="tel:+4407862608652"
+                    href={UK_OFFICE.phone.href}
                     className="py-1 text-white hover:text-[#40A2D8] transition-colors"
                   >
-                    +44 07862 608652
+                    {UK_OFFICE.phone.display}
                   </a>
                 </div>
                 <a
@@ -311,7 +309,7 @@ export default function Footer() {
               </p>
               {maps && (
                 <a
-                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(maps)}`}
+                  href={mapsUrl(maps)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="relative z-10 mt-4 inline-flex self-start items-center gap-1.5 py-1 pl-[1.625rem] text-sm font-medium text-[#40A2D8] hover:text-white"
