@@ -36,7 +36,7 @@ const PRAXISTENCE_FEATURES = [
   { icon: Bot, title: "Works with Clio AI", description: "Pair Praxistence with Clio, our AI voice agent, to handle calls and follow-ups together." },
 ];
 
-const CLIO_IMAGE = "/AI solutions 2.webp";
+export const CLIO_IMAGE = "/AI solutions 2.webp";
 const PRAXISTENCE_IMAGE = "/CRM Marketing Automation 2.png";
 // Saved as the old video posters but never in /public — the video always
 // covered them, so nobody saw the broken image.

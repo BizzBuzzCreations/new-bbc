@@ -3,7 +3,13 @@ import Link from "next/link";
 import { ArrowUpRight, BarChart3, Bot, Check, GitBranch, Globe, Headset, Server, Workflow } from "lucide-react";
 import RichText from "@/components/ui/richText";
 import Pill from "@/components/home/pill";
-import { productCards } from "@/components/sections/aiProductsShowcase";
+import { productCards, CLIO_IMAGE } from "@/components/sections/aiProductsShowcase";
+
+// The homepage's Clio picture: the conversation illustration (transparent,
+// shown whole — "contain" — so the logo and hands are never cropped). Used
+// while the dashboard's Clio card image is still the old default; an image
+// uploaded there instead still wins.
+const CLIO_ART = "/clio-conversation.webp";
 
 // Same fallback icons as the old in-house cards (components/sections/
 // caseStudies.js), matched by position; a dashboard logo replaces the icon.
@@ -43,40 +49,49 @@ export default function BuildV2({ content, showClio = true, showPraxistence = tr
 
         {products.length > 0 && (
           <div className="mt-14 space-y-6 md:mt-20 stack-cards:space-y-0">
-            {products.map((p, i) => (
-              <article
-                key={p.key}
-                className="grid gap-8 overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b0e16] p-6 shadow-[0_-24px_60px_rgba(0,0,0,0.6)] sm:p-8 stack-cards:sticky lg:grid-cols-[1.15fr_1fr] lg:gap-12 lg:p-10 stack-cards:not-last:mb-[24vh]"
-                style={{ top: `calc(6.5rem + ${i * 1.5}rem)` }}
-              >
-                <div className="flex flex-col">
-                  <p className="text-xs uppercase tracking-wider text-[#40A2D8]">
-                    Product {String(i + 1).padStart(2, "0")}
-                  </p>
-                  <h3 className="font-display mt-3 text-3xl leading-tight md:text-4xl">{p.heading}</h3>
-                  <RichText as="div" text={p.paragraph} className="mt-4 space-y-3 text-base leading-relaxed text-white/70" />
-                  <ul className="mt-8 grid gap-x-6 gap-y-5 sm:grid-cols-2">
-                    {p.features.map((f, k) => (
-                      <li key={k} className="flex gap-3">
-                        <span aria-hidden="true" className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#0B60B0]/25 text-[#40A2D8]">
-                          <Check size={12} strokeWidth={3} />
-                        </span>
-                        <span>
-                          <RichText as="p" text={f.title} className="text-sm text-white" />
-                          <RichText as="p" text={f.description} className="mt-1 text-sm leading-relaxed text-white/60" />
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-8">
-                    <Pill href={p.buttonLink}>{p.buttonText}</Pill>
+            {products.map((p, i) => {
+              const art = p.key === "clio" && p.image === CLIO_IMAGE;
+              return (
+                <article
+                  key={p.key}
+                  className="grid gap-8 overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b0e16] p-6 shadow-[0_-24px_60px_rgba(0,0,0,0.6)] sm:p-8 stack-cards:sticky lg:grid-cols-[1.15fr_1fr] lg:gap-12 lg:p-10 stack-cards:not-last:mb-[24vh]"
+                  style={{ top: `calc(6.5rem + ${i * 1.5}rem)` }}
+                >
+                  <div className="flex flex-col">
+                    <p className="text-xs uppercase tracking-wider text-[#40A2D8]">
+                      Product {String(i + 1).padStart(2, "0")}
+                    </p>
+                    <h3 className="font-display mt-3 text-3xl leading-tight md:text-4xl">{p.heading}</h3>
+                    <RichText as="div" text={p.paragraph} className="mt-4 space-y-3 text-base leading-relaxed text-white/70" />
+                    <ul className="mt-8 grid gap-x-6 gap-y-5 sm:grid-cols-2">
+                      {p.features.map((f, k) => (
+                        <li key={k} className="flex gap-3">
+                          <span aria-hidden="true" className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#0B60B0]/25 text-[#40A2D8]">
+                            <Check size={12} strokeWidth={3} />
+                          </span>
+                          <span>
+                            <RichText as="p" text={f.title} className="text-sm text-white" />
+                            <RichText as="p" text={f.description} className="mt-1 text-sm leading-relaxed text-white/60" />
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mt-8">
+                      <Pill href={p.buttonLink}>{p.buttonText}</Pill>
+                    </div>
                   </div>
-                </div>
-                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-black lg:aspect-auto lg:min-h-[20rem]">
-                  <Image src={p.image} alt="" fill sizes="(min-width: 1024px) 520px, 100vw" className="object-cover" />
-                </div>
-              </article>
-            ))}
+                  <div className={`relative aspect-[4/3] overflow-hidden rounded-2xl lg:aspect-auto lg:min-h-[20rem] ${art ? "bg-white/[0.02]" : "bg-black"}`}>
+                    <Image
+                      src={art ? CLIO_ART : p.image}
+                      alt=""
+                      fill
+                      sizes="(min-width: 1024px) 520px, 100vw"
+                      className={art ? "object-contain p-4" : "object-cover"}
+                    />
+                  </div>
+                </article>
+              );
+            })}
           </div>
         )}
 
