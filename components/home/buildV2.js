@@ -3,13 +3,17 @@ import Link from "next/link";
 import { ArrowUpRight, BarChart3, Bot, Check, GitBranch, Globe, Headset, Server, Workflow } from "lucide-react";
 import RichText from "@/components/ui/richText";
 import Pill from "@/components/home/pill";
-import { productCards, CLIO_IMAGE } from "@/components/sections/aiProductsShowcase";
+import { productCards, CLIO_IMAGE, PRAXISTENCE_IMAGE } from "@/components/sections/aiProductsShowcase";
 
-// The homepage's Clio picture: the Clio logo + conversation illustration
-// (transparent, so no frame or backdrop behind it — it sits straight on the
-// card; shown whole, never cropped). Used while the dashboard's Clio card
-// image is still the old default; an image uploaded there instead still wins.
-const CLIO_ART = "/clio-illustration.webp";
+// The homepage's product pictures: transparent illustrations (Clio logo +
+// conversation; glossy CRM dashboard) with no frame or backdrop — they sit
+// straight on the card, shown whole, never cropped. Used while the
+// dashboard's card image is still one of the old defaults; an image
+// uploaded there instead still wins. `ratio` sizes the phone frame.
+const PRODUCT_ART = {
+  clio: { src: "/clio-illustration.webp", ratio: "aspect-[1082/1282]", defaults: [CLIO_IMAGE] },
+  praxistence: { src: "/praxistence-crm.webp", ratio: "aspect-[1327/1155]", defaults: [PRAXISTENCE_IMAGE, CLIO_IMAGE] },
+};
 
 // Same fallback icons as the old in-house cards (components/sections/
 // caseStudies.js), matched by position; a dashboard logo replaces the icon.
@@ -52,7 +56,7 @@ export default function BuildV2({ content, showClio = true, showPraxistence = tr
         {products.length > 0 && (
           <div className="mt-14 space-y-6 md:mt-20 stack-cards:space-y-0">
             {products.map((p, i) => {
-              const art = p.key === "clio" && p.image === CLIO_IMAGE;
+              const art = PRODUCT_ART[p.key]?.defaults.includes(p.image) ? PRODUCT_ART[p.key] : null;
               const flip = i % 2 === 1; // zig-zag: every second card has its picture on the left
               return (
                 <article
@@ -84,8 +88,8 @@ export default function BuildV2({ content, showClio = true, showPraxistence = tr
                     </div>
                   </div>
                   {art ? (
-                    <div className="relative mx-auto aspect-[1082/1282] w-full max-w-[20rem] lg:aspect-auto lg:min-h-[20rem] lg:max-w-none">
-                      <Image src={CLIO_ART} alt="" fill sizes="(min-width: 1024px) 460px, 320px" className="object-contain" />
+                    <div className={`relative mx-auto w-full max-w-[20rem] lg:aspect-auto lg:min-h-[20rem] lg:max-w-none ${art.ratio}`}>
+                      <Image src={art.src} alt="" fill sizes="(min-width: 1024px) 460px, 320px" className="object-contain" />
                     </div>
                   ) : (
                     <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-black lg:aspect-auto lg:min-h-[20rem]">
