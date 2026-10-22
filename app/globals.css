@@ -179,24 +179,20 @@ body {
   display: none;
 }
 
-/* Navbar style — fully opaque (not e.g. #0a0a0ae6) on purpose: at 90%
-   opacity, whatever sits directly behind the navbar on each page (a hero
-   photo's top edge, a lighter section background...) bled through just
-   enough to make the navbar look like a different shade of black from
-   page to page. Solid color means it's the exact same black everywhere,
-   regardless of what's underneath. backdrop-filter is dropped too — it
-   only ever mattered for that see-through blend, so it's dead weight
-   (a wasted per-frame blur) now that the color behind it is invisible. */
-/* Navbar: frosted glass — page content and the hero video show through,
-   softly blurred. 60% dark keeps the white links readable even over light
-   content; browsers without backdrop-filter get a near-solid bar. */
+/* Navbar: dark frosted glass. 85% dark, so it reads as the same near-black
+   on every page — even over white content (a lighter glass let white pages
+   turn it grey) — while the hero video and bright illustrations still show
+   through faintly, blurred. At the very top of a page a black strip sits
+   behind it (app/(main)/layout.js), so pages whose hero starts below the
+   bar don't show the white page background through it. Browsers without
+   backdrop-filter get a near-solid bar. */
 .nav {
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
   background-color: rgba(10, 10, 10, 0.92);
 }
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .nav {
-    background-color: rgba(10, 10, 10, 0.6);
+    background-color: rgba(10, 10, 10, 0.85);
     -webkit-backdrop-filter: blur(14px) saturate(160%);
     backdrop-filter: blur(14px) saturate(160%);
   }
