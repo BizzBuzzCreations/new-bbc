@@ -6,11 +6,6 @@ import RichText from "@/components/ui/richText";
 // Native <details>: keyboard and screen-reader friendly with no script, and
 // every answer stays in the page. The homepage FAQ structured data is built
 // from the same dashboard items (PageSeoScripts), unchanged.
-// From md up the left column holds the FAQ illustration (Storyset "Rafiki"
-// art, recoloured for the black page) and stays in view while the questions
-// scroll past. It's lazy-loaded with fixed dimensions (no layout shift), not
-// loaded on phones (hidden there), and a still copy replaces the animated one
-// under reduced motion.
 export default function FaqV2({ content }) {
   const heading = content?.faqHeading || "FAQs";
   const items = (content?.faqItems || []).filter((f) => f?.question);
@@ -19,22 +14,9 @@ export default function FaqV2({ content }) {
   return (
     <section className="bg-black text-white">
       <div className="reveal-stagger mx-auto grid max-w-7xl gap-10 px-6 md:px-10 py-16 md:grid-cols-[2fr_3fr] md:gap-16 md:py-24">
-        <div className="md:sticky md:top-28 md:self-start">
+        <div>
           <p className="text-sm text-[#40A2D8]">Questions</p>
           <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
-          <picture>
-            <source srcSet="/faq-illustration-still.webp" media="(prefers-reduced-motion: reduce)" />
-            {/* plain <img>: next/image would serve an animated WebP unoptimised anyway */}
-            <img
-              src="/faq-illustration.webp"
-              alt=""
-              width={353}
-              height={294}
-              loading="lazy"
-              decoding="async"
-              className="mt-10 hidden h-auto w-full max-w-[22rem] md:block"
-            />
-          </picture>
         </div>
         <div className="border-t border-white/10">
           {items.map((f, i) => (
