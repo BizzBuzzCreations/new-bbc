@@ -4,17 +4,16 @@ import { forwardRef, useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import Image from "next/image";
 
-// Floating BizzBee button: the animated support bubble from
-// /bizzbee-support.json (a Lottie file: a chat bubble with a headset and
-// typing dots) as a clickable button fixed in the bottom-right corner. Its first frames are a
-// pop-in from nothing, so that plays once and then only the typing part
-// loops (LOOP_FROM: frame 51 is identical to the last frame — seamless).
+// Floating BizzBee button: the animated BizzBee robot from
+// /bizzbee-robot.json (a Lottie file) as a clickable button fixed in the
+// bottom-right corner. (/bizzbee-support.json — a chat-bubble version —
+// was tried and is kept in /public, unused.)
 //
 // - lottie-web is imported dynamically (after the page is idle), so it is not
 //   part of the initial bundle; until it loads, the static logo shows.
-// - The bubble's own animation (typing dots, the headset's sound waves)
+// - The robot's own animation (hovering, blinking, the shadow breathing)
 //   ALWAYS plays — it is small and is the button's identity.
-// - On top of that, the bubble floats gently up and down (4px), leans a
+// - On top of that, the robot floats gently up and down (4px), leans a
 //   little, and tilts slightly toward a mouse pointer — kept small on
 //   purpose, so it doesn't distract. Those extra movements are driven from script
 //   (Web Animations API), not from stylesheet keyframes, and are switched off
@@ -25,8 +24,7 @@ import Image from "next/image";
 //   fades out and can't be tapped; it comes back once that has scrolled
 //   away. Never while the chat is open, or while it has keyboard focus.
 // - While the chat is open it is static.
-const LOOP_FROM = 51;
-const REST_FRAME = 90; // shown while the chat is open
+const REST_FRAME = 40; // shown while the chat is open
 
 const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
   { onOpen, expanded = false, showTip, onDismissTip },
@@ -39,7 +37,7 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
   const anims = useRef([]); // Web Animations (roam + lean), so hover can speed them up
   const [ready, setReady] = useState(false);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const hitRef = useRef(null); // the tappable circle around the bubble
+  const hitRef = useRef(null); // the tappable circle around the robot
   const [tucked, setTucked] = useState(false);
 
   // Step aside while overlapping a [data-bizzbee-avoid] element. Checked on
@@ -83,14 +81,13 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
         container: lottieBox.current,
         renderer: "svg",
         loop: true,
-        autoplay: false,
-        path: "/bizzbee-support.json?v=1", // ?v busts the browser cache when the artwork changes
+        autoplay: true,
+        path: "/bizzbee-robot.json?v=5", // ?v busts the browser cache when the artwork changes
         rendererSettings: { preserveAspectRatio: "xMidYMid meet", progressiveLoad: true },
       });
       anim.addEventListener("DOMLoaded", () => {
         if (cancelled) return;
-        // pop in once, then loop the typing dots (the last segment repeats)
-        anim.playSegments([[0, anim.totalFrames], [LOOP_FROM, anim.totalFrames]], true);
+        anim.play();
         setReady(true);
       });
     });
@@ -139,7 +136,7 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
 
   const setSpeed = (rate) => anims.current.forEach((a) => (a.playbackRate = rate));
 
-  // While the chat is open the bubble is static: all motion stops (it rests at
+  // While the chat is open the robot is static: all motion stops (it rests at
   // a neutral pose) and it doesn't tilt. Minimizing the chat brings the
   // motion back.
   useEffect(() => {
@@ -152,7 +149,7 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
       setTilt({ x: 0, y: 0 });
     } else {
       anims.current.forEach((a) => a.play());
-      if (ready) animRef.current?.playSegments([LOOP_FROM, animRef.current.totalFrames], true);
+      animRef.current?.play();
     }
   }, [expanded, ready]);
 
@@ -208,18 +205,18 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
         aria-expanded={expanded}
         title={expanded ? "Minimize BizzBee AI" : "Ask BizzBee AI"}
         aria-haspopup="dialog"
-        className={`bizzbee-fab pointer-events-none relative block h-[84px] w-[84px] sm:h-[104px] sm:w-[104px] select-none cursor-pointer focus:outline-none focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8] [perspective:520px]`}
+        className={`bizzbee-fab pointer-events-none relative block h-[84px] w-[102px] sm:h-[104px] sm:w-[126px] select-none cursor-pointer focus:outline-none focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8] [perspective:520px]`}
       >
         <span
           ref={stageRef}
           className="bizzbee-fab-stage block h-full w-full"
           style={{ transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }}
         >
-          {/* Just the bubble (no background shape); it drifts around on its
-              own, with a soft drop shadow. */}
+          {/* Just the robot (no background shape), floating gently, with a
+              soft drop shadow. */}
           <span ref={roamEl} className="relative block h-full w-full [transform-style:preserve-3d]">
             {/* The only part that takes taps/clicks (the button itself is
-                pointer-events-none): a circle around the bubble that floats
+                pointer-events-none): a circle around the robot that floats
                 with it, so the box's empty corners never swallow taps meant
                 for buttons underneath, e.g. a hero CTA on a phone. */}
             <span
