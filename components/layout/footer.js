@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, MapPin, Phone, Mail, Clock } from "lucide-react";
 import IndiaOfficeCard from "./indiaOfficeCard";
+import OfficeSkyline from "./officeSkyline";
 
 // Same data as the navbar's dropdowns — duplicated here (rather than
 // imported from navbar.js, which is a client component with its own
@@ -79,6 +80,7 @@ const OFFICES = [
     country: "United Kingdom",
     href: "/en-uk/digital-marketing-services-in-uk",
     city: "London · UK time (GMT/BST)",
+    skyline: "london",
     maps: "3 Thornham St, London SE10 9SA, United Kingdom",
     address: (
       <>
@@ -280,10 +282,10 @@ export default function Footer() {
             regional page. */}
         <div className="grid gap-6 mb-6 sm:grid-cols-2">
           <IndiaOfficeCard />
-          {OFFICES.map(({ Flag, country, tag, address, href, city, maps }) => (
+          {OFFICES.map(({ Flag, country, tag, address, href, city, maps, skyline }) => (
             <div
               key={country}
-              className="group relative rounded-2xl border border-white/15 bg-white/[0.03] p-6 hover:border-[#40A2D8]/50 hover:bg-white/[0.05] transition-colors"
+              className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/15 bg-white/[0.03] p-6 hover:border-[#40A2D8]/50 hover:bg-white/[0.05] transition-colors"
             >
               <div className="flex items-center gap-3 mb-1">
                 <span className="w-10 h-10 rounded-full overflow-hidden shrink-0 ring-1 ring-white/20">
@@ -315,11 +317,12 @@ export default function Footer() {
                   href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(maps)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative z-10 mt-4 inline-flex items-center gap-1.5 py-1 pl-[1.625rem] text-sm font-medium text-[#40A2D8] hover:text-white"
+                  className="relative z-10 mt-4 inline-flex self-start items-center gap-1.5 py-1 pl-[1.625rem] text-sm font-medium text-[#40A2D8] hover:text-white"
                 >
                   Get directions <ArrowUpRight size={14} aria-hidden="true" />
                 </a>
               )}
+              {skyline && <OfficeSkyline city={skyline} />}
             </div>
           ))}
         </div>

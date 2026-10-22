@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { MapPin, ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
+import OfficeSkyline from "./officeSkyline";
 
 // Emoji flags render as plain letters on some systems (common on Windows),
 // so the flag is drawn as an inline SVG, same as the footer's UK flag.
@@ -65,7 +66,7 @@ export default function IndiaOfficeCard() {
   const last = INDIA_OFFICES.length - 1;
 
   return (
-    <div className="relative block rounded-2xl border border-white/15 bg-white/[0.03] p-6 hover:border-[#40A2D8]/50 hover:bg-white/[0.05] transition-colors">
+    <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/15 bg-white/[0.03] p-6 hover:border-[#40A2D8]/50 hover:bg-white/[0.05] transition-colors">
       {/* Arrows sit in the header row (top-right) so the card is no taller
           than the UK card next to it. */}
       <div className="absolute top-6 right-6 flex items-center gap-1.5">
@@ -131,6 +132,7 @@ export default function IndiaOfficeCard() {
           </div>
         ))}
       </div>
+      <OfficeSkyline city="india" />
     </div>
   );
 }
