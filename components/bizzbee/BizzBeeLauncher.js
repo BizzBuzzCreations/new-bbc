@@ -4,14 +4,17 @@ import { forwardRef, useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import Image from "next/image";
 
-// Floating BizzBee button: the animated robot from /bizzbee-robot.json
-// (a Lottie file) as a clickable, draggable button.
+// Floating BizzBee button: the animated support bubble from
+// /bizzbee-support.json (a Lottie file: a chat bubble with a headset and
+// typing dots) as a clickable, draggable button. Its first frames are a
+// pop-in from nothing, so that plays once and then only the typing part
+// loops (LOOP_FROM: frame 51 is identical to the last frame — seamless).
 //
 // - lottie-web is imported dynamically (after the page is idle), so it is not
 //   part of the initial bundle; until it loads, the static logo shows.
-// - The robot's own animation (hovering up and down, blinking, the shadow
-//   breathing) ALWAYS plays — it is small and is the button's identity.
-// - On top of that, the robot drifts around, hops and turns in 3D, leans, and
+// - The bubble's own animation (typing dots, the headset's sound waves)
+//   ALWAYS plays — it is small and is the button's identity.
+// - On top of that, the bubble drifts around, hops and turns in 3D, leans, and
 //   tilts toward the pointer. Those extra movements are driven from script
 //   (Web Animations API), not from stylesheet keyframes, and are switched off
 //   for visitors who ask their system for reduced motion.
@@ -19,6 +22,8 @@ import Image from "next/image";
 //   tab). A plain click (no drag) opens / minimizes the chat.
 // - While the chat is open it is static and not draggable.
 const POS_KEY = "bizzbee-fab-pos";
+const LOOP_FROM = 51;
+const REST_FRAME = 90; // shown while the chat is open
 
 const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
   { onOpen, expanded = false, showTip, onDismissTip },
@@ -63,13 +68,14 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
         container: lottieBox.current,
         renderer: "svg",
         loop: true,
-        autoplay: true,
-        path: "/bizzbee-robot.json?v=5", // ?v busts the browser cache when the artwork changes
+        autoplay: false,
+        path: "/bizzbee-support.json?v=1", // ?v busts the browser cache when the artwork changes
         rendererSettings: { preserveAspectRatio: "xMidYMid meet", progressiveLoad: true },
       });
       anim.addEventListener("DOMLoaded", () => {
         if (cancelled) return;
-        anim.play();
+        // pop in once, then loop the typing dots (the last segment repeats)
+        anim.playSegments([[0, anim.totalFrames], [LOOP_FROM, anim.totalFrames]], true);
         setReady(true);
       });
     });
@@ -123,7 +129,7 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
 
   const setSpeed = (rate) => anims.current.forEach((a) => (a.playbackRate = rate));
 
-  // While the chat is open the robot is static: all motion stops (it rests at
+  // While the chat is open the bubble is static: all motion stops (it rests at
   // a neutral pose), it can't be dragged, and it doesn't tilt. Minimizing the
   // chat brings the motion and dragging back.
   useEffect(() => {
@@ -132,13 +138,13 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
         a.pause();
         a.currentTime = 0;
       });
-      animRef.current?.goToAndStop(40, true);
+      animRef.current?.goToAndStop(REST_FRAME, true);
       setTilt({ x: 0, y: 0 });
       drag.current.active = false;
       setDragging(false);
     } else {
       anims.current.forEach((a) => a.play());
-      animRef.current?.play();
+      if (ready) animRef.current?.playSegments([LOOP_FROM, animRef.current.totalFrames], true);
     }
   }, [expanded, ready]);
 
@@ -242,13 +248,12 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
           className="bizzbee-fab-stage block h-full w-full"
           style={{ transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }}
         >
-          {/* Just the robot (no background shape); it drifts around on its
-              own, and a light halo keeps its black outline readable on dark
-              pages. */}
+          {/* Just the bubble (no background shape); it drifts around on its
+              own, with a soft drop shadow. */}
           <span ref={roamEl} className="relative block h-full w-full [transform-style:preserve-3d]">
             {/* The only part that takes taps/clicks (the button itself is
-                pointer-events-none): a circle around the robot that drifts
-                with it. The button's box is much bigger than the robot so
+                pointer-events-none): a circle around the bubble that drifts
+                with it. The button's box is much bigger than the bubble so
                 it has room to roam, and its empty corners used to swallow
                 taps meant for buttons underneath, e.g. a hero CTA on a phone. */}
             <span
