@@ -14,8 +14,9 @@ import Image from "next/image";
 //   part of the initial bundle; until it loads, the static logo shows.
 // - The bubble's own animation (typing dots, the headset's sound waves)
 //   ALWAYS plays — it is small and is the button's identity.
-// - On top of that, the bubble drifts around, hops and turns in 3D, leans, and
-//   tilts toward the pointer. Those extra movements are driven from script
+// - On top of that, the bubble floats gently up and down (4px), leans a
+//   little, and tilts slightly toward a mouse pointer — kept small on
+//   purpose, so it doesn't distract. Those extra movements are driven from script
 //   (Web Animations API), not from stylesheet keyframes, and are switched off
 //   for visitors who ask their system for reduced motion.
 // - Not draggable: it stays in its corner. A click opens / minimizes the chat.
@@ -101,7 +102,7 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
     };
   }, []);
 
-  // Extra motion (drift / hop / turn, and a lean) via the Web Animations API.
+  // Extra motion (a gentle float, and a small lean) via the Web Animations API.
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const list = [];
@@ -109,16 +110,11 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
       list.push(
         roamEl.current.animate(
           [
-            { transform: "translate3d(0,0,0) rotateY(0deg) rotateZ(0deg)", offset: 0 },
-            { transform: "translate3d(12px,-14px,24px) rotateY(18deg) rotateZ(3deg)", offset: 0.12 },
-            { transform: "translate3d(16px,2px,0) rotateY(8deg) rotateZ(-2deg)", offset: 0.25 },
-            { transform: "translate3d(2px,-22px,30px) rotateY(-6deg) rotateZ(0deg)", offset: 0.38 }, // hop
-            { transform: "translate3d(-6px,3px,0) rotateY(-14deg) rotateZ(3deg)", offset: 0.46 }, // land
-            { transform: "translate3d(-16px,-10px,18px) rotateY(-20deg) rotateZ(-3deg)", offset: 0.62 },
-            { transform: "translate3d(-6px,4px,0) rotateY(10deg) rotateZ(2deg)", offset: 0.8 },
-            { transform: "translate3d(0,0,0) rotateY(0deg) rotateZ(0deg)", offset: 1 },
+            { transform: "translate3d(0,0,0)" },
+            { transform: "translate3d(0,-4px,0)" },
+            { transform: "translate3d(0,0,0)" },
           ],
-          { duration: 8000, iterations: Infinity, easing: "ease-in-out" },
+          { duration: 4000, iterations: Infinity, easing: "ease-in-out" },
         ),
       );
     }
@@ -126,11 +122,11 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
       list.push(
         lottieBox.current.animate(
           [
-            { transform: "translateY(0) rotate(-3deg)" },
-            { transform: "translateY(-5px) rotate(3deg)" },
-            { transform: "translateY(0) rotate(-3deg)" },
+            { transform: "rotate(-1.5deg)" },
+            { transform: "rotate(1.5deg)" },
+            { transform: "rotate(-1.5deg)" },
           ],
-          { duration: 2400, iterations: Infinity, easing: "ease-in-out" },
+          { duration: 5200, iterations: Infinity, easing: "ease-in-out" },
         ),
       );
     }
@@ -167,7 +163,7 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
     if (!r) return;
     const px = (e.clientX - r.left) / r.width - 0.5; // -0.5 … 0.5
     const py = (e.clientY - r.top) / r.height - 0.5;
-    setTilt({ x: -py * 22, y: px * 26 });
+    setTilt({ x: -py * 8, y: px * 10 });
   };
   const resetTilt = () => setTilt({ x: 0, y: 0 });
 
@@ -212,7 +208,7 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
         aria-expanded={expanded}
         title={expanded ? "Minimize BizzBee AI" : "Ask BizzBee AI"}
         aria-haspopup="dialog"
-        className={`bizzbee-fab pointer-events-none relative block h-[104px] w-[127px] sm:h-[128px] sm:w-[156px] select-none cursor-pointer focus:outline-none focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8] [perspective:520px]`}
+        className={`bizzbee-fab pointer-events-none relative block h-[84px] w-[84px] sm:h-[104px] sm:w-[104px] select-none cursor-pointer focus:outline-none focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8] [perspective:520px]`}
       >
         <span
           ref={stageRef}
@@ -223,14 +219,13 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
               own, with a soft drop shadow. */}
           <span ref={roamEl} className="relative block h-full w-full [transform-style:preserve-3d]">
             {/* The only part that takes taps/clicks (the button itself is
-                pointer-events-none): a circle around the bubble that drifts
-                with it. The button's box is much bigger than the bubble so
-                it has room to roam, and its empty corners used to swallow
-                taps meant for buttons underneath, e.g. a hero CTA on a phone. */}
+                pointer-events-none): a circle around the bubble that floats
+                with it, so the box's empty corners never swallow taps meant
+                for buttons underneath, e.g. a hero CTA on a phone. */}
             <span
               ref={hitRef}
               aria-hidden="true"
-              className="pointer-events-auto absolute left-1/2 top-1/2 h-[72px] w-[72px] -translate-x-1/2 -translate-y-1/2 rounded-full sm:h-[88px] sm:w-[88px]"
+              className="pointer-events-auto absolute left-1/2 top-1/2 h-[60px] w-[60px] -translate-x-1/2 -translate-y-1/2 rounded-full sm:h-[72px] sm:w-[72px]"
             />
             {/* Static logo until the animation has loaded */}
             {!ready && (
@@ -241,7 +236,7 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
                 height={160}
                 sizes="96px"
                 priority
-                className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 rounded-full object-cover"
+                className="absolute left-1/2 top-1/2 h-14 w-14 -translate-x-1/2 -translate-y-1/2 rounded-full object-cover sm:h-16 sm:w-16"
                 draggable={false}
               />
             )}
