@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import RichText from "@/components/ui/richText";
 import Pill from "@/components/home/pill";
 import { productCards } from "@/components/sections/aiProductsShowcase";
@@ -70,6 +72,20 @@ export default function BuildV2({ content, showClio = true, showPraxistence = tr
                   <RichText as="p" text={b.tagline} className="mt-2 text-sm leading-relaxed text-white/60" />
                 </li>
               ))}
+              {/* Last tile: the same systems, offered to clients (also evens out an odd list) */}
+              <li className="group relative border-b border-white/10 py-6">
+                <h3 className="text-base text-white transition-colors group-hover:text-[#40A2D8]">
+                  <Link href="/contact" className="after:absolute after:inset-0 after:content-[''] focus-visible:underline focus-visible:outline-none">
+                    Need a system like these for your business?
+                  </Link>
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-white/60">
+                  We build custom CRMs, dashboards and automations for clients too.
+                </p>
+                <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-[#40A2D8]">
+                  Talk to us <ArrowUpRight size={16} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </span>
+              </li>
             </ul>
           </div>
         )}
