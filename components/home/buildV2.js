@@ -21,7 +21,9 @@ const BUILD_ICONS = [Headset, Bot, Workflow, Server, Globe, GitBranch, BarChart3
 //    in globals.css) each card pins below the navbar (sticky, pure CSS) and
 //    the next one slides up over it. Smaller or shorter screens — where a
 //    card can be taller than the space below the navbar — get them one
-//    after another, so nothing is ever hidden under the next card. Each card: label, heading, text, the
+//    after another, so nothing is ever hidden under the next card. From lg
+//    up the cards zig-zag: text left / picture right, then picture left /
+//    text right (phones: always text first, picture below). Each card: label, heading, text, the
 //    features as a small 2x2 grid, the button, and the picture at about its
 //    real size.
 //  - The rest of the in-house systems are small icon tiles (4 across on
@@ -51,13 +53,14 @@ export default function BuildV2({ content, showClio = true, showPraxistence = tr
           <div className="mt-14 space-y-6 md:mt-20 stack-cards:space-y-0">
             {products.map((p, i) => {
               const art = p.key === "clio" && p.image === CLIO_IMAGE;
+              const flip = i % 2 === 1; // zig-zag: every second card has its picture on the left
               return (
                 <article
                   key={p.key}
-                  className="grid gap-8 overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b0e16] p-6 shadow-[0_-24px_60px_rgba(0,0,0,0.6)] sm:p-8 stack-cards:sticky lg:grid-cols-[1.15fr_1fr] lg:gap-12 lg:p-10 stack-cards:not-last:mb-[24vh]"
+                  className={`grid gap-8 overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b0e16] p-6 shadow-[0_-24px_60px_rgba(0,0,0,0.6)] sm:p-8 stack-cards:sticky lg:gap-12 lg:p-10 stack-cards:not-last:mb-[24vh] ${flip ? "lg:grid-cols-[1fr_1.15fr]" : "lg:grid-cols-[1.15fr_1fr]"}`}
                   style={{ top: `calc(6.5rem + ${i * 1.5}rem)` }}
                 >
-                  <div className="flex flex-col">
+                  <div className={`flex flex-col ${flip ? "lg:order-2" : ""}`}>
                     <p className="text-xs uppercase tracking-wider text-[#40A2D8]">
                       Product {String(i + 1).padStart(2, "0")}
                     </p>
