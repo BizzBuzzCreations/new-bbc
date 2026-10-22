@@ -1,6 +1,5 @@
 "use client";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 import "@splidejs/react-splide/css";
 import RichText from "@/components/ui/richText";
 
@@ -40,29 +39,20 @@ const DifferentiatorsCarousel = ({ items }) => {
         type: "loop",
         perPage: 3,
         perMove: 1,
-        arrows: false,
+        arrows: true,
+        keyboard: "focused",
         pagination: false,
         gap: "1.5rem",
-        drag: "free",
-        focus: "center",
-        pauseOnHover: true,
-        pauseOnFocus: false,
+        drag: true,
         autoWidth: false,
 
-        autoScroll: {
-          speed: 0.8,
-          pauseOnHover: true,
-          pauseOnFocus: false,
-          rewind: false,
-        },
 
         breakpoints: {
           1024: { perPage: 2 },
           640: { perPage: 1 },
         },
       }}
-      extensions={{ AutoScroll }}
-      className="max-w-6xl mx-auto"
+      className="bbc-carousel max-w-6xl mx-auto"
     >
       {differentiators.map((item, index) => (
         <SplideSlide key={index} className="h-auto py-2">

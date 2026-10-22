@@ -71,7 +71,9 @@ export default function Recognitions({ content, showIcons = true }) {
   const buttonText = content?.recognitionsButtonText || "";
 
   return (
-    <section className="relative bg-black text-white py-24 px-6 md:px-12 overflow-hidden">
+    // id: in-page link target (e.g. a "See Our Credentials" button saved as "#recognitions");
+    // scroll-mt keeps the heading clear of the sticky navbar.
+    <section id="recognitions" className="relative bg-black text-white py-24 px-6 md:px-12 overflow-hidden scroll-mt-20">
 
       <div className="relative max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
         <div>

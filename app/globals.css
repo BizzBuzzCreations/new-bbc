@@ -3,6 +3,117 @@
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
 
+/* Desktop-width screens that aren't very tall (e.g. 1366×768 laptops at
+   100% zoom, ~655px of page): the home hero tightens up so heading, buttons,
+   stats and badges all fit in the first screen. */
+@custom-variant short-screen (@media (min-width: 768px) and (max-height: 860px));
+/* Screens big enough for the homepage's stacking product cards (What We
+   Build): a whole card fits below the navbar, so pinning never hides any of it. */
+@custom-variant stack-cards (@media (min-width: 1280px) and (min-height: 760px));
+
+/* Homepage redesign: big, light display type (IBM Plex Sans at 300 — the
+   body font's variable file already covers it, so no extra download). */
+@utility font-display {
+  font-family: var(--font-ibm), sans-serif;
+  font-weight: 300;
+  letter-spacing: -0.025em;
+}
+
+/* Homepage effects — pure CSS scroll-driven animations (they run off the
+   main thread, no JavaScript), only where the browser supports them and
+   only without reduced motion; everywhere else everything is simply shown.
+   Opacity/transform only, so no layout shift.
+   .reveal — rises in over its first 160px into view. Tied to where the
+   element is, not to a script firing, so anything already well on screen
+   (on load, zoomed out, or in a crawler's tall viewport) is fully shown.
+   .reveal-stagger — on a grid: its children rise in one after another
+   across each row instead of all at once.
+   .reveal-sides — on a two-column grid: from md up the left column slides
+   in from the left and the right column from the right, meeting as each
+   row arrives (phones, one column: the same rise as .reveal). The section
+   around it should clip sideways overflow (overflow-x-clip), so the
+   right-hand items never widen the page while they slide in.
+   .scroll-progress — a thin bar at the top that fills as the page scrolls. */
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes reveal-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-48px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes reveal-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(48px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes scroll-progress-fill {
+  to {
+    transform: scaleX(1);
+  }
+}
+.scroll-progress {
+  display: none;
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal,
+    .reveal-stagger > *,
+    .reveal-sides > * {
+      animation: reveal-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0px entry 160px;
+    }
+    .reveal-stagger > :nth-child(4n + 2) {
+      animation-range: entry 30px entry 190px;
+    }
+    .reveal-stagger > :nth-child(4n + 3) {
+      animation-range: entry 60px entry 220px;
+    }
+    .reveal-stagger > :nth-child(4n + 4) {
+      animation-range: entry 90px entry 250px;
+    }
+    @media (min-width: 768px) {
+      .reveal-sides > :nth-child(odd) {
+        animation-name: reveal-from-left;
+      }
+      .reveal-sides > :nth-child(even) {
+        animation-name: reveal-from-right;
+      }
+    }
+  }
+  .scroll-progress {
+    display: block;
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 60;
+    height: 2px;
+    pointer-events: none;
+    background: linear-gradient(to right, #40a2d8, #7b74f7, #b57cff);
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+    animation: scroll-progress-fill linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
 @theme {
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
@@ -26,17 +137,6 @@
 }
 
 /* Slow-drifting blobs for the contact form's animated backdrop. */
-/* Right-to-left infinite marquee — content is duplicated once by the
-   component using it, so this loops seamlessly at exactly -50%. */
-@keyframes marquee-rtl {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
 @keyframes blob-float-a {
   0%,
   100% {
@@ -79,17 +179,33 @@ body {
   display: none;
 }
 
-/* Navbar style — fully opaque (not e.g. #0a0a0ae6) on purpose: at 90%
-   opacity, whatever sits directly behind the navbar on each page (a hero
-   photo's top edge, a lighter section background...) bled through just
-   enough to make the navbar look like a different shade of black from
-   page to page. Solid color means it's the exact same black everywhere,
-   regardless of what's underneath. backdrop-filter is dropped too — it
-   only ever mattered for that see-through blend, so it's dead weight
-   (a wasted per-frame blur) now that the color behind it is invisible. */
+/* Navbar: dark frosted glass. 85% dark, so it reads as the same near-black
+   on every page — even over white content (a lighter glass let white pages
+   turn it grey) — while the hero video and bright illustrations still show
+   through faintly, blurred. At the very top of a page a black strip sits
+   behind it (app/(main)/layout.js), so pages whose hero starts below the
+   bar don't show the white page background through it. Browsers without
+   backdrop-filter get a near-solid bar. */
 .nav {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-  background-color: #0a0a0a;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  background-color: rgba(10, 10, 10, 0.92);
+}
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .nav {
+    background-color: rgba(10, 10, 10, 0.85);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    backdrop-filter: blur(14px) saturate(160%);
+  }
+}
+
+/* Navbar dropdown panels (About, Services, Industries, Resources): dark, to
+   match the glass bar. Solid on purpose: they sit inside the blurred header,
+   and a blur inside a blurred element can't see the page behind it, so any
+   see-through panel shows the page text ghosting through. */
+.nav-panel {
+  background-color: #0c0d12;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 /* Custom button */
@@ -327,46 +443,6 @@ body {
   animation-delay: 0.5s;
 }
 
-/* wobble animation */
-@keyframes shake {
-  0% {
-    transform: translate(1px, 1px) rotate(0deg);
-  }
-  10% {
-    transform: translate(-1px, -2px) rotate(-1deg);
-  }
-  20% {
-    transform: translate(-3px, 0px) rotate(1deg);
-  }
-  30% {
-    transform: translate(3px, 2px) rotate(0deg);
-  }
-  40% {
-    transform: translate(1px, -1px) rotate(1deg);
-  }
-  50% {
-    transform: translate(-1px, 2px) rotate(-1deg);
-  }
-  60% {
-    transform: translate(-3px, 1px) rotate(0deg);
-  }
-  70% {
-    transform: translate(3px, 1px) rotate(-1deg);
-  }
-  80% {
-    transform: translate(-1px, -1px) rotate(1deg);
-  }
-  90% {
-    transform: translate(1px, 2px) rotate(0deg);
-  }
-  100% {
-    transform: translate(1px, -2px) rotate(-1deg);
-  }
-}
-.wobble {
-  animation: shake 0.5s;
-}
-
 /* Whatsapp profile logo */
 .styles-module_chatHeader__gaeOA .styles-module_avatar__afcc4 img {
   object-fit: cover !important;
@@ -395,6 +471,17 @@ body {
   line-height: 1.8;
   font-size: 18px;
   color: #333;
+}
+
+/* Blog text in the site's fonts even when a post carries fonts pasted in
+   from another editor (inline font-family, e.g. Arial): headings in Fira
+   Sans, everything else in IBM Plex Sans. Code keeps its monospace. */
+.article :where(*:not(pre, code, kbd, samp, pre *, code *)) {
+  font-family: var(--font-ibm), sans-serif !important;
+}
+.article :is(h1, h2, h3, h4, h5, h6),
+.article :is(h1, h2, h3, h4, h5, h6) * {
+  font-family: var(--font-fira), sans-serif !important;
 }
 
 .article h2 {
@@ -745,5 +832,66 @@ a.animated-button {
   .bizzbee-fab:hover,
   .bizzbee-fab:active {
     animation: none;
+  }
+}
+
+/* Card carousels (Splide, `.bbc-carousel`): they no longer scroll on their
+   own, so the prev/next buttons sit centred under the cards (not on top of
+   them) as clear dark-theme controls with a 40px tap target. Order puts
+   the buttons after the track whatever order Splide inserts them in. */
+.bbc-carousel.splide {
+  display: flex;
+  flex-direction: column;
+}
+.bbc-carousel .splide__track {
+  order: 1;
+}
+.bbc-carousel .splide__arrows {
+  order: 2;
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+.bbc-carousel .splide__arrow {
+  position: static;
+  transform: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  opacity: 1;
+  background: rgb(255 255 255 / 0.08);
+  border: 1px solid rgb(255 255 255 / 0.25);
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.bbc-carousel .splide__arrow svg {
+  fill: #ffffff;
+  width: 0.9rem;
+  height: 0.9rem;
+}
+.bbc-carousel .splide__arrow:hover:not(:disabled) {
+  background: #0b60b0;
+  border-color: #0b60b0;
+  opacity: 1;
+}
+.bbc-carousel .splide__arrow:focus-visible {
+  outline: 3px solid #40a2d8;
+  outline-offset: 2px;
+}
+.bbc-carousel .splide__track:focus-visible,
+.bbc-carousel.splide:focus-visible {
+  outline: 3px solid #40a2d8;
+  outline-offset: 4px;
+}
+
+/* Visitors who ask their device for less motion: no looping or long CSS
+   animations anywhere (framer-motion is covered by MotionPreferences in
+   the root layout, and the JS-driven effects check this media query too). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
   }
 }

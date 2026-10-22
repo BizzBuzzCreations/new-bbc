@@ -3,8 +3,8 @@ import { buildPageMetadata } from "@/lib/pageMetadata";
 
 export async function generateMetadata() {
   return buildPageMetadata("legal-privacy-policy", {
-  title: "Privacy Policy of Bizzbuzz Creations",
-  description: "About our policies || Bizzbuzz Creations",
+  title: "Privacy Policy of BizzBuzz Creations",
+  description: "About our policies || BizzBuzz Creations",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/privacy-policy",
   },

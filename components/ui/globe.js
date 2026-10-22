@@ -210,8 +210,15 @@ export default function Globe({
   const smoothingN = normalizeSmoothing(smoothing);
 
   const baseRotationSpeed = mapSpeedUiToInternal(speed);
-  const rotationSpeed =
-    direction === "left" ? -baseRotationSpeed : baseRotationSpeed;
+  // Visitors who ask for reduced motion get a still globe (dragging it
+  // still works). This file only ever runs in the browser (lazyGlobe loads
+  // it with ssr: false), so matchMedia is safe here.
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const rotationSpeed = reduceMotion
+    ? 0
+    : direction === "left"
+      ? -baseRotationSpeed
+      : baseRotationSpeed;
   const dotSpacing = mapDensityUiToSpacing(density);
   const dotSizeMultiplier = mapDotSizeUiToMultiplier(dotSize);
   const markerRadiusMultiplier = mapMarkerDotSizeUiToMultiplier(markerConfig.size);

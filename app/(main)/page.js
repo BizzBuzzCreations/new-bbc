@@ -1,19 +1,18 @@
-import CTA from "@/components/sections/CTA";
-import FAQ from "@/components/sections/FAQ";
-import HomeAbout from "@/components/sections/homeAbout";
-import HomeHero from "@/components/sections/homeHero";
-import OurServices from "@/components/sections/ourServices";
-import CaseStudies from "@/components/sections/caseStudies";
-import ScrollZoomReveal from "@/components/sections/scrollZoomReveal";
-import StatsShowcase from "@/components/sections/statsShowcase";
-import AiShowcase from "@/components/sections/aiShowcase";
-import PraxistenceShowcase from "@/components/sections/praxistenceShowcase";
-import Reviews from "@/components/sections/reviews";
-import WhatMAkesUs from "@/components/sections/whatMakesUs";
-import IndustriesShowcase from "@/components/sections/industriesShowcase";
-import WhyChooseUs from "@/components/sections/WhyChooseUs";
+// Homepage redesign (dark, GPG-style): its own sections in components/home/,
+// reading the same dashboard fields as before. Other pages keep using the
+// original components/sections/ versions.
+import HeroHome from "@/components/home/heroHome";
+import AboutV2 from "@/components/home/aboutV2";
+import ServicesV2 from "@/components/home/servicesV2";
+import BuildV2 from "@/components/home/buildV2";
+import ProcessV2 from "@/components/home/processV2";
+import IndustriesV2 from "@/components/home/industriesV2";
+import ReviewsV2 from "@/components/home/reviewsV2";
+import BlogsV2 from "@/components/home/blogsV2";
+import FaqV2 from "@/components/home/faqV2";
+import CtaV2 from "@/components/home/ctaV2";
+import BeamsBlock from "@/components/home/band";
 import ConsultationPopup from "@/components/sections/popupForm";
-import LatestBlogs from "@/components/sections/latestBlogs";
 import { getPageContent } from "@/actions/pageContentActions";
 import { buildPageMetadata } from "@/lib/pageMetadata";
 import PageSeoScripts from "@/components/sections/pageSeoScripts";
@@ -55,64 +54,57 @@ export default async function Home() {
   // Sections switched off in the dashboard (Remove section).
   const hidden = new Set(content?.hiddenSections || []);
 
+  // data-no-reveal: the site-wide scroll fade-in (ScrollReveal) hides every
+  // heading and grid item below the fold until it scrolls into view. These
+  // sections are meant to be visible straight away (they have their own
+  // light scroll effects), so they opt out.
   return (
-    <>
+    <div data-no-reveal>
       <PageSeoScripts pageKey="home" />
-      {/* Home Hero Section */}
-      {!hidden.has("hero") && <HomeHero content={content} separated showGlow={false} />}
+      {/* thin reading-progress line at the top (pure CSS, see globals.css) */}
+      <div aria-hidden="true" className="scroll-progress" />
+      {/* Hero: the BizzBuzz Creations wordmark over the background video,
+          stats and certification badges (homepage look; the shared HomeHero
+          stays as it is on the UK / location pages). */}
+      {!hidden.has("hero") && (
+        <HeroHome
+          content={content}
+          stats={content?.zoomStats}
+          secondaryCta={hidden.has("services") ? null : { text: "Explore Our Services", href: "#services" }}
+        />
+      )}
 
-      {/* About section */}
-      {!hidden.has("about") && <HomeAbout content={content} separated />}
+      {/* About + the statement line (the statement can be removed on its own) */}
+      {!hidden.has("about") && <AboutV2 content={content} showStatement={!hidden.has("statement")} />}
 
-      {/* Our Services */}
-      {!hidden.has("services") && <OurServices content={content} />}
+      {!hidden.has("services") && <ServicesV2 content={content} />}
 
-      {/* Case Studies — client work carousel */}
-      {!hidden.has("caseStudies") && <CaseStudies content={content} />}
+      {/* What We Build: Clio AI + Praxistence, then the other in-house systems
+          (the old case-study wheel). Each part keeps its own Remove switch. */}
+      <BuildV2
+        content={content}
+        showClio={!hidden.has("aiShowcase")}
+        showPraxistence={!hidden.has("praxistenceShowcase")}
+        showBuilds={!hidden.has("caseStudies")}
+      />
 
-      {/* Stats showcase — auto-scrolling numbers/logos/services carousel —
-          now directly after Case Studies. */}
-      {!hidden.has("stats") && <StatsShowcase content={content} />}
+      {/* Process, Industries and Reviews share one background (the beams) */}
+      {["process", "industries", "reviews"].some((key) => !hidden.has(key)) && (
+        <BeamsBlock>
+          {!hidden.has("process") && <ProcessV2 content={content} />}
+          {!hidden.has("industries") && <IndustriesV2 content={content} />}
+          {!hidden.has("reviews") && <ReviewsV2 content={content} />}
+        </BeamsBlock>
+      )}
 
-      {/* Praxistence — same video + feature-cards split as the Clio AI section */}
-      {!hidden.has("praxistenceShowcase") && <PraxistenceShowcase content={content} />}
+      {!hidden.has("latestBlogs") && <BlogsV2 content={content} />}
 
-      {/* Our Process — mobile only here, between Praxistence and Clio AI. On
-          desktop it keeps its usual spot below the AI section (copy below). */}
-      {!hidden.has("process") && <WhatMAkesUs content={content} className="md:hidden" />}
+      {!hidden.has("faq") && <FaqV2 content={content} />}
 
-      {/* Scroll-pinned "Know More About Us" zoom-text transition — releases
-          straight into AiShowcase below with no divider/gap in between, so
-          the pin lets go right as the next section is already there. */}
-      {!hidden.has("scrollZoom") && <ScrollZoomReveal content={content} />}
+      {!hidden.has("cta") && <CtaV2 content={content} />}
 
-      {/* AI showcase — video + AI services split section */}
-      {!hidden.has("aiShowcase") && <AiShowcase content={content} />}
-
-      {/* What Makes Us Different section */}
-      {!hidden.has("process") && <WhatMAkesUs content={content} className="max-md:hidden" />}
-
-      {/* Why choose us */}
-      {!hidden.has("whyChooseUs") && <WhyChooseUs dark content={content} />}
-
-      {/* Industries we work with — same list as the navbar's mega-menu */}
-      {!hidden.has("industries") && <IndustriesShowcase content={content} />}
-
-      {/* Reviews section */}
-      {!hidden.has("reviews") && <Reviews content={content} />}
-
-      {!hidden.has("latestBlogs") && <LatestBlogs dark content={content} />}
-
-      <div className="bg-black pt-10">
-        {/* FAQ section */}
-        {!hidden.has("faq") && <FAQ content={content} />}
-
-        {/* CTA section */}
-        {!hidden.has("cta") && <CTA content={content} />}
-      </div>
-      {/* Popup form */}
       {!hidden.has("popup") && <ConsultationPopup content={content} />}
-    </>
+    </div>
   );
 }
 

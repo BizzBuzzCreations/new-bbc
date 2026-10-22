@@ -28,7 +28,7 @@ const MOBILE_COLUMN_TWO = INDUSTRIES.slice(MOBILE_COL_SIZE);
 // Short hover descriptions specific to this homepage showcase — kept
 // separate from each industry's own page description (industriesData.js),
 // which also drives the hero paragraph on /industries/<slug>.
-const HOVER_DESCRIPTIONS = {
+export const HOVER_DESCRIPTIONS = {
   healthcare: "Build a stronger healthcare presence with digital marketing, SEO, and websites designed to connect with patients.",
   finance: "Strengthen your finance brand with digital strategies that build visibility, trust, engagement, and qualified customer opportunities.",
   restaurant: "Attract more diners with local SEO, social media, and digital marketing strategies built for restaurant growth.",
@@ -47,7 +47,7 @@ const HOVER_DESCRIPTIONS = {
 };
 
 export default function IndustriesShowcase({ content }) {
-  const eyebrow = content?.industriesEyebrow || "";
+  const eyebrow = content?.industriesEyebrow || "Industries";
   const heading = content?.industriesHeading || "Digital Solutions for Businesses Across Industries";
   const subtext =
     content?.industriesSubtext ||
@@ -93,7 +93,7 @@ export default function IndustriesShowcase({ content }) {
   );
 
   return (
-    <section id="industries" className="relative overflow-hidden bg-black py-20 px-6 md:px-12 lg:px-24">
+    <section id="industries" className="relative overflow-hidden bg-black py-14 md:py-20 px-6 md:px-12 lg:px-24">
 
       <div className="relative max-w-6xl mx-auto">
         <div className="text-center mb-14">

@@ -8,6 +8,7 @@ import AnimatedButton from "@/components/ui/animatedButton";
 // `dark` is opt-in, passed by pages that want the all-black section run.
 export default async function LatestBlogs({ dark = false, content }) {
   const heading = content?.blogsHeading || "Our Latest Blogs";
+  const eyebrow = content?.blogsEyebrow ?? "From Our Blog";
   const subtext = content?.blogsSubtext || "Explore, discover, and find inspiration through these exciting blogs.";
   const readMore = content?.blogsReadMoreText || "Read More";
   const buttonText = content?.blogsButtonText || "View All Blogs";
@@ -24,10 +25,9 @@ export default async function LatestBlogs({ dark = false, content }) {
       }
 
   return (
-    <section className={`py-16 md:py-20 ${dark ? "bg-black" : "bg-white"}`}>
+    <section className={`py-12 md:py-20 ${dark ? "bg-black" : "bg-white"}`}>
       <div className="text-center px-6">
-        <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">
-        </p>
+        {eyebrow && <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">{eyebrow}</p>}
         <h2 className={`md:text-4xl text-3xl font-bold mb-3 ${dark ? "text-white" : "text-black"}`}>
           {heading}
         </h2>
@@ -37,14 +37,17 @@ export default async function LatestBlogs({ dark = false, content }) {
       </div>
 
       {/* Latest blogs */}
-      <div className="px-8 pt-12 mx-auto lg:max-w-screen-xl sm:max-w-xl md:max-w-full sm:px-12 md:px-16">
-        <div className="grid gap-x-8 gap-y-12 sm:gap-y-16 md:grid-cols-2 lg:grid-cols-3 mb-14">
+      {/* Phones: a swipeable row (each card 85% wide so the next one peeks
+          in) instead of three tall cards stacked, which took over two
+          screens. From md up it's the usual grid. */}
+      <div className="px-8 pt-8 md:pt-12 mx-auto lg:max-w-screen-xl sm:max-w-xl md:max-w-full sm:px-12 md:px-16">
+        <div className="-mx-8 sm:-mx-12 md:mx-0 flex md:grid snap-x snap-mandatory overflow-x-auto md:overflow-visible scroll-px-8 sm:scroll-px-12 px-8 sm:px-12 md:px-0 pb-2 md:pb-0 gap-4 md:gap-x-8 md:gap-y-16 md:grid-cols-2 lg:grid-cols-3 mb-14">
           {blogs.length > 0 &&
             blogs.map((e, index) => {
               const featuredImage = getFeaturedImage(e);
               return (
               <div
-                className={`group rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 ${
+                className={`group w-[85%] shrink-0 snap-start md:w-auto rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 ${
                   dark
                     ? "border border-white/10 bg-white/5 hover:border-[#40A2D8]/40 hover:shadow-xl hover:shadow-black/40"
                     : "border border-gray-200 bg-white shadow-sm hover:border-[#0B60B0]/30 hover:shadow-xl"
@@ -114,7 +117,7 @@ export default async function LatestBlogs({ dark = false, content }) {
 
                   <Link
                     href={`/blog/${e?.slug}`}
-                    className={`inline-flex items-center gap-1.5 text-sm font-semibold hover:underline ${
+                    className={`inline-flex items-center gap-1.5 py-1 text-sm font-semibold hover:underline ${
                       dark ? "text-[#40A2D8]" : "text-[#0B60B0]"
                     }`}
                     aria-label={`Read more about ${e?.title}`}

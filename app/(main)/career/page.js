@@ -10,7 +10,7 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 
 export async function generateMetadata() {
   return buildPageMetadata("career", {
-  title: "Careers at BizzBuzz Creations | Digital Marketing Jobs & Internships",
+  title: "Digital Marketing Jobs & Internships | BizzBuzz Creations",
   description:
     "Join BizzBuzz Creations and build your career in SEO, Meta Ads, content marketing & branding. Explore digital marketing jobs and internship opportunities today.",
   alternates: {

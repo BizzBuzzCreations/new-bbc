@@ -40,7 +40,7 @@ export default function JobCard({ job, days }) {
         <button
           type="button"
           onClick={() => setExpanded((e) => !e)}
-          className="inline-flex items-center gap-1 text-xs font-semibold text-[#40A2D8] hover:text-white mb-3 transition-colors duration-300"
+          className="inline-flex items-center gap-1 py-1.5 -my-1.5 text-xs font-semibold text-[#40A2D8] hover:text-white mb-3 transition-colors duration-300"
         >
           {expanded ? "Read less" : "Read more"}
           <ChevronDown size={13} className={`transition-transform duration-300 ${expanded ? "rotate-180" : ""}`} />

@@ -14,9 +14,9 @@ const LAYOUT = [
   { icon: Award, color: "#334155" }, // slate-700
   { icon: Search, color: "#1e40af" }, // blue-800
   { icon: Layers, color: "#2563eb" }, // blue-600
-  { icon: HeartHandshake, color: "#0284c7" }, // sky-600
-  { icon: Headset, color: "#0ea5e9" }, // sky-500
-  { icon: TrendingUp, color: "#06b6d4" }, // cyan-500
+  { icon: HeartHandshake, color: "#0369a1" }, // sky-700 (sky-600 was 4.1:1 with white text; needs 4.5:1)
+  { icon: Headset, color: "#0e7490" }, // cyan-700 (sky-500 was 2.8:1 with white text)
+  { icon: TrendingUp, color: "#0f766e" }, // teal-700 (cyan-500 was 2.4:1)
 ];
 
 const DEFAULT_ITEMS = [

@@ -202,7 +202,7 @@ export default function ServiceDetailPage({
               >
                 <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
               </svg>
-              <span className="text">{heroCtaText || "Book Your Free Consultation"}</span>
+              <span className="text">{heroCtaText || "Get a Free Consultation"}</span>
               <span className="circle"></span>
               <svg
                 viewBox="0 0 24 24"
@@ -229,9 +229,11 @@ export default function ServiceDetailPage({
               it cleanly. Reappear from sm up, where there's room. */}
           <div className="flex items-center justify-center gap-4 mb-14 text-center">
             <span className="hidden sm:block h-px w-14 bg-white/20" />
-            <p className="text-sm md:text-base font-bold uppercase tracking-widest text-white">
+            {/* <h2> (not <p>): it heads the capability cards' <h3>s, so the
+                page doesn't jump from the hero <h1> straight to <h3>. */}
+            <h2 className="text-sm md:text-base font-bold uppercase tracking-widest text-white">
               {capabilitiesHeading || "What's Included"}
-            </p>
+            </h2>
             <span className="hidden sm:block h-px w-14 bg-white/20" />
           </div>
 
@@ -319,7 +321,7 @@ export default function ServiceDetailPage({
                             : "md:col-start-2 md:pl-14"
                         }
                       >
-                        <span className="block text-4xl md:text-5xl font-bold text-[#0B60B0]/40 mb-2">
+                        <span className="block text-4xl md:text-5xl font-bold text-[#0B60B0] mb-2">
                           {number}
                         </span>
                         <h3 className="text-xl font-bold text-white mb-3">

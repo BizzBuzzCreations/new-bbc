@@ -4,8 +4,8 @@ import { useState } from "react";
 import { sendMail } from "@/actions/serverActions";
 import { toast, Bounce } from "react-toastify";
 import { Eye, Users, FileText, Paperclip } from "lucide-react";
-import Particles from "@/components/ui/Particles";
 import RichText from "@/components/ui/richText";
+import { markEnquired } from "@/lib/enquiryFlag";
 
 // Icons stay code-driven (design), matched positionally to whichever
 // steps are saved.
@@ -45,7 +45,13 @@ const MAX_FILE_BYTES = 4 * 1024 * 1024;
 const inputClasses =
   "w-full border border-gray-300 focus:border-[#0B60B0] rounded-lg outline-none px-4 py-2.5 text-sm transition";
 
-export default function ContactSection({ content }) {
+// `headingLevel` — the /contact page passes "h1" (it's that page's main
+// heading; the page had no <h1> at all). Our Team reuses this section below
+// its own hero <h1>, so it keeps the default "h2".
+export default function ContactSection({ content, headingLevel = "h2" }) {
+  const Heading = headingLevel;
+  // Sub-headings sit one level below whichever heading the section uses.
+  const SubHeading = headingLevel === "h1" ? "h2" : "h3";
   const heading = content?.contactHeroHeading || "Let’s Turn Your Digital Goals Into a Growth Plan";
   const paragraph =
     content?.contactHeroParagraph ||
@@ -121,6 +127,7 @@ export default function ContactSection({ content }) {
     setSubmitting(false);
 
     if (response?.success) {
+      markEnquired(); // the consultation popup won't ask again
       toast.success(response.message, toastOptions);
       setForm({ name: "", email: "", subject: "", contact: "", message: "" });
       setFile(null);
@@ -131,29 +138,8 @@ export default function ContactSection({ content }) {
 
   return (
     <section id="contact-form" className="relative overflow-hidden min-h-screen flex flex-col justify-center px-4 md:px-12 lg:px-24 py-20 bg-black">
-      {/* Animated backdrop — sits behind the whole card, not inside it.
-          Bigger than the card itself so it's visible around its edges
-          (in the section's own padding), while the card sits fully
-          opaque on top (z-10) — no motion shows through the form. */}
-      <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
-        {/* moveParticlesOnHover intentionally left off: this whole layer
-            is pointer-events-none (so it never blocks clicks anywhere in
-            the section), which also means it can't receive the mousemove
-            events that prop depends on. */}
-        <Particles
-          particleColors={["#40A2D8", "#0B60B0", "#8fd0f2", "#ffffff"]}
-          particleCount={220}
-          particleSpread={14}
-          speed={0.08}
-          particleBaseSize={110}
-          alphaParticles={false}
-          disableRotation={false}
-        />
-      </div>
-
       <div className="max-w-6xl mx-auto relative z-10 rounded-3xl overflow-hidden shadow-xl grid lg:grid-cols-2 border border-gray-200">
-        {/* Left: dark info panel — semi-transparent so the animated
-            particle backdrop stays clearly visible through it. */}
+        {/* Left: dark info panel. */}
         <div className="relative bg-black/40 backdrop-blur-sm text-white p-8 sm:p-10 lg:p-12 overflow-hidden">
           <div
             className="absolute inset-0 opacity-40"
@@ -163,9 +149,9 @@ export default function ContactSection({ content }) {
             }}
           />
           <div className="relative">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+            <Heading className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
               {heading}
-            </h2>
+            </Heading>
             <RichText as="p" text={paragraph} className="text-white mb-10 max-w-md" />
 
             <div className="grid sm:grid-cols-3 gap-4">
@@ -175,7 +161,7 @@ export default function ContactSection({ content }) {
                   className="rounded-2xl border border-white/10 bg-white/5 p-4"
                 >
                   <Icon size={18} className="text-[#40A2D8] mb-3" />
-                  <h3 className="font-semibold text-sm mb-2">{title}</h3>
+                  <SubHeading className="font-semibold text-sm mb-2">{title}</SubHeading>
                   <RichText as="p" text={description} className="text-xs text-white leading-relaxed" />
                 </div>
               ))}
@@ -186,9 +172,9 @@ export default function ContactSection({ content }) {
         {/* Right: form — fully opaque now that the animation lives behind
             the card instead of inside it. */}
         <div className="relative bg-white p-8 lg:p-10">
-          <h3 className="font-semibold text-lg text-black mb-6">
+          <SubHeading className="font-semibold text-lg text-black mb-6">
             {formHeading}
-          </h3>
+          </SubHeading>
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="grid sm:grid-cols-2 gap-5">
               <div>

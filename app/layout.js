@@ -4,7 +4,7 @@ import Script from "next/script";
 import { ToastContainer, Bounce } from "react-toastify";
 import BizzBeeWidget from "@/components/bizzbee/BizzBeeWidget";
 import AllScripts from "@/components/sections/allScripts";
-import ClickSpark from "@/components/ui/ClickSpark";
+import MotionPreferences from "@/components/ui/motionPreferences";
 import ScrollReveal from "@/components/sections/scrollReveal";
 
 // Self-hosted (public/fonts) instead of next/font/google: the Google loader
@@ -31,9 +31,9 @@ const ibmPlexSans = localFont({
 
 export const metadata = {
   metadataBase: new URL("https://bizzbuzzcreations.com"),
-  title: "Best Digital Marketing Agency in India | Bizz Buzz Creations",
+  title: "Best Digital Marketing Agency in India | BizzBuzz Creations",
   description:
-    "Grow your business with Bizz Buzz Creations – India’s top digital marketing and BPO company. We offer SEO, SMM, and lead generation services.",
+    "Grow your business with BizzBuzz Creations – India’s top digital marketing and BPO company. We offer SEO, SMM, and lead generation services.",
   // Site-wide default for the small "site name" Google shows next to the
   // favicon in search results (og:site_name) — every page inherits this
   // unless its own generateMetadata sets its own `openGraph.siteName`.
@@ -73,16 +73,11 @@ export default function RootLayout({ children }) {
             (no data-modal-toggle/data-dropdown-toggle etc.), so it was
             ~30KB of parse/execute per page for nothing. Flowbite's CSS
             (globals.css) is still used and stays. */}
-        <BizzBeeWidget />
-        <ScrollReveal />
-        <main>{children}</main>
-        <ClickSpark
-          sparkColor="#40A2D8"
-          sparkSize={10}
-          sparkRadius={18}
-          sparkCount={8}
-          duration={450}
-        />
+        <MotionPreferences>
+          <BizzBeeWidget />
+          <ScrollReveal />
+          <main>{children}</main>
+        </MotionPreferences>
         <ToastContainer
           position="top-right"
           autoClose={5000}

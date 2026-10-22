@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Image from "next/image";
 import {
   Headphones,
@@ -16,7 +15,7 @@ import RichText from "@/components/ui/richText";
 import AnimatedButton from "@/components/ui/animatedButton";
 
 // What makes working with BizzBuzz Creations different — kept as 4 cards
-// so the existing marquee/visual layout below (photos, client logos,
+// so the existing card/visual layout below (photos, client logos,
 // icon grid) stays exactly as designed, just with new copy.
 const STATS = [
   {
@@ -187,27 +186,11 @@ function WaveMask({ position = "top" }) {
   );
 }
 
-// Card + gap width, in px — kept as plain numbers (not Tailwind classes) so
-// the marquee math below can compute exact loop distances.
-const CARD_WIDTH = 300;
-const GAP = 20;
-const SPEED = 0.6; // px per frame, roughly matching the site's other marquees
-// The strip must stay wider than the widest screen plus one full set, so
-// it can loop without a visible gap however few cards there are.
-const MIN_STRIP_WIDTH = 2600;
-
-// Wrap `value` into the range (-width, 0] so the strip can scroll infinitely
-// in either direction without ever visibly jumping.
-function wrap(value, width) {
-  let v = value % width;
-  if (v > 0) v -= width;
-  return v;
-}
-
 export default function StatsShowcase({ content }) {
   const heading = content?.statsHeading || "Here’s Why Our Way of Working Is Different";
+  const eyebrow = content?.statsEyebrow ?? "Why Us";
 
-  // The dashboard's card list drives the strip — adding or removing a card
+  // The dashboard's card list drives the cards — adding or removing a card
   // there now adds/removes it here (it used to always show exactly the 4
   // built-in cards and ignore any beyond them). A card with no uploaded
   // image falls back to one of the built-in photos, by position.
@@ -225,105 +208,48 @@ export default function StatsShowcase({ content }) {
         })
       : STATS;
 
-  const setWidth = stats.length * (CARD_WIDTH + GAP);
-  const copies = Math.max(3, Math.ceil(MIN_STRIP_WIDTH / setWidth) + 1);
-
-  const trackRef = useRef(null);
-  const offsetRef = useRef(0);
-  const hoveringRef = useRef(false);
-  const draggingRef = useRef(false);
-  const dragStartRef = useRef({ x: 0, offset: 0 });
-
-  // Auto-scrolling marquee, driven by our own rAF loop (rather than a
-  // third-party carousel lib) so drag + hover-pause + autoplay all stay in
-  // one predictable place.
-  useEffect(() => {
-    let raf;
-    const tick = () => {
-      if (!draggingRef.current && !hoveringRef.current) {
-        offsetRef.current -= SPEED;
-      }
-      offsetRef.current = wrap(offsetRef.current, setWidth);
-      if (trackRef.current) {
-        trackRef.current.style.transform = `translateX(${offsetRef.current}px)`;
-      }
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-    // Restarts only if the card count changes; the scroll position lives in
-    // offsetRef, so it carries on from where it was.
-  }, [setWidth]);
-
-  const handlePointerDown = (e) => {
-    draggingRef.current = true;
-    dragStartRef.current = { x: e.clientX, offset: offsetRef.current };
-  };
-
-  const handlePointerMove = (e) => {
-    if (!draggingRef.current) return;
-    offsetRef.current = dragStartRef.current.offset + (e.clientX - dragStartRef.current.x);
-  };
-
-  const endDrag = () => {
-    draggingRef.current = false;
-  };
-
   return (
-    <section
-      className="bg-black pt-8 pb-20 overflow-hidden"
-      aria-label="BizzBuzz Creations by the numbers"
-      onMouseEnter={() => {
-        hoveringRef.current = true;
-      }}
-      onMouseLeave={() => {
-        hoveringRef.current = false;
-        endDrag();
-      }}
-    >
+    <section className="bg-black pt-8 pb-14 md:pb-20" aria-label="BizzBuzz Creations by the numbers">
+      {eyebrow && <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] text-center mb-3 px-5">{eyebrow}</p>}
       <h2 className="text-3xl md:text-4xl font-bold text-white text-center max-w-3xl mx-auto mb-10 px-5">
         {heading}
       </h2>
 
+      {/* Desktop: the cards sit side by side, centred (four fit in one
+          row), so there is nothing to scroll. Phones: a swipe row — each
+          card snaps into place and the next one peeks in. Focusable so
+          keyboard users can scroll it with the arrow keys. */}
       <div
-        className="overflow-hidden cursor-grab active:cursor-grabbing select-none"
-        style={{ touchAction: "pan-y" }}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={endDrag}
-        onPointerCancel={endDrag}
+        role="region"
+        aria-label={heading}
+        tabIndex={0}
+        className="mx-auto flex max-w-[1320px] snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-5 px-5 pb-2 md:flex-wrap md:justify-center md:overflow-visible md:pb-0 focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-[#40A2D8]"
       >
-        <div
-          ref={trackRef}
-          className="flex"
-          style={{ gap: `${GAP}px`, willChange: "transform" }}
-        >
-          {/* The set is repeated (3x, or more when there are only a few
-              cards) so there's always a full extra set of cards on either
-              side of the visible window to scroll into, regardless of drag
-              distance or viewport width. */}
-          {Array.from({ length: copies }, () => stats).flat().map((stat, i) => (
-            <div
-              key={`${stat.label}-${i}`}
-              className="flex flex-col h-[460px] shrink-0 rounded-2xl overflow-hidden bg-white shadow-xl"
-              style={{ width: `${CARD_WIDTH}px` }}
-            >
-              {/* Image — on top, with a wavy white mask along its bottom
-                  edge flowing into the text panel below */}
-              <div className="relative flex-1 min-h-0">
-                <Visual visual={stat.visual} />
-                <WaveMask position="bottom" />
-              </div>
+        {stats.map((stat, i) => (
+          <div
+            key={`${stat.label}-${i}`}
+            className="flex min-h-[460px] w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl bg-white shadow-xl transition-transform duration-300 hover:-translate-y-1.5 sm:w-[300px]"
+          >
+            {/* Image — on top, with a wavy white mask along its bottom
+                edge flowing into the text panel below. Fixed height so
+                every card's text starts at the same line, whether its
+                title takes one line or two. */}
+            <div className="relative h-[200px] shrink-0">
+              <Visual visual={stat.visual} />
+              <WaveMask position="bottom" />
+            </div>
 
-              {/* Text — below */}
-              <div className="p-5 shrink-0">
-                <p className="text-xs font-bold uppercase tracking-wider text-[#0B60B0] mb-2">
-                  {stat.tag}
-                </p>
-                <h3 className="text-lg font-bold text-gray-900 mb-2 leading-snug">
-                  {stat.value} {stat.label}
-                </h3>
-                <RichText as="p" text={stat.description} className="text-sm text-gray-600 leading-relaxed mb-4" />
+            {/* Text — below; the button sits at the bottom so the
+                buttons line up across the row. */}
+            <div className="flex flex-1 flex-col p-5">
+              <p className="text-xs font-bold uppercase tracking-wider text-[#0B60B0] mb-2">
+                {stat.tag}
+              </p>
+              <h3 className="text-lg font-bold text-gray-900 mb-2 leading-snug">
+                {stat.value} {stat.label}
+              </h3>
+              <RichText as="p" text={stat.description} className="text-sm text-gray-600 leading-relaxed mb-4" />
+              <div className="mt-auto">
                 {/* buttonText / buttonLink are only editable on the
                     Outside Location page; elsewhere never saved. */}
                 <AnimatedButton
@@ -336,8 +262,8 @@ export default function StatsShowcase({ content }) {
                 </AnimatedButton>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </section>
   );

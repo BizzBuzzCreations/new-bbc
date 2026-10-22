@@ -222,15 +222,15 @@ function DesktopDropdown({ label, items, width = "w-72", href }) {
       {open && (
         <div className="z-20 absolute left-1/2 -translate-x-1/2 top-full">
           <div
-            className={`bg-white border border-gray-200 rounded-xl shadow-xl ${width}`}
+            className={`nav-panel rounded-xl ${width}`}
           >
-            <ul className="p-2 text-sm text-black font-medium">
+            <ul className="p-2 text-sm text-white/85 font-medium">
               {items.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
                     onClick={closeNow}
-                    className="inline-flex items-center w-full p-2.5 rounded transition-colors duration-150 hover:bg-[#0B60B0] hover:text-white"
+                    className="inline-flex items-center w-full p-2.5 rounded transition-colors duration-150 hover:bg-white/[0.06] hover:text-white"
                   >
                     {item.label}
                   </Link>
@@ -309,9 +309,9 @@ function ServicesMegaMenu() {
           onMouseEnter={openMenu}
           onMouseLeave={scheduleClose}
         >
-          <div className="flex bg-white border border-gray-200 rounded-xl shadow-xl w-[960px] max-w-[95vw] overflow-hidden">
+          <div className="nav-panel flex rounded-xl w-[960px] max-w-[95vw] overflow-hidden">
           {/* Left column — the 8 categories */}
-          <ul className="w-56 shrink-0 border-r border-gray-200 p-2 text-sm font-medium text-black">
+          <ul className="w-56 shrink-0 border-r border-white/10 p-2 text-sm font-medium text-white/85">
             {SERVICE_LINKS.map((service) => (
               <li key={service.href}>
                 <Link
@@ -320,8 +320,8 @@ function ServicesMegaMenu() {
                   onClick={closeNow}
                   className={`flex items-center w-full p-2.5 rounded transition-colors duration-150 ${
                     active.href === service.href
-                      ? "bg-[#0B60B0] text-white"
-                      : "hover:bg-gray-100"
+                      ? "bg-[#0B60B0]/20 text-[#40A2D8]"
+                      : "hover:bg-white/[0.06] hover:text-white"
                   }`}
                 >
                   {service.label}
@@ -339,17 +339,17 @@ function ServicesMegaMenu() {
             <Link
               href={active.href}
               onClick={closeNow}
-              className="inline-flex items-center gap-1.5 text-lg font-semibold text-[#0B60B0] hover:underline mb-5"
+              className="inline-flex items-center gap-1.5 text-lg font-semibold text-[#40A2D8] hover:underline mb-5"
             >
               {active.label}
               <ArrowRight size={17} />
             </Link>
             {active.subItems && (
-              <div className="flex divide-x divide-gray-200 w-full">
+              <div className="flex divide-x divide-white/10 w-full">
                 {[0, 1].map((col) => (
                   <ul
                     key={col}
-                    className={`flex-1 min-w-0 divide-y divide-gray-200 ${
+                    className={`flex-1 min-w-0 divide-y divide-white/10 ${
                       col === 0 ? "pr-6" : "pl-6"
                     }`}
                   >
@@ -360,7 +360,7 @@ function ServicesMegaMenu() {
                           <Link
                             href={sub.href}
                             onClick={closeNow}
-                            className="block text-sm font-medium text-black hover:text-[#0B60B0] transition-colors duration-150 leading-snug"
+                            className="block text-sm font-medium text-white/75 hover:text-white transition-colors duration-150 leading-snug"
                           >
                             {sub.label}
                           </Link>
@@ -432,10 +432,10 @@ function IndustriesMegaMenu() {
           onMouseEnter={openMenu}
           onMouseLeave={scheduleClose}
         >
-          <div className="bg-white border border-gray-200 rounded-xl shadow-xl w-[960px] max-w-[95vw] overflow-hidden">
+          <div className="nav-panel rounded-xl w-[960px] max-w-[95vw] overflow-hidden">
             <div className="grid grid-cols-3 gap-x-8 p-6">
               {INDUSTRY_COLUMNS.map((column, i) => (
-                <ul key={i} className="space-y-1 text-sm text-black font-medium">
+                <ul key={i} className="space-y-1 text-sm text-white/85 font-medium">
                   {column.map((item) => {
                     const Icon = item.icon;
                     return (
@@ -443,7 +443,7 @@ function IndustriesMegaMenu() {
                         <Link
                           href={item.href}
                           onClick={closeNow}
-                          className="group/item flex items-center gap-3 w-full p-2.5 rounded transition-colors duration-150 hover:bg-[#0B60B0] hover:text-white"
+                          className="group/item flex items-center gap-3 w-full p-2.5 rounded transition-colors duration-150 hover:bg-white/[0.06] hover:text-white"
                         >
                           <Icon
                             size={18}
@@ -460,8 +460,8 @@ function IndustriesMegaMenu() {
 
             {/* Bottom CTA strip — doesn't touch the 15 industries above,
                 just a way out for visitors whose industry isn't listed. */}
-            <div className="flex items-center justify-between gap-4 bg-amber-50 px-6 py-4 border-t border-amber-100">
-              <p className="text-sm text-black/70 max-w-md">
+            <div className="flex items-center justify-between gap-4 bg-white/[0.03] px-6 py-4 border-t border-white/10">
+              <p className="text-sm text-white/70 max-w-md">
                 Didn&rsquo;t find what you&rsquo;re looking for? Let us
                 know your needs, and we&rsquo;ll tailor a solution just
                 for you.
@@ -662,9 +662,14 @@ export default function Navbar() {
         </nav>
 
         {/* Hamburger Button */}
+        {/* 40x40 hit area (the three bars alone were ~24x19px, under the
+            WCAG 2.2 minimum target size); -mr-2 keeps the bars where they
+            were visually. */}
         <button
-          className="md:hidden flex flex-col space-y-[5px]"
+          type="button"
+          className="md:hidden flex flex-col items-center justify-center space-y-[5px] w-10 h-10 -mr-2"
           aria-label="Toggle mobile menu"
+          aria-expanded={open}
           onClick={() => setOpen(!open)}
         >
           <span
@@ -687,7 +692,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {open && (
-        <nav className="md:hidden absolute top-full mt-2 left-1/2 -translate-x-1/2 w-full bg-black/95 backdrop-blur-md border border-white/10 rounded-3xl shadow-lg animate-slideDown max-h-[70vh] overflow-y-auto z-40">
+        <nav className="md:hidden absolute top-full mt-2 left-1/2 -translate-x-1/2 w-full nav-panel rounded-3xl animate-slideDown max-h-[70vh] overflow-y-auto z-40">
           <ul className="flex flex-col space-y-3 p-5 font-medium text-white">
             <MobileAccordion
               id="about"

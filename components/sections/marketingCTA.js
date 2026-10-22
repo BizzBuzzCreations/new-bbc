@@ -9,7 +9,6 @@ import {
   ArrowUpRight,
   ShieldCheck,
 } from "lucide-react";
-import Particles from "@/components/ui/Particles";
 import RichText from "@/components/ui/richText";
 import AnimatedButton from "@/components/ui/animatedButton";
 
@@ -45,7 +44,7 @@ export default function MarketingCTA({ content }) {
   const paragraph =
     content?.marketingCtaParagraph ||
     "Whether you're launching, scaling, or ready for a fresh marketing direction, tell us what you're working on. We'll show you the smartest way forward.";
-  const buttonText = content?.marketingCtaButtonText || "Get Free Consultation Now";
+  const buttonText = content?.marketingCtaButtonText || "Get a Free Consultation";
   const trustLinesRaw = content?.marketingCtaTrustLines?.length > 0 ? content.marketingCtaTrustLines : DEFAULT_TRUST_LINES;
   const trustLines = trustLinesRaw.map((t) => t.text);
   // "/building.jpg" was the old default — a dashboard save stores every
@@ -99,19 +98,6 @@ export default function MarketingCTA({ content }) {
 
         {/* Right — 3x2 stage cards, dark glass-card grid */}
         <div className="relative flex flex-col justify-center bg-[#050505] p-6 sm:p-10 lg:p-12 overflow-hidden">
-          {/* Same particle backdrop as the rest of the page — cards sit
-              semi-transparent on top so it shows through subtly. */}
-          <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
-            <Particles
-              particleColors={["#40A2D8", "#0B60B0", "#8fd0f2", "#ffffff"]}
-              particleCount={150}
-              particleSpread={14}
-              speed={0.08}
-              particleBaseSize={100}
-              alphaParticles={false}
-              disableRotation={false}
-            />
-          </div>
           <p className="relative z-10 text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-6">
             {stagesEyebrow}
           </p>

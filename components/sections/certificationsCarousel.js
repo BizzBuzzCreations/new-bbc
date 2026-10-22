@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 import "@splidejs/react-splide/css";
 
 // Real certifications only (same badges used on /our-team, /how-we-work,
-// and in the footer) — auto-scrolling strip instead of a static row.
+// and in the footer) — a manual carousel (prev/next buttons, ←/→ when
+// focused, drag or swipe) instead of a static row.
 const CERTIFICATIONS = [
   { src: "/clutch.png", alt: "Clutch — Verified Partner", label: "Clutch", sub: "Verified Partner" },
   { src: "/CDL.png", alt: "Certified Google Ads Partner", label: "Google Partner", sub: "Certified" },
@@ -21,21 +21,13 @@ export default function CertificationsCarousel() {
         type: "loop",
         perPage: 4,
         perMove: 1,
-        arrows: false,
+        arrows: true,
+        keyboard: "focused",
         pagination: false,
         gap: "1.5rem",
-        drag: "free",
-        focus: "center",
-        pauseOnHover: true,
-        pauseOnFocus: false,
+        drag: true,
         autoWidth: false,
 
-        autoScroll: {
-          speed: 0.6,
-          pauseOnHover: true,
-          pauseOnFocus: false,
-          rewind: false,
-        },
 
         breakpoints: {
           1024: { perPage: 3 },
@@ -43,8 +35,7 @@ export default function CertificationsCarousel() {
           480: { perPage: 1 },
         },
       }}
-      extensions={{ AutoScroll }}
-      className="max-w-5xl mx-auto"
+      className="bbc-carousel max-w-5xl mx-auto"
     >
       {CERTIFICATIONS.map((cert) => (
         <SplideSlide key={cert.label} className="h-auto py-2">

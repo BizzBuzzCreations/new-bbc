@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, MapPin, Phone, Mail, Clock } from "lucide-react";
 import IndiaOfficeCard from "./indiaOfficeCard";
+import Pill from "@/components/home/pill";
+import OfficeSkyline from "./officeSkyline";
 
 // Same data as the navbar's dropdowns — duplicated here (rather than
 // imported from navbar.js, which is a client component with its own
@@ -78,6 +80,9 @@ const OFFICES = [
     Flag: UKFlag,
     country: "United Kingdom",
     href: "/en-uk/digital-marketing-services-in-uk",
+    city: "London · UK time (GMT/BST)",
+    skyline: "london",
+    maps: "3 Thornham St, London SE10 9SA, United Kingdom",
     address: (
       <>
         3 Thornham St,
@@ -138,10 +143,10 @@ function FooterColumn({ title, links, viewMoreHref }) {
       {viewMoreHref && (
         <Link
           href={viewMoreHref}
-          className="inline-flex items-center gap-1 text-sm text-[#40A2D8] hover:text-white mt-4 underline underline-offset-4 transition-colors"
+          className="group inline-flex items-center gap-1.5 py-1 text-sm font-medium text-[#40A2D8] hover:text-white mt-4 transition-colors"
         >
           View More
-          <ArrowUpRight size={14} />
+          <ArrowUpRight size={14} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </Link>
       )}
     </div>
@@ -152,11 +157,7 @@ export default function Footer() {
   return (
     <footer
       data-no-reveal
-      className="text-white pt-8 pb-0 px-6 md:px-8"
-      style={{
-        background:
-          "linear-gradient(180deg, #000000 0%, #000000 70%, #0B60B0 130%)",
-      }}
+      className="bg-black text-white pt-8 pb-6 px-6 md:px-8"
     >
       <div className="max-w-7xl mx-auto">
         {/* Brand + social row */}
@@ -244,21 +245,21 @@ export default function Footer() {
                 <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
                   <a
                     href="tel:+918115585285"
-                    className="flex items-center gap-2 text-white hover:text-[#40A2D8] transition-colors"
+                    className="flex items-center gap-2 py-1 text-white hover:text-[#40A2D8] transition-colors"
                   >
                     <Phone size={15} className="text-[#40A2D8] shrink-0" />
                     +91 8115585285,
                   </a>
                   <a
                     href="tel:+4407862608652"
-                    className="text-white hover:text-[#40A2D8] transition-colors"
+                    className="py-1 text-white hover:text-[#40A2D8] transition-colors"
                   >
                     +44 07862 608652
                   </a>
                 </div>
                 <a
                   href="mailto:info@bizzbuzzcreations.com"
-                  className="flex items-center gap-2 text-white hover:text-[#40A2D8] transition-colors"
+                  className="flex items-center gap-2 py-1 text-white hover:text-[#40A2D8] transition-colors"
                 >
                   <Mail size={15} className="text-[#40A2D8] shrink-0" />
                   info@bizzbuzzcreations.com
@@ -272,45 +273,55 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Office address cards — India + UK, side by side from sm up
-            (stacked on mobile). */}
-        <div className="grid gap-6 mb-6 max-w-3xl sm:grid-cols-2">
+        {/* Office address cards — India + UK, side by side across the full
+            width from sm up (stacked on mobile). Each has a Get directions
+            link (Google Maps); the UK card's name also links to its
+            regional page. */}
+        <div className="grid gap-6 mb-6 sm:grid-cols-2">
           <IndiaOfficeCard />
-          {OFFICES.map(({ Flag, country, tag, address, href }) => {
-            // Offices with an href (UK) link to their regional page.
-            const Card = href ? Link : "div";
-            return (
-              <Card
-                key={country}
-                {...(href ? { href } : {})}
-                className="block rounded-2xl border border-white/15 bg-white/[0.03] p-5 hover:border-[#40A2D8]/50 hover:bg-white/[0.05] transition-colors"
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="w-9 h-9 rounded-full overflow-hidden shrink-0 ring-1 ring-white/20">
-                    <Flag />
-                  </span>
-                  <span className="font-semibold text-white text-base">
-                    {country}
-                    {tag && (
-                      <>
-                        <span className="mx-2 text-white/40">|</span>
-                        <span className="font-medium text-[#8fd0f2]">
-                          ({tag})
-                        </span>
-                      </>
-                    )}
-                  </span>
-                </div>
-                <p className="text-sm text-[#8fd0f2] leading-relaxed flex gap-2.5">
-                  <MapPin
-                    size={16}
-                    className="shrink-0 mt-0.5 text-[#40A2D8]"
-                  />
-                  <span>{address}</span>
-                </p>
-              </Card>
-            );
-          })}
+          {OFFICES.map(({ Flag, country, tag, address, href, city, maps, skyline }) => (
+            <div
+              key={country}
+              className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/15 bg-white/[0.03] p-6 hover:border-[#40A2D8]/50 hover:bg-white/[0.05] transition-colors"
+            >
+              <div className="flex items-center gap-3 mb-1">
+                <span className="w-10 h-10 rounded-full overflow-hidden shrink-0 ring-1 ring-white/20">
+                  <Flag />
+                </span>
+                <span className="font-semibold text-white text-lg">
+                  {href ? (
+                    <Link href={href} className="after:absolute after:inset-0 after:rounded-2xl after:content-[''] hover:text-[#40A2D8] focus-visible:underline focus-visible:outline-none">
+                      {country}
+                    </Link>
+                  ) : (
+                    country
+                  )}
+                  {tag && (
+                    <>
+                      <span className="mx-2 text-white/40">|</span>
+                      <span className="font-medium text-[#8fd0f2]">({tag})</span>
+                    </>
+                  )}
+                </span>
+              </div>
+              {city && <p className="mb-4 pl-[3.25rem] text-xs text-white/50">{city}</p>}
+              <p className="text-sm text-white/80 leading-relaxed flex gap-2.5">
+                <MapPin size={16} className="shrink-0 mt-0.5 text-[#40A2D8]" />
+                <span>{address}</span>
+              </p>
+              {maps && (
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(maps)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative z-10 mt-4 inline-flex self-start items-center gap-1.5 py-1 pl-[1.625rem] text-sm font-medium text-[#40A2D8] hover:text-white"
+                >
+                  Get directions <ArrowUpRight size={14} aria-hidden="true" />
+                </a>
+              )}
+              {skyline && <OfficeSkyline city={skyline} />}
+            </div>
+          ))}
         </div>
 
         <div className="border-t border-white/10 mb-12" />
@@ -334,12 +345,9 @@ export default function Footer() {
           />
           <div>
             <FooterColumn title="Resources" links={RESOURCE_LINKS} />
-            <Link
-              href="/contact"
-              className="mt-6 inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-100 text-black text-sm font-semibold rounded-full px-6 py-3 w-fit transition"
-            >
-              Get In Touch
-            </Link>
+            <div className="mt-6">
+              <Pill href="/contact" variant="solid">Get a Free Consultation</Pill>
+            </div>
           </div>
         </div>
 
@@ -352,25 +360,25 @@ export default function Footer() {
             <div className="grid grid-cols-2 gap-x-6 gap-y-3 mb-4 sm:flex sm:flex-wrap sm:gap-y-2 md:mb-0">
               <Link
                 href="/privacy-policy"
-                className="text-xs text-white hover:text-[#40A2D8]"
+                className="inline-block py-1 text-xs text-white hover:text-[#40A2D8]"
               >
                 Privacy Policy
               </Link>
               <Link
                 href="/cookie-policy"
-                className="text-xs text-white hover:text-[#40A2D8]"
+                className="inline-block py-1 text-xs text-white hover:text-[#40A2D8]"
               >
                 Cookie Policy
               </Link>
               <Link
                 href="/disclaimer"
-                className="text-xs text-white hover:text-[#40A2D8]"
+                className="inline-block py-1 text-xs text-white hover:text-[#40A2D8]"
               >
                 Disclaimer
               </Link>
               <Link
                 href="/terms-and-conditions"
-                className="text-xs text-white hover:text-[#40A2D8]"
+                className="inline-block py-1 text-xs text-white hover:text-[#40A2D8]"
               >
                 Terms &amp; Conditions
               </Link>
@@ -382,52 +390,26 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Giant brand wordmark — the bottom ~25% of the letters is cut off
-            by the page edge, the top ~75% stays fully readable. It's a
-            plain in-flow block (no absolute positioning / negative margins
-            / z-index), so it can never overlap or sit on top of any other
-            footer content; the SVG's own viewBox does the cropping and
-            scales with the width, so the 75/25 split holds at every screen
-            size. Font metrics (Fira Sans Bold): cap height ≈ 0.69em, so at
+        {/* Brand wordmark: the whole name, drawn as a fine outline in the
+            beams' blue-to-violet (like the hero's drawn wordmark), not cut
+            off by the page edge. A plain in-flow block, so it can never
+            overlap other footer content; the SVG scales with the width.
+            Font metrics (Fira Sans Bold): cap height ≈ 0.69em, so at
             font-size 100 with the baseline at y=80 the caps span y≈11–80;
-            a viewBox height of 63 cuts at 75% of that. */}
-        <div className="mt-10 select-none" aria-hidden="true">
+            the viewBox keeps a little room above and below. */}
+        <div className="mt-12 select-none" aria-hidden="true">
           <svg
-            viewBox="-16 0 1032 63"
+            viewBox="-16 -4 1032 92"
             className="block w-full h-auto"
-            preserveAspectRatio="xMidYMin meet"
+            preserveAspectRatio="xMidYMid meet"
             xmlns="http://www.w3.org/2000/svg"
           >
             <defs>
-              {/* Embossed / neumorphic lettering: the letters themselves
-                  are cut out of the graphic (composite "out" with the
-                  text's own alpha), so whatever the footer gradient is
-                  behind them shows straight through — the text is the
-                  exact same colour as the background. What makes it
-                  readable is only a soft shadow straight below each
-                  letter (no side/top shadow), like a raised block. */}
-              <filter
-                id="footerWordmarkEmboss"
-                x="-5%"
-                y="-40%"
-                width="110%"
-                height="200%"
-                colorInterpolationFilters="sRGB"
-              >
-                <feGaussianBlur
-                  in="SourceAlpha"
-                  stdDeviation="5"
-                  result="blur"
-                />
-                <feOffset in="blur" dx="0" dy="7" result="darkOffset" />
-                <feFlood floodColor="#000000" floodOpacity="0.55" />
-                <feComposite
-                  in2="darkOffset"
-                  operator="in"
-                  result="darkShadow"
-                />
-                <feComposite in="darkShadow" in2="SourceAlpha" operator="out" />
-              </filter>
+              <linearGradient id="footerWordmarkStroke" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#40A2D8" />
+                <stop offset="50%" stopColor="#7b74f7" />
+                <stop offset="100%" stopColor="#b57cff" />
+              </linearGradient>
             </defs>
             <text
               x="0"
@@ -436,8 +418,11 @@ export default function Footer() {
               fontWeight="700"
               textLength="1000"
               lengthAdjust="spacingAndGlyphs"
-              fill="#000000"
-              filter="url(#footerWordmarkEmboss)"
+              fill="none"
+              stroke="url(#footerWordmarkStroke)"
+              strokeWidth="1"
+              vectorEffect="non-scaling-stroke"
+              strokeOpacity="0.55"
               style={{ fontFamily: "var(--font-fira), sans-serif" }}
             >
               BizzBuzz Creations

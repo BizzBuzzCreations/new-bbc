@@ -57,6 +57,7 @@ export default function RndTeamGrid({ content } = {}) {
             showLinkedin={false}
             showInstagram={false}
             flip
+            headingLevel="h2"
           />
         ))}
       </div>
@@ -74,6 +75,7 @@ export default function RndTeamGrid({ content } = {}) {
             showLinkedin={false}
             showInstagram={false}
             flip
+            headingLevel="h2"
           />
         ))}
       </div>

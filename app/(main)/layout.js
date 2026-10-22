@@ -11,6 +11,11 @@ export const revalidate = 60;
 export default function MainLayout({ children }) {
   return (
     <>
+      {/* Black behind the glass navbar at the very top of every page (so the
+          white page background never shows through it). Drawn first and not
+          raised, so a hero that slides up behind the bar (the homepage's
+          video) still paints over it. */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-14 bg-black md:h-[72px]" />
       <Navbar />
       {children}
       <Footer />

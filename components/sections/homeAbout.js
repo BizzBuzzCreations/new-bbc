@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import RichText from "@/components/ui/richText";
+import Parallax from "@/components/ui/parallax";
 
 // `separated` — off by default (real homepage unchanged). The Outside
 // Location page passes it to fade the photo's top edge into black and
@@ -64,25 +65,29 @@ export default function HomeAbout({ content, separated = false }) {
       <div className="hidden md:flex relative min-h-[620px] lg:min-h-[700px] items-stretch">
         <div className="relative z-10 flex items-center max-w-2xl shrink-0 pl-12 lg:pl-24 pr-10">
           <div>
-            <p className="text-white">{eyebrow}</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">{eyebrow}</p>
             <h2 className="text-4xl font-bold mb-4 text-[#40A2D8]">{heading}</h2>
             <RichText as="p" text={paragraph} className="max-w-xl mb-6 text-white" />
             {button}
           </div>
         </div>
 
-        <div className="relative flex-1">
+        <div className="relative flex-1 overflow-hidden">
           {/* New front-on, symmetric shot of the building — the BBC/
               BizzBuzz signage sits centered rather than off to one side,
               so this goes back to plain center cropping (no left/right
               position nudging needed like the previous angled photo). */}
-          <Image
-            src={backgroundImage}
-            alt="BizzBuzz Creations office"
-            fill
-            sizes="60vw"
-            className="object-cover"
-          />
+          {/* Drifts slightly slower than the page while scrolling (depth);
+              the extra 96px above and below covers the drift. */}
+          <Parallax className="absolute inset-x-0 -inset-y-24" strength={0.08}>
+            <Image
+              src={backgroundImage}
+              alt="BizzBuzz Creations office"
+              fill
+              sizes="60vw"
+              className="object-cover"
+            />
+          </Parallax>
           {/* Left-edge fade, smoothed into many more stops instead of a
               few big jumps — the old 4-stop version read as a flat block
               of black with a visible "edge" where it cut off into the
@@ -119,7 +124,7 @@ export default function HomeAbout({ content, separated = false }) {
           request removed for mobile so only the heading and paragraph
           carry the section). */}
       <div className="md:hidden px-6 py-16 text-center">
-        <p className="text-white">{eyebrow}</p>
+        <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">{eyebrow}</p>
         <h2 className="text-3xl font-bold mb-6 text-[#40A2D8]">{heading}</h2>
         <RichText as="p" text={paragraph} className="max-w-lg mx-auto mb-6 text-white" />
         {button}

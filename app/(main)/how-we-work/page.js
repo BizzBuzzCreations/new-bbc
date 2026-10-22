@@ -290,7 +290,7 @@ export default async function HowWeWorkPage() {
   const ctaParagraph =
     content?.ctaParagraph ||
     "No guesswork, no vague timelines — just a clear process built to turn strategy into measurable growth. Book a free consultation and see exactly how we'd approach your business.";
-  const ctaButtonText = content?.ctaButtonText || "Book Your Free Consultation";
+  const ctaButtonText = content?.ctaButtonText || "Get a Free Consultation";
 
   return (
     <>

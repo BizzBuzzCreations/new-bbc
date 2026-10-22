@@ -1,7 +1,6 @@
 // Lazy wrapper, not ./globe directly — keeps three.js out of the /contact
 // route bundle so other pages' links to /contact don't prefetch it.
 import Globe from "@/components/ui/lazyGlobe";
-import Particles from "@/components/ui/Particles";
 import RichText from "@/components/ui/richText";
 
 // BizzBuzz's two real offices (same coordinates as the address cards on
@@ -20,20 +19,6 @@ export default function GlobeTrust({ content }) {
 
   return (
     <section className="relative bg-black text-white pt-2 md:pt-3 pb-3 md:pb-4 px-6 md:px-12 lg:px-24 overflow-hidden">
-      {/* Same animated particle backdrop as the contact form above —
-          continues the effect down the page instead of stopping dead
-          after the first section. */}
-      <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
-        <Particles
-          particleColors={["#40A2D8", "#0B60B0", "#8fd0f2", "#ffffff"]}
-          particleCount={160}
-          particleSpread={14}
-          speed={0.08}
-          particleBaseSize={110}
-          alphaParticles={false}
-          disableRotation={false}
-        />
-      </div>
 
       {/* items-center (not items-end) so the text sits level with the
           globe's own visual center, instead of pinned to the bottom of a

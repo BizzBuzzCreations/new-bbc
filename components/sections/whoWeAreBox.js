@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Search, Users, Briefcase, ArrowRight } from "lucide-react";
-import Particles from "@/components/ui/Particles";
 import AnimatedButton from "@/components/ui/animatedButton";
 import RichText from "@/components/ui/richText";
 
@@ -50,17 +49,6 @@ export default function WhoWeAreBox({ content }) {
       {/* The entire block — text, stats, quick-links — sits inside this
           one bordered card, full width (no max-w cap), per the request. */}
       <div className="relative w-full rounded-3xl border border-white/10 bg-white/[0.02] overflow-hidden p-8 md:p-12">
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <Particles
-            particleColors={["#40A2D8", "#0B60B0", "#8fd0f2", "#ffffff"]}
-            particleCount={160}
-            particleSpread={14}
-            speed={0.08}
-            particleBaseSize={100}
-            alphaParticles={false}
-            disableRotation={false}
-          />
-        </div>
         <div className="absolute -top-16 -left-16 w-72 h-72 rounded-full bg-[#0B60B0]/25 blur-3xl pointer-events-none" aria-hidden="true" />
         <div className="absolute -bottom-16 -right-16 w-72 h-72 rounded-full bg-[#40A2D8]/20 blur-3xl pointer-events-none" aria-hidden="true" />
 

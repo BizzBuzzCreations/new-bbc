@@ -12,6 +12,8 @@ import {
   Globe,
   GitBranch,
   BarChart3,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 // Real, in-house products and infrastructure BizzBuzz builds and runs
@@ -68,15 +70,17 @@ const CLIENTS = [
 // Visual offset (distance from the active card) -> position/scale/rotation.
 // Covers every position from -3 to +4 so, with 8 total clients, the whole
 // ring stays visible at once instead of a couple of cards hiding off-screen.
+// Opacity never goes below 0.5: the card text is white, and at 0.3 it fell
+// to 2.4:1 contrast (WCAG AA needs 4.5:1); 0.5 gives about 5.2:1.
 const OFFSET_STYLE = {
   0: { x: 0, rotate: 0, scale: 1, opacity: 1, zIndex: 30 },
   1: { x: 230, rotate: 10, scale: 0.86, opacity: 0.85, zIndex: 20 },
   "-1": { x: -230, rotate: -10, scale: 0.86, opacity: 0.85, zIndex: 20 },
   2: { x: 430, rotate: 16, scale: 0.72, opacity: 0.5, zIndex: 10 },
   "-2": { x: -430, rotate: -16, scale: 0.72, opacity: 0.5, zIndex: 10 },
-  3: { x: 610, rotate: 20, scale: 0.6, opacity: 0.3, zIndex: 5 },
-  "-3": { x: -610, rotate: -20, scale: 0.6, opacity: 0.3, zIndex: 5 },
-  4: { x: 770, rotate: 24, scale: 0.5, opacity: 0.15, zIndex: 2 },
+  3: { x: 610, rotate: 20, scale: 0.6, opacity: 0.5, zIndex: 5 },
+  "-3": { x: -610, rotate: -20, scale: 0.6, opacity: 0.5, zIndex: 5 },
+  4: { x: 770, rotate: 24, scale: 0.5, opacity: 0.5, zIndex: 2 },
 };
 
 // `plainLogos` — UK landing page only: slightly larger logos with no white
@@ -89,6 +93,7 @@ export default function CaseStudies({ content, plainLogos = false }) {
   const clients =
     content?.caseStudyClients?.length > 0 ? content.caseStudyClients : CLIENTS;
 
+  const eyebrow = content?.caseStudiesEyebrow ?? "What We Build";
   const [active, setActive] = useState(0);
   const count = clients.length;
 
@@ -108,17 +113,33 @@ export default function CaseStudies({ content, plainLogos = false }) {
 
   const go = (dir) => setActive((prev) => (prev + dir + count) % count);
 
-  // Auto-play: keep drifting left-to-right on its own, but pause the moment
-  // the user takes over (hover, drag, or touch), and resume once they let go.
-  const [paused, setPaused] = useState(false);
-  const AUTOPLAY_DELAY = 1600;
-
+  // The stage is as tall as the tallest card (plus room for the tilt), so a
+  // card with long text — e.g. the UK page's — never spills over the
+  // prev/next buttons below. Cards are centred in it vertically.
+  const stageRef = useRef(null);
+  const [stageHeight, setStageHeight] = useState(null);
   useEffect(() => {
-    if (paused) return;
-    const id = setInterval(() => go(1), AUTOPLAY_DELAY);
-    return () => clearInterval(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paused, active, count]);
+    const el = stageRef.current;
+    if (!el) return;
+    const measure = () => {
+      const tallest = Math.max(0, ...[...el.children].map((c) => c.offsetHeight));
+      if (tallest) setStageHeight(tallest + 40);
+    };
+    const raf = requestAnimationFrame(measure);
+    const ro = new ResizeObserver(measure);
+    [...el.children].forEach((c) => ro.observe(c));
+    return () => {
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+    };
+  }, [clients]);
+
+  // No auto-play: the cards move only when the visitor asks — the
+  // prev/next buttons, ←/→ keys, dragging, or clicking a side card.
+  const onKeyDown = (e) => {
+    if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); }
+    else if (e.key === "ArrowRight") { e.preventDefault(); go(1); }
+  };
 
   // Drag-to-navigate: track the pointer manually instead of framer-motion's
   // `drag` prop, since cards need to stay click-able for direct selection.
@@ -127,7 +148,6 @@ export default function CaseStudies({ content, plainLogos = false }) {
 
   const handlePointerDown = (e) => {
     dragRef.current = { startX: e.clientX, dragging: true, moved: false };
-    setPaused(true);
   };
 
   const handlePointerMove = (e) => {
@@ -143,7 +163,6 @@ export default function CaseStudies({ content, plainLogos = false }) {
     dragRef.current.dragging = false;
     if (dx <= -DRAG_THRESHOLD) go(1);
     else if (dx >= DRAG_THRESHOLD) go(-1);
-    setPaused(false);
   };
 
   // Swallow the click that follows a drag so it doesn't also jump to
@@ -154,7 +173,8 @@ export default function CaseStudies({ content, plainLogos = false }) {
   };
 
   return (
-    <section id="case-studies" className="bg-black text-white pt-20 pb-10 overflow-hidden">
+    <section id="case-studies" className="bg-black text-white pt-14 md:pt-20 pb-10 overflow-hidden">
+      {eyebrow && <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] text-center mb-3">{eyebrow}</p>}
       <h2 className="md:text-4xl text-3xl font-bold text-center mb-3">
         {heading}
       </h2>
@@ -162,15 +182,14 @@ export default function CaseStudies({ content, plainLogos = false }) {
 
       {/* Card carousel */}
       <div
+        ref={stageRef}
         className="relative h-[300px] md:h-80 cursor-grab active:cursor-grabbing select-none"
-        style={{ touchAction: "pan-y" }}
+        style={{ touchAction: "pan-y", ...(stageHeight && { height: `${stageHeight}px` }) }}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={endDrag}
         onPointerLeave={endDrag}
         onPointerCancel={endDrag}
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
       >
         {clients.map((client, index) => {
           const offset = offsetOf(index);
@@ -185,13 +204,14 @@ export default function CaseStudies({ content, plainLogos = false }) {
               onClick={() => handleCardClick(index)}
               animate={{
                 x: style.x,
+                y: "-50%",
                 rotate: style.rotate,
                 scale: style.scale,
                 opacity: style.opacity,
               }}
               style={{ zIndex: style.zIndex }}
               transition={{ type: "spring", stiffness: 420, damping: 32 }}
-              className={`absolute top-1/2 left-1/2 -mt-[135px] -ml-[140px] w-[280px] md:w-[300px] p-6 rounded-3xl border cursor-pointer ${
+              className={`absolute top-1/2 left-1/2 -ml-[140px] md:-ml-[150px] w-[280px] md:w-[300px] p-6 rounded-3xl border cursor-pointer ${
                 isActive
                   ? "bg-linear-to-br from-[#0B60B0] to-[#40A2D8] border-white/20 shadow-2xl"
                   : "bg-white/6 border-white/10"
@@ -239,6 +259,29 @@ export default function CaseStudies({ content, plainLogos = false }) {
             </motion.div>
           );
         })}
+      </div>
+
+      <div className="mt-8 flex items-center justify-center gap-3" onKeyDown={onKeyDown}>
+        <button
+          type="button"
+          onClick={() => go(-1)}
+          aria-label="Previous project"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-white/[0.08] text-white transition-colors duration-200 hover:border-[#0B60B0] hover:bg-[#0B60B0] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8]"
+        >
+          <ChevronLeft size={18} />
+        </button>
+        <button
+          type="button"
+          onClick={() => go(1)}
+          aria-label="Next project"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-white/[0.08] text-white transition-colors duration-200 hover:border-[#0B60B0] hover:bg-[#0B60B0] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8]"
+        >
+          <ChevronRight size={18} />
+        </button>
+        {/* Tells screen-reader users which card is in front after each move. */}
+        <p className="sr-only" aria-live="polite">
+          {`Project ${active + 1} of ${count}: ${clients[active]?.name || ""}`}
+        </p>
       </div>
     </section>
   );

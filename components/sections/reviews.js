@@ -2,8 +2,9 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
+import { TestimonialCard } from "@/components/ui/testimonials-columns-1";
 import RichText from "@/components/ui/richText";
+import BackgroundBeams from "@/components/ui/backgroundBeams";
 
 const testimonials = [
   {
@@ -41,13 +42,20 @@ const testimonials = [
 export default function Reviews({ content }) {
   const heading = content?.reviewsHeading || "Customer Reviews";
   const subtext = content?.reviewsSubtext || "See what our customers have to say about us.";
+  const eyebrow = content?.reviewsEyebrow ?? "Testimonials";
   const items = content?.testimonials?.length > 0 ? content.testimonials : testimonials;
-  const firstColumn = items.slice(0, 2);
-  const secondColumn = items.slice(2, 4);
-  const thirdColumn = items.slice(4, 6);
 
   return (
-    <section className="relative overflow-hidden bg-black py-20">
+    // id: in-page link target (e.g. a "Read Client Reviews" button saved as "#reviews");
+    // scroll-mt keeps the heading clear of the sticky navbar.
+    // Deep-navy band with a soft blue glow, easing into black over ~30% at each edge.
+    <section
+      id="reviews"
+      className="relative overflow-hidden py-14 md:py-20 scroll-mt-20"
+      style={{ background: "radial-gradient(70% 40% at 50% 40%, rgba(11, 96, 176, 0.2), transparent 100%), linear-gradient(to bottom, #000000 0%, #03070e 12%, #050e1a 22%, #06101f 32%, #06101f 68%, #050e1a 78%, #03070e 88%, #000000 100%)" }}
+    >
+      {/* Same beams as Our Process, but still (no motion behind the reviews). */}
+      <BackgroundBeams still />
 
       <div className="container mx-auto px-5 relative">
         <motion.div
@@ -60,24 +68,26 @@ export default function Reviews({ content }) {
           <div className="flex justify-center">
           </div>
 
+          {eyebrow && <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mt-5 -mb-2">{eyebrow}</p>}
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tighter mt-5 text-white">
             {heading}
           </h2>
           <RichText as="p" text={subtext} className="text-center mt-5 text-white" />
         </motion.div>
 
-        <div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[740px] overflow-hidden">
-          <TestimonialsColumn testimonials={firstColumn} duration={15} />
-          <TestimonialsColumn
-            testimonials={secondColumn}
-            className="hidden md:block"
-            duration={19}
-          />
-          <TestimonialsColumn
-            testimonials={thirdColumn}
-            className="hidden lg:block"
-            duration={17}
-          />
+        {/* Still cards (they used to scroll upward in endless columns, and
+            phones only ever saw two of them): a grid from md up, and a
+            swipe row on phones with each card 85% wide so the next peeks in. */}
+        {/* Focusable + labelled so keyboard users can scroll the phone swipe row with the arrow keys. */}
+        <div
+          role="region"
+          aria-label="Customer reviews"
+          tabIndex={0}
+          className="-mx-5 md:mx-auto mt-10 flex md:grid snap-x snap-mandatory overflow-x-auto md:overflow-visible scroll-px-5 px-5 md:px-0 pb-2 md:pb-0 gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-[#40A2D8]"
+        >
+          {items.map((t, i) => (
+            <TestimonialCard key={i} {...t} className="w-[85%] shrink-0 snap-start md:w-auto" />
+          ))}
         </div>
       </div>
     </section>

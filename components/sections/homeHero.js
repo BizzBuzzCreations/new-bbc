@@ -3,8 +3,9 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { ArrowDown } from "lucide-react";
 import { RICH_TEXT_CLASS, richTextHTML, richTextScopeClass } from "@/components/ui/richText";
-import { getImageProps } from "next/image";
+import Image, { getImageProps } from "next/image";
 import { optimizedImageUrl, imageSrcSet } from "@/lib/getFeaturedImage";
 
 const reveal = { duration: 0.8, ease: [0.16, 1, 0.3, 1] };
@@ -52,6 +53,14 @@ function heroImageSource(src) {
 // app/(main)/page.js), same as the Outside Location page: fades the
 // hero's background out to black at the bottom edge instead of ending in
 // a hard line right against the next section's own photo (About Us).
+// `stats` — optional [{ value, label }] row under the buttons (homepage
+// only; editable as "Stats under the hero buttons").
+// `secondaryCta` — optional { text, href } quieter link next to the main
+// button (the homepage points it at its own services list).
+// `showBadges` — the four certification badges (Clutch, Google Partner,
+// Google Analytics, ISO — the same ones as the Recognitions section) as a
+// compact row under the stats: one line on desktop, 2×2 on phones. Homepage
+// only; the longer descriptions stay in the Recognitions section.
 export default function HomeHero({
   content,
   showWordmark = true,
@@ -60,6 +69,9 @@ export default function HomeHero({
   // The soft light-blue glow at the top-left of the scrim — on by default
   // (UK page keeps it); the real homepage passes false to drop it.
   showGlow = true,
+  stats,
+  secondaryCta,
+  showBadges = false,
 }) {
   const heading = content?.heroHeading || "India’s Trusted Digital Marketing Agency";
   const subheading =
@@ -67,7 +79,7 @@ export default function HomeHero({
   const subtext =
     content?.heroSubtext ||
     "Looking for a trusted digital marketing agency in Prayagraj that helps your business generate more leads, increase website traffic, and grow revenue? Welcome to BizzBuzz Creations.";
-  const ctaText = content?.heroCtaText || "Get Free Consultation";
+  const ctaText = content?.heroCtaText || "Get a Free Consultation";
   const ctaLink = content?.heroCtaLink || "/contact";
   const chosenVideo = heroMediaChoice ? content?.heroVideo : "";
   const chosenImage = heroMediaChoice && !chosenVideo ? content?.heroPosterImage : "";
@@ -101,7 +113,7 @@ export default function HomeHero({
 
   return (
     <>
-      <div className="relative overflow-hidden md:min-h-screen text-white flex flex-col justify-center pb-10 md:pb-30 -mt-14 pt-14 md:-mt-[72px] md:pt-[72px] bg-black">
+      <div className="relative overflow-hidden md:min-h-screen text-white flex flex-col justify-center pb-10 md:pb-16 -mt-14 pt-14 md:-mt-[72px] md:pt-[72px] bg-black">
         {/* Background video — desktop/tablet only. On mobile there's no
             room for a full-bleed video behind the text without it either
             looking cramped or getting cropped oddly, so mobile gets a
@@ -172,7 +184,7 @@ export default function HomeHero({
               showGlow
                 ? "radial-gradient(ellipse 80% 60% at 20% 10%, rgba(120, 180, 255, 0.25), transparent 70%), "
                 : ""
-            }linear-gradient(to right, rgba(0,0,0,0.88) 35%, rgba(0,0,0,0.45) 100%)`,
+            }linear-gradient(to right, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.9) 40%, rgba(0,0,0,0.62) 68%, rgba(0,0,0,0.4) 100%)`,
           }}
         />
 
@@ -194,12 +206,12 @@ export default function HomeHero({
           />
         )}
 
-        <div className="relative z-10 2xl:px-20 px-5 md:pt-20 pt-4 max-w-3xl flex flex-col md:block">
+        <div className="relative z-10 2xl:px-20 px-5 md:pt-20 short-screen:pt-6 pt-4 max-w-3xl flex flex-col md:block">
           <motion.h1
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={reveal}
-            className="md:text-3xl xl:text-4xl text-xl font-bold mb-3 md:mb-4"
+            className="md:text-3xl xl:text-4xl text-xl font-bold mb-3 md:mb-4 short-screen:mb-2"
           >
             {heading}
           </motion.h1>
@@ -208,7 +220,7 @@ export default function HomeHero({
               initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ ...reveal, delay: 0.15 }}
-              className="animated-text order-first md:order-none mb-2 md:mb-0"
+              className="animated-text order-first md:order-none mb-2 md:mb-0 short-screen:max-w-[480px]"
               viewBox="0 0 1320 220"
             >
               <text x="0" y="50%" dy=".35em" textAnchor="start">
@@ -220,7 +232,7 @@ export default function HomeHero({
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...reveal, delay: 0.22 }}
-            className="text-lg md:text-xl font-semibold hidden md:block text-white mt-2 md:mt-4 mb-3 md:mb-4"
+            className="text-lg md:text-xl font-semibold hidden md:block text-white mt-2 md:mt-4 mb-3 md:mb-4 short-screen:my-2"
           >
             {subheading}
           </motion.h2>
@@ -231,7 +243,7 @@ export default function HomeHero({
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...reveal, delay: 0.3 }}
-            className={`max-w-xl mb-6 md:mb-10 ${RICH_TEXT_CLASS} ${richTextScopeClass(subtext)}`}
+            className={`max-w-xl mb-6 md:mb-10 short-screen:mb-5 ${RICH_TEXT_CLASS} ${richTextScopeClass(subtext)}`}
             dangerouslySetInnerHTML={richTextHTML(subtext)}
           />
 
@@ -314,6 +326,7 @@ export default function HomeHero({
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...reveal, delay: 0.45 }}
+            className="flex flex-wrap items-center gap-x-6 gap-y-3"
           >
             <Link href={ctaLink} className="inline-block max-w-full">
               <button className="animated-button animated-button-lg whitespace-nowrap">
@@ -335,7 +348,58 @@ export default function HomeHero({
                 </svg>
               </button>
             </Link>
+            {secondaryCta?.text && secondaryCta?.href && (
+              <Link
+                href={secondaryCta.href}
+                className="group inline-flex items-center gap-2 py-2 text-sm md:text-base font-semibold text-white transition-colors duration-200 hover:text-[#40A2D8]"
+              >
+                {secondaryCta.text}
+                <ArrowDown size={16} className="transition-transform duration-200 group-hover:translate-y-0.5" />
+              </Link>
+            )}
           </motion.div>
+
+          {stats?.length > 0 && (
+            <motion.dl
+              initial={false}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ ...reveal, delay: 0.5 }}
+              className="mt-8 md:mt-12 short-screen:mt-6 grid max-w-lg border-t border-white/15 pt-5 short-screen:pt-3"
+              style={{ gridTemplateColumns: `repeat(${Math.min(stats.length, 4)}, minmax(0, 1fr))` }}
+            >
+              {stats.slice(0, 4).map(({ value, label }, i) => (
+                <div key={`${label}-${i}`} className="flex flex-col-reverse justify-end border-l border-white/15 px-3 first:border-l-0 first:pl-0 sm:px-5">
+                  <dt className="mt-1 text-[11px] sm:text-xs uppercase tracking-wider text-white/80 leading-snug">{label}</dt>
+                  <dd className="text-2xl md:text-3xl short-screen:text-2xl font-bold text-[#40A2D8]">{value}</dd>
+                </div>
+              ))}
+            </motion.dl>
+          )}
+
+          {showBadges && (
+            <motion.ul
+              initial={false}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ ...reveal, delay: 0.55 }}
+              className="mt-6 short-screen:mt-4 grid max-w-md grid-cols-2 gap-2 sm:flex sm:max-w-none sm:flex-wrap sm:items-center sm:gap-3"
+              aria-label="Certifications"
+            >
+              {[
+                { src: "/clutch.png", alt: "Clutch", title: "Clutch", sub: "Verified Partner" },
+                { src: "/CDL.png", alt: "Google Partner", title: "Google Partner", sub: "Certified" },
+                { src: "/GA.png", alt: "Google Analytics", title: "Google Analytics", sub: "Certified" },
+                { src: "/iso.png", alt: "ISO", title: "ISO", sub: "Certified" },
+              ].map((b) => (
+                <li key={b.title} className="flex min-w-0 items-center gap-2 rounded-xl border border-white/10 bg-black/40 px-3 py-2 backdrop-blur-sm">
+                  <Image src={b.src} alt={b.alt} width={28} height={28} className="h-7 w-7 shrink-0 object-contain" />
+                  <span className="leading-tight">
+                    <span className="block text-xs font-semibold text-white">{b.title}</span>
+                    <span className="block text-[11px] text-white/80">{b.sub}</span>
+                  </span>
+                </li>
+              ))}
+            </motion.ul>
+          )}
         </div>
       </div>
     </>

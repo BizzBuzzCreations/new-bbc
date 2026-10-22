@@ -70,6 +70,7 @@ export default function BpoTeamGrid({ content } = {}) {
           showLinkedin={false}
           showInstagram={false}
           flip
+          headingLevel="h2"
         />
       ))}
     </div>

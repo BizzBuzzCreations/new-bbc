@@ -47,8 +47,11 @@ export default function TeamHero({ content } = {}) {
     return () => window.removeEventListener("load", ready);
   }, []);
 
+  // Slow background crossfade — the dots still switch slides by hand.
+  // Visitors who ask for reduced motion get a still photo.
   useEffect(() => {
     if (!restReady) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const id = setInterval(() => {
       setActive((prev) => (prev + 1) % SLIDES.length);
     }, SLIDE_DURATION);
@@ -121,16 +124,23 @@ export default function TeamHero({ content } = {}) {
       </div>
 
       {/* Slide indicators */}
-      <div className="absolute bottom-6 left-6 md:left-12 lg:left-24 flex gap-2 z-10">
+      {/* Each dot sits in a 24px-tall button so it's easy to tap; the
+          visible bar is the inner span. */}
+      <div className="absolute bottom-6 left-6 md:left-12 lg:left-24 flex gap-1 z-10">
         {SLIDES.map((_, i) => (
           <button
             key={i}
+            type="button"
             onClick={() => setActive(i)}
             aria-label={`Show slide ${i + 1}`}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
-              i === active ? "w-6 bg-white" : "w-1.5 bg-white/40 hover:bg-white/70"
-            }`}
-          />
+            className="group flex items-center justify-center h-6 min-w-6"
+          >
+            <span
+              className={`block h-1.5 rounded-full transition-all duration-300 ${
+                i === active ? "w-6 bg-white" : "w-1.5 bg-white/40 group-hover:bg-white/70"
+              }`}
+            />
+          </button>
         ))}
       </div>
     </section>

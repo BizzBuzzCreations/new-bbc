@@ -14,6 +14,17 @@ function FlipCard({ number, title, desc, ctaText, services }) {
   const [height, setHeight] = useState(null);
   const frontRef = useRef(null);
   const backRef = useRef(null);
+  const frontButtonRef = useRef(null);
+  const backButtonRef = useRef(null);
+  // Set when one face's button flips the card, so focus follows to the
+  // button on the face now showing instead of staying on the hidden one.
+  const moveFocus = useRef(false);
+
+  useEffect(() => {
+    if (!moveFocus.current) return;
+    moveFocus.current = false;
+    (open ? backButtonRef : frontButtonRef).current?.focus({ preventScroll: true });
+  }, [open]);
 
   useEffect(() => {
     const measure = () => {
@@ -35,11 +46,15 @@ function FlipCard({ number, title, desc, ctaText, services }) {
           transform: open ? "rotateY(180deg)" : "rotateY(0deg)",
         }}
       >
-        {/* Front — overview. The whole card is the click target (not
-            just the "Know Our Services" line). */}
+        {/* Front — overview. The whole card is the click target for mouse
+            and touch; keyboard and screen-reader users get the real
+            <button> below (aria-expanded belongs on a button, not on a
+            <span>). The face turned away is aria-hidden and its button
+            leaves the tab order, so focus never lands on hidden text. */}
         <div
           ref={frontRef}
           onClick={() => setOpen(true)}
+          aria-hidden={open}
           className="[grid-area:1/1] self-start [backface-visibility:hidden] rounded-2xl p-6 border border-white/10 bg-white/[0.03] cursor-pointer"
         >
           <p className="text-xs font-bold text-[#40A2D8] mb-2">{number}</p>
@@ -52,13 +67,21 @@ function FlipCard({ number, title, desc, ctaText, services }) {
               baseline height regardless of how much text it holds. */}
           <h3 className="font-bold text-lg text-white mb-3 min-h-[3.5rem]">{title}</h3>
           <RichText as="p" text={desc} className="text-sm leading-relaxed text-white mb-5 min-h-[2.75rem]" />
-          <span
+          <button
+            ref={frontButtonRef}
+            type="button"
             aria-expanded={open}
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#40A2D8]"
+            tabIndex={open ? -1 : 0}
+            onClick={(e) => {
+              e.stopPropagation();
+              moveFocus.current = true;
+              setOpen(true);
+            }}
+            className="inline-flex items-center gap-1.5 py-2 -my-2 text-sm font-semibold text-[#40A2D8] hover:text-white transition-colors duration-200"
           >
             {ctaText || "Know Our Services"}
             <ChevronDown size={16} />
-          </span>
+          </button>
         </div>
 
         {/* Back — service-tag list, flipped 180deg so it reads correctly
@@ -66,6 +89,7 @@ function FlipCard({ number, title, desc, ctaText, services }) {
         <div
           ref={backRef}
           onClick={() => setOpen(false)}
+          aria-hidden={!open}
           className="[grid-area:1/1] self-start [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-2xl p-6 border border-[#40A2D8]/40 bg-[#0B60B0]/10 cursor-pointer"
         >
           <h3 className="font-bold text-lg text-white mb-4">{title}</h3>
@@ -79,10 +103,21 @@ function FlipCard({ number, title, desc, ctaText, services }) {
               </span>
             ))}
           </div>
-          <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#40A2D8]">
+          <button
+            ref={backButtonRef}
+            type="button"
+            aria-expanded={open}
+            tabIndex={open ? 0 : -1}
+            onClick={(e) => {
+              e.stopPropagation();
+              moveFocus.current = true;
+              setOpen(false);
+            }}
+            className="inline-flex items-center gap-1.5 py-2 -my-2 text-sm font-semibold text-[#40A2D8] hover:text-white transition-colors duration-200"
+          >
             <ArrowLeft size={16} />
             Back to Overview
-          </span>
+          </button>
         </div>
       </div>
     </div>
@@ -146,7 +181,7 @@ export default function ServiceBreakdownGrid({ items, flip = false }) {
               type="button"
               onClick={() => setOpenIndex(open ? null : i)}
               aria-expanded={open}
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#40A2D8] hover:text-white transition-colors duration-200"
+              className="inline-flex items-center gap-1.5 py-2 -my-2 text-sm font-semibold text-[#40A2D8] hover:text-white transition-colors duration-200"
             >
               {ctaText || "Know Our Services"}
               <ChevronDown

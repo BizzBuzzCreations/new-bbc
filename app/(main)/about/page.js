@@ -47,9 +47,9 @@ const DEFAULT_ROADMAP_STEPS = [
 
 export async function generateMetadata() {
   return buildPageMetadata("about", {
-  title: "About BizzBuzz Creations | Digital Marketing Agency in Prayagraj",
+  title: "About BizzBuzz Creations, Prayagraj Digital Marketing Agency",
   description:
-    "Meet BizzBuzz Creations, a digital marketing agency in Prayagraj helping businesses across India and worldwide grow through SEO, paid ads, social media, web and digital strategy.",
+    "Meet BizzBuzz Creations, a digital marketing agency in Prayagraj helping businesses in India and worldwide grow with SEO, paid ads, social media and web design.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/about",
   },
@@ -101,7 +101,7 @@ export default async function About() {
     `In a market flooded with agencies promising "guaranteed rankings," we chose a different path — building sustainable digital growth systems instead of chasing quick wins.`;
 
   const roadmapHeading = content?.roadmapHeading || "How Our Digital Marketing Process Works";
-  const roadmapSubheading = content?.roadmapSubheading || "The Bizzbuzz Growth Blueprint";
+  const roadmapSubheading = content?.roadmapSubheading || "The BizzBuzz Growth Blueprint";
   const roadmapIntro =
     content?.roadmapIntro ||
     "We follow a structured, repeatable process that has helped us deliver consistent results across 90+ projects.";
@@ -114,10 +114,10 @@ export default async function About() {
   const trustHeading = content?.trustHeading || "Why Businesses Choose BizzBuzz Creations";
   const trustIntro =
     content?.trustIntro ||
-    "If you're looking for a digital marketing agency that treats your business like a long-term partnership — not a one-off project — Bizzbuzz Creations is built for that.";
+    "If you're looking for a digital marketing agency that treats your business like a long-term partnership — not a one-off project — BizzBuzz Creations is built for that.";
   const trustClosing =
     content?.trustClosing ||
-    "If you're looking for a digital marketing agency that treats your business like a long-term partnership — not a one-off project — Bizzbuzz Creations is built for that.";
+    "If you're looking for a digital marketing agency that treats your business like a long-term partnership — not a one-off project — BizzBuzz Creations is built for that.";
 
   return (
     <>
@@ -389,11 +389,16 @@ export default async function About() {
 
         <TrustAdvantage content={content} />
 
-        <RichText
-          as="p"
-          text={trustClosing}
-          className="text-lg leading-relaxed text-center max-w-3xl mx-auto mt-12 font-medium text-white"
-        />
+        {/* Only when it says something different — the default (and the
+            saved dashboard copy) repeated the intro sentence word for word,
+            so visitors read the same line above and below the cards. */}
+        {trustClosing && trustClosing.trim() !== trustIntro.trim() && (
+          <RichText
+            as="p"
+            text={trustClosing}
+            className="text-lg leading-relaxed text-center max-w-3xl mx-auto mt-12 font-medium text-white"
+          />
+        )}
       </div>
       </>
       )}
