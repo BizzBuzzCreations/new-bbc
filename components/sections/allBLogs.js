@@ -304,7 +304,7 @@ export default function AllBLogs() {
                         alt={e?.title}
                       />
                     ) : (
-                      <div className="w-full h-full flex flex-col items-center justify-center gap-2 bg-white/5 text-white/30">
+                      <div className="w-full h-full flex flex-col items-center justify-center gap-2 bg-white/5 text-white/60">
                         <ImageOff size={28} />
                         <span className="text-xs font-medium">
                           Image unavailable

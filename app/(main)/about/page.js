@@ -154,7 +154,7 @@ export default async function About() {
                   BizzBuzz Creations started with a small team of marketers, designers, and
                   strategists determined to help businesses get more from their digital
                   presence. What began locally in Prayagraj has grown into a{" "}
-                  <Link href="/services" className="text-[#40A2D8] hover:underline">
+                  <Link href="/services" className="text-[#40A2D8] underline underline-offset-2 hover:text-white">
                     digital marketing agency
                   </Link>{" "}
                   serving businesses across India, the UK, the US, and beyond.
@@ -167,11 +167,11 @@ export default async function About() {
               {storyParagraphThreeIsDefault ? (
                 <>
                   Today, we bring together strategy, creativity, technology,{" "}
-                  <Link href="/search-engine-optimization" className="text-[#40A2D8] hover:underline">
+                  <Link href="/search-engine-optimization" className="text-[#40A2D8] underline underline-offset-2 hover:text-white">
                     SEO
                   </Link>
                   , and{" "}
-                  <Link href="/paid-marketing" className="text-[#40A2D8] hover:underline">
+                  <Link href="/paid-marketing" className="text-[#40A2D8] underline underline-offset-2 hover:text-white">
                     performance marketing
                   </Link>{" "}
                   to help businesses build stronger brands, reach the right audiences, and

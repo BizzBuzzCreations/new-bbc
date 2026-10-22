@@ -73,8 +73,8 @@ export default async function LatestBlogs({ dark = false, content }) {
                     <div
                       className={`w-full h-full flex flex-col items-center justify-center gap-2 ${
                         dark
-                          ? "bg-white/5 text-white/30"
-                          : "bg-gradient-to-br from-gray-50 to-gray-200 text-gray-400"
+                          ? "bg-white/5 text-white/60"
+                          : "bg-gradient-to-br from-gray-50 to-gray-200 text-gray-600"
                       }`}
                     >
                       <ImageOff size={28} />

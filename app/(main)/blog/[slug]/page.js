@@ -175,9 +175,11 @@ export default async function SingleBlog({ params }) {
       {toc.length > 0 && (
         <aside className="hidden lg:block w-56 shrink-0 sticky top-28 self-start">
           <div className="border border-gray-200 rounded-2xl p-5 bg-white shadow-sm">
-            <h3 className="text-sm font-bold uppercase tracking-wide text-gray-900 mb-4">
+            {/* a label, not a heading: it sits between the title (h1) and the
+                article's own h2s, so a heading here would skip a level */}
+            <p className="text-sm font-bold uppercase tracking-wide text-gray-900 mb-4">
               Contents
-            </h3>
+            </p>
             {/* Main sections (h2) are numbered 1, 2, 3…; their sub-sections
                 (h3) sit indented under them with a dash, not a number of
                 their own. */}
@@ -221,7 +223,7 @@ export default async function SingleBlog({ params }) {
             className="w-full h-auto [aspect-ratio:auto_16/9] mb-8 rounded-lg"
           />
         ) : (
-          <div className="w-full aspect-[1.91/1] mb-8 rounded-lg flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-gray-50 to-gray-200 text-gray-400">
+          <div className="w-full aspect-[1.91/1] mb-8 rounded-lg flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-gray-50 to-gray-200 text-gray-600">
             <ImageOff size={36} />
             <span className="text-sm font-medium">Image unavailable</span>
           </div>

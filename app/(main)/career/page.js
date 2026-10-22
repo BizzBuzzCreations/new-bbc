@@ -72,7 +72,7 @@ export default async function Career() {
               </p>
               <p className="text-sm text-white">
                 Check back soon, or reach out through our{" "}
-                <a href="/contact" className="text-[#40A2D8] hover:underline">
+                <a href="/contact" className="text-[#40A2D8] underline underline-offset-2 hover:text-white">
                   contact page
                 </a>
                 .
