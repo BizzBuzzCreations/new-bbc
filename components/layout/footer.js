@@ -78,6 +78,8 @@ const OFFICES = [
     Flag: UKFlag,
     country: "United Kingdom",
     href: "/en-uk/digital-marketing-services-in-uk",
+    city: "London · UK time (GMT/BST)",
+    maps: "3 Thornham St, London SE10 9SA, United Kingdom",
     address: (
       <>
         3 Thornham St,
@@ -272,45 +274,54 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Office address cards — India + UK, side by side from sm up
-            (stacked on mobile). */}
-        <div className="grid gap-6 mb-6 max-w-3xl sm:grid-cols-2">
+        {/* Office address cards — India + UK, side by side across the full
+            width from sm up (stacked on mobile). Each has a Get directions
+            link (Google Maps); the UK card's name also links to its
+            regional page. */}
+        <div className="grid gap-6 mb-6 sm:grid-cols-2">
           <IndiaOfficeCard />
-          {OFFICES.map(({ Flag, country, tag, address, href }) => {
-            // Offices with an href (UK) link to their regional page.
-            const Card = href ? Link : "div";
-            return (
-              <Card
-                key={country}
-                {...(href ? { href } : {})}
-                className="block rounded-2xl border border-white/15 bg-white/[0.03] p-5 hover:border-[#40A2D8]/50 hover:bg-white/[0.05] transition-colors"
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="w-9 h-9 rounded-full overflow-hidden shrink-0 ring-1 ring-white/20">
-                    <Flag />
-                  </span>
-                  <span className="font-semibold text-white text-base">
-                    {country}
-                    {tag && (
-                      <>
-                        <span className="mx-2 text-white/40">|</span>
-                        <span className="font-medium text-[#8fd0f2]">
-                          ({tag})
-                        </span>
-                      </>
-                    )}
-                  </span>
-                </div>
-                <p className="text-sm text-[#8fd0f2] leading-relaxed flex gap-2.5">
-                  <MapPin
-                    size={16}
-                    className="shrink-0 mt-0.5 text-[#40A2D8]"
-                  />
-                  <span>{address}</span>
-                </p>
-              </Card>
-            );
-          })}
+          {OFFICES.map(({ Flag, country, tag, address, href, city, maps }) => (
+            <div
+              key={country}
+              className="group relative rounded-2xl border border-white/15 bg-white/[0.03] p-6 hover:border-[#40A2D8]/50 hover:bg-white/[0.05] transition-colors"
+            >
+              <div className="flex items-center gap-3 mb-1">
+                <span className="w-10 h-10 rounded-full overflow-hidden shrink-0 ring-1 ring-white/20">
+                  <Flag />
+                </span>
+                <span className="font-semibold text-white text-lg">
+                  {href ? (
+                    <Link href={href} className="after:absolute after:inset-0 after:rounded-2xl after:content-[''] hover:text-[#40A2D8] focus-visible:underline focus-visible:outline-none">
+                      {country}
+                    </Link>
+                  ) : (
+                    country
+                  )}
+                  {tag && (
+                    <>
+                      <span className="mx-2 text-white/40">|</span>
+                      <span className="font-medium text-[#8fd0f2]">({tag})</span>
+                    </>
+                  )}
+                </span>
+              </div>
+              {city && <p className="mb-4 pl-[3.25rem] text-xs text-white/50">{city}</p>}
+              <p className="text-sm text-white/80 leading-relaxed flex gap-2.5">
+                <MapPin size={16} className="shrink-0 mt-0.5 text-[#40A2D8]" />
+                <span>{address}</span>
+              </p>
+              {maps && (
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(maps)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative z-10 mt-4 inline-flex items-center gap-1.5 py-1 pl-[1.625rem] text-sm font-medium text-[#40A2D8] hover:text-white"
+                >
+                  Get directions <ArrowUpRight size={14} aria-hidden="true" />
+                </a>
+              )}
+            </div>
+          ))}
         </div>
 
         <div className="border-t border-white/10 mb-12" />
