@@ -13,60 +13,11 @@ import {
 } from "lucide-react";
 import RichText from "@/components/ui/richText";
 import AnimatedButton from "@/components/ui/animatedButton";
+import { resolveStatCards } from "@/lib/statCards";
 
 // What makes working with BizzBuzz Creations different — kept as 4 cards
 // so the existing card/visual layout below (photos, client logos,
 // icon grid) stays exactly as designed, just with new copy.
-const STATS = [
-  {
-    tag: "Why It's Different",
-    value: "01.",
-    label: "One Team, Multiple Capabilities",
-    description:
-      "Get SEO, Google Ads, social media marketing, web development, AI, automation, and BPO support from one connected digital team.",
-    visual: {
-      type: "image",
-      src: "/oneteam-multiplecapabilities.jpg",
-      alt: "One team, multiple capabilities",
-    },
-  },
-  {
-    tag: "Why It's Different",
-    value: "02.",
-    label: "Solutions Built Around You",
-    description:
-      "We consider your industry, audience, market, and business needs to recommend digital solutions that fit your objectives.",
-    visual: {
-      type: "image",
-      src: "/solutionbuilt-aroundus.jpg",
-      alt: "Solutions built around you",
-    },
-  },
-  {
-    tag: "Why It's Different",
-    value: "03.",
-    label: "Clear From Day One",
-    description:
-      "Know what's included, what we're working on, and what to expect through straightforward communication and practical recommendations.",
-    visual: {
-      type: "image",
-      src: "/clearfrom-dayone.jpg",
-      alt: "Clear from day one",
-    },
-  },
-  {
-    tag: "Why It's Different",
-    value: "04.",
-    label: "Built to Adapt With You",
-    description:
-      "Start with the services you need today and expand into SEO, advertising, technology, automation, or business support as your needs evolve.",
-    visual: {
-      type: "image",
-      src: "/builtto-adaptwithyou.jpg",
-      alt: "Built to adapt with you",
-    },
-  },
-];
 
 const CLIENT_LOGOS = [
   { src: "/avondale-1.png", alt: "Avondale Finance" },
@@ -189,24 +140,7 @@ function WaveMask({ position = "top" }) {
 export default function StatsShowcase({ content }) {
   const heading = content?.statsHeading || "Here’s Why Our Way of Working Is Different";
   const eyebrow = content?.statsEyebrow ?? "Why Us";
-
-  // The dashboard's card list drives the cards — adding or removing a card
-  // there now adds/removes it here (it used to always show exactly the 4
-  // built-in cards and ignore any beyond them). A card with no uploaded
-  // image falls back to one of the built-in photos, by position.
-  const saved = content?.statCards;
-  const stats =
-    saved?.length > 0
-      ? saved.map((card, i) => {
-          const base = STATS[i % STATS.length];
-          const { image, ...text } = card;
-          return {
-            ...base,
-            ...text,
-            visual: image ? { type: "image", src: image, alt: text.label || base.label } : base.visual,
-          };
-        })
-      : STATS;
+  const stats = resolveStatCards(content);
 
   return (
     <section className="bg-black pt-8 pb-14 md:pb-20" aria-label="BizzBuzz Creations by the numbers">

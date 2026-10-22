@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { RICH_TEXT_CLASS, richTextHTML, richTextScopeClass } from "@/components/ui/richText";
 import Pill from "@/components/home/pill";
+import { heroImageSource } from "@/components/sections/homeHero";
 
 const BADGES = [
   { src: "/clutch.png", title: "Clutch", sub: "Verified Partner" },
@@ -21,7 +22,11 @@ const BADGES = [
 // with the navbar, a small capabilities label, a big light headline whose
 // last three words carry the beams' blue→violet, the page's pill buttons,
 // and light, larger stats.
-export default function HeroHome({ content, stats, secondaryCta }) {
+// `mediaChoice` (location pages): the background comes from the dashboard
+// as an either/or — Background Video if set, otherwise Background Image,
+// otherwise just black — instead of the homepage's fixed video.
+// `showWordmark` (default on): the outlined "BizzBuzz Creations" wordmark.
+export default function HeroHome({ content, stats, secondaryCta, mediaChoice = false, showWordmark = true }) {
   const heading = content?.heroHeading || "India’s Trusted Digital Marketing Agency";
   const subheading = content?.heroSubheading || "Turn Clicks Into Customers With Data-Driven Digital Marketing";
   const subtext =
@@ -30,6 +35,9 @@ export default function HeroHome({ content, stats, secondaryCta }) {
   const ctaText = content?.heroCtaText || "Get a Free Consultation";
   const ctaLink = content?.heroCtaLink || "/contact";
   const shownStats = (stats || []).filter((s) => s?.value).slice(0, 4);
+  const chosenVideo = mediaChoice ? content?.heroVideo : "";
+  const chosenImage = mediaChoice && !chosenVideo ? content?.heroPosterImage : "";
+  const image = heroImageSource(chosenImage);
 
   const words = heading.split(/\s+/);
   const lead = words.slice(0, Math.max(0, words.length - 3)).join(" ");
@@ -58,10 +66,17 @@ export default function HeroHome({ content, stats, secondaryCta }) {
 
   return (
     <section className="relative -mt-14 flex flex-col justify-center overflow-hidden bg-black pt-14 pb-10 text-white md:-mt-[72px] md:min-h-screen md:pt-[72px] md:pb-16">
-      {mediaMode === "desktop" && (
+      {!mediaChoice && mediaMode === "desktop" && (
         <video autoPlay muted loop playsInline preload="metadata" className="absolute inset-0 hidden h-full w-full bg-black object-cover md:block">
           <source src="/hero-sec.webm" type="video/webm" />
         </video>
+      )}
+      {chosenVideo && mediaMode === "desktop" && (
+        <video key={chosenVideo} src={chosenVideo} autoPlay muted loop playsInline preload="metadata" className="absolute inset-0 hidden h-full w-full bg-black object-cover md:block" />
+      )}
+      {chosenImage && (
+        // eslint-disable-next-line @next/next/no-img-element -- right-sized srcset from heroImageSource (Cloudinary or the Next optimizer)
+        <img src={image.src} srcSet={image.srcSet} sizes="100vw" alt="" decoding="async" fetchPriority="high" className="absolute inset-0 hidden h-full w-full bg-black object-cover md:block" />
       )}
       {/* Dark from the left so the text reads; the video shows on the right */}
       <div
@@ -88,14 +103,16 @@ export default function HeroHome({ content, stats, secondaryCta }) {
             <span className="bg-linear-to-r from-[#40A2D8] via-[#7b74f7] to-[#b57cff] bg-clip-text pb-1 text-transparent">{accent}</span>
           </h1>
 
-          <svg
-            className="animated-text order-first mb-3 max-w-[560px] md:order-none md:mt-4 md:mb-0 short-screen:mt-2 short-screen:max-w-[430px]"
-            viewBox="0 0 1320 220"
-          >
-            <text x="0" y="50%" dy=".35em" textAnchor="start">
-              BizzBuzz Creations
-            </text>
-          </svg>
+          {showWordmark && (
+            <svg
+              className="animated-text order-first mb-3 max-w-[560px] md:order-none md:mt-4 md:mb-0 short-screen:mt-2 short-screen:max-w-[430px]"
+              viewBox="0 0 1320 220"
+            >
+              <text x="0" y="50%" dy=".35em" textAnchor="start">
+                BizzBuzz Creations
+              </text>
+            </svg>
+          )}
 
           <p className="mt-5 hidden text-lg font-medium text-white md:block md:text-xl short-screen:mt-3">{subheading}</p>
           <div
@@ -105,15 +122,30 @@ export default function HeroHome({ content, stats, secondaryCta }) {
 
           {/* Phones: the video as its own box under the text (poster first;
               it's the phone's LCP image), never full-bleed behind it. */}
-          <div className="relative mt-6 aspect-video w-full max-w-sm overflow-hidden rounded-2xl md:hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element -- small fixed poster, already optimised (37KB) */}
-            <img src="/hero-sec-poster.webp" alt="" width={800} height={321} decoding="async" fetchPriority="high" className="absolute inset-0 h-full w-full bg-black object-cover" />
-            {mediaMode === "mobile" && (
-              <video autoPlay muted loop playsInline preload="metadata" poster="/hero-sec-poster.webp" className="absolute inset-0 h-full w-full bg-black object-cover">
-                <source src="/hero-sec-mobile.webm" type="video/webm" />
-              </video>
-            )}
-          </div>
+          {!mediaChoice ? (
+            <div className="relative mt-6 aspect-video w-full max-w-sm overflow-hidden rounded-2xl md:hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element -- small fixed poster, already optimised (37KB) */}
+              <img src="/hero-sec-poster.webp" alt="" width={800} height={321} decoding="async" fetchPriority="high" className="absolute inset-0 h-full w-full bg-black object-cover" />
+              {mediaMode === "mobile" && (
+                <video autoPlay muted loop playsInline preload="metadata" poster="/hero-sec-poster.webp" className="absolute inset-0 h-full w-full bg-black object-cover">
+                  <source src="/hero-sec-mobile.webm" type="video/webm" />
+                </video>
+              )}
+            </div>
+          ) : (
+            (chosenVideo || chosenImage) && (
+              <div className="relative mt-6 aspect-video w-full max-w-sm overflow-hidden rounded-2xl md:hidden">
+                {chosenVideo
+                  ? mediaMode === "mobile" && (
+                      <video key={chosenVideo} src={chosenVideo} autoPlay muted loop playsInline preload="metadata" className="absolute inset-0 h-full w-full bg-black object-cover" />
+                    )
+                  : (
+                    // eslint-disable-next-line @next/next/no-img-element -- right-sized srcset from heroImageSource
+                    <img src={image.src} srcSet={image.srcSet} sizes="100vw" alt="" fetchPriority="high" className="absolute inset-0 h-full w-full bg-black object-cover" />
+                  )}
+              </div>
+            )
+          )}
 
           <div className="mt-7 flex flex-wrap items-center gap-3 md:mt-9 short-screen:mt-6">
             <Pill href={ctaLink} variant="solid" className="px-6 py-3 text-base">{ctaText}</Pill>

@@ -33,11 +33,13 @@ const BUILD_ICONS = [Headset, Bot, Workflow, Server, Globe, GitBranch, BarChart3
 //  - The rest of the in-house systems are small icon tiles (4 across on
 //    desktop), ending with a highlighted "Need a system like these?" tile.
 // Same dashboard fields as before.
-export default function BuildV2({ content, showClio = true, showPraxistence = true, showBuilds = true }) {
+// `clioPrefix`: the dashboard field prefix of the Clio card ("ai" on the
+// homepage, "clio" on the location pages).
+export default function BuildV2({ content, showClio = true, showPraxistence = true, showBuilds = true, clioPrefix = "ai" }) {
   const eyebrow = content?.caseStudiesEyebrow || "What We Build";
   const heading = content?.caseStudiesHeading || "Powered by What We Build";
   const subtext = content?.caseStudiesSubtext || "";
-  const products = productCards(content, { showClio, showPraxistence });
+  const products = productCards(content, { clioPrefix, showClio, showPraxistence });
   const builds = showBuilds ? (content?.caseStudyClients || []).filter((c) => c?.name) : [];
 
   if (!products.length && !builds.length) return null;

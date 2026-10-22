@@ -1,19 +1,18 @@
-import CTA from "@/components/sections/CTA";
-import FAQ from "@/components/sections/FAQ";
-import HomeAbout from "@/components/sections/homeAbout";
-import HomeHero from "@/components/sections/homeHero";
-import OurServices from "@/components/sections/ourServices";
-import CaseStudies from "@/components/sections/caseStudies";
-import StatsShowcase from "@/components/sections/statsShowcase";
-import WhoWeAreBox from "@/components/sections/whoWeAreBox";
-import AiProductsShowcase from "@/components/sections/aiProductsShowcase";
-import Reviews from "@/components/sections/reviews";
-import VideoTestimonial from "@/components/sections/videoTestimonial";
-import WhatMAkesUs from "@/components/sections/whatMakesUs";
-import Recognitions from "@/components/sections/recognitions";
-import IndustriesShowcase from "@/components/sections/industriesShowcase";
+import HeroHome from "@/components/home/heroHome";
+import AboutV2 from "@/components/home/aboutV2";
+import ServicesV2 from "@/components/home/servicesV2";
+import BuildV2 from "@/components/home/buildV2";
+import WhyUsV2 from "@/components/home/whyUsV2";
+import WhoWeAreV2 from "@/components/home/whoWeAreV2";
+import ProcessV2 from "@/components/home/processV2";
+import IndustriesV2 from "@/components/home/industriesV2";
+import ReviewsV2 from "@/components/home/reviewsV2";
+import VideoTestimonialV2 from "@/components/home/videoTestimonialV2";
+import BlogsV2 from "@/components/home/blogsV2";
+import FaqV2 from "@/components/home/faqV2";
+import CtaV2 from "@/components/home/ctaV2";
+import BeamsBlock from "@/components/home/band";
 import ConsultationPopup from "@/components/sections/popupForm";
-import LatestBlogs from "@/components/sections/latestBlogs";
 import { getPageContent } from "@/actions/pageContentActions";
 import PageSeoScripts from "@/components/sections/pageSeoScripts";
 import { ukPageSchema } from "@/lib/ukPageSchema";
@@ -25,22 +24,24 @@ import { hasCustomSchema } from "@/lib/seo";
 // this one component, so they always have the exact same structure. Only
 // `pageKey` differs: it decides which saved content / SEO settings load.
 //
-// Mostly the same sections as the real homepage, except: the hero's
-// background is an either/or Image-or-Video choice (HomeHero's
-// `heroMediaChoice`) read from the dashboard's own fields; the hero's big
-// outlined "BizzBuzz Creations" wordmark is dropped (`showWordmark={false}`);
-// and the "Know More About Us" scroll-zoom section is swapped for
-// WhoWeAreBox. Like the homepage, Clio AI and Praxistence share one
-// two-card section and "Why Clients Stick Around" (WhyChooseUs) was
-// dropped. Each section can be switched off from the dashboard
-// ("Remove section") — `hidden` below.
+// Built from the redesigned homepage's sections (components/home/*), with
+// the location pages' own differences: the hero's background is the
+// dashboard's either/or Image-or-Video (`mediaChoice`) and has no outlined
+// wordmark; the Clio card reads the clio* fields; and three sections only
+// these pages have — "Why Our Way of Working Is Different" (WhyUsV2),
+// "Who We Are" (WhoWeAreV2) and the client video testimonial — in the same
+// style. Recognitions are the badges in the hero now, as on the homepage.
+// Each section can be switched off from the dashboard ("Remove section") —
+// `hidden` below.
 export default async function OutsideLocationPage({ pageKey }) {
   const content = await getPageContent(pageKey);
   const hidden = new Set(content?.hiddenSections || []);
   const isUk = pageKey === "outside-location-uk";
 
   return (
-    <>
+    <div data-no-reveal>
+      {/* thin reading-progress line at the top (pure CSS, see globals.css) */}
+      <div aria-hidden="true" className="scroll-progress" />
       <PageSeoScripts pageKey={pageKey} />
       {/* The UK page's own structured data (the site-wide India
           LocalBusiness schema is skipped on that route — see allScripts.js);
@@ -56,32 +57,38 @@ export default async function OutsideLocationPage({ pageKey }) {
         />
       )}
       {!hidden.has("hero") && (
-        <HomeHero content={content} showWordmark={false} heroMediaChoice separated />
+        <HeroHome
+          content={content}
+          mediaChoice
+          showWordmark={false}
+          secondaryCta={hidden.has("services") ? null : { text: "Explore Our Services", href: "#services" }}
+        />
       )}
-      {!hidden.has("about") && <HomeAbout content={content} separated />}
-      {!hidden.has("services") && <OurServices content={content} />}
-      {!hidden.has("caseStudies") && <CaseStudies content={content} plainLogos />}
-      {!hidden.has("stats") && <StatsShowcase content={content} />}
-      {!hidden.has("whoWeAre") && <WhoWeAreBox content={content} />}
-      {/* Clio AI (clio* fields) and Praxistence as two cards in one section;
-          each can still be removed on its own from the dashboard. */}
-      <AiProductsShowcase
+      {!hidden.has("about") && <AboutV2 content={content} showStatement={false} />}
+      {!hidden.has("services") && <ServicesV2 content={content} />}
+      {/* Clio AI (clio* fields), Praxistence and the in-house systems; each
+          part keeps its own Remove switch. */}
+      <BuildV2
         content={content}
         clioPrefix="clio"
         showClio={!hidden.has("clioShowcase")}
         showPraxistence={!hidden.has("praxistenceShowcase")}
+        showBuilds={!hidden.has("caseStudies")}
       />
-      {!hidden.has("process") && <WhatMAkesUs content={content} />}
-      {!hidden.has("recognitions") && <Recognitions content={content} showIcons={false} />}
-      {!hidden.has("industries") && <IndustriesShowcase content={content} />}
-      {!hidden.has("reviews") && <Reviews content={content} />}
-      {!hidden.has("videoTestimonial") && <VideoTestimonial content={content} />}
-      <LatestBlogs dark />
-      <div className="bg-black pt-10">
-        {!hidden.has("faq") && <FAQ content={content} />}
-        {!hidden.has("cta") && <CTA content={content} />}
-      </div>
+      {!hidden.has("stats") && <WhyUsV2 content={content} />}
+      {!hidden.has("whoWeAre") && <WhoWeAreV2 content={content} />}
+      {["process", "industries", "reviews", "videoTestimonial"].some((key) => !hidden.has(key)) && (
+        <BeamsBlock>
+          {!hidden.has("process") && <ProcessV2 content={content} />}
+          {!hidden.has("industries") && <IndustriesV2 content={content} />}
+          {!hidden.has("reviews") && <ReviewsV2 content={content} />}
+          {!hidden.has("videoTestimonial") && <VideoTestimonialV2 content={content} />}
+        </BeamsBlock>
+      )}
+      <BlogsV2 content={content} />
+      {!hidden.has("faq") && <FaqV2 content={content} />}
+      {!hidden.has("cta") && <CtaV2 content={content} />}
       {!hidden.has("popup") && <ConsultationPopup content={content} />}
-    </>
+    </div>
   );
 }
