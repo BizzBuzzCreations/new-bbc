@@ -6,7 +6,7 @@ import Image from "next/image";
 
 // Floating BizzBee button: the animated support bubble from
 // /bizzbee-support.json (a Lottie file: a chat bubble with a headset and
-// typing dots) as a clickable, draggable button. Its first frames are a
+// typing dots) as a clickable button fixed in the bottom-right corner. Its first frames are a
 // pop-in from nothing, so that plays once and then only the typing part
 // loops (LOOP_FROM: frame 51 is identical to the last frame — seamless).
 //
@@ -18,10 +18,8 @@ import Image from "next/image";
 //   tilts toward the pointer. Those extra movements are driven from script
 //   (Web Animations API), not from stylesheet keyframes, and are switched off
 //   for visitors who ask their system for reduced motion.
-// - Movable: drag it anywhere on screen (the position is remembered for the
-//   tab). A plain click (no drag) opens / minimizes the chat.
-// - While the chat is open it is static and not draggable.
-const POS_KEY = "bizzbee-fab-pos";
+// - Not draggable: it stays in its corner. A click opens / minimizes the chat.
+// - While the chat is open it is static.
 const LOOP_FROM = 51;
 const REST_FRAME = 90; // shown while the chat is open
 
@@ -29,7 +27,6 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
   { onOpen, expanded = false, showTip, onDismissTip },
   ref,
 ) {
-  const wrapRef = useRef(null);
   const stageRef = useRef(null);
   const lottieBox = useRef(null);
   const roamEl = useRef(null);
@@ -37,25 +34,6 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
   const anims = useRef([]); // Web Animations (roam + lean), so hover can speed them up
   const [ready, setReady] = useState(false);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const [offset, setOffset] = useState({ x: 0, y: 0 }); // drag offset from the default corner
-  const offsetRef = useRef(offset);
-  offsetRef.current = offset;
-  const [dragging, setDragging] = useState(false);
-  const drag = useRef({ active: false, moved: false, sx: 0, sy: 0, start: { x: 0, y: 0 }, rect: null });
-
-  // Restore the remembered position (kept inside the viewport).
-  useEffect(() => {
-    try {
-      const saved = JSON.parse(sessionStorage.getItem(POS_KEY) || "null");
-      const r = wrapRef.current?.getBoundingClientRect();
-      if (saved && r && Number.isFinite(saved.x) && Number.isFinite(saved.y)) {
-        setOffset({
-          x: Math.min(Math.max(saved.x, -(window.innerWidth - r.width - 8)), 0),
-          y: Math.min(Math.max(saved.y, -(window.innerHeight - r.height - 8)), 0),
-        });
-      }
-    } catch {}
-  }, []);
 
   // Load the Lottie animation (lazy). It always plays.
   useEffect(() => {
@@ -130,8 +108,8 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
   const setSpeed = (rate) => anims.current.forEach((a) => (a.playbackRate = rate));
 
   // While the chat is open the bubble is static: all motion stops (it rests at
-  // a neutral pose), it can't be dragged, and it doesn't tilt. Minimizing the
-  // chat brings the motion and dragging back.
+  // a neutral pose) and it doesn't tilt. Minimizing the chat brings the
+  // motion back.
   useEffect(() => {
     if (expanded) {
       anims.current.forEach((a) => {
@@ -140,58 +118,14 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
       });
       animRef.current?.goToAndStop(REST_FRAME, true);
       setTilt({ x: 0, y: 0 });
-      drag.current.active = false;
-      setDragging(false);
     } else {
       anims.current.forEach((a) => a.play());
       if (ready) animRef.current?.playSegments([LOOP_FROM, animRef.current.totalFrames], true);
     }
   }, [expanded, ready]);
 
-  const onDown = (e) => {
-    if (expanded) return; // not draggable while the chat is open
-    if (e.button !== undefined && e.button !== 0) return;
-    const rect = wrapRef.current?.getBoundingClientRect();
-    drag.current = { active: true, moved: false, sx: e.clientX, sy: e.clientY, start: offsetRef.current, rect };
-    e.currentTarget.setPointerCapture?.(e.pointerId);
-  };
-
-  const onUp = (e) => {
-    const d = drag.current;
-    d.active = false;
-    setDragging(false);
-    e.currentTarget.releasePointerCapture?.(e.pointerId);
-    if (d.moved) {
-      try {
-        sessionStorage.setItem(POS_KEY, JSON.stringify(offsetRef.current));
-      } catch {}
-    }
-  };
-
-  const onClick = () => {
-    // A drag also ends with a click event — ignore that one.
-    if (drag.current.moved) {
-      drag.current.moved = false;
-      return;
-    }
-    onOpen();
-  };
-
   const onMove = (e) => {
-    const d = drag.current;
-    if (d.active) {
-      const dx = e.clientX - d.sx;
-      const dy = e.clientY - d.sy;
-      if (!d.moved && Math.hypot(dx, dy) < 6) return; // still a click
-      d.moved = true;
-      setDragging(true);
-      setTilt({ x: 0, y: 0 });
-      const r = d.rect;
-      const cdx = Math.min(Math.max(dx, 4 - r.left), window.innerWidth - r.right - 4);
-      const cdy = Math.min(Math.max(dy, 4 - r.top), window.innerHeight - r.bottom - 4);
-      setOffset({ x: d.start.x + cdx, y: d.start.y + cdy });
-      return;
-    }
+    if (e.pointerType !== "mouse") return; // tilt toward a mouse pointer only
     if (expanded || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const r = stageRef.current?.getBoundingClientRect();
     if (!r) return;
@@ -202,11 +136,7 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
   const resetTilt = () => setTilt({ x: 0, y: 0 });
 
   return (
-    <div
-      ref={wrapRef}
-      className="fixed bottom-2 right-2 z-[9990] pb-[env(safe-area-inset-bottom)] sm:right-3"
-      style={{ transform: `translate3d(${offset.x}px, ${offset.y}px, 0)` }}
-    >
+    <div className="fixed bottom-2 right-2 z-[9990] pb-[env(safe-area-inset-bottom)] sm:right-3">
       {showTip && (
         <div
           role="status"
@@ -226,10 +156,7 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
       <button
         ref={ref}
         type="button"
-        onClick={onClick}
-        onPointerDown={onDown}
-        onPointerUp={onUp}
-        onPointerCancel={onUp}
+        onClick={onOpen}
         onPointerMove={onMove}
         onPointerEnter={() => !expanded && setSpeed(2.2)}
         onPointerLeave={() => {
@@ -239,9 +166,9 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
         onBlur={resetTilt}
         aria-label={expanded ? "Minimize BizzBee AI assistant" : "Open BizzBee AI assistant"}
         aria-expanded={expanded}
-        title={expanded ? "Minimize BizzBee AI" : "Ask BizzBee AI (drag to move)"}
+        title={expanded ? "Minimize BizzBee AI" : "Ask BizzBee AI"}
         aria-haspopup="dialog"
-        className={`bizzbee-fab pointer-events-none relative block h-[104px] w-[127px] touch-none sm:h-[128px] sm:w-[156px] select-none ${dragging ? "cursor-grabbing" : "cursor-pointer"} focus:outline-none focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8] [perspective:520px]`}
+        className={`bizzbee-fab pointer-events-none relative block h-[104px] w-[127px] sm:h-[128px] sm:w-[156px] select-none cursor-pointer focus:outline-none focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8] [perspective:520px]`}
       >
         <span
           ref={stageRef}
