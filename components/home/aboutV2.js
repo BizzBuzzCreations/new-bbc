@@ -22,7 +22,7 @@ export default function AboutV2({ content, showStatement = true }) {
 
   return (
     <section className="bg-black text-white">
-      <div className="reveal-stagger mx-auto grid max-w-7xl gap-10 px-6 md:px-10 py-16 md:grid-cols-2 md:gap-16 md:py-24">
+      <div className="reveal-stagger mx-auto grid max-w-7xl gap-10 px-6 md:px-10 py-16 md:grid-cols-2 md:gap-16 md:py-20">
         <div>
           <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
           <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
@@ -39,7 +39,7 @@ export default function AboutV2({ content, showStatement = true }) {
       </div>
 
       {showStatement && (
-        <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-20">
           <LightUpText text={statement} as="p" className="font-display max-w-5xl text-4xl leading-[1.1] md:text-6xl" />
         </div>
       )}

@@ -28,7 +28,7 @@ export default function BuildV2({ content, showClio = true, showPraxistence = tr
 
   return (
     <section className="overflow-x-clip bg-black text-white">
-      <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-20">
         <div className="reveal-stagger grid gap-6 md:grid-cols-2 md:gap-12">
           <div>
             <p className="text-sm text-[#40A2D8]">{eyebrow}</p>

@@ -27,7 +27,7 @@ export default function ServicesV2({ content }) {
 
   return (
     <section id="services" className="scroll-mt-20 bg-black text-white">
-      <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-20">
         {/* same split and gap as the cards, so the intro starts over the third card */}
         <div className="reveal-stagger grid gap-6 md:grid-cols-2 md:gap-4 xl:gap-5">
           <div>
