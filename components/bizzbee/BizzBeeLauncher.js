@@ -19,6 +19,10 @@ import Image from "next/image";
 //   (Web Animations API), not from stylesheet keyframes, and are switched off
 //   for visitors who ask their system for reduced motion.
 // - Not draggable: it stays in its corner. A click opens / minimizes the chat.
+// - Steps aside: while it would sit on top of anything marked
+//   `data-bizzbee-avoid` (e.g. the blog sidebar form's Submit button), it
+//   fades out and can't be tapped; it comes back once that has scrolled
+//   away. Never while the chat is open, or while it has keyboard focus.
 // - While the chat is open it is static.
 const LOOP_FROM = 51;
 const REST_FRAME = 90; // shown while the chat is open
@@ -34,6 +38,38 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
   const anims = useRef([]); // Web Animations (roam + lean), so hover can speed them up
   const [ready, setReady] = useState(false);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const hitRef = useRef(null); // the tappable circle around the bubble
+  const [tucked, setTucked] = useState(false);
+
+  // Step aside while overlapping a [data-bizzbee-avoid] element. Checked on
+  // scroll / resize (once per frame at most) — just a few rect reads.
+  useEffect(() => {
+    let frame = 0;
+    const check = () => {
+      frame = 0;
+      const hit = hitRef.current?.getBoundingClientRect();
+      if (!hit) return;
+      const pad = 12;
+      const over = [...document.querySelectorAll("[data-bizzbee-avoid]")].some((el) => {
+        const r = el.getBoundingClientRect();
+        return r.width > 0 && r.left < hit.right + pad && r.right > hit.left - pad && r.top < hit.bottom + pad && r.bottom > hit.top - pad;
+      });
+      setTucked(over);
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(check);
+    };
+    schedule();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, []);
+  const [focused, setFocused] = useState(false);
+  const away = tucked && !expanded && !focused;
 
   // Load the Lottie animation (lazy). It always plays.
   useEffect(() => {
@@ -136,8 +172,12 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
   const resetTilt = () => setTilt({ x: 0, y: 0 });
 
   return (
-    <div className="fixed bottom-2 right-2 z-[9990] pb-[env(safe-area-inset-bottom)] sm:right-3">
-      {showTip && (
+    <div
+      className={`fixed bottom-2 right-2 z-[9990] pb-[env(safe-area-inset-bottom)] transition-opacity duration-300 sm:right-3 ${
+        away ? "opacity-0 [&_*]:!pointer-events-none" : "opacity-100"
+      }`}
+    >
+      {showTip && !away && (
         <div
           role="status"
           className="bizzbee-enter absolute bottom-full right-1 mb-1 w-[190px] rounded-2xl rounded-br-md bg-white sm:bottom-auto sm:right-full sm:top-1/2 sm:mb-0 sm:mr-2 sm:w-[200px] sm:-translate-y-1/2 sm:rounded-br-2xl sm:rounded-r-md px-3.5 py-2.5 pr-8 text-xs font-medium text-[#0a2540] shadow-xl"
@@ -163,7 +203,11 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
           resetTilt();
           setSpeed(1);
         }}
-        onBlur={resetTilt}
+        onFocus={() => setFocused(true)}
+        onBlur={() => {
+          resetTilt();
+          setFocused(false);
+        }}
         aria-label={expanded ? "Minimize BizzBee AI assistant" : "Open BizzBee AI assistant"}
         aria-expanded={expanded}
         title={expanded ? "Minimize BizzBee AI" : "Ask BizzBee AI"}
@@ -184,6 +228,7 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
                 it has room to roam, and its empty corners used to swallow
                 taps meant for buttons underneath, e.g. a hero CTA on a phone. */}
             <span
+              ref={hitRef}
               aria-hidden="true"
               className="pointer-events-auto absolute left-1/2 top-1/2 h-[72px] w-[72px] -translate-x-1/2 -translate-y-1/2 rounded-full sm:h-[88px] sm:w-[88px]"
             />

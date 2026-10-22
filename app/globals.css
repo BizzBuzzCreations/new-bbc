@@ -473,6 +473,17 @@ body {
   color: #333;
 }
 
+/* Blog text in the site's fonts even when a post carries fonts pasted in
+   from another editor (inline font-family, e.g. Arial): headings in Fira
+   Sans, everything else in IBM Plex Sans. Code keeps its monospace. */
+.article :where(*:not(pre, code, kbd, samp, pre *, code *)) {
+  font-family: var(--font-ibm), sans-serif !important;
+}
+.article :is(h1, h2, h3, h4, h5, h6),
+.article :is(h1, h2, h3, h4, h5, h6) * {
+  font-family: var(--font-fira), sans-serif !important;
+}
+
 .article h2 {
   margin-top: 2.5rem;
   font-size: 28px;

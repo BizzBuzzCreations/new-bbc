@@ -50,7 +50,7 @@ export default function BlogContactForm() {
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl shadow-md p-6">
+    <div data-bizzbee-avoid className="bg-white border border-gray-200 rounded-2xl shadow-md p-6">
       <h3 className="text-lg font-bold text-black mb-1">Have Questions?</h3>
       <p className="text-sm text-gray-500 mb-5">
         Tell us a little about your project and we&apos;ll get back to you.
@@ -70,7 +70,7 @@ export default function BlogContactForm() {
             name="name"
             type="text"
             id="blog-contact-name"
-            className="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-black"
+            className="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-[#0B60B0]"
             placeholder="Your full name"
             required
           />
@@ -89,7 +89,7 @@ export default function BlogContactForm() {
             name="email"
             type="email"
             id="blog-contact-email"
-            className="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-black"
+            className="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-[#0B60B0]"
             placeholder="you@example.com"
             required
           />
@@ -108,7 +108,7 @@ export default function BlogContactForm() {
             name="message"
             id="blog-contact-message"
             rows="4"
-            className="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-black"
+            className="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-[#0B60B0]"
             placeholder="Briefly tell us what you need..."
             required
           ></textarea>
@@ -117,8 +117,9 @@ export default function BlogContactForm() {
         <button
           type="submit"
           disabled={submitting}
-          className="w-full rounded-lg px-4 py-3 bg-black text-white text-sm font-semibold cursor-pointer transition-transform duration-300 ease-in-out hover:scale-95 disabled:opacity-60"
+          className="inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-[#0B60B0] bg-[#0B60B0] px-5 py-3 text-sm font-medium text-white cursor-pointer transition-colors duration-200 hover:border-[#0d70cf] hover:bg-[#0d70cf] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8] disabled:opacity-60"
         >
+          <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-current opacity-80" />
           {submitting ? "Sending..." : "Submit"}
         </button>
       </form>

@@ -8,7 +8,8 @@ import BlogContactForm from "@/components/sections/blogContactForm";
 import RichText from "@/components/ui/richText";
 import { FAQSection } from "@/components/ui/faq-accordion";
 import CTA from "@/components/sections/CTA";
-import { User, ImageOff } from "lucide-react";
+import Link from "next/link";
+import { User, ImageOff, ChevronLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 
 // ISR: served from cache and regenerated at most every 60s. Dashboard
@@ -88,7 +89,11 @@ export default async function SingleBlog({ params }) {
   });
 
   const rawContent = removeDeadWordpressImages(sanitizeBlogContent(post?.content));
-  const { html: extractedHtml, toc } = extractTableOfContents(rawContent);
+  const { html: extractedHtml, toc: headings } = extractTableOfContents(rawContent);
+  // number the main sections only (a post that has no h2 numbers its h3s)
+  const hasH2 = headings.some((h) => h.level === 2);
+  let section = 0;
+  const toc = headings.map((h) => ({ ...h, level: hasH2 ? h.level : 2, number: !hasH2 || h.level === 2 ? ++section : null }));
   // Images inside the article body sit below the fold — lazy-load them so
   // they don't compete with the featured image (the LCP element).
   const filteredData = extractedHtml?.replace(
@@ -133,7 +138,28 @@ export default async function SingleBlog({ params }) {
 
   return (
     <>
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 md:pt-28 pb-20 lg:flex lg:items-start gap-8">
+    {/* Title band in the site's dark style; the article itself stays on
+        white below it, for easy reading. */}
+    <header className="bg-black text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-12 md:pt-16 md:pb-16">
+        <Link href="/blog" className="inline-flex items-center gap-1 text-sm text-[#40A2D8] hover:text-white transition-colors">
+          <ChevronLeft size={16} aria-hidden="true" /> All blogs
+        </Link>
+        <h1 className="font-display mt-5 max-w-4xl text-3xl leading-[1.12] md:text-5xl">
+          {post?.title}
+        </h1>
+        <p className="mt-5 text-sm text-white/60">
+          {post?.author && (
+            <>
+              By <span className="text-white/85">{post.author}</span>
+              <span className="mx-2 text-white/30" aria-hidden="true">·</span>
+            </>
+          )}
+          Published on <time dateTime={post?.publishedAt}>{formattedDate}</time>
+        </p>
+      </div>
+    </header>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 md:pt-12 pb-20 lg:flex lg:items-start gap-8">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
@@ -152,17 +178,20 @@ export default async function SingleBlog({ params }) {
             <h3 className="text-sm font-bold uppercase tracking-wide text-gray-900 mb-4">
               Contents
             </h3>
+            {/* Main sections (h2) are numbered 1, 2, 3…; their sub-sections
+                (h3) sit indented under them with a dash, not a number of
+                their own. */}
             <ol className="space-y-2">
-              {toc.map((item, index) => (
+              {toc.map((item) => (
                 <li key={item.id}>
                   <a
                     href={`#${item.id}`}
-                    className={`flex gap-2 py-0.5 text-sm text-gray-600 hover:text-black transition-colors ${
-                      item.level === 3 ? "pl-4" : ""
+                    className={`flex gap-2 py-0.5 text-sm transition-colors ${
+                      item.level === 3 ? "pl-5 text-gray-500 hover:text-[#0B60B0]" : "text-gray-700 hover:text-[#0B60B0]"
                     }`}
                   >
-                    <span className="font-semibold text-black shrink-0">
-                      {index + 1}.
+                    <span className={`shrink-0 ${item.level === 3 ? "text-gray-400" : "font-semibold text-[#0B60B0]"}`}>
+                      {item.level === 3 ? "–" : `${item.number}.`}
                     </span>
                     <span>{item.text}</span>
                   </a>
@@ -175,15 +204,6 @@ export default async function SingleBlog({ params }) {
 
       {/* Blog content */}
       <div className="max-w-3xl mx-auto lg:mx-0 flex-1 min-w-0">
-        {/* Header */}
-        <div className="py-8">
-          <h1 className="md:text-3xl xl:text-4xl text-2xl font-bold mb-4 font-bold mb-2">
-            {post?.title}
-          </h1>
-          <p className="text-gray-500 text-sm">
-            Published on <time dateTime={post?.publishedAt}>{formattedDate}</time>
-          </p>
-        </div>
         {/* Featured Image */}
         {featuredImage ? (
           // eslint-disable-next-line @next/next/no-img-element
