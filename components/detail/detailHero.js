@@ -4,13 +4,16 @@ import { ChevronRight } from "lucide-react";
 import RichText from "@/components/ui/richText";
 import Pill from "@/components/home/pill";
 
-// Detail-page hero (sub-service pages, redesign): a breadcrumb back to the
+// Detail-page hero (sub-service and industry pages): a breadcrumb back to the
 // parent page, the big light headline (last three words in the beams'
 // blue → violet, like the homepage), the description with the page's own
-// CTA, then the page photo in a wide rounded frame at its own 2.18:1 shape
-// (all these photos are that crop, so nothing important is cut off). The
-// photo is the LCP element: loaded eagerly at high priority.
-export default function DetailHero({ parentLabel, parentHref, label, title, description, ctaText, image, secondaryHref }) {
+// CTA, then the page photo in a wide rounded frame at its own shape —
+// `imageShape` "2.18" (sub-service photos) or "2.86" (industry photos) — so
+// nothing important is cut off. The photo is the LCP element: loaded
+// eagerly at high priority.
+const FRAME_SHAPES = { "2.18": "md:aspect-[2.18/1]", "2.86": "md:aspect-[2.86/1]" };
+
+export default function DetailHero({ parentLabel, parentHref, label, title, description, ctaText, image, secondaryHref, imageShape = "2.18" }) {
   const words = (title || "").split(/\s+/);
   const lead = words.slice(0, Math.max(0, words.length - 3)).join(" ");
   const accent = words.slice(-3).join(" ");
@@ -51,7 +54,7 @@ export default function DetailHero({ parentLabel, parentHref, label, title, desc
 
       {image && (
         <div className="mx-auto max-w-7xl px-6 pt-10 md:px-10 md:pt-14">
-          <div className="relative aspect-[16/9] overflow-hidden rounded-3xl bg-[#0a0a0a] md:aspect-[2.18/1]">
+          <div className={`relative aspect-[16/9] overflow-hidden rounded-3xl bg-[#0a0a0a] ${FRAME_SHAPES[imageShape] || FRAME_SHAPES["2.18"]}`}>
             <Image src={image} alt="" fill preload fetchPriority="high" sizes="(min-width: 1280px) 1200px, 100vw" className="object-cover" />
           </div>
         </div>
