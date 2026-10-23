@@ -10,7 +10,6 @@ import CtaSideImage from "@/components/ui/ctaSideImage";
 import { getPageContent } from "@/actions/pageContentActions";
 import { buildPageMetadata } from "@/lib/pageMetadata";
 import PageSeoScripts from "@/components/sections/pageSeoScripts";
-import HeroBottomFade from "@/components/ui/heroBottomFade";
 import {
   Eye,
   Users,
@@ -351,7 +350,6 @@ export default async function HowWeWorkPage() {
           }}
         />
 
-        <HeroBottomFade />
         <div className="relative max-w-3xl">
           <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4">
             {heroHeading}

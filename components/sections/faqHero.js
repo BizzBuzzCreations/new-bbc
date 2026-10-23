@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import RichText from "@/components/ui/richText";
-import HeroBottomFade from "@/components/ui/heroBottomFade";
 
 // FAQ page hero — same full-bleed-photo treatment as HomeAbout's building
 // shot: the question-mark graphic spans the whole section as a background
@@ -55,7 +54,6 @@ export default function FaqHero({ content } = {}) {
         aria-hidden="true"
       />
 
-      <HeroBottomFade />
       <div className="relative w-full px-6 md:px-12 lg:px-24 pt-10 pb-16 md:py-16">
         <div className="max-w-xl">
           <h1 className="text-white leading-[1.05]">

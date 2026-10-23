@@ -26,7 +26,6 @@ import { getPageContent } from "@/actions/pageContentActions";
 import { buildPageMetadata } from "@/lib/pageMetadata";
 import PageSeoScripts from "@/components/sections/pageSeoScripts";
 import RichText from "@/components/ui/richText";
-import HeroBottomFade from "@/components/ui/heroBottomFade";
 
 // Icons stay code-driven (design), matched positionally to whichever
 // industry cards are saved — same order as the default list below.
@@ -185,7 +184,6 @@ export default async function IndustriesIndexPage() {
           }}
         />
 
-        <HeroBottomFade />
         <div className="relative max-w-2xl">
           <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-4">
             {heroEyebrow}

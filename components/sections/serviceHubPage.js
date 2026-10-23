@@ -15,7 +15,7 @@ import BeamsBlock from "@/components/home/band";
 // into all 8 files.
 //
 // In the homepage's style: hero (breadcrumb to /services, the page photo
-// fading into the page) → overview (portrait photo + text) → the
+// in a rounded frame) → overview (portrait photo + text) → the
 // sub-services as linked cards → how it works + who we are (on the beams
 // background) → FAQ → why businesses trust us (photo + text) → closing CTA.
 // Same dashboard fields and "Remove section" switches (`hidden`) as before.
