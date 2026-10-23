@@ -43,3 +43,15 @@ next-env.d.ts
 
 # keep the placeholder template committed
 !.env.example
+
+# Original artwork kept locally as sources; the site uses the prepared
+# WebP copies (faq-question-*, reviews-5stars-*, cta-conversation-*,
+# praxistence-crm, clio-illustration) and bizzbee-support.json.
+/public/FAQs Flat illustration _ Rafiki style.gif
+/public/People Thinking to Make Decision, Problem Solving and Find Creative Ideas with Question Mark in Flat Cartoon Background for Poster Illustration.jpeg
+/public/a_clean_vector_style_flat_illustration_on_a_transp.png
+/public/Woman Reviewing Feedback on Beanbag Chair.png
+/public/Friendly Office Conversation Illustration.png
+/public/Glossy Blue CRM Dashboard Illustration.png
+/public/clio-logo-and-illustration-transparent.png
+/public/Customer Support.json
