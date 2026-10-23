@@ -13,11 +13,21 @@ import Pill from "@/components/home/pill";
 // eagerly at high priority.
 const FRAME_SHAPES = { "2.18": "md:aspect-[2.18/1]", "2.86": "md:aspect-[2.86/1]" };
 
-export default function DetailHero({ parentLabel, parentHref, label, title, description, ctaText, image, secondaryHref, imageShape = "2.18" }) {
+// The headline's words, the last three in the blue → violet gradient (shared
+// with the one-off pages' hero, pageHero.js).
+export function AccentTitle({ title }) {
   const words = (title || "").split(/\s+/);
   const lead = words.slice(0, Math.max(0, words.length - 3)).join(" ");
   const accent = words.slice(-3).join(" ");
+  return (
+    <>
+      {lead && <span>{lead} </span>}
+      <span className="bg-linear-to-r from-[#40A2D8] via-[#7b74f7] to-[#b57cff] bg-clip-text pb-1 text-transparent">{accent}</span>
+    </>
+  );
+}
 
+export default function DetailHero({ parentLabel, parentHref, label, title, description, ctaText, image, secondaryHref, imageShape = "2.18" }) {
   return (
     <section className="bg-black text-white">
       <div className="mx-auto max-w-7xl px-6 pt-8 md:px-10 md:pt-14">
@@ -39,8 +49,7 @@ export default function DetailHero({ parentLabel, parentHref, label, title, desc
 
         <div className="mt-6 grid gap-8 md:mt-8 md:grid-cols-[3fr_2fr] md:items-end md:gap-16">
           <h1 className="font-display text-[2.3rem] leading-[1.06] sm:text-5xl xl:text-6xl">
-            {lead && <span>{lead} </span>}
-            <span className="bg-linear-to-r from-[#40A2D8] via-[#7b74f7] to-[#b57cff] bg-clip-text pb-1 text-transparent">{accent}</span>
+            <AccentTitle title={title} />
           </h1>
           <div>
             <RichText as="p" text={description} className="text-base leading-relaxed text-white/70 md:text-lg" />

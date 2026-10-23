@@ -14,6 +14,7 @@ import RichText from "@/components/ui/richText";
 export default function FaqV2({ content }) {
   const heading = content?.faqHeading || "FAQs";
   const subtext = content?.faqSubheading || "";
+  const eyebrow = content?.faqEyebrow || "Questions";
   const items = (content?.faqItems || []).filter((f) => f?.question);
   if (!items.length) return null;
 
@@ -21,7 +22,7 @@ export default function FaqV2({ content }) {
     <section className="bg-black text-white">
       <div className="reveal-stagger mx-auto grid max-w-7xl gap-10 px-6 md:px-10 py-16 md:grid-cols-[2fr_3fr] md:gap-16 md:py-20">
         <div className="md:sticky md:top-28 md:self-start">
-          <p className="text-sm text-[#40A2D8]">Questions</p>
+          <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
           <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
           {subtext && <RichText as="p" text={subtext} className="mt-5 max-w-md text-base leading-relaxed text-white/70" />}
           {/* eslint-disable-next-line @next/next/no-img-element -- pre-sized 1x / 2x files (31KB / 75KB); next/image would only recompress them */}

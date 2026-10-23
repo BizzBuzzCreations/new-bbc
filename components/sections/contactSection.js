@@ -3,13 +3,11 @@
 import { useState } from "react";
 import { sendMail } from "@/actions/serverActions";
 import { toast, Bounce } from "react-toastify";
-import { Eye, Users, FileText, Paperclip } from "lucide-react";
+import Link from "next/link";
+import { ChevronRight, Phone, MessageCircle, Mail, Paperclip } from "lucide-react";
 import RichText from "@/components/ui/richText";
+import { AccentTitle } from "@/components/detail/detailHero";
 import { markEnquired } from "@/lib/enquiryFlag";
-
-// Icons stay code-driven (design), matched positionally to whichever
-// steps are saved.
-const STEP_ICONS = [Eye, Users, FileText];
 
 const DEFAULT_STEPS = [
   {
@@ -43,11 +41,15 @@ const toastOptions = {
 const MAX_FILE_BYTES = 4 * 1024 * 1024;
 
 const inputClasses =
-  "w-full border border-gray-300 focus:border-[#0B60B0] rounded-lg outline-none px-4 py-2.5 text-sm transition";
+  "w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-base text-white placeholder:text-white/40 outline-none transition focus:border-[#40A2D8] md:text-sm";
+const labelClasses = "mb-1.5 block text-sm text-white/80";
 
-// `headingLevel` — the /contact page passes "h1" (it's that page's main
-// heading; the page had no <h1> at all). Our Team reuses this section below
-// its own hero <h1>, so it keeps the default "h2".
+// Redesign (dark, like the rest of the site): on the left the heading (a
+// breadcrumb above it on /contact), the text, the three steps as a
+// numbered thin-line list and the direct lines (call / WhatsApp / email);
+// on the right the form on a dark card. Same fields, checks and enquiry
+// handling as before (sendMail; a successful enquiry also stops the
+// consultation popup).
 export default function ContactSection({ content, headingLevel = "h2" }) {
   const Heading = headingLevel;
   // Sub-headings sit one level below whichever heading the section uses.
@@ -58,8 +60,7 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
     "You bring the goals. We bring the strategy, execution, and ongoing support. From the first idea to measurable results, our team handles the heavy lifting, so you can focus on growing your business.";
   const formHeading = content?.contactFormHeading || "Send Us a Message";
   const formButtonText = content?.contactFormButtonText || "Send Message";
-  const stepsRaw = content?.contactSteps?.length > 0 ? content.contactSteps : DEFAULT_STEPS;
-  const steps = stepsRaw.map((s, i) => ({ ...s, icon: STEP_ICONS[i % STEP_ICONS.length] }));
+  const steps = content?.contactSteps?.length > 0 ? content.contactSteps : DEFAULT_STEPS;
 
   const [form, setForm] = useState({
     name: "",
@@ -136,75 +137,74 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
     }
   };
 
-  return (
-    <section id="contact-form" className="relative overflow-hidden min-h-screen flex flex-col justify-center px-4 md:px-12 lg:px-24 py-20 bg-black">
-      <div className="max-w-6xl mx-auto relative z-10 rounded-3xl overflow-hidden shadow-xl grid lg:grid-cols-2 border border-gray-200">
-        {/* Left: dark info panel. */}
-        <div className="relative bg-black/40 backdrop-blur-sm text-white p-8 sm:p-10 lg:p-12 overflow-hidden">
-          <div
-            className="absolute inset-0 opacity-40"
-            style={{
-              background:
-                "radial-gradient(circle at 15% 15%, rgba(11,96,176,0.55), transparent 55%), radial-gradient(circle at 85% 75%, rgba(64,162,216,0.4), transparent 55%)",
-            }}
-          />
-          <div className="relative">
-            <Heading className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
-              {heading}
-            </Heading>
-            <RichText as="p" text={paragraph} className="text-white mb-10 max-w-md" />
+  const field = (id, label, input) => (
+    <div>
+      <label className={labelClasses} htmlFor={id}>{label}</label>
+      {input}
+    </div>
+  );
 
-            <div className="grid sm:grid-cols-3 gap-4">
-              {steps.map(({ icon: Icon, title, description }, i) => (
-                <div
-                  key={i}
-                  className="rounded-2xl border border-white/10 bg-white/5 p-4"
-                >
-                  <Icon size={18} className="text-[#40A2D8] mb-3" />
-                  <SubHeading className="font-semibold text-sm mb-2">{title}</SubHeading>
-                  <RichText as="p" text={description} className="text-xs text-white leading-relaxed" />
+  return (
+    <section id="contact-form" className="scroll-mt-20 bg-black text-white">
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 pt-8 pb-16 md:px-10 md:pt-14 md:pb-20 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+        <div>
+          {headingLevel === "h1" && (
+            <nav aria-label="Breadcrumb" className="mb-6 md:mb-8">
+              <ol className="flex flex-wrap items-center gap-1.5 text-sm text-white/60">
+                <li>
+                  <Link href="/" className="text-[#40A2D8] hover:text-white">Home</Link>
+                </li>
+                <li aria-hidden="true">
+                  <ChevronRight size={14} />
+                </li>
+                <li aria-current="page" className="text-white/80">Contact</li>
+              </ol>
+            </nav>
+          )}
+          <Heading className="font-display text-[2.3rem] leading-[1.06] sm:text-5xl">
+            <AccentTitle title={heading} />
+          </Heading>
+          <RichText as="p" text={paragraph} className="mt-6 max-w-xl text-base leading-relaxed text-white/70 md:text-lg" />
+
+          <ol className="mt-10 border-t border-white/10">
+            {steps.map(({ title, description }, i) => (
+              <li key={i} className="flex gap-5 border-b border-white/10 py-5">
+                <span aria-hidden="true" className="font-display w-8 shrink-0 text-2xl text-[#40A2D8]">{String(i + 1).padStart(2, "0")}</span>
+                <div>
+                  <SubHeading className="text-base font-medium text-white">{title}</SubHeading>
+                  <RichText as="p" text={description} className="mt-1.5 text-sm leading-relaxed text-white/65" />
                 </div>
-              ))}
-            </div>
+              </li>
+            ))}
+          </ol>
+
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <span className="w-full text-sm text-white/60">or reach us directly:</span>
+            <a href="tel:+918115585285" className="inline-flex items-center gap-2 rounded-full border border-white/25 px-5 py-2.5 text-sm font-medium transition-colors hover:border-white hover:bg-white hover:text-black">
+              <Phone size={16} aria-hidden="true" /> +91 81155 85285
+            </a>
+            <a href="https://wa.me/918115585285" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/25 px-5 py-2.5 text-sm font-medium transition-colors hover:border-[#25D366] hover:bg-[#25D366] hover:text-black">
+              <MessageCircle size={16} aria-hidden="true" /> WhatsApp
+            </a>
+            <a href="mailto:info@bizzbuzzcreations.com" className="inline-flex items-center gap-2 rounded-full border border-white/25 px-5 py-2.5 text-sm font-medium transition-colors hover:border-white hover:bg-white hover:text-black">
+              <Mail size={16} aria-hidden="true" /> info@bizzbuzzcreations.com
+            </a>
           </div>
         </div>
 
-        {/* Right: form — fully opaque now that the animation lives behind
-            the card instead of inside it. */}
-        <div className="relative bg-white p-8 lg:p-10">
-          <SubHeading className="font-semibold text-lg text-black mb-6">
-            {formHeading}
-          </SubHeading>
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div className="grid sm:grid-cols-2 gap-5">
-              <div>
-                <label
-                  className="block text-sm font-medium text-gray-700 mb-1.5"
-                  htmlFor="name"
-                >
-                  Full Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  className={inputClasses}
-                  placeholder="Your name"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  className="block text-sm font-medium text-gray-700 mb-1.5"
-                  htmlFor="email"
-                >
-                  Email Address
-                </label>
+        <div className="rounded-3xl border border-white/10 bg-[#0b0e16] p-6 sm:p-8 lg:p-10">
+          <SubHeading className="font-display text-2xl text-white">{formHeading}</SubHeading>
+          <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+            <div className="grid gap-5 sm:grid-cols-2">
+              {field("name", "Full Name", (
+                <input id="name" name="name" autoComplete="name" value={form.name} onChange={handleChange} className={inputClasses} placeholder="Your name" required />
+              ))}
+              {field("email", "Email Address", (
                 <input
                   id="email"
                   name="email"
                   type="email"
+                  autoComplete="email"
                   pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)*\.[a-zA-Z]{2,}"
                   title="Enter a valid email address, e.g. name@example.com"
                   value={form.email}
@@ -213,39 +213,18 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
                   placeholder="your@email.com"
                   required
                 />
-              </div>
+              ))}
             </div>
-
-            <div>
-              <label
-                className="block text-sm font-medium text-gray-700 mb-1.5"
-                htmlFor="subject"
-              >
-                Subject
-              </label>
-              <input
-                id="subject"
-                name="subject"
-                value={form.subject}
-                onChange={handleChange}
-                className={inputClasses}
-                placeholder="What is this regarding?"
-                required
-              />
-            </div>
-
-            <div>
-              <label
-                className="block text-sm font-medium text-gray-700 mb-1.5"
-                htmlFor="contact"
-              >
-                Contact Number
-              </label>
+            {field("subject", "Subject", (
+              <input id="subject" name="subject" value={form.subject} onChange={handleChange} className={inputClasses} placeholder="What is this regarding?" required />
+            ))}
+            {field("contact", "Contact Number", (
               <input
                 id="contact"
                 name="contact"
                 type="tel"
                 inputMode="numeric"
+                autoComplete="tel-national"
                 pattern="[0-9]{10}"
                 minLength={10}
                 maxLength={10}
@@ -256,51 +235,30 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
                 placeholder="Your contact number"
                 required
               />
-            </div>
+            ))}
+            {field("message", "Message", (
+              <textarea id="message" name="message" rows={4} value={form.message} onChange={handleChange} className={`${inputClasses} resize-none`} placeholder="Tell us about your project..." required />
+            ))}
 
-            <div>
-              <label
-                className="block text-sm font-medium text-gray-700 mb-1.5"
-                htmlFor="message"
-              >
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={4}
-                value={form.message}
-                onChange={handleChange}
-                className={`${inputClasses} resize-none`}
-                placeholder="Tell us about your project..."
-                required
-              />
-            </div>
-
+            {/* sr-only, not hidden: the input stays reachable by keyboard
+                (the label shows the focus ring) */}
             <div>
               <label
                 htmlFor="file"
-                className="flex items-center justify-between border-b border-gray-300 py-2 text-sm text-gray-500 cursor-pointer"
+                className="flex cursor-pointer items-center justify-between gap-3 rounded-xl border border-dashed border-white/20 px-4 py-3 text-sm text-white/60 transition-colors hover:border-white/40 has-[+input:focus-visible]:border-[#40A2D8]"
               >
-                <span className="truncate">
-                  {fileName || "Attach PDF/Doc File (optional)"}
-                </span>
-                <Paperclip size={16} className="shrink-0" />
+                <span className="truncate">{fileName || "Attach PDF/Doc File (optional)"}</span>
+                <Paperclip size={16} aria-hidden="true" className="shrink-0" />
               </label>
-              <input
-                id="file"
-                type="file"
-                accept=".pdf,.doc,.docx"
-                onChange={handleFile}
-                className="hidden"
-              />
+              <input id="file" type="file" accept=".pdf,.doc,.docx" onChange={handleFile} className="sr-only" />
             </div>
 
             <button
               type="submit"
               disabled={submitting}
-              className="w-full bg-black hover:bg-black/85 disabled:opacity-60 text-white text-sm font-semibold py-3.5 rounded-lg transition cursor-pointer"
+              className="group inline-flex w-full cursor-pointer items-center justify-center gap-2.5 rounded-full border border-[#0B60B0] bg-[#0B60B0] px-6 py-3.5 text-base font-medium text-white transition-colors duration-200 hover:border-[#0d70cf] hover:bg-[#0d70cf] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8] disabled:opacity-60"
             >
+              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-current opacity-80 transition-transform duration-200 group-hover:scale-[1.7]" />
               {submitting ? "Sending…" : formButtonText}
             </button>
           </form>

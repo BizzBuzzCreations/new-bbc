@@ -4,10 +4,11 @@ import Pill from "@/components/home/pill";
 
 // Closing call to action (sub-service pages, redesign) — same look as the
 // homepage's closing section (big light heading, illustration on the right)
-// but with the page's own heading, text and two buttons (both to /contact,
-// as before), plus Call / WhatsApp. Illustration lazy-loads; hidden on
+// but with the page's own heading, text and two buttons (both to /contact
+// unless `secondaryHref` says otherwise, e.g. /our-team's "Explore
+// Careers"), plus Call / WhatsApp. Illustration lazy-loads; hidden on
 // phones.
-export default function DetailCta({ heading, tagline, text, primaryText, secondaryText }) {
+export default function DetailCta({ heading, tagline, text, primaryText, secondaryText, secondaryHref = "/contact" }) {
   return (
     <section id="CTA" className="scroll-mt-20 bg-black text-white">
       <div className="mx-auto max-w-7xl px-6 md:px-10 pb-24 md:pb-32">
@@ -18,7 +19,7 @@ export default function DetailCta({ heading, tagline, text, primaryText, seconda
             <RichText as="p" text={text} className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 md:text-lg" />
             <div className="mt-10 flex flex-wrap gap-3">
               <Pill href="/contact" variant="solid" className="px-6 py-3 text-base">{primaryText || "Get a Free Consultation"}</Pill>
-              {secondaryText && <Pill href="/contact" className="px-6 py-3 text-base">{secondaryText}</Pill>}
+              {secondaryText && <Pill href={secondaryHref} className="px-6 py-3 text-base">{secondaryText}</Pill>}
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <span className="w-full text-sm text-white/60 sm:w-auto">or talk to us now:</span>

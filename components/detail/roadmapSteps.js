@@ -6,15 +6,17 @@ import RichText from "@/components/ui/richText";
 // the steps on desktop (sticky), and as you scroll the line fills and each
 // step's dot lights up when it reaches it (ScrollSteps, vertical). Nothing
 // moves on its own; under reduced motion everything is shown lit.
-export default function RoadmapSteps({ heading, subtext, steps }) {
+// `footnote`: an optional closing line under the heading (/about).
+export default function RoadmapSteps({ heading, subtext, steps, eyebrow = "How it works", footnote }) {
   if (!steps?.length) return null;
   return (
     <section className="relative text-white">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-[2fr_3fr] md:gap-16 md:px-10 py-16 md:py-20">
         <div className="reveal md:sticky md:top-28 md:self-start">
-          <p className="text-sm text-[#40A2D8]">How it works</p>
+          <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
           <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
           {subtext && <RichText as="p" text={subtext} className="mt-5 text-base leading-relaxed text-white/70" />}
+          {footnote && <RichText as="p" text={footnote} className="mt-6 border-l-2 border-[#40A2D8] pl-4 text-base leading-relaxed text-white" />}
         </div>
         <ScrollSteps vertical className="relative">
           {/* the line, and its filled part */}

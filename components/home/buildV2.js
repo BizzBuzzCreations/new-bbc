@@ -4,6 +4,7 @@ import { ArrowUpRight, BarChart3, Bot, Check, GitBranch, Globe, Headset, Server,
 import RichText from "@/components/ui/richText";
 import Pill from "@/components/home/pill";
 import { productCards, CLIO_IMAGE, PRAXISTENCE_IMAGE } from "@/components/sections/aiProductsShowcase";
+import { IN_HOUSE_BUILDS } from "@/lib/inHouseBuilds";
 
 // The homepage's product pictures: transparent illustrations (Clio logo +
 // conversation; glossy CRM dashboard) with no frame or backdrop — they sit
@@ -32,7 +33,8 @@ const BUILD_ICONS = [Headset, Bot, Workflow, Server, Globe, GitBranch, BarChart3
 //    real size.
 //  - The rest of the in-house systems are small icon tiles (4 across on
 //    desktop), ending with a highlighted "Need a system like these?" tile.
-// Same dashboard fields as before.
+// Same dashboard fields as before (the built-in systems list when none are
+// saved, like the old section). /industries shows the tiles on their own.
 // `clioPrefix`: the dashboard field prefix of the Clio card ("ai" on the
 // homepage, "clio" on the location pages).
 export default function BuildV2({ content, showClio = true, showPraxistence = true, showBuilds = true, clioPrefix = "ai" }) {
@@ -40,7 +42,7 @@ export default function BuildV2({ content, showClio = true, showPraxistence = tr
   const heading = content?.caseStudiesHeading || "Powered by What We Build";
   const subtext = content?.caseStudiesSubtext || "";
   const products = productCards(content, { clioPrefix, showClio, showPraxistence });
-  const builds = showBuilds ? (content?.caseStudyClients || []).filter((c) => c?.name) : [];
+  const builds = showBuilds ? (content?.caseStudyClients?.length > 0 ? content.caseStudyClients : IN_HOUSE_BUILDS).filter((c) => c?.name) : [];
 
   if (!products.length && !builds.length) return null;
 
@@ -105,9 +107,9 @@ export default function BuildV2({ content, showClio = true, showPraxistence = tr
         )}
 
         {builds.length > 0 && (
-          <div className="mt-24">
-            <p className="text-sm text-white/60">Also built and run in-house</p>
-            <ul className="reveal-stagger mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className={products.length ? "mt-24" : "mt-12 md:mt-16"}>
+            {products.length > 0 && <p className="mb-6 text-sm text-white/60">Also built and run in-house</p>}
+            <ul className="reveal-stagger grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {builds.map((b, i) => {
                 const Icon = BUILD_ICONS[i % BUILD_ICONS.length];
                 return (

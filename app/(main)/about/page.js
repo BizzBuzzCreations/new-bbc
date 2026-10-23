@@ -1,9 +1,3 @@
-import AboutHero from "@/components/sections/aboutHero";
-import CTA from "@/components/sections/CTA";
-import Recognitions from "@/components/sections/recognitions";
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
 import {
   Target,
   Rocket,
@@ -12,15 +6,39 @@ import {
   Lightbulb,
   Users,
   ShieldCheck,
+  Award,
+  Search,
+  Layers,
+  HeartHandshake,
+  Headset,
+  TrendingUp,
+  CheckCircle2,
 } from "lucide-react";
-import WhyChooseUs from "@/components/sections/WhyChooseUs";
-import AboutFAQ from "@/components/sections/AboutFAQ";
-import DifferentiatorsCarousel from "@/components/sections/differentiatorsCarousel";
-import TrustAdvantage from "@/components/sections/trustAdvantage";
-import RoadmapTimeline from "@/components/sections/roadmapTimeline";
-import RichText from "@/components/ui/richText";
-import AboutCulture from "@/components/sections/aboutCulture";
-import OurJourney from "@/components/sections/ourJourney";
+import PageHero from "@/components/detail/pageHero";
+import PhotoMosaic from "@/components/detail/photoMosaic";
+import HubIntro from "@/components/detail/hubIntro";
+import MissionValues from "@/components/detail/missionValues";
+import JourneyYears from "@/components/detail/journeyYears";
+import WhyTrust from "@/components/detail/whyTrust";
+import CultureRows from "@/components/detail/cultureRows";
+import RoadmapSteps from "@/components/detail/roadmapSteps";
+import CertificationsRow from "@/components/detail/certificationsRow";
+import WhoItsFor from "@/components/detail/whoItsFor";
+import PhotoFeatures from "@/components/detail/photoFeatures";
+import FaqV2 from "@/components/home/faqV2";
+import CtaV2 from "@/components/home/ctaV2";
+import BeamsBlock from "@/components/home/band";
+import Pill from "@/components/home/pill";
+import {
+  ABOUT_HERO_IMAGES,
+  ABOUT_JOURNEY_YEARS,
+  ABOUT_DIFFERENTIATORS,
+  ABOUT_CULTURE_ROWS,
+  ABOUT_RECOGNITIONS,
+  ABOUT_TRUST_ITEMS,
+  ABOUT_WHY_CHOOSE_FEATURES,
+  ABOUT_FAQS,
+} from "@/lib/aboutPageContent";
 import { getPageContent } from "@/actions/pageContentActions";
 import { buildPageMetadata } from "@/lib/pageMetadata";
 import PageSeoScripts from "@/components/sections/pageSeoScripts";
@@ -45,6 +63,18 @@ const DEFAULT_ROADMAP_STEPS = [
   { title: "Report & Grow", desc: "Transparent reporting and regular strategy calls keep growth compounding long after launch day." },
 ];
 
+// Icons for "Why businesses choose us", matched positionally like the core
+// values.
+const TRUST_ICONS = [Award, Search, Layers, HeartHandshake, Headset, TrendingUp];
+
+// The dashboard's badge image and line for each certification.
+const RECOGNITION_FIELDS = {
+  Clutch: ["clutchBadgeImage", "clutchTitle"],
+  "Google Partner": ["googleAdsBadgeImage", "googleAdsTitle"],
+  "Google Analytics": ["googleAnalyticsBadgeImage", "googleAnalyticsTitle"],
+  ISO: ["isoBadgeImage", "isoTitle"],
+};
+
 export async function generateMetadata() {
   return buildPageMetadata("about", {
   title: "About BizzBuzz Creations, Prayagraj Digital Marketing Agency",
@@ -67,21 +97,17 @@ export default async function About() {
   const storyParagraphOne =
     content?.storyParagraphOne ||
     "Every big journey starts somewhere. Ours began in Prayagraj (Allahabad), India, with a simple belief: marketing shouldn't feel like guesswork.";
+  // The default paragraphs two and three carry links to the service pages
+  // (saved text can carry its own links too).
   const storyParagraphTwo =
     content?.storyParagraphTwo ||
-    "BizzBuzz Creations started with a small team of marketers, designers, and strategists determined to help businesses get more from their digital presence. What began locally in Prayagraj has grown into a digital marketing agency serving businesses across India, the UK, the US, and beyond.";
+    'BizzBuzz Creations started with a small team of marketers, designers, and strategists determined to help businesses get more from their digital presence. What began locally in Prayagraj has grown into a <a href="/services">digital marketing agency</a> serving businesses across India, the UK, the US, and beyond.';
   const storyParagraphThree =
     content?.storyParagraphThree ||
-    "Today, we bring together strategy, creativity, technology, SEO, and performance marketing to help businesses build stronger brands, reach the right audiences, and achieve meaningful digital growth.";
+    'Today, we bring together strategy, creativity, technology, <a href="/search-engine-optimization">SEO</a>, and <a href="/paid-marketing">performance marketing</a> to help businesses build stronger brands, reach the right audiences, and achieve meaningful digital growth.';
   const storyParagraphFour =
     content?.storyParagraphFour ||
     "Our ambition is global, but our approach remains personal: understand the business, build the right strategy, and focus on results that actually matter.";
-  // Links inside paragraphs two and three only render on the real,
-  // un-edited default copy — an admin override falls back to plain text
-  // since a textarea can't carry embedded links.
-  const storyParagraphTwoIsDefault = !content?.storyParagraphTwo;
-  const storyParagraphThreeIsDefault = !content?.storyParagraphThree;
-
   const missionVisionHeading = content?.missionVisionHeading || "Our Mission, Vision & Core Values";
   const missionTitle = content?.missionTitle || "Our Mission";
   const missionText =
@@ -106,7 +132,7 @@ export default async function About() {
     content?.roadmapIntro ||
     "We follow a structured, repeatable process that has helped us deliver consistent results across 90+ projects.";
   const roadmapStepsRaw = content?.roadmapSteps?.length > 0 ? content.roadmapSteps : DEFAULT_ROADMAP_STEPS;
-  const roadmapSteps = roadmapStepsRaw.map((s, i) => ({ number: i + 1, title: s.title, desc: s.desc }));
+  const roadmapSteps = roadmapStepsRaw.map((s) => ({ title: s.title, desc: s.desc }));
   const roadmapClosing =
     content?.roadmapClosing ||
     "This roadmap is the reason our clients don't just get short-term spikes — they get compounding, long-term digital growth.";
@@ -119,307 +145,151 @@ export default async function About() {
     content?.trustClosing ||
     "If you're looking for a digital marketing agency that treats your business like a long-term partnership — not a one-off project — BizzBuzz Creations is built for that.";
 
+
+  // Hero
+  const heroHeading = content?.aboutHeroHeading || "India’s Digital Marketing Agency, Trusted Worldwide";
+  const heroTagline = content?.aboutHeroSubheading || "Systems first. Campaigns second.";
+  const heroParagraph =
+    content?.aboutHeroParagraph ||
+    "Built and based in India, BizzBuzz Creations helps businesses across India and worldwide grow through data-driven strategy, design, and technology, not just ads.";
+  const heroStats = [
+    content?.aboutHeroStat1 || "Data-Driven Strategy, Not Guesswork",
+    content?.aboutHeroStat2 || "Serving Businesses Across India & Worldwide",
+  ];
+  const heroButtonText = content?.aboutHeroButtonText || "Build Your Digital Growth Strategy";
+  const heroImages = content?.aboutHeroImages?.length > 0 ? content.aboutHeroImages : ABOUT_HERO_IMAGES;
+
+  const journeyHeading = content?.journeyHeading || "Our Journey So Far";
+  const journeyYears = content?.journeyYears?.length > 0 ? content.journeyYears : ABOUT_JOURNEY_YEARS;
+  const differentiators = content?.differentiatorItems?.length > 0 ? content.differentiatorItems : ABOUT_DIFFERENTIATORS;
+  const cultureRows = content?.cultureRows?.length > 0 ? content.cultureRows : ABOUT_CULTURE_ROWS;
+
+  const recognitionsHeading = content?.recognitionsHeading || "Proven Expertise. Real Recognition.";
+  const recognitions = ABOUT_RECOGNITIONS.map((r) => {
+    const [badgeKey, titleKey] = RECOGNITION_FIELDS[r.org] || [];
+    return { src: content?.[badgeKey] || r.badge, alt: r.alt, label: r.org, sub: r.status, title: content?.[titleKey] || r.title };
+  });
+
+  const trustItemsRaw = content?.trustItems?.length > 0 ? content.trustItems : ABOUT_TRUST_ITEMS;
+  const trustItems = trustItemsRaw.map((item, i) => ({ ...item, icon: TRUST_ICONS[i % TRUST_ICONS.length] }));
+
+  const whyChooseHeading = content?.whyChooseHeading || "Why Businesses Continue Working With Us";
+  const whyChooseImage = content?.whyChooseImage || "/team-images/team-5.jpeg";
+  const whyChooseFeatures = content?.whyChooseFeatures?.length > 0 ? content.whyChooseFeatures : ABOUT_WHY_CHOOSE_FEATURES;
+
+  const showJourney = !hidden.has("journey");
+  const showDifferentiators = !hidden.has("differentiators");
+
+  // Redesign, in the homepage's style: hero (photo mosaic) → our story →
+  // mission, vision & values → (on the beams background) our journey + what
+  // makes us different → culture → how we work → recognition → why
+  // businesses choose us → why they keep working with us → FAQ → closing
+  // CTA. Same dashboard fields and "Remove section" switches as before.
   return (
-    <>
+    <div data-no-reveal>
       <PageSeoScripts pageKey="about" />
+      {/* thin reading-progress line at the top (pure CSS, see globals.css) */}
+      <div aria-hidden="true" className="scroll-progress" />
       {!hidden.has("aboutHero") && (
-      <>
-      <AboutHero content={content} />
-      </>
+        <PageHero
+          label="About"
+          title={heroHeading}
+          tagline={heroTagline}
+          description={heroParagraph}
+          actions={[{ text: heroButtonText, href: "/services", variant: "solid" }]}
+          media={<PhotoMosaic images={heroImages} eager />}
+        >
+          <ul className="mt-8 space-y-3 text-sm text-white/80 md:text-base">
+            {heroStats.filter(Boolean).map((stat) => (
+              <li key={stat} className="flex items-start gap-3">
+                <CheckCircle2 size={18} aria-hidden="true" className="mt-0.5 shrink-0 text-[#40A2D8]" />
+                {stat}
+              </li>
+            ))}
+          </ul>
+        </PageHero>
       )}
 
-      {/* Who we are */}
       {!hidden.has("story") && (
-      <>
-      <div className="bg-black py-20">
-        <h2 className="text-3xl font-bold mb-10 text-center text-white">{storyHeading}</h2>
-        <div className="mx-auto 2xl:px-15 px-5 flex lg:flex-row flex-col justify-center items-center gap-15">
-          <Image src={storyImage} alt="team" width={500} height={500} />
-          <div className="text-white">
-            <h2 className="text-white"><b>{storySubheading}</b></h2>
-            <RichText
-              as="p"
-              text={storyParagraphOne}
-              className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white whitespace-pre-line"
-            />
-            {/* <div>, not <p> (same look — Tailwind resets both): a saved
-                override is wrapped in its own <p> by the editor, and a <p>
-                inside a <p> made the browser split it, failing hydration for
-                the whole page (React error #418) — the page re-rendered on
-                the client, re-painting the hero late (a second LCP). Same
-                reason RichText's as="p" renders a <div>. */}
-            <div className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white whitespace-pre-line">
-              {storyParagraphTwoIsDefault ? (
-                <>
-                  BizzBuzz Creations started with a small team of marketers, designers, and
-                  strategists determined to help businesses get more from their digital
-                  presence. What began locally in Prayagraj has grown into a{" "}
-                  <Link href="/services" className="text-[#40A2D8] underline underline-offset-2 hover:text-white">
-                    digital marketing agency
-                  </Link>{" "}
-                  serving businesses across India, the UK, the US, and beyond.
-                </>
-              ) : (
-                <RichText text={storyParagraphTwo} />
-              )}
-            </div>
-            <div className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white whitespace-pre-line">
-              {storyParagraphThreeIsDefault ? (
-                <>
-                  Today, we bring together strategy, creativity, technology,{" "}
-                  <Link href="/search-engine-optimization" className="text-[#40A2D8] underline underline-offset-2 hover:text-white">
-                    SEO
-                  </Link>
-                  , and{" "}
-                  <Link href="/paid-marketing" className="text-[#40A2D8] underline underline-offset-2 hover:text-white">
-                    performance marketing
-                  </Link>{" "}
-                  to help businesses build stronger brands, reach the right audiences, and
-                  achieve meaningful digital growth.
-                </>
-              ) : (
-                <RichText text={storyParagraphThree} />
-              )}
-            </div>
-            <RichText
-              as="p"
-              text={storyParagraphFour}
-              className="leading-relaxed text-left max-w-xl mx-auto mb-4 text-white whitespace-pre-line"
-            />
-          </div>
-        </div>
-      </div>
-      </>
+        <HubIntro
+          eyebrow={storyHeading}
+          heading={storySubheading}
+          paragraphs={[storyParagraphOne, storyParagraphTwo, storyParagraphThree, storyParagraphFour]}
+          image={storyImage}
+          alt="The BizzBuzz Creations team"
+        />
       )}
 
-      {/* Our Mission & Vision */}
       {!hidden.has("missionVision") && (
-      <>
-      <div className="bg-black py-20 px-5">
-        <div className="mx-auto 2xl:px-10 flex lg:flex-row flex-col justify-center items-start gap-15">
-        <div>
-          <h2 className="text-3xl font-bold mb-10 text-center text-white">
-            {missionVisionHeading}
-          </h2>
-          {/* Full-width, stacked on mobile (was grid-cols-2 side-by-side,
-              which squeezed each card into a cramped, narrow half-width
-              box on phones); side by side again from sm up where there's
-              actually room for two comfortable columns. */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 justify-center gap-4 sm:gap-8">
-            <div className="group relative flex flex-col items-center rounded-2xl border-2 border-white/10 bg-white/5 p-6 sm:p-8 text-center shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-2xl hover:shadow-black/40">
-              <div className="mb-4 sm:mb-5 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-white/10 text-[#40A2D8] transition-colors duration-300 group-hover:bg-[#0B60B0] group-hover:text-white">
-                <Target size={28} className="sm:hidden" />
-                <Target size={32} className="hidden sm:block" />
-              </div>
-              <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-center text-white">
-                {missionTitle}
-              </h3>
-              <RichText
-                as="p"
-                text={missionText}
-                className="text-base sm:text-lg leading-relaxed text-center max-w-xl mx-auto mb-4 text-white"
-              />
-            </div>
-            <div className="group relative flex flex-col items-center rounded-2xl border-2 border-white/10 bg-white/5 p-6 sm:p-8 text-center shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-2xl hover:shadow-black/40">
-              <div className="mb-4 sm:mb-5 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-white/10 text-[#40A2D8] transition-colors duration-300 group-hover:bg-[#0B60B0] group-hover:text-white">
-                <Rocket size={28} className="sm:hidden" />
-                <Rocket size={32} className="hidden sm:block" />
-              </div>
-              <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-center text-white">
-                {visionTitle}
-              </h3>
-              <RichText
-                as="p"
-                text={visionText}
-                className="text-base sm:text-lg leading-relaxed text-center max-w-xl mx-auto mb-4 text-white"
-              />
-            </div>
-          </div>
-
-          <h3 className="text-2xl font-bold mt-15 mb-10 text-center text-white">
-            {coreValuesHeading}
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            {coreValues.map((value, i) => (
-              <div key={i} className="relative">
-                {/* Mobile-only connector — sits only in the gap above this
-                    card (never over its body/icon), so it reads as a
-                    behind-the-scenes link between cards instead of a line
-                    drawn on top of one. The card's own bg-white/5 is too
-                    transparent to hide a line placed behind it via
-                    z-index, which is why a full-height spine (the
-                    previous approach) still showed through the icon. */}
-                {i > 0 && (
-                  <span
-                    className="sm:hidden absolute left-1/2 -top-6 h-6 w-px -translate-x-1/2"
-                    style={{
-                      backgroundImage:
-                        "repeating-linear-gradient(to bottom, rgba(64,162,216,0.4) 0px, rgba(64,162,216,0.4) 4px, transparent 4px, transparent 12px)",
-                    }}
-                    aria-hidden="true"
-                  />
-                )}
-                <div className="group relative flex flex-col items-center rounded-2xl border border-white/10 bg-white/5 p-6 pt-8 w-full h-full text-center shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-black/40">
-                  {i > 0 && (
-                    <span className="hidden lg:block absolute -left-6 top-[60px] w-6 h-0.5 bg-[#40A2D8]/30" aria-hidden="true" />
-                  )}
-                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-[#40A2D8] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#0B60B0] group-hover:text-white">
-                    <value.Icon size={26} />
-                  </div>
-                  <h4 className="text-lg font-semibold mb-2 text-center text-white">
-                    {value.title}
-                  </h4>
-                  <RichText
-                    as="p"
-                    text={value.description}
-                    className="text-sm leading-relaxed text-center text-white"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        </div>
-      </div>
-      </>
+        <MissionValues
+          heading={missionVisionHeading}
+          mission={{ title: missionTitle, text: missionText }}
+          vision={{ title: visionTitle, text: visionText }}
+          valuesHeading={coreValuesHeading}
+          values={coreValues}
+        />
       )}
 
-      {/* Our Journey — 2022 to 2026 */}
-      {!hidden.has("journey") && (
-      <>
-      <OurJourney content={content} />
-      </>
+      {(showJourney || showDifferentiators) && (
+        <BeamsBlock>
+          {showJourney && <JourneyYears heading={journeyHeading} years={journeyYears} />}
+          {showDifferentiators && (
+            <WhyTrust eyebrow="What makes us different" heading={differentiatorsHeading} description={differentiatorsSubtext} items={differentiators} />
+          )}
+        </BeamsBlock>
       )}
 
-      {/* What Makes BizzBuzz Creations Different */}
-      {!hidden.has("differentiators") && (
-      <>
-      <div className="bg-black py-20 px-5">
-        <div>
-          <h2 className="text-3xl font-bold mb-10 text-center text-white">
-            {differentiatorsHeading}
-          </h2>
-          <RichText
-            as="p"
-            text={differentiatorsSubtext}
-            className="text-center max-w-4xl mx-auto mb-10 text-white"
-          />
-          <DifferentiatorsCarousel items={content?.differentiatorItems} />
-        </div>
-      </div>
-      </>
-      )}
+      {!hidden.has("culture") && <CultureRows rows={cultureRows} />}
 
-      {/* Culture — real ownership, one team, growing together */}
-      {!hidden.has("culture") && (
-      <>
-      <AboutCulture content={content} />
-      </>
-      )}
-
-      {/* The Roadmap Behind Every Digital Success */}
       {!hidden.has("roadmap") && (
-      <>
-      <div className="bg-black py-20 px-5">
-        <h2 className="text-3xl font-bold mb-2 text-center text-white">
-          {roadmapHeading}
-        </h2>
-        <h3 className="text-xl font-semibold mb-4 text-center text-[#40A2D8]">
-          {roadmapSubheading}
-        </h3>
-        <RichText
-          as="p"
-          text={roadmapIntro}
-          className="text-lg leading-relaxed text-center max-w-2xl mx-auto mb-16 text-white"
-        />
-
-        {/* Desktop: flowing zig-zag timeline */}
-        <div className="hidden lg:block">
-          <RoadmapTimeline steps={roadmapSteps} dark />
+        <div className="bg-black">
+          <RoadmapSteps eyebrow={roadmapSubheading} heading={roadmapHeading} subtext={roadmapIntro} steps={roadmapSteps} footnote={roadmapClosing} />
         </div>
-
-        {/* Mobile / tablet: stacked timeline */}
-        <div className="lg:hidden relative max-w-2xl mx-auto">
-          <div className="absolute left-5 top-5 bottom-5 w-0.5 bg-white/15" />
-          <div className="space-y-10">
-            {roadmapSteps.map((step) => (
-              <div key={step.number} className="relative flex gap-6 items-start">
-                <div className="relative z-10 flex items-center justify-center w-10 h-10 rounded-full bg-[#0B60B0] text-white font-bold shadow-lg shrink-0">
-                  {step.number}
-                </div>
-                <div className="flex-1 border border-white/10 rounded-xl bg-white/5 shadow-md p-5">
-                  <h4 className="font-bold text-lg mb-2 text-white">
-                    Step {step.number}: {step.title}
-                  </h4>
-                  <RichText as="p" text={step.desc} className="leading-relaxed text-white" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <RichText
-          as="p"
-          text={roadmapClosing}
-          className="text-lg leading-relaxed text-center max-w-3xl mx-auto mt-16 font-medium text-white"
-        />
-      </div>
-      </>
       )}
 
-      {/* Recognised for Excellence */}
       {!hidden.has("recognitions") && (
-      <>
-      <Recognitions content={content} showIcons={false} />
-      </>
+        <CertificationsRow
+          id="recognitions"
+          eyebrow={content?.recognitionsEyebrow || "Recognition"}
+          heading={recognitionsHeading}
+          subtext={content?.recognitionsParagraph}
+          items={recognitions}
+        >
+          {content?.recognitionsButtonText && (
+            <div className="mt-6">
+              <Pill href="/contact">{content.recognitionsButtonText}</Pill>
+            </div>
+          )}
+        </CertificationsRow>
       )}
 
-      {/* Why Businesses Across India Trust Us */}
+      {/* the closing line only when it says something different — the
+          default (and the saved copy) repeated the intro word for word */}
       {!hidden.has("trust") && (
-      <>
-      <div className="bg-black py-20 px-5">
-        <h2 className="text-3xl font-bold mb-5 text-center text-white">
-          {trustHeading}
-        </h2>
-        <RichText
-          as="p"
-          text={trustIntro}
-          className="text-lg leading-relaxed text-center max-w-3xl mx-auto mb-12 text-white"
+        <WhoItsFor
+          eyebrow="Why us"
+          heading={trustHeading}
+          subtext={trustIntro}
+          items={trustItems}
+          twoUpOnPhones
+          footnote={trustClosing && trustClosing.trim() !== trustIntro.trim() ? trustClosing : null}
         />
-
-        <TrustAdvantage content={content} />
-
-        {/* Only when it says something different — the default (and the
-            saved dashboard copy) repeated the intro sentence word for word,
-            so visitors read the same line above and below the cards. */}
-        {trustClosing && trustClosing.trim() !== trustIntro.trim() && (
-          <RichText
-            as="p"
-            text={trustClosing}
-            className="text-lg leading-relaxed text-center max-w-3xl mx-auto mt-12 font-medium text-white"
-          />
-        )}
-      </div>
-      </>
       )}
 
       {!hidden.has("whyChooseUs") && (
-      <>
-      <WhyChooseUs dark content={content} />
-      </>
+        <PhotoFeatures eyebrow="Long-term partners" heading={whyChooseHeading} image={whyChooseImage} alt="The BizzBuzz Creations team at work" features={whyChooseFeatures} />
       )}
 
-      {/* FAQ's */}
       {!hidden.has("aboutFaq") && (
-      <>
-      <AboutFAQ content={content} />
-      </>
+        <FaqV2
+          content={{
+            faqHeading: content?.aboutFaqHeading || "FAQs",
+            faqItems: content?.aboutFaqItems?.length > 0 ? content.aboutFaqItems : ABOUT_FAQS,
+          }}
+        />
       )}
-      {!hidden.has("cta") && (
-      <>
-      <CTA content={content} />
-      </>
-      )}
-    </>
+
+      {!hidden.has("cta") && <CtaV2 content={content} />}
+    </div>
   );
 }

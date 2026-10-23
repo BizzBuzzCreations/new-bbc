@@ -4,8 +4,8 @@ import RichText from "@/components/ui/richText";
 // Intro (service pages, redesign) — the page's portrait photo (4:5) on the
 // left, heading, tagline and two paragraphs on the right; on phones the text
 // comes first and the photo sits below it at a modest width. Photo
-// lazy-loads.
-export default function HubIntro({ heading, tagline, paragraphs = [], image, alt = "" }) {
+// lazy-loads. Also /about's story (with its own `eyebrow`).
+export default function HubIntro({ heading, tagline, paragraphs = [], image, alt = "", eyebrow = "Overview" }) {
   const text = paragraphs.filter(Boolean);
   if (!heading && !text.length) return null;
   return (
@@ -17,7 +17,7 @@ export default function HubIntro({ heading, tagline, paragraphs = [], image, alt
           </div>
         )}
         <div className="order-1 md:order-none">
-          <p className="text-sm text-[#40A2D8]">Overview</p>
+          <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
           <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
           {tagline && <p className="mt-4 text-lg text-[#40A2D8]">{tagline}</p>}
           {text.map((p, i) => (

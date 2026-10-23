@@ -588,7 +588,7 @@ function MobileAccordion({
 }
 
 // White-content pages where the navbar is solid instead of glass.
-const SOLID_BAR_PAGES = new Set(["/privacy-policy", "/terms-and-conditions", "/disclaimer", "/cookie-policy", "/faq"]);
+const SOLID_BAR_PAGES = new Set(["/privacy-policy", "/terms-and-conditions", "/disclaimer", "/cookie-policy"]);
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
