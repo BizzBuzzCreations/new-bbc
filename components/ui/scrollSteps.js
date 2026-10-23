@@ -11,7 +11,10 @@ import { useEffect, useRef } from "react";
 //     lights up when the line gets to it;
 //   - phones (steps stacked): each step lights up as it comes into view.
 // With reduced motion requested, everything is shown complete straight away.
-export default function ScrollSteps({ children, className = "" }) {
+// `vertical`: the steps are a stacked list at every width (e.g. a 6-step
+// roadmap) — each lights up as it scrolls to 75% of the screen height, and
+// --steps-progress is the share of the list that has passed that point.
+export default function ScrollSteps({ children, className = "", vertical = false }) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -24,16 +27,22 @@ export default function ScrollSteps({ children, className = "" }) {
     const update = () => {
       raf = 0;
       const vh = window.innerHeight;
-      const top = el.getBoundingClientRect().top;
-      // 0 when the steps' top edge is 85% down the screen, 1 at 35%.
-      const progress = reduce ? 1 : Math.min(1, Math.max(0, (vh * 0.85 - top) / (vh * 0.5)));
+      const box = el.getBoundingClientRect();
+      const top = box.top;
+      // 0 when the steps' top edge is 85% down the screen, 1 at 35% —
+      // or, for a vertical list, how much of it has passed 75% of the screen.
+      const progress = reduce
+        ? 1
+        : vertical
+          ? Math.min(1, Math.max(0, (vh * 0.75 - top) / box.height))
+          : Math.min(1, Math.max(0, (vh * 0.85 - top) / (vh * 0.5)));
       el.style.setProperty("--steps-progress", progress.toFixed(3));
       for (const step of el.querySelectorAll("[data-step]")) {
         const i = Number(step.dataset.step);
         const n = Number(step.dataset.steps) || 1;
         const on =
           reduce ||
-          (wide.matches ? progress >= (i + 0.5) / n : step.getBoundingClientRect().top < vh * 0.75);
+          (wide.matches && !vertical ? progress >= (i + 0.5) / n : step.getBoundingClientRect().top < vh * 0.75);
         step.dataset.active = on ? "true" : "false";
       }
     };
@@ -49,7 +58,7 @@ export default function ScrollSteps({ children, className = "" }) {
       window.removeEventListener("resize", onScroll);
       cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [vertical]);
 
   return (
     <div ref={ref} className={className}>
