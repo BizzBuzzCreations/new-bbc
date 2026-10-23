@@ -7,13 +7,14 @@ import Pill from "@/components/home/pill";
 // but with the page's own heading, text and two buttons (both to /contact,
 // as before), plus Call / WhatsApp. Illustration lazy-loads; hidden on
 // phones.
-export default function DetailCta({ heading, text, primaryText, secondaryText }) {
+export default function DetailCta({ heading, tagline, text, primaryText, secondaryText }) {
   return (
     <section id="CTA" className="scroll-mt-20 bg-black text-white">
       <div className="mx-auto max-w-7xl px-6 md:px-10 pb-24 md:pb-32">
         <div className="reveal-stagger grid gap-12 border-t border-white/10 pt-16 md:grid-cols-[3fr_2fr] md:items-center md:gap-16 md:pt-20">
           <div>
             <h2 className="font-display max-w-4xl text-4xl leading-[1.06] md:text-6xl">{heading}</h2>
+            {tagline && <p className="mt-4 text-lg text-[#40A2D8]">{tagline}</p>}
             <RichText as="p" text={text} className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 md:text-lg" />
             <div className="mt-10 flex flex-wrap gap-3">
               <Pill href="/contact" variant="solid" className="px-6 py-3 text-base">{primaryText || "Get a Free Consultation"}</Pill>

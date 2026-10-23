@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import RichText from "@/components/ui/richText";
+import HeroBottomFade from "@/components/ui/heroBottomFade";
 
 // Same auto-advancing photo carousel as the career page hero — real
 // team/office photos, fading between slides, instead of one static
@@ -90,6 +91,7 @@ export default function TeamHero({ content } = {}) {
         }}
       />
 
+      <HeroBottomFade />
       <div className="relative max-w-2xl">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 leading-tight max-w-2xl">
           {heading}

@@ -6,8 +6,9 @@ import RichText from "@/components/ui/richText";
 // (the sections above put text first, so this flips the rhythm); text,
 // then photo, on phones. Photo lazy-loads. Without a photo it's a single
 // text column (heading left, text right on desktop).
-export default function LocalityBlock({ heading, text, image, eyebrow = "Where we work" }) {
-  if (!text) return null;
+export default function LocalityBlock({ heading, subtext, text, image, alt = "", eyebrow = "Where we work" }) {
+  const paragraphs = (Array.isArray(text) ? text : [text]).filter(Boolean);
+  if (!paragraphs.length) return null;
   if (!image) {
     return (
       <section className="bg-black text-white">
@@ -16,7 +17,12 @@ export default function LocalityBlock({ heading, text, image, eyebrow = "Where w
             <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
             <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
           </div>
-          <RichText as="p" text={text} className="text-base leading-relaxed text-white/70 md:self-end md:text-lg" />
+          <div className="space-y-4 md:self-end">
+            {subtext && <RichText as="p" text={subtext} className="text-base leading-relaxed text-white md:text-lg" />}
+            {paragraphs.map((p, i) => (
+              <RichText key={i} as="p" text={p} className="text-base leading-relaxed text-white/70 md:text-lg" />
+            ))}
+          </div>
         </div>
       </section>
     );
@@ -26,13 +32,16 @@ export default function LocalityBlock({ heading, text, image, eyebrow = "Where w
       <div className="reveal-sides mx-auto grid max-w-7xl gap-10 px-6 md:grid-cols-2 md:items-center md:gap-16 md:px-10 py-16 md:py-20">
         {image && (
           <div className="relative order-2 aspect-[4/3] overflow-hidden rounded-3xl bg-[#0a0a0a] md:order-none">
-            <Image src={image} alt="" fill sizes="(min-width: 1280px) 600px, (min-width: 768px) 48vw, 100vw" className="object-cover" />
+            <Image src={image} alt={alt} fill sizes="(min-width: 1280px) 600px, (min-width: 768px) 48vw, 100vw" className="object-cover" />
           </div>
         )}
         <div className="order-1 md:order-none">
           <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
           <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
-          <RichText as="p" text={text} className="mt-6 text-base leading-relaxed text-white/70 md:text-lg" />
+          {subtext && <RichText as="p" text={subtext} className="mt-6 text-base leading-relaxed text-white md:text-lg" />}
+          {paragraphs.map((p, i) => (
+            <RichText key={i} as="p" text={p} className="mt-4 text-base leading-relaxed text-white/70 md:text-lg" />
+          ))}
         </div>
       </div>
     </section>

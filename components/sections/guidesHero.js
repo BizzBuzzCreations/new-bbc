@@ -1,5 +1,6 @@
 import Link from "next/link";
 import RichText from "@/components/ui/richText";
+import HeroBottomFade from "@/components/ui/heroBottomFade";
 
 // Full-bleed photo hero (same treatment as the FAQ/Services/Industries/How
 // We Work heroes): the image is already designed with a dark-to-photo
@@ -56,6 +57,7 @@ export default function GuidesHero({ content } = {}) {
         aria-hidden="true"
       />
 
+      <HeroBottomFade />
       <div className="relative max-w-3xl">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-5">
           {heading}

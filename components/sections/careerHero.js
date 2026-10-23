@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import RichText from "@/components/ui/richText";
+import HeroBottomFade from "@/components/ui/heroBottomFade";
 
 // Real BizzBuzz office/team photos (same assets already used elsewhere on
 // the site) auto-advancing behind the hero text, instead of one static
@@ -88,6 +89,7 @@ export default function CareerHero({ content } = {}) {
         }}
       />
 
+      <HeroBottomFade />
       <div className="relative w-full px-6 md:px-12 lg:px-24 py-16">
         <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-4">
         </p>
