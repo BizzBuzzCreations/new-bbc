@@ -198,6 +198,13 @@ body {
   }
 }
 
+/* Solid bar on the white-content pages (navbar.js SOLID_BAR_PAGES). */
+.nav.nav-solid {
+  background-color: #0a0a0a;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
 /* Navbar dropdown panels (About, Services, Industries, Resources): dark, to
    match the glass bar. Solid on purpose: they sit inside the blurred header,
    and a blur inside a blurred element can't see the page behind it, so any

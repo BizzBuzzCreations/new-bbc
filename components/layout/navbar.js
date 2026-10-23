@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import {
@@ -586,6 +587,9 @@ function MobileAccordion({
   );
 }
 
+// White-content pages where the navbar is solid instead of glass.
+const SOLID_BAR_PAGES = new Set(["/privacy-policy", "/terms-and-conditions", "/disclaimer", "/cookie-policy", "/faq"]);
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [openSection, setOpenSection] = useState(null);
@@ -601,6 +605,11 @@ export default function Navbar() {
   };
 
   const industriesFlat = INDUSTRY_COLUMNS.flat();
+
+  // Pages whose content is white: a glass bar over white text turns grey, so
+  // the bar is solid black there (same near-black as everywhere else).
+  const pathname = usePathname();
+  const solidBar = SOLID_BAR_PAGES.has(pathname?.replace(/\/+$/, "") || "/");
 
   // Hide the bar on scroll-down, bring it back on scroll-up. Skipped while
   // the mobile menu is open so it can't disappear mid-interaction.
@@ -621,7 +630,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`nav sticky top-0 z-50 w-full border-b border-white/10 transition-transform duration-300 ${
+      className={`nav sticky top-0 z-50 w-full border-b border-white/10 transition-transform duration-300 ${solidBar ? "nav-solid" : ""} ${
         hidden ? "-translate-y-[150%]" : "translate-y-0"
       }`}
     >

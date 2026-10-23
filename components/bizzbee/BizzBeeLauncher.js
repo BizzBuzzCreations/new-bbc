@@ -18,6 +18,10 @@ import Image from "next/image";
 //   purpose, so it doesn't distract. Those extra movements are driven from script
 //   (Web Animations API), not from stylesheet keyframes, and are switched off
 //   for visitors who ask their system for reduced motion.
+// - Rests most of the time, to save battery / processor time on phones: it
+//   moves for the first 10 seconds, then holds still, with a short 4-second
+//   "nudge" every 30 seconds; hovering it (mouse) wakes it while the pointer
+//   is on it. All motion stops while the chat is open.
 // - Not draggable: it stays in its corner. A click opens / minimizes the chat.
 // - Steps aside: while it would sit on top of anything marked
 //   `data-bizzbee-avoid` (e.g. the blog sidebar form's Submit button), it
@@ -136,6 +140,38 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
 
   const setSpeed = (rate) => anims.current.forEach((a) => (a.playbackRate = rate));
 
+  // Awake / resting. wake(ms) plays everything and schedules a rest after
+  // `ms` (no rest while `ms` is Infinity, e.g. under the mouse).
+  const restTimer = useRef(0);
+  const expandedRef = useRef(expanded);
+  expandedRef.current = expanded;
+  const wake = (ms) => {
+    if (expandedRef.current) return;
+    clearTimeout(restTimer.current);
+    anims.current.forEach((a) => a.play());
+    animRef.current?.play();
+    if (Number.isFinite(ms)) {
+      restTimer.current = setTimeout(() => {
+        anims.current.forEach((a) => a.pause());
+        animRef.current?.pause();
+      }, ms);
+    }
+  };
+  const wakeRef = useRef(wake);
+  wakeRef.current = wake;
+  // 10 s once it has loaded, then a 4 s nudge every 30 s while the tab is visible.
+  useEffect(() => {
+    if (!ready) return;
+    wakeRef.current(10000);
+    const nudge = setInterval(() => {
+      if (document.visibilityState === "visible") wakeRef.current(4000);
+    }, 30000);
+    return () => {
+      clearInterval(nudge);
+      clearTimeout(restTimer.current);
+    };
+  }, [ready]);
+
   // While the chat is open the robot is static: all motion stops (it rests at
   // a neutral pose) and it doesn't tilt. Minimizing the chat brings the
   // motion back.
@@ -145,11 +181,11 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
         a.pause();
         a.currentTime = 0;
       });
+      clearTimeout(restTimer.current);
       animRef.current?.goToAndStop(REST_FRAME, true);
       setTilt({ x: 0, y: 0 });
-    } else {
-      anims.current.forEach((a) => a.play());
-      animRef.current?.play();
+    } else if (ready) {
+      wakeRef.current(6000);
     }
   }, [expanded, ready]);
 
@@ -191,8 +227,13 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
         type="button"
         onClick={onOpen}
         onPointerMove={onMove}
-        onPointerEnter={() => !expanded && setSpeed(2.2)}
-        onPointerLeave={() => {
+        onPointerEnter={(e) => {
+          if (expanded || e.pointerType !== "mouse") return;
+          setSpeed(2.2);
+          wake(Infinity);
+        }}
+        onPointerLeave={(e) => {
+          if (e.pointerType === "mouse") wake(3000);
           resetTilt();
           setSpeed(1);
         }}
