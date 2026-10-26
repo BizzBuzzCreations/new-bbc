@@ -14,7 +14,7 @@ export default function AuthorCard({ author, headingLevel = "h3" }) {
   return (
     <article className="group relative flex h-full flex-col rounded-3xl border border-white/10 bg-[#0b0e16] p-6 transition-colors duration-300 hover:border-[#40A2D8]/50 md:p-7">
       <div className="flex items-center gap-4">
-        <AuthorAvatar name={author.name} size={56} />
+        <AuthorAvatar name={author.name} photo={author.member?.photo} size={56} />
         <div className="min-w-0">
           <Name className="font-display text-xl leading-snug text-white transition-colors group-hover:text-[#40A2D8]">
             <Link href={`/author/${author.slug}`} className="after:absolute after:inset-0 after:content-[''] focus-visible:underline focus-visible:outline-none">
@@ -22,6 +22,7 @@ export default function AuthorCard({ author, headingLevel = "h3" }) {
             </Link>
           </Name>
           <p className="text-sm text-white/60">
+            {author.member?.role ? `${author.member.role} · ` : ""}
             {author.count} article{author.count === 1 ? "" : "s"}
           </p>
         </div>

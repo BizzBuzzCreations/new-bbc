@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { ChevronRight, Quote } from "lucide-react";
 import { getAuthor, plainText, clipText } from "@/lib/authors";
 import RichText from "@/components/ui/richText";
@@ -44,8 +44,12 @@ export default async function AuthorPage({ params }) {
   const data = await getAuthor(slug);
   if (!data) notFound();
   const { author, posts, others } = data;
+  // another spelling of the same person (e.g. "Shakib" for "Md. Shaquib"): one address
+  if (slug !== author.slug) permanentRedirect(`/author/${author.slug}`);
 
   const first = author.name.split(/\s+/)[0];
+  // a team member: their team photo, role and a link to where they're listed
+  const member = author.member;
   const latest = posts[0];
   const topics = author.categories.map((c) => c.name);
   // their own words: the excerpts of their newest articles
@@ -63,6 +67,8 @@ export default async function AuthorPage({ params }) {
       name: author.name,
       url: `${SITE}/author/${author.slug}`,
       ...(plainText(author.bio) && { description: plainText(author.bio) }),
+      ...(member?.role && { jobTitle: member.role }),
+      ...(member?.photo && { image: member.photo.startsWith("/") ? `${SITE}${member.photo}` : member.photo }),
       worksFor: { "@type": "Organization", name: "BizzBuzz Creations", url: SITE },
       ...(topics.length && { knowsAbout: topics }),
     },
@@ -92,8 +98,15 @@ export default async function AuthorPage({ params }) {
             <div className="mt-8 grid gap-12 md:mt-12 lg:grid-cols-[1.25fr_1fr] lg:items-center lg:gap-16">
               <div>
                 <div className="flex items-center gap-5">
-                  <AuthorAvatar name={author.name} size={88} />
-                  <p className="text-sm text-[#40A2D8]">Author at BizzBuzz Creations</p>
+                  <AuthorAvatar name={author.name} photo={member?.photo} size={member ? 112 : 88} />
+                  <div className="text-sm">
+                    <p className="text-[#40A2D8]">{member?.role ? `${member.role} at BizzBuzz Creations` : "Author at BizzBuzz Creations"}</p>
+                    {member && (
+                      <Link href={member.team.href} className="mt-1 inline-block text-white/60 underline decoration-white/25 underline-offset-4 transition-colors hover:text-white">
+                        Part of the {member.team.label}
+                      </Link>
+                    )}
+                  </div>
                 </div>
                 <h1 className="font-display mt-6 text-[2.6rem] leading-[1.05] sm:text-6xl">{author.name}</h1>
                 {topics.length > 0 && <p className="mt-4 text-lg text-[#40A2D8]">Writes about {topics.slice(0, 3).join(" · ")}</p>}

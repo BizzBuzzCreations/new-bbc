@@ -8,6 +8,7 @@ import BlogContactForm from "@/components/sections/blogContactForm";
 import BlogToc from "@/components/sections/blogToc";
 import AuthorAvatar from "@/components/author/authorAvatar";
 import { authorPath } from "@/lib/authorSlug";
+import { getTeamMember } from "@/lib/authorTeam";
 import RichText from "@/components/ui/richText";
 import { FAQSection } from "@/components/ui/faq-accordion";
 import CTA from "@/components/sections/CTA";
@@ -82,6 +83,8 @@ export default async function SingleBlog({ params }) {
     return notFound();
   }
   const post = res?.data;
+  // a team member who wrote it shows their photo and role in the "Written by" box
+  const member = await getTeamMember(post?.author);
 
   const featuredImage = getFeaturedImage(post);
 
@@ -222,7 +225,7 @@ export default async function SingleBlog({ params }) {
           <div className="flex items-center gap-4 mb-4">
             {/* Avatar (the author's page is one click away) */}
             <Link href={authorPath(post?.author)} aria-label={`${post?.author}'s profile`}>
-              <AuthorAvatar name={post?.author} size={52} />
+              <AuthorAvatar name={post?.author} photo={member?.photo} size={52} />
             </Link>
 
             {/* Author Info */}
@@ -231,6 +234,7 @@ export default async function SingleBlog({ params }) {
               <p className="text-lg font-semibold text-gray-900">
                 <Link href={authorPath(post?.author)} className="transition-colors hover:text-[#0B60B0]">{post?.author}</Link>
               </p>
+              {member?.role && <p className="text-sm text-gray-500">{member.role}</p>}
             </div>
           </div>
 
