@@ -491,6 +491,12 @@ body {
   font-family: var(--font-fira), sans-serif !important;
 }
 
+/* Jumping to a heading from the Contents list (or a #link) must stop below
+   the sticky navbar, not under it. */
+.article :is(h2, h3, h4, h5, h6) {
+  scroll-margin-top: 7rem;
+}
+
 .article h2 {
   margin-top: 2.5rem;
   font-size: 28px;
