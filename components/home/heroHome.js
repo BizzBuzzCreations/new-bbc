@@ -30,7 +30,11 @@ const BADGES = [
 // `locationLine` (location pages): replaces the capabilities label with a
 // "where we serve" line (also on phones). `skyline` ("london" / "india"):
 // the city skyline from the footer, faint along the hero's bottom edge.
-export default function HeroHome({ content, stats, secondaryCta, mediaChoice = false, showWordmark = true, locationLine = "", skyline = null }) {
+// `framed` (location pages): the chosen video / image sits in a rounded
+// frame beside the text (under it on phones, after the buttons) instead of
+// stretched across the whole screen — an uploaded photo is never blown up
+// past its own pixels — with `office` ({ label, line }) as a small tag on it.
+export default function HeroHome({ content, stats, secondaryCta, mediaChoice = false, showWordmark = true, locationLine = "", skyline = null, framed = false, office = null }) {
   const heading = content?.heroHeading || "India’s Trusted Digital Marketing Agency";
   const subheading = content?.heroSubheading || "Turn Clicks Into Customers With Data-Driven Digital Marketing";
   const subtext =
@@ -42,6 +46,7 @@ export default function HeroHome({ content, stats, secondaryCta, mediaChoice = f
   const chosenVideo = mediaChoice ? content?.heroVideo : "";
   const chosenImage = mediaChoice && !chosenVideo ? content?.heroPosterImage : "";
   const image = heroImageSource(chosenImage);
+  const inFrame = framed && Boolean(chosenVideo || chosenImage);
 
   const words = heading.split(/\s+/);
   const lead = words.slice(0, Math.max(0, words.length - 3)).join(" ");
@@ -69,24 +74,29 @@ export default function HeroHome({ content, stats, secondaryCta, mediaChoice = f
   }, []);
 
   return (
-    <section className="relative -mt-14 flex flex-col justify-center overflow-hidden bg-black pt-14 pb-10 text-white md:-mt-[72px] md:min-h-screen md:pt-[72px] md:pb-16">
+    <section className={`relative -mt-14 flex flex-col justify-center overflow-hidden bg-black pt-14 pb-10 text-white md:-mt-[72px] md:pt-[72px] md:pb-16 ${inFrame ? "md:min-h-[88vh]" : "md:min-h-screen"}`}>
       {!mediaChoice && mediaMode === "desktop" && (
         <video autoPlay muted loop playsInline preload="metadata" className="absolute inset-0 hidden h-full w-full bg-black object-cover md:block">
           <source src="/hero-sec.webm" type="video/webm" />
         </video>
       )}
-      {chosenVideo && mediaMode === "desktop" && (
+      {!inFrame && chosenVideo && mediaMode === "desktop" && (
         <video key={chosenVideo} src={chosenVideo} autoPlay muted loop playsInline preload="metadata" className="absolute inset-0 hidden h-full w-full bg-black object-cover md:block" />
       )}
-      {chosenImage && (
+      {!inFrame && chosenImage && (
         // eslint-disable-next-line @next/next/no-img-element -- right-sized srcset from heroImageSource (Cloudinary or the Next optimizer)
         <img src={image.src} srcSet={image.srcSet} sizes="100vw" alt="" decoding="async" fetchPriority="high" className="absolute inset-0 hidden h-full w-full bg-black object-cover md:block" />
       )}
-      {/* Dark from the left so the text reads; the video shows on the right */}
+      {/* Dark from the left so the text reads; the video shows on the right
+          (framed: just a soft blue light behind the frame) */}
       <div
         aria-hidden="true"
         className="absolute inset-0"
-        style={{ background: "linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.88) 38%, rgba(0,0,0,0.55) 68%, rgba(0,0,0,0.35) 100%)" }}
+        style={{
+          background: inFrame
+            ? "radial-gradient(55% 60% at 78% 45%, rgba(11,96,176,0.28), transparent 70%)"
+            : "linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.88) 38%, rgba(0,0,0,0.55) 68%, rgba(0,0,0,0.35) 100%)",
+        }}
       />
       {skyline && (
         // eslint-disable-next-line @next/next/no-img-element -- pre-sized 1x / 2x skyline files (footer's); decorative
@@ -109,7 +119,7 @@ export default function HeroHome({ content, stats, secondaryCta, mediaChoice = f
         style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 50%, #000000 100%)" }}
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-4 md:px-10 md:pt-14 short-screen:pt-4">
+      <div className={`relative z-10 mx-auto w-full max-w-7xl px-6 pt-4 md:px-10 md:pt-14 short-screen:pt-4 ${inFrame ? "grid gap-10 md:grid-cols-[1.05fr_1fr] md:items-center md:gap-14" : ""}`}>
         <div className="flex max-w-3xl flex-col md:block">
           {locationLine ? (
             <p className="order-first mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs text-white/85 backdrop-blur-sm md:mb-0">
@@ -158,7 +168,7 @@ export default function HeroHome({ content, stats, secondaryCta, mediaChoice = f
               )}
             </div>
           ) : (
-            (chosenVideo || chosenImage) && (
+            !inFrame && (chosenVideo || chosenImage) && (
               <div className="relative mt-6 aspect-video w-full max-w-sm overflow-hidden rounded-2xl md:hidden">
                 {chosenVideo
                   ? mediaMode === "mobile" && (
@@ -203,6 +213,25 @@ export default function HeroHome({ content, stats, secondaryCta, mediaChoice = f
             ))}
           </ul>
         </div>
+
+        {inFrame && (
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-white/10 bg-[#0a0a0a]">
+            {chosenVideo
+              ? mediaMode && <video key={chosenVideo} src={chosenVideo} autoPlay muted loop playsInline preload="metadata" className="absolute inset-0 h-full w-full object-cover" />
+              : (
+                // eslint-disable-next-line @next/next/no-img-element -- right-sized srcset from heroImageSource
+                <img src={image.src} srcSet={image.srcSet} sizes="(min-width: 1280px) 600px, (min-width: 768px) 48vw, 100vw" alt="" decoding="async" fetchPriority="high" className="absolute inset-0 h-full w-full object-cover" />
+              )}
+            {office && (
+              <p className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full border border-white/15 bg-black/60 px-3.5 py-2 text-xs text-white backdrop-blur-md sm:bottom-4 sm:left-4">
+                <MapPin size={14} aria-hidden="true" className="shrink-0 text-[#40A2D8]" />
+                <span>
+                  {office.label} <span className="text-white/60">· {office.line}</span>
+                </span>
+              </p>
+            )}
+          </div>
+        )}
       </div>
     </section>
   );

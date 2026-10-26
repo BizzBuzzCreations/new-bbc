@@ -36,8 +36,10 @@ const BUILD_ICONS = [Headset, Bot, Workflow, Server, Globe, GitBranch, BarChart3
 // Same dashboard fields as before (the built-in systems list when none are
 // saved, like the old section). /industries shows the tiles on their own.
 // `clioPrefix`: the dashboard field prefix of the Clio card ("ai" on the
-// homepage, "clio" on the location pages).
-export default function BuildV2({ content, showClio = true, showPraxistence = true, showBuilds = true, clioPrefix = "ai" }) {
+// homepage, "clio" on the location pages). `compact` (location pages): the
+// two products side by side as shorter cards — picture, label, heading,
+// text, button; the feature lists stay on the homepage.
+export default function BuildV2({ content, showClio = true, showPraxistence = true, showBuilds = true, clioPrefix = "ai", compact = false }) {
   const eyebrow = content?.caseStudiesEyebrow || "What We Build";
   const heading = content?.caseStudiesHeading || "Powered by What We Build";
   const subtext = content?.caseStudiesSubtext || "";
@@ -57,7 +59,34 @@ export default function BuildV2({ content, showClio = true, showPraxistence = tr
           {subtext && <RichText as="p" text={subtext} className="self-end text-base text-white/70 md:text-lg" />}
         </div>
 
-        {products.length > 0 && (
+        {compact && products.length > 0 && (
+          <div className={`reveal-stagger mt-12 grid gap-5 md:mt-16 ${products.length > 1 ? "lg:grid-cols-2" : ""}`}>
+            {products.map((p, i) => {
+              const art = PRODUCT_ART[p.key]?.defaults.includes(p.image) ? PRODUCT_ART[p.key] : null;
+              return (
+                <article key={p.key} className="flex flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b0e16]">
+                  <div className="relative h-56 bg-linear-to-b from-[#0B60B0]/15 to-transparent sm:h-64">
+                    {art ? (
+                      <Image src={art.src} alt="" fill sizes="(min-width: 1024px) 560px, 100vw" className="object-contain p-6" />
+                    ) : (
+                      <Image src={p.image} alt="" fill sizes="(min-width: 1024px) 560px, 100vw" className="object-cover" />
+                    )}
+                  </div>
+                  <div className="flex flex-1 flex-col p-6 sm:p-8">
+                    <p className="text-xs uppercase tracking-wider text-[#40A2D8]">Product {String(i + 1).padStart(2, "0")}</p>
+                    <h3 className="font-display mt-3 text-2xl leading-tight md:text-3xl">{p.heading}</h3>
+                    <RichText as="div" text={p.paragraph} className="mt-4 line-clamp-4 text-base leading-relaxed text-white/70" />
+                    <div className="mt-auto pt-8">
+                      <Pill href={p.buttonLink}>{p.buttonText}</Pill>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        )}
+
+        {!compact && products.length > 0 && (
           <div className="mt-14 space-y-6 md:mt-20 stack-cards:space-y-0">
             {products.map((p, i) => {
               const art = PRODUCT_ART[p.key]?.defaults.includes(p.image) ? PRODUCT_ART[p.key] : null;
