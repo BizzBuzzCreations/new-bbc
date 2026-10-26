@@ -27,7 +27,6 @@ const STAGGER = 0.1;
 
 function isExcluded(el) {
   if (el.closest("[data-no-reveal]")) return true;
-  if (el.closest(".splide")) return true;
   if (el.style.opacity !== "" || el.style.transform !== "") return true;
   const position = window.getComputedStyle(el).position;
   if (position === "fixed" || position === "sticky") return true;

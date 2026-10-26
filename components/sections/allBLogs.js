@@ -1,12 +1,11 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
 import { getBlogCategoriesMongo, getPublishedBlogsMongo } from "@/actions/blogActions";
-import { getFeaturedImage, optimizedImageUrl, imageSrcSet } from "@/lib/getFeaturedImage";
-import { ArrowLeft, ArrowRight, ImageOff } from "lucide-react";
-import Link from "next/link";
+import { ArrowLeft, ArrowRight, ChevronDown } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import Cookies from "js-cookie";
-import AnimatedButton from "@/components/ui/animatedButton";
+import Pill from "@/components/home/pill";
+import PostCard from "@/components/detail/postCard";
 
 export default function AllBLogs() {
   const searchParams = useSearchParams();
@@ -63,6 +62,8 @@ export default function AllBLogs() {
           );
           setShowAll(true);
           setCurrPage(1);
+          // without a page size nothing is fetched (the list stayed empty)
+          setPosts(9);
         }
       }
     });
@@ -147,253 +148,113 @@ export default function AllBLogs() {
     return txt.value;
   }
 
+  const goToPage = (step) => {
+    if (loading) return;
+    setPosts(9);
+    setCurrPage((prev) => prev + step);
+  };
+  const pagerButton = "flex h-10 w-10 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-white hover:bg-white hover:text-black disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-white";
+  const pager = (
+    <div className="flex items-center gap-3">
+      <button type="button" aria-label="Previous page" disabled={currPage === 1 || loading} onClick={() => goToPage(-1)} className={pagerButton}>
+        <ArrowLeft size={16} aria-hidden="true" />
+      </button>
+      <p className="text-sm text-white/70">
+        Page {currPage} of {totalPages}
+      </p>
+      <button type="button" aria-label="Next page" disabled={currPage == totalPages || loading} onClick={() => goToPage(1)} className={pagerButton}>
+        <ArrowRight size={16} aria-hidden="true" />
+      </button>
+    </div>
+  );
+
+  // Redesign (dark, like the homepage's latest posts): the heading with the
+  // category menu and pager beside it, then the posts as plain cards
+  // (PostCard), the pager again underneath. Same fetching, paging, category
+  // deep links and remembered selection as before.
   return (
-    <>
-      <div className="lg:max-w-screen-xl sm:max-w-xl md:max-w-full sm:px-12 md:px-18 px-8 mx-auto">
-        {showAll && (
-          <h2 className="md:text-4xl text-3xl font-bold md:py-15 md:mb-0 mb-10 text-center text-white">
-            All Blogs
-          </h2>
-        )}
-
-        {showAll && (
-          <div className="flex items-center gap-6 md:justify-end justify-center mb-10 flex-wrap">
+    <div className="mx-auto max-w-7xl px-6 text-white md:px-10">
+      {showAll && (
+        <div className="flex flex-wrap items-end justify-between gap-6 border-t border-white/10 pt-16 md:pt-20">
+          <div>
+            <p className="text-sm text-[#40A2D8]">Every post</p>
+            <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">All Blogs</h2>
+          </div>
+          <div className="flex flex-wrap items-center gap-4">
             <div className="relative w-64" ref={ref}>
-              {/* Trigger */}
               <button
+                type="button"
                 onClick={() => setOpen((o) => !o)}
-                className="w-full flex items-center justify-between px-4 py-2.5 bg-white border border-stone-200 rounded-xl shadow-sm hover:border-stone-400 transition-all duration-200"
+                aria-haspopup="listbox"
+                aria-expanded={open}
+                className="flex w-full items-center justify-between gap-3 rounded-full border border-white/25 px-5 py-2.5 text-sm text-white transition-colors hover:border-white"
               >
-                <span className="text-sm font-semibold text-stone-700">
-                  {decodeHTML(selected.name)}
-                </span>
-                <svg
-                  className={`w-4 h-4 text-stone-400 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
+                <span className="truncate">{decodeHTML(selected.name)}</span>
+                <ChevronDown size={16} aria-hidden="true" className={`shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
               </button>
-
-              {/* Menu */}
+              {/* inert while closed: hidden from keyboards and screen readers */}
               <div
-                className={`absolute z-50 mt-2 w-full bg-white border border-stone-200 rounded-xl shadow-lg overflow-hidden transition-all duration-200 origin-top max-h-80 overflow-y-auto
-        ${open ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"}`}
+                inert={!open}
+                className={`absolute z-50 mt-2 max-h-80 w-full origin-top overflow-y-auto rounded-2xl border border-white/10 bg-[#0c0d12] shadow-xl shadow-black/60 transition-all duration-200 ${
+                  open ? "pointer-events-auto scale-100 opacity-100" : "pointer-events-none scale-95 opacity-0"
+                }`}
               >
-                <ul className="py-1.5 px-1.5 space-y-0.5">
-                  {categories.map((cat, i) => (
+                <ul className="space-y-0.5 p-1.5">
+                  {categories.map((cat) => (
                     <li key={cat.name}>
                       <button
+                        type="button"
                         onClick={() => handleSelect(cat)}
-                        className={`w-full flex items-center justify-between px-3 py-2 rounded-lg transition-colors duration-150
-                  ${
-                    cat.name === selected.name
-                      ? "bg-stone-900 text-white"
-                      : "text-stone-600 hover:bg-stone-100 hover:text-stone-900"
-                  }`}
+                        className={`flex w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-left text-sm transition-colors duration-150 ${
+                          cat.name === selected.name ? "bg-[#0B60B0] text-white" : "text-white/80 hover:bg-white/5 hover:text-white"
+                        }`}
                       >
-                        <span className="text-sm font-medium text-start">
-                          {decodeHTML(cat.name)}
-                        </span>
-                        <span
-                          className={`text-xs font-semibold px-2 py-0.5 rounded-full
-                  ${
-                    cat.name === selected.name
-                      ? "bg-white/20 text-white"
-                      : "bg-stone-100 text-stone-500"
-                  }`}
-                        >
-                          {cat.count}
-                        </span>
+                        <span>{decodeHTML(cat.name)}</span>
+                        <span className="rounded-full bg-white/10 px-2 py-0.5 text-xs">{cat.count}</span>
                       </button>
-                      {i < categories.length - 1 && (
-                        <div className="mx-2 border-b border-stone-100" />
-                      )}
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
-            <div className="flex gap-3 justify-end items-center">
-              <button
-                disabled={currPage === 1 || loading}
-                onClick={() => {
-                  if (loading) return;
-                  setPosts(9);
-                  setCurrPage((prev) => prev - 1);
-                }}
-                className={`${currPage === 1 ? "opacity-50 cursor-not-allowed " : "hover:text-white hover:bg-black hover:border-black"} p-1 cursor-pointer rounded border text-black bg-white `}
-              >
-                <ArrowLeft />
-              </button>
-              <p className="text-white">
-                Page {currPage} of {totalPages}
-              </p>
-              <button
-                disabled={currPage == totalPages || loading}
-                onClick={() => {
-                  if (loading) return;
-                  setPosts(9);
-                  setCurrPage((prev) => prev + 1);
-                }}
-                className={`${currPage == totalPages ? "opacity-50 cursor-not-allowed " : "hover:text-white hover:bg-black hover:border-black"} p-1 cursor-pointer rounded border text-black bg-white `}
-              >
-                <ArrowRight />
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-      {loading ? (
-        // <!-- Grid Skeleton -->
-        <div className=" sm:px-12 md:px-16 px-8 mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 py-10 lg:py-20 sm:py-16 lg:max-w-screen-xl sm:max-w-xl md:max-w-full">
-          <div className="rounded-xl border border-white/10 bg-white/5 p-4 space-y-3">
-            <div className="w-full h-48 rounded animate-shimmer"></div>
-            <div className="h-4 w-3/4 animate-shimmer rounded"></div>
-            <div className="h-3 w-1/2 animate-shimmer rounded"></div>
-          </div>
-          <div className="rounded-xl border border-white/10 bg-white/5 p-4 space-y-3">
-            <div className="w-full h-48 rounded animate-shimmer"></div>
-            <div className="h-4 w-3/4 animate-shimmer rounded"></div>
-            <div className="h-3 w-1/2 animate-shimmer rounded"></div>
-          </div>
-          <div className="rounded-xl border border-white/10 bg-white/5 p-4 space-y-3">
-            <div className="w-full h-48 rounded animate-shimmer"></div>
-            <div className="h-4 w-3/4 animate-shimmer rounded"></div>
-            <div className="h-3 w-1/2 animate-shimmer rounded"></div>
-          </div>
-        </div>
-      ) : (
-        <div className="px-8 mx-auto lg:max-w-screen-xl sm:max-w-xl md:max-w-full sm:px-12 md:px-16 ">
-          <div
-            className={`grid gap-x-8 gap-y-12 sm:gap-y-16 md:grid-cols-2 lg:grid-cols-3 ${showAll ? "mb-20" : ""}`}
-          >
-            {blogs.length > 0 &&
-              blogs.map((e, index) => {
-                const featuredImage = getFeaturedImage(e);
-                return (
-                // Cards previously used dark text (text-black, text-slate-700,
-                // text-gray-700) meant for a white card background, but this
-                // grid renders directly on the page's black section — same
-                // dark-card treatment as the "latest 3" cards on
-                // app/(main)/blog/page.js so text is actually visible here.
-                <div
-                  className="group relative rounded-2xl border border-white/10 bg-white/5 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-[#40A2D8] hover:shadow-xl hover:shadow-black/40"
-                  key={index}
-                >
-                  <Link
-                    href={`/blog/${e?.slug}`}
-                    className="block overflow-hidden rounded-xl aspect-[1.91/1] bg-white/10"
-                  >
-                    {featuredImage ? (
-                      // eslint-disable-next-line @next/next/no-img-element -- user/dashboard-supplied URL (Cloudinary etc.), not a fixed host
-                      <img
-                        src={optimizedImageUrl(featuredImage, 640)}
-                        srcSet={imageSrcSet(featuredImage, [400, 640, 900])}
-                        sizes="(max-width: 768px) 100vw, 400px"
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
-                        alt={e?.title}
-                      />
-                    ) : (
-                      <div className="w-full h-full flex flex-col items-center justify-center gap-2 bg-white/5 text-white/30">
-                        <ImageOff size={28} />
-                        <span className="text-xs font-medium">
-                          Image unavailable
-                        </span>
-                      </div>
-                    )}
-                  </Link>
-                  <div className="relative mt-5">
-                    <p className="uppercase font-semibold text-xs mb-2.5 text-white transition-colors duration-300 group-hover:text-[#40A2D8]">
-                      {new Date(e?.publishedAt).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric",
-                      })}
-                      &nbsp;&nbsp; by {e?.author}
-                    </p>
-                    <Link
-                      href={`/blog/${e?.slug}`}
-                      className="block mb-3"
-                    >
-                      <h2 className="text-xl lg:text-2xl leading-tight font-semibold leading-5 text-white transition-colors duration-300 group-hover:text-[#40A2D8]">
-                        {e?.title}
-                      </h2>
-                    </Link>
-                    <p className="text-white transition-colors duration-300 group-hover:text-[#40A2D8]">
-                      {truncateHTML(e?.excerpt, 150)}
-                    </p>
-
-                    <Link
-                      href={`/blog/${e?.slug}`}
-                      className="font-medium underline text-white transition-colors duration-300 group-hover:text-[#40A2D8]"
-                      aria-label={`Read more about ${e?.title}`}
-                    >
-                      Read More
-                    </Link>
-                  </div>
-                </div>
-                );
-              })}
-          </div>
-          <div className="w-full text-center">
-            {!showAll && (
-              // .animated-button is `display: flex`, which (unlike the
-              // plain inline-block <button> this replaced) doesn't get
-              // centered by the ancestor's `text-align: center` — center
-              // it directly with flex instead.
-              <div className="mb-5 flex justify-center">
-                <AnimatedButton
-                  onClick={() => {
-                    setPosts(9);
-                    setShowAll(true);
-                  }}
-                >
-                  View all blogs
-                </AnimatedButton>
-              </div>
-            )}
-            {showAll && (
-              <div className="flex items-center gap-3 justify-center items-center">
-                <button
-                  disabled={currPage === 1 || loading}
-                  onClick={() => {
-                    if (loading) return;
-                    setPosts(9);
-                    setCurrPage((prev) => prev - 1);
-                  }}
-                  className={`${currPage === 1 ? "opacity-50 cursor-not-allowed " : "hover:text-white hover:bg-black hover:border-black"} p-1 cursor-pointer rounded border text-black bg-white `}
-                >
-                  <ArrowLeft />
-                </button>
-                <p className="text-white">
-                  Page {currPage} of {totalPages}
-                </p>
-                <button
-                  disabled={currPage == totalPages || loading}
-                  onClick={() => {
-                    if (loading) return;
-                    setPosts(9);
-                    setCurrPage((prev) => prev + 1);
-                  }}
-                  className={`${currPage == totalPages ? "opacity-50 cursor-not-allowed " : "hover:text-white hover:bg-black hover:border-black"} p-1 cursor-pointer rounded border text-black bg-white `}
-                >
-                  <ArrowRight />
-                </button>
-              </div>
-            )}
+            {pager}
           </div>
         </div>
       )}
-    </>
+
+      {loading ? (
+        <div className="grid gap-8 py-12 md:grid-cols-3">
+          {[0, 1, 2].map((k) => (
+            <div key={k} className="space-y-3">
+              <div className="aspect-[1.91/1] w-full rounded-2xl animate-shimmer" />
+              <div className="h-4 w-3/4 rounded animate-shimmer" />
+              <div className="h-3 w-1/2 rounded animate-shimmer" />
+            </div>
+          ))}
+        </div>
+      ) : (
+        blogs.length > 0 && (
+          <div className="grid gap-x-8 gap-y-14 pt-12 md:grid-cols-2 md:pt-16 lg:grid-cols-3">
+            {blogs.map((e, index) => (
+              <PostCard key={e?.slug || index} post={e} excerpt={truncateHTML(e?.excerpt, 150)} />
+            ))}
+          </div>
+        )
+      )}
+
+      {!showAll && (
+        <div className="flex justify-center">
+          <Pill
+            onClick={() => {
+              setPosts(9);
+              setShowAll(true);
+            }}
+          >
+            View all blogs
+          </Pill>
+        </div>
+      )}
+      {showAll && !loading && <div className="mt-14 flex justify-center">{pager}</div>}
+    </div>
   );
 }

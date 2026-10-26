@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Briefcase, MapPin, Clock, ChevronDown } from "lucide-react";
-import AnimatedButton from "@/components/ui/animatedButton";
+import Pill from "@/components/home/pill";
 
 const PREVIEW_LENGTH = 180;
 
@@ -10,7 +10,9 @@ const PREVIEW_LENGTH = 180;
 // long, unwieldy block — especially on mobile, where a handful of open
 // roles could mean endless scrolling before reaching "Apply Now" on later
 // ones. Collapsed to a short preview by default with a "Read more" toggle,
-// so the list reads as a clean, scannable stack of roles.
+// so the list reads as a clean, scannable stack of roles. Redesign: a thin
+// line between roles instead of boxes, the Apply pill (opens the role's
+// form in a new tab).
 export default function JobCard({ job, days }) {
   const [expanded, setExpanded] = useState(false);
   const description = job.description || "";
@@ -18,22 +20,22 @@ export default function JobCard({ job, days }) {
   const preview = isLong ? `${description.slice(0, PREVIEW_LENGTH).trimEnd()}…` : description;
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-black/40">
+    <div className="border-b border-white/10 py-8">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between mb-4">
         <div>
-          <h3 className="text-lg font-bold text-white mb-1">{job.title}</h3>
-          <span className="text-xs text-white">
+          <h3 className="font-display text-2xl leading-snug text-white mb-1">{job.title}</h3>
+          <span className="text-sm text-white/60">
             Posted {days === 0 ? "today" : `${days} day${days === 1 ? "" : "s"} ago`}
           </span>
         </div>
         <div className="shrink-0 w-full sm:w-fit">
-          <AnimatedButton href={job.applyForm} external size="sm" className="w-full sm:w-fit">
+          <Pill href={job.applyForm} variant="solid" srText={`for ${job.title} (opens in a new tab)`}>
             Apply Now
-          </AnimatedButton>
+          </Pill>
         </div>
       </div>
 
-      <p className="text-sm text-white leading-relaxed whitespace-pre-line mb-2">
+      <p className="max-w-3xl text-sm text-white/70 leading-relaxed whitespace-pre-line mb-2 md:text-base">
         {expanded ? description : preview}
       </p>
       {isLong && (
@@ -48,15 +50,15 @@ export default function JobCard({ job, days }) {
       )}
 
       <div className="flex flex-wrap gap-2 mt-3">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 text-[#40A2D8] px-3 py-1.5 text-xs font-semibold">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 text-white/80 px-3 py-1.5 text-xs">
           <Briefcase size={13} />
           {job.department}
         </span>
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 text-[#40A2D8] px-3 py-1.5 text-xs font-semibold">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 text-white/80 px-3 py-1.5 text-xs">
           <MapPin size={13} />
           {job.location}
         </span>
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 text-[#40A2D8] px-3 py-1.5 text-xs font-semibold">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 text-white/80 px-3 py-1.5 text-xs">
           <Clock size={13} />
           {job.experience}
         </span>

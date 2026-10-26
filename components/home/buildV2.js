@@ -4,6 +4,7 @@ import { ArrowUpRight, BarChart3, Bot, Check, GitBranch, Globe, Headset, Server,
 import RichText from "@/components/ui/richText";
 import Pill from "@/components/home/pill";
 import { productCards, CLIO_IMAGE, PRAXISTENCE_IMAGE } from "@/components/sections/aiProductsShowcase";
+import { IN_HOUSE_BUILDS } from "@/lib/inHouseBuilds";
 
 // The homepage's product pictures: transparent illustrations (Clio logo +
 // conversation; glossy CRM dashboard) with no frame or backdrop — they sit
@@ -32,13 +33,18 @@ const BUILD_ICONS = [Headset, Bot, Workflow, Server, Globe, GitBranch, BarChart3
 //    real size.
 //  - The rest of the in-house systems are small icon tiles (4 across on
 //    desktop), ending with a highlighted "Need a system like these?" tile.
-// Same dashboard fields as before.
-export default function BuildV2({ content, showClio = true, showPraxistence = true, showBuilds = true }) {
+// Same dashboard fields as before (the built-in systems list when none are
+// saved, like the old section). /industries shows the tiles on their own.
+// `clioPrefix`: the dashboard field prefix of the Clio card ("ai" on the
+// homepage, "clio" on the location pages). `compact` (location pages): the
+// two products side by side as shorter cards — picture, label, heading,
+// text, button; the feature lists stay on the homepage.
+export default function BuildV2({ content, showClio = true, showPraxistence = true, showBuilds = true, clioPrefix = "ai", compact = false }) {
   const eyebrow = content?.caseStudiesEyebrow || "What We Build";
   const heading = content?.caseStudiesHeading || "Powered by What We Build";
   const subtext = content?.caseStudiesSubtext || "";
-  const products = productCards(content, { showClio, showPraxistence });
-  const builds = showBuilds ? (content?.caseStudyClients || []).filter((c) => c?.name) : [];
+  const products = productCards(content, { clioPrefix, showClio, showPraxistence });
+  const builds = showBuilds ? (content?.caseStudyClients?.length > 0 ? content.caseStudyClients : IN_HOUSE_BUILDS).filter((c) => c?.name) : [];
 
   if (!products.length && !builds.length) return null;
 
@@ -53,7 +59,33 @@ export default function BuildV2({ content, showClio = true, showPraxistence = tr
           {subtext && <RichText as="p" text={subtext} className="self-end text-base text-white/70 md:text-lg" />}
         </div>
 
-        {products.length > 0 && (
+        {compact && products.length > 0 && (
+          <div className={`reveal-stagger mt-12 grid gap-5 md:mt-16 ${products.length > 1 ? "lg:grid-cols-2" : ""}`}>
+            {products.map((p, i) => {
+              const art = PRODUCT_ART[p.key]?.defaults.includes(p.image) ? PRODUCT_ART[p.key] : null;
+              return (
+                <article key={p.key} className="flex flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b0e16]">
+                  <div className="relative h-56 bg-linear-to-b from-[#0B60B0]/15 to-transparent sm:h-64">
+                    {art ? (
+                      <Image src={art.src} alt="" fill sizes="(min-width: 1024px) 560px, 100vw" className="object-contain p-6" />
+                    ) : (
+                      <Image src={p.image} alt="" fill sizes="(min-width: 1024px) 560px, 100vw" className="object-cover" />
+                    )}
+                  </div>
+                  <div className="flex flex-1 flex-col p-6 sm:p-8">
+                    <h3 className="font-display text-2xl leading-tight md:text-3xl">{p.heading}</h3>
+                    <RichText as="div" text={p.paragraph} className="mt-4 line-clamp-4 text-base leading-relaxed text-white/70" />
+                    <div className="mt-auto pt-8">
+                      <Pill href={p.buttonLink}>{p.buttonText}</Pill>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        )}
+
+        {!compact && products.length > 0 && (
           <div className="mt-14 space-y-6 md:mt-20 stack-cards:space-y-0">
             {products.map((p, i) => {
               const art = PRODUCT_ART[p.key]?.defaults.includes(p.image) ? PRODUCT_ART[p.key] : null;
@@ -65,10 +97,7 @@ export default function BuildV2({ content, showClio = true, showPraxistence = tr
                   style={{ top: `calc(6.5rem + ${i * 1.5}rem)` }}
                 >
                   <div className={`flex flex-col ${flip ? "lg:order-2" : ""}`}>
-                    <p className="text-xs uppercase tracking-wider text-[#40A2D8]">
-                      Product {String(i + 1).padStart(2, "0")}
-                    </p>
-                    <h3 className="font-display mt-3 text-3xl leading-tight md:text-4xl">{p.heading}</h3>
+                    <h3 className="font-display text-3xl leading-tight md:text-4xl">{p.heading}</h3>
                     <RichText as="div" text={p.paragraph} className="mt-4 space-y-3 text-base leading-relaxed text-white/70" />
                     <ul className="mt-8 grid gap-x-6 gap-y-5 sm:grid-cols-2">
                       {p.features.map((f, k) => (
@@ -103,9 +132,9 @@ export default function BuildV2({ content, showClio = true, showPraxistence = tr
         )}
 
         {builds.length > 0 && (
-          <div className="mt-24">
-            <p className="text-sm text-white/60">Also built and run in-house</p>
-            <ul className="reveal-stagger mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className={products.length ? "mt-24" : "mt-12 md:mt-16"}>
+            {products.length > 0 && <p className="mb-6 text-sm text-white/60">Also built and run in-house</p>}
+            <ul className="reveal-stagger grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {builds.map((b, i) => {
                 const Icon = BUILD_ICONS[i % BUILD_ICONS.length];
                 return (

@@ -1,12 +1,14 @@
-import Link from "next/link";
-import Image from "next/image";
-import RoadmapTimeline from "@/components/sections/roadmapTimeline";
-import { FAQSection } from "@/components/ui/faq-accordion";
-import OnboardingCarousel from "@/components/sections/onboardingCarousel";
-import CategoriesShowcase from "@/components/sections/categoriesShowcase";
 import { INDUSTRIES } from "@/lib/industriesData";
-import RichText from "@/components/ui/richText";
-import CtaSideImage from "@/components/ui/ctaSideImage";
+import PageHero from "@/components/detail/pageHero";
+import WhoItsFor from "@/components/detail/whoItsFor";
+import RoadmapSteps from "@/components/detail/roadmapSteps";
+import WhyTrust from "@/components/detail/whyTrust";
+import TimelineRow from "@/components/detail/timelineRow";
+import LinkChips from "@/components/detail/linkChips";
+import DetailCta from "@/components/detail/detailCta";
+import ServicesV2 from "@/components/home/servicesV2";
+import FaqV2 from "@/components/home/faqV2";
+import BeamsBlock from "@/components/home/band";
 import { getPageContent } from "@/actions/pageContentActions";
 import { buildPageMetadata } from "@/lib/pageMetadata";
 import PageSeoScripts from "@/components/sections/pageSeoScripts";
@@ -17,7 +19,6 @@ import {
   Unlock,
   ShieldCheck,
   Lightbulb,
-  FileSignature,
   BarChart3,
   Megaphone,
   Workflow,
@@ -191,6 +192,35 @@ const DEFAULT_FAQS = [
   },
 ];
 
+// "What to expect, and when" — how long each stage typically takes.
+const DEFAULT_ONBOARDING_STEPS = [
+  {
+    step: "1 TO 2 WEEKS",
+    title: "Discover & Audit",
+    desc: "We review your business, competitors, and current digital presence to identify real opportunities before recommending anything.",
+  },
+  {
+    step: "1 WEEK",
+    title: "Strategise",
+    desc: "We turn audit insights into a focused roadmap across the right channels, matched to your goals and budget.",
+  },
+  {
+    step: "ONGOING",
+    title: "Create & Execute",
+    desc: "Campaigns, content, and websites are built and launched in phases, so results start compounding early rather than all at once.",
+  },
+  {
+    step: "CONTINUOUS",
+    title: "Optimise & Scale",
+    desc: "We don't stop after launch — testing, refining, and scaling run throughout the engagement, not just at the start.",
+  },
+  {
+    step: "MONTHLY",
+    title: "Report & Grow",
+    desc: "You receive clear reporting on a consistent monthly cycle, with strategy calls to review what's working and what's next.",
+  },
+];
+
 export default async function HowWeWorkPage() {
   const content = await getPageContent("how-we-work");
   // Sections switched off in the dashboard (Remove section).
@@ -292,405 +322,73 @@ export default async function HowWeWorkPage() {
     "No guesswork, no vague timelines — just a clear process built to turn strategy into measurable growth. Book a free consultation and see exactly how we'd approach your business.";
   const ctaButtonText = content?.ctaButtonText || "Get a Free Consultation";
 
+
+  const onboardingSteps = content?.onboardingSteps?.length > 0 ? content.onboardingSteps : DEFAULT_ONBOARDING_STEPS;
+  const showRoadmap = !hidden.has("hwwRoadmap");
+  const showTools = !hidden.has("tools");
+  const showOnboarding = !hidden.has("onboarding");
+
+  // Redesign, in the homepage's style: hero → principles → (on the beams
+  // background) the engagement roadmap, the tools and the timeline → what
+  // you can expect → industries → services → FAQ → closing CTA. Same
+  // dashboard fields and "Remove section" switches as before.
   return (
-    <>
+    <div data-no-reveal>
       <PageSeoScripts pageKey="how-we-work" />
-      {/* Hero — full-bleed photo (same treatment as the FAQ hero): the
-          image is already designed with a dark-to-photo gradient built
-          in, laid down as a plain background with a matching black
-          overlay, text sitting in the solid-black portion on the left.
-          Replaces the previous two conic-gradient decorative blobs. */}
-      {/* md:min-h-screen — fills the full viewport on desktop/laptop (was
-          a fixed 500px, which left the next section peeking in at the
-          bottom of the first screen). Mobile keeps its own shorter
-          heights. */}
+      {/* thin reading-progress line at the top (pure CSS, see globals.css) */}
+      <div aria-hidden="true" className="scroll-progress" />
       {!hidden.has("hwwHero") && (
-      <>
-      <section className="relative overflow-hidden sm:min-h-[500px] md:min-h-screen flex items-start md:items-center pt-8 pb-12 px-6 sm:pt-24 sm:pb-16 md:pt-20 md:px-12 lg:px-24 bg-black">
-        {/* Mobile: the image sits behind the content (object-right keeps the
-            photo's subject in view) with a dark scrim so the text stays
-            readable; md+ uses the background-image version below. */}
-        {/* next/image (was a plain <img> of the raw ~700KB PNG — the mobile
-            LCP element): served as WebP/AVIF at ~23KB instead. sizes is
-            the banner's full source width, not 100vw — object-cover in
-            this tall box renders it several times wider than the screen,
-            and anything smaller looked blurry. The optimizer never
-            upscales, so this always gets the full-resolution file. */}
-        <div className="md:hidden absolute inset-0">
-          <Image
-            src={heroImage}
-            alt=""
-            fill
-            sizes="1900px"
-            loading="eager"
-            fetchPriority="high"
-            className="object-cover object-right"
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.85) 100%)",
-            }}
-          />
-        </div>
-        <div
-          className="absolute inset-0 max-md:hidden"
-          style={{
-            backgroundImage: `url('${heroImage}')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
+        <PageHero
+          label="How We Work"
+          title={heroHeading}
+          tagline={heroSubheading}
+          description={heroParagraph}
+          actions={[{ text: heroCtaText, href: "/contact", variant: "solid" }]}
+          image={heroImage}
+          imageAspect="aspect-[4/3]"
+          imageClassName="object-[62%_50%]"
         />
-        <div
-          className="absolute inset-0 max-md:hidden"
-          style={{
-            background:
-              "linear-gradient(90deg, #000000 0%, #000000 38%, rgba(0,0,0,0.82) 55%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0) 100%)",
-          }}
-        />
-
-        <div className="relative max-w-3xl">
-          <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4">
-            {heroHeading}
-          </h1>
-          <h2 className="text-lg sm:text-xl font-semibold text-[#8fd0f2] mb-6">
-            {heroSubheading}
-          </h2>
-          <RichText
-            as="p"
-            text={heroParagraph}
-            className="text-white leading-relaxed mb-8 max-w-xl"
-          />
-          <a href="/contact" className="inline-block">
-            <button className="animated-button animated-button-lg whitespace-nowrap">
-              <svg
-                viewBox="0 0 24 24"
-                className="arr-2"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-              </svg>
-              <span className="text">{heroCtaText}</span>
-              <span className="circle"></span>
-              <svg
-                viewBox="0 0 24 24"
-                className="arr-1"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-              </svg>
-            </button>
-          </a>
-        </div>
-      </section>
-      </>
       )}
 
-      {/* Our principles */}
-      {!hidden.has("principles") && (
-      <>
-      <section className="bg-black py-20 px-6 md:px-12 lg:px-24 text-white">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4 max-w-2xl">
-            {principlesHeading}
-          </h2>
-          <RichText
-            as="p"
-            text={principlesParagraph}
-            className="text-white max-w-2xl mb-14"
-          />
+      {!hidden.has("principles") && <WhoItsFor eyebrow="Our principles" heading={principlesHeading} subtext={principlesParagraph} items={principles} />}
 
-          <div className="grid sm:grid-cols-2 gap-5">
-            {principles.map(({ icon: Icon, title, tagline, desc }, i) => (
-              <div key={i} className="relative">
-                {/* Mobile-only connector — sits only in the gap above this
-                    card (never over its body/icon). A full-height spine
-                    behind the cards (the previous approach) still showed
-                    through the icon since the card's bg-white/5 is too
-                    transparent to hide anything placed behind it. */}
-                {i > 0 && (
-                  <span
-                    className="sm:hidden absolute left-[42px] -top-5 h-5 w-px"
-                    style={{
-                      backgroundImage:
-                        "repeating-linear-gradient(to bottom, rgba(64,162,216,0.4) 0px, rgba(64,162,216,0.4) 4px, transparent 4px, transparent 12px)",
-                    }}
-                    aria-hidden="true"
-                  />
-                )}
-                <div className="group flex items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-5 h-full transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-white hover:shadow-xl hover:shadow-black/20">
-                  <span className="shrink-0 flex items-center justify-center w-11 h-11 rounded-full bg-white/15 text-white transition-colors duration-300 group-hover:bg-[#0B60B0] group-hover:text-white">
-                    <Icon size={20} />
-                  </span>
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-1.5 transition-colors duration-300 group-hover:text-[#0B60B0]">
-                      {title}
-                    </p>
-                    <h3 className="font-bold text-lg mb-1.5 transition-colors duration-300 group-hover:text-black">
-                      {tagline}
-                    </h3>
-                    <RichText
-                      as="p"
-                      text={desc}
-                      className="text-white text-sm leading-relaxed transition-colors duration-300 group-hover:text-gray-600"
-                    />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      </>
+      {(showRoadmap || showTools || showOnboarding) && (
+        <BeamsBlock>
+          {showRoadmap && <RoadmapSteps eyebrow="Engagement roadmap" heading={roadmapHeading} steps={roadmapSteps} />}
+          {showTools && <WhyTrust eyebrow="Our tools" heading={toolsHeading} description={toolsParagraph} items={tools} />}
+          {showOnboarding && <TimelineRow heading={onboardingHeading} subtext={onboardingParagraph} steps={onboardingSteps} />}
+        </BeamsBlock>
       )}
 
-      {/* Engagement roadmap */}
-      {!hidden.has("hwwRoadmap") && (
-      <>
-      <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-16">
-            {roadmapHeading}
-          </h2>
-          <RoadmapTimeline steps={roadmapSteps} dark />
-        </div>
-      </section>
-      </>
-      )}
-
-      {/* The Tools Behind Every Strategy */}
-      {!hidden.has("tools") && (
-      <>
-      <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10 text-white">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">
-            {toolsHeading}
-          </h2>
-          <RichText
-            as="p"
-            text={toolsParagraph}
-            className="text-white leading-relaxed max-w-2xl mb-14"
-          />
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {tools.map(({ icon: Icon, title, desc }, i) => (
-              <div
-                key={i}
-                className="group rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-black/40"
-              >
-                <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-white/10 text-[#40A2D8] mb-4 transition-all duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
-                  <Icon size={20} />
-                </span>
-                <h3 className="font-bold text-white mb-2">{title}</h3>
-                <RichText
-                  as="p"
-                  text={desc}
-                  className="text-sm text-white leading-relaxed transition-colors duration-300 group-hover:text-white/85"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      </>
-      )}
-
-      {/* How we onboard new clients */}
-      {!hidden.has("onboarding") && (
-      <>
-      <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 max-w-2xl">
-            {onboardingHeading}
-          </h2>
-          <RichText
-            as="p"
-            text={onboardingParagraph}
-            className="text-white max-w-2xl mb-14 leading-relaxed"
-          />
-
-          <OnboardingCarousel content={content} />
-        </div>
-      </section>
-      </>
-      )}
-
-      {/* What You Can Expect */}
       {!hidden.has("expectations") && (
-      <>
-      <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10 text-white">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-2">
-            {expectationsHeading}
-          </h2>
-          <h3 className="text-lg font-semibold text-[#40A2D8] mb-4">
-            {expectationsSubheading}
-          </h3>
-          <RichText
-            as="p"
-            text={expectationsParagraph}
-            className="text-white max-w-2xl mx-auto mb-14 leading-relaxed"
-          />
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
-            {expectations.map(({ icon: Icon, title, desc }, i) => (
-              <div
-                key={i}
-                className="group rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-black/40"
-              >
-                <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-white/10 text-[#40A2D8] mb-4 transition-all duration-300 group-hover:bg-white group-hover:text-[#0B60B0] group-hover:scale-110">
-                  <Icon size={20} />
-                </span>
-                <h4 className="font-bold text-white mb-2">{title}</h4>
-                <RichText
-                  as="p"
-                  text={desc}
-                  className="text-sm text-white leading-relaxed transition-colors duration-300 group-hover:text-white/85"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      </>
-      )}
-
-      {/* Industries we apply this process to */}
-      {!hidden.has("hwwIndustries") && (
-      <>
-      <section className="bg-black py-20 px-6 md:px-12 lg:px-24 text-white border-t border-white/10">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-2">
-            {industriesHeading}
-          </h2>
-          <h3 className="text-lg font-semibold text-[#40A2D8] mb-4">
-            {industriesSubheading}
-          </h3>
-          <RichText
-            as="p"
-            text={industriesParagraph}
-            className="text-white max-w-2xl mx-auto mb-2 leading-relaxed"
-          />
-          <p className="text-white text-sm mb-10"></p>
-
-          {/* Mobile: a strict 3-column grid (5 rows for 15 industries)
-              instead of flex-wrap, which let differently-sized pills wrap
-              unevenly (2, then 1, then 2...) into a ragged layout. Desktop
-              keeps the original centered flex-wrap flow. */}
-          <div className="grid grid-cols-3 gap-3 sm:flex sm:flex-wrap sm:justify-center">
-            {INDUSTRY_LINKS.map(({ slug, label, icon: Icon }) => (
-              <Link
-                key={slug}
-                href={`/industries/${slug}`}
-                className="group flex sm:inline-flex min-w-0 flex-col sm:flex-row items-center justify-center gap-2 rounded-2xl sm:rounded-full border border-white/15 bg-white/5 px-2 sm:px-5 py-4 sm:py-2.5 text-xs sm:text-sm leading-tight font-medium text-white text-center transition-all duration-300 hover:-translate-y-0.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:text-white hover:shadow-lg hover:shadow-black/40"
-              >
-                <span className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 sm:w-auto sm:h-auto sm:bg-transparent sm:rounded-none">
-                  <Icon
-                    size={20}
-                    className="shrink-0 text-[#40A2D8] transition-colors duration-300 group-hover:text-white sm:w-[14px] sm:h-[14px]"
-                  />
-                </span>
-                <span className="sm:truncate">{label}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-      </>
-      )}
-
-      {/* Categories we work across */}
-      {!hidden.has("categories") && (
-      <>
-      <section className="bg-black text-white py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4 max-w-2xl">
-            {categoriesHeading}
-          </h2>
-          <RichText
-            as="p"
-            text={categoriesParagraph}
-            className="text-white max-w-2xl mb-10 leading-relaxed"
-          />
-
-          <CategoriesShowcase />
-        </div>
-      </section>
-      </>
-      )}
-
-      {/* FAQ */}
-      {!hidden.has("hwwFaq") && (
-      <>
-      <section className="bg-black pt-20 pb-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
-        <FAQSection
-          faqs={faqs}
-          defaultValue="item-0"
-          className="max-w-4xl mx-auto"
-          headingClassName="text-2xl md:text-3xl font-bold text-center mb-12 text-white"
-          heading={faqHeading}
-          triggerClassName="bg-white/5 border-[#0B60B0]/50 hover:border-[#0B60B0] text-white hover:bg-white/10 hover:shadow-none"
-          iconClassName="text-[#40A2D8]"
-          questionTextClassName="text-white"
-          chevronWrapClassName="bg-white/10"
-          chevronClassName="text-white"
-          answerClassName="bg-white/5 border border-[#0B60B0]/30 shadow-none"
-          answerTextClassName="text-white"
-          answerIconWrapClassName="bg-white/10"
-          answerIconClassName="text-[#40A2D8]"
+        <WhoItsFor
+          eyebrow={expectationsSubheading}
+          heading={expectationsHeading}
+          subtext={expectationsParagraph}
+          items={expectations}
+          cols="lg:grid-cols-4"
+          twoUpOnPhones
         />
-      </section>
-      </>
       )}
 
-      {/* CTA — page-specific content (not the shared site-wide CTA), same
-          visual treatment as it, with a button instead of an email form. */}
-      {!hidden.has("cta") && (
-      <>
-      <div className="bg-black px-5 pt-4 pb-10 scroll-mt-34" id="CTA">
-        <div
-          className="md:flex md:items-stretch rounded-3xl border-2 border-[#0B60B0] shadow-lg shadow-black md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto container"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(120, 180, 255, 0.25), transparent 70%), #000000",
-          }}
-        >
-          <div className="flex-1 min-w-0 py-8 md:py-10 px-6 md:px-10 z-10 text-white">
-            <h3 className="md:text-3xl text-2xl font-bold mb-5">
-              {ctaHeading}
-            </h3>
-            <RichText
-              as="p"
-              text={ctaParagraph}
-              className="max-w-3xl text-white mb-8"
-            />
-            {/* Full width on mobile (was inline-flex sized to content,
-                which — combined with the card's own padding — left so
-                little room the label wrapped mid-phrase onto two lines);
-                back to its normal auto-width pill from sm up. */}
-            <Link
-              href="/contact"
-              className="flex sm:inline-flex items-center justify-center w-full sm:w-auto whitespace-nowrap bg-white hover:bg-gray-100 text-black text-sm font-semibold px-7 py-3.5 rounded-lg transition"
-            >
-              {ctaButtonText}
-            </Link>
-          </div>
-          <CtaSideImage src={content?.ctaImage} />
-        </div>
-      </div>
-      </>
+      {!hidden.has("hwwIndustries") && (
+        <LinkChips
+          eyebrow="Industries"
+          heading={industriesHeading}
+          tagline={industriesSubheading}
+          text={industriesParagraph}
+          links={INDUSTRY_LINKS.map(({ slug, label, icon }) => ({ href: `/industries/${slug}`, label, icon }))}
+        />
       )}
 
-      {/* Full-width white divider before the footer — same as the shared
-          CTA's divider, so this page still ends the same way. */}
-      {!hidden.has("cta") && (
-      <>
-      <div className="w-full bg-black pt-8 md:pt-10">
-        <div className="w-full border-t border-white" />
-      </div>
-      </>
+      {/* the homepage's services grid, with this page's heading */}
+      {!hidden.has("categories") && (
+        <ServicesV2 content={{ servicesEyebrow: "What we do", servicesHeading: categoriesHeading, servicesSubtext: categoriesParagraph }} />
       )}
-    </>
+
+      {!hidden.has("hwwFaq") && <FaqV2 content={{ faqHeading, faqItems: faqs }} />}
+
+      {!hidden.has("cta") && <DetailCta heading={ctaHeading} text={ctaParagraph} primaryText={ctaButtonText} />}
+    </div>
   );
 }

@@ -76,8 +76,8 @@ export default function ReviewsV2({ content }) {
 
         {/* eslint-disable-next-line @next/next/no-img-element -- pre-sized 1x / 2x files (30KB / 69KB); next/image would only recompress them */}
         <img
-          src="/reviews-feedback-456.webp"
-          srcSet="/reviews-feedback-456.webp 456w, /reviews-feedback-912.webp 912w"
+          src="/reviews-5stars-456.webp"
+          srcSet="/reviews-5stars-456.webp 456w, /reviews-5stars-912.webp 912w"
           sizes="(min-width: 1280px) 456px, 36vw"
           alt=""
           width={456}

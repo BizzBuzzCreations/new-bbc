@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 import {
   Building2,
   Search,
@@ -14,7 +13,8 @@ import {
   Briefcase,
   Handshake,
 } from "lucide-react";
-import { FAQSection } from "@/components/ui/faq-accordion";
+import { Plus } from "lucide-react";
+import RichText from "@/components/ui/richText";
 
 // Real, BizzBuzz-specific answers — reusing facts already established
 // elsewhere on the site (free consultation flow on /contact, the
@@ -434,9 +434,6 @@ const DEFAULT_TOPICS = [
 
 // A blue-tinted hover instead of the accordion's default gray, just for
 // this page's questions.
-const TRIGGER_HOVER =
-  "hover:bg-[#eaf4fb] hover:border-[#40A2D8]/40";
-
 const SCROLL_SPY_OFFSET = 140; // px from the top of the viewport
 
 export default function FaqTopics({ content } = {}) {
@@ -498,87 +495,58 @@ export default function FaqTopics({ content } = {}) {
     });
   };
 
+  // Redesign (dark): the topic list stays beside the questions (sticky) on
+  // desktop and scrolls sideways on phones; each topic is a heading, its
+  // line and its questions as the homepage FAQ's thin-line list (native
+  // <details>, a plus that turns into a cross), no white cards.
   return (
-    <section className="bg-black">
-      <div
-        data-no-reveal
-        className="max-w-7xl mx-auto grid lg:grid-cols-[300px_1fr] lg:gap-6 px-4 md:px-6 pt-8 pb-6 md:pt-28 md:pb-16"
-      >
-        {/* TOC sidebar — stays put (sticky) while the page scrolls; only
-            the active highlight moves between topics via scroll-spy.
-            min-w-0: without it, a CSS Grid item won't shrink below its
-            content's intrinsic width by default — since the pill row
-            below is an unwrapped horizontal scroller, that was forcing
-            this whole grid (and the page along with it) wider than the
-            viewport on mobile instead of letting overflow-x-auto scroll
-            internally. */}
-        <div className="min-w-0 lg:sticky lg:top-24 lg:self-start bg-black px-2 md:px-4 py-2 lg:py-0">
-          <p className="text-xs font-bold uppercase tracking-widest text-white mb-6 px-2">
-          </p>
-          {/* Mobile: smaller, snap-scrolling pills — the full-size desktop
-              pills (icon + full label, generous padding) only fit about
-              1.5 on screen at once on a phone, making the other 9 topics
-              hard to discover. Scroll-snap makes each swipe land cleanly
-              on the next pill instead of stopping mid-pill. */}
-          <div className="flex lg:flex-col gap-1.5 lg:gap-2 overflow-x-auto snap-x snap-mandatory lg:overflow-visible pb-2 lg:pb-0 -mx-1 px-1">
+    <section className="bg-black text-white">
+      <div data-no-reveal className="mx-auto grid max-w-7xl gap-6 px-6 pb-16 md:px-10 md:pb-24 lg:grid-cols-[280px_1fr] lg:gap-16">
+        {/* min-w-0: lets the phone pill row scroll inside the grid instead
+            of widening the page */}
+        <nav aria-label="FAQ topics" className="sticky top-14 z-10 -mx-6 min-w-0 bg-black/90 px-6 py-3 backdrop-blur-sm md:top-[72px] lg:top-28 lg:mx-0 lg:self-start lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
+          <p className="mb-4 hidden text-sm text-[#40A2D8] lg:block">Topics</p>
+          <div className="flex gap-1.5 overflow-x-auto snap-x snap-mandatory pb-1 lg:flex-col lg:gap-1 lg:overflow-visible lg:pb-0">
             {TOPICS.map((t, i) => {
               const Icon = t.icon;
               const isActive = active === i;
               return (
                 <button
                   key={t.id}
+                  type="button"
                   onClick={() => scrollToTopic(i)}
-                  className={`group snap-start shrink-0 flex items-center gap-2 lg:gap-3 text-left pl-3 pr-3.5 lg:pl-4 lg:pr-4 py-2.5 lg:py-3.5 rounded-xl text-xs lg:text-sm font-medium whitespace-nowrap lg:whitespace-normal transition-all duration-300 border ${
-                    isActive
-                      ? "bg-[#0B60B0] text-white border-[#40A2D8] shadow-lg shadow-[#0B60B0]/30"
-                      : "text-white border-transparent hover:text-white hover:bg-white/5 hover:border-white/10"
+                  aria-current={isActive ? "true" : undefined}
+                  className={`flex shrink-0 snap-start items-center gap-2.5 whitespace-nowrap rounded-full border px-4 py-2 text-left text-sm transition-colors duration-200 lg:whitespace-normal lg:rounded-xl lg:px-3 lg:py-2.5 ${
+                    isActive ? "border-[#40A2D8] bg-[#0B60B0] text-white" : "border-white/15 text-white/80 hover:border-white/40 hover:text-white lg:border-transparent"
                   }`}
                 >
-                  <span
-                    className={`shrink-0 flex items-center justify-center w-6 h-6 lg:w-8 lg:h-8 rounded-lg transition-colors ${
-                      isActive
-                        ? "bg-white/15"
-                        : "bg-white/5 group-hover:bg-white/10"
-                    }`}
-                  >
-                    <Icon size={15} />
-                  </span>
+                  <Icon size={16} aria-hidden="true" className="shrink-0" />
                   {t.label}
                 </button>
               );
             })}
           </div>
-        </div>
+        </nav>
 
-        {/* All topics, stacked — no shared wrapper background anymore;
-            each topic is just its own card floating directly on the
-            section's black backdrop. */}
-        <div className="relative min-w-0 px-2 md:px-4 py-6 md:py-16 space-y-6 md:space-y-16">
+        <div className="min-w-0 space-y-16 md:space-y-20">
           {TOPICS.map((topic, i) => (
-            <motion.div
-              key={topic.id}
-              ref={(el) => (sectionRefs.current[i] = el)}
-              data-index={i}
-              id={topic.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-10% 0px" }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-              className="relative scroll-mt-28 bg-white rounded-2xl border border-gray-200 shadow-sm p-5 md:p-10"
-            >
-              <FAQSection
-                heading={topic.label}
-                // Dashboard "Topic Description" — it was saved but never
-                // shown anywhere; now a short line under the topic title.
-                description={topic.description}
-                descriptionClassName="text-sm md:text-base text-gray-600 leading-relaxed mb-5 md:mb-8"
-                faqs={topic.faqs}
-                defaultValue="item-0"
-                headingClassName={`text-xl md:text-3xl font-bold text-black ${topic.description ? "mb-2" : "mb-5 md:mb-8"}`}
-                triggerClassName={TRIGGER_HOVER}
-                questionTextClassName="text-base md:text-lg"
-              />
-            </motion.div>
+            <div key={topic.id} ref={(el) => (sectionRefs.current[i] = el)} data-index={i} id={topic.id} className="scroll-mt-40 lg:scroll-mt-28">
+              <h2 className="font-display text-3xl leading-tight md:text-4xl">{topic.label}</h2>
+              {topic.description && <p className="mt-3 text-base text-white/65">{topic.description}</p>}
+              <div className="mt-6 border-t border-white/10 md:mt-8">
+                {(topic.faqs || []).filter((f) => f?.question).map((f, k) => (
+                  <details key={k} className="group border-b border-white/10" open={k === 0}>
+                    <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-6 text-left text-lg text-white transition-colors hover:text-[#40A2D8] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8] [&::-webkit-details-marker]:hidden">
+                      <span>{f.question}</span>
+                      <span aria-hidden="true" className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/25 transition-transform duration-300 group-open:rotate-45">
+                        <Plus size={16} />
+                      </span>
+                    </summary>
+                    <RichText as="div" text={f.answer} className="max-w-3xl pb-6 pr-12 text-base leading-relaxed text-white/65" />
+                  </details>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>

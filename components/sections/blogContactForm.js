@@ -35,7 +35,7 @@ export default function BlogContactForm() {
       toast.success(response.message, {
         position: "top-right",
         autoClose: 5000,
-        theme: "light",
+        theme: "dark",
         transition: Bounce,
       });
       setFormData({ name: "", email: "", message: "" });
@@ -43,16 +43,16 @@ export default function BlogContactForm() {
       toast.error(response.message, {
         position: "top-right",
         autoClose: 5000,
-        theme: "light",
+        theme: "dark",
         transition: Bounce,
       });
     }
   };
 
   return (
-    <div data-bizzbee-avoid className="bg-white border border-gray-200 rounded-2xl shadow-md p-6">
-      <h3 className="text-lg font-bold text-black mb-1">Have Questions?</h3>
-      <p className="text-sm text-gray-500 mb-5">
+    <div data-bizzbee-avoid className="rounded-3xl border border-white/10 bg-[#0b0e16]/85 p-6 backdrop-blur-sm">
+      <h3 className="font-display mb-1 text-xl text-white">Have Questions?</h3>
+      <p className="mb-5 text-sm text-white/65">
         Tell us a little about your project and we&apos;ll get back to you.
       </p>
 
@@ -60,7 +60,7 @@ export default function BlogContactForm() {
         <div>
           <label
             htmlFor="blog-contact-name"
-            className="block text-xs font-semibold uppercase tracking-wide text-gray-600 mb-1.5"
+            className="block text-xs font-semibold uppercase tracking-wide text-white/70 mb-1.5"
           >
             Name
           </label>
@@ -70,7 +70,7 @@ export default function BlogContactForm() {
             name="name"
             type="text"
             id="blog-contact-name"
-            className="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-[#0B60B0]"
+            className="w-full rounded-xl border border-white/20 bg-white/[0.04] px-3 py-2.5 text-base text-white placeholder:text-white/45 focus:border-[#40A2D8] focus:outline-none md:text-sm"
             placeholder="Your full name"
             required
           />
@@ -79,7 +79,7 @@ export default function BlogContactForm() {
         <div>
           <label
             htmlFor="blog-contact-email"
-            className="block text-xs font-semibold uppercase tracking-wide text-gray-600 mb-1.5"
+            className="block text-xs font-semibold uppercase tracking-wide text-white/70 mb-1.5"
           >
             Email
           </label>
@@ -89,7 +89,7 @@ export default function BlogContactForm() {
             name="email"
             type="email"
             id="blog-contact-email"
-            className="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-[#0B60B0]"
+            className="w-full rounded-xl border border-white/20 bg-white/[0.04] px-3 py-2.5 text-base text-white placeholder:text-white/45 focus:border-[#40A2D8] focus:outline-none md:text-sm"
             placeholder="you@example.com"
             required
           />
@@ -98,7 +98,7 @@ export default function BlogContactForm() {
         <div>
           <label
             htmlFor="blog-contact-message"
-            className="block text-xs font-semibold uppercase tracking-wide text-gray-600 mb-1.5"
+            className="block text-xs font-semibold uppercase tracking-wide text-white/70 mb-1.5"
           >
             Message
           </label>
@@ -108,7 +108,7 @@ export default function BlogContactForm() {
             name="message"
             id="blog-contact-message"
             rows="4"
-            className="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-[#0B60B0]"
+            className="w-full rounded-xl border border-white/20 bg-white/[0.04] px-3 py-2.5 text-base text-white placeholder:text-white/45 focus:border-[#40A2D8] focus:outline-none md:text-sm"
             placeholder="Briefly tell us what you need..."
             required
           ></textarea>

@@ -17,36 +17,21 @@ export default function GlobeTrust({ content }) {
     content?.globeParagraph ||
     "From local businesses to growing enterprises, we help brands across Prayagraj, India, and global markets build a digital presence that drives leads and sales — real results, not vanity metrics. Whether you're a small business just getting started online or an established company looking to expand into new markets, our team combines local market understanding with strategies that work across borders, so your growth never stays confined to one city or one country.";
 
+  // Redesign: the heading block in the site's style (small blue eyebrow,
+  // big light heading) beside the globe; on phones heading → globe → text.
   return (
-    <section className="relative bg-black text-white pt-2 md:pt-3 pb-3 md:pb-4 px-6 md:px-12 lg:px-24 overflow-hidden">
-
-      {/* items-center (not items-end) so the text sits level with the
-          globe's own visual center, instead of pinned to the bottom of a
-          much taller box. */}
-      <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-        {/* Text — vertically centered against the globe. Paragraph is
-            hidden here on mobile and re-rendered below the globe instead,
-            so the mobile order reads heading → globe → paragraph while
-            desktop keeps its original text-column / globe side-by-side
-            layout untouched. */}
-        <div className="max-w-sm sm:max-w-md md:max-w-lg">
-          <p className="text-lg sm:text-xl text-white font-light mb-1">
-            {eyebrow}
-          </p>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            {heading}
-          </h2>
-          <RichText
-            as="p"
-            text={paragraph}
-            className="hidden md:block text-sm text-white leading-relaxed"
-          />
+    <section className="relative overflow-hidden bg-black px-6 py-16 text-white md:px-10 md:py-20">
+      <div className="relative z-10 mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-center md:justify-between">
+        <div className="max-w-xl">
+          <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
+          <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
+          <RichText as="p" text={paragraph} className="mt-6 hidden text-base leading-relaxed text-white/70 md:block" />
         </div>
 
         {/* Interactive 3D globe — real dot-mapped world map (Three.js +
             d3-geo), drag to spin, markers on our actual India + UK
             offices. Replaces the old orbiting-rings visual. */}
-        <div className="relative w-80 h-80 sm:w-96 sm:h-96 md:w-[480px] md:h-[480px] shrink-0">
+        <div className="relative mx-auto h-80 w-80 shrink-0 sm:h-96 sm:w-96 md:mx-0 md:h-[480px] md:w-[480px]">
           <Globe
             speed={1.5}
             direction="left"
@@ -67,11 +52,7 @@ export default function GlobeTrust({ content }) {
         </div>
 
         {/* Mobile-only paragraph, placed after the globe. */}
-        <RichText
-          as="p"
-          text={paragraph}
-          className="md:hidden max-w-sm sm:max-w-md text-sm text-white leading-relaxed"
-        />
+        <RichText as="p" text={paragraph} className="text-base leading-relaxed text-white/70 md:hidden" />
       </div>
     </section>
   );

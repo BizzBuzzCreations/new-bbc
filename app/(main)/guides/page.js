@@ -10,15 +10,15 @@ import {
   Link2,
   FileText,
   Compass,
-  Rocket,
+  ArrowUpRight,
 } from "lucide-react";
-import GuidesHero from "@/components/sections/guidesHero";
-import CTA from "@/components/sections/CTA";
-import LatestBlogs from "@/components/sections/latestBlogs";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import PageHero from "@/components/detail/pageHero";
+import BlogsV2 from "@/components/home/blogsV2";
+import FaqV2 from "@/components/home/faqV2";
+import CtaV2 from "@/components/home/ctaV2";
+import Pill from "@/components/home/pill";
 import { getPageContent } from "@/actions/pageContentActions";
 import RichText from "@/components/ui/richText";
-import AnimatedButton from "@/components/ui/animatedButton";
 import { buildPageMetadata } from "@/lib/pageMetadata";
 import PageSeoScripts from "@/components/sections/pageSeoScripts";
 
@@ -62,9 +62,8 @@ const DEFAULT_GUIDES = [
 ];
 
 // Guides page FAQs — questions specific to the guides/resources library.
-// The last question's default answer includes a real link to /services;
-// an admin override falls back to plain text since a textarea can't
-// carry an embedded link.
+// The last default answer links to /services (saved answers can carry
+// their own links).
 const DEFAULT_GUIDES_FAQS = [
   {
     question: "What topics are covered in the BizzBuzz Creations guides?",
@@ -94,7 +93,7 @@ const DEFAULT_GUIDES_FAQS = [
   {
     question: "Can I get professional help if I need help implementing these strategies?",
     answer:
-      "Yes. If you need help applying the strategies covered in our guides, you can explore our digital marketing services or contact BizzBuzz Creations for a consultation.",
+      'Yes. If you need help applying the strategies covered in our guides, you can explore our <a href="/services">digital marketing services</a> or contact BizzBuzz Creations for a consultation.',
   },
 ];
 
@@ -105,11 +104,7 @@ export default async function GuidesPage() {
 
   const allGuidesHeading = content?.allGuidesHeading || "All Guides";
   const guidesRaw = content?.guides?.length > 0 ? content.guides : DEFAULT_GUIDES;
-  const guides = guidesRaw.map((g, i) => ({
-    ...g,
-    icon: GUIDE_ICONS[i % GUIDE_ICONS.length],
-    tag: String(i + 1).padStart(2, "0"),
-  }));
+  const guides = guidesRaw.map((g, i) => ({ ...g, icon: GUIDE_ICONS[i % GUIDE_ICONS.length] }));
 
   const sidebarHeading = content?.guidesSidebarHeading || "Want Hands-On Help With Any of This?";
   const sidebarParagraph =
@@ -117,138 +112,92 @@ export default async function GuidesPage() {
     "Reading is a great start — but a strategy built for your specific business moves faster. Talk to our team and we'll turn these guides into a clear, actionable plan.";
   const sidebarPrimaryText = content?.guidesSidebarPrimaryText || "Schedule a Call";
   const sidebarSecondaryText = content?.guidesSidebarSecondaryText || "View Our Services";
+  const showGuides = !hidden.has("allGuides");
 
-  const faqHeading = content?.guidesFaqHeading || "Frequently Asked Questions";
-  const isDefaultFaqs = !(content?.guidesFaqItems?.length > 0);
-  const GUIDES_FAQS = isDefaultFaqs
-    ? [
-        ...DEFAULT_GUIDES_FAQS.slice(0, 5),
-        {
-          question: DEFAULT_GUIDES_FAQS[5].question,
-          answer: (
-            <>
-              Yes. If you need help applying the strategies covered in our
-              guides, you can explore our{" "}
-              <Link href="/services" className="text-[#40A2D8] font-semibold hover:underline">
-                digital marketing services
-              </Link>{" "}
-              or contact BizzBuzz Creations for a consultation.
-            </>
-          ),
-        },
-      ]
-    : content.guidesFaqItems;
-
+  // Redesign, in the homepage's style: hero → every guide (each opens its
+  // category on the blog) with a help card beside them → FAQ → latest
+  // posts → closing CTA. Same dashboard fields and "Remove section"
+  // switches as before.
   return (
-    <>
+    <div data-no-reveal>
       <PageSeoScripts pageKey="guides" />
+      {/* thin reading-progress line at the top (pure CSS, see globals.css) */}
+      <div aria-hidden="true" className="scroll-progress" />
       {!hidden.has("guidesHero") && (
-      <>
-      <GuidesHero content={content} />
-      </>
+        <PageHero
+          label="Guides"
+          title={content?.guidesHeroHeading || "Digital Marketing Guides & Resources"}
+          description={
+            content?.guidesHeroParagraph ||
+            "Practical, no-fluff guides and insights on SEO, paid ads, social media, websites, content, AI, and digital growth."
+          }
+          actions={[
+            showGuides && { text: content?.guidesHeroPrimaryCtaText || "Explore Our Guides", href: "#all-guides", variant: "solid" },
+            { text: content?.guidesHeroSecondaryCtaText || "Need Help With Marketing?", href: "/contact", variant: showGuides ? "outline" : "solid" },
+          ]}
+          image={content?.guidesHeroImage || "/guide.jpg"}
+          imageAspect="aspect-[1100/633]"
+        />
       )}
 
-      {/* Guides — list + sidebar, dark theme */}
-      {!hidden.has("allGuides") && (
-      <>
-      <section id="all-guides" className="bg-black text-white py-16 px-6 md:px-12 lg:px-24">
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-[1fr_320px] gap-12">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-bold mb-1">
-              {allGuidesHeading}
-            </h2>
-            <p className="text-white text-sm mb-8">
-              {guides.length} guides
-            </p>
-
-            <div className="divide-y divide-white/10">
-              {/* Each guide links to its matching category on the blog, so
-                  readers land straight on that category's posts. */}
-              {guides.map(({ icon: Icon, tag, title, body }, i) => (
-                <Link
-                  key={i}
-                  href={`/blog?category=${encodeURIComponent(title)}`}
-                  className="group flex gap-5 py-6 first:pt-0"
-                >
-                  <span className="shrink-0 w-14 h-14 rounded-xl bg-[#0B60B0]/15 border border-[#40A2D8]/25 flex items-center justify-center text-[#40A2D8] transition-colors duration-300 group-hover:bg-[#0B60B0] group-hover:text-white">
-                    <Icon size={24} />
-                  </span>
-                  <div>
-                    <span className="text-xs font-bold uppercase tracking-widest text-[#40A2D8]">
-                      {tag}
-                    </span>
-                    <h3 className="font-bold text-white mt-1 mb-1.5 leading-snug transition-colors duration-300 group-hover:text-[#40A2D8]">
-                      {title}
-                    </h3>
-                    <RichText as="p" text={body} className="text-sm text-white leading-relaxed" />
+      {showGuides && (
+        <section id="all-guides" className="scroll-mt-20 bg-black text-white">
+          <div className="mx-auto grid max-w-7xl gap-12 px-6 md:px-10 py-16 md:py-20 lg:grid-cols-[1fr_340px] lg:gap-16">
+            <div>
+              <p className="text-sm text-[#40A2D8]">{guides.length} guides</p>
+              <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{allGuidesHeading}</h2>
+              {/* each guide opens its category on the blog */}
+              <ul className="reveal-stagger mt-12 grid border-t border-white/10 md:grid-cols-2 md:gap-x-10">
+                {guides.map(({ icon: Icon, title, body }, i) => (
+                  <li key={i} className="border-b border-white/10">
+                    <Link href={`/blog?category=${encodeURIComponent(title)}`} className="group flex gap-5 py-7 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8]">
+                      <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0B60B0]/15 text-[#40A2D8]">
+                        <Icon size={18} />
+                      </span>
+                      <div className="flex-1">
+                        <h3 className="font-display text-xl leading-snug text-white transition-colors group-hover:text-[#40A2D8]">{title}</h3>
+                        <RichText as="p" text={body} noLink className="mt-2 text-sm leading-relaxed text-white/65" />
+                      </div>
+                      <ArrowUpRight size={18} aria-hidden="true" className="mt-1 shrink-0 text-white/40 transition-colors group-hover:text-[#40A2D8]" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {!hidden.has("guidesSidebar") && (
+              <aside className="lg:sticky lg:top-28 lg:self-start">
+                <div className="rounded-3xl border border-[#40A2D8]/40 bg-linear-to-br from-[#0B60B0]/30 to-[#0b0e16] p-7">
+                  <h3 className="font-display text-2xl leading-snug text-white">{sidebarHeading}</h3>
+                  <RichText as="p" text={sidebarParagraph} className="mt-4 text-sm leading-relaxed text-white/75" />
+                  <div className="mt-7 flex flex-col gap-3">
+                    <Pill href="/contact" variant="solid" className="justify-center">{sidebarPrimaryText}</Pill>
+                    <Pill href="/services" className="justify-center">{sidebarSecondaryText}</Pill>
                   </div>
-                </Link>
-              ))}
-            </div>
+                </div>
+              </aside>
+            )}
           </div>
-
-          {!hidden.has("guidesSidebar") && (
-          <aside className="lg:sticky lg:top-28 lg:self-start">
-            <div
-              className="relative flex flex-col rounded-2xl p-7 overflow-hidden border border-white/20 shadow-2xl shadow-[#0B60B0]/30"
-              style={{
-                background: "linear-gradient(160deg, #0B60B0, #40A2D8)",
-              }}
-            >
-              <div
-                className="absolute -top-20 -right-16 w-56 h-56 rounded-full blur-3xl opacity-40 pointer-events-none"
-                style={{ background: "radial-gradient(circle, #ffffff, transparent 70%)" }}
-                aria-hidden="true"
-              />
-              <span className="relative z-10 flex items-center justify-center w-12 h-12 rounded-xl bg-white/15 text-white mb-5">
-                <Rocket size={22} />
-              </span>
-
-              <h3 className="relative z-10 font-bold text-xl leading-snug mb-3">
-                {sidebarHeading}
-              </h3>
-              <RichText as="p" text={sidebarParagraph} className="relative z-10 text-sm text-white leading-relaxed mb-7" />
-
-              <div className="relative z-10 flex flex-col gap-3">
-                <AnimatedButton href="/contact" size="sm" className="w-full">
-                  {sidebarPrimaryText}
-                </AnimatedButton>
-                <AnimatedButton href="/services" size="sm" className="w-full">
-                  {sidebarSecondaryText}
-                </AnimatedButton>
-              </div>
-            </div>
-          </aside>
-          )}
-        </div>
-      </section>
-      </>
+        </section>
       )}
 
-      {/* FAQs — questions specific to the guides/resources library */}
       {!hidden.has("guidesFaq") && (
-      <>
-      <DarkFAQSection faqs={GUIDES_FAQS} heading={faqHeading} />
-      </>
+        <FaqV2
+          content={{
+            faqHeading: content?.guidesFaqHeading || "Frequently Asked Questions",
+            faqItems: content?.guidesFaqItems?.length > 0 ? content.guidesFaqItems : DEFAULT_GUIDES_FAQS,
+          }}
+        />
       )}
 
-      {/* Latest blogs — real, live content from the blog */}
-      {!hidden.has("latestBlogs") && <LatestBlogs dark content={content} />}
+      {!hidden.has("latestBlogs") && <BlogsV2 content={content} />}
 
-      {/* CTA — just above the footer */}
-      {!hidden.has("cta") && (
-      <>
-      <div className="bg-black pt-4">
-        <CTA content={content} />
-      </div>
-      </>
-      )}
-    </>
+      {!hidden.has("cta") && <CtaV2 content={content} />}
+    </div>
   );
 }
 
-// LatestBlogs fetches from MongoDB — force-dynamic so this page renders at
-// request time instead of during `next build`, where the build sandbox
+// The latest posts come from MongoDB — force-dynamic so this page renders
+// at request time instead of during `next build`, where the build sandbox
 // can't reliably resolve the Atlas mongodb+srv:// DNS record. Same pattern
 // already used on /career and /blog.
 export const dynamic = "force-dynamic";

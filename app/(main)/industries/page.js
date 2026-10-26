@@ -1,7 +1,4 @@
-import Image from "next/image";
-import Link from "next/link";
 import {
-  ArrowUpRight,
   Stethoscope,
   PiggyBank,
   UtensilsCrossed,
@@ -18,14 +15,15 @@ import {
   Gamepad2,
   HardHat,
 } from "lucide-react";
-import CTA from "@/components/sections/CTA";
-import CaseStudies from "@/components/sections/caseStudies";
-import CertificationsCarousel from "@/components/sections/certificationsCarousel";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
+import PageHero from "@/components/detail/pageHero";
+import CatalogGrid from "@/components/detail/catalogGrid";
+import CertificationsRow from "@/components/detail/certificationsRow";
+import BuildV2 from "@/components/home/buildV2";
+import FaqV2 from "@/components/home/faqV2";
+import CtaV2 from "@/components/home/ctaV2";
 import { getPageContent } from "@/actions/pageContentActions";
 import { buildPageMetadata } from "@/lib/pageMetadata";
 import PageSeoScripts from "@/components/sections/pageSeoScripts";
-import RichText from "@/components/ui/richText";
 
 // Icons stay code-driven (design), matched positionally to whichever
 // industry cards are saved — same order as the default list below.
@@ -145,202 +143,62 @@ export default async function IndustriesIndexPage() {
     icon: INDUSTRY_ICONS[i % INDUSTRY_ICONS.length],
   }));
 
+  // Redesign, in the homepage's style: hero → the 15 industries as picture
+  // cards (each links to its own industry page) → what we build (the
+  // in-house systems) → certifications → FAQ → closing CTA. Same dashboard
+  // fields and "Remove section" switches as before.
   return (
-    <>
+    <div data-no-reveal>
       <PageSeoScripts pageKey="industries" />
-      {/* Hero — full-bleed photo (same treatment as the FAQ hero): the
-          image is already designed with a dark-to-photo gradient built
-          in, laid down as a plain background with a matching black
-          overlay, text sitting in the solid-black portion on the left.
-          Replaces the previous radial-gradient background + coded
-          icon-badge cluster. */}
-      {/* pt-10 on mobile (was pt-28) — that much top padding under a
-          sticky nav that already occupies its own space in the flow was
-          just leaving a large empty gap before the heading; md keeps its
-          original spacing. */}
-      {/* md:min-h-screen — fills the full viewport on desktop/laptop (was
-          a fixed 560px, which left empty black / the next section showing
-          below the hero on the first screen). */}
+      {/* thin reading-progress line at the top (pure CSS, see globals.css) */}
+      <div aria-hidden="true" className="scroll-progress" />
       {!hidden.has("industriesHero") && (
-      <>
-      <section className="relative overflow-hidden md:min-h-screen flex items-center pt-10 md:pt-32 pb-12 md:pb-20 px-6 md:px-12 lg:px-24 text-white bg-black">
-        {/* Full-bleed version — desktop/tablet only. On mobile this sat
-            dimmed behind the gradient with text stacked on top, hard to
-            actually see; mobile instead gets its own boxed copy of the
-            same image between the paragraph and the CTA button below. */}
-        <div
-          className="absolute inset-0 hidden md:block"
-          style={{
-            backgroundImage: `url('${heroImage}')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
+        <PageHero
+          label={heroEyebrow}
+          title={heroHeading}
+          description={heroParagraph}
+          actions={[{ text: heroButtonText, href: "/services", variant: "solid" }]}
+          image={heroImage}
+          imageAspect="aspect-[4/3]"
+          imageClassName="object-[62%_50%]"
         />
-        <div
-          className="absolute inset-0 hidden md:block"
-          style={{
-            background:
-              "linear-gradient(90deg, #000000 0%, #000000 38%, rgba(0,0,0,0.82) 55%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0) 100%)",
-          }}
-        />
-
-        <div className="relative max-w-2xl">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-4">
-            {heroEyebrow}
-          </p>
-          <h1 className="text-4xl sm:text-5xl font-bold mb-6 leading-tight">
-            {heroHeading}
-          </h1>
-          <p className="text-white leading-relaxed mb-9 max-w-lg">
-            {heroParagraph}
-          </p>
-          <div
-            className="md:hidden relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-lg mb-9"
-            style={{
-              backgroundImage: `url('${heroImage}')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          />
-          <Link href="/services" className="inline-block">
-            <button className="animated-button animated-button-lg whitespace-nowrap">
-              <svg
-                viewBox="0 0 24 24"
-                className="arr-2"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-              </svg>
-              <span className="text">{heroButtonText}</span>
-              <span className="circle"></span>
-              <svg
-                viewBox="0 0 24 24"
-                className="arr-1"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-              </svg>
-            </button>
-          </Link>
-        </div>
-      </section>
-      </>
       )}
 
-      {/* Industries grid */}
       {!hidden.has("industriesGrid") && (
-      <>
-      <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">
-            {gridEyebrow}
-          </p>
-          <h2 className="text-2xl md:text-3xl font-bold text-white max-w-2xl mb-4">
-            {gridHeading}
-          </h2>
-          <p className="text-white max-w-2xl mb-14 leading-relaxed">
-            {gridSubtext}
-          </p>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {industryCards.map((card, i) => {
-              const Icon = card.icon;
-              return (
-                <Link
-                  key={card.title}
-                  href={card.linkHref}
-                  className="group relative rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-black/40"
-                >
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    <Image
-                      src={card.image}
-                      alt={card.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div
-                      className="absolute inset-0"
-                      style={{
-                        background:
-                          "linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.85) 100%)",
-                      }}
-                      aria-hidden="true"
-                    />
-                    <span className="absolute top-3 right-3 text-[11px] font-bold text-white">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="absolute bottom-3 left-3 flex items-center gap-2">
-                      <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#0B60B0] text-white shrink-0 transition-transform duration-300 group-hover:scale-110">
-                        <Icon size={16} />
-                      </span>
-                      <span className="font-bold text-white">{card.title}</span>
-                    </span>
-                  </div>
-                  <div className="p-5">
-                    {/* noLink — the whole card is already a <Link>; a link
-                        inside the description would nest an <a> inside an
-                        <a>, which every browser breaks (force-closes the
-                        outer one), so the card would stop navigating. */}
-                    <RichText
-                      as="p"
-                      text={card.description}
-                      noLink
-                      className="text-sm text-white leading-relaxed line-clamp-2"
-                    />
-                    <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#40A2D8] mt-3 transition-colors duration-300 group-hover:text-white">
-                      {card.linkText}
-                      <ArrowUpRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </span>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-      </>
+        <CatalogGrid
+          id="industries-grid"
+          eyebrow={gridEyebrow || "Industries we serve"}
+          heading={gridHeading}
+          subtext={gridSubtext}
+          cols="lg:grid-cols-3"
+          imageAspect="aspect-[4/3] sm:aspect-[16/10]"
+          items={industryCards.map((card) => ({
+            key: card.title,
+            label: card.title,
+            href: card.linkHref,
+            icon: card.icon,
+            description: card.description,
+            buttonText: card.linkText,
+            image: card.image,
+          }))}
+        />
       )}
 
-      {/* Case studies — real BizzBuzz clients */}
-      {!hidden.has("caseStudies") && (
-      <div className="border-t border-white/10">
-        <CaseStudies content={content} />
-      </div>
-      )}
+      {/* the in-house systems only (the homepage also shows the two products here) */}
+      {!hidden.has("caseStudies") && <BuildV2 content={content} showClio={false} showPraxistence={false} />}
 
-      {/* Certifications carousel */}
-      {!hidden.has("industriesCertifications") && (
-      <>
-      <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
-            {certHeading}
-          </h2>
-          <p className="text-white max-w-xl mx-auto mb-14 leading-relaxed">
-            {certSubtext}
-          </p>
-          <CertificationsCarousel />
-        </div>
-      </section>
-      </>
-      )}
+      {!hidden.has("industriesCertifications") && <CertificationsRow heading={certHeading} subtext={certSubtext} />}
 
-      {/* FAQs — questions specific to working across industries */}
       {!hidden.has("industriesFaq") && (
-      <>
-      <DarkFAQSection
-        faqs={content?.industriesFaqItems?.length > 0 ? content.industriesFaqItems : INDUSTRIES_FAQS}
-        heading={content?.industriesFaqHeading || "Frequently Asked Questions"}
-      />
-      </>
+        <FaqV2
+          content={{
+            faqHeading: content?.industriesFaqHeading || "Frequently Asked Questions",
+            faqItems: content?.industriesFaqItems?.length > 0 ? content.industriesFaqItems : INDUSTRIES_FAQS,
+          }}
+        />
       )}
 
-      {!hidden.has("cta") && (
-      <>
-      <CTA content={content} />
-      </>
-      )}
-    </>
+      {!hidden.has("cta") && <CtaV2 content={content} />}
+    </div>
   );
 }

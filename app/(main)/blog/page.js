@@ -1,10 +1,9 @@
-import { getLatestThreeBlogsMongo } from "@/actions/blogActions";
-import { getFeaturedImage, optimizedImageUrl, imageSrcSet } from "@/lib/getFeaturedImage";
-import AllBLogs from "@/components/sections/allBLogs";
-import CTA from "@/components/sections/CTA";
-import Link from "next/link";
 import he from "he";
-import { ImageOff } from "lucide-react";
+import { getLatestThreeBlogsMongo } from "@/actions/blogActions";
+import PageHero from "@/components/detail/pageHero";
+import PostCard from "@/components/detail/postCard";
+import AllBLogs from "@/components/sections/allBLogs";
+import CtaV2 from "@/components/home/ctaV2";
 
 // Same reasoning as the single-post page: blog content is edited/scheduled
 // via the dashboard, so this listing must always read fresh from the DB.
@@ -32,104 +31,30 @@ export default async function Blogs() {
     return text.length > limit ? text.slice(0, limit) + "..." : text;
   }
 
+  // Redesign, in the homepage's style: the page heading, the three latest
+  // posts, then every post (category menu and pages) → closing CTA.
   return (
-    <section className="relative overflow-hidden bg-black md:pt-16 pt-10">
-      {/* Soft brand-blue glows — decorative only, sit behind everything. */}
+    <div data-no-reveal>
+      {/* plain black, like the posts */}
+      <div className="bg-black text-white">
+      <PageHero label="Blog" title="Our Latest Blogs" description="Explore, discover, and find inspiration through these exciting blogs." />
 
-
-
-      <div className="relative text-center">
-        <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">
-        </p>
-        <h1 className="md:text-4xl text-3xl font-bold text-white">
-          Our Latest Blogs
-        </h1>
-        <p className="text-lg text-white">
-          Explore, discover, and find inspiration through these exciting Blogs.
-        </p>
-      </div>
-
-      {/* Latest blogs */}
-      <div className="px-8 pt-10 mx-auto lg:max-w-screen-xl sm:max-w-xl md:max-w-full sm:px-12 md:px-16 lg:pt-20 sm:pt-16">
-        <div className="grid gap-x-8 gap-y-12 sm:gap-y-16 md:grid-cols-2 lg:grid-cols-3 mb-20">
-          {blogs.length > 0 &&
-            blogs.map((e, index) => {
-              const featuredImage = getFeaturedImage(e);
-              return (
-              <div
-                key={index}
-                className="group relative rounded-2xl border border-white/10 bg-white/5 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-[#40A2D8] hover:shadow-xl hover:shadow-black/40"
-              >
-                <Link
-                  href={`/blog/${e?.slug}`}
-                  className="block overflow-hidden rounded-xl aspect-[1.91/1] bg-white/10"
-                >
-                  {featuredImage ? (
-                    // Right-sized WebP/AVIF instead of the raw multi-MB
-                    // upload (this was a ~30s mobile LCP). Only the first
-                    // card can be above the fold on phones, so it's the only
-                    // eager/high one; the rest are low priority so they
-                    // don't split the bandwidth the first (LCP) image needs.
-                    // eslint-disable-next-line @next/next/no-img-element -- user/dashboard-supplied URL (Cloudinary etc.), not a fixed host
-                    <img
-                      src={optimizedImageUrl(featuredImage, 640)}
-                      srcSet={imageSrcSet(featuredImage, [400, 640, 900])}
-                      sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 400px"
-                      loading={index === 0 ? "eager" : "lazy"}
-                      fetchPriority={index === 0 ? "high" : "low"}
-                      decoding="async"
-                      className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
-                      alt={e?.title}
-                    />
-                  ) : (
-                    <div className="w-full h-full flex flex-col items-center justify-center gap-2 bg-white/5 text-white/30">
-                      <ImageOff size={28} />
-                      <span className="text-xs font-medium">
-                        Image unavailable
-                      </span>
-                    </div>
-                  )}
-                </Link>
-                <div className="relative mt-5">
-                  <p className="uppercase font-semibold text-xs mb-2.5 text-white transition-colors duration-300 group-hover:text-[#40A2D8]">
-                    {new Date(e?.publishedAt).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
-                    &nbsp;&nbsp; by {e?.author}
-                  </p>
-                  <Link
-                    href={`/blog/${e?.slug}`}
-                    className="block mb-3"
-                  >
-                    <h2 className="text-xl lg:text-2xl leading-tight font-semibold leading-5 text-white transition-colors duration-300 group-hover:text-[#40A2D8]">
-                      {e?.title}
-                    </h2>
-                  </Link>
-                  <p className="text-white transition-colors duration-300 group-hover:text-[#40A2D8]">
-                    {truncateHTML(e?.excerpt, 150)}
-                  </p>
-
-                  <Link
-                    href={`/blog/${e?.slug}`}
-                    className="font-medium underline text-white transition-colors duration-300 group-hover:text-[#40A2D8]"
-                    aria-label={`Read more about ${e?.title}`}
-                  >
-                    Read More
-                  </Link>
-                </div>
-              </div>
-              );
-            })}
-        </div>
-      </div>
+      {blogs.length > 0 && (
+        <section className="mx-auto max-w-7xl px-6 pb-16 md:px-10 md:pb-20">
+          <div className="grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+            {/* only the first card can be above the fold on phones */}
+            {blogs.map((e, index) => (
+              <PostCard key={e?.slug || index} post={e} excerpt={truncateHTML(e?.excerpt, 150)} headingLevel="h2" eager={index === 0} />
+            ))}
+          </div>
+        </section>
+      )}
 
       <AllBLogs />
-
-      <div className="relative pt-16 md:pt-20">
-        <CTA />
+      <div className="pb-16 md:pb-20" />
       </div>
-    </section>
+
+      <CtaV2 />
+    </div>
   );
 }

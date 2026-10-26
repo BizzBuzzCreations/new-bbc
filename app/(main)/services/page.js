@@ -1,26 +1,23 @@
-import Link from "next/link";
-import Image from "next/image";
 import {
-  ArrowUpRight,
   Users,
   ShieldCheck,
   FileSignature,
   Layers,
   Unlock,
   LifeBuoy,
-  Target,
-  TrendingUp,
-  CheckCircle2,
 } from "lucide-react";
-import CTA from "@/components/sections/CTA";
-import ServiceScenariosCarousel from "@/components/sections/serviceScenariosCarousel";
-import DarkFAQSection from "@/components/sections/darkFAQSection";
-import HighlightCard from "@/components/ui/highlightCard";
+import PageHero from "@/components/detail/pageHero";
+import CatalogGrid from "@/components/detail/catalogGrid";
+import WhoItsFor from "@/components/detail/whoItsFor";
+import ScenarioList from "@/components/detail/scenarioList";
+import WhyTrust from "@/components/detail/whyTrust";
+import FaqV2 from "@/components/home/faqV2";
+import CtaV2 from "@/components/home/ctaV2";
+import BeamsBlock from "@/components/home/band";
 import { SERVICES } from "@/lib/industriesData";
 import { getPageContent } from "@/actions/pageContentActions";
 import { buildPageMetadata } from "@/lib/pageMetadata";
 import PageSeoScripts from "@/components/sections/pageSeoScripts";
-import RichText from "@/components/ui/richText";
 
 // Real, short descriptions already used elsewhere on the site (the
 // homepage's Categories showcase) — reused here rather than invented,
@@ -36,10 +33,6 @@ const DEFAULT_SERVICE_DETAILS = {
   automation: { description: "Streamline lead nurturing and follow-ups with CRM workflows, email automation, customer journeys, and marketing systems that keep your sales process moving consistently.", buttonText: "Explore Marketing Automation" },
   consultancy: { description: "Get practical business guidance through strategic audits, workshops, market insights, and growth roadmaps designed to help you make better decisions with confidence.", buttonText: "Explore Business Consultancy" },
 };
-
-// Icons stay code-driven (design), matched positionally to whichever
-// "Why Choose Us" cards are saved.
-const WHY_CHOOSE_ICONS = [Layers, Target, TrendingUp, CheckCircle2];
 
 // Services page FAQs — questions specific to choosing/working with our
 // service lineup.
@@ -155,61 +148,6 @@ const SERVICE_BG_IMAGES = {
   consultancy: "/services-bg-image/business-consultancy.webp",
 };
 
-function ServiceCard({ service, description, buttonText, image }) {
-  const Icon = service.icon;
-  // A saved image (even "" = removed in the dashboard) wins over the built-in one.
-  const bgImage = image ?? SERVICE_BG_IMAGES[service.key];
-  return (
-    <Link
-      href={service.href}
-      className="group relative isolate overflow-hidden rounded-2xl border border-white/10 bg-black p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-[#0B60B0]/20"
-    >
-      {bgImage && (
-        <>
-          <Image
-            src={bgImage}
-            alt=""
-            fill
-            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="-z-20 object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-          {/* Dark scrim keeps the text readable; the card colour does not change on hover. */}
-          <div
-            className="absolute inset-0 -z-10 bg-gradient-to-b from-black/75 via-black/70 to-black/85"
-            aria-hidden="true"
-          />
-        </>
-      )}
-      <div className="flex items-center justify-between mb-4">
-        <span className="flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 text-[#40A2D8] transition-colors duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
-          <Icon size={22} />
-        </span>
-        <ArrowUpRight
-          size={18}
-          className="text-white/30 group-hover:text-white transition-colors"
-        />
-      </div>
-      <h3 className="font-bold text-white mb-2">{service.label}</h3>
-      {/* noLink — this whole card is already a <Link>; a link inside the
-          description would nest an <a> inside an <a>, which every
-          browser's HTML parser breaks (force-closes the outer one),
-          making the card itself stop navigating. Bold still works. */}
-      <RichText
-        as="p"
-        text={description}
-        noLink
-        className="text-sm text-white leading-relaxed line-clamp-3 mb-4 transition-colors duration-300 group-hover:text-white/85"
-      />
-      {buttonText && (
-        <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#40A2D8] transition-colors duration-300 group-hover:text-white">
-          {buttonText}
-          <ArrowUpRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </span>
-      )}
-    </Link>
-  );
-}
-
 export default async function ServicesIndexPage() {
   const content = await getPageContent("services");
   // Sections switched off in the dashboard (Remove section).
@@ -257,300 +195,85 @@ export default async function ServicesIndexPage() {
   const whyChooseEyebrow = content?.servicesProcessEyebrow || "Why Choose Us?";
   const whyChooseHeading = content?.servicesProcessHeading || "Why Businesses Choose BizzBuzz Creations";
   const whyChooseSubtext = content?.servicesProcessSubtext || "More than individual services, you get one team that understands the bigger picture of your digital presence.";
-  const whyChooseItemsRaw = content?.servicesProcessSteps?.length > 0 ? content.servicesProcessSteps : DEFAULT_WHY_CHOOSE_ITEMS;
-  const whyChooseItems = whyChooseItemsRaw.map((s, i) => ({ ...s, icon: WHY_CHOOSE_ICONS[i % WHY_CHOOSE_ICONS.length] }));
+  const whyChooseItems = content?.servicesProcessSteps?.length > 0 ? content.servicesProcessSteps : DEFAULT_WHY_CHOOSE_ITEMS;
 
+  // The saved default is the old full-width background strip
+  // (/services.png); the framed hero shows its icon-grid part instead
+  // (/services-hero-mobile.png, a crop of the same artwork).
+  const heroPhoto = !heroImage || heroImage === "/services.png" ? "/services-hero-mobile.png" : heroImage;
+  const catalog = services.map((service) => {
+    const details = serviceDetailsByKey[service.key];
+    // A saved image (even "" = removed in the dashboard) wins over the built-in one.
+    return { ...service, description: details?.description, buttonText: details?.buttonText, image: details?.image ?? SERVICE_BG_IMAGES[service.key] };
+  });
+  const showGrid = !hidden.has("servicesGrid");
+  const showScenarios = !hidden.has("scenarios");
+  const showWhyChoose = !hidden.has("servicesProcess");
+
+  // Redesign, in the homepage's style: hero → the 8 services as picture
+  // cards → what every engagement includes → (on the beams background) what
+  // are you trying to fix + why choose us → FAQ → closing CTA. Same
+  // dashboard fields and "Remove section" switches as before.
   return (
-    <>
+    <div data-no-reveal>
       <PageSeoScripts pageKey="services" />
-      {/* Hero — full-bleed photo (same treatment as the FAQ hero): the
-          image itself is already designed with a dark-to-photo gradient
-          built in, so it's laid down as a plain background with a
-          matching black-to-transparent overlay on top, text sitting in
-          the solid-black portion on the left. Replaces the previous
-          radial-gradient background + coded 6-icon floating grid.
-
-          On mobile, the full-bleed background version is hidden entirely
-          (`hidden md:block` below) — same treatment as the other hero
-          sections across the site: at narrow widths the photo mostly just
-          sat dimmed behind the gradient with the text stacked over it,
-          hard to make out. Instead, mobile gets its own boxed copy of the
-          same image as a plain in-flow block between the paragraph and
-          the CTA buttons (`md:hidden` further down). */}
-      {/* min-h now kicks in from md up and mobile's top padding is a much
-          lighter pt-10 (was min-h-[520px] unconditional + pt-24) — that
-          combo was forcing a tall, vertically-centered box on mobile too,
-          leaving a large empty gap between the nav and the heading before
-          any content appeared. */}
-      {/* md:min-h-screen — fills the full viewport on desktop/laptop (was
-          a fixed 520px, which left the next section peeking in on the
-          first screen). */}
+      {/* thin reading-progress line at the top (pure CSS, see globals.css) */}
+      <div aria-hidden="true" className="scroll-progress" />
       {!hidden.has("servicesHero") && (
-      <>
-      <section className="relative overflow-hidden md:min-h-screen flex items-center pt-10 md:pt-28 pb-12 md:pb-20 px-6 md:px-12 lg:px-24 text-white bg-black">
-        {/* The icon-grid artwork is a very wide (~3.45:1) strip. Stretched
-            edge-to-edge with `cover` over a full-viewport-tall section it
-            would zoom ~2x on a 16:9 screen (icons blown up, right half of
-            the grid cropped off). Instead it sits at its natural scale as
-            a vertically-centered band — same size as before, aligned with
-            the text — and its top/bottom edges (which aren't pure black)
-            fade out into the section so there's no visible seam. */}
-        <div
-          className="hidden md:block absolute inset-x-0 top-1/2 -translate-y-1/2 aspect-[1897/550]"
-          style={{
-            backgroundImage: `url('${heroImage}')`,
-            backgroundSize: "cover",
-            backgroundPosition: "right center",
-            backgroundRepeat: "no-repeat",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%)",
-            maskImage:
-              "linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%)",
-          }}
+        <PageHero
+          label="Services"
+          title={heroHeading}
+          description={heroParagraph}
+          actions={[
+            { text: heroSecondaryButtonText, href: "/contact", variant: "solid" },
+            showGrid && { text: heroButtonText, href: "#services-grid" },
+          ]}
+          image={heroPhoto}
+          imageAspect="aspect-[680/550]"
         />
-        <div
-          className="hidden md:block absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(90deg, #000000 0%, #000000 38%, rgba(0,0,0,0.82) 55%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0) 100%)",
-          }}
-        />
-        {/* Mobile background — plain, no photo, so the section reads as a
-            simple dark hero rather than an empty gradient with nothing
-            behind it once the full-bleed photo above is hidden. */}
-        <div
-          className="absolute inset-0 md:hidden"
-          style={{ background: "radial-gradient(circle at top, #0d1b2e, #000000)" }}
-          aria-hidden="true"
-        />
-
-        <div className="relative max-w-2xl">
-          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
-            {heroHeading}
-          </h1>
-          <p className="text-white leading-relaxed mb-9 max-w-lg">
-            {heroParagraph}
-          </p>
-          {/* /services.png is a very wide (3.45:1), mostly-empty-on-the-
-              left desktop background photo — the icon grid it actually
-              shows sits only in its right ~35%. Cropping the box to that
-              ratio (and object-cover to it) just squeezed the icons into
-              a sliver or, matched 1:1, left a wall of dead black space.
-              /services-hero-mobile.png is a pre-cropped copy showing only
-              the icon-grid portion — full icons, no dead space, no
-              cutoff — sized to its own real 680x550 aspect ratio here. */}
-          <div className="md:hidden relative w-full max-w-sm mx-auto aspect-[680/550] rounded-2xl overflow-hidden shadow-lg mb-9">
-            {/* Mobile LCP element — eager + high priority (next/image is
-                lazy by default). "1px" from md up: the box is display:none
-                there, and an eager image still downloads when hidden. */}
-            <Image src="/services-hero-mobile.png" alt="" fill sizes="(max-width: 767px) 100vw, 1px" loading="eager" fetchPriority="high" className="object-contain" />
-          </div>
-          <div className="flex flex-wrap items-center gap-4">
-            <Link href="#services-grid" className="inline-block">
-              <button className="animated-button animated-button-lg whitespace-nowrap">
-                <svg
-                  viewBox="0 0 24 24"
-                  className="arr-2"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-                </svg>
-                <span className="text">{heroButtonText}</span>
-                <span className="circle"></span>
-                <svg
-                  viewBox="0 0 24 24"
-                  className="arr-1"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-                </svg>
-              </button>
-            </Link>
-            <Link href="/contact" className="inline-block">
-              <button className="animated-button animated-button-lg whitespace-nowrap">
-                <svg
-                  viewBox="0 0 24 24"
-                  className="arr-2"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-                </svg>
-                <span className="text">{heroSecondaryButtonText}</span>
-                <span className="circle"></span>
-                <svg
-                  viewBox="0 0 24 24"
-                  className="arr-1"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-                </svg>
-              </button>
-            </Link>
-          </div>
-        </div>
-      </section>
-      </>
       )}
 
-      {/* Services grid */}
-      {!hidden.has("servicesGrid") && (
-      <>
-      <section id="services-grid" className="relative bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10 overflow-hidden">
+      {showGrid && <CatalogGrid id="services-grid" eyebrow="Our services" heading={gridHeading} subtext={gridSubtext} items={catalog} />}
 
-        <div className="relative z-10 max-w-6xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-3">
-            {gridHeading}
-          </h2>
-          <p className="text-center text-white max-w-xl mx-auto mb-14">
-            {gridSubtext}
-          </p>
-
-          {/* 3 / 2 / 3 layout — the middle row's 2 cards sit centered
-              instead of trailing off to one side. */}
-          <div className="space-y-6">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {services.slice(0, 3).map((service) => (
-                <ServiceCard key={service.key} service={service} description={serviceDetailsByKey[service.key]?.description} buttonText={serviceDetailsByKey[service.key]?.buttonText} image={serviceDetailsByKey[service.key]?.image} />
-              ))}
-            </div>
-            <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
-              {services.slice(3, 5).map((service) => (
-                <ServiceCard key={service.key} service={service} description={serviceDetailsByKey[service.key]?.description} buttonText={serviceDetailsByKey[service.key]?.buttonText} image={serviceDetailsByKey[service.key]?.image} />
-              ))}
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {services.slice(5, 8).map((service) => (
-                <ServiceCard key={service.key} service={service} description={serviceDetailsByKey[service.key]?.description} buttonText={serviceDetailsByKey[service.key]?.buttonText} image={serviceDetailsByKey[service.key]?.image} />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-      </>
-      )}
-
-      {/* What every engagement includes — real, company-wide facts */}
       {!hidden.has("engagement") && (
-      <>
-      <section className="bg-[#050505] py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] text-center mb-3">
-            {engagementEyebrow}
-          </p>
-          <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-4">
-            {engagementHeading}
-          </h2>
-          <p className="text-white text-center max-w-xl mx-auto mb-14 leading-relaxed">
-            {engagementSubtext}
-          </p>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {engagementFeatures.map(({ icon: Icon, title, desc }, i) => (
-              <div key={i} className="relative flex">
-                {/* flex makes the card stretch to the full grid-row height,
-                    so every card in a row is the same size. */}
-                {/* Mobile-only connector — sits only in the gap above this
-                    card (never over its body/icon). A full-height spine
-                    behind the cards (the previous approach) still showed
-                    through the icon since the card's own background is
-                    too transparent to hide anything placed behind it. */}
-                {i > 0 && (
-                  <span
-                    className="sm:hidden absolute left-[46px] -top-6 h-6 w-px"
-                    style={{
-                      backgroundImage:
-                        "repeating-linear-gradient(to bottom, rgba(64,162,216,0.4) 0px, rgba(64,162,216,0.4) 4px, transparent 4px, transparent 12px)",
-                    }}
-                    aria-hidden="true"
-                  />
-                )}
-                <HighlightCard icon={<Icon size={20} />} title={title} desc={desc} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      </>
+        <WhoItsFor eyebrow={engagementEyebrow} heading={engagementHeading} subtext={engagementSubtext} items={engagementFeatures} />
       )}
 
-      {/* Not sure where to start — self-select by problem, flowing carousel */}
-      {!hidden.has("scenarios") && (
-      <>
-      <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
-        <div className="max-w-6xl mx-auto mb-14 text-center">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">
-            {scenariosEyebrow}
-          </p>
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-            {scenariosHeading}
-          </h2>
-          <p className="text-white max-w-xl mx-auto leading-relaxed">
-            {scenariosSubtext}
-          </p>
-        </div>
-
-        <ServiceScenariosCarousel
-          items={serviceScenarios.map(({ question, service: key, detail }) => ({
-            question,
-            service: key,
-            detail: detail || serviceDetailsByKey[key]?.description,
-          }))}
-        />
-      </section>
-      </>
+      {(showScenarios || showWhyChoose) && (
+        <BeamsBlock>
+          {showScenarios && (
+            <ScenarioList
+              eyebrow={scenariosEyebrow}
+              heading={scenariosHeading}
+              subtext={scenariosSubtext}
+              items={serviceScenarios.map(({ question, service: key, detail }) => ({
+                question,
+                detail: detail || serviceDetailsByKey[key]?.description,
+                service: SERVICES[key],
+              }))}
+            />
+          )}
+          {showWhyChoose && (
+            <WhyTrust
+              eyebrow={whyChooseEyebrow}
+              heading={whyChooseHeading}
+              description={whyChooseSubtext}
+              items={whyChooseItems.map(({ title, description }) => ({ title, desc: description }))}
+            />
+          )}
+        </BeamsBlock>
       )}
 
-      {/* Why Choose Us */}
-      {!hidden.has("servicesProcess") && (
-      <>
-      <section className="bg-black py-20 px-6 md:px-12 lg:px-24 border-t border-white/10">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] text-center mb-3">
-            {whyChooseEyebrow}
-          </p>
-          <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-3">
-            {whyChooseHeading}
-          </h2>
-          <RichText as="p" text={whyChooseSubtext} className="text-center text-white max-w-xl mx-auto mb-14" />
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {whyChooseItems.map(({ icon: Icon, title, description }, i) => (
-              <div
-                key={i}
-                className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:shadow-xl hover:shadow-[#0B60B0]/20"
-              >
-                <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-white/10 text-[#40A2D8] mb-4 transition-colors duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
-                  <Icon size={20} />
-                </span>
-                <h3 className="font-bold text-white mb-2">{title}</h3>
-                <RichText
-                  as="p"
-                  text={description}
-                  className="text-sm text-white leading-relaxed transition-colors duration-300 group-hover:text-white/85"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      </>
-      )}
-
-      {/* FAQs — questions specific to choosing/working with our services */}
       {!hidden.has("servicesFaq") && (
-      <>
-      <DarkFAQSection
-        faqs={content?.servicesFaqItems?.length > 0 ? content.servicesFaqItems : SERVICES_FAQS}
-        heading={content?.servicesFaqHeading || "Frequently Asked Questions"}
-      />
-      </>
+        <FaqV2
+          content={{
+            faqHeading: content?.servicesFaqHeading || "Frequently Asked Questions",
+            faqItems: content?.servicesFaqItems?.length > 0 ? content.servicesFaqItems : SERVICES_FAQS,
+          }}
+        />
       )}
 
-      {!hidden.has("cta") && (
-      <>
-      <CTA content={content} />
-      </>
-      )}
-    </>
+      {!hidden.has("cta") && <CtaV2 content={content} />}
+    </div>
   );
 }

@@ -20,7 +20,7 @@ const HERO_IMAGE_WIDTHS = [640, 828, 1200, 1920];
 // Cloudinary uploads are resized by Cloudinary; a local /public path (e.g.
 // the field's default, /image-1.jpg — 3.4MB) goes through Next's image
 // optimizer instead, which the plain <img> otherwise bypassed.
-function heroImageSource(src) {
+export function heroImageSource(src) {
   if (!src) return {};
   if (src.includes("res.cloudinary.com")) {
     return {

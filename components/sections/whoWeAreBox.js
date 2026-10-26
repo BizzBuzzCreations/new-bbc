@@ -32,17 +32,25 @@ const DEFAULT_QUICK_LINKS = [
 const DEFAULT_PARAGRAPH =
   "BizzBuzz Creations is a digital marketing and business solutions agency helping businesses in Prayagraj (Allahabad), across India, and international markets build a stronger digital presence. We understand that every business has different goals, audiences, and challenges, so we focus on practical solutions rather than one-size-fits-all marketing.";
 
+// Saved content with the fallbacks applied — shared with the redesigned
+// location pages (components/home/whoWeAreV2.js).
+export function whoWeAreContent(content) {
+  return {
+    heading: content?.whoWeAreHeading || "Who We Are",
+    paragraph: content?.whoWeAreParagraph || DEFAULT_PARAGRAPH,
+    buttonText: content?.whoWeAreButtonText || "Learn Our Story",
+    buttonLink: content?.whoWeAreButtonLink || "/about",
+    tagline: content?.whoWeAreTagline || "One team, every capability — built to help your business grow.",
+    stats: content?.whoWeAreStats?.length ? content.whoWeAreStats : DEFAULT_STATS,
+    links: (content?.whoWeAreLinks?.length ? content.whoWeAreLinks : DEFAULT_QUICK_LINKS).map((l, i) => ({
+      ...l,
+      icon: QUICK_LINK_ICONS[i % QUICK_LINK_ICONS.length],
+    })),
+  };
+}
+
 export default function WhoWeAreBox({ content }) {
-  const heading = content?.whoWeAreHeading || "Who We Are";
-  const paragraph = content?.whoWeAreParagraph || DEFAULT_PARAGRAPH;
-  const buttonText = content?.whoWeAreButtonText || "Learn Our Story";
-  const buttonLink = content?.whoWeAreButtonLink || "/about";
-  const tagline =
-    content?.whoWeAreTagline || "One team, every capability — built to help your business grow.";
-  const STATS = content?.whoWeAreStats?.length ? content.whoWeAreStats : DEFAULT_STATS;
-  const QUICK_LINKS = (
-    content?.whoWeAreLinks?.length ? content.whoWeAreLinks : DEFAULT_QUICK_LINKS
-  ).map((l, i) => ({ ...l, icon: QUICK_LINK_ICONS[i % QUICK_LINK_ICONS.length] }));
+  const { heading, paragraph, buttonText, buttonLink, tagline, stats: STATS, links: QUICK_LINKS } = whoWeAreContent(content);
 
   return (
     <section className="bg-black py-16 px-6 md:px-12">
