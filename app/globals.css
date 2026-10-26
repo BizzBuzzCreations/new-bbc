@@ -677,6 +677,139 @@ body {
   transition: background 0.3s ease;
 }
 
+/* Blog post — dark reading theme (components/blog/articleBody.js adds
+   `article-dark` unless the reader picked light). Soft off-white text on
+   near-black, headings in pure white, brand-blue links; tables, details,
+   quotes and code restyled to match. Text size follows data-size (s/m/l).
+   `.fx-light` / `.fx-dark` are set by the reader-side contrast check on text
+   the post's own colours made unreadable (dark text pasted from a white
+   page, etc.). */
+.article[data-size="s"] {
+  font-size: 16px;
+}
+.article[data-size="l"] {
+  font-size: 20px;
+}
+.article-dark {
+  color: #d5dae4;
+}
+.article-dark :is(h1, h2, h3, h4, h5, h6),
+.article-dark :is(h1, h2, h3, h4, h5, h6) *,
+.article-dark strong,
+.article-dark b {
+  color: #ffffff;
+}
+.article-dark h6 {
+  color: #9aa3b2;
+}
+.article-dark a {
+  color: #40a2d8;
+  text-decoration-color: rgba(64, 162, 216, 0.45);
+  text-underline-offset: 3px;
+}
+.article-dark a:hover {
+  color: #ffffff;
+  text-decoration-color: #ffffff;
+}
+.article-dark blockquote {
+  border-left-color: #40a2d8;
+  background: rgba(255, 255, 255, 0.04);
+  color: #c4cad6;
+  padding: 1rem 1.25rem;
+  border-radius: 0 12px 12px 0;
+}
+.article-dark pre {
+  background: #05070b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.article-dark :not(pre) > code {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffd6a0;
+  padding: 0.1em 0.35em;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+.article-dark hr {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.article-dark img {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+}
+.article-dark details {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+.article-dark summary {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+.article-dark summary:hover {
+  background: rgba(255, 255, 255, 0.09);
+}
+.article-dark summary::after {
+  border-color: #d5dae4;
+}
+.article-dark details > div {
+  background: transparent;
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+.article-dark table {
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.article-dark thead {
+  background: rgba(255, 255, 255, 0.07);
+}
+.article-dark th {
+  border-bottom-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+.article-dark td {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+.article-dark tbody tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+.article-dark .fx-light,
+.article-dark .fx-light * {
+  color: #e6e9f0 !important;
+}
+.article-dark .fx-dark {
+  color: #141a26 !important;
+}
+.article-dark a.fx-dark {
+  color: #0b60b0 !important;
+}
+/* images open larger on click (articleBody.js) */
+.article-zoomable img {
+  cursor: zoom-in;
+}
+/* a "#" that appears beside a heading on hover / focus: copies the link to
+   that section */
+.article .heading-anchor {
+  margin-left: 0.5rem;
+  padding: 0 0.35rem;
+  border: 0;
+  background: transparent;
+  color: #40a2d8;
+  font-size: 0.8em;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.article :is(h2, h3):hover .heading-anchor,
+.article .heading-anchor:focus-visible {
+  opacity: 1;
+}
+@media (hover: none) {
+  .article .heading-anchor {
+    opacity: 0.45;
+  }
+}
+
 /* ============================================================
    Site-wide button hover effect
    Every real <button> and every pill-shaped CTA link (the

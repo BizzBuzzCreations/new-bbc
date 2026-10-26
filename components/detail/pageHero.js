@@ -17,9 +17,10 @@ import { AccentTitle } from "@/components/detail/detailHero";
 // is the LCP element: loaded eagerly at high priority. `media` replaces the
 // photo with anything else (e.g. /about's photo mosaic); `tagline` is a
 // short blue line under the headline; `children` go under the buttons (e.g.
-// a small list of facts); `parent` ({ label, href }) adds a crumb between
+// a small list of facts); `background` ("" lets a background behind it show,
+// e.g. the beams); `parent` ({ label, href }) adds a crumb between
 // Home and this page.
-export default function PageHero({ label, parent, title, tagline, description, actions = [], image, imageAlt = "", imageAspect = "aspect-[4/3]", imageClassName = "", media, children }) {
+export default function PageHero({ label, parent, title, tagline, description, actions = [], image, imageAlt = "", imageAspect = "aspect-[4/3]", imageClassName = "", media, background = "bg-black", children }) {
   const buttons = actions.filter((a) => a?.text && a?.href);
   const crumbs = (
     <nav aria-label="Breadcrumb">
@@ -67,7 +68,7 @@ export default function PageHero({ label, parent, title, tagline, description, a
   );
 
   return (
-    <section className="bg-black text-white">
+    <section className={`${background} text-white`}>
       <div className="mx-auto max-w-7xl px-6 pt-8 pb-12 md:px-10 md:pt-14 md:pb-16">
         {crumbs}
         {image || media ? (

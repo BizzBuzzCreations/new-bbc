@@ -10,8 +10,14 @@ import AuthorAvatar from "@/components/author/authorAvatar";
 import { authorPath } from "@/lib/authorSlug";
 import { getTeamMember } from "@/lib/authorTeam";
 import RichText from "@/components/ui/richText";
-import { FAQSection } from "@/components/ui/faq-accordion";
-import CTA from "@/components/sections/CTA";
+import BeamsBlock from "@/components/home/band";
+import CtaV2 from "@/components/home/ctaV2";
+import Pill from "@/components/home/pill";
+import ArticleBody from "@/components/blog/articleBody";
+import ShareRow from "@/components/blog/shareRow";
+import PostFaq from "@/components/blog/postFaq";
+import SuggestedPosts, { PrevNext } from "@/components/blog/suggestedPosts";
+import { getSuggestedPosts, getNeighbourPosts, readingMinutes } from "@/lib/relatedPosts";
 import Link from "next/link";
 import { ImageOff, ChevronLeft, ChevronRight } from "lucide-react";
 import { notFound } from "next/navigation";
@@ -84,7 +90,8 @@ export default async function SingleBlog({ params }) {
   }
   const post = res?.data;
   // a team member who wrote it shows their photo and role in the "Written by" box
-  const member = await getTeamMember(post?.author);
+  const [member, suggested, neighbours] = await Promise.all([getTeamMember(post?.author), getSuggestedPosts(post), getNeighbourPosts(post)]);
+  const minutes = readingMinutes(post?.content);
 
   const featuredImage = getFeaturedImage(post);
 
@@ -106,6 +113,11 @@ export default async function SingleBlog({ params }) {
     /<img(?![^>]*loading=)/gi,
     '<img loading="lazy" decoding="async"',
   );
+
+  // a post that carries its own page-builder design (<style> blocks made for a
+  // white page) starts in the light reading theme; everything else in dark
+  const defaultMode = /<style[\s>]/i.test(extractedHtml || "") ? "light" : "dark";
+  const postUrl = `https://bizzbuzzcreations.com/blog/${slug}`;
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -144,119 +156,119 @@ export default async function SingleBlog({ params }) {
 
   return (
     <>
-    {/* Title band in the site's dark style; the article itself stays on
-        white below it, for easy reading. */}
-    <header className="bg-black text-white">
-      <div className="max-w-[88rem] mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-12 md:pt-16 md:pb-16">
-        <Link href="/blog" className="inline-flex items-center gap-1 text-sm text-[#40A2D8] hover:text-white transition-colors">
-          <ChevronLeft size={16} aria-hidden="true" /> All blogs
-        </Link>
-        <h1 className="font-display mt-5 max-w-4xl text-3xl leading-[1.12] md:text-5xl">
-          {post?.title}
-        </h1>
-        <p className="mt-5 text-sm text-white/60">
-          {post?.author && (
-            <>
-              By <Link href={authorPath(post.author)} className="text-white/85 underline decoration-white/30 underline-offset-4 transition-colors hover:text-[#40A2D8] hover:decoration-[#40A2D8]">{post.author}</Link>
-              <span className="mx-2 text-white/30" aria-hidden="true">·</span>
-            </>
-          )}
-          Published on <time dateTime={post?.publishedAt}>{formattedDate}</time>
-        </p>
-      </div>
-    </header>
-    <div className="max-w-[88rem] mx-auto px-4 sm:px-6 lg:px-8 pt-10 md:pt-12 pb-20 lg:flex lg:items-start gap-8">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      {faqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      )}
+      {/* thin reading-progress line at the top (pure CSS, see globals.css) */}
+      <div aria-hidden="true" className="scroll-progress" />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
 
-      {/* Table of Contents: follows the reader (see blogToc.js) */}
-      {toc.length > 0 && <BlogToc toc={toc} />}
-
-      {/* Blog content */}
-      <div className="max-w-[52rem] mx-auto lg:mx-0 flex-1 min-w-0">
-        {/* Featured Image */}
-        {featuredImage ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={optimizedImageUrl(featuredImage, 1100)}
-            srcSet={imageSrcSet(featuredImage)}
-            sizes="(max-width: 768px) 100vw, 832px"
-            alt={post?.title}
-            fetchPriority="high"
-            decoding="async"
-            // Reserves a 16:9 box (what most featured images are) until the
-            // image loads, then switches to its real ratio. With no
-            // dimensions it rendered 0px tall first and pushed the whole
-            // article down on load — a 0.27 CLS on mobile.
-            className="w-full h-auto [aspect-ratio:auto_16/9] mb-8 rounded-lg"
-          />
-        ) : (
-          <div className="w-full aspect-[1.91/1] mb-8 rounded-lg flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-gray-50 to-gray-200 text-gray-600">
-            <ImageOff size={36} />
-            <span className="text-sm font-medium">Image unavailable</span>
-          </div>
-        )}
-        {/* Content */}
-        <div
-          className="article"
-          dangerouslySetInnerHTML={{ __html: filteredData }}
-        />
-
-        {/* FAQs */}
-        {post.faqs?.length > 0 && (
-          <div className="my-12">
-            <FAQSection
-              faqs={post.faqs}
-              heading="Frequently Asked Questions"
-              headingClassName="text-2xl font-bold mb-6"
-            />
-          </div>
-        )}
-
-        <div className="my-12 p-6 border border-gray-200 rounded-2xl bg-white shadow-md hover:shadow-lg transition duration-300">
-          <div className="flex items-center gap-4 mb-4">
-            {/* Avatar (the author's page is one click away) */}
-            <Link href={authorPath(post?.author)} aria-label={`${post?.author}'s profile`}>
-              <AuthorAvatar name={post?.author} photo={member?.photo} size={52} />
-            </Link>
-
-            {/* Author Info */}
-            <div>
-              <p className="text-sm text-gray-500">Written by</p>
-              <p className="text-lg font-semibold text-gray-900">
-                <Link href={authorPath(post?.author)} className="transition-colors hover:text-[#0B60B0]">{post?.author}</Link>
-              </p>
-              {member?.role && <p className="text-sm text-gray-500">{member.role}</p>}
+      {/* The whole post sits on the site's beams background (like the
+          homepage): the title band, the article, the suggestions. */}
+      <BeamsBlock>
+        <header className="text-white">
+          <div className="mx-auto max-w-[88rem] px-4 pt-8 pb-10 sm:px-6 md:pt-14 md:pb-14 lg:px-8">
+            <nav aria-label="Breadcrumb">
+              <ol className="flex flex-wrap items-center gap-1.5 text-sm text-white/60">
+                <li><Link href="/" className="text-[#40A2D8] hover:text-white">Home</Link></li>
+                <li aria-hidden="true"><ChevronRight size={14} /></li>
+                <li><Link href="/blog" className="text-[#40A2D8] hover:text-white">Blog</Link></li>
+                {post?.category && (
+                  <>
+                    <li aria-hidden="true"><ChevronRight size={14} /></li>
+                    <li><Link href={`/blog?category=${encodeURIComponent(post.category)}`} className="text-[#40A2D8] hover:text-white">{post.category}</Link></li>
+                  </>
+                )}
+              </ol>
+            </nav>
+            <h1 className="font-display mt-6 max-w-5xl text-[2rem] leading-[1.1] sm:text-5xl xl:text-6xl">{post?.title}</h1>
+            <div className="mt-8 flex flex-wrap items-center justify-between gap-x-8 gap-y-5">
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+                <Link href={authorPath(post?.author)} className="group flex items-center gap-3">
+                  <AuthorAvatar name={post?.author} photo={member?.photo} size={44} />
+                  <span className="leading-tight">
+                    <span className="block text-sm text-white transition-colors group-hover:text-[#40A2D8]">{post?.author}</span>
+                    <span className="block text-xs text-white/60">{member?.role || "Author"}</span>
+                  </span>
+                </Link>
+                <span className="hidden h-6 w-px bg-white/15 sm:block" aria-hidden="true" />
+                <p className="text-sm text-white/60">
+                  <time dateTime={post?.publishedAt}>{formattedDate}</time>
+                  <span className="mx-2 text-white/30" aria-hidden="true">·</span>
+                  {minutes} min read
+                </p>
+              </div>
+              <ShareRow url={postUrl} title={post?.title} />
             </div>
           </div>
+        </header>
 
-          {/* Author Bio */}
-          <RichText as="p" text={post?.authorBio} className="text-gray-600 leading-relaxed text-sm" />
-          <Link href={authorPath(post?.author)} className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#0B60B0] hover:underline">
-            View profile and all articles by {post?.author} <ChevronRight size={16} aria-hidden="true" />
-          </Link>
+        <div className="mx-auto max-w-[88rem] gap-8 px-4 pb-16 sm:px-6 lg:flex lg:items-start lg:px-8">
+          {/* Contents: follows the reader (see blogToc.js) */}
+          {toc.length > 0 && <BlogToc toc={toc} />}
+
+          <div className="mx-auto min-w-0 max-w-[52rem] flex-1 lg:mx-0">
+            {featuredImage ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={optimizedImageUrl(featuredImage, 1100)}
+                srcSet={imageSrcSet(featuredImage)}
+                sizes="(max-width: 768px) 100vw, 832px"
+                alt={post?.title}
+                fetchPriority="high"
+                decoding="async"
+                // Reserves a 16:9 box (what most featured images are) until the
+                // image loads, then switches to its real ratio. With no
+                // dimensions it rendered 0px tall first and pushed the whole
+                // article down on load — a 0.27 CLS on mobile.
+                className="mb-8 h-auto w-full rounded-3xl border border-white/10 shadow-[0_20px_60px_-20px_rgba(11,96,176,0.45)] [aspect-ratio:auto_16/9]"
+              />
+            ) : (
+              <div className="mb-8 flex aspect-[1.91/1] w-full flex-col items-center justify-center gap-2 rounded-3xl border border-white/10 bg-white/[0.03] text-white/60">
+                <ImageOff size={36} aria-hidden="true" />
+                <span className="text-sm">Image unavailable</span>
+              </div>
+            )}
+
+            <ArticleBody html={filteredData} defaultMode={defaultMode} />
+
+            <PostFaq faqs={post.faqs} />
+
+            <div className="my-12 flex flex-wrap items-center justify-between gap-5 rounded-3xl border border-white/10 bg-white/[0.03] p-5 md:p-6">
+              <p className="font-display text-xl text-white">Found this useful? Share it.</p>
+              <ShareRow url={postUrl} title={post?.title} label="" />
+            </div>
+
+            <div className="rounded-3xl border border-white/10 bg-[#0b0e16]/85 p-6 backdrop-blur-sm md:p-8">
+              <div className="flex items-center gap-4">
+                <Link href={authorPath(post?.author)} aria-label={`${post?.author}'s profile`}>
+                  <AuthorAvatar name={post?.author} photo={member?.photo} size={64} />
+                </Link>
+                <div>
+                  <p className="text-sm text-white/60">Written by</p>
+                  <p className="font-display text-xl text-white">
+                    <Link href={authorPath(post?.author)} className="transition-colors hover:text-[#40A2D8]">{post?.author}</Link>
+                  </p>
+                  {member?.role && <p className="text-sm text-[#40A2D8]">{member.role}</p>}
+                </div>
+              </div>
+              <RichText as="p" text={post?.authorBio} className="mt-5 text-sm leading-relaxed text-white/70 md:text-base" />
+              <div className="mt-6">
+                <Pill href={authorPath(post?.author)}>View profile and all articles</Pill>
+              </div>
+            </div>
+
+            <PrevNext prev={neighbours.prev} next={neighbours.next} />
+          </div>
+
+          {/* Contact form */}
+          <aside className="mt-8 shrink-0 self-start lg:sticky lg:top-28 lg:mt-0 lg:w-72">
+            <BlogContactForm />
+          </aside>
         </div>
-      </div>
 
-      {/* Contact Form */}
-      <aside className="lg:w-72 shrink-0 sticky top-28 self-start mt-8 lg:mt-0">
-        <BlogContactForm />
-      </aside>
-    </div>
+        <SuggestedPosts suggested={suggested} />
+      </BeamsBlock>
 
-      {/* CTA — just above the footer. White background here only — every
-          other page keeps CTA's original dark version. */}
-      <div className="bg-white pt-4">
-        <CTA white />
-      </div>
+      <CtaV2 />
     </>
   );
 }

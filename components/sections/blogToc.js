@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 // The "Contents" list beside a blog post. It follows the reader: the section
 // they are currently in is highlighted (and its parent section softly, when
 // it is a sub-section), and the list scrolls by itself to keep that entry in
 // view when the list is taller than the screen. Main sections (h2) are
 // numbered 1, 2, 3…; sub-sections (h3) sit indented under them with a dash.
-// `toc`: { id, text, level, number }.
+// `toc`: { id, text, level, number }. Nothing else moves: no progress meter,
+// no blur, and the list never scrolls by itself.
 // The current section is the last heading that has reached the line just
 // under the navbar. Driven by scroll position (one frame at a time), so it
 // stays right with tall sections; nothing is animated.
@@ -15,7 +16,6 @@ const READ_LINE = 150; // px from the top of the screen
 
 export default function BlogToc({ toc }) {
   const [activeId, setActiveId] = useState(null);
-  const listRef = useRef(null);
 
   useEffect(() => {
     const els = toc.map((t) => document.getElementById(t.id));
@@ -43,35 +43,15 @@ export default function BlogToc({ toc }) {
     };
   }, [toc]);
 
-  // keep the current entry inside the list's own scroll area (the page isn't touched)
-  useEffect(() => {
-    const box = listRef.current;
-    const link = box?.querySelector('a[aria-current="true"]');
-    if (!box || !link) return;
-    const top = link.offsetTop; // the box is `relative`, so this is within it
-    if (top < box.scrollTop + 8) box.scrollTop = Math.max(0, top - 8);
-    else if (top + link.offsetHeight > box.scrollTop + box.clientHeight - 8) box.scrollTop = top + link.offsetHeight - box.clientHeight + 8;
-  }, [activeId]);
-
-  // an h3's parent section: the closest h2 above it
-  const parentOf = {};
-  let lastH2 = null;
-  toc.forEach((t) => {
-    if (t.level === 2) lastH2 = t.id;
-    else parentOf[t.id] = lastH2;
-  });
-  const activeParent = activeId ? parentOf[activeId] : null;
-
   return (
     <aside aria-label="Contents" className="sticky top-28 hidden w-52 shrink-0 self-start xl:block">
-      <div ref={listRef} className="relative max-h-[calc(100vh-8rem)] overflow-y-auto rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+      <div className="max-h-[calc(100vh-8rem)] overflow-y-auto rounded-3xl border border-white/10 bg-[#0b0e16] p-5 [scrollbar-color:rgba(255,255,255,0.2)_transparent] [scrollbar-width:thin]">
         {/* a label, not a heading: it sits between the title (h1) and the
             article's own h2s, so a heading here would skip a level */}
-        <p className="mb-4 text-sm font-bold uppercase tracking-wide text-gray-900">Contents</p>
+        <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-white">Contents</p>
         <ol className="space-y-1">
           {toc.map((item) => {
             const active = item.id === activeId;
-            const parent = item.id === activeParent;
             return (
               <li key={item.id}>
                 <a
@@ -81,15 +61,13 @@ export default function BlogToc({ toc }) {
                     item.level === 3 ? "pl-5" : "pl-2"
                   } ${
                     active
-                      ? "bg-[#0B60B0]/10 font-semibold text-[#0B60B0]"
-                      : parent
-                        ? "text-[#0B60B0] hover:bg-gray-50"
-                        : item.level === 3
-                          ? "text-gray-500 hover:bg-gray-50 hover:text-[#0B60B0]"
-                          : "text-gray-700 hover:bg-gray-50 hover:text-[#0B60B0]"
+                      ? "bg-[#0B60B0]/30 font-semibold text-white"
+                      : item.level === 3
+                        ? "text-white/55 hover:bg-white/5 hover:text-white"
+                        : "text-white/75 hover:bg-white/5 hover:text-white"
                   }`}
                 >
-                  <span className={`shrink-0 ${item.level === 3 ? (active ? "text-[#0B60B0]" : "text-gray-400") : "font-semibold text-[#0B60B0]"}`}>
+                  <span className={`shrink-0 ${item.level === 3 ? (active ? "text-[#40A2D8]" : "text-white/40") : "font-semibold text-[#40A2D8]"}`}>
                     {item.level === 3 ? "–" : `${item.number}.`}
                   </span>
                   <span>{item.text}</span>

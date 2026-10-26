@@ -4,6 +4,7 @@ import PageHero from "@/components/detail/pageHero";
 import PostCard from "@/components/detail/postCard";
 import AllBLogs from "@/components/sections/allBLogs";
 import CtaV2 from "@/components/home/ctaV2";
+import BeamsBlock from "@/components/home/band";
 
 // Same reasoning as the single-post page: blog content is edited/scheduled
 // via the dashboard, so this listing must always read fresh from the DB.
@@ -34,8 +35,10 @@ export default async function Blogs() {
   // Redesign, in the homepage's style: the page heading, the three latest
   // posts, then every post (category menu and pages) → closing CTA.
   return (
-    <div data-no-reveal className="bg-black">
-      <PageHero label="Blog" title="Our Latest Blogs" description="Explore, discover, and find inspiration through these exciting blogs." />
+    <div data-no-reveal>
+      {/* the site's beams background behind the heading, the posts and the list */}
+      <BeamsBlock>
+      <PageHero background="" label="Blog" title="Our Latest Blogs" description="Explore, discover, and find inspiration through these exciting blogs." />
 
       {blogs.length > 0 && (
         <section className="mx-auto max-w-7xl px-6 pb-16 md:px-10 md:pb-20">
@@ -49,10 +52,10 @@ export default async function Blogs() {
       )}
 
       <AllBLogs />
+      <div className="pb-16 md:pb-20" />
+      </BeamsBlock>
 
-      <div className="pt-16 md:pt-20">
-        <CtaV2 />
-      </div>
+      <CtaV2 />
     </div>
   );
 }
