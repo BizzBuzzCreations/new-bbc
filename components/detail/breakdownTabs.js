@@ -42,7 +42,6 @@ export default function BreakdownTabs({ heading, items }) {
                   }`}
                 >
                   <span>
-                    <span className="mr-3 font-display text-sm text-white/60">{String(i + 1).padStart(2, "0")}</span>
                     {item.title}
                   </span>
                   <ChevronDown size={18} aria-hidden="true" className={`shrink-0 transition-transform md:-rotate-90 ${open ? "rotate-180 md:rotate-0 md:opacity-0" : ""}`} />

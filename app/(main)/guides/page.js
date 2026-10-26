@@ -155,8 +155,7 @@ export default async function GuidesPage() {
                         <Icon size={18} />
                       </span>
                       <div className="flex-1">
-                        <span aria-hidden="true" className="text-xs tabular-nums text-white/60">{String(i + 1).padStart(2, "0")}</span>
-                        <h3 className="font-display mt-1 text-xl leading-snug text-white transition-colors group-hover:text-[#40A2D8]">{title}</h3>
+                        <h3 className="font-display text-xl leading-snug text-white transition-colors group-hover:text-[#40A2D8]">{title}</h3>
                         <RichText as="p" text={body} noLink className="mt-2 text-sm leading-relaxed text-white/65" />
                       </div>
                       <ArrowUpRight size={18} aria-hidden="true" className="mt-1 shrink-0 text-white/40 transition-colors group-hover:text-[#40A2D8]" />

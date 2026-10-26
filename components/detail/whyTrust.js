@@ -14,17 +14,17 @@ export default function WhyTrust({ heading, description, items, eyebrow = "Why u
           <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
           {description && <RichText as="p" text={description} className="mt-5 text-base leading-relaxed text-white/70 md:text-lg" />}
         </div>
-        <ol className="reveal-sides mt-12 grid border-t border-white/10 md:mt-16 md:grid-cols-2 md:gap-x-12">
-          {items.map(({ title, desc }, i) => (
-            <li key={title} className="flex gap-6 border-b border-white/10 py-8">
-              <span aria-hidden="true" className="font-display w-12 shrink-0 text-3xl text-[#40A2D8] md:text-4xl">{String(i + 1).padStart(2, "0")}</span>
+        <ul className="reveal-sides mt-12 grid border-t border-white/10 md:mt-16 md:grid-cols-2 md:gap-x-12">
+          {items.map(({ title, desc }) => (
+            <li key={title} className="flex gap-5 border-b border-white/10 py-8">
+              <span aria-hidden="true" className="mt-3 h-2 w-2 shrink-0 rounded-full bg-[#40A2D8]" />
               <div>
                 <h3 className="font-display text-xl leading-snug text-white md:text-2xl">{title}</h3>
                 <RichText as="p" text={desc} className="mt-3 text-sm leading-relaxed text-white/65 md:text-base" />
               </div>
             </li>
           ))}
-        </ol>
+        </ul>
       </div>
     </section>
   );

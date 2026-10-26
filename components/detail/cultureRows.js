@@ -22,10 +22,8 @@ export default function CultureRows({ id, eyebrow = "Our culture", heading, rows
         {rows.map(({ title, tagline, body, img, href, linkText }, i) => (
           <div key={`${title}-${i}`} className="reveal-sides grid gap-8 md:grid-cols-2 md:items-center md:gap-16">
             <div className={i % 2 === 1 ? "md:order-2" : ""}>
-              <p className="text-sm text-[#40A2D8]">
-                {i === 0 && !heading ? eyebrow : <span aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>}
-              </p>
-              <h3 className="font-display mt-4 text-3xl leading-[1.1] md:text-4xl">{title}</h3>
+              {i === 0 && !heading && <p className="mb-4 text-sm text-[#40A2D8]">{eyebrow}</p>}
+              <h3 className="font-display text-3xl leading-[1.1] md:text-4xl">{title}</h3>
               {tagline && <p className="mt-3 text-lg text-[#40A2D8]">{tagline}</p>}
               <RichText as="p" text={body} className="mt-5 text-base leading-relaxed text-white/70 md:text-lg" />
               {href && (

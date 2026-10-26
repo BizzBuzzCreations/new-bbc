@@ -73,8 +73,7 @@ export default function BuildV2({ content, showClio = true, showPraxistence = tr
                     )}
                   </div>
                   <div className="flex flex-1 flex-col p-6 sm:p-8">
-                    <p className="text-xs uppercase tracking-wider text-[#40A2D8]">Product {String(i + 1).padStart(2, "0")}</p>
-                    <h3 className="font-display mt-3 text-2xl leading-tight md:text-3xl">{p.heading}</h3>
+                    <h3 className="font-display text-2xl leading-tight md:text-3xl">{p.heading}</h3>
                     <RichText as="div" text={p.paragraph} className="mt-4 line-clamp-4 text-base leading-relaxed text-white/70" />
                     <div className="mt-auto pt-8">
                       <Pill href={p.buttonLink}>{p.buttonText}</Pill>
@@ -98,10 +97,7 @@ export default function BuildV2({ content, showClio = true, showPraxistence = tr
                   style={{ top: `calc(6.5rem + ${i * 1.5}rem)` }}
                 >
                   <div className={`flex flex-col ${flip ? "lg:order-2" : ""}`}>
-                    <p className="text-xs uppercase tracking-wider text-[#40A2D8]">
-                      Product {String(i + 1).padStart(2, "0")}
-                    </p>
-                    <h3 className="font-display mt-3 text-3xl leading-tight md:text-4xl">{p.heading}</h3>
+                    <h3 className="font-display text-3xl leading-tight md:text-4xl">{p.heading}</h3>
                     <RichText as="div" text={p.paragraph} className="mt-4 space-y-3 text-base leading-relaxed text-white/70" />
                     <ul className="mt-8 grid gap-x-6 gap-y-5 sm:grid-cols-2">
                       {p.features.map((f, k) => (

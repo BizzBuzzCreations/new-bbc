@@ -59,7 +59,6 @@ export default function CatalogGrid({ id, eyebrow, heading, subtext, items, cols
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                 style={{ background: "radial-gradient(280px circle at var(--x, 50%) var(--y, 50%), rgba(64, 162, 216, 0.16), transparent 70%)" }}
               />
-              <span className="absolute left-3 top-3 rounded-full bg-black/55 px-2 py-0.5 text-xs tabular-nums text-white/85 backdrop-blur-sm sm:left-4 sm:top-4">{String(i + 1).padStart(2, "0")}</span>
 
               <div className="relative flex flex-1 flex-col p-4 pt-1 sm:p-5 sm:pt-1 md:p-6 md:pt-1">
                 <h3 className="font-display text-base leading-snug text-white transition-colors duration-200 group-hover:text-[#40A2D8] sm:text-xl">

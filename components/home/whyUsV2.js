@@ -46,8 +46,7 @@ export default function WhyUsV2({ content }) {
                 </div>
               )}
               <div className="p-5">
-                <p className="font-display text-sm text-[#40A2D8]">{c.value}</p>
-                <h3 className="font-display mt-1 text-xl leading-snug text-white">
+                <h3 className="font-display text-xl leading-snug text-white">
                   <Link href={c.buttonLink || "/about"} className="after:absolute after:inset-0 after:content-[''] focus-visible:underline focus-visible:outline-none">
                     {c.label}
                   </Link>

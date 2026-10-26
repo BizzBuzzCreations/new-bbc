@@ -80,9 +80,6 @@ export default function ServicesV2({ content }) {
                   className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                   style={{ background: "radial-gradient(280px circle at var(--x, 50%) var(--y, 50%), rgba(64, 162, 216, 0.16), transparent 70%)" }}
                 />
-                <span className="absolute left-4 top-4 text-xs tabular-nums text-white/60 sm:left-5 sm:top-5">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
                 <span
                   aria-hidden="true"
                   className="absolute bottom-5 right-5 hidden h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white backdrop-blur-sm transition-colors duration-300 group-hover:border-[#40A2D8] group-hover:bg-[#40A2D8] group-hover:text-black sm:flex"
