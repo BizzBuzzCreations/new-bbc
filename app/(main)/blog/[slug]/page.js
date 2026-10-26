@@ -10,7 +10,6 @@ import AuthorAvatar from "@/components/author/authorAvatar";
 import { authorPath } from "@/lib/authorSlug";
 import { getTeamMember } from "@/lib/authorTeam";
 import RichText from "@/components/ui/richText";
-import BeamsBlock from "@/components/home/band";
 import CtaV2 from "@/components/home/ctaV2";
 import Pill from "@/components/home/pill";
 import ArticleBody from "@/components/blog/articleBody";
@@ -158,9 +157,9 @@ export default async function SingleBlog({ params }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
 
-      {/* The whole post sits on the site's beams background (like the
-          homepage): the title band, the article, the suggestions. */}
-      <BeamsBlock>
+      {/* Plain black behind the whole post (no beams): nothing moves behind
+          the text while you read. */}
+      <div className="bg-black text-white">
         <header className="text-white">
           <div className="mx-auto max-w-[88rem] px-4 pt-8 pb-10 sm:px-6 md:pt-14 md:pb-14 lg:px-8">
             <nav aria-label="Breadcrumb">
@@ -263,7 +262,7 @@ export default async function SingleBlog({ params }) {
         </div>
 
         <SuggestedPosts suggested={suggested} />
-      </BeamsBlock>
+      </div>
 
       <CtaV2 />
     </>
