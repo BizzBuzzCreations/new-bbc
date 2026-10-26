@@ -33,7 +33,9 @@ const BADGES = [
 // `framed` (location pages): the chosen video / image sits in a rounded
 // frame beside the text (under it on phones, after the buttons) instead of
 // stretched across the whole screen — an uploaded photo is never blown up
-// past its own pixels — with `office` ({ label, line }) as a small tag on it.
+// past its own pixels — with `office` ({ label, line }) as a small tag on it;
+// the badges then sit in one quiet row under the hero and the skyline is
+// left out, so the hero stays clean.
 export default function HeroHome({ content, stats, secondaryCta, mediaChoice = false, showWordmark = true, locationLine = "", skyline = null, framed = false, office = null }) {
   const heading = content?.heroHeading || "India’s Trusted Digital Marketing Agency";
   const subheading = content?.heroSubheading || "Turn Clicks Into Customers With Data-Driven Digital Marketing";
@@ -98,7 +100,7 @@ export default function HeroHome({ content, stats, secondaryCta, mediaChoice = f
             : "linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.88) 38%, rgba(0,0,0,0.55) 68%, rgba(0,0,0,0.35) 100%)",
         }}
       />
-      {skyline && (
+      {skyline && !inFrame && (
         // eslint-disable-next-line @next/next/no-img-element -- pre-sized 1x / 2x skyline files (footer's); decorative
         <img
           src={`/skyline-${skyline}-840.webp`}
@@ -119,7 +121,7 @@ export default function HeroHome({ content, stats, secondaryCta, mediaChoice = f
         style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 50%, #000000 100%)" }}
       />
 
-      <div className={`relative z-10 mx-auto w-full max-w-7xl px-6 pt-4 md:px-10 md:pt-14 short-screen:pt-4 ${inFrame ? "grid gap-10 md:grid-cols-[1.05fr_1fr] md:items-center md:gap-14" : ""}`}>
+      <div className={`relative z-10 mx-auto w-full max-w-7xl px-6 pt-4 md:px-10 md:pt-14 ${inFrame ? "grid gap-10 short-screen:pt-10 md:grid-cols-[1.05fr_1fr] md:items-center md:gap-14" : "short-screen:pt-4"}`}>
         <div className="flex max-w-3xl flex-col md:block">
           {locationLine ? (
             <p className="order-first mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs text-white/85 backdrop-blur-sm md:mb-0">
@@ -133,7 +135,7 @@ export default function HeroHome({ content, stats, secondaryCta, mediaChoice = f
             </p>
           )}
 
-          <h1 className="font-display mt-2 text-[2.4rem] leading-[1.05] sm:text-5xl md:mt-5 xl:text-6xl short-screen:text-5xl">
+          <h1 className={`font-display mt-2 text-[2.4rem] leading-[1.05] sm:text-5xl md:mt-5 xl:text-6xl short-screen:text-5xl ${inFrame ? "text-balance" : ""}`}>
             {lead && <span className="text-white">{lead} </span>}
             <span className="bg-linear-to-r from-[#40A2D8] via-[#7b74f7] to-[#b57cff] bg-clip-text pb-1 text-transparent">{accent}</span>
           </h1>
@@ -201,17 +203,19 @@ export default function HeroHome({ content, stats, secondaryCta, mediaChoice = f
             </dl>
           )}
 
-          <ul aria-label="Certifications" className="mt-6 grid max-w-md grid-cols-2 gap-2 sm:flex sm:max-w-none sm:flex-wrap sm:gap-3 short-screen:mt-4">
-            {BADGES.map((b) => (
-              <li key={b.title} className="flex min-w-0 items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] py-1.5 pl-1.5 pr-4 backdrop-blur-sm">
-                <Image src={b.src} alt={b.title} width={28} height={28} className="h-7 w-7 shrink-0 rounded-full bg-white/90 object-contain p-0.5" />
-                <span className="leading-tight">
-                  <span className="block text-xs font-medium text-white">{b.title}</span>
-                  <span className="block text-[11px] text-white/60">{b.sub}</span>
-                </span>
-              </li>
-            ))}
-          </ul>
+          {!inFrame && (
+            <ul aria-label="Certifications" className="mt-6 grid max-w-md grid-cols-2 gap-2 sm:flex sm:max-w-none sm:flex-wrap sm:gap-3 short-screen:mt-4">
+              {BADGES.map((b) => (
+                <li key={b.title} className="flex min-w-0 items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] py-1.5 pl-1.5 pr-4 backdrop-blur-sm">
+                  <Image src={b.src} alt={b.title} width={28} height={28} className="h-7 w-7 shrink-0 rounded-full bg-white/90 object-contain p-0.5" />
+                  <span className="leading-tight">
+                    <span className="block text-xs font-medium text-white">{b.title}</span>
+                    <span className="block text-[11px] text-white/60">{b.sub}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         {inFrame && (
@@ -233,6 +237,26 @@ export default function HeroHome({ content, stats, secondaryCta, mediaChoice = f
           </div>
         )}
       </div>
+
+      {/* framed: the badges as one quiet row under the hero, not crowded
+          under the buttons */}
+      {inFrame && (
+        <div className="relative z-10 mx-auto mt-12 w-full max-w-7xl px-6 md:mt-16 md:px-10">
+          <div className="flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:gap-8">
+            <p className="shrink-0 text-xs uppercase tracking-wider text-white/60">Certified &amp; verified</p>
+            <ul aria-label="Certifications" className="grid grid-cols-2 gap-x-6 gap-y-3 sm:flex sm:flex-wrap sm:gap-x-8">
+              {BADGES.map((b) => (
+                <li key={b.title} className="flex items-center gap-2.5">
+                  <Image src={b.src} alt="" width={24} height={24} className="h-6 w-6 shrink-0 rounded-full bg-white/90 object-contain p-0.5" />
+                  <span className="text-sm text-white/80">
+                    {b.title} <span className="text-white/50">{b.sub}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
