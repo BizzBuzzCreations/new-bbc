@@ -29,7 +29,7 @@ export default async function RndTeamPage() {
       <section className="bg-black text-white">
         <div className="mx-auto max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
           {/* LinkedIn only on the founders, as before */}
-          <PeopleGrid people={team.map(({ linkedin, ...p }) => p)} cols="grid-cols-2 md:grid-cols-3 lg:grid-cols-4" headingLevel="h2" />
+          <PeopleGrid people={team.map(({ linkedin, ...p }) => p)} headingLevel="h2" />
         </div>
       </section>
     </div>

@@ -101,7 +101,7 @@ export default async function OurTeamPage() {
             "BizzBuzz Creations was built on a simple belief: digital marketing should connect creativity with measurable business outcomes. Our founders combine entrepreneurial thinking, marketing expertise, and a long-term vision to build solutions that help businesses grow with clarity and confidence."
           }
         >
-          <PeopleGrid people={founders} cols="grid-cols-2 lg:grid-cols-4" />
+          <PeopleGrid people={founders} variant="profiles" />
         </TitledSection>
       )}
 
@@ -116,7 +116,7 @@ export default async function OurTeamPage() {
           }
         >
           {/* LinkedIn only on the founders, as before */}
-          <PeopleGrid people={leaders.map(({ linkedin, ...l }) => l)} cols="grid-cols-2 lg:grid-cols-4" />
+          <PeopleGrid people={leaders.map(({ linkedin, ...l }) => l)} />
         </TitledSection>
       )}
 

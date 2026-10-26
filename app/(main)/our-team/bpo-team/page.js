@@ -28,7 +28,7 @@ export default async function BpoTeamPage() {
       <PageHero label="BPO Team" parent={{ label: "Our Team", href: "/our-team" }} title={content?.bpoTeamHeading || "Meet Our BPO Team"} />
       <section className="bg-black text-white">
         <div className="mx-auto max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
-          <PeopleGrid people={team} cols="grid-cols-2 md:grid-cols-3 lg:grid-cols-4" headingLevel="h2" />
+          <PeopleGrid people={team} headingLevel="h2" />
         </div>
       </section>
     </div>
