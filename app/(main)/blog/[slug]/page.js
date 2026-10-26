@@ -5,6 +5,7 @@ import { extractTableOfContents } from "@/lib/extractTableOfContents";
 import { sanitizeBlogContent } from "@/lib/sanitizeBlogContent";
 import { removeDeadWordpressImages } from "@/lib/removeDeadWordpressImages";
 import BlogContactForm from "@/components/sections/blogContactForm";
+import BlogToc from "@/components/sections/blogToc";
 import RichText from "@/components/ui/richText";
 import { FAQSection } from "@/components/ui/faq-accordion";
 import CTA from "@/components/sections/CTA";
@@ -141,7 +142,7 @@ export default async function SingleBlog({ params }) {
     {/* Title band in the site's dark style; the article itself stays on
         white below it, for easy reading. */}
     <header className="bg-black text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-12 md:pt-16 md:pb-16">
+      <div className="max-w-[88rem] mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-12 md:pt-16 md:pb-16">
         <Link href="/blog" className="inline-flex items-center gap-1 text-sm text-[#40A2D8] hover:text-white transition-colors">
           <ChevronLeft size={16} aria-hidden="true" /> All blogs
         </Link>
@@ -159,7 +160,7 @@ export default async function SingleBlog({ params }) {
         </p>
       </div>
     </header>
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 md:pt-12 pb-20 lg:flex lg:items-start gap-8">
+    <div className="max-w-[88rem] mx-auto px-4 sm:px-6 lg:px-8 pt-10 md:pt-12 pb-20 lg:flex lg:items-start gap-8">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
@@ -171,48 +172,18 @@ export default async function SingleBlog({ params }) {
         />
       )}
 
-      {/* Table of Contents */}
-      {toc.length > 0 && (
-        <aside className="hidden lg:block w-56 shrink-0 sticky top-28 self-start">
-          <div className="border border-gray-200 rounded-2xl p-5 bg-white shadow-sm">
-            {/* a label, not a heading: it sits between the title (h1) and the
-                article's own h2s, so a heading here would skip a level */}
-            <p className="text-sm font-bold uppercase tracking-wide text-gray-900 mb-4">
-              Contents
-            </p>
-            {/* Main sections (h2) are numbered 1, 2, 3…; their sub-sections
-                (h3) sit indented under them with a dash, not a number of
-                their own. */}
-            <ol className="space-y-2">
-              {toc.map((item) => (
-                <li key={item.id}>
-                  <a
-                    href={`#${item.id}`}
-                    className={`flex gap-2 py-0.5 text-sm transition-colors ${
-                      item.level === 3 ? "pl-5 text-gray-500 hover:text-[#0B60B0]" : "text-gray-700 hover:text-[#0B60B0]"
-                    }`}
-                  >
-                    <span className={`shrink-0 ${item.level === 3 ? "text-gray-400" : "font-semibold text-[#0B60B0]"}`}>
-                      {item.level === 3 ? "–" : `${item.number}.`}
-                    </span>
-                    <span>{item.text}</span>
-                  </a>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </aside>
-      )}
+      {/* Table of Contents: follows the reader (see blogToc.js) */}
+      {toc.length > 0 && <BlogToc toc={toc} />}
 
       {/* Blog content */}
-      <div className="max-w-3xl mx-auto lg:mx-0 flex-1 min-w-0">
+      <div className="max-w-[52rem] mx-auto lg:mx-0 flex-1 min-w-0">
         {/* Featured Image */}
         {featuredImage ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={optimizedImageUrl(featuredImage, 1100)}
             srcSet={imageSrcSet(featuredImage)}
-            sizes="(max-width: 768px) 100vw, 768px"
+            sizes="(max-width: 768px) 100vw, 832px"
             alt={post?.title}
             fetchPriority="high"
             decoding="async"
@@ -267,7 +238,7 @@ export default async function SingleBlog({ params }) {
       </div>
 
       {/* Contact Form */}
-      <aside className="lg:w-80 shrink-0 sticky top-28 self-start mt-8 lg:mt-0">
+      <aside className="lg:w-72 shrink-0 sticky top-28 self-start mt-8 lg:mt-0">
         <BlogContactForm />
       </aside>
     </div>
