@@ -6,11 +6,13 @@ import { sanitizeBlogContent } from "@/lib/sanitizeBlogContent";
 import { removeDeadWordpressImages } from "@/lib/removeDeadWordpressImages";
 import BlogContactForm from "@/components/sections/blogContactForm";
 import BlogToc from "@/components/sections/blogToc";
+import AuthorAvatar from "@/components/author/authorAvatar";
+import { authorPath } from "@/lib/authorSlug";
 import RichText from "@/components/ui/richText";
 import { FAQSection } from "@/components/ui/faq-accordion";
 import CTA from "@/components/sections/CTA";
 import Link from "next/link";
-import { User, ImageOff, ChevronLeft } from "lucide-react";
+import { ImageOff, ChevronLeft, ChevronRight } from "lucide-react";
 import { notFound } from "next/navigation";
 
 // ISR: served from cache and regenerated at most every 60s. Dashboard
@@ -108,7 +110,7 @@ export default async function SingleBlog({ params }) {
     headline: post.title,
     description: metaDescription(post),
     ...(post.featuredImage ? { image: post.featuredImage } : {}),
-    author: { "@type": "Person", name: post.author },
+    author: { "@type": "Person", name: post.author, url: `https://bizzbuzzcreations.com${authorPath(post.author)}` },
     publisher: {
       "@type": "Organization",
       name: "Digital Marketing Agency",
@@ -152,7 +154,7 @@ export default async function SingleBlog({ params }) {
         <p className="mt-5 text-sm text-white/60">
           {post?.author && (
             <>
-              By <span className="text-white/85">{post.author}</span>
+              By <Link href={authorPath(post.author)} className="text-white/85 underline decoration-white/30 underline-offset-4 transition-colors hover:text-[#40A2D8] hover:decoration-[#40A2D8]">{post.author}</Link>
               <span className="mx-2 text-white/30" aria-hidden="true">·</span>
             </>
           )}
@@ -218,22 +220,25 @@ export default async function SingleBlog({ params }) {
 
         <div className="my-12 p-6 border border-gray-200 rounded-2xl bg-white shadow-md hover:shadow-lg transition duration-300">
           <div className="flex items-center gap-4 mb-4">
-            {/* Avatar */}
-            <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 border border-gray-200">
-              <User size={22} className="text-gray-600" />
-            </div>
+            {/* Avatar (the author's page is one click away) */}
+            <Link href={authorPath(post?.author)} aria-label={`${post?.author}'s profile`}>
+              <AuthorAvatar name={post?.author} size={52} />
+            </Link>
 
             {/* Author Info */}
             <div>
               <p className="text-sm text-gray-500">Written by</p>
               <p className="text-lg font-semibold text-gray-900">
-                {post?.author}
+                <Link href={authorPath(post?.author)} className="transition-colors hover:text-[#0B60B0]">{post?.author}</Link>
               </p>
             </div>
           </div>
 
           {/* Author Bio */}
           <RichText as="p" text={post?.authorBio} className="text-gray-600 leading-relaxed text-sm" />
+          <Link href={authorPath(post?.author)} className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#0B60B0] hover:underline">
+            View profile and all articles by {post?.author} <ChevronRight size={16} aria-hidden="true" />
+          </Link>
         </div>
       </div>
 

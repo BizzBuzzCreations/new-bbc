@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { authorPath } from "@/lib/authorSlug";
 import { ImageOff } from "lucide-react";
 import { getFeaturedImage, optimizedImageUrl, imageSrcSet } from "@/lib/getFeaturedImage";
 
@@ -37,7 +38,15 @@ export default function PostCard({ post, excerpt, headingLevel = "h3", eager = f
       </div>
       <p className="mt-5 text-xs uppercase tracking-wider text-white/60">
         {date}
-        {post?.author && <> &middot; {post.author}</>}
+        {post?.author && (
+          <>
+            {" "}&middot;{" "}
+            {/* above the card's whole-card link, so the author's name goes to their page */}
+            <Link href={authorPath(post.author)} className="relative z-10 transition-colors hover:text-white hover:underline">
+              {post.author}
+            </Link>
+          </>
+        )}
       </p>
       <Title className="font-display mt-2 text-xl leading-snug text-white transition-colors duration-200 group-hover:text-[#40A2D8] md:text-2xl">
         <Link href={`/blog/${post?.slug}`} className="after:absolute after:inset-0 after:content-[''] focus-visible:underline focus-visible:outline-none">
