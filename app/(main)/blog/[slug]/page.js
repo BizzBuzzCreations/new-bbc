@@ -114,9 +114,6 @@ export default async function SingleBlog({ params }) {
     '<img loading="lazy" decoding="async"',
   );
 
-  // a post that carries its own page-builder design (<style> blocks made for a
-  // white page) starts in the light reading theme; everything else in dark
-  const defaultMode = /<style[\s>]/i.test(extractedHtml || "") ? "light" : "dark";
   const postUrl = `https://bizzbuzzcreations.com/blog/${slug}`;
 
   const articleSchema = {
@@ -228,7 +225,7 @@ export default async function SingleBlog({ params }) {
               </div>
             )}
 
-            <ArticleBody html={filteredData} defaultMode={defaultMode} />
+            <ArticleBody html={filteredData} />
 
             <PostFaq faqs={post.faqs} />
 

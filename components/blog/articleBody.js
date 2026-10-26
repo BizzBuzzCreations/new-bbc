@@ -1,17 +1,19 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { Moon, Sun, X } from "lucide-react";
 
 // The blog post's text, made comfortable and interactive:
 //  - Dark reading theme by default (like the rest of the site); a Dark /
-//    Light switch and three text sizes, remembered for next time. Posts that
-//    carry their own page-builder design (<style> blocks made for a white
-//    page) start in Light (`defaultMode`) unless the reader chose.
-//  - A contrast check on the reader's side: text the post's own colours
-//    left unreadable on the dark page (pasted-in dark text, say) is lifted to
-//    a readable colour; boxes the author made keep their own look.
+//    Light switch and three text sizes, remembered for next time. (Light is
+//    the post exactly as its author styled it, on a white card.)
+//  - Dark really re-themes the post, whatever it brings along: light
+//    backgrounds from its own CSS or inline styles (a white page-builder
+//    wrapper, light table cells, cream boxes) are turned dark, and then every
+//    piece of text is checked against what is behind it — dark text pasted in
+//    from a white page is lifted to a readable colour. Coloured boxes (a blue
+//    box with white text) keep their look. Light switches it all off again.
 //  - A "#" beside each heading that copies the link to that section.
 //  - Images open larger on click (Esc or a click closes).
 // `html` is the post's already sanitised HTML.
@@ -35,15 +37,36 @@ const rgb = (css) => {
 const contrast = (a, b) => (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
 const PAGE_DARK = 0.006; // the near-black page behind the article
 
-// give unreadable text a readable colour (classes only — undone by switching to Light)
-function fixContrast(root) {
+const SKIP = new Set(["SCRIPT", "STYLE", "IMG", "SVG", "PICTURE", "VIDEO", "IFRAME", "CANVAS", "BR", "HR", "PATH"]);
+const lightColor = (c) => c && c.a > 0.5 && c.l > 0.7;
+
+// Turn the post into a dark page (classes only — undone by switching to Light):
+//  1) light solid / light gradient backgrounds become dark (a big wrapper
+//     clear, a smaller box a faint lighter panel);
+//  2) text that is now hard to read against what is behind it is lifted.
+function themeDark(root) {
+  const els = [...root.querySelectorAll("*")].filter((el) => !SKIP.has(el.tagName.toUpperCase()));
+  els.forEach((el) => el.classList.remove("fx-bg", "fx-bg0", "fx-light", "fx-dark"));
+  const rootH = root.getBoundingClientRect().height || 1;
+  els.forEach((el) => {
+    const cs = getComputedStyle(el);
+    let light = false;
+    if (cs.backgroundImage !== "none") {
+      // a gradient made only of light colours (a picture is left alone)
+      const cols = [...cs.backgroundImage.matchAll(/rgba?\([^)]+\)/g)].map((m) => rgb(m[0])).filter(Boolean);
+      light = !/url\(/.test(cs.backgroundImage) && cols.length > 0 && cols.every((c) => c.a < 0.5 || c.l > 0.7);
+    } else light = lightColor(rgb(cs.backgroundColor));
+    if (light) el.classList.add(el.getBoundingClientRect().height > rootH * 0.5 ? "fx-bg0" : "fx-bg");
+  });
+
+  // what is behind an element: the nearest solid background above it, else the dark page
   const bgCache = new Map();
   const bgOf = (el) => {
-    if (el === root || !el) return PAGE_DARK;
+    if (!el || el === root) return PAGE_DARK;
     if (bgCache.has(el)) return bgCache.get(el);
     const cs = getComputedStyle(el);
     let out;
-    if (cs.backgroundImage !== "none") out = null; // gradients / pictures: leave alone
+    if (cs.backgroundImage !== "none") out = null; // a picture / a coloured gradient: leave the text alone
     else {
       const c = rgb(cs.backgroundColor);
       out = c && c.a > 0.5 ? c.l : bgOf(el.parentElement);
@@ -51,12 +74,11 @@ function fixContrast(root) {
     bgCache.set(el, out);
     return out;
   };
-  root.querySelectorAll("p, li, span, a, td, th, div, h1, h2, h3, h4, h5, h6, blockquote, strong, em, b, i, label, summary, figcaption, small").forEach((el) => {
-    el.classList.remove("fx-light", "fx-dark");
+  els.forEach((el) => {
     if (![...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())) return;
     const text = rgb(getComputedStyle(el).color);
     const bg = bgOf(el);
-    if (!text || bg === null || contrast(text.l, bg) >= 4) return;
+    if (!text || bg === null || contrast(text.l, bg) >= 4.5) return;
     el.classList.add(bg < 0.35 ? "fx-light" : "fx-dark");
   });
 }
@@ -99,17 +121,14 @@ export default function ArticleBody({ html, defaultMode = "dark" }) {
     } catch {}
   };
 
-  // contrast check whenever the dark theme is on
-  useEffect(() => {
+  // theme the post whenever the dark theme is on (before the browser paints, so
+  // switching never shows the old colours for a moment) and undo it for Light
+  useLayoutEffect(() => {
     const root = box.current;
     if (!root) return;
-    if (mode !== "dark") {
-      root.querySelectorAll(".fx-light, .fx-dark").forEach((el) => el.classList.remove("fx-light", "fx-dark"));
-      return;
-    }
-    const id = "requestIdleCallback" in window ? window.requestIdleCallback(() => fixContrast(root), { timeout: 1500 }) : setTimeout(() => fixContrast(root), 300);
-    return () => ("cancelIdleCallback" in window ? window.cancelIdleCallback(id) : clearTimeout(id));
-  }, [mode, html]);
+    if (mode === "dark") themeDark(root);
+    else root.querySelectorAll(".fx-bg, .fx-bg0, .fx-light, .fx-dark").forEach((el) => el.classList.remove("fx-bg", "fx-bg0", "fx-light", "fx-dark"));
+  }, [mode, html, size]);
 
   // "#" beside headings
   useEffect(() => {

@@ -693,6 +693,18 @@ body {
 .article-dark {
   color: #d5dae4;
 }
+/* the post's own page background (a white wrapper from a page builder) never shows */
+.article.article-dark {
+  background: transparent !important;
+}
+.article-dark .fx-bg {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  background-image: none !important;
+}
+.article-dark .fx-bg0 {
+  background-color: transparent !important;
+  background-image: none !important;
+}
 .article-dark :is(h1, h2, h3, h4, h5, h6),
 .article-dark :is(h1, h2, h3, h4, h5, h6) *,
 .article-dark strong,
@@ -780,6 +792,9 @@ body {
 }
 .article-dark a.fx-dark {
   color: #0b60b0 !important;
+}
+.article-dark a.fx-light {
+  color: #40a2d8 !important;
 }
 /* images open larger on click (articleBody.js) */
 .article-zoomable img {
