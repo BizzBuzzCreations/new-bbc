@@ -48,6 +48,7 @@ export default async function OutsideLocationPage({ pageKey }) {
   const content = await getPageContent(pageKey);
   const hidden = new Set(content?.hiddenSections || []);
   const isUk = pageKey === "outside-location-uk";
+  const featuredVideo = !hidden.has("videoTestimonial") && Boolean(content?.videoTestimonialVideo);
 
   return (
     <div data-no-reveal>
@@ -86,7 +87,8 @@ export default async function OutsideLocationPage({ pageKey }) {
       {["reviews", "clientVideos", "videoTestimonial"].some((key) => !hidden.has(key)) && (
         <BeamsBlock>
           {!hidden.has("reviews") && <ReviewsV2 content={content} />}
-          {!hidden.has("clientVideos") && <ClientVideosV2 content={content} />}
+          {/* the client the featured video block below already shows isn't repeated in the row */}
+          {!hidden.has("clientVideos") && <ClientVideosV2 content={content} skipNames={featuredVideo ? [content?.videoTestimonialClientName] : []} />}
           {!hidden.has("videoTestimonial") && <VideoTestimonialV2 content={content} />}
         </BeamsBlock>
       )}

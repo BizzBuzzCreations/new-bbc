@@ -8,9 +8,14 @@ import { resolveClientVideos } from "@/lib/clientVideos";
 // usual one — small blue label, big light heading, a line of text. Dashboard
 // fields: "Client Video Testimonials" (label, heading, subtext, the list of
 // videos); renders nothing when the list is empty. No background of its own
-// (it sits on the beams block with Customer Reviews).
-export default function ClientVideosV2({ content }) {
-  const items = resolveClientVideos(content);
+// (it sits on the beams block with Customer Reviews). `skipNames`: clients
+// left out of the row because the page already features them (the UK page's
+// own video testimonial block).
+const norm = (t) => String(t || "").trim().toLowerCase();
+
+export default function ClientVideosV2({ content, skipNames = [] }) {
+  const skip = new Set(skipNames.map(norm).filter(Boolean));
+  const items = resolveClientVideos(content).filter((v) => !skip.has(norm(v.name)));
   if (!items.length) return null;
   const eyebrow = content?.clientVideosEyebrow || "Client Stories";
   const heading = content?.clientVideosHeading || "Hear It Straight From Our Clients";

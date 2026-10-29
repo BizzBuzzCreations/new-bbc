@@ -8,14 +8,20 @@ import { ArrowUpRight, ChevronLeft, ChevronRight, Play, X } from "lucide-react";
 //  - The cards are plain pictures — nothing from YouTube loads until a
 //    visitor taps one, so five videos cost the page about 150KB of images
 //    instead of five heavy players.
-//  - Wide screens: every card in one aligned row (cards of one height, a
-//    short last row centred). Tablets and phones: a swipe row.
+//  - Wide screens: every card in one aligned row (cards of one height; the
+//    count per row follows how many videos there are, a short last row centred). Tablets and phones: a swipe row.
 //  - Tapping a card opens a theatre player on the page: the video plays
 //    straight away (YouTube's privacy-enhanced player), ← / → (or the
 //    arrow buttons) go to the previous / next client, Esc closes it, and
 //    closing stops the video.
 // `items`: { id, name, role, cover } (lib/clientVideos.js).
 const GAP_REM = 1;
+// how many cards sit side by side, so a row is never left with one on its own:
+// wide screens (xl) up to 6 across, laptops (lg) up to 5 (6 become 3 + 3),
+// else 4 across with a centred short last row
+const acrossXl = (n) => (n <= 6 ? Math.max(n, 1) : 4);
+const acrossLg = (n) => (n <= 5 ? Math.max(n, 1) : n === 6 ? 3 : 4);
+const widthFor = (k) => `calc((100% - ${(k - 1) * GAP_REM}rem) / ${k})`;
 
 export default function ClientVideoWall({ items }) {
   const [open, setOpen] = useState(null); // index of the video being watched
@@ -46,9 +52,6 @@ export default function ClientVideoWall({ items }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open === null]);
 
-  // five across on wide screens (fewer if there are fewer videos)
-  const across = Math.min(Math.max(n, 1), 5);
-  const width = `calc((100% - ${(across - 1) * GAP_REM}rem) / ${across})`;
   const current = open !== null ? items[open] : null;
 
   return (
@@ -57,10 +60,10 @@ export default function ClientVideoWall({ items }) {
       <ul
         data-bizzbee-avoid
         className="reveal-stagger no-scrollbar -mx-6 mt-12 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-px-6 px-6 pb-2 md:mt-16 lg:mx-0 lg:flex-wrap lg:justify-center lg:gap-4 lg:overflow-visible lg:px-0 lg:pb-0"
-        style={{ "--card": width }}
+        style={{ "--card-lg": widthFor(acrossLg(n)), "--card-xl": widthFor(acrossXl(n)) }}
       >
         {items.map((v, i) => (
-          <li key={`${v.id}-${i}`} className="w-[62%] shrink-0 snap-start sm:w-[38%] md:w-[30%] lg:w-(--card)">
+          <li key={`${v.id}-${i}`} className="@container w-[62%] shrink-0 snap-start sm:w-[38%] md:w-[30%] lg:w-(--card-lg) xl:w-(--card-xl)">
             <button
               type="button"
               onClick={() => setOpen(i)}
@@ -76,12 +79,15 @@ export default function ClientVideoWall({ items }) {
               )}
               {/* darkens the bottom so the name reads on any picture */}
               <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-2/5 bg-linear-to-t from-black/90 via-black/55 to-transparent" />
-              <span className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4 md:p-5">
+              {/* on a narrow card (six across) the role drops out and the name and play
+                  button get smaller, so the text never crowds the video's own captions
+                  (the full name and role are in the player) */}
+              <span className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-4 md:p-5 @max-[14rem]:p-3">
                 <span className="min-w-0">
-                  <span className="font-display block text-lg leading-tight text-white md:text-xl">{v.name}</span>
-                  <span className="mt-0.5 block text-xs text-white/70">{v.role || "Client testimonial"}</span>
+                  <span className="font-display block text-lg leading-tight text-white md:text-xl @max-[14rem]:text-[0.95rem]">{v.name}</span>
+                  <span className="mt-0.5 block text-xs text-white/70 @max-[14rem]:hidden">{v.role || "Client testimonial"}</span>
                 </span>
-                <span aria-hidden="true" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/30 bg-white/15 text-white backdrop-blur-md transition-colors duration-300 group-hover:border-[#40A2D8] group-hover:bg-[#40A2D8] group-hover:text-black">
+                <span aria-hidden="true" className="flex h-11 w-11 shrink-0 @max-[14rem]:h-9 @max-[14rem]:w-9 items-center justify-center rounded-full border border-white/30 bg-white/15 text-white backdrop-blur-md transition-colors duration-300 group-hover:border-[#40A2D8] group-hover:bg-[#40A2D8] group-hover:text-black">
                   <Play size={16} fill="currentColor" className="ml-0.5" />
                 </span>
               </span>
