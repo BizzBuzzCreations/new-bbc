@@ -8,6 +8,7 @@ import BuildV2 from "@/components/home/buildV2";
 import ProcessV2 from "@/components/home/processV2";
 import IndustriesV2 from "@/components/home/industriesV2";
 import ReviewsV2 from "@/components/home/reviewsV2";
+import ClientVideosV2 from "@/components/home/clientVideosV2";
 import BlogsV2 from "@/components/home/blogsV2";
 import FaqV2 from "@/components/home/faqV2";
 import CtaV2 from "@/components/home/ctaV2";
@@ -88,12 +89,13 @@ export default async function Home() {
         showBuilds={!hidden.has("caseStudies")}
       />
 
-      {/* Process, Industries and Reviews share one background (the beams) */}
-      {["process", "industries", "reviews"].some((key) => !hidden.has(key)) && (
+      {/* Process, Industries, Reviews and the client videos share one background (the beams) */}
+      {["process", "industries", "reviews", "clientVideos"].some((key) => !hidden.has(key)) && (
         <BeamsBlock>
           {!hidden.has("process") && <ProcessV2 content={content} />}
           {!hidden.has("industries") && <IndustriesV2 content={content} />}
           {!hidden.has("reviews") && <ReviewsV2 content={content} />}
+          {!hidden.has("clientVideos") && <ClientVideosV2 content={content} />}
         </BeamsBlock>
       )}
 

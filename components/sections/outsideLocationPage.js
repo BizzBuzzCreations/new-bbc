@@ -6,6 +6,7 @@ import WhyUsV2 from "@/components/home/whyUsV2";
 import ProcessV2 from "@/components/home/processV2";
 import IndustriesV2 from "@/components/home/industriesV2";
 import ReviewsV2 from "@/components/home/reviewsV2";
+import ClientVideosV2 from "@/components/home/clientVideosV2";
 import VideoTestimonialV2 from "@/components/home/videoTestimonialV2";
 import FaqV2 from "@/components/home/faqV2";
 import CtaV2 from "@/components/home/ctaV2";
@@ -82,9 +83,10 @@ export default async function OutsideLocationPage({ pageKey }) {
       {!hidden.has("services") && <ServicesV2 content={content} />}
       {/* Proof early: a visitor comparing agencies from abroad sees reviews
           and the client video right after the services. */}
-      {["reviews", "videoTestimonial"].some((key) => !hidden.has(key)) && (
+      {["reviews", "clientVideos", "videoTestimonial"].some((key) => !hidden.has(key)) && (
         <BeamsBlock>
           {!hidden.has("reviews") && <ReviewsV2 content={content} />}
+          {!hidden.has("clientVideos") && <ClientVideosV2 content={content} />}
           {!hidden.has("videoTestimonial") && <VideoTestimonialV2 content={content} />}
         </BeamsBlock>
       )}
