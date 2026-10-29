@@ -34,6 +34,16 @@
    around it should clip sideways overflow (overflow-x-clip), so the
    right-hand items never widen the page while they slide in.
    .scroll-progress — a thin bar at the top that fills as the page scrolls. */
+/* the soft glow behind the client video stage fades in when the client changes */
+@keyframes glow-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.4;
+  }
+}
+
 @keyframes reveal-rise {
   from {
     opacity: 0;

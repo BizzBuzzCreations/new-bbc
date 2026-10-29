@@ -1,160 +1,205 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
-import { ArrowUpRight, ChevronLeft, ChevronRight, Play, X } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, Play } from "lucide-react";
 
-// Client video testimonials (YouTube Shorts, 9:16):
-//  - The cards are plain pictures — nothing from YouTube loads until a
-//    visitor taps one, so five videos cost the page about 150KB of images
-//    instead of five heavy players.
-//  - Wide screens: every card in one aligned row (cards of one height; the
-//    count per row follows how many videos there are, a short last row centred). Tablets and phones: a swipe row.
-//  - Tapping a card opens a theatre player on the page: the video plays
-//    straight away (YouTube's privacy-enhanced player), ← / → (or the
-//    arrow buttons) go to the previous / next client, Esc closes it, and
-//    closing stops the video.
+// Client video testimonials (YouTube Shorts) as a "phone stage". They are
+// phone-recorded vertical videos, so each one sits in a phone frame on an
+// arc: the client you're on is in the middle — large, upright, lit by a soft
+// glow taken from their own video — and the others fan out to the sides,
+// smaller and turned toward the centre.
+//  - Bring someone to the centre by clicking their phone, swiping / dragging,
+//    the arrows, the keyboard's ← / →, or their name below.
+//  - Tap the centre phone and the video plays inside it (YouTube's
+//    privacy-enhanced player). Until then nothing from YouTube loads — the
+//    phones are small pictures (~150KB for all of them). Moving to another
+//    client removes the player, which stops the video.
+//  - Nothing moves on its own; with reduced motion the phones jump instead
+//    of gliding.
 // `items`: { id, name, role, cover } (lib/clientVideos.js).
-const GAP_REM = 1;
-// how many cards sit side by side, so a row is never left with one on its own:
-// wide screens (xl) up to 6 across, laptops (lg) up to 5 (6 become 3 + 3),
-// else 4 across with a centred short last row
-const acrossXl = (n) => (n <= 6 ? Math.max(n, 1) : 4);
-const acrossLg = (n) => (n <= 5 ? Math.max(n, 1) : n === 6 ? 3 : 4);
-const widthFor = (k) => `calc((100% - ${(k - 1) * GAP_REM}rem) / ${k})`;
+const STEP = 0.62; // distance between neighbouring phone centres, in phone widths
+const SHOWN = 2; // how many phones are visible on each side of the centre
 
 export default function ClientVideoWall({ items }) {
-  const [open, setOpen] = useState(null); // index of the video being watched
-  const dialog = useRef(null);
-  const closeBtn = useRef(null);
   const n = items.length;
+  const [active, setActive] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const drag = useRef({ x: 0, moved: false, down: false });
+  const half = Math.floor(n / 2);
 
-  const go = (step) => setOpen((i) => (i === null ? i : (i + step + n) % n));
+  const select = (i) => {
+    setActive(((i % n) + n) % n);
+    setPlaying(false);
+  };
+  const go = (step) => select(active + step);
+  // signed distance from the centre phone, going the short way round
+  const dist = (i) => ((i - active + n + half) % n) - half;
+  const current = items[active];
 
-  useEffect(() => {
-    if (open === null) return;
-    if (dialog.current && !dialog.current.open) dialog.current.showModal();
-    // keyboard focus on the Close button, not inside the YouTube frame (which
-    // swallows keys, and is replaced when the video changes)
-    closeBtn.current?.focus();
-  }, [open]);
-
-  // ← / → while the player is open (heard on the whole page, so they keep
-  // working after the video changes)
-  useEffect(() => {
-    if (open === null) return;
-    const onKey = (e) => {
-      if (e.key === "ArrowRight") go(1);
-      else if (e.key === "ArrowLeft") go(-1);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open === null]);
-
-  const current = open !== null ? items[open] : null;
+  const onKeyDown = (e) => {
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      go(1);
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      go(-1);
+    }
+  };
+  // swipe / drag: a horizontal move of more than 40px changes client; the
+  // click that follows a drag is ignored
+  const onPointerDown = (e) => {
+    drag.current = { x: e.clientX, moved: false, down: true };
+  };
+  const onPointerUp = (e) => {
+    const d = drag.current;
+    if (!d.down) return;
+    d.down = false;
+    const dx = e.clientX - d.x;
+    if (Math.abs(dx) > 40) {
+      d.moved = true;
+      go(dx < 0 ? 1 : -1);
+    }
+  };
 
   return (
-    <>
-      {/* data-bizzbee-avoid: the chat robot steps aside rather than sitting on a play button */}
-      <ul
-        data-bizzbee-avoid
-        className="reveal-stagger no-scrollbar -mx-6 mt-12 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-px-6 px-6 pb-2 md:mt-16 lg:mx-0 lg:flex-wrap lg:justify-center lg:gap-4 lg:overflow-visible lg:px-0 lg:pb-0"
-        style={{ "--card-lg": widthFor(acrossLg(n)), "--card-xl": widthFor(acrossXl(n)) }}
-      >
-        {items.map((v, i) => (
-          <li key={`${v.id}-${i}`} className="@container w-[62%] shrink-0 snap-start sm:w-[38%] md:w-[30%] lg:w-(--card-lg) xl:w-(--card-xl)">
-            <button
-              type="button"
-              onClick={() => setOpen(i)}
-              aria-haspopup="dialog"
-              aria-label={`Play the video testimonial from ${v.name}`}
-              className="group relative block aspect-[9/16] w-full overflow-hidden rounded-3xl border border-white/10 bg-[#0b0e16] text-left transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/60 hover:shadow-[0_24px_50px_-20px_rgba(64,162,216,0.45)] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-[#40A2D8]"
-            >
-              {v.cover.startsWith("/") ? (
-                <Image src={v.cover} alt="" fill sizes="(min-width: 1280px) 230px, (min-width: 1024px) 18vw, (min-width: 768px) 30vw, 62vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
-              ) : (
-                // eslint-disable-next-line @next/next/no-img-element -- a YouTube frame (i.ytimg.com), used only when no cover was uploaded
-                <img src={v.cover} alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
-              )}
-              {/* darkens the bottom so the name reads on any picture */}
-              <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-2/5 bg-linear-to-t from-black/90 via-black/55 to-transparent" />
-              {/* on a narrow card (six across) the role drops out and the name and play
-                  button get smaller, so the text never crowds the video's own captions
-                  (the full name and role are in the player) */}
-              <span className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-4 md:p-5 @max-[14rem]:p-3">
-                <span className="min-w-0">
-                  <span className="font-display block text-lg leading-tight text-white md:text-xl @max-[14rem]:text-[0.95rem]">{v.name}</span>
-                  <span className="mt-0.5 block text-xs text-white/70 @max-[14rem]:hidden">{v.role || "Client testimonial"}</span>
-                </span>
-                <span aria-hidden="true" className="flex h-11 w-11 shrink-0 @max-[14rem]:h-9 @max-[14rem]:w-9 items-center justify-center rounded-full border border-white/30 bg-white/15 text-white backdrop-blur-md transition-colors duration-300 group-hover:border-[#40A2D8] group-hover:bg-[#40A2D8] group-hover:text-black">
-                  <Play size={16} fill="currentColor" className="ml-0.5" />
-                </span>
-              </span>
-            </button>
-          </li>
-        ))}
-      </ul>
+    <div data-bizzbee-avoid role="group" aria-roledescription="carousel" aria-label="Client video testimonials" onKeyDown={onKeyDown} className="mt-10 md:mt-14">
+      {/* the stage */}
+      <div className="relative">
+        {/* a soft glow from the video you are on */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-1/2 h-[130%] -translate-y-1/2 [mask-image:radial-gradient(closest-side,#000_35%,transparent_100%)]">
+          {/* eslint-disable-next-line @next/next/no-img-element -- the cover, blurred into a glow; decorative */}
+          <img
+            key={current.id}
+            src={current.cover}
+            alt=""
+            className="absolute left-1/2 top-1/2 h-full w-[60%] -translate-x-1/2 -translate-y-1/2 scale-125 object-cover opacity-40 blur-[90px] motion-safe:animate-[glow-in_0.9s_ease-out_both]"
+          />
+        </div>
 
-      {current && (
-        <dialog
-          ref={dialog}
-          aria-label={`Video testimonial from ${current.name}`}
-          onClose={() => setOpen(null)}
-          onClick={(e) => e.target === e.currentTarget && dialog.current?.close()}
-          className="m-auto max-h-none max-w-none overflow-visible bg-transparent p-0 backdrop:bg-black/85 backdrop:backdrop-blur-sm"
+        <div
+          onPointerDown={onPointerDown}
+          onPointerUp={onPointerUp}
+          onPointerCancel={() => (drag.current.down = false)}
+          className="relative mx-auto h-[calc(var(--w)*1.78+3rem)] touch-pan-y select-none overflow-x-clip [--w:clamp(190px,64vw,300px)] sm:[--w:clamp(200px,34vw,300px)] lg:[--w:clamp(220px,22vw,300px)] [perspective:1400px]"
         >
-          <div className="flex flex-col items-center gap-4 px-3 py-4 md:flex-row md:gap-6">
-            <button type="button" onClick={() => go(-1)} aria-label="Previous video" className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-white hover:bg-white hover:text-black md:flex">
+          {items.map((v, i) => {
+            const d = dist(i);
+            const a = Math.abs(d);
+            const visible = a <= SHOWN;
+            const center = d === 0;
+            return (
+              <div
+                key={`${v.id}-${i}`}
+                aria-hidden={visible ? undefined : "true"}
+                className="absolute left-1/2 top-1/2 w-(--w) transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none"
+                style={{
+                  transform: `translate(-50%, -50%) translateX(calc(var(--w) * ${d * STEP})) scale(${1 - a * 0.12}) rotateY(${-d * 14}deg)`,
+                  opacity: visible ? 1 - a * 0.22 : 0,
+                  zIndex: 20 - a,
+                  pointerEvents: visible ? "auto" : "none",
+                }}
+              >
+                {/* the phone */}
+                <div className="rounded-[2.3rem] bg-linear-to-b from-white/35 via-white/10 to-white/25 p-[6px] shadow-[0_30px_60px_-20px_rgba(0,0,0,0.8)]">
+                  <div className="relative aspect-[9/16] overflow-hidden rounded-[1.85rem] bg-black">
+                    {center && playing ? (
+                      <iframe
+                        key={v.id}
+                        src={`https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&rel=0&playsinline=1`}
+                        title={`Client Testimonial | ${v.name} | BizzBuzz Creations`}
+                        allow="autoplay; encrypted-media; picture-in-picture; web-share; fullscreen"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allowFullScreen
+                        className="absolute inset-0 h-full w-full"
+                      />
+                    ) : (
+                      <button
+                        type="button"
+                        tabIndex={visible ? 0 : -1}
+                        onClick={() => {
+                          if (drag.current.moved) {
+                            drag.current.moved = false;
+                            return;
+                          }
+                          if (center) setPlaying(true);
+                          else select(i);
+                        }}
+                        aria-label={center ? `Play the video testimonial from ${v.name}` : `Show the video from ${v.name}`}
+                        className="group absolute inset-0 block text-left focus-visible:outline-3 focus-visible:-outline-offset-4 focus-visible:outline-[#40A2D8]"
+                      >
+                        {v.cover.startsWith("/") ? (
+                          <Image src={v.cover} alt="" fill sizes="(min-width: 1024px) 300px, (min-width: 640px) 34vw, 64vw" draggable={false} className="object-cover" />
+                        ) : (
+                          // eslint-disable-next-line @next/next/no-img-element -- a YouTube frame (i.ytimg.com), used only when no cover was uploaded
+                          <img src={v.cover} alt="" loading="lazy" decoding="async" draggable={false} className="absolute inset-0 h-full w-full object-cover" />
+                        )}
+                        <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-black/85 to-transparent" />
+                        <span aria-hidden="true" className="absolute left-1/2 top-2.5 h-4 w-16 -translate-x-1/2 rounded-full bg-black/90" />
+                        {center ? (
+                          <span aria-hidden="true" className="absolute left-1/2 top-[58%] flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/35 bg-white/20 text-white backdrop-blur-md transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#40A2D8] group-hover:text-black">
+                            <Play size={24} fill="currentColor" className="ml-1" />
+                          </span>
+                        ) : (
+                          <span aria-hidden="true" className="font-display absolute inset-x-0 bottom-3 px-3 text-center text-sm text-white">
+                            {v.name}
+                          </span>
+                        )}
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* who you are watching */}
+      <div className="mx-auto mt-8 flex max-w-2xl flex-col items-center gap-5 text-center md:mt-10">
+        <div aria-live="polite">
+          <p className="font-display text-3xl leading-tight text-white md:text-4xl">{current.name}</p>
+          <p className="mt-2 text-sm text-white/65">
+            {current.role ? `${current.role} · ` : "Client testimonial · "}
+            {active + 1} of {n}
+          </p>
+        </div>
+
+        <div className="flex items-center gap-3">
+          {n > 1 && (
+            <button type="button" onClick={() => go(-1)} aria-label="Previous client" className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-white hover:bg-white hover:text-black focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8]">
               <ChevronLeft size={20} aria-hidden="true" />
             </button>
-
-            <div className="flex flex-col items-center">
-              {/* the player: 9:16, as tall as the screen allows */}
-              <div className="aspect-[9/16] h-[min(78vh,720px)] max-h-[calc(100vh-11rem)] overflow-hidden rounded-3xl border border-white/10 bg-black shadow-2xl shadow-black/60">
-                <iframe
-                  key={current.id}
-                  src={`https://www.youtube-nocookie.com/embed/${current.id}?autoplay=1&rel=0&playsinline=1`}
-                  title={`Client Testimonial | ${current.name} | BizzBuzz Creations`}
-                  allow="autoplay; encrypted-media; picture-in-picture; web-share; fullscreen"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                  className="h-full w-full"
-                />
-              </div>
-              <div className="mt-4 flex w-full items-center justify-between gap-4 text-white">
-                <div className="min-w-0">
-                  <p className="font-display text-lg leading-tight">{current.name}</p>
-                  <p className="text-xs text-white/60">
-                    {current.role ? `${current.role} · ` : ""}
-                    {open + 1} of {n}
-                  </p>
-                </div>
-                <a href={`https://www.youtube.com/watch?v=${current.id}`} target="_blank" rel="noopener noreferrer" className="inline-flex shrink-0 items-center gap-1.5 text-sm text-[#40A2D8] hover:text-white">
-                  Watch on YouTube <ArrowUpRight size={14} aria-hidden="true" />
-                  <span className="sr-only"> (opens in a new tab)</span>
-                </a>
-              </div>
-              {/* phones: the arrows sit under the video */}
-              <div className="mt-4 flex gap-3 md:hidden">
-                <button type="button" onClick={() => go(-1)} aria-label="Previous video" className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-white active:bg-white active:text-black">
-                  <ChevronLeft size={18} aria-hidden="true" />
-                </button>
-                <button type="button" onClick={() => go(1)} aria-label="Next video" className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-white active:bg-white active:text-black">
-                  <ChevronRight size={18} aria-hidden="true" />
-                </button>
-              </div>
-            </div>
-
-            <button type="button" onClick={() => go(1)} aria-label="Next video" className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-white hover:bg-white hover:text-black md:flex">
+          )}
+          <a href={`https://www.youtube.com/watch?v=${current.id}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-white/25 px-5 py-2.5 text-sm text-white transition-colors hover:border-[#40A2D8] hover:text-[#40A2D8] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8]">
+            Watch on YouTube <ArrowUpRight size={14} aria-hidden="true" />
+            <span className="sr-only"> (opens in a new tab)</span>
+          </a>
+          {n > 1 && (
+            <button type="button" onClick={() => go(1)} aria-label="Next client" className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-white hover:bg-white hover:text-black focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8]">
               <ChevronRight size={20} aria-hidden="true" />
             </button>
-          </div>
-          <button type="button" ref={closeBtn} onClick={() => dialog.current?.close()} aria-label="Close video" className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-black/70 text-white hover:bg-white hover:text-black md:right-0 md:top-0">
-            <X size={18} aria-hidden="true" />
-          </button>
-        </dialog>
-      )}
-    </>
+          )}
+        </div>
+
+        {/* jump to anyone */}
+        {n > 1 && (
+          <ul className="flex flex-wrap justify-center gap-2" aria-label="Choose a client">
+            {items.map((v, i) => (
+              <li key={`${v.id}-chip-${i}`}>
+                <button
+                  type="button"
+                  onClick={() => select(i)}
+                  aria-current={i === active ? "true" : undefined}
+                  className={`rounded-full border px-3.5 py-1.5 text-sm transition-colors focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8] ${i === active ? "border-[#0B60B0] bg-[#0B60B0] text-white" : "border-white/20 text-white/75 hover:border-white/50 hover:text-white"}`}
+                >
+                  {v.name}
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
   );
 }

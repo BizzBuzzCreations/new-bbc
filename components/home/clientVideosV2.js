@@ -3,23 +3,19 @@ import ClientVideoWall from "@/components/home/clientVideoWall";
 import { resolveClientVideos } from "@/lib/clientVideos";
 
 // "Client Stories" (homepage and the UK / location pages): the client video
-// testimonials as one aligned row of vertical cards that open in an on-page
-// theatre player (see clientVideoWall.js). The heading block is the site's
+// testimonials as a "phone stage": the videos are phone-recorded, so they sit
+// in phone frames on an arc and play inside the centre phone (see
+// clientVideoWall.js). The heading block is the site's
 // usual one — small blue label, big light heading, a line of text. Dashboard
 // fields: "Client Video Testimonials" (label, heading, subtext, the list of
 // videos); renders nothing when the list is empty. No background of its own
-// (it sits on the beams block with Customer Reviews). `skipNames`: clients
-// left out of the row because the page already features them (the UK page's
-// own video testimonial block).
-const norm = (t) => String(t || "").trim().toLowerCase();
-
-export default function ClientVideosV2({ content, skipNames = [] }) {
-  const skip = new Set(skipNames.map(norm).filter(Boolean));
-  const items = resolveClientVideos(content).filter((v) => !skip.has(norm(v.name)));
+// (it sits on the beams block with Customer Reviews).
+export default function ClientVideosV2({ content }) {
+  const items = resolveClientVideos(content);
   if (!items.length) return null;
   const eyebrow = content?.clientVideosEyebrow || "Client Stories";
   const heading = content?.clientVideosHeading || "Hear It Straight From Our Clients";
-  const subtext = content?.clientVideosSubtext ?? "Short, honest videos from the businesses we work with. Tap a card to watch.";
+  const subtext = content?.clientVideosSubtext ?? "Short, honest videos from the businesses we work with. Tap the phone in the middle to watch, or swipe to meet the others.";
 
   return (
     <section id="client-stories" className="scroll-mt-20 text-white">
