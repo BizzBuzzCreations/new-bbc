@@ -7,7 +7,6 @@ import ProcessV2 from "@/components/home/processV2";
 import IndustriesV2 from "@/components/home/industriesV2";
 import ReviewsV2 from "@/components/home/reviewsV2";
 import ClientVideosV2 from "@/components/home/clientVideosV2";
-import VideoTestimonialV2 from "@/components/home/videoTestimonialV2";
 import FaqV2 from "@/components/home/faqV2";
 import CtaV2 from "@/components/home/ctaV2";
 import BeamsBlock from "@/components/home/band";
@@ -29,14 +28,13 @@ import { UK_OFFICE } from "@/lib/offices";
 // the location pages' own differences: the hero's background is the
 // dashboard's either/or Image-or-Video (`mediaChoice`) and has no outlined
 // wordmark; the Clio card reads the clio* fields; and sections only these
-// pages have — "Why Our Way of Working Is Different" (WhyUsV2), the "Who We
-// Are" numbers and links (inside LocationAboutV2) and the client video
-// testimonial — in the same style. Recognitions are the badges in the hero
-// now, as on the homepage.
+// pages have — "Why Our Way of Working Is Different" (WhyUsV2) and the "Who
+// We Are" numbers and links (inside LocationAboutV2) — in the same style.
+// Recognitions are the badges in the hero now, as on the homepage.
 // To feel local rather than a copy of the homepage: a "where we serve" line
 // above the hero heading (dashboard field, UK default) and, on the UK page,
 // the London skyline in the hero and a UK office section before the closing
-// CTA; reviews and the client video come straight after the services; the
+// CTA; reviews and the client video stories come straight after the services; the
 // homepage's in-house systems tiles are left out.
 // Kept shorter than the homepage (UK page feedback, Oct 2026): the hero's
 // video / photo sits in a frame beside the text (with the London office on
@@ -81,13 +79,12 @@ export default async function OutsideLocationPage({ pageKey }) {
       )}
       {!hidden.has("about") && <LocationAboutV2 content={content} showGlance={!hidden.has("whoWeAre")} />}
       {!hidden.has("services") && <ServicesV2 content={content} />}
-      {/* Proof early: a visitor comparing agencies from abroad sees reviews
-          and the client video right after the services. */}
-      {["reviews", "clientVideos", "videoTestimonial"].some((key) => !hidden.has(key)) && (
+      {/* Proof early: a visitor comparing agencies from abroad sees the reviews
+          and the client video stories right after the services. */}
+      {["reviews", "clientVideos"].some((key) => !hidden.has(key)) && (
         <BeamsBlock>
           {!hidden.has("reviews") && <ReviewsV2 content={content} />}
           {!hidden.has("clientVideos") && <ClientVideosV2 content={content} />}
-          {!hidden.has("videoTestimonial") && <VideoTestimonialV2 content={content} />}
         </BeamsBlock>
       )}
       {/* Clio AI (clio* fields) and Praxistence, each with its own Remove
