@@ -10,7 +10,7 @@ import { ArrowUpRight, ChevronLeft, ChevronRight, Play } from "lucide-react";
 // glow taken from their own video — and the others fan out to the sides,
 // smaller and turned toward the centre.
 //  - Bring someone to the centre by clicking their phone, swiping / dragging,
-//    the arrows, the keyboard's ← / →, or their name below.
+//    the arrows or the keyboard's ← / →.
 //  - Tap the centre phone and the video plays inside it (YouTube's
 //    privacy-enhanced player). Until then nothing from YouTube loads — the
 //    phones are small pictures (~150KB for all of them). Moving to another
@@ -180,24 +180,6 @@ export default function ClientVideoWall({ items }) {
             </button>
           )}
         </div>
-
-        {/* jump to anyone */}
-        {n > 1 && (
-          <ul className="flex flex-wrap justify-center gap-2" aria-label="Choose a client">
-            {items.map((v, i) => (
-              <li key={`${v.id}-chip-${i}`}>
-                <button
-                  type="button"
-                  onClick={() => select(i)}
-                  aria-current={i === active ? "true" : undefined}
-                  className={`rounded-full border px-3.5 py-1.5 text-sm transition-colors focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8] ${i === active ? "border-[#0B60B0] bg-[#0B60B0] text-white" : "border-white/20 text-white/75 hover:border-white/50 hover:text-white"}`}
-                >
-                  {v.name}
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
       </div>
     </div>
   );
