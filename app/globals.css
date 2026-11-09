@@ -1163,9 +1163,10 @@ a.animated-button {
     clip-path: inset(0);
   }
 }
+/* transform only — no fade from invisible, so the headline counts as
+   painted at once (Largest Contentful Paint) */
 @keyframes hero-rise {
   from {
-    opacity: 0;
     transform: translateY(28px);
   }
   to {

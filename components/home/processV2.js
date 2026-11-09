@@ -32,7 +32,7 @@ export default function ProcessV2({ content }) {
                 data-active="false"
                 className="group border-t border-white/10 py-8 md:border-l md:border-t-0 md:px-6 md:pb-0 md:pt-10 md:first:border-l-0 md:first:pl-0"
               >
-                <span className="kicker text-white/40 transition-colors duration-500 group-data-[active=true]:text-buzz">Step {String(i + 1).padStart(2, "0")}</span>
+                <span className="kicker text-fog transition-colors duration-500 group-data-[active=true]:text-buzz">Step {String(i + 1).padStart(2, "0")}</span>
                 <h3 className="font-display mt-5 text-[1.75rem] leading-tight md:text-3xl">{step.title}</h3>
                 <RichText as="p" text={step.description} className="mt-4 text-[0.9375rem] leading-relaxed text-fog" />
               </li>

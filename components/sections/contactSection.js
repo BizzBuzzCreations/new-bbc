@@ -168,7 +168,7 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
   const chips = (legend, options, selected, toggle, multi) => (
     <fieldset>
       <legend className="kicker text-fog">
-        {legend} {multi && <span className="normal-case tracking-normal text-white/40">(pick any)</span>}
+        {legend} {multi && <span className="normal-case tracking-normal text-fog">(pick any)</span>}
       </legend>
       <div className="mt-3 flex flex-wrap gap-2">
         {options.map((o) => {

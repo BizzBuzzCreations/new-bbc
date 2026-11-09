@@ -67,7 +67,7 @@ export default function BlogToc({ toc }) {
                         : "text-white/75 hover:bg-white/5 hover:text-white"
                   }`}
                 >
-                  <span className={`shrink-0 ${item.level === 3 ? (active ? "text-buzz" : "text-white/40") : "font-semibold text-buzz"}`}>
+                  <span className={`shrink-0 ${item.level === 3 ? (active ? "text-buzz" : "text-fog") : "font-semibold text-buzz"}`}>
                     {item.level === 3 ? "–" : `${item.number}.`}
                   </span>
                   <span>{item.text}</span>

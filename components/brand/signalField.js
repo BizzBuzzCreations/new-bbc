@@ -7,7 +7,8 @@ import { useEffect, useRef } from "react";
 // resolves into one clean waveform lit in buzz yellow — "signal from noise".
 //  - The focus follows the pointer over the field (desktop); without a
 //    pointer it drifts slowly on its own (phones, before the mouse moves).
-//  - One 2D canvas, no library. Draws only while on screen and the tab is
+//  - One 2D canvas, no library. Starts once the page has loaded and the
+//    browser is idle; draws (≤30 fps) only while on screen and the tab is
 //    visible; resolution capped at 1.5× for speed.
 //  - prefers-reduced-motion: one still frame, no animation.
 // Decorative (aria-hidden). `variant` "hero" (full strength) | "quiet"
@@ -41,7 +42,7 @@ export default function SignalField({ variant = "hero", lines, className = "" })
       canvas.width = Math.round(w * dpr);
       canvas.height = Math.round(h * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      rows = lines || Math.round(Math.min(46, Math.max(18, h / (w < 640 ? 22 : 17))));
+      rows = lines || Math.round(Math.min(34, Math.max(16, h / (w < 640 ? 26 : 22))));
     };
 
     const draw = (now) => {
@@ -61,7 +62,7 @@ export default function SignalField({ variant = "hero", lines, className = "" })
       const sigmaX = w * (w < 640 ? 0.34 : 0.2);
       const sigmaY = h * 0.22;
       const gap = h / (rows + 1);
-      const step = w < 640 ? 7 : 6;
+      const step = w < 640 ? 12 : 10;
       const noiseAmp = gap * (quiet ? 0.28 : 0.36);
       const sigAmp = gap * (quiet ? 1.6 : 2.6) * focus.energy;
 
@@ -101,12 +102,18 @@ export default function SignalField({ variant = "hero", lines, className = "" })
       ctx.globalAlpha = 1;
     };
 
+    // at most ~30 frames a second: smooth enough for slow waves, half the work
+    let last = 0;
     const loop = (now) => {
-      draw(now);
+      if (now - last >= 32) {
+        last = now;
+        draw(now);
+      }
       frame = running ? requestAnimationFrame(loop) : 0;
     };
+    let started = false; // the animation waits for the page to load and the browser to be idle
     const play = () => {
-      if (reduced || running || !visible || document.hidden) return;
+      if (reduced || running || !visible || document.hidden || !started) return;
       running = true;
       frame = requestAnimationFrame(loop);
     };
@@ -128,6 +135,16 @@ export default function SignalField({ variant = "hero", lines, className = "" })
       { rootMargin: "100px" },
     );
     io.observe(canvas);
+    let idle = 0;
+    const begin = () => {
+      const go = () => {
+        started = true;
+        play();
+      };
+      idle = "requestIdleCallback" in window ? window.requestIdleCallback(go, { timeout: 3000 }) : window.setTimeout(go, 1500);
+    };
+    if (document.readyState === "complete") begin();
+    else window.addEventListener("load", begin, { once: true });
     const ro = new ResizeObserver(() => {
       resize();
       if (!running) draw(performance.now());
@@ -157,6 +174,9 @@ export default function SignalField({ variant = "hero", lines, className = "" })
 
     return () => {
       pause();
+      window.removeEventListener("load", begin);
+      if ("cancelIdleCallback" in window) window.cancelIdleCallback(idle);
+      else window.clearTimeout(idle);
       io.disconnect();
       ro.disconnect();
       document.removeEventListener("visibilitychange", onVis);

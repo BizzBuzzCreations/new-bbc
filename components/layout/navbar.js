@@ -411,7 +411,7 @@ function PhoneSheet({ open, onClose }) {
               {SERVICE_LINES.map((s) => (
                 <li key={s.href}>
                   <Link href={s.href} onClick={onClose} className="flex items-baseline gap-3 py-2 text-lg text-white/85">
-                    <span className="kicker text-[0.7rem] text-white/40">{s.no}</span>
+                    <span className="kicker text-[0.7rem] text-fog">{s.no}</span>
                     {s.name}
                   </Link>
                 </li>
