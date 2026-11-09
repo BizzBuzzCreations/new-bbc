@@ -1,92 +1,64 @@
 import Image from "next/image";
-import Link from "next/link";
-import { ChevronRight } from "lucide-react";
 import RichText from "@/components/ui/richText";
-import Pill from "@/components/home/pill";
-import { AccentTitle } from "@/components/detail/detailHero";
+import Button from "@/components/brand/button";
+import AccentText from "@/components/brand/accentText";
+import Breadcrumb from "@/components/brand/breadcrumb";
 
-// Hero for the one-off pages (/services, /about, /career, …), in the
-// detail pages' style: a breadcrumb back to the homepage, the big light
-// headline (last three words in the blue → violet gradient), the page's
-// text and buttons (`actions`: { text, href, variant }; the first is
-// usually "solid"). With an `image` the text sits on the left and the photo
-// on the right in a rounded frame at `imageAspect` (a Tailwind aspect
-// class, so the photo keeps its own shape; on phones it comes after the
-// text; `imageClassName` can move the crop, e.g. "object-[62%_50%]");
-// without one the headline and the text sit side by side. The photo
-// is the LCP element: loaded eagerly at high priority. `media` replaces the
-// photo with anything else (e.g. /about's photo mosaic); `tagline` is a
-// short blue line under the headline; `children` go under the buttons (e.g.
-// a small list of facts); `background` ("" lets a background behind it show,
-// e.g. the beams); `parent` ({ label, href }) adds a crumb between
-// Home and this page.
-export default function PageHero({ label, parent, title, tagline, description, actions = [], image, imageAlt = "", imageAspect = "aspect-[4/3]", imageClassName = "", media, background = "bg-black", children }) {
+// Hero of the company pages (about, team, careers, FAQ, guides, blog,
+// services and industries indexes…) (rebuild): breadcrumb, a big H1 with
+// its accent word, an optional tagline, the description and buttons; with
+// an `image` (or any `media`) the visual sits beside the text, otherwise the
+// text uses the full width (heading left, body right). `actions`:
+// [{ text, href, variant }]. `children` go under the body.
+export default function PageHero({ label, parent, title, tagline, description, actions = [], image, imageAlt = "", imageAspect = "aspect-[4/3]", imageClassName = "", media, background = "bg-ink", children }) {
   const buttons = actions.filter((a) => a?.text && a?.href);
-  const crumbs = (
-    <nav aria-label="Breadcrumb">
-      <ol className="flex flex-wrap items-center gap-1.5 text-sm text-white/60">
-        <li>
-          <Link href="/" className="text-[#40A2D8] hover:text-white">Home</Link>
-        </li>
-        <li aria-hidden="true">
-          <ChevronRight size={14} />
-        </li>
-        {parent && (
-          <>
-            <li>
-              <Link href={parent.href} className="text-[#40A2D8] hover:text-white">{parent.label}</Link>
-            </li>
-            <li aria-hidden="true">
-              <ChevronRight size={14} />
-            </li>
-          </>
-        )}
-        <li aria-current="page" className="text-white/80">{label}</li>
-      </ol>
-    </nav>
-  );
+  const crumbs = <Breadcrumb items={[{ label: "Home", href: "/" }, parent, { label }].filter(Boolean)} />;
   const heading = (
     <>
-      <h1 className="font-display text-[2.3rem] leading-[1.06] sm:text-5xl xl:text-6xl">
-        <AccentTitle title={title} />
+      <h1 className="font-display text-balance text-[clamp(2.6rem,6.4vw,6.5rem)] leading-[0.93] motion-safe:animate-[hero-rise_0.9s_var(--ease-out-soft)_both]">
+        <AccentText text={title} />
       </h1>
-      {tagline && <p className="mt-4 text-lg text-[#40A2D8]">{tagline}</p>}
+      {tagline && <p className="mt-6 text-xl text-white">{tagline}</p>}
     </>
   );
   const body = (
-    <>
-      {description && <RichText as="p" text={description} className="text-base leading-relaxed text-white/70 md:text-lg" />}
+    <div className="motion-safe:animate-[hero-rise_0.9s_0.12s_var(--ease-out-soft)_both]">
+      {description && <RichText as="p" text={description} className="text-lg leading-relaxed text-fog" />}
       {buttons.length > 0 && (
-        <div className="mt-6 flex flex-wrap gap-3">
-          {buttons.map(({ text, href, variant }) => (
-            <Pill key={text} href={href} variant={variant} className="px-6 py-3 text-base">{text}</Pill>
+        <div className="mt-8 flex flex-wrap gap-3">
+          {buttons.map(({ text, href, variant }, i) => (
+            <Button key={text} href={href} variant={variant === "solid" || (!variant && i === 0) ? "solid" : "outline"}>
+              {text}
+            </Button>
           ))}
         </div>
       )}
       {children}
-    </>
+    </div>
   );
 
   return (
-    <section className={`${background} text-white`}>
-      <div className="mx-auto max-w-7xl px-6 pt-8 pb-12 md:px-10 md:pt-14 md:pb-16">
+    <section className={`grain relative isolate overflow-hidden ${background} pt-28 text-white md:pt-36`}>
+      <div className="wrap pb-16 md:pb-24">
         {crumbs}
         {image || media ? (
-          <div className="mt-6 grid gap-10 md:mt-8 md:grid-cols-2 md:items-center md:gap-16">
-            <div>
+          <div className="mt-12 grid gap-12 md:mt-20 lg:grid-cols-12 lg:items-center lg:gap-10">
+            <div className="lg:col-span-6">
               {heading}
-              <div className="mt-6">{body}</div>
+              <div className="mt-8">{body}</div>
             </div>
-            {media || (
-              <div className={`relative w-full overflow-hidden rounded-3xl bg-[#0a0a0a] ${imageAspect}`}>
-                <Image src={image} alt={imageAlt} fill preload fetchPriority="high" sizes="(min-width: 1280px) 580px, (min-width: 768px) 46vw, 100vw" className={`object-cover ${imageClassName}`} />
-              </div>
-            )}
+            <div className="lg:col-span-6">
+              {media || (
+                <div className={`relative w-full overflow-hidden rounded-[20px] border border-white/10 bg-ink-2 ${imageAspect}`}>
+                  <Image src={image} alt={imageAlt} fill preload fetchPriority="high" sizes="(min-width: 1440px) 680px, (min-width: 1024px) 48vw, 100vw" className={`object-cover ${imageClassName}`} />
+                </div>
+              )}
+            </div>
           </div>
         ) : (
-          <div className="mt-6 grid gap-8 md:mt-8 md:grid-cols-[3fr_2fr] md:items-end md:gap-16">
-            <div>{heading}</div>
-            <div>{body}</div>
+          <div className="mt-12 grid gap-10 md:mt-20 lg:grid-cols-12 lg:items-end lg:gap-10">
+            <div className="lg:col-span-8">{heading}</div>
+            <div className="lg:col-span-4">{body}</div>
           </div>
         )}
       </div>

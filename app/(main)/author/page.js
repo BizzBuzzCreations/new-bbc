@@ -22,8 +22,8 @@ export default async function AuthorsIndex() {
         description="The marketers, strategists and developers who write what we publish. Pick an author to read about them and see everything they have written."
         actions={[{ text: "Read the blog", href: "/blog", variant: "solid" }]}
       />
-      <section className="bg-black text-white">
-        <div className="mx-auto max-w-7xl px-6 pb-20 md:px-10 md:pb-24">
+      <section className="bg-ink text-white">
+        <div className="wrap pb-20 md:px-10 md:pb-24">
           {authors.length > 0 ? (
             <ul className={`reveal-stagger grid gap-4 ${authors.length === 1 ? "max-w-md" : authors.length === 2 ? "sm:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3"}`}>
               {authors.map((a) => (
@@ -33,7 +33,7 @@ export default async function AuthorsIndex() {
               ))}
             </ul>
           ) : (
-            <p className="border-y border-white/10 py-10 text-white/70">No articles have been published yet.</p>
+            <p className="border-y border-white/10 py-10 text-fog">No articles have been published yet.</p>
           )}
         </div>
       </section>

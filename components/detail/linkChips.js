@@ -1,29 +1,30 @@
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import RichText from "@/components/ui/richText";
+import Kicker from "@/components/brand/kicker";
+import AccentText from "@/components/brand/accentText";
 
-// Heading + text + a cloud of linked pills (/how-we-work's industries,
-// redesign): each pill has the page's icon and name and links to it.
-// `links`: { href, label, icon }.
+// A heading with a set of links as chips (how we work's tools) (rebuild).
 export default function LinkChips({ eyebrow, heading, tagline, text, links }) {
   if (!links?.length) return null;
   return (
-    <section className="bg-black text-white">
-      <div className="reveal-stagger mx-auto grid max-w-7xl gap-10 px-6 md:grid-cols-[2fr_3fr] md:gap-16 md:px-10 py-16 md:py-20">
-        <div>
-          {eyebrow && <p className="text-sm text-[#40A2D8]">{eyebrow}</p>}
-          <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
-          {tagline && <p className="mt-4 text-lg text-[#40A2D8]">{tagline}</p>}
-          {text && <RichText as="p" text={text} className="mt-5 text-base leading-relaxed text-white/70 md:text-lg" />}
+    <section className="bg-ink text-white">
+      <div className="wrap grid gap-12 py-24 md:py-36 lg:grid-cols-12 lg:gap-10">
+        <div className="lg:col-span-5">
+          {eyebrow && <Kicker>{eyebrow}</Kicker>}
+          <h2 className="font-display mt-6 text-[clamp(2.2rem,4.2vw,3.9rem)] leading-[0.98]">
+            <AccentText text={heading} />
+          </h2>
+          {tagline && <p className="mt-5 text-xl">{tagline}</p>}
+          {text && <RichText as="p" text={text} className="mt-5 text-lg leading-relaxed text-fog" />}
         </div>
-        <ul className="flex flex-wrap content-start gap-2.5 md:self-end">
+        <ul className="flex flex-wrap content-end gap-2.5 lg:col-span-6 lg:col-start-7">
           {links.map(({ href, label, icon: Icon }) => (
             <li key={href}>
-              <Link
-                href={href}
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2.5 text-sm text-white transition-colors duration-200 hover:border-[#40A2D8] hover:bg-[#40A2D8] hover:text-black focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8]"
-              >
+              <Link href={href} className="group inline-flex h-12 items-center gap-2.5 rounded-full border border-white/20 px-5 text-[0.9375rem] transition-colors duration-300 hover:border-buzz hover:bg-buzz hover:text-buzz-ink">
                 {Icon && <Icon size={16} aria-hidden="true" />}
                 {label}
+                <ArrowUpRight aria-hidden="true" size={15} className="opacity-50 transition-opacity group-hover:opacity-100" />
               </Link>
             </li>
           ))}

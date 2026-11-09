@@ -45,7 +45,7 @@ export default function BlogToc({ toc }) {
 
   return (
     <aside aria-label="Contents" className="sticky top-28 hidden w-52 shrink-0 self-start xl:block">
-      <div className="max-h-[calc(100vh-8rem)] overflow-y-auto rounded-3xl border border-white/10 bg-[#0b0e16] p-5 [scrollbar-color:rgba(255,255,255,0.2)_transparent] [scrollbar-width:thin]">
+      <div className="max-h-[calc(100vh-8rem)] overflow-y-auto rounded-[20px] border border-white/10 bg-ink-2 p-5 [scrollbar-color:rgba(255,255,255,0.2)_transparent] [scrollbar-width:thin]">
         {/* a label, not a heading: it sits between the title (h1) and the
             article's own h2s, so a heading here would skip a level */}
         <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-white">Contents</p>
@@ -61,13 +61,13 @@ export default function BlogToc({ toc }) {
                     item.level === 3 ? "pl-5" : "pl-2"
                   } ${
                     active
-                      ? "bg-[#0B60B0]/30 font-semibold text-white"
+                      ? "bg-buzz/30 font-semibold text-white"
                       : item.level === 3
                         ? "text-white/55 hover:bg-white/5 hover:text-white"
                         : "text-white/75 hover:bg-white/5 hover:text-white"
                   }`}
                 >
-                  <span className={`shrink-0 ${item.level === 3 ? (active ? "text-[#40A2D8]" : "text-white/40") : "font-semibold text-[#40A2D8]"}`}>
+                  <span className={`shrink-0 ${item.level === 3 ? (active ? "text-buzz" : "text-white/40") : "font-semibold text-buzz"}`}>
                     {item.level === 3 ? "–" : `${item.number}.`}
                   </span>
                   <span>{item.text}</span>

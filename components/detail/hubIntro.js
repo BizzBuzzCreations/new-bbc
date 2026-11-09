@@ -1,28 +1,35 @@
 import Image from "next/image";
 import RichText from "@/components/ui/richText";
+import Kicker from "@/components/brand/kicker";
+import AccentText from "@/components/brand/accentText";
 
-// Intro (service pages, redesign) — the page's portrait photo (4:5) on the
-// left, heading, tagline and two paragraphs on the right; on phones the text
-// comes first and the photo sits below it at a modest width. Photo
-// lazy-loads. Also /about's story (with its own `eyebrow`).
+// Overview block (service hubs, about) (rebuild): a paper section — the
+// heading as the thesis on the left with the tagline, the paragraphs on the
+// right, and the photo (if any) in a frame under the text column.
 export default function HubIntro({ heading, tagline, paragraphs = [], image, alt = "", eyebrow = "Overview" }) {
   const text = paragraphs.filter(Boolean);
   if (!heading && !text.length) return null;
   return (
-    <section className="overflow-x-clip bg-black text-white">
-      <div className="reveal-sides mx-auto grid max-w-7xl gap-10 px-6 md:grid-cols-[2fr_3fr] md:items-center md:gap-16 md:px-10 py-16 md:py-20">
-        {image && (
-          <div className="relative order-2 mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-3xl bg-[#0a0a0a] md:order-none md:max-w-none">
-            <Image src={image} alt={alt} fill sizes="(min-width: 1280px) 460px, (min-width: 768px) 38vw, 384px" className="object-cover" />
-          </div>
-        )}
-        <div className="order-1 md:order-none">
-          <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
-          <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
-          {tagline && <p className="mt-4 text-lg text-[#40A2D8]">{tagline}</p>}
+    <section className="relative bg-paper text-ink">
+      <div className="wrap grid gap-12 py-24 md:py-36 lg:grid-cols-12 lg:gap-10">
+        <div className="lg:col-span-5">
+          <Kicker no="01" tone="dark">
+            {eyebrow}
+          </Kicker>
+          <h2 className="font-display mt-6 text-balance text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98]">
+            <AccentText text={heading} />
+          </h2>
+          {tagline && <p className="mt-6 text-xl leading-snug">{tagline}</p>}
+        </div>
+        <div className="lg:col-span-6 lg:col-start-7">
           {text.map((p, i) => (
-            <RichText key={i} as="p" text={p} className="mt-5 text-base leading-relaxed text-white/70 md:text-lg" />
+            <RichText key={i} as="p" text={p} className={`text-lg leading-relaxed text-stone ${i ? "mt-6" : ""}`} />
           ))}
+          {image && (
+            <div className="relative mt-12 aspect-[4/3] overflow-hidden rounded-[20px] bg-paper-2">
+              <Image src={image} alt={alt} fill sizes="(min-width: 1440px) 680px, (min-width: 1024px) 48vw, 100vw" className="object-cover" />
+            </div>
+          )}
         </div>
       </div>
     </section>

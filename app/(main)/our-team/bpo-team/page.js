@@ -26,8 +26,8 @@ export default async function BpoTeamPage() {
     <div data-no-reveal>
       <PageSeoScripts pageKey="bpo-team" />
       <PageHero label="BPO Team" parent={{ label: "Our Team", href: "/our-team" }} title={content?.bpoTeamHeading || "Meet Our BPO Team"} />
-      <section className="bg-black text-white">
-        <div className="mx-auto max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
+      <section className="bg-ink text-white">
+        <div className="wrap pb-24 md:px-10 md:pb-32">
           <PeopleGrid people={team} headingLevel="h2" />
         </div>
       </section>

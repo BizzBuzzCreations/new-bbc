@@ -36,11 +36,11 @@ export default async function Blogs() {
   return (
     <div data-no-reveal>
       {/* plain black, like the posts */}
-      <div className="bg-black text-white">
+      <div className="bg-ink text-white">
       <PageHero label="Blog" title="Our Latest Blogs" description="Explore, discover, and find inspiration through these exciting blogs." />
 
       {blogs.length > 0 && (
-        <section className="mx-auto max-w-7xl px-6 pb-16 md:px-10 md:pb-20">
+        <section className="wrap pb-16 md:px-10 md:pb-20">
           <div className="grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
             {/* only the first card can be above the fold on phones */}
             {blogs.map((e, index) => (

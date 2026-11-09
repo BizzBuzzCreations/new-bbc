@@ -141,24 +141,24 @@ export default async function GuidesPage() {
       )}
 
       {showGuides && (
-        <section id="all-guides" className="scroll-mt-20 bg-black text-white">
-          <div className="mx-auto grid max-w-7xl gap-12 px-6 md:px-10 py-16 md:py-20 lg:grid-cols-[1fr_340px] lg:gap-16">
+        <section id="all-guides" className="scroll-mt-20 bg-ink text-white">
+          <div className="mx-auto grid max-w-7xl gap-12 px-6 md:px-10 py-24 md:py-32 lg:grid-cols-[1fr_340px] lg:gap-16">
             <div>
-              <p className="text-sm text-[#40A2D8]">{guides.length} guides</p>
-              <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{allGuidesHeading}</h2>
+              <p className="kicker text-buzz">{guides.length} guides</p>
+              <h2 className="font-display mt-6 text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98]">{allGuidesHeading}</h2>
               {/* each guide opens its category on the blog */}
               <ul className="reveal-stagger mt-12 grid border-t border-white/10 md:grid-cols-2 md:gap-x-10">
                 {guides.map(({ icon: Icon, title, body }, i) => (
                   <li key={i} className="border-b border-white/10">
-                    <Link href={`/blog?category=${encodeURIComponent(title)}`} className="group flex gap-5 py-7 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8]">
-                      <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0B60B0]/15 text-[#40A2D8]">
+                    <Link href={`/blog?category=${encodeURIComponent(title)}`} className="group flex gap-5 py-7 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz">
+                      <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-buzz/15 text-buzz">
                         <Icon size={18} />
                       </span>
                       <div className="flex-1">
-                        <h3 className="font-display text-xl leading-snug text-white transition-colors group-hover:text-[#40A2D8]">{title}</h3>
-                        <RichText as="p" text={body} noLink className="mt-2 text-sm leading-relaxed text-white/65" />
+                        <h3 className="font-display text-xl leading-snug text-white transition-colors group-hover:text-buzz">{title}</h3>
+                        <RichText as="p" text={body} noLink className="mt-2 text-sm leading-relaxed text-fog" />
                       </div>
-                      <ArrowUpRight size={18} aria-hidden="true" className="mt-1 shrink-0 text-white/40 transition-colors group-hover:text-[#40A2D8]" />
+                      <ArrowUpRight size={18} aria-hidden="true" className="mt-1 shrink-0 text-white/40 transition-colors group-hover:text-buzz" />
                     </Link>
                   </li>
                 ))}
@@ -166,7 +166,7 @@ export default async function GuidesPage() {
             </div>
             {!hidden.has("guidesSidebar") && (
               <aside className="lg:sticky lg:top-28 lg:self-start">
-                <div className="rounded-3xl border border-[#40A2D8]/40 bg-linear-to-br from-[#0B60B0]/30 to-[#0b0e16] p-7">
+                <div className="rounded-[20px] border border-buzz/40 bg-linear-to-br from-buzz/30 to-[#0b0e16] p-7">
                   <h3 className="font-display text-2xl leading-snug text-white">{sidebarHeading}</h3>
                   <RichText as="p" text={sidebarParagraph} className="mt-4 text-sm leading-relaxed text-white/75" />
                   <div className="mt-7 flex flex-col gap-3">

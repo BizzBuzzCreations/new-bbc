@@ -113,7 +113,7 @@ export default function HomeHero({
 
   return (
     <>
-      <div className="relative overflow-hidden md:min-h-screen text-white flex flex-col justify-center pb-10 md:pb-16 -mt-14 pt-14 md:-mt-[72px] md:pt-[72px] bg-black">
+      <div className="relative overflow-hidden md:min-h-screen text-white flex flex-col justify-center pb-10 md:pb-16 -mt-14 pt-14 md:-mt-[72px] md:pt-[72px] bg-ink">
         {/* Background video — desktop/tablet only. On mobile there's no
             room for a full-bleed video behind the text without it either
             looking cramped or getting cropped oddly, so mobile gets a
@@ -145,7 +145,7 @@ export default function HomeHero({
                 loop
                 playsInline
                 preload="metadata"
-                className="hidden md:block absolute inset-0 w-full h-full object-cover bg-black"
+                className="hidden md:block absolute inset-0 w-full h-full object-cover bg-ink"
               />
             )}
             {chosenImage && (
@@ -157,7 +157,7 @@ export default function HomeHero({
                 alt=""
                 decoding="async"
                 fetchPriority="high"
-                className="hidden md:block absolute inset-0 w-full h-full object-cover bg-black"
+                className="hidden md:block absolute inset-0 w-full h-full object-cover bg-ink"
               />
             )}
           </>
@@ -169,7 +169,7 @@ export default function HomeHero({
               loop
               playsInline
               preload="metadata"
-              className="hidden md:block absolute inset-0 w-full h-full object-cover bg-black"
+              className="hidden md:block absolute inset-0 w-full h-full object-cover bg-ink"
             >
               <source src="/hero-sec.webm" type="video/webm" />
             </video>
@@ -272,7 +272,7 @@ export default function HomeHero({
                       loop
                       playsInline
                       preload="metadata"
-                      className="absolute inset-0 w-full h-full object-cover bg-black"
+                      className="absolute inset-0 w-full h-full object-cover bg-ink"
                     />
                   )
                 ) : (
@@ -283,7 +283,7 @@ export default function HomeHero({
                     sizes="100vw"
                     alt=""
                     fetchPriority="high"
-                    className="absolute inset-0 w-full h-full object-cover bg-black"
+                    className="absolute inset-0 w-full h-full object-cover bg-ink"
                   />
                 )
               ) : (
@@ -302,7 +302,7 @@ export default function HomeHero({
                     height={321}
                     decoding="async"
                     fetchPriority="high"
-                    className="absolute inset-0 w-full h-full object-cover bg-black"
+                    className="absolute inset-0 w-full h-full object-cover bg-ink"
                   />
                   {mediaMode === "mobile" && (
                     <video
@@ -312,7 +312,7 @@ export default function HomeHero({
                       playsInline
                       preload="metadata"
                       poster="/hero-sec-poster.webp"
-                      className="absolute inset-0 w-full h-full object-cover bg-black"
+                      className="absolute inset-0 w-full h-full object-cover bg-ink"
                     >
                       <source src="/hero-sec-mobile.webm" type="video/webm" />
                     </video>
@@ -351,7 +351,7 @@ export default function HomeHero({
             {secondaryCta?.text && secondaryCta?.href && (
               <Link
                 href={secondaryCta.href}
-                className="group inline-flex items-center gap-2 py-2 text-sm md:text-base font-semibold text-white transition-colors duration-200 hover:text-[#40A2D8]"
+                className="group inline-flex items-center gap-2 py-2 text-sm md:text-base font-semibold text-white transition-colors duration-200 hover:text-buzz"
               >
                 {secondaryCta.text}
                 <ArrowDown size={16} className="transition-transform duration-200 group-hover:translate-y-0.5" />
@@ -370,7 +370,7 @@ export default function HomeHero({
               {stats.slice(0, 4).map(({ value, label }, i) => (
                 <div key={`${label}-${i}`} className="flex flex-col-reverse justify-end border-l border-white/15 px-3 first:border-l-0 first:pl-0 sm:px-5">
                   <dt className="mt-1 text-[11px] sm:text-xs uppercase tracking-wider text-white/80 leading-snug">{label}</dt>
-                  <dd className="text-2xl md:text-3xl short-screen:text-2xl font-bold text-[#40A2D8]">{value}</dd>
+                  <dd className="text-2xl md:text-3xl short-screen:text-2xl font-bold text-buzz">{value}</dd>
                 </div>
               ))}
             </motion.dl>
@@ -390,7 +390,7 @@ export default function HomeHero({
                 { src: "/GA.png", alt: "Google Analytics", title: "Google Analytics", sub: "Certified" },
                 { src: "/iso.png", alt: "ISO", title: "ISO", sub: "Certified" },
               ].map((b) => (
-                <li key={b.title} className="flex min-w-0 items-center gap-2 rounded-xl border border-white/10 bg-black/40 px-3 py-2 backdrop-blur-sm">
+                <li key={b.title} className="flex min-w-0 items-center gap-2 rounded-xl border border-white/10 bg-ink/40 px-3 py-2 backdrop-blur-sm">
                   <Image src={b.src} alt={b.alt} width={28} height={28} className="h-7 w-7 shrink-0 object-contain" />
                   <span className="leading-tight">
                     <span className="block text-xs font-semibold text-white">{b.title}</span>

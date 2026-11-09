@@ -63,22 +63,22 @@ export default function MarketingCTA({ content }) {
   // paths as a linked thin-line list (icon, title, line, link text). Phones:
   // one column.
   return (
-    <section className="overflow-x-clip bg-black text-white">
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 md:px-10 py-16 md:py-20 lg:grid-cols-2 lg:gap-16">
+    <section className="overflow-x-clip bg-ink text-white">
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 md:px-10 py-24 md:py-32 lg:grid-cols-2 lg:gap-16">
         <div>
-          <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
-          <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
-          <RichText as="p" text={paragraph} className="mt-6 max-w-xl text-base leading-relaxed text-white/70 md:text-lg" />
+          <p className="kicker text-buzz">{eyebrow}</p>
+          <h2 className="font-display mt-6 text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98]">{heading}</h2>
+          <RichText as="p" text={paragraph} className="mt-6 max-w-xl text-base leading-relaxed text-fog md:text-lg" />
           <div className="mt-8">
             <Pill href="#contact-form" variant="solid" className="px-6 py-3 text-base">{buttonText}</Pill>
           </div>
-          <div className="relative mt-10 hidden aspect-[16/9] overflow-hidden rounded-3xl bg-[#0a0a0a] sm:block">
+          <div className="relative mt-10 hidden aspect-[16/9] overflow-hidden rounded-[20px] bg-ink-2 sm:block">
             <Image src={backgroundImage} alt="" fill sizes="(min-width: 1280px) 600px, (min-width: 1024px) 46vw, 100vw" className="object-cover" />
           </div>
           <ul className="mt-8 space-y-4">
             {trustLines.map((line, i) => (
               <li key={i} className="flex items-start gap-3">
-                <ShieldCheck size={18} aria-hidden="true" className="mt-0.5 shrink-0 text-[#40A2D8]" />
+                <ShieldCheck size={18} aria-hidden="true" className="mt-0.5 shrink-0 text-buzz" />
                 <RichText as="p" text={line} className="text-sm leading-relaxed text-white/80" />
               </li>
             ))}
@@ -90,14 +90,14 @@ export default function MarketingCTA({ content }) {
           <ul className="mt-6 border-t border-white/10">
             {STAGES.map(({ icon: Icon, title, description, ctaText, href }) => (
               <li key={title} className="border-b border-white/10">
-                <Link href={href} className="group flex gap-5 py-6 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8]">
-                  <span aria-hidden="true" className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0B60B0]/15 text-[#40A2D8]">
+                <Link href={href} className="group flex gap-5 py-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz">
+                  <span aria-hidden="true" className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-buzz/15 text-buzz">
                     <Icon size={18} />
                   </span>
                   <div className="flex-1">
-                    <h3 className="font-display text-xl leading-snug text-white transition-colors group-hover:text-[#40A2D8]">{title}</h3>
-                    <RichText as="p" text={description} noLink className="mt-2 text-sm leading-relaxed text-white/65" />
-                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-[#40A2D8]">
+                    <h3 className="font-display text-xl leading-snug text-white transition-colors group-hover:text-buzz">{title}</h3>
+                    <RichText as="p" text={description} noLink className="mt-2 text-sm leading-relaxed text-fog" />
+                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-buzz">
                       {ctaText}
                       <ArrowUpRight size={16} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </span>

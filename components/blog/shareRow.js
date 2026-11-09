@@ -23,7 +23,7 @@ export default function ShareRow({ url, title, label = "Share" }) {
     ["Facebook", `https://www.facebook.com/sharer/sharer.php?u=${u}`, Facebook],
     ["WhatsApp", `https://wa.me/?text=${t}%20${u}`, MessageCircle],
   ];
-  const btn = "flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white transition-colors duration-200 hover:border-[#40A2D8] hover:bg-[#40A2D8] hover:text-black focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8]";
+  const btn = "flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white transition-colors duration-200 hover:border-buzz hover:bg-buzz hover:text-buzz-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz";
   const copyLink = async () => {
     try {
       await navigator.clipboard.writeText(url);

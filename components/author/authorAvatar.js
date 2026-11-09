@@ -14,10 +14,10 @@ export default function AuthorAvatar({ name, photo = "", size = 96, className = 
   return (
     <span
       aria-hidden="true"
-      className={`relative inline-flex shrink-0 items-center justify-center rounded-full bg-linear-to-br from-[#0B60B0] via-[#7b74f7] to-[#b57cff] ${className}`}
+      className={`relative inline-flex shrink-0 items-center justify-center rounded-full bg-linear-to-br from-buzz via-buzz to-[#c9a21a] ${className}`}
       style={{ width: size, height: size }}
     >
-      <span className="absolute inset-[3px] overflow-hidden rounded-full bg-[#0b0e16]">
+      <span className="absolute inset-[3px] overflow-hidden rounded-full bg-ink-2">
         {photo && <Image src={photo} alt="" fill sizes={`${size}px`} className="object-cover object-top" />}
       </span>
       {!photo && (

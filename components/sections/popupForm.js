@@ -176,7 +176,7 @@ export default function ConsultationPopup({ content }) {
         }`}
     >
       {/* Overlay — clicking it closes the popup */}
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => close()} aria-hidden="true"></div>
+      <div className="absolute inset-0 bg-ink/60 backdrop-blur-sm" onClick={() => close()} aria-hidden="true"></div>
 
       {/* Popup */}
       <div
@@ -187,7 +187,7 @@ export default function ConsultationPopup({ content }) {
         className="relative mx-5 z-10 w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white rounded-xl shadow-xl"
       >
         {/* Header */}
-        <div className="relative bg-black py-4 text-center">
+        <div className="relative bg-ink py-4 text-center">
           <h2 id="consultation-popup-title" className="text-white text-sm  sm:text-lg font-semibold">
             {headerTitle}
           </h2>
@@ -321,7 +321,7 @@ export default function ConsultationPopup({ content }) {
 
               <button
                 type="submit"
-                className="cursor-pointer w-full bg-black text-white py-3 rounded-md font-medium"
+                className="cursor-pointer w-full bg-ink text-white py-3 rounded-md font-medium"
               >
                 Book Appointment
               </button>
@@ -331,7 +331,7 @@ export default function ConsultationPopup({ content }) {
             <div className="flex gap-4 mt-6">
               <a
                 href="tel:+918115585285"
-                className="flex-1 flex items-center justify-center gap-2 border border-black py-3 rounded-md text-sm hover:bg-black hover:text-white transition"
+                className="flex-1 flex items-center justify-center gap-2 border border-black py-3 rounded-md text-sm hover:bg-ink hover:text-white transition"
               >
                 <Phone size={16} />
                 Call now

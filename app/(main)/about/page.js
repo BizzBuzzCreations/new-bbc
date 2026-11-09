@@ -202,7 +202,7 @@ export default async function About() {
           <ul className="mt-8 space-y-3 text-sm text-white/80 md:text-base">
             {heroStats.filter(Boolean).map((stat) => (
               <li key={stat} className="flex items-start gap-3">
-                <CheckCircle2 size={18} aria-hidden="true" className="mt-0.5 shrink-0 text-[#40A2D8]" />
+                <CheckCircle2 size={18} aria-hidden="true" className="mt-0.5 shrink-0 text-buzz" />
                 {stat}
               </li>
             ))}
@@ -242,7 +242,7 @@ export default async function About() {
       {!hidden.has("culture") && <CultureRows rows={cultureRows} />}
 
       {!hidden.has("roadmap") && (
-        <div className="bg-black">
+        <div className="bg-ink">
           <RoadmapSteps eyebrow={roadmapSubheading} heading={roadmapHeading} subtext={roadmapIntro} steps={roadmapSteps} footnote={roadmapClosing} />
         </div>
       )}

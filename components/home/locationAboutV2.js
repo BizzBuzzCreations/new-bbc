@@ -26,18 +26,18 @@ export default function LocationAboutV2({ content, showGlance = true }) {
   const { stats, links } = whoWeAreContent(content);
 
   return (
-    <section className="overflow-x-clip bg-black text-white">
-      <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-20">
+    <section className="overflow-x-clip bg-ink text-white">
+      <div className="wrap py-24 md:py-32">
         <div className="reveal-sides grid gap-10 md:grid-cols-[1.1fr_1fr] md:items-center md:gap-16">
           <div>
-            <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
-            <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
-            <RichText as="div" text={paragraph} className="mt-6 space-y-4 text-base leading-relaxed text-white/70 md:text-lg" />
+            <p className="kicker text-buzz">{eyebrow}</p>
+            <h2 className="font-display mt-6 text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98]">{heading}</h2>
+            <RichText as="div" text={paragraph} className="mt-6 space-y-4 text-base leading-relaxed text-fog md:text-lg" />
             <div className="mt-8">
               <Pill href={buttonLink} srText="about BizzBuzz Creations">{buttonText}</Pill>
             </div>
           </div>
-          <div className="relative mx-auto aspect-[4/3] w-full max-w-[560px] overflow-hidden rounded-3xl bg-[#0a0a0a]">
+          <div className="relative mx-auto aspect-[4/3] w-full max-w-[560px] overflow-hidden rounded-[20px] bg-ink-2">
             <Image src={photo} alt="The BizzBuzz Creations team at work" fill sizes="(min-width: 1280px) 560px, (min-width: 768px) 45vw, 100vw" className="object-cover" />
           </div>
         </div>
@@ -54,9 +54,9 @@ export default function LocationAboutV2({ content, showGlance = true }) {
             </dl>
             <ul className="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-3">
               {links.map(({ label, href, icon: Icon }) => (
-                <li key={href} className="bg-black">
-                  <Link href={href} className="group flex items-center gap-3 px-5 py-4 text-sm text-white transition-colors hover:bg-white/[0.04] hover:text-[#40A2D8]">
-                    {Icon && <Icon size={18} aria-hidden="true" className="shrink-0 text-[#40A2D8]" />}
+                <li key={href} className="bg-ink">
+                  <Link href={href} className="group flex items-center gap-3 px-5 py-4 text-sm text-white transition-colors hover:bg-white/[0.04] hover:text-buzz">
+                    {Icon && <Icon size={18} aria-hidden="true" className="shrink-0 text-buzz" />}
                     <span className="flex-1">{label}</span>
                     <ArrowUpRight size={16} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   </Link>

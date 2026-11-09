@@ -108,10 +108,10 @@ export default async function Career() {
         >
           {jobsData.length === 0 ? (
             <div className="flex flex-col items-start gap-4 border-y border-white/10 py-10 sm:flex-row sm:items-center">
-              <Briefcase className="shrink-0 text-[#40A2D8]" size={28} aria-hidden="true" />
+              <Briefcase className="shrink-0 text-buzz" size={28} aria-hidden="true" />
               <p className="text-base text-white/80">
                 We don&rsquo;t have any open positions posted at the moment. Check back soon, or reach out through our{" "}
-                <a href="/contact" className="text-[#40A2D8] underline underline-offset-2 hover:text-white">
+                <a href="/contact" className="text-buzz underline underline-offset-2 hover:text-white">
                   contact page
                 </a>
                 .

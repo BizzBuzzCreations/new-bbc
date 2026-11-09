@@ -301,10 +301,10 @@ export default function BizzBeeChatWindow({ onClose, visible = true }) {
       role="dialog"
       aria-label="BizzBee AI website assistant"
       onKeyDown={onKeyDown}
-      className={`bizzbee-panel fixed inset-x-2 bottom-[7.5rem] mb-[env(safe-area-inset-bottom)] z-[10000] ${visible ? "flex" : "hidden"} h-[min(640px,calc(100dvh-9.5rem))] flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a] text-white shadow-2xl shadow-black/60 sm:inset-x-auto sm:right-5 sm:bottom-[9.5rem] sm:h-[min(640px,calc(100dvh-12rem))] sm:w-[390px]`}
+      className={`bizzbee-panel fixed inset-x-2 bottom-[7.5rem] mb-[env(safe-area-inset-bottom)] z-[10000] ${visible ? "flex" : "hidden"} h-[min(640px,calc(100dvh-9.5rem))] flex-col overflow-hidden rounded-2xl border border-white/10 bg-ink-2 text-white shadow-2xl shadow-black/60 sm:inset-x-auto sm:right-5 sm:bottom-[9.5rem] sm:h-[min(640px,calc(100dvh-12rem))] sm:w-[390px]`}
     >
       {/* Header */}
-      <div className="flex items-center gap-3 bg-linear-to-r from-[#0B60B0] to-[#40A2D8] px-4 py-3">
+      <div className="flex items-center gap-3 bg-linear-to-r from-[#0B60B0] to-buzz px-4 py-3">
         <Image
           src="/bizzbee-logo.png"
           alt=""
@@ -385,7 +385,7 @@ export default function BizzBeeChatWindow({ onClose, visible = true }) {
                 type="button"
                 onClick={() => send(q)}
                 disabled={busy}
-                className="bizzbee-enter rounded-full border border-[#40A2D8]/50 bg-[#40A2D8]/10 px-3 py-1.5 text-left text-xs font-medium text-[#bfe6fa] transition hover:bg-[#40A2D8]/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#40A2D8] disabled:opacity-50"
+                className="bizzbee-enter rounded-full border border-buzz/50 bg-buzz/10 px-3 py-1.5 text-left text-xs font-medium text-[#bfe6fa] transition hover:bg-buzz/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-buzz disabled:opacity-50"
               >
                 {q}
               </button>
@@ -496,14 +496,14 @@ export default function BizzBeeChatWindow({ onClose, visible = true }) {
             <button
               type="button"
               onClick={() => setLeadOpen(true)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-3 py-1 text-xs text-white/80 transition hover:border-[#40A2D8] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#40A2D8]"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-3 py-1 text-xs text-white/80 transition hover:border-buzz hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-buzz"
             >
               <ClipboardList size={12} aria-hidden="true" /> Talk to the team
             </button>
           )}
           <a
             href={`tel:${CONTACT.phoneIndiaTel}`}
-            className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-3 py-1 text-xs text-white/80 transition hover:border-[#40A2D8] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#40A2D8]"
+            className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-3 py-1 text-xs text-white/80 transition hover:border-buzz hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-buzz"
           >
             <Phone size={12} aria-hidden="true" /> Call
           </a>
@@ -535,13 +535,13 @@ export default function BizzBeeChatWindow({ onClose, visible = true }) {
             rows={1}
             maxLength={BIZZBEE.maxMessageChars}
             placeholder="Type your question…"
-            className="max-h-28 min-h-[40px] flex-1 resize-none rounded-2xl border border-white/15 bg-white/5 px-3.5 py-2.5 text-base sm:text-sm text-white placeholder:text-white/40 focus:border-[#40A2D8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#40A2D8]/60"
+            className="max-h-28 min-h-[40px] flex-1 resize-none rounded-2xl border border-white/15 bg-white/5 px-3.5 py-2.5 text-base sm:text-sm text-white placeholder:text-white/40 focus:border-buzz focus:outline-none focus-visible:ring-2 focus-visible:ring-buzz/60"
           />
           <button
             type="submit"
             disabled={busy || !input.trim()}
             aria-label="Send message"
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0B60B0] text-white transition hover:bg-[#0d70cf] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#40A2D8] disabled:cursor-not-allowed disabled:opacity-40"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-buzz text-buzz-ink transition hover:bg-[#ffe066] focus:outline-none focus-visible:ring-2 focus-visible:ring-buzz disabled:cursor-not-allowed disabled:opacity-40"
           >
             <SendHorizontal size={18} />
           </button>
@@ -560,7 +560,7 @@ function Bubble({ role, children }) {
       <div
         className={`max-w-[88%] rounded-2xl px-3.5 py-2.5 ${
           mine
-            ? "rounded-br-md bg-[#0B60B0] text-white"
+            ? "rounded-br-md bg-buzz text-buzz-ink"
             : "rounded-bl-md bg-white/10 text-white"
         }`}
       >

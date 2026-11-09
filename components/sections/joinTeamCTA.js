@@ -13,15 +13,15 @@ export default function JoinTeamCTA({ content }) {
   // Redesign: the team photo on the left, the heading, text and two pills
   // (email us / careers) on the right; phones: text, then photo.
   return (
-    <section className="overflow-x-clip bg-black text-white">
+    <section className="overflow-x-clip bg-ink text-white">
       <div className="reveal-sides mx-auto grid max-w-7xl gap-10 px-6 md:grid-cols-2 md:items-center md:gap-16 md:px-10 pt-16 pb-24 md:pt-20 md:pb-32">
-        <div className="relative order-2 aspect-[4/3] overflow-hidden rounded-3xl bg-[#0a0a0a] md:order-none">
+        <div className="relative order-2 aspect-[4/3] overflow-hidden rounded-[20px] bg-ink-2 md:order-none">
           <Image src={image} alt="The BizzBuzz Creations team" fill sizes="(min-width: 1280px) 600px, (min-width: 768px) 48vw, 100vw" className="object-cover" />
         </div>
         <div className="order-1 md:order-none">
-          <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
+          <p className="kicker text-buzz">{eyebrow}</p>
           <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-6xl">{heading}</h2>
-          <RichText as="p" text={paragraph} className="mt-6 max-w-md text-base leading-relaxed text-white/70 md:text-lg" />
+          <RichText as="p" text={paragraph} className="mt-6 max-w-md text-base leading-relaxed text-fog md:text-lg" />
           <div className="mt-8 flex flex-wrap gap-3">
             <Pill href="/career" variant="solid" className="px-6 py-3 text-base">{careersButtonText}</Pill>
             <Pill href="mailto:info@bizzbuzzcreations.com" className="px-6 py-3 text-base">{emailButtonText}</Pill>

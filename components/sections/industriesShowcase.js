@@ -63,7 +63,7 @@ export default function IndustriesShowcase({ content }) {
       {items.map((industry, i) => {
         const index = offset + i;
         const itemClass = `block w-full text-left py-1.5 text-lg font-medium transition-colors cursor-pointer ${
-          index === active ? "text-[#40A2D8]" : "text-white/60 hover:text-white"
+          index === active ? "text-buzz" : "text-white/60 hover:text-white"
         }`;
         return (
           <li key={industry.label}>
@@ -93,11 +93,11 @@ export default function IndustriesShowcase({ content }) {
   );
 
   return (
-    <section id="industries" className="relative overflow-hidden bg-black py-14 md:py-20 px-6 md:px-12 lg:px-24">
+    <section id="industries" className="relative overflow-hidden bg-ink py-14 md:py-20 px-6 md:px-12 lg:px-24">
 
       <div className="relative max-w-6xl mx-auto">
         <div className="text-center mb-14">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-3">
+          <p className="text-xs font-bold uppercase tracking-widest text-buzz mb-3">
             {eyebrow}
           </p>
           <h2 className="text-3xl md:text-4xl font-bold text-white max-w-2xl mx-auto">
@@ -111,7 +111,7 @@ export default function IndustriesShowcase({ content }) {
             stacked into one long, undifferentiated list of 15 names. Tap
             (not just hover) a name to preview it. */}
         <div className="md:hidden">
-          <div className="relative w-full h-56 rounded-2xl overflow-hidden border border-white/10 bg-linear-to-br from-[#0B60B0]/20 to-[#40A2D8]/10 mb-8">
+          <div className="relative w-full h-56 rounded-2xl overflow-hidden border border-white/10 bg-linear-to-br from-buzz/20 to-buzz/10 mb-8">
             <AnimatePresence mode="wait">
               <motion.div
                 key={current.label}
@@ -123,7 +123,7 @@ export default function IndustriesShowcase({ content }) {
               >
                 <Image src={current.image} alt={current.label} fill sizes="100vw" className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                <span className="absolute bottom-3 left-3 flex items-center justify-center w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/20 text-[#40A2D8]">
+                <span className="absolute bottom-3 left-3 flex items-center justify-center w-10 h-10 rounded-full bg-ink/50 backdrop-blur-sm border border-white/20 text-buzz">
                   <Icon size={20} />
                 </span>
               </motion.div>
@@ -164,7 +164,7 @@ export default function IndustriesShowcase({ content }) {
               industry is hovered/focused, crossfading in on change (was
               just a generic icon in a circle before, the same for every
               industry). */}
-          <div className="relative w-full h-56 md:h-[380px] rounded-2xl overflow-hidden border border-white/10 bg-linear-to-br from-[#0B60B0]/20 to-[#40A2D8]/10">
+          <div className="relative w-full h-56 md:h-[380px] rounded-2xl overflow-hidden border border-white/10 bg-linear-to-br from-buzz/20 to-buzz/10">
             <AnimatePresence mode="wait">
               <motion.div
                 key={current.label}
@@ -182,7 +182,7 @@ export default function IndustriesShowcase({ content }) {
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                <span className="absolute bottom-3 left-3 flex items-center justify-center w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/20 text-[#40A2D8]">
+                <span className="absolute bottom-3 left-3 flex items-center justify-center w-10 h-10 rounded-full bg-ink/50 backdrop-blur-sm border border-white/20 text-buzz">
                   <Icon size={20} />
                 </span>
               </motion.div>

@@ -102,7 +102,7 @@ export default function ClientVideoWall({ items }) {
               >
                 {/* the phone */}
                 <div className="rounded-[2.3rem] bg-linear-to-b from-white/35 via-white/10 to-white/25 p-[6px] shadow-[0_30px_60px_-20px_rgba(0,0,0,0.8)]">
-                  <div className="relative aspect-[9/16] overflow-hidden rounded-[1.85rem] bg-black">
+                  <div className="relative aspect-[9/16] overflow-hidden rounded-[1.85rem] bg-ink">
                     {center && playing ? (
                       <iframe
                         key={v.id}
@@ -126,7 +126,7 @@ export default function ClientVideoWall({ items }) {
                           else select(i);
                         }}
                         aria-label={center ? `Play the video testimonial from ${v.name}` : `Show the video from ${v.name}`}
-                        className="group absolute inset-0 block text-left focus-visible:outline-3 focus-visible:-outline-offset-4 focus-visible:outline-buzz"
+                        className="group absolute inset-0 block text-left focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-buzz"
                       >
                         {v.cover.startsWith("/") ? (
                           <Image src={v.cover} alt="" fill sizes="(min-width: 1024px) 300px, (min-width: 640px) 34vw, 64vw" draggable={false} className="object-cover" />
@@ -166,16 +166,16 @@ export default function ClientVideoWall({ items }) {
 
         <div className="flex items-center gap-3">
           {n > 1 && (
-            <button type="button" onClick={() => go(-1)} aria-label="Previous client" className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-white hover:bg-white hover:text-black focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-buzz">
+            <button type="button" onClick={() => go(-1)} aria-label="Previous client" className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-white hover:bg-white hover:text-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz">
               <ChevronLeft size={20} aria-hidden="true" />
             </button>
           )}
-          <a href={`https://www.youtube.com/watch?v=${current.id}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-white/25 px-5 py-2.5 text-sm text-white transition-colors hover:border-buzz hover:text-buzz focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-buzz">
+          <a href={`https://www.youtube.com/watch?v=${current.id}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-white/25 px-5 py-2.5 text-sm text-white transition-colors hover:border-buzz hover:text-buzz focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz">
             Watch on YouTube <ArrowUpRight size={14} aria-hidden="true" />
             <span className="sr-only"> (opens in a new tab)</span>
           </a>
           {n > 1 && (
-            <button type="button" onClick={() => go(1)} aria-label="Next client" className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-white hover:bg-white hover:text-black focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-buzz">
+            <button type="button" onClick={() => go(1)} aria-label="Next client" className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-white hover:bg-white hover:text-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz">
               <ChevronRight size={20} aria-hidden="true" />
             </button>
           )}

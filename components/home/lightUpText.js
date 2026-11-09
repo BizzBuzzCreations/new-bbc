@@ -52,7 +52,7 @@ export default function LightUpText({ text, as: Tag = "p", className = "" }) {
           <span
             data-word
             data-lit="false"
-            className={`text-white/40 transition-colors duration-500 ${isAccent ? "data-[lit=true]:text-[#40A2D8]" : "data-[lit=true]:text-white"}`}
+            className={`text-white/40 transition-colors duration-500 ${isAccent ? "data-[lit=true]:text-buzz" : "data-[lit=true]:text-white"}`}
           >
             {w}
           </span>

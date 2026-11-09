@@ -12,14 +12,18 @@ import BeamsBlock from "@/components/home/band";
 // each page plugs in its own content (lib/industryPageContent.js +
 // dashboard overrides).
 //
-// Redesigned with the same sections as the sub-service pages
-// (components/detail/*): hero with a breadcrumb to /industries and the
-// industry photo in a wide frame (2.86:1, the industry photos' own shape)
-// → who it's for → what we do (service groups, tabbed panel / accordion)
+// Rebuild: the same sections as the sub-service pages (components/detail/*):
+// hero with a breadcrumb to /industries and the industry's generated
+// signature in a wide frame (no photo — the industry photos were low
+// quality; the dashboard's hero image field is not shown) → who it's for → what we do (service groups, tabbed panel / accordion)
 // → why us + how it works (on the beams background) → the "why businesses
 // choose us" statement (text only — these pages have no second photo) →
 // FAQ → closing CTA. Each section keeps its dashboard "Remove section"
 // switch (`hidden`).
+// the industry's slug from its label ("Fashion & Apparel" → fashion-apparel),
+// for its signature visual
+const industrySlug = (label) => String(label || "").toLowerCase().replace(/&/g, " ").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
 export default function IndustryDetailPage({
   label,
   description,
@@ -63,17 +67,17 @@ export default function IndustryDetailPage({
           title={heroTitle || `Digital Marketing for ${label}`}
           description={heroDescription || description}
           ctaText={heroCtaText}
-          image={heroImage}
+          signature={industrySlug(label)}
           imageShape="2.86"
           secondaryHref={showCapabilities ? "#included" : null}
         />
       )}
-      {showCapabilities && <WhoItsFor id="included" heading={capabilitiesHeading} items={capabilities} />}
-      {!hidden.has("serviceBreakdown") && <BreakdownTabs heading={serviceBreakdownHeading} items={serviceBreakdown} />}
+      {showCapabilities && <WhoItsFor id="included" heading={capabilitiesHeading} items={capabilities} no="01" />}
+      {!hidden.has("serviceBreakdown") && <BreakdownTabs heading={serviceBreakdownHeading} items={serviceBreakdown} no="02" />}
       {(showWhy || showRoadmap) && (
         <BeamsBlock>
-          {showWhy && <WhyTrust heading={differentiatorsHeading} items={differentiators} />}
-          {showRoadmap && <RoadmapSteps heading={roadmapCarouselHeading} steps={roadmapCarouselSteps} />}
+          {showWhy && <WhyTrust heading={differentiatorsHeading} items={differentiators} no="03" divided />}
+          {showRoadmap && <RoadmapSteps heading={roadmapCarouselHeading} steps={roadmapCarouselSteps} no="04" />}
         </BeamsBlock>
       )}
       {!hidden.has("whyChooseUs") && (
@@ -81,10 +85,11 @@ export default function IndustryDetailPage({
           eyebrow="Why businesses choose us"
           heading={whyChooseUsHeading || `Why Businesses Choose Us for ${label}`}
           text={whyChooseUsText}
+          no="05"
         />
       )}
       {!hidden.has("faq") && faqs?.length > 0 && (
-        <FaqV2 content={{ faqHeading: faqsHeading || "Frequently Asked Questions", faqItems: faqs }} />
+        <FaqV2 content={{ faqHeading: faqsHeading || "Frequently Asked Questions", faqItems: faqs }} no="06" />
       )}
       {!hidden.has("cta") && (
         <DetailCta

@@ -35,14 +35,14 @@ export default function JobCard({ job, days }) {
         </div>
       </div>
 
-      <p className="max-w-3xl text-sm text-white/70 leading-relaxed whitespace-pre-line mb-2 md:text-base">
+      <p className="max-w-3xl text-sm text-fog leading-relaxed whitespace-pre-line mb-2 md:text-base">
         {expanded ? description : preview}
       </p>
       {isLong && (
         <button
           type="button"
           onClick={() => setExpanded((e) => !e)}
-          className="inline-flex items-center gap-1 py-1.5 -my-1.5 text-xs font-semibold text-[#40A2D8] hover:text-white mb-3 transition-colors duration-300"
+          className="inline-flex items-center gap-1 py-1.5 -my-1.5 text-xs font-semibold text-buzz hover:text-white mb-3 transition-colors duration-300"
         >
           {expanded ? "Read less" : "Read more"}
           <ChevronDown size={13} className={`transition-transform duration-300 ${expanded ? "rotate-180" : ""}`} />

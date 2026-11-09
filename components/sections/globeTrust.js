@@ -20,12 +20,12 @@ export default function GlobeTrust({ content }) {
   // Redesign: the heading block in the site's style (small blue eyebrow,
   // big light heading) beside the globe; on phones heading → globe → text.
   return (
-    <section className="relative overflow-hidden bg-black px-6 py-16 text-white md:px-10 md:py-20">
+    <section className="relative overflow-hidden bg-ink px-6 py-16 text-white md:px-10 md:py-20">
       <div className="relative z-10 mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-center md:justify-between">
         <div className="max-w-xl">
-          <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
-          <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
-          <RichText as="p" text={paragraph} className="mt-6 hidden text-base leading-relaxed text-white/70 md:block" />
+          <p className="kicker text-buzz">{eyebrow}</p>
+          <h2 className="font-display mt-6 text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98]">{heading}</h2>
+          <RichText as="p" text={paragraph} className="mt-6 hidden text-base leading-relaxed text-fog md:block" />
         </div>
 
         {/* Interactive 3D globe — real dot-mapped world map (Three.js +
@@ -40,11 +40,11 @@ export default function GlobeTrust({ content }) {
             dragSpeed={5}
             stopOnHover
             oceanColor="#000000"
-            outlineColor="#40A2D8"
+            outlineColor="var(--color-buzz)"
             outlineWidth={1}
             showGrid
             graticuleColor="rgba(64,162,216,0.18)"
-            dots={{ color: "#40A2D8", size: 4, density: 7, allDots: false }}
+            dots={{ color: "var(--color-buzz)", size: 4, density: 7, allDots: false }}
             markerConfig={{ markers: OFFICE_MARKERS, color: "#ffffff", size: 55 }}
             initialLatitude={20}
             initialLongitude={-15}
@@ -52,7 +52,7 @@ export default function GlobeTrust({ content }) {
         </div>
 
         {/* Mobile-only paragraph, placed after the globe. */}
-        <RichText as="p" text={paragraph} className="text-base leading-relaxed text-white/70 md:hidden" />
+        <RichText as="p" text={paragraph} className="text-base leading-relaxed text-fog md:hidden" />
       </div>
     </section>
   );

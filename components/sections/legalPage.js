@@ -21,12 +21,12 @@ export default async function LegalPage({ slug }) {
 
   return (
     <>
-      <header className="bg-black text-white">
-        <div className="mx-auto max-w-7xl px-6 pt-8 pb-12 md:px-10 md:pt-14 md:pb-16">
+      <header className="bg-ink text-white">
+        <div className="wrap pt-8 pb-12 md:px-10 md:pt-14 md:pb-16">
           <nav aria-label="Breadcrumb">
             <ol className="flex flex-wrap items-center gap-1.5 text-sm text-white/60">
               <li>
-                <Link href="/" className="text-[#40A2D8] hover:text-white">Home</Link>
+                <Link href="/" className="text-buzz hover:text-white">Home</Link>
               </li>
               <li aria-hidden="true">
                 <ChevronRight size={14} />
@@ -48,7 +48,7 @@ export default async function LegalPage({ slug }) {
               <ol className="space-y-1.5 border-l border-gray-200">
                 {sections.map((item) => (
                   <li key={item.id}>
-                    <a href={`#${item.id}`} className="-ml-px block border-l border-transparent py-0.5 pl-4 text-sm text-gray-600 transition-colors hover:border-[#0B60B0] hover:text-[#0B60B0]">
+                    <a href={`#${item.id}`} className="-ml-px block border-l border-transparent py-0.5 pl-4 text-sm text-gray-600 transition-colors hover:border-buzz hover:text-ink">
                       {item.text}
                     </a>
                   </li>
@@ -64,7 +64,7 @@ export default async function LegalPage({ slug }) {
               <ul className="mt-4 flex flex-wrap gap-3">
                 {others.map((p) => (
                   <li key={p.slug}>
-                    <Link href={p.path} className="inline-flex rounded-full border border-gray-300 px-4 py-2 text-sm text-gray-800 transition-colors hover:border-[#0B60B0] hover:bg-[#0B60B0] hover:text-white">
+                    <Link href={p.path} className="inline-flex rounded-full border border-gray-300 px-4 py-2 text-sm text-gray-800 transition-colors hover:border-buzz hover:bg-buzz hover:text-white">
                       {p.label}
                     </Link>
                   </li>

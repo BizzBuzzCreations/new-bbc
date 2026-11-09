@@ -16,7 +16,7 @@ export default function PostCard({ post, excerpt, headingLevel = "h3", eager = f
     : "";
   return (
     <article className="group relative">
-      <div className="aspect-[1.91/1] overflow-hidden rounded-2xl bg-[#0a0a0a]">
+      <div className="aspect-[1.91/1] overflow-hidden rounded-2xl bg-ink-2">
         {img ? (
           // eslint-disable-next-line @next/next/no-img-element -- dashboard-supplied URL (Cloudinary etc.), not a fixed host
           <img
@@ -48,7 +48,7 @@ export default function PostCard({ post, excerpt, headingLevel = "h3", eager = f
           </>
         )}
       </p>
-      <Title className="font-display mt-2 text-xl leading-snug text-white transition-colors duration-200 group-hover:text-[#40A2D8] md:text-2xl">
+      <Title className="font-display mt-2 text-xl leading-snug text-white transition-colors duration-200 group-hover:text-buzz md:text-2xl">
         <Link href={`/blog/${post?.slug}`} className="after:absolute after:inset-0 after:content-[''] focus-visible:underline focus-visible:outline-none">
           {post?.title}
         </Link>

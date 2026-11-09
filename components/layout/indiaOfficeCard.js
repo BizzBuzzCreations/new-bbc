@@ -66,7 +66,7 @@ export default function IndiaOfficeCard() {
   const last = INDIA_OFFICES.length - 1;
 
   return (
-    <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/15 bg-white/[0.03] p-6 hover:border-[#40A2D8]/50 hover:bg-white/[0.05] transition-colors">
+    <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/15 bg-white/[0.03] p-6 hover:border-buzz/50 hover:bg-white/[0.05] transition-colors">
       {/* Arrows sit in the header row (top-right) so the card is no taller
           than the UK card next to it. */}
       <div className="absolute top-6 right-6 flex items-center gap-1.5">
@@ -75,7 +75,7 @@ export default function IndiaOfficeCard() {
           onClick={() => setIndex((i) => Math.max(i - 1, 0))}
           disabled={index === 0}
           aria-label="Previous address"
-          className="w-7 h-7 rounded-full border border-white/15 flex items-center justify-center text-white hover:border-[#40A2D8] hover:bg-white/5 transition-colors disabled:opacity-30 disabled:pointer-events-none"
+          className="w-7 h-7 rounded-full border border-white/15 flex items-center justify-center text-white hover:border-buzz hover:bg-white/5 transition-colors disabled:opacity-30 disabled:pointer-events-none"
         >
           <ChevronLeft size={14} />
         </button>
@@ -84,7 +84,7 @@ export default function IndiaOfficeCard() {
           onClick={() => setIndex((i) => Math.min(i + 1, last))}
           disabled={index === last}
           aria-label="Next address"
-          className="w-7 h-7 rounded-full border border-white/15 flex items-center justify-center text-white hover:border-[#40A2D8] hover:bg-white/5 transition-colors disabled:opacity-30 disabled:pointer-events-none"
+          className="w-7 h-7 rounded-full border border-white/15 flex items-center justify-center text-white hover:border-buzz hover:bg-white/5 transition-colors disabled:opacity-30 disabled:pointer-events-none"
         >
           <ChevronRight size={14} />
         </button>
@@ -117,7 +117,7 @@ export default function IndiaOfficeCard() {
             </div>
             <p className="mb-4 pl-[3.25rem] text-xs text-white/50">{city}</p>
             <p className="text-sm text-white/80 leading-relaxed flex gap-2.5">
-              <MapPin size={16} className="shrink-0 mt-0.5 text-[#40A2D8]" />
+              <MapPin size={16} className="shrink-0 mt-0.5 text-buzz" />
               <span>{address}</span>
             </p>
             <a
@@ -125,7 +125,7 @@ export default function IndiaOfficeCard() {
               target="_blank"
               rel="noopener noreferrer"
               tabIndex={i === index ? 0 : -1}
-              className="mt-4 inline-flex items-center gap-1.5 py-1 pl-[1.625rem] text-sm font-medium text-[#40A2D8] hover:text-white"
+              className="mt-4 inline-flex items-center gap-1.5 py-1 pl-[1.625rem] text-sm font-medium text-buzz hover:text-white"
             >
               Get directions <ArrowUpRight size={14} aria-hidden="true" />
             </a>

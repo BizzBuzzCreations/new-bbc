@@ -1,40 +1,46 @@
 import Image from "next/image";
 import RichText from "@/components/ui/richText";
-import Pill from "@/components/home/pill";
+import Button from "@/components/brand/button";
+import Kicker from "@/components/brand/kicker";
+import AccentText from "@/components/brand/accentText";
 
-// Photo + text rows that zig-zag (text left / photo right, then the other
-// way round), no boxes: a small number, the title, an optional blue
-// tagline, the text and an optional link. Phones: text, then photo. Used for
-// /about's culture and /our-team's BPO and R&D teams (with a section
-// `heading` above the rows). `rows`: { title, tagline, body, img, href,
-// linkText }. Photos lazy-load.
+// Photo + text rows that zig-zag (about's culture, team pages' BPO / R&D
+// teams) (rebuild): a numbered kicker, the title, tagline, text and link
+// beside a framed photo; every second row flips. `rows`: { title, tagline,
+// body, img, href, linkText }.
 export default function CultureRows({ id, eyebrow = "Our culture", heading, rows }) {
   if (!rows?.length) return null;
   return (
-    <section id={id} className="scroll-mt-20 overflow-x-clip bg-black text-white">
-      <div className="mx-auto max-w-7xl space-y-16 px-6 md:space-y-24 md:px-10 py-16 md:py-20">
+    <section id={id} className="scroll-mt-20 bg-ink text-white">
+      <div className="wrap space-y-20 py-24 md:space-y-32 md:py-36">
         {heading && (
-          <div className="reveal max-w-3xl">
-            <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
-            <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
+          <div className="max-w-4xl">
+            <Kicker>{eyebrow}</Kicker>
+            <h2 className="font-display mt-6 text-[clamp(2.4rem,5vw,4.75rem)] leading-[0.96]">
+              <AccentText text={heading} />
+            </h2>
           </div>
         )}
         {rows.map(({ title, tagline, body, img, href, linkText }, i) => (
-          <div key={`${title}-${i}`} className="reveal-sides grid gap-8 md:grid-cols-2 md:items-center md:gap-16">
-            <div className={i % 2 === 1 ? "md:order-2" : ""}>
-              {i === 0 && !heading && <p className="mb-4 text-sm text-[#40A2D8]">{eyebrow}</p>}
-              <h3 className="font-display text-3xl leading-[1.1] md:text-4xl">{title}</h3>
-              {tagline && <p className="mt-3 text-lg text-[#40A2D8]">{tagline}</p>}
-              <RichText as="p" text={body} className="mt-5 text-base leading-relaxed text-white/70 md:text-lg" />
+          <div key={`${title}-${i}`} className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-10">
+            <div className={`lg:col-span-5 ${i % 2 ? "lg:order-2 lg:col-start-8" : ""}`}>
+              <p className="kicker text-buzz">{String(i + 1).padStart(2, "0")}{!heading && i === 0 ? ` · ${eyebrow}` : ""}</p>
+              <h3 className="font-display mt-5 text-4xl leading-[1] md:text-5xl">
+                <AccentText text={title} />
+              </h3>
+              {tagline && <p className="mt-5 text-xl text-white">{tagline}</p>}
+              <RichText as="p" text={body} className="mt-5 text-lg leading-relaxed text-fog" />
               {href && (
                 <div className="mt-8">
-                  <Pill href={href}>{linkText || "Learn more"}</Pill>
+                  <Button href={href} variant="outline">
+                    {linkText || "Learn more"}
+                  </Button>
                 </div>
               )}
             </div>
             {img && (
-              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-[#0a0a0a]">
-                <Image src={img} alt={title || ""} fill sizes="(min-width: 1280px) 600px, (min-width: 768px) 48vw, 100vw" className="object-cover" />
+              <div className={`relative aspect-[4/3] overflow-hidden rounded-[20px] border border-white/10 bg-ink-2 lg:col-span-6 ${i % 2 ? "lg:order-1 lg:col-start-1" : "lg:col-start-7"}`}>
+                <Image src={img} alt={title || ""} fill sizes="(min-width: 1440px) 680px, (min-width: 1024px) 48vw, 100vw" className="object-cover" />
               </div>
             )}
           </div>

@@ -36,8 +36,8 @@ export default function AuthorPosts({ posts, categories, authorName }) {
     setShown(PAGE);
   };
   const chip = (active) =>
-    `rounded-full border px-4 py-2 text-sm transition-colors duration-200 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8] ${
-      active ? "border-[#0B60B0] bg-[#0B60B0] text-white" : "border-white/20 text-white/80 hover:border-white/50 hover:text-white"
+    `rounded-full border px-4 py-2 text-sm transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz ${
+      active ? "border-buzz bg-buzz text-buzz-ink" : "border-white/20 text-white/80 hover:border-white/50 hover:text-white"
     }`;
 
   return (
@@ -56,7 +56,7 @@ export default function AuthorPosts({ posts, categories, authorName }) {
               setShown(PAGE);
             }}
             placeholder="Search these articles…"
-            className="w-full rounded-full border border-white/20 bg-white/[0.04] py-3 pl-11 pr-11 text-base text-white placeholder:text-white/50 focus:border-[#40A2D8] focus:outline-none md:text-sm"
+            className="w-full rounded-full border border-white/20 bg-white/[0.04] py-3 pl-11 pr-11 text-base text-white placeholder:text-white/50 focus:border-buzz focus:outline-none md:text-sm"
           />
           {query && (
             <button type="button" onClick={() => setQuery("")} aria-label="Clear search" className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-white/60 hover:bg-white/10 hover:text-white">
@@ -74,7 +74,7 @@ export default function AuthorPosts({ posts, categories, authorName }) {
               type="button"
               aria-pressed={newestFirst === value}
               onClick={() => setNewestFirst(value)}
-              className={`rounded-full px-4 py-1.5 text-sm transition-colors ${newestFirst === value ? "bg-white text-black" : "text-white/70 hover:text-white"}`}
+              className={`rounded-full px-4 py-1.5 text-sm transition-colors ${newestFirst === value ? "bg-white text-black" : "text-fog hover:text-white"}`}
             >
               {label}
             </button>
@@ -127,7 +127,7 @@ export default function AuthorPosts({ posts, categories, authorName }) {
             {visible.map((p) => (
               <motion.li key={p.slug} layout initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.96 }} transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}>
                 <article className="group relative h-full">
-                  <div className="relative aspect-[1.91/1] overflow-hidden rounded-2xl bg-[#0a0a0a]">
+                  <div className="relative aspect-[1.91/1] overflow-hidden rounded-2xl bg-ink-2">
                     {p.image ? (
                       // eslint-disable-next-line @next/next/no-img-element -- dashboard-supplied URL (Cloudinary etc.), not a fixed host
                       <img
@@ -145,18 +145,18 @@ export default function AuthorPosts({ posts, categories, authorName }) {
                         <span className="text-xs">Image unavailable</span>
                       </div>
                     )}
-                    {p.category && <span className="absolute bottom-3 left-3 rounded-full border border-white/15 bg-black/60 px-3 py-1 text-xs text-white backdrop-blur-md">{p.category}</span>}
+                    {p.category && <span className="absolute bottom-3 left-3 rounded-full border border-white/15 bg-ink/60 px-3 py-1 text-xs text-white backdrop-blur-md">{p.category}</span>}
                   </div>
                   <p className="mt-5 text-xs uppercase tracking-wider text-white/60">
                     {fmt(p.date)} &middot; {p.minutes} min read
                   </p>
-                  <h3 className="font-display mt-2 text-xl leading-snug text-white transition-colors duration-200 group-hover:text-[#40A2D8] md:text-2xl">
+                  <h3 className="font-display mt-2 text-xl leading-snug text-white transition-colors duration-200 group-hover:text-buzz md:text-2xl">
                     <Link href={`/blog/${p.slug}`} className="after:absolute after:inset-0 after:content-[''] focus-visible:underline focus-visible:outline-none">
                       {p.title}
                     </Link>
                   </h3>
                   {p.excerpt && <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-white/60">{p.excerpt}</p>}
-                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-[#40A2D8]">
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-buzz">
                     Read article
                     <ArrowUpRight size={16} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   </span>

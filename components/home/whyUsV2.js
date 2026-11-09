@@ -28,18 +28,18 @@ export default function WhyUsV2({ content }) {
   const cols = columns(cards.length);
 
   return (
-    <section className="overflow-hidden bg-black text-white">
-      <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-20">
+    <section className="overflow-hidden bg-ink text-white">
+      <div className="wrap py-24 md:py-32">
         <div className="reveal max-w-3xl">
-          {eyebrow && <p className="text-sm text-[#40A2D8]">{eyebrow}</p>}
-          <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
+          {eyebrow && <p className="kicker text-buzz">{eyebrow}</p>}
+          <h2 className="font-display mt-6 text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98]">{heading}</h2>
         </div>
         <ul
           className="reveal-stagger no-scrollbar -mx-6 mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-6 px-6 pb-2 md:mx-0 md:mt-16 md:flex-wrap md:justify-center md:gap-5 md:overflow-visible md:px-0 md:pb-0"
           style={{ "--w-md": widthFor(cols.md), "--w-xl": widthFor(cols.xl) }}
         >
           {cards.map((c, i) => (
-            <li key={`${c.label}-${i}`} className="group relative w-[78%] shrink-0 snap-start overflow-hidden rounded-3xl border border-white/10 bg-[#0b0e16] md:w-(--w-md) xl:w-(--w-xl)">
+            <li key={`${c.label}-${i}`} className="group relative w-[78%] shrink-0 snap-start overflow-hidden rounded-[20px] border border-white/10 bg-ink-2 md:w-(--w-md) xl:w-(--w-xl)">
               {c.visual?.type === "image" && (
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <Image src={c.visual.src} alt="" fill sizes="(min-width: 1280px) 300px, (min-width: 768px) 45vw, 78vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
@@ -51,8 +51,8 @@ export default function WhyUsV2({ content }) {
                     {c.label}
                   </Link>
                 </h3>
-                <RichText as="p" text={c.description} className="mt-3 text-sm leading-relaxed text-white/65" />
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-[#40A2D8]">
+                <RichText as="p" text={c.description} className="mt-3 text-sm leading-relaxed text-fog" />
+                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-buzz">
                   {c.buttonText || "Learn More"}
                   <ArrowUpRight size={16} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </span>

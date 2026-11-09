@@ -69,9 +69,9 @@ export default function CTA({ content, white = false } = {}) {
   };
   return (
     <>
-      <div className={`${white ? "bg-white" : "bg-black"} px-5 py-10 scroll-mt-34`} id="CTA">
+      <div className={`${white ? "bg-white" : "bg-ink"} px-5 py-10 scroll-mt-34`} id="CTA">
         <div
-          className={`md:flex md:items-stretch rounded-3xl border-2 md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto container border-[#0B60B0] ${
+          className={`md:flex md:items-stretch rounded-[20px] border-2 md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto container border-buzz ${
             white ? "shadow-lg shadow-black/20" : "shadow-lg shadow-black"
           }`}
           style={{
@@ -110,7 +110,7 @@ export default function CTA({ content, white = false } = {}) {
                   className="group absolute top-10 right-2 flex items-center justify-center cursor-pointer"
                 >
                   <span
-                    className="bg-black p-3 rounded-full text-white
+                    className="bg-ink p-3 rounded-full text-white
                      transition-all duration-300
                      focus:outline-none focus:ring-2 focus:ring-black/50"
                   >
@@ -148,7 +148,7 @@ export default function CTA({ content, white = false } = {}) {
       {/* Divider between the CTA and whatever comes next (the footer, on
           every page that ends with this CTA) so the two don't just blend
           into one section. */}
-      <div className={`w-full ${white ? "bg-white" : "bg-black"} pt-8 md:pt-10`}>
+      <div className={`w-full ${white ? "bg-white" : "bg-ink"} pt-8 md:pt-10`}>
         <div className={`w-full border-t ${white ? "border-black/10" : "border-white"}`} />
       </div>
     </>

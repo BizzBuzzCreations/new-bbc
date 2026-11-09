@@ -159,18 +159,18 @@ export default async function SingleBlog({ params }) {
 
       {/* Plain black behind the whole post (no beams): nothing moves behind
           the text while you read. */}
-      <div className="bg-black text-white">
+      <div className="bg-ink text-white">
         <header className="text-white">
           <div className="mx-auto max-w-[88rem] px-4 pt-8 pb-10 sm:px-6 md:pt-14 md:pb-14 lg:px-8">
             <nav aria-label="Breadcrumb">
               <ol className="flex flex-wrap items-center gap-1.5 text-sm text-white/60">
-                <li><Link href="/" className="text-[#40A2D8] hover:text-white">Home</Link></li>
+                <li><Link href="/" className="text-buzz hover:text-white">Home</Link></li>
                 <li aria-hidden="true"><ChevronRight size={14} /></li>
-                <li><Link href="/blog" className="text-[#40A2D8] hover:text-white">Blog</Link></li>
+                <li><Link href="/blog" className="text-buzz hover:text-white">Blog</Link></li>
                 {post?.category && (
                   <>
                     <li aria-hidden="true"><ChevronRight size={14} /></li>
-                    <li><Link href={`/blog?category=${encodeURIComponent(post.category)}`} className="text-[#40A2D8] hover:text-white">{post.category}</Link></li>
+                    <li><Link href={`/blog?category=${encodeURIComponent(post.category)}`} className="text-buzz hover:text-white">{post.category}</Link></li>
                   </>
                 )}
               </ol>
@@ -181,7 +181,7 @@ export default async function SingleBlog({ params }) {
                 <Link href={authorPath(post?.author)} className="group flex items-center gap-3">
                   <AuthorAvatar name={post?.author} photo={member?.photo} size={44} />
                   <span className="leading-tight">
-                    <span className="block text-sm text-white transition-colors group-hover:text-[#40A2D8]">{post?.author}</span>
+                    <span className="block text-sm text-white transition-colors group-hover:text-buzz">{post?.author}</span>
                     <span className="block text-xs text-white/60">{member?.role || "Author"}</span>
                   </span>
                 </Link>
@@ -215,10 +215,10 @@ export default async function SingleBlog({ params }) {
                 // image loads, then switches to its real ratio. With no
                 // dimensions it rendered 0px tall first and pushed the whole
                 // article down on load — a 0.27 CLS on mobile.
-                className="mb-8 h-auto w-full rounded-3xl border border-white/10 shadow-[0_20px_60px_-20px_rgba(11,96,176,0.45)] [aspect-ratio:auto_16/9]"
+                className="mb-8 h-auto w-full rounded-[20px] border border-white/10 shadow-[0_20px_60px_-20px_rgba(11,96,176,0.45)] [aspect-ratio:auto_16/9]"
               />
             ) : (
-              <div className="mb-8 flex aspect-[1.91/1] w-full flex-col items-center justify-center gap-2 rounded-3xl border border-white/10 bg-white/[0.03] text-white/60">
+              <div className="mb-8 flex aspect-[1.91/1] w-full flex-col items-center justify-center gap-2 rounded-[20px] border border-white/10 bg-white/[0.03] text-white/60">
                 <ImageOff size={36} aria-hidden="true" />
                 <span className="text-sm">Image unavailable</span>
               </div>
@@ -228,12 +228,12 @@ export default async function SingleBlog({ params }) {
 
             <PostFaq faqs={post.faqs} />
 
-            <div className="my-12 flex flex-wrap items-center justify-between gap-5 rounded-3xl border border-white/10 bg-white/[0.03] p-5 md:p-6">
+            <div className="my-12 flex flex-wrap items-center justify-between gap-5 rounded-[20px] border border-white/10 bg-white/[0.03] p-5 md:p-6">
               <p className="font-display text-xl text-white">Found this useful? Share it.</p>
               <ShareRow url={postUrl} title={post?.title} label="" />
             </div>
 
-            <div className="rounded-3xl border border-white/10 bg-[#0b0e16]/85 p-6 backdrop-blur-sm md:p-8">
+            <div className="rounded-[20px] border border-white/10 bg-ink-2/85 p-6 backdrop-blur-sm md:p-8">
               <div className="flex items-center gap-4">
                 <Link href={authorPath(post?.author)} aria-label={`${post?.author}'s profile`}>
                   <AuthorAvatar name={post?.author} photo={member?.photo} size={64} />
@@ -241,12 +241,12 @@ export default async function SingleBlog({ params }) {
                 <div>
                   <p className="text-sm text-white/60">Written by</p>
                   <p className="font-display text-xl text-white">
-                    <Link href={authorPath(post?.author)} className="transition-colors hover:text-[#40A2D8]">{post?.author}</Link>
+                    <Link href={authorPath(post?.author)} className="transition-colors hover:text-buzz">{post?.author}</Link>
                   </p>
-                  {member?.role && <p className="text-sm text-[#40A2D8]">{member.role}</p>}
+                  {member?.role && <p className="kicker text-buzz">{member.role}</p>}
                 </div>
               </div>
-              <RichText as="p" text={post?.authorBio} className="mt-5 text-sm leading-relaxed text-white/70 md:text-base" />
+              <RichText as="p" text={post?.authorBio} className="mt-5 text-sm leading-relaxed text-fog md:text-base" />
               <div className="mt-6">
                 <Pill href={authorPath(post?.author)}>View profile and all articles</Pill>
               </div>

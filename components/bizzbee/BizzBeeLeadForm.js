@@ -8,7 +8,7 @@ import { emailProblem, phoneProblem } from "@/lib/bizzbee/leadValidation";
 import { markEnquired } from "@/lib/enquiryFlag";
 
 const field =
-  "w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-base sm:text-sm text-white placeholder:text-white/40 focus:border-[#40A2D8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#40A2D8]/60";
+  "w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-base sm:text-sm text-white placeholder:text-white/40 focus:border-buzz focus:outline-none focus-visible:ring-2 focus-visible:ring-buzz/60";
 const label = "mb-1 block text-xs font-semibold text-white/80";
 
 // Enquiry form shown inside the chat. Posts to /api/bizzbee/lead (our own
@@ -81,7 +81,7 @@ export default function BizzBeeLeadForm({ onDone, onCancel, defaultService = "" 
   }
 
   return (
-    <form onSubmit={submit} noValidate className="space-y-3 rounded-xl border border-white/15 bg-black/40 p-3">
+    <form onSubmit={submit} noValidate className="space-y-3 rounded-xl border border-white/15 bg-ink/40 p-3">
       <p className="text-sm font-semibold text-white">Share your details and the team will get back to you</p>
       <p className="text-xs text-white/60">
         Name, email and a short description are required. Everything else is optional. These details go to the
@@ -145,7 +145,7 @@ export default function BizzBeeLeadForm({ onDone, onCancel, defaultService = "" 
       </div>
 
       <label className="flex items-start gap-2 text-xs text-white/80">
-        <input type="checkbox" checked={values.consent} onChange={set("consent")} className="mt-0.5 h-4 w-4 shrink-0 accent-[#40A2D8]" />
+        <input type="checkbox" checked={values.consent} onChange={set("consent")} className="mt-0.5 h-4 w-4 shrink-0 accent-buzz" />
         <span>
           I agree that BizzBuzz Creations may use these details to contact me about my enquiry, as described in the{" "}
           <Link href="/privacy-policy" target="_blank" className="font-semibold text-[#6cc3ee] underline">Privacy Policy</Link>.
@@ -158,7 +158,7 @@ export default function BizzBeeLeadForm({ onDone, onCancel, defaultService = "" 
         <button
           type="submit"
           disabled={status === "sending"}
-          className="inline-flex items-center gap-2 rounded-full bg-[#0B60B0] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#0d70cf] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#40A2D8] disabled:opacity-60"
+          className="inline-flex items-center gap-2 rounded-full bg-buzz px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#ffe066] focus:outline-none focus-visible:ring-2 focus-visible:ring-buzz disabled:opacity-60"
         >
           {status === "sending" && <Loader2 size={14} className="animate-spin" aria-hidden="true" />}
           {status === "sending" ? "Sending…" : "Send enquiry"}
@@ -166,7 +166,7 @@ export default function BizzBeeLeadForm({ onDone, onCancel, defaultService = "" 
         <button
           type="button"
           onClick={onCancel}
-          className="rounded-full px-3 py-2 text-sm text-white/70 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#40A2D8]"
+          className="rounded-full px-3 py-2 text-sm text-fog hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-buzz"
         >
           Cancel
         </button>

@@ -1,73 +1,72 @@
 import Image from "next/image";
-import Link from "next/link";
-import { ChevronRight } from "lucide-react";
 import RichText from "@/components/ui/richText";
-import Pill from "@/components/home/pill";
+import Button from "@/components/brand/button";
+import AccentText from "@/components/brand/accentText";
+import Breadcrumb from "@/components/brand/breadcrumb";
+import IndustrySignature from "@/components/brand/industrySignature";
+import { ClockLine } from "@/components/brand/clock";
 
-// Detail-page hero (sub-service and industry pages): a breadcrumb back to the
-// parent page, the big light headline (last three words in the beams'
-// blue → violet, like the homepage), the description with the page's own
-// CTA, then the page photo in a wide rounded frame at its own shape —
-// `imageShape` "2.18" (sub-service photos) or "2.86" (industry photos) — so
-// nothing important is cut off. The photo is the LCP element: loaded
-// eagerly at high priority.
-const FRAME_SHAPES = { "2.18": "md:aspect-[2.18/1]", "2.86": "md:aspect-[2.86/1]" };
-
-// The headline's words, the last three in the blue → violet gradient (shared
-// with the one-off pages' hero, pageHero.js).
+// Kept for older imports: a title with its accent word (now the rebuild's
+// AccentText — last word, or a *starred* word, in the accent serif).
 export function AccentTitle({ title }) {
-  const words = (title || "").split(/\s+/);
-  const lead = words.slice(0, Math.max(0, words.length - 3)).join(" ");
-  const accent = words.slice(-3).join(" ");
-  return (
-    <>
-      {lead && <span>{lead} </span>}
-      <span className="bg-linear-to-r from-[#40A2D8] via-[#7b74f7] to-[#b57cff] bg-clip-text pb-1 text-transparent">{accent}</span>
-    </>
-  );
+  return <AccentText text={title} />;
 }
 
-export default function DetailHero({ parentLabel, parentHref, label, title, description, ctaText, image, secondaryHref, imageShape = "2.18" }) {
-  return (
-    <section className="bg-black text-white">
-      <div className="mx-auto max-w-7xl px-6 pt-8 md:px-10 md:pt-14">
-        <nav aria-label="Breadcrumb">
-          <ol className="flex flex-wrap items-center gap-1.5 text-sm text-white/60">
-            {parentHref ? (
-              <li>
-                <Link href={parentHref} className="text-[#40A2D8] hover:text-white">{parentLabel}</Link>
-              </li>
-            ) : (
-              <li>{parentLabel}</li>
-            )}
-            <li aria-hidden="true">
-              <ChevronRight size={14} />
-            </li>
-            <li aria-current="page" className="text-white/80">{label}</li>
-          </ol>
-        </nav>
+const FRAME_SHAPES = { "2.18": "md:aspect-[2.18/1]", "2.86": "md:aspect-[2.86/1]" };
 
-        <div className="mt-6 grid gap-8 md:mt-8 md:grid-cols-[3fr_2fr] md:items-end md:gap-16">
-          <h1 className="font-display text-[2.3rem] leading-[1.06] sm:text-5xl xl:text-6xl">
-            <AccentTitle title={title} />
-          </h1>
-          <div>
-            <RichText as="p" text={description} className="text-base leading-relaxed text-white/70 md:text-lg" />
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Pill href="/contact" variant="solid" className="px-6 py-3 text-base">{ctaText || "Get a Free Consultation"}</Pill>
-              {secondaryHref && <Pill href={secondaryHref} className="px-6 py-3 text-base">What&rsquo;s included</Pill>}
+// Hero of the service hubs, sub-service and industry pages (rebuild):
+// breadcrumb (Home / parent / page) → a big H1 with its accent word on the
+// left, the description and the buttons on the right → the page's image in
+// a wide frame. `signature` (industry pages): an industry signature drawn
+// in place of a photo. `kicker` replaces the default "[BBC] …" line.
+export default function DetailHero({ parentLabel, parentHref, label, title, description, ctaText, image, secondaryHref, imageShape = "2.18", signature, kicker }) {
+  return (
+    <section className="grain relative isolate overflow-hidden bg-ink pt-28 text-white md:pt-36">
+      <div className="wrap">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <Breadcrumb items={[{ label: "Home", href: "/" }, { label: parentLabel, href: parentHref }, { label }]} />
+          <ClockLine className="hidden text-fog md:inline-flex" />
+        </div>
+        <div className="mt-12 grid gap-10 md:mt-20 lg:grid-cols-12 lg:items-end lg:gap-10">
+          <div className="lg:col-span-8">
+            {kicker && <p className="kicker mb-6 text-buzz">{kicker}</p>}
+            <h1 className="font-display text-balance text-[clamp(2.6rem,6.6vw,6.75rem)] leading-[0.93] motion-safe:animate-[hero-rise_0.9s_var(--ease-out-soft)_both]">
+              <AccentText text={title} />
+            </h1>
+          </div>
+          <div className="lg:col-span-4 motion-safe:animate-[hero-rise_0.9s_0.12s_var(--ease-out-soft)_both]">
+            <RichText as="p" text={description} className="text-lg leading-relaxed text-fog" />
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href="/contact" variant="solid">
+                {ctaText || "Get a Free Consultation"}
+              </Button>
+              {secondaryHref && (
+                <Button href={secondaryHref} variant="outline">
+                  What&rsquo;s included
+                </Button>
+              )}
             </div>
           </div>
         </div>
       </div>
 
-      {image && (
-        <div className="mx-auto max-w-7xl px-6 pt-10 md:px-10 md:pt-14">
-          <div className={`relative aspect-[16/9] overflow-hidden rounded-3xl bg-[#0a0a0a] ${FRAME_SHAPES[imageShape] || FRAME_SHAPES["2.18"]}`}>
-            <Image src={image} alt="" fill preload fetchPriority="high" sizes="(min-width: 1280px) 1200px, 100vw" className="object-cover" />
+      {(signature || image) && (
+        <div className="wrap pb-6 pt-14 md:pt-20">
+          <div className={`relative aspect-[16/10] overflow-hidden rounded-[20px] border border-white/10 bg-ink-2 ${FRAME_SHAPES[imageShape] || FRAME_SHAPES["2.18"]}`}>
+            {signature ? (
+              <>
+                <IndustrySignature slug={signature} lines={34} className="absolute inset-0 h-full w-full" />
+                <p className="kicker absolute bottom-4 left-5 text-fog">
+                  <span className="text-buzz">Signature</span> · {label}
+                </p>
+              </>
+            ) : (
+              <Image src={image} alt="" fill preload fetchPriority="high" sizes="(min-width: 1440px) 1360px, 100vw" className="object-cover" />
+            )}
           </div>
         </div>
       )}
+      {!signature && !image && <div className="pb-16 md:pb-24" />}
     </section>
   );
 }

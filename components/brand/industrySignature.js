@@ -38,7 +38,7 @@ export default function IndustrySignature({ slug = "", title, tone = "light", cl
       const s = Math.sin(dx * f1 * 2.2 + phase) * amp * g;
       d += `${x ? "L" : "M"}${x} ${(y0 + n - s).toFixed(1)}`;
     }
-    paths.push({ d, hot: rowG > 0.55 });
+    paths.push({ d, hot: rowG > 0.8 && i % 2 === 0 });
   }
   const base = tone === "dark" ? "rgba(10,10,11,0.28)" : "rgba(255,255,255,0.22)";
   return (

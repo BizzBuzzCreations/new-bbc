@@ -11,18 +11,18 @@ import { UK_OFFICE, mapsUrl } from "@/lib/offices";
 export default function OfficeV2() {
   const o = UK_OFFICE;
   return (
-    <section className="bg-black text-white">
-      <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-20">
-        <div className="reveal relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b0e16] p-6 sm:p-10">
+    <section className="bg-ink text-white">
+      <div className="wrap py-24 md:py-32">
+        <div className="reveal relative overflow-hidden rounded-[2rem] border border-white/10 bg-ink-2 p-6 sm:p-10">
           <div className="relative z-10 grid gap-8 md:grid-cols-2 md:gap-12">
             <div>
-              <p className="text-sm text-[#40A2D8]">Our UK office</p>
-              <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">A team you can call in London</h2>
+              <p className="kicker text-buzz">Our UK office</p>
+              <h2 className="font-display mt-6 text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98]">A team you can call in London</h2>
               <p className="mt-4 text-sm text-white/60">{o.city}</p>
             </div>
             <div className="space-y-4 text-base text-white/80">
               <p className="flex gap-3">
-                <MapPin size={18} aria-hidden="true" className="mt-1 shrink-0 text-[#40A2D8]" />
+                <MapPin size={18} aria-hidden="true" className="mt-1 shrink-0 text-buzz" />
                 <span>
                   {o.lines.map((line) => (
                     <span key={line} className="block">{line}</span>
@@ -30,8 +30,8 @@ export default function OfficeV2() {
                 </span>
               </p>
               <p className="flex items-center gap-3">
-                <Phone size={18} aria-hidden="true" className="shrink-0 text-[#40A2D8]" />
-                <a href={o.phone.href} className="hover:text-[#40A2D8]">{o.phone.display}</a>
+                <Phone size={18} aria-hidden="true" className="shrink-0 text-buzz" />
+                <a href={o.phone.href} className="hover:text-buzz">{o.phone.display}</a>
               </p>
               <div className="flex flex-wrap gap-3 pt-2">
                 <Pill href={o.phone.href} variant="solid">Call our UK team</Pill>

@@ -56,7 +56,7 @@ export default function ScrollStatement({ content }) {
   }, [text]);
 
   return (
-    <section className="bg-black px-6 py-16 md:py-28">
+    <section className="bg-ink px-6 py-16 md:py-28">
       <div className="mx-auto max-w-5xl text-center">
         <h2 ref={ref} className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-6xl">
           {words.map(({ w, accent: isAccent }, i) => (
@@ -68,7 +68,7 @@ export default function ScrollStatement({ content }) {
                 data-word
                 data-lit="false"
                 className={`inline-block translate-y-[0.3em] blur-[2px] text-white/45 transition-[color,translate,filter] duration-500 ease-out data-[lit=true]:translate-y-0 data-[lit=true]:blur-none motion-reduce:translate-y-0 motion-reduce:blur-none ${
-                  isAccent ? "data-[lit=true]:text-[#40A2D8]" : "data-[lit=true]:text-white"
+                  isAccent ? "data-[lit=true]:text-buzz" : "data-[lit=true]:text-white"
                 }`}
               >
                 {w}
@@ -80,7 +80,7 @@ export default function ScrollStatement({ content }) {
         {buttonText && buttonLink && (
           <Link
             href={buttonLink}
-            className="group mt-8 inline-flex items-center gap-2 py-2 text-sm font-semibold text-[#40A2D8] transition-colors duration-200 hover:text-white md:text-base"
+            className="group mt-8 inline-flex items-center gap-2 py-2 text-sm font-semibold text-buzz transition-colors duration-200 hover:text-white md:text-base"
           >
             {buttonText}
             <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-1" />

@@ -54,10 +54,11 @@ export default function ServiceHubPage({ content, label, introAlt = "", trustAlt
       {showServices && <HubServices id="services" heading={c.servicesGridHeading} subheading={c.servicesGridSubheading} items={c.services} />}
       {(showRoadmap || showWeAre) && (
         <BeamsBlock>
-          {showRoadmap && <RoadmapSteps heading={c.roadmapHeading} subtext={c.roadmapSubtext} steps={c.roadmapSteps} />}
+          {showRoadmap && <RoadmapSteps heading={c.roadmapHeading} subtext={c.roadmapSubtext} steps={c.roadmapSteps} no="03" />}
           {showWeAre && (
             <WhyTrust
               eyebrow="Who we are"
+              no="04"
               heading={c.weAreHeading}
               description={c.weAreDescription}
               items={c.weArePoints.map((p) => ({ title: p.title, desc: p.description }))}
@@ -66,7 +67,7 @@ export default function ServiceHubPage({ content, label, introAlt = "", trustAlt
         </BeamsBlock>
       )}
       {!hidden.has("faq") && c.faqs?.length > 0 && (
-        <FaqV2 content={{ faqHeading: c.faqHeading || "Frequently Asked Questions", faqSubheading: c.faqSubheading, faqItems: c.faqs }} />
+        <FaqV2 content={{ faqHeading: c.faqHeading || "Frequently Asked Questions", faqSubheading: c.faqSubheading, faqItems: c.faqs }} no="05" />
       )}
       {!hidden.has("trust") && (
         <LocalityBlock
@@ -76,6 +77,7 @@ export default function ServiceHubPage({ content, label, introAlt = "", trustAlt
           text={[c.trustParagraphOne, c.trustParagraphTwo]}
           image={c.trustImage}
           alt={trustAlt}
+          no="06"
         />
       )}
       {!hidden.has("cta") && (

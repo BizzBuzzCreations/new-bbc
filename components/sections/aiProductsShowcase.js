@@ -50,7 +50,7 @@ function withOverrides(defaults, saved) {
 
 function ProductCard({ heading, paragraph, image, features, buttonText, buttonLink }) {
   return (
-    <article className="flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]">
+    <article className="flex flex-col overflow-hidden rounded-[20px] border border-white/10 bg-white/[0.03]">
       {/* Fixed 16:9 frame + object-cover, so a dashboard image of any shape
           fills it without stretching. Decorative: the heading below says
           what the card is about. */}
@@ -69,7 +69,7 @@ function ProductCard({ heading, paragraph, image, features, buttonText, buttonLi
         <ul className="grid gap-4 sm:grid-cols-2">
           {features.map(({ icon: Icon, title, description }, i) => (
             <li key={i} className="flex gap-3">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/10 text-[#40A2D8]">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/10 text-buzz">
                 <Icon size={16} />
               </span>
               <div className="min-w-0">
@@ -133,7 +133,7 @@ export default function AiProductsShowcase({ content, clioPrefix = "ai", showCli
   if (!cards.length) return null;
 
   return (
-    <section className="bg-black py-12 md:py-16 px-6 md:px-12">
+    <section className="bg-ink py-12 md:py-16 px-6 md:px-12">
       <div className={`mx-auto grid gap-6 lg:gap-8 ${cards.length > 1 ? "max-w-6xl md:grid-cols-2" : "max-w-2xl"}`}>
         {cards.map(({ key, ...card }) => (
           <ProductCard key={key} {...card} />

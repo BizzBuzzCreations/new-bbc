@@ -165,7 +165,7 @@ export default function OurServices({ content }) {
         />
 
         {eyebrow && (
-          <p className="relative z-10 text-xs font-bold uppercase tracking-widest text-[#40A2D8] text-center mb-3">{eyebrow}</p>
+          <p className="relative z-10 text-xs font-bold uppercase tracking-widest text-buzz text-center mb-3">{eyebrow}</p>
         )}
         <h2 className="relative z-10 md:text-4xl text-3xl font-bold mb-10 text-center text-white">
           {heading}
@@ -185,7 +185,7 @@ export default function OurServices({ content }) {
             return (
               <div
                 key={service.heading}
-                className="group relative isolate max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-black p-5 md:p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:border-[#40A2D8]/50 hover:shadow-xl hover:shadow-[#0B60B0]/20 has-[a:focus-visible]:border-[#40A2D8] has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-[#40A2D8]"
+                className="group relative isolate max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-ink p-5 md:p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:border-buzz/50 hover:shadow-xl hover:shadow-[#0B60B0]/20 has-[a:focus-visible]:border-buzz has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-buzz"
               >
                 {bgImage && (
                   <>
@@ -207,7 +207,7 @@ export default function OurServices({ content }) {
                 <div className="flex items-start gap-4">
                   {/* Icon — on phones it sits in the card's top-right corner so
                       the text gets the full card width. */}
-                  <div className="max-md:absolute max-md:right-4 max-md:top-4 text-4xl text-[#40A2D8] p-2 md:p-4 rounded-full transition-colors duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
+                  <div className="max-md:absolute max-md:right-4 max-md:top-4 text-4xl text-buzz p-2 md:p-4 rounded-full transition-colors duration-300 group-hover:bg-white group-hover:text-ink">
                     <Icon size={28} />
                   </div>
 
@@ -230,7 +230,7 @@ export default function OurServices({ content }) {
                     <div className="mt-4 md:mt-6">
                       <Link
                         href={service.href}
-                        className="inline-flex rounded-lg py-2 gap-2 items-center text-sm font-medium text-[#40A2D8] transition-colors duration-300 group-hover:text-white focus:outline-none after:absolute after:inset-0 after:content-['']"
+                        className="inline-flex rounded-lg py-2 gap-2 items-center text-sm font-medium text-buzz transition-colors duration-300 group-hover:text-white focus:outline-none after:absolute after:inset-0 after:content-['']"
                       >
                         {service.buttonText}
                         <MoveRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />

@@ -80,17 +80,17 @@ export default function ServiceDetailPage({
           secondaryHref={showCapabilities ? "#included" : null}
         />
       )}
-      {showCapabilities && <WhoItsFor id="included" heading={capabilitiesHeading} items={capabilities} />}
-      {!hidden.has("serviceBreakdown") && <BreakdownTabs heading={serviceBreakdownHeading} items={serviceBreakdown} />}
+      {showCapabilities && <WhoItsFor id="included" heading={capabilitiesHeading} items={capabilities} no="01" />}
+      {!hidden.has("serviceBreakdown") && <BreakdownTabs heading={serviceBreakdownHeading} items={serviceBreakdown} no="02" />}
       {(showWhy || showRoadmap) && (
         <BeamsBlock>
-          {showWhy && <WhyTrust heading={differentiatorsHeading} items={differentiators} />}
-          {showRoadmap && <RoadmapSteps heading={roadmapCarouselHeading} steps={roadmapCarouselSteps} />}
+          {showWhy && <WhyTrust heading={differentiatorsHeading} items={differentiators} no="03" divided />}
+          {showRoadmap && <RoadmapSteps heading={roadmapCarouselHeading} steps={roadmapCarouselSteps} no="04" />}
         </BeamsBlock>
       )}
-      {!hidden.has("locality") && <LocalityBlock heading={localityHeading} text={localityText} image={localityImage || heroImage} />}
+      {!hidden.has("locality") && <LocalityBlock heading={localityHeading} text={localityText} image={localityImage || heroImage} no="05" />}
       {!hidden.has("faq") && faqs?.length > 0 && (
-        <FaqV2 content={{ faqHeading: "Frequently Asked Questions", faqItems: faqs }} />
+        <FaqV2 content={{ faqHeading: "Frequently Asked Questions", faqItems: faqs }} no="06" />
       )}
       {!hidden.has("cta") && (
         <DetailCta

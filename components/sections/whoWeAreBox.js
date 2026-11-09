@@ -53,12 +53,12 @@ export default function WhoWeAreBox({ content }) {
   const { heading, paragraph, buttonText, buttonLink, tagline, stats: STATS, links: QUICK_LINKS } = whoWeAreContent(content);
 
   return (
-    <section className="bg-black py-16 px-6 md:px-12">
+    <section className="bg-ink py-16 px-6 md:px-12">
       {/* The entire block — text, stats, quick-links — sits inside this
           one bordered card, full width (no max-w cap), per the request. */}
-      <div className="relative w-full rounded-3xl border border-white/10 bg-white/[0.02] overflow-hidden p-8 md:p-12">
-        <div className="absolute -top-16 -left-16 w-72 h-72 rounded-full bg-[#0B60B0]/25 blur-3xl pointer-events-none" aria-hidden="true" />
-        <div className="absolute -bottom-16 -right-16 w-72 h-72 rounded-full bg-[#40A2D8]/20 blur-3xl pointer-events-none" aria-hidden="true" />
+      <div className="relative w-full rounded-[20px] border border-white/10 bg-white/[0.02] overflow-hidden p-8 md:p-12">
+        <div className="absolute -top-16 -left-16 w-72 h-72 rounded-full bg-buzz/25 blur-3xl pointer-events-none" aria-hidden="true" />
+        <div className="absolute -bottom-16 -right-16 w-72 h-72 rounded-full bg-buzz/20 blur-3xl pointer-events-none" aria-hidden="true" />
 
         {/* The center stats row is naturally wider than an equal third of
             the box (three big numbers + labels, none of which wrap) — a
@@ -90,7 +90,7 @@ export default function WhoWeAreBox({ content }) {
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-5 sm:gap-x-14">
               {STATS.map(({ value, label }, i) => (
                 <div key={`${label}-${i}`} className="text-center">
-                  <p className="text-2xl sm:text-4xl font-bold text-[#40A2D8]">
+                  <p className="text-2xl sm:text-4xl font-bold text-buzz">
                     {value}
                   </p>
                   <p className="text-[10px] sm:text-xs uppercase tracking-widest text-white mt-1 sm:whitespace-nowrap">
@@ -112,9 +112,9 @@ export default function WhoWeAreBox({ content }) {
               <Link
                 key={`${label}-${i}`}
                 href={href}
-                className="group flex items-center gap-3 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:border-[#40A2D8]/50 hover:bg-[#0B60B0] hover:text-white"
+                className="group flex items-center gap-3 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:border-buzz/50 hover:bg-buzz hover:text-white"
               >
-                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white/10 text-[#40A2D8] transition-colors duration-300 group-hover:bg-white group-hover:text-[#0B60B0]">
+                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white/10 text-buzz transition-colors duration-300 group-hover:bg-white group-hover:text-ink">
                   <Icon size={15} />
                 </span>
                 {label}

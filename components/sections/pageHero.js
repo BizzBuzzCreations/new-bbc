@@ -9,7 +9,7 @@ export default function PageHero({ label, title, subtitle }) {
       style={{ background: "radial-gradient(circle at top, #1c1c1c, #000000)" }}
     >
       {label && (
-        <p className="text-xs font-bold uppercase tracking-widest text-[#40A2D8] mb-4">
+        <p className="text-xs font-bold uppercase tracking-widest text-buzz mb-4">
           {label}
         </p>
       )}

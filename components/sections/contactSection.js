@@ -41,7 +41,7 @@ const toastOptions = {
 const MAX_FILE_BYTES = 4 * 1024 * 1024;
 
 const inputClasses =
-  "w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-base text-white placeholder:text-white/40 outline-none transition focus:border-[#40A2D8] md:text-sm";
+  "w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-base text-white placeholder:text-white/40 outline-none transition focus:border-buzz md:text-sm";
 const labelClasses = "mb-1.5 block text-sm text-white/80";
 
 // Redesign (dark, like the rest of the site): on the left the heading (a
@@ -145,14 +145,14 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
   );
 
   return (
-    <section id="contact-form" className="scroll-mt-20 bg-black text-white">
+    <section id="contact-form" className="scroll-mt-20 bg-ink text-white">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 pt-8 pb-16 md:px-10 md:pt-14 md:pb-20 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
         <div>
           {headingLevel === "h1" && (
             <nav aria-label="Breadcrumb" className="mb-6 md:mb-8">
               <ol className="flex flex-wrap items-center gap-1.5 text-sm text-white/60">
                 <li>
-                  <Link href="/" className="text-[#40A2D8] hover:text-white">Home</Link>
+                  <Link href="/" className="text-buzz hover:text-white">Home</Link>
                 </li>
                 <li aria-hidden="true">
                   <ChevronRight size={14} />
@@ -164,15 +164,15 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
           <Heading className="font-display text-[2.3rem] leading-[1.06] sm:text-5xl">
             <AccentTitle title={heading} />
           </Heading>
-          <RichText as="p" text={paragraph} className="mt-6 max-w-xl text-base leading-relaxed text-white/70 md:text-lg" />
+          <RichText as="p" text={paragraph} className="mt-6 max-w-xl text-base leading-relaxed text-fog md:text-lg" />
 
           <ol className="mt-10 border-t border-white/10">
             {steps.map(({ title, description }, i) => (
               <li key={i} className="flex gap-5 border-b border-white/10 py-5">
-                <span aria-hidden="true" className="font-display w-8 shrink-0 text-2xl text-[#40A2D8]">{String(i + 1).padStart(2, "0")}</span>
+                <span aria-hidden="true" className="font-display w-8 shrink-0 text-2xl text-buzz">{String(i + 1).padStart(2, "0")}</span>
                 <div>
                   <SubHeading className="text-base font-medium text-white">{title}</SubHeading>
-                  <RichText as="p" text={description} className="mt-1.5 text-sm leading-relaxed text-white/65" />
+                  <RichText as="p" text={description} className="mt-1.5 text-sm leading-relaxed text-fog" />
                 </div>
               </li>
             ))}
@@ -192,7 +192,7 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
           </div>
         </div>
 
-        <div className="rounded-3xl border border-white/10 bg-[#0b0e16] p-6 sm:p-8 lg:p-10">
+        <div className="rounded-[20px] border border-white/10 bg-ink-2 p-6 sm:p-8 lg:p-10">
           <SubHeading className="font-display text-2xl text-white">{formHeading}</SubHeading>
           <form onSubmit={handleSubmit} className="mt-6 space-y-5">
             <div className="grid gap-5 sm:grid-cols-2">
@@ -245,7 +245,7 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
             <div>
               <label
                 htmlFor="file"
-                className="flex cursor-pointer items-center justify-between gap-3 rounded-xl border border-dashed border-white/20 px-4 py-3 text-sm text-white/60 transition-colors hover:border-white/40 has-[+input:focus-visible]:border-[#40A2D8]"
+                className="flex cursor-pointer items-center justify-between gap-3 rounded-xl border border-dashed border-white/20 px-4 py-3 text-sm text-white/60 transition-colors hover:border-white/40 has-[+input:focus-visible]:border-buzz"
               >
                 <span className="truncate">{fileName || "Attach PDF/Doc File (optional)"}</span>
                 <Paperclip size={16} aria-hidden="true" className="shrink-0" />
@@ -256,7 +256,7 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
             <button
               type="submit"
               disabled={submitting}
-              className="group inline-flex w-full cursor-pointer items-center justify-center gap-2.5 rounded-full border border-[#0B60B0] bg-[#0B60B0] px-6 py-3.5 text-base font-medium text-white transition-colors duration-200 hover:border-[#0d70cf] hover:bg-[#0d70cf] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8] disabled:opacity-60"
+              className="group inline-flex w-full cursor-pointer items-center justify-center gap-2.5 rounded-full border border-buzz bg-buzz px-6 py-3.5 text-base font-medium text-white transition-colors duration-200 hover:border-[#0d70cf] hover:bg-[#ffe066] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz disabled:opacity-60"
             >
               <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-current opacity-80 transition-transform duration-200 group-hover:scale-[1.7]" />
               {submitting ? "Sending…" : formButtonText}

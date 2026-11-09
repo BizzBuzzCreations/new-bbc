@@ -246,7 +246,7 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
         aria-expanded={expanded}
         title={expanded ? "Minimize BizzBee AI" : "Ask BizzBee AI"}
         aria-haspopup="dialog"
-        className={`bizzbee-fab pointer-events-none relative block h-[84px] w-[102px] sm:h-[104px] sm:w-[126px] select-none cursor-pointer focus:outline-none focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8] [perspective:520px]`}
+        className={`bizzbee-fab pointer-events-none relative block h-[84px] w-[102px] sm:h-[104px] sm:w-[126px] select-none cursor-pointer focus:outline-none focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-buzz [perspective:520px]`}
       >
         <span
           ref={stageRef}

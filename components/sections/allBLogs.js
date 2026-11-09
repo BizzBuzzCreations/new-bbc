@@ -159,7 +159,7 @@ export default function AllBLogs() {
       <button type="button" aria-label="Previous page" disabled={currPage === 1 || loading} onClick={() => goToPage(-1)} className={pagerButton}>
         <ArrowLeft size={16} aria-hidden="true" />
       </button>
-      <p className="text-sm text-white/70">
+      <p className="text-sm text-fog">
         Page {currPage} of {totalPages}
       </p>
       <button type="button" aria-label="Next page" disabled={currPage == totalPages || loading} onClick={() => goToPage(1)} className={pagerButton}>
@@ -173,12 +173,12 @@ export default function AllBLogs() {
   // (PostCard), the pager again underneath. Same fetching, paging, category
   // deep links and remembered selection as before.
   return (
-    <div className="mx-auto max-w-7xl px-6 text-white md:px-10">
+    <div className="wrap text-white md:px-10">
       {showAll && (
         <div className="flex flex-wrap items-end justify-between gap-6 border-t border-white/10 pt-16 md:pt-20">
           <div>
-            <p className="text-sm text-[#40A2D8]">Every post</p>
-            <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">All Blogs</h2>
+            <p className="kicker text-buzz">Every post</p>
+            <h2 className="font-display mt-6 text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98]">All Blogs</h2>
           </div>
           <div className="flex flex-wrap items-center gap-4">
             <div className="relative w-64" ref={ref}>
@@ -206,7 +206,7 @@ export default function AllBLogs() {
                         type="button"
                         onClick={() => handleSelect(cat)}
                         className={`flex w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-left text-sm transition-colors duration-150 ${
-                          cat.name === selected.name ? "bg-[#0B60B0] text-white" : "text-white/80 hover:bg-white/5 hover:text-white"
+                          cat.name === selected.name ? "bg-buzz text-buzz-ink" : "text-white/80 hover:bg-white/5 hover:text-white"
                         }`}
                       >
                         <span>{decodeHTML(cat.name)}</span>

@@ -50,9 +50,9 @@ export default function BlogContactForm() {
   };
 
   return (
-    <div data-bizzbee-avoid className="rounded-3xl border border-white/10 bg-[#0b0e16]/85 p-6 backdrop-blur-sm">
+    <div data-bizzbee-avoid className="rounded-[20px] border border-white/10 bg-ink-2/85 p-6 backdrop-blur-sm">
       <h3 className="font-display mb-1 text-xl text-white">Have Questions?</h3>
-      <p className="mb-5 text-sm text-white/65">
+      <p className="mb-5 text-sm text-fog">
         Tell us a little about your project and we&apos;ll get back to you.
       </p>
 
@@ -60,7 +60,7 @@ export default function BlogContactForm() {
         <div>
           <label
             htmlFor="blog-contact-name"
-            className="block text-xs font-semibold uppercase tracking-wide text-white/70 mb-1.5"
+            className="block text-xs font-semibold uppercase tracking-wide text-fog mb-1.5"
           >
             Name
           </label>
@@ -70,7 +70,7 @@ export default function BlogContactForm() {
             name="name"
             type="text"
             id="blog-contact-name"
-            className="w-full rounded-xl border border-white/20 bg-white/[0.04] px-3 py-2.5 text-base text-white placeholder:text-white/45 focus:border-[#40A2D8] focus:outline-none md:text-sm"
+            className="w-full rounded-xl border border-white/20 bg-white/[0.04] px-3 py-2.5 text-base text-white placeholder:text-white/45 focus:border-buzz focus:outline-none md:text-sm"
             placeholder="Your full name"
             required
           />
@@ -79,7 +79,7 @@ export default function BlogContactForm() {
         <div>
           <label
             htmlFor="blog-contact-email"
-            className="block text-xs font-semibold uppercase tracking-wide text-white/70 mb-1.5"
+            className="block text-xs font-semibold uppercase tracking-wide text-fog mb-1.5"
           >
             Email
           </label>
@@ -89,7 +89,7 @@ export default function BlogContactForm() {
             name="email"
             type="email"
             id="blog-contact-email"
-            className="w-full rounded-xl border border-white/20 bg-white/[0.04] px-3 py-2.5 text-base text-white placeholder:text-white/45 focus:border-[#40A2D8] focus:outline-none md:text-sm"
+            className="w-full rounded-xl border border-white/20 bg-white/[0.04] px-3 py-2.5 text-base text-white placeholder:text-white/45 focus:border-buzz focus:outline-none md:text-sm"
             placeholder="you@example.com"
             required
           />
@@ -98,7 +98,7 @@ export default function BlogContactForm() {
         <div>
           <label
             htmlFor="blog-contact-message"
-            className="block text-xs font-semibold uppercase tracking-wide text-white/70 mb-1.5"
+            className="block text-xs font-semibold uppercase tracking-wide text-fog mb-1.5"
           >
             Message
           </label>
@@ -108,7 +108,7 @@ export default function BlogContactForm() {
             name="message"
             id="blog-contact-message"
             rows="4"
-            className="w-full rounded-xl border border-white/20 bg-white/[0.04] px-3 py-2.5 text-base text-white placeholder:text-white/45 focus:border-[#40A2D8] focus:outline-none md:text-sm"
+            className="w-full rounded-xl border border-white/20 bg-white/[0.04] px-3 py-2.5 text-base text-white placeholder:text-white/45 focus:border-buzz focus:outline-none md:text-sm"
             placeholder="Briefly tell us what you need..."
             required
           ></textarea>
@@ -117,7 +117,7 @@ export default function BlogContactForm() {
         <button
           type="submit"
           disabled={submitting}
-          className="inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-[#0B60B0] bg-[#0B60B0] px-5 py-3 text-sm font-medium text-white cursor-pointer transition-colors duration-200 hover:border-[#0d70cf] hover:bg-[#0d70cf] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8] disabled:opacity-60"
+          className="inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-buzz bg-buzz px-5 py-3 text-sm font-medium text-white cursor-pointer transition-colors duration-200 hover:border-[#0d70cf] hover:bg-[#ffe066] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz disabled:opacity-60"
         >
           <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-current opacity-80" />
           {submitting ? "Sending..." : "Submit"}
