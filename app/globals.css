@@ -13,43 +13,61 @@
 
 /* Homepage redesign: big, light display type (IBM Plex Sans at 300 — the
    body font's variable file already covers it, so no extra download). */
-/* ===== BizzBuzz Creations rebuild — design system (DESIGN_DIRECTION.md) =====
-   Display: Bricolage Grotesque · accent word: Newsreader italic ·
-   body: Instrument Sans · labels: DM Mono. Colours: ink / paper / buzz. */
+/* ===== BizzBuzz Creations — design system v2 "Set in type" (DESIGN_DIRECTION.md)
+   Geist (everything) + Geist Mono (labels, numbers). Two surfaces, one accent. */
 @theme {
-  --color-ink: #0a0a0b;
-  --color-ink-2: #111113;
-  --color-ink-3: #1a1a1d;
-  --color-fog: #a6a59f;
-  --color-paper: #f1efe9;
-  --color-paper-2: #e6e3da;
-  --color-stone: #57554f;
+  --color-paper: #f5f4f0;
+  --color-paper-2: #ecebe6;
+  --color-ink: #111110;
+  --color-ink-2: #1b1b1a;
+  --color-ink-3: #262624;
+  --color-stone: #6a6962;
+  --color-fog: #a3a29a;
   --color-buzz: #ffd43b;
   --color-buzz-ink: #1c1700;
-  --font-mono: var(--font-dm-mono), ui-monospace, monospace;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* headings — Bricolage Grotesque, tight */
+/* The two surfaces. Every v2 component draws with these variables, so the
+   same component works on paper and on ink. */
+.v-paper,
+.on-paper {
+  --bg: #f5f4f0;
+  --fg: #111110;
+  --mut: #6a6962;
+  --line: rgb(17 17 16 / 0.15);
+}
+.v-ink,
+.on-ink {
+  --bg: #111110;
+  --fg: #f5f4f0;
+  --mut: #a3a29a;
+  --line: rgb(245 244 240 / 0.18);
+}
+.on-paper,
+.on-ink {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+/* headings — Geist, tight */
 @utility font-display {
-  font-family: var(--font-bricolage), var(--font-ibm), sans-serif;
+  font-family: var(--font-geist), var(--font-ibm), system-ui, sans-serif;
   font-weight: 500;
-  letter-spacing: -0.04em;
-  font-feature-settings: "ss01";
+  letter-spacing: -0.045em;
+  font-feature-settings: "ss01", "cv11";
 }
-/* the one accent word in a heading */
+/* kept for older call sites: no italic any more — the same sans, muted */
 @utility font-accent {
-  font-family: var(--font-newsreader), Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  opacity: 0.55;
 }
-/* instrument labels: [01] SERVICES */
+/* labels: 01 / 08 · SERVICES */
 @utility kicker {
-  font-family: var(--font-dm-mono), ui-monospace, monospace;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
   font-size: 0.75rem;
   line-height: 1.3;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 /* page container: 1440 max, 20 / 40px gutters */
@@ -531,18 +549,18 @@ body {
   margin: auto;
   line-height: 1.8;
   font-size: 18px;
-  color: #333;
+  color: #1b1b1a;
 }
 
 /* Blog text in the site's fonts even when a post carries fonts pasted in
    from another editor (inline font-family, e.g. Arial): headings in Fira
    Sans, everything else in IBM Plex Sans. Code keeps its monospace. */
 .article :where(*:not(pre, code, kbd, samp, pre *, code *)) {
-  font-family: var(--font-instrument), var(--font-ibm), sans-serif !important;
+  font-family: var(--font-geist), var(--font-ibm), sans-serif !important;
 }
 .article :is(h1, h2, h3, h4, h5, h6),
 .article :is(h1, h2, h3, h4, h5, h6) * {
-  font-family: var(--font-bricolage), var(--font-fira), sans-serif !important;
+  font-family: var(--font-geist), var(--font-fira), sans-serif !important;
   letter-spacing: -0.02em;
 }
 
@@ -862,7 +880,7 @@ body {
   padding: 0 0.35rem;
   border: 0;
   background: transparent;
-  color: var(--color-buzz);
+  color: var(--color-stone);
   font-size: 0.8em;
   font-weight: 400;
   line-height: 1;
@@ -1064,27 +1082,30 @@ a.animated-button {
   }
 }
 
-/* ===== Rebuild: the public site's base (app/(main)/layout.js wraps every
-   page in .site; the admin dashboard keeps its own look) ===== */
+/* ===== The public site's base (app/(main)/layout.js wraps every page in
+   .site; the admin dashboard keeps its own look) ===== */
 .site {
-  font-family: var(--font-instrument), var(--font-ibm), system-ui, sans-serif;
-  background: var(--color-ink);
-  color: #fff;
+  font-family: var(--font-geist), var(--font-ibm), system-ui, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
   font-feature-settings: "kern", "liga";
+  -webkit-font-smoothing: antialiased;
 }
 .site :is(h1, h2, h3, h4, h5, h6) {
-  font-family: var(--font-bricolage), var(--font-ibm), sans-serif;
+  font-family: var(--font-geist), var(--font-ibm), system-ui, sans-serif;
 }
 .site ::selection {
   background: var(--color-buzz);
   color: var(--color-buzz-ink);
 }
 .site :focus-visible {
-  outline: 2px solid var(--color-buzz);
+  outline: 2px solid var(--color-ink);
   outline-offset: 3px;
 }
-/* the old site-wide "brighten on hover" safety net is replaced by each
-   component's own hover state */
+.on-ink :focus-visible,
+.on-ink:focus-visible {
+  outline-color: var(--color-buzz);
+}
 @media (hover: hover) and (pointer: fine) {
   .site :is(button, a[class*="rounded-full"]):not(:disabled):hover {
     filter: none;
@@ -1228,4 +1249,34 @@ a.animated-button {
 .article-dark a {
   text-decoration-color: var(--color-buzz) !important;
   text-underline-offset: 4px;
+}
+
+/* the menu opens like a curtain */
+@keyframes curtain {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0);
+  }
+}
+
+@keyframes line-up {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }

@@ -40,6 +40,7 @@ export default function ServiceHubPage({ content, label, introAlt = "", trustAlt
           ctaText={c.heroCtaText}
           image={c.heroImage}
           secondaryHref={showServices ? "#services" : null}
+          aside={showServices ? { title: `${c.services.length} services in this line`, links: c.services.map((x) => ({ label: x.heading, href: x.href })) } : null}
         />
       )}
       {!hidden.has("intro") && (

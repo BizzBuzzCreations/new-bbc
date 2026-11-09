@@ -3,46 +3,42 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowUpRight, ChevronDown, Mail, MessageCircle, Phone, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import Button from "@/components/brand/button";
 import { ClockLine } from "@/components/brand/clock";
 import { SERVICE_LINES, SUB_SERVICE_COUNT, INDUSTRIES, COMPANY_LINKS, INSIGHT_LINKS, CONTACT } from "@/lib/siteNav";
 
-// The site header (rebuild, DESIGN_DIRECTION.md §6).
-//  - Fixed; transparent over the page's hero, ink + blur once scrolled.
-//    Hides while scrolling down past the first screen, back on scroll up
-//    (and whenever something in it has focus).
-//  - Desktop (lg+): Services / Industries / Company mega panels — open on
-//    hover (short intent delay) or click, Esc / outside click / route change
-//    close them; arrow keys move between the 8 service lines.
-//  - Phone: a full-screen sheet with big numbered links, Services and
-//    Industries as accordions, and call / WhatsApp / email at the bottom.
-//    Body scroll is locked while it is open; Esc closes; focus returns to
-//    the menu button.
-const PANELS = ["services", "industries", "company"];
+// The header (DESIGN_DIRECTION.md §5): logo · live time · Menu · Start a
+// project — nothing else. "Menu" opens a full-screen overlay on every screen
+// size: huge links on the left; on the right the links of the one you hover
+// (on phones each opens under itself, as an accordion). The header hides
+// while reading down the page and returns on scroll up; Esc closes the menu,
+// focus is held inside it and goes back to the button.
+const PRIMARY = [
+  { key: "services", label: "Services", href: "/services" },
+  { key: "industries", label: "Industries", href: "/industries" },
+  { key: "company", label: "Company", href: "/about" },
+  { key: "insights", label: "Insights", href: "/blog" },
+  { key: "contact", label: "Contact", href: "/contact" },
+];
+const HAS_PANEL = new Set(["services", "industries", "company"]);
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(null); // which desktop panel
-  const [sheet, setSheet] = useState(false); // phone menu
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("services");
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const [line, setLine] = useState(0); // the service line shown in the Services panel
-  const headerRef = useRef(null);
-  const timer = useRef(null);
-  const menuBtn = useRef(null);
+  const btn = useRef(null);
+  const overlay = useRef(null);
 
-  // close everything on navigation (adjusting state while rendering, the
-  // React-recommended way to reset on a prop change)
   const [lastPath, setLastPath] = useState(pathname);
   if (pathname !== lastPath) {
     setLastPath(pathname);
-    setOpen(null);
-    setSheet(false);
+    setOpen(false);
   }
 
-  // scrolled look + hide on scroll down
   useEffect(() => {
     let lastY = window.scrollY;
     let frame = 0;
@@ -50,10 +46,8 @@ export default function Navbar() {
       frame = 0;
       const y = window.scrollY;
       setScrolled(y > 24);
-      const down = y > lastY + 4;
-      const up = y < lastY - 4;
-      if (down && y > window.innerHeight * 0.8) setHidden(true);
-      else if (up || y < 80) setHidden(false);
+      if (y > lastY + 4 && y > window.innerHeight * 0.6) setHidden(true);
+      else if (y < lastY - 4 || y < 80) setHidden(false);
       lastY = y;
     };
     const onScroll = () => {
@@ -67,416 +61,207 @@ export default function Navbar() {
     };
   }, []);
 
-  // Esc and outside clicks close the desktop panel
+  // menu open: lock scroll, Esc closes, Tab stays inside, focus returns
   useEffect(() => {
     if (!open) return;
-    const onKey = (e) => e.key === "Escape" && setOpen(null);
-    const onDown = (e) => headerRef.current && !headerRef.current.contains(e.target) && setOpen(null);
-    document.addEventListener("keydown", onKey);
-    document.addEventListener("pointerdown", onDown);
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.removeEventListener("pointerdown", onDown);
-    };
-  }, [open]);
-
-  // phone sheet: lock scroll, Esc closes, focus back to the button
-  useEffect(() => {
-    if (!sheet) return;
     const prev = document.documentElement.style.overflow;
     document.documentElement.style.overflow = "hidden";
-    const onKey = (e) => e.key === "Escape" && setSheet(false);
+    const root = overlay.current;
+    const focusables = () => [...root.querySelectorAll("a[href], button:not([disabled])")].filter((e) => e.offsetParent !== null);
+    focusables()[0]?.focus();
+    const onKey = (e) => {
+      if (e.key === "Escape") setOpen(false);
+      if (e.key !== "Tab") return;
+      const f = focusables();
+      if (!f.length) return;
+      const first = f[0];
+      const last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
     document.addEventListener("keydown", onKey);
-    const btn = menuBtn.current;
+    const trigger = btn.current;
     return () => {
       document.documentElement.style.overflow = prev;
       document.removeEventListener("keydown", onKey);
-      btn?.focus();
+      trigger?.focus();
     };
-  }, [sheet]);
+  }, [open]);
 
-  const hoverOpen = useCallback((key) => {
-    clearTimeout(timer.current);
-    timer.current = setTimeout(() => setOpen(key), 90);
-  }, []);
-  const hoverClose = useCallback(() => {
-    clearTimeout(timer.current);
-    timer.current = setTimeout(() => setOpen(null), 180);
-  }, []);
-  useEffect(() => () => clearTimeout(timer.current), []);
-
-  const solid = scrolled || open || sheet;
-  const isActive = (href) => (href === "/" ? pathname === "/" : pathname === href || pathname?.startsWith(`${href}/`));
-
+  const solid = scrolled && !open;
   return (
     <>
-      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-full focus:bg-buzz focus:px-4 focus:py-2 focus:text-buzz-ink">
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-paper">
         Skip to content
       </a>
       <header
-        ref={headerRef}
         onFocusCapture={() => setHidden(false)}
-        onMouseLeave={hoverClose}
-        className={`fixed inset-x-0 top-0 z-50 transition-[transform,background-color,border-color] duration-500 ease-out-soft ${
-          hidden && !open && !sheet ? "-translate-y-full" : "translate-y-0"
-        } ${solid ? "border-b border-white/10 bg-ink/85 backdrop-blur-xl" : "border-b border-transparent bg-transparent"}`}
+        className={`fixed inset-x-0 top-0 z-[70] transition-[transform,background-color,border-color,color] duration-500 ease-out-soft ${
+          hidden && !open ? "-translate-y-full" : "translate-y-0"
+        } text-(--fg) ${open ? "v-ink border-b border-transparent bg-transparent" : solid ? "v-paper border-b border-(--line) bg-paper/95 backdrop-blur-xl" : "v-paper border-b border-transparent bg-transparent"}`}
       >
-        <div className="wrap flex h-16 items-center gap-6 md:h-[76px]">
-          <Link href="/" className="relative z-10 shrink-0" aria-label="BizzBuzz Creations — home">
-            <Image src="/bbc logo white.png" alt="BizzBuzz Creations" width={447} height={143} priority className="h-8 w-auto md:h-9" />
+        <div className="wrap flex h-16 items-center gap-6 md:h-20">
+          <Link href="/" onClick={() => setOpen(false)} className="shrink-0" aria-label="BizzBuzz Creations — home">
+            <Image src={open ? "/bbc logo white.png" : "/bbc-logo-ink.png"} alt="BizzBuzz Creations" width={447} height={143} priority className="h-8 w-auto md:h-9" />
           </Link>
-
-          {/* desktop navigation */}
-          <nav aria-label="Main" className="hidden flex-1 items-center gap-1 lg:flex">
-            {PANELS.map((key) => (
-              <button
-                key={key}
-                type="button"
-                aria-expanded={open === key}
-                aria-controls={`panel-${key}`}
-                onClick={() => setOpen(open === key ? null : key)}
-                onMouseEnter={() => hoverOpen(key)}
-                className={`group inline-flex h-10 items-center gap-1.5 rounded-full px-4 text-[0.9375rem] capitalize transition-colors ${
-                  open === key ? "bg-white/10 text-white" : "text-white/80 hover:text-white"
-                }`}
-              >
-                {key}
-                <ChevronDown aria-hidden="true" size={15} className={`transition-transform duration-300 ${open === key ? "rotate-180" : ""}`} />
-              </button>
-            ))}
-            <Link
-              href="/blog"
-              onMouseEnter={hoverClose}
-              aria-current={isActive("/blog") ? "page" : undefined}
-              className="inline-flex h-10 items-center rounded-full px-4 text-[0.9375rem] text-white/80 transition-colors hover:text-white aria-[current=page]:text-buzz"
-            >
-              Insights
-            </Link>
-            <Link
-              href="/contact"
-              onMouseEnter={hoverClose}
-              aria-current={isActive("/contact") ? "page" : undefined}
-              className="inline-flex h-10 items-center rounded-full px-4 text-[0.9375rem] text-white/80 transition-colors hover:text-white aria-[current=page]:text-buzz"
-            >
-              Contact
-            </Link>
-          </nav>
-
-          <div className="ml-auto flex items-center gap-4">
-            <ClockLine className="hidden text-fog 2xl:inline-flex" />
-            <div className="hidden lg:block">
-              <Button href="/contact" variant="solid">
-                Start a project
-              </Button>
-            </div>
+          <div className="ml-auto flex items-center gap-3 md:gap-6">
+            <ClockLine className="hidden text-(--mut) xl:inline-flex" />
+            {!open && (
+              <div className="hidden sm:block">
+                <Button href="/contact" variant="solid" size="md">
+                  Start a project
+                </Button>
+              </div>
+            )}
             <button
-              ref={menuBtn}
+              ref={btn}
               type="button"
-              onClick={() => setSheet(true)}
-              aria-expanded={sheet}
-              aria-controls="phone-menu"
-              className="flex h-11 items-center gap-2.5 rounded-full border border-white/20 pl-4 pr-3 text-sm text-white lg:hidden"
+              onClick={() => setOpen((o) => !o)}
+              aria-expanded={open}
+              aria-controls="site-menu"
+              className="group flex h-12 items-center gap-3 rounded-full border border-(--fg)/30 pl-5 pr-4 text-[0.9375rem] font-medium transition-colors duration-300 hover:border-(--fg)"
             >
-              Menu
-              <span aria-hidden="true" className="flex flex-col gap-[5px]">
-                <span className="block h-px w-4 bg-current" />
-                <span className="block h-px w-4 bg-current" />
+              <span className="roll">
+                <span>{open ? "Close" : "Menu"}</span>
+                <span aria-hidden="true">{open ? "Close" : "Menu"}</span>
+              </span>
+              <span aria-hidden="true" className="relative block h-3 w-5">
+                <span className={`absolute left-0 h-px w-5 bg-current transition-all duration-300 ${open ? "top-1.5 rotate-45" : "top-0"}`} />
+                <span className={`absolute left-0 h-px w-5 bg-current transition-all duration-300 ${open ? "top-1.5 -rotate-45" : "top-3"}`} />
               </span>
             </button>
           </div>
         </div>
-
-        {/* desktop panels */}
-        <div className="hidden lg:block" onMouseEnter={() => clearTimeout(timer.current)}>
-          <ServicesPanel open={open === "services"} line={line} setLine={setLine} />
-          <IndustriesPanel open={open === "industries"} />
-          <CompanyPanel open={open === "company"} />
-        </div>
       </header>
 
-      <PhoneSheet open={sheet} onClose={() => setSheet(false)} />
+      <div
+        id="site-menu"
+        ref={overlay}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site menu"
+        hidden={!open}
+        className="on-ink fixed inset-0 z-[60] overflow-y-auto motion-safe:animate-[curtain_0.6s_var(--ease-out-soft)]"
+      >
+        <div className="wrap flex min-h-full flex-col pb-10 pt-7 md:pt-10">
+          <div className="grid flex-1 gap-12 lg:grid-cols-12 lg:gap-10">
+            <ul className="lg:col-span-5">
+              {PRIMARY.map((p, i) => {
+                const panel = HAS_PANEL.has(p.key);
+                const on = active === p.key;
+                return (
+                  <li key={p.key} className="border-b border-(--line)">
+                    <div className="flex items-center">
+                      <Link
+                        href={p.href}
+                        onMouseEnter={() => panel && setActive(p.key)}
+                        onFocus={() => panel && setActive(p.key)}
+                        onClick={() => setOpen(false)}
+                        className={`font-display flex flex-1 items-baseline gap-4 py-4 text-[clamp(2.4rem,5.4vw,5rem)] leading-none transition-opacity duration-300 md:py-5 ${on || !panel ? "opacity-100" : "opacity-50 hover:opacity-100"}`}
+                      >
+                        <span className="kicker w-6 text-(--mut)">{String(i + 1).padStart(2, "0")}</span>
+                        {p.label}
+                      </Link>
+                      {panel && (
+                        <button type="button" aria-label={`${on ? "Hide" : "Show"} ${p.label} links`} aria-expanded={on} onClick={() => setActive(on ? "" : p.key)} className="flex h-12 w-12 items-center justify-center lg:hidden">
+                          <ChevronDown aria-hidden="true" size={22} className={`transition-transform duration-300 ${on ? "rotate-180" : ""}`} />
+                        </button>
+                      )}
+                    </div>
+                    {panel && on && (
+                      <div className="pb-6 lg:hidden">
+                        <MenuPanel which={p.key} onNavigate={() => setOpen(false)} compact />
+                      </div>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="hidden lg:col-span-7 lg:block">
+              <div key={active} className="motion-safe:animate-[fade-in_0.4s_ease-out]">
+                <MenuPanel which={active || "services"} onNavigate={() => setOpen(false)} />
+              </div>
+            </div>
+          </div>
+          <div className="mt-12 flex flex-wrap items-end justify-between gap-6 border-t border-(--line) pt-6 text-sm text-(--mut)">
+            <p>
+              <a href={`mailto:${CONTACT.email}`} className="text-(--fg) underline decoration-(--fg)/30 underline-offset-4 hover:decoration-(--fg)">
+                {CONTACT.email}
+              </a>
+              <span className="mx-3">·</span>
+              <a href={CONTACT.phoneIndia.href} className="hover:text-(--fg)">{CONTACT.phoneIndia.display}</a>
+              <span className="mx-3">·</span>
+              <a href={CONTACT.phoneUk.href} className="hover:text-(--fg)">{CONTACT.phoneUk.display}</a>
+            </p>
+            <ClockLine />
+          </div>
+        </div>
+      </div>
     </>
   );
 }
 
-function Panel({ id, open, children, label }) {
-  return (
-    <div
-      id={`panel-${id}`}
-      role="region"
-      aria-label={label}
-      hidden={!open}
-      className="border-t border-white/10 bg-ink-2/95 backdrop-blur-xl motion-safe:animate-[panel-in_0.35s_var(--ease-out-soft)]"
-    >
-      <div className="wrap py-10">{children}</div>
-    </div>
-  );
-}
-
-function ServicesPanel({ open, line, setLine }) {
-  const current = SERVICE_LINES[line];
-  const onKey = (e) => {
-    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-      e.preventDefault();
-      const next = (line + (e.key === "ArrowDown" ? 1 : -1) + SERVICE_LINES.length) % SERVICE_LINES.length;
-      setLine(next);
-      e.currentTarget.querySelectorAll("[data-line]")[next]?.focus();
-    }
-  };
-  return (
-    <Panel id="services" open={open} label="Services">
-      <div className="grid grid-cols-12 gap-10">
-        <ul className="col-span-4 border-l border-white/10" onKeyDown={onKey}>
-          {SERVICE_LINES.map((s, i) => (
+function MenuPanel({ which, onNavigate, compact = false }) {
+  const link = "group flex items-center justify-between gap-3 py-2 text-(--mut) transition-colors hover:text-(--fg)";
+  if (which === "services") {
+    return (
+      <div>
+        <p className="kicker mb-5 hidden text-(--mut) lg:block">
+          {SERVICE_LINES.length} lines · {SUB_SERVICE_COUNT} services
+        </p>
+        <ul className={compact ? "grid gap-6" : "grid gap-x-8 gap-y-9 xl:grid-cols-2"}>
+          {SERVICE_LINES.map((s) => (
             <li key={s.href}>
-              <Link
-                href={s.href}
-                data-line
-                onMouseEnter={() => setLine(i)}
-                onFocus={() => setLine(i)}
-                aria-current={i === line ? "true" : undefined}
-                className={`-ml-px flex items-baseline gap-4 border-l py-2.5 pl-5 text-lg transition-colors duration-200 ${
-                  i === line ? "border-buzz text-white" : "border-transparent text-white/55 hover:text-white"
-                }`}
-              >
-                <span className="kicker text-[0.7rem] text-buzz">{s.no}</span>
+              <Link href={s.href} onClick={onNavigate} className="font-display flex items-baseline gap-3 border-b border-(--line) pb-2 text-xl hover:opacity-70">
+                <span className="kicker text-(--mut)">{s.no}</span>
                 {s.name}
               </Link>
-            </li>
-          ))}
-        </ul>
-        <div className="col-span-8 col-start-5" key={current.href}>
-          <div className="flex items-end justify-between gap-8 border-b border-white/10 pb-6 motion-safe:animate-[panel-in_0.35s_var(--ease-out-soft)]">
-            <div>
-              <p className="kicker text-fog">
-                <span className="text-buzz">[{current.no}]</span> {current.subs.length} services
-              </p>
-              <p className="font-display mt-3 text-4xl">{current.name}</p>
-              <p className="mt-3 max-w-xl text-fog">{current.line}</p>
-            </div>
-            <Link href={current.href} className="group inline-flex shrink-0 items-center gap-1.5 text-sm text-white underline decoration-white/30 underline-offset-[6px] hover:decoration-buzz">
-              Overview <ArrowUpRight aria-hidden="true" size={15} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </Link>
-          </div>
-          <ul className="mt-2 grid grid-cols-2 gap-x-10">
-            {current.subs.map((sub) => (
-              <li key={sub.href}>
-                <Link href={sub.href} className="group flex items-center justify-between gap-4 border-b border-white/10 py-4 text-white/85 transition-colors hover:text-white">
-                  {sub.label}
-                  <ArrowUpRight aria-hidden="true" size={16} className="shrink-0 text-white/30 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-buzz" />
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-8 text-sm text-fog">
-            {SERVICE_LINES.length} lines · {SUB_SERVICE_COUNT} services —{" "}
-            <Link href="/services" className="text-white underline decoration-white/30 underline-offset-4 hover:decoration-buzz">
-              see them all
-            </Link>
-          </p>
-        </div>
-      </div>
-    </Panel>
-  );
-}
-
-function IndustriesPanel({ open }) {
-  return (
-    <Panel id="industries" open={open} label="Industries">
-      <div className="grid grid-cols-12 gap-10">
-        <div className="col-span-4">
-          <p className="kicker text-fog">
-            <span className="text-buzz">[{String(INDUSTRIES.length).padStart(2, "0")}]</span> Industries
-          </p>
-          <p className="font-display mt-3 text-4xl leading-tight">
-            Marketing that speaks your <span className="font-accent">customers&rsquo;</span> language.
-          </p>
-          <Link href="/industries" className="group mt-6 inline-flex items-center gap-1.5 text-sm text-white underline decoration-white/30 underline-offset-[6px] hover:decoration-buzz">
-            All industries <ArrowUpRight aria-hidden="true" size={15} />
-          </Link>
-        </div>
-        <ul className="col-span-8 col-start-5 grid grid-cols-3 gap-x-10">
-          {INDUSTRIES.map((ind, i) => (
-            <li key={ind.href}>
-              <Link href={ind.href} className="group flex items-baseline gap-3 border-b border-white/10 py-3.5 text-white/85 transition-colors hover:text-white">
-                <span className="kicker text-[0.7rem] text-white/55 transition-colors group-hover:text-buzz">{String(i + 1).padStart(2, "0")}</span>
-                {ind.label}
-              </Link>
+              <ul className="mt-2">
+                {s.subs.map((sub) => (
+                  <li key={sub.href}>
+                    <Link href={sub.href} onClick={onNavigate} className={`${link} text-[0.9375rem]`}>
+                      {sub.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </li>
           ))}
         </ul>
       </div>
-    </Panel>
-  );
-}
-
-function CompanyPanel({ open }) {
-  const col = (title, items) => (
-    <div>
-      <p className="kicker mb-3 text-fog">{title}</p>
-      <ul>
-        {items.map((l) => (
-          <li key={l.href}>
-            <Link href={l.href} className="group flex items-baseline justify-between gap-6 border-b border-white/10 py-4">
-              <span className="text-lg text-white">{l.label}</span>
-              <span className="text-sm text-fog transition-colors group-hover:text-white">{l.line}</span>
+    );
+  }
+  if (which === "industries") {
+    return (
+      <ul className={compact ? "grid grid-cols-2 gap-x-4" : "grid grid-cols-3 gap-x-8"}>
+        {INDUSTRIES.map((ind, i) => (
+          <li key={ind.href}>
+            <Link href={ind.href} onClick={onNavigate} className="group flex items-baseline gap-3 border-b border-(--line) py-3 transition-opacity hover:opacity-70">
+              <span className="kicker text-(--mut)">{String(i + 1).padStart(2, "0")}</span>
+              <span className="text-lg">{ind.label}</span>
             </Link>
           </li>
         ))}
       </ul>
-    </div>
-  );
+    );
+  }
   return (
-    <Panel id="company" open={open} label="Company">
-      <div className="grid grid-cols-12 gap-10">
-        <div className="col-span-6">{col("Company", COMPANY_LINKS)}</div>
-        <div className="col-span-5 col-start-8">
-          {col("Insights", INSIGHT_LINKS)}
-          <div className="mt-10 rounded-2xl border border-white/10 p-6">
-            <p className="kicker text-fog">Talk to us</p>
-            <p className="mt-3 text-white">
-              <a href={`mailto:${CONTACT.email}`} className="underline decoration-white/30 underline-offset-4 hover:decoration-buzz">
-                {CONTACT.email}
-              </a>
-            </p>
-            <p className="mt-1 text-fog">
-              <a href={CONTACT.phoneIndia.href} className="hover:text-white">
-                {CONTACT.phoneIndia.display}
-              </a>{" "}
-              ·{" "}
-              <a href={CONTACT.phoneUk.href} className="hover:text-white">
-                {CONTACT.phoneUk.display}
-              </a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </Panel>
-  );
-}
-
-function PhoneSheet({ open, onClose }) {
-  const [section, setSection] = useState(null);
-  const closeBtn = useRef(null);
-  useEffect(() => {
-    if (open) closeBtn.current?.focus();
-  }, [open]);
-
-  const big = "font-display flex w-full items-baseline gap-4 py-4 text-left text-[2rem] leading-none";
-  const acc = (key, no, title, body) => (
-    <li className="border-b border-white/10">
-      <button type="button" aria-expanded={section === key} onClick={() => setSection(section === key ? null : key)} className={`${big} justify-between`}>
-        <span className="flex items-baseline gap-4">
-          <span className="kicker text-buzz">{no}</span>
-          {title}
-        </span>
-        <ChevronDown aria-hidden="true" size={22} className={`shrink-0 self-center transition-transform duration-300 ${section === key ? "rotate-180" : ""}`} />
-      </button>
-      {section === key && <div className="pb-5">{body}</div>}
-    </li>
-  );
-  const link = (no, title, href) => (
-    <li className="border-b border-white/10">
-      <Link href={href} onClick={onClose} className={big}>
-        <span className="kicker text-buzz">{no}</span>
-        {title}
-      </Link>
-    </li>
-  );
-
-  return (
-    <div
-      id="phone-menu"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Menu"
-      hidden={!open}
-      className="fixed inset-0 z-[60] overflow-y-auto bg-ink text-white motion-safe:animate-[sheet-in_0.4s_var(--ease-out-soft)] lg:hidden"
-    >
-      <div className="wrap flex min-h-full flex-col">
-        <div className="flex h-16 items-center justify-between">
-          <Link href="/" onClick={onClose} aria-label="BizzBuzz Creations — home">
-            <Image src="/bbc logo white.png" alt="BizzBuzz Creations" width={447} height={143} className="h-8 w-auto" />
+    <ul>
+      {COMPANY_LINKS.concat(INSIGHT_LINKS.slice(1)).map((l) => (
+        <li key={l.href}>
+          <Link href={l.href} onClick={onNavigate} className="group flex items-baseline justify-between gap-6 border-b border-(--line) py-4">
+            <span className="font-display text-2xl">{l.label}</span>
+            <span className="flex items-center gap-1 text-sm text-(--mut) group-hover:text-(--fg)">
+              {l.line} <ArrowUpRight aria-hidden="true" size={14} />
+            </span>
           </Link>
-          <button ref={closeBtn} type="button" onClick={onClose} className="flex h-11 items-center gap-2 rounded-full border border-white/20 pl-4 pr-3 text-sm">
-            Close <X aria-hidden="true" size={18} />
-          </button>
-        </div>
-        <ul className="mt-6">
-          {acc(
-            "services",
-            "01",
-            "Services",
-            <ul className="grid gap-1">
-              {SERVICE_LINES.map((s) => (
-                <li key={s.href}>
-                  <Link href={s.href} onClick={onClose} className="flex items-baseline gap-3 py-2 text-lg text-white/85">
-                    <span className="kicker text-[0.7rem] text-fog">{s.no}</span>
-                    {s.name}
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <Link href="/services" onClick={onClose} className="mt-2 inline-flex items-center gap-1.5 py-2 text-buzz">
-                  All {SUB_SERVICE_COUNT} services <ArrowUpRight aria-hidden="true" size={16} />
-                </Link>
-              </li>
-            </ul>,
-          )}
-          {acc(
-            "industries",
-            "02",
-            "Industries",
-            <ul className="grid grid-cols-2 gap-x-4">
-              {INDUSTRIES.map((ind) => (
-                <li key={ind.href}>
-                  <Link href={ind.href} onClick={onClose} className="block py-2 text-white/85">
-                    {ind.label}
-                  </Link>
-                </li>
-              ))}
-              <li className="col-span-2">
-                <Link href="/industries" onClick={onClose} className="mt-2 inline-flex items-center gap-1.5 py-2 text-buzz">
-                  All industries <ArrowUpRight aria-hidden="true" size={16} />
-                </Link>
-              </li>
-            </ul>,
-          )}
-          {acc(
-            "company",
-            "03",
-            "Company",
-            <ul>
-              {COMPANY_LINKS.concat(INSIGHT_LINKS.slice(1)).map((l) => (
-                <li key={l.href}>
-                  <Link href={l.href} onClick={onClose} className="block py-2 text-lg text-white/85">
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>,
-          )}
-          {link("04", "Insights", "/blog")}
-          {link("05", "Contact", "/contact")}
-        </ul>
-        <div className="mt-auto pb-8 pt-10">
-          <Button href="/contact" variant="solid" className="w-full" onClick={onClose}>
-            Start a project
-          </Button>
-          <div className="mt-4 grid grid-cols-3 gap-2 text-sm">
-            <a href={CONTACT.phoneIndia.href} className="flex h-12 items-center justify-center gap-2 rounded-full border border-white/15">
-              <Phone aria-hidden="true" size={16} /> Call
-            </a>
-            <a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" className="flex h-12 items-center justify-center gap-2 rounded-full border border-white/15">
-              <MessageCircle aria-hidden="true" size={16} /> WhatsApp
-            </a>
-            <a href={`mailto:${CONTACT.email}`} className="flex h-12 items-center justify-center gap-2 rounded-full border border-white/15">
-              <Mail aria-hidden="true" size={16} /> Email
-            </a>
-          </div>
-          <ClockLine className="mt-6 text-fog" />
-        </div>
-      </div>
-    </div>
+        </li>
+      ))}
+    </ul>
   );
 }

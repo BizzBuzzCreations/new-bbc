@@ -36,7 +36,7 @@ export default function HeroSlideshow({ slides, aspect = "aspect-[4/3]" }) {
   if (!list.length) return null;
   return (
     <div>
-      <div className={`relative w-full overflow-hidden rounded-[20px] border border-white/10 bg-ink-2 ${aspect}`}>
+      <div className={`relative w-full overflow-hidden bg-paper-2 ${aspect}`}>
         {list.map((src, i) => (
           // index, not src — slides can repeat the same image
           <div key={i} aria-hidden={i !== active} className="absolute inset-0 transition-opacity duration-1000 ease-in-out" style={{ opacity: i === active ? 1 : 0 }}>
@@ -65,7 +65,7 @@ export default function HeroSlideshow({ slides, aspect = "aspect-[4/3]" }) {
               aria-pressed={i === active}
               className="group flex h-6 min-w-8 items-center justify-center"
             >
-              <span className={`block h-0.5 w-8 rounded-full transition-colors duration-300 ${i === active ? "bg-buzz" : "bg-white/25 group-hover:bg-white/60"}`} />
+              <span className={`block h-0.5 w-8 rounded-full transition-colors duration-300 ${i === active ? "bg-(--fg)" : "bg-(--fg)/25 group-hover:bg-(--fg)/60"}`} />
             </button>
           ))}
         </div>

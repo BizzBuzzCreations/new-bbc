@@ -1,204 +1,118 @@
-# Design direction — BizzBuzz Creations rebuild
+# Design direction v2 — BizzBuzz Creations
 
-Synthesised from the six references in `DESIGN_REFERENCES.md` and the
-business facts in the codebase. This is the system every page is built
-from. Approved by the owner on 2026-11-09 ("I approve the creative
-direction … do what is best for the website").
+Replaces v1 ("Signal from noise"), which the owner rejected on 2026-11-09:
+it kept the old site's section structure, used generated line-art and
+diagrams, and was not clean. v2 is designed from the eight references in
+`DESIGN_REFERENCES.md` (Mira, Tresmares, Kerna, AIR, Tenity, Zirka, Grail,
+Pier Gorelli) and a fresh brainstorm. **Nothing is derived from the previous
+site's layout.**
 
----
+## 1. The idea — "Set in type"
 
-## 1. What the references taught us (synthesis)
+Everything the references do best is *restraint*: one huge, tight grotesk; a
+great deal of white space; hairlines; real photographs and real numbers; one
+accent. So the site is **typeset, not decorated** — it reads like a well-made
+annual report for a company that is easy to work with. No illustration, no
+generated art, no stock imagery, no decorative gradients. What is shown is
+real: the team's photo, the clients' videos, the products' names, the
+numbers, the people.
 
-| Lesson | From | How we use it |
-|---|---|---|
-| One brand idea carried through copy, labels and visuals | Velmax, Axiom | **"Signal from noise"** (below) |
-| Grotesk headline + one serif-italic word + mono labels | Velmax, Visuvate | Bricolage Grotesque + *Newsreader italic* + DM Mono |
-| One rare accent colour on black / white | all six | **Buzz yellow** on ink and paper |
-| Show, don't claim — let the visitor see the work | Velmax, Visuvate, Shape of Intelligence | A pinned "signal path" scene with our real systems; live, interactive pieces |
-| Rows and numbered lists instead of card grids | Bitnomial, Velmax | Services as rows, advantages as numbered lists |
-| A big catalogue needs a mega menu and an index | BD Emerson, Velmax | Services mega menu (8 lines → 44 pages), searchable index on /services |
-| Cheap, convincing "3D" | Axiom (2D canvas), Shape of Intelligence (renders) | A generative **Signal Field** on one 2D canvas — no WebGL |
-| Visible honesty | Shape of Intelligence, Bitnomial | "Illustration" notes on demos; only verifiable numbers |
-| Motion respects the reader | Visuvate, Axiom | Everything still under reduced motion; nothing auto-moves except the hero field |
+Brand line (hero): the dashboard's heading, set huge and staggered.
+Interactive device: the *words* — staggered lines, words that fill as you
+read, a word that types ("Working with: clinics▮"), numbers that count,
+cells that invert, a giant wordmark that closes the page.
 
-**Rejected:** generic centred-label card grids (BD Emerson's template
-feel), auto-moving marquees and testimonial columns, hidden system cursor,
-`mailto:` forms, heavy WebGL, unverifiable stats, the current site's blue.
-
----
-
-## 2. Brand idea — "Signal from noise"
-
-The name is a buzz. The market around a small or growing business is
-noise: ads, algorithms, platforms, tools that don't talk to each other.
-BizzBuzz Creations turns that noise into a **signal** — a clear message,
-a site that converts, systems that follow up, people who answer.
-
-- **Motif:** the *Signal Field* — a field of fine horizontal lines that is
-  noisy at rest and resolves into a clean waveform where the visitor's
-  cursor (or the scroll) passes. Used in the hero, the footer and as quiet
-  section texture. One 2D canvas, paused off-screen, still under reduced
-  motion.
-- **Voice:** short, specific, confident. Plain English. Concrete nouns
-  (leads, calls, pages, rankings, invoices). No "unlock", "empower",
-  "transform tomorrow", "trusted partner".
-- **Labels** read like an instrument: `[01] SERVICES`, `IST 14:32 ·
-  GMT 09:02`, `08 LINES · 44 SERVICES`.
-
----
-
-## 3. Colour
+## 2. Colour (one accent, used sparingly)
 
 | Token | Value | Use |
 |---|---|---|
-| `ink` | `#0A0A0B` | default page background |
-| `ink-2` | `#111113` | raised surfaces |
-| `ink-3` | `#1A1A1D` | hover / inputs |
-| `line` | `rgb(255 255 255 / 0.12)` | hairlines on ink |
-| `fog` | `#A6A59F` | secondary text on ink (≥ 7:1) |
-| `paper` | `#F1EFE9` | light sections |
-| `paper-2` | `#E6E3DA` | light raised / hover |
-| `line-dark` | `rgb(10 10 11 / 0.14)` | hairlines on paper |
-| `stone` | `#57554F` | secondary text on paper (≥ 7:1) |
-| `buzz` | `#FFD43B` | the accent: primary buttons, index numbers, the signal, focus |
+| `paper` | `#F5F4F0` | the page (default surface) |
+| `paper-2` | `#ECEBE6` | hover / raised on paper |
+| `ink` | `#111110` | text on paper; the dark surface |
+| `stone` | `#6A6962` | secondary text on paper (5.1:1) |
+| `fog` | `#A3A29A` | secondary text on ink (7.1:1) |
+| `buzz` | `#FFD43B` | the only accent: marker dot, focus, one highlight |
 | `buzz-ink` | `#1C1700` | text on buzz |
 
-Rules: buzz is never text on paper (contrast); on ink it may be text. One
-accent only — no gradients except the signal's glow.
+Two surfaces — `.on-paper` and `.on-ink` — set `--bg --fg --mut --line`, and
+every component draws with those, so the same component works on both.
+Light is the default; **one or two dark bands per page** (stats, closing)
+for rhythm, as in Tenity and Kerna.
 
-## 4. Typography
+## 3. Type
 
-| Role | Family | Settings |
-|---|---|---|
-| Display | **Bricolage Grotesque** (var 200–800) | 500–600, tracking −0.035 to −0.05 em, line-height 0.9–1.0 |
-| Accent word | **Newsreader** italic 400 | one or two words per heading, never a whole line |
-| Body / UI | **Instrument Sans** (var 400–700) | 16–18 px body, 1.6 line-height |
-| Labels | **DM Mono** 400/500 | uppercase, 11–13 px, tracking 0.08 em; never body text |
+**Geist** (variable, 100–900) for everything; **Geist Mono** for labels
+and numbers. No serif, no italic accent.
+- Display: weight 500, tracking −0.045 em, line-height 0.9, huge
+  (`clamp(3.2rem, 9.4vw, 10rem)` for the hero).
+- Headlines are **two-tone**: the leading words in ink, the trailing words in
+  the same colour at 55 % (Tresmares' grey fill) — hierarchy without a second
+  typeface. A dashboard editor can choose the grey part with stars:
+  `Websites that *sell*`.
+- Body 17–19 px / 1.6; labels 12 px mono, uppercase, +0.06 em.
 
-Scale (fluid, clamp): display-xl 64→176 px, display-l 48→112, display-m
-36→72, h3 24→36, body-l 18–20, body 16, small 14, label 12.
+## 4. Layout and spacing
 
-## 5. Layout
+Max width 1440, 20/40 px gutters, 12 columns. Sections are separated by
+hairlines and 128–224 px of air, not by boxes or shadows. Corners are sharp
+(0–2 px) except pills (buttons) and the video cards. Section numbers
+`01 / 08` in mono.
 
-- 12-column grid, max width 1440 px, gutters 20 px (phone) / 40 px (desktop).
-- Asymmetric: headings left, supporting text right on the same baseline.
-- Hairlines instead of boxes; cards only where something is a *thing*
-  (a project, a person, a video). Radius 4 px on UI, 20 px on media.
-- Section rhythm: 96–176 px between sections; tight inside.
-- Ink is the default; paper sections switch the mood (the statement,
-  the services index on hubs, the FAQ, legal text).
+## 5. Navigation
 
-## 6. Navigation
+Header: logo · live time · **Menu** · "Start a project" — nothing else.
+**Menu** opens a full-screen overlay on every screen size (Mira / Kerna):
+left, huge links (Services, Industries, Company, Insights, Contact); right,
+the links of the one you hover (the 8 service lines with their 44
+sub-services; the 15 industries; company pages). Phones: the same as
+accordions. Esc closes; focus is trapped and returned.
 
-- **Header:** fixed; transparent over the hero, ink + blur once scrolled.
-  Logo · Services ▾ · Industries ▾ · Company ▾ · Insights · Contact, and a
-  buzz "Start a project" button. Live clocks (IST · GMT) on wide screens.
-- **Services mega menu:** 8 lines on the left (hover/focus selects), that
-  line's sub-services on the right with a one-line description and a link
-  to the hub; keyboard operable (arrows, Esc).
-- **Industries:** 15 industries in a numbered 3-column index (no photos).
-- **Phone:** full-screen sheet, huge numbered links, Services and
-  Industries as accordions, contact buttons (call, WhatsApp, email) and
-  both clocks at the bottom.
-- **Footer:** big closing line + the Signal Field, office cards (Prayagraj
-  HQ, Kanpur, London) with live local time, link columns, socials.
+## 6. Motion (purposeful, never required to read)
 
-## 7. Components (one language)
+Hero lines rise from a mask on load (transform only); statement words fill on
+scroll; numbers count up when they arrive; service cells invert on hover with
+a cursor-following label; the hero's last line types through the industries
+we serve; the menu opens as a curtain. No auto-playing carousels, no
+scroll-jacking, no pop-up on arrival (Mira's pop-up was the one thing to
+avoid); everything is still under `prefers-reduced-motion`.
 
-`Button` (buzz solid / outline / text; letter-roll on hover, magnetic on
-desktop) · `Label` (mono index `[01]`) · `SectionHead` (label + display
-heading with accent word + side text) · `Rows` (numbered list rows with
-hover reveal) · `Statement` (words fill in on scroll) · `SignalField`
-(canvas) · `SignalPath` (pinned, scroll-driven scene) · `Accordion` (FAQ)
-· `MediaFrame` (rounded image with mono caption) · `Specimen` (project /
-system card with tag `BBC-01`) · `ClockLine` · `Breadcrumb` · `Chips`
-· forms (underline fields, chip choices, inline validation, success state).
+## 7. Pages (all share the primitives in `components/brand`)
 
-## 8. Motion system
+- **Home:** hero → the team (real photo) → statement → services (8 cells) →
+  our own products → numbers (ink) → industries → client stories (real
+  videos) → reviews → process → insights → FAQ → closing (ink) + footer.
+- **Service hub / sub-service / industry:** a big staggered title, one
+  paragraph, the structure as numbered hairline rows and plain lists — no
+  imagery (the dashboard image fields stay but are not shown).
+- **Company pages, blog, authors, legal, contact, 404:** the same type,
+  rows and hairlines.
 
-- Easing `cubic-bezier(0.22, 1, 0.36, 1)` for everything; 0.2 s hovers,
-  0.6–1.0 s reveals; stagger 60 ms.
-- Reveals: CSS scroll-driven (`animation-timeline: view()`) where
-  supported, otherwise shown immediately — never hidden content.
-- Interaction-led: hovers, the cursor pulse in the Signal Field, the
-  pinned Signal Path, statement fill, magnetic buttons, mega-menu
-  transitions, accordion height.
-- `prefers-reduced-motion`: no transforms, no canvas animation (a single
-  static frame), no pinning; content identical.
+## 8. Content rules
 
-## 9. Page structures
+Dashboard fields, "Remove section" switches, every URL, metadata and the
+sitemap keep working. No invented clients, numbers or awards. Pop-up: only
+after real engagement (scroll depth), once per visitor.
 
-- **Home:** hero (headline + Signal Field + clocks) → statement → the 8
-  service lines as rows → Signal Path (how the pieces connect) → what we
-  build (Clio AI, Praxistence + in-house systems as specimens) → industries
-  index → client video stage + reviews → process → insights → FAQ → CTA.
-- **Service hub (×8):** hero (line number, name, accent, CTA) → overview
-  (thesis left, text right) → sub-services as numbered rows → how it works
-  → who we are → FAQ → trust → CTA.
-- **Sub-service (×44):** hero with breadcrumb → who it's for → what's
-  included (tabbed groups) → why us (numbered list) → roadmap (timeline)
-  → where we work → FAQ → CTA.
-- **Industry (×15):** same as sub-service, **no photos** — a generated
-  typographic/signal visual per industry instead.
-- **Location (UK + Outside Location pages):** home structure, local hero
-  line, UK office section.
-- **About, Team, Careers, How we work, FAQ, Guides, Contact, Blog, Post,
-  Author, Legal:** each in the same language; listed in the build log.
+## 9. Build log (2026-11-09)
 
-## 10. Content rules
+Built across every public page through the shared primitives in
+`components/brand` and the section components in `components/home`,
+`components/detail`; the site map is `lib/siteNav.js`.
 
-- Every dashboard field and "Remove section" switch keeps working — the
-  new components read the same fields; saved text wins over defaults.
-- No invented clients, metrics, awards or team sizes. Only shown: real
-  reviews, the six client videos, real certifications, real products.
-- New copy is written for the defaults; where the dashboard has saved
-  text it takes over.
-
-## 11. Technical
-
-- Next.js 16 App Router (existing), Tailwind v4, framer-motion (already
-  installed) only where CSS can't do it; no new runtime dependencies.
-- Self-hosted fonts (`public/fonts`), `next/font/local`, `display: swap`.
-- All URLs, metadata, canonicals, JSON-LD, sitemap and robots unchanged.
-- Performance budget: hero LCP is text (no video), the Signal Field starts
-  after first paint and pauses off-screen; JS per page kept small.
-- Accessibility: WCAG 2.1 AA contrast, focus visible (buzz outline),
-  keyboard for every interaction, one H1 per page, 24 px+ targets.
-
----
-
-## 12. Build log (2026-11-09, branch `rebuild`)
-
-**What was rebuilt** — every public page, through the shared templates:
-home; the 8 service hubs; 44 sub-services; 15 industries; /services,
-/industries; about, our team (+ BPO, R&D), careers, how we work, FAQ,
-guides; contact; blog index, posts, authors; the 4 legal pages; the UK page
-and every Outside Location page; 404; header, footer, consultation popup,
-BizzBee chat. The admin dashboard is unchanged.
-
-**New pieces** (`components/brand/`): Button, Kicker, AccentText,
-SectionHead, Breadcrumb, SignalField, Clock / ClockLine, Statement,
-IndustrySignature. Site map in `lib/siteNav.js`. Signature section on the
-homepage: `components/home/signalPath.js`.
-
-**For editors (dashboard)**
-- Every field and "Remove section" switch works as before; saved text wins.
-- Headings: the **last word** is set in the italic accent serif. To choose
-  a different word, wrap it in stars: `Websites that *sell*`.
-- Industry pages no longer show a photo (a generated signature instead), so
-  their image fields are hidden. Service pages still show their hero /
-  overview images — replacing the old blue illustrations there with real
-  photos or simpler art will suit the new look better.
-
-**Checked** (local production build, desktop 1440 + phone 390, all 89
-routes): 0 script errors, 0 sideways scroll, one H1 per page, 0 broken
-images, axe WCAG 2.1 AA clean; 36/36 interaction checks (menus + keyboard,
-phone menu, Signal Path pinning, industries index, reviews, FAQ, tabs,
-closing CTA and contact form sending, reduced motion fully still);
-dashboard edit → live page verified. Lighthouse mobile (median of 3):
-home 86, sub-service 92, industry 91, UK 88, contact 93; accessibility,
-best practices and SEO 100.
-
-**Not built (needs real material):** a Work / case-study section — there
-are no verified client case studies in the codebase. Creative services
-(UI/UX, branding) were not added — not in the current service list.
+- **No illustration anywhere:** the old line-art, diagrams, globe and the
+  illustrated team / service / industry images are not shown (the dashboard's
+  image fields stay but are unused on those pages). Photos used are real:
+  the team photograph, office photos, portraits, the client videos.
+- **Content-dense by rule:** sections are separated by hairlines and 56–80 px
+  of air, not 150+ px; heroes carry a side list (sibling services, the
+  service list, quick links); service cells show their sub-services; the
+  numbers band fills its row with real facts; FAQs carry a contact card;
+  empty states (no open roles, no cover image) are written, not blank.
+  `gaps.mjs` (Playwright + pixel scan) measured the blank bands: largest
+  ≈ 184 px (desktop), 134 px (phone), most under 130 px.
+- **Checked:** 89 routes × desktop/phone: 0 script errors, 0 sideways scroll,
+  one H1, no broken images, axe WCAG 2.1 AA clean; 29/29 interaction checks
+  (menu with keyboard, header hide/return, typed hero word, service cell
+  hover, counting numbers, industries dimming, inline video playback and
+  one-at-a-time, reviews, FAQ, CTA and contact forms sending, phone menu,
+  reduced motion fully still).

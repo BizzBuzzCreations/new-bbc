@@ -23,7 +23,7 @@ export default function ShareRow({ url, title, label = "Share" }) {
     ["Facebook", `https://www.facebook.com/sharer/sharer.php?u=${u}`, Facebook],
     ["WhatsApp", `https://wa.me/?text=${t}%20${u}`, MessageCircle],
   ];
-  const btn = "flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white transition-colors duration-200 hover:border-buzz hover:bg-buzz hover:text-buzz-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz";
+  const btn = "flex h-10 w-10 items-center justify-center rounded-full border border-(--line) text-(--fg) transition-colors duration-200 hover:border-(--fg) hover:bg-buzz hover:text-buzz-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz";
   const copyLink = async () => {
     try {
       await navigator.clipboard.writeText(url);
@@ -35,7 +35,7 @@ export default function ShareRow({ url, title, label = "Share" }) {
 
   return (
     <div className="flex flex-wrap items-center gap-2.5">
-      <span className="mr-1 text-sm text-white/60">{label}</span>
+      <span className="mr-1 text-sm text-(--mut)">{label}</span>
       {links.map(([name, href, Icon]) => (
         <a key={name} href={href} target="_blank" rel="noopener noreferrer" aria-label={`Share on ${name} (opens in a new tab)`} className={btn}>
           <Icon size={16} aria-hidden="true" />

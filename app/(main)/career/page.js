@@ -9,6 +9,7 @@ import PhotoMosaic from "@/components/detail/photoMosaic";
 import CtaV2 from "@/components/home/ctaV2";
 import { getPageContent } from "@/actions/pageContentActions";
 import JobCard from "@/components/ui/jobCard";
+import { SERVICE_LINES } from "@/lib/siteNav";
 import { buildPageMetadata } from "@/lib/pageMetadata";
 import PageSeoScripts from "@/components/sections/pageSeoScripts";
 
@@ -107,18 +108,30 @@ export default async function Career() {
           }
         >
           {jobsData.length === 0 ? (
-            <div className="flex flex-col items-start gap-4 border-y border-white/10 py-10 sm:flex-row sm:items-center">
-              <Briefcase className="shrink-0 text-buzz" size={28} aria-hidden="true" />
-              <p className="text-base text-white/80">
-                We don&rsquo;t have any open positions posted at the moment. Check back soon, or reach out through our{" "}
-                <a href="/contact" className="text-buzz underline underline-offset-2 hover:text-white">
-                  contact page
-                </a>
-                .
-              </p>
+            <div className="grid gap-8 border-t border-(--fg) pt-8 lg:grid-cols-12 lg:gap-10">
+              <div className="lg:col-span-5">
+                <Briefcase className="text-(--fg)" size={26} aria-hidden="true" />
+                <p className="font-display mt-5 text-2xl leading-snug tracking-[-0.03em]">Nothing posted right now — but we always read CVs.</p>
+                <p className="mt-3 text-base leading-relaxed text-(--mut)">
+                  Tell us which team you would join and what you have made. Send it to{" "}
+                  <a href="mailto:info@bizzbuzzcreations.com" className="text-(--fg) underline underline-offset-4">info@bizzbuzzcreations.com</a> or use our{" "}
+                  <a href="/contact" className="text-(--fg) underline underline-offset-4">contact page</a>.
+                </p>
+              </div>
+              <div className="lg:col-span-6 lg:col-start-7">
+                <p className="kicker text-(--mut)">Teams you could join</p>
+                <ul className="mt-3 grid border-t border-(--line) sm:grid-cols-2 sm:gap-x-8">
+                  {SERVICE_LINES.map((s, i) => (
+                    <li key={s.href} className="flex items-baseline gap-3 border-b border-(--line) py-3">
+                      <span className="kicker text-(--mut)">{String(i + 1).padStart(2, "0")}</span>
+                      <span>{s.name}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           ) : (
-            <div className="border-t border-white/10">
+            <div className="border-t border-(--line)">
               {jobsData.map((job, i) => (
                 <JobCard key={i} job={job} days={getDaysSincePosted(job.createdAt)} />
               ))}

@@ -10,14 +10,14 @@ import { UK_OFFICE, mapsUrl } from "@/lib/offices";
 export default function OfficeV2() {
   const o = UK_OFFICE;
   return (
-    <section className="relative overflow-hidden bg-paper text-ink">
-      <div className="wrap grid gap-12 pb-10 pt-24 md:pt-36 lg:grid-cols-12 lg:gap-10">
+    <section className="relative overflow-hidden on-paper">
+      <div className="wrap grid gap-12 pb-10 pt-7 md:pt-10 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-6">
           <Kicker tone="dark">Our UK office</Kicker>
           <h2 className="font-display mt-6 text-[clamp(2.4rem,5vw,4.75rem)] leading-[0.95]">
             A team you can call in <span className="font-accent">London</span>
           </h2>
-          <p className="kicker mt-8 text-stone">
+          <p className="kicker mt-8 text-(--mut)">
             Local time · <Clock tz="Europe/London" className="text-ink" />
           </p>
         </div>
@@ -38,7 +38,7 @@ export default function OfficeV2() {
             <Button href={o.phone.href} variant="ink">
               Call our UK team
             </Button>
-            <a href={mapsUrl(o.maps)} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 items-center gap-1.5 rounded-full border border-ink/25 px-5 text-[0.9375rem] font-medium transition-colors hover:border-ink hover:bg-ink hover:text-white">
+            <a href={mapsUrl(o.maps)} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 items-center gap-1.5 rounded-full border border-ink/25 px-5 text-[0.9375rem] font-medium transition-colors hover:border-ink hover:bg-(--bg) hover:text-(--fg)">
               Get directions <ArrowUpRight size={16} aria-hidden="true" />
               <span className="sr-only"> (opens in a new tab)</span>
             </a>

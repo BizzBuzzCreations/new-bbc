@@ -3,31 +3,26 @@
 import { useEffect, useRef } from "react";
 import AccentText from "@/components/brand/accentText";
 
-// A large statement whose words fill in from faint to full as it scrolls
-// through the screen (DESIGN_DIRECTION.md §7). Readers who don't scroll
-// still get it: it is complete once its middle reaches the middle of the
-// screen, and with reduced motion (or no JS) it is simply full. Plain text
-// only; `tone` "dark" (ink text on paper) | "light".
-export default function Statement({ text, tone = "dark", className = "", as: Tag = "p" }) {
+// A large statement whose words fill from faint to full as it scrolls through
+// the screen (Tresmares). Complete once its middle reaches the middle of the
+// screen; with reduced motion (or no JS) it is simply full. Plain text only.
+export default function Statement({ text, className = "", as: Tag = "p" }) {
   const ref = useRef(null);
   const words = String(text || "").replace(/<[^>]+>/g, "").split(/\s+/).filter(Boolean);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const spans = [...el.querySelectorAll("[data-w]")];
-    el.dataset.live = "1";
     let frame = 0;
     const update = () => {
       frame = 0;
       const r = el.getBoundingClientRect();
       const vh = window.innerHeight;
-      // 0 when the top enters the lower 85% of the screen, 1 when the middle reaches the middle
-      const p = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (vh * 0.85 - vh * 0.5 + r.height * 0.5)));
+      const p = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (vh * 0.85 - vh * 0.45 + r.height * 0.5)));
       const lit = p * spans.length;
       spans.forEach((s, i) => {
-        s.style.opacity = String(Math.min(1, Math.max(0.18, lit - i + 0.18)));
+        s.style.opacity = String(Math.min(1, Math.max(0.5, lit - i + 0.5)));
       });
     };
     const onScroll = () => {
@@ -45,7 +40,7 @@ export default function Statement({ text, tone = "dark", className = "", as: Tag
 
   if (!words.length) return null;
   return (
-    <Tag ref={ref} className={`font-display text-balance ${tone === "dark" ? "text-ink" : "text-white"} ${className}`}>
+    <Tag ref={ref} className={`font-display text-balance ${className}`}>
       <span className="sr-only">{words.join(" ")}</span>
       <span aria-hidden="true">
         {words.map((w, i) => (

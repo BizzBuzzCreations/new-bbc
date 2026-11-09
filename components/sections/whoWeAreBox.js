@@ -53,12 +53,12 @@ export default function WhoWeAreBox({ content }) {
   const { heading, paragraph, buttonText, buttonLink, tagline, stats: STATS, links: QUICK_LINKS } = whoWeAreContent(content);
 
   return (
-    <section className="bg-ink py-16 px-6 md:px-12">
+    <section className="bg-(--bg) py-16 px-6 md:px-12">
       {/* The entire block — text, stats, quick-links — sits inside this
           one bordered card, full width (no max-w cap), per the request. */}
-      <div className="relative w-full rounded-[20px] border border-white/10 bg-white/[0.02] overflow-hidden p-8 md:p-12">
-        <div className="absolute -top-16 -left-16 w-72 h-72 rounded-full bg-buzz/25 blur-3xl pointer-events-none" aria-hidden="true" />
-        <div className="absolute -bottom-16 -right-16 w-72 h-72 rounded-full bg-buzz/20 blur-3xl pointer-events-none" aria-hidden="true" />
+      <div className="relative w-full rounded-[20px] border border-(--line) bg-white/[0.02] overflow-hidden p-8 md:p-12">
+        <div className="absolute -top-16 -left-16 w-72 h-72 rounded-full bg-(--fg)/10 blur-3xl pointer-events-none" aria-hidden="true" />
+        <div className="absolute -bottom-16 -right-16 w-72 h-72 rounded-full bg-(--fg)/10 blur-3xl pointer-events-none" aria-hidden="true" />
 
         {/* The center stats row is naturally wider than an equal third of
             the box (three big numbers + labels, none of which wrap) — a
@@ -72,11 +72,11 @@ export default function WhoWeAreBox({ content }) {
         <div className="relative grid grid-cols-1 gap-10 xl:grid-cols-[1fr_auto_1fr] xl:items-center">
           {/* Left — heading + blurb + CTA */}
           <div className="min-w-0 text-center xl:text-left">
-            <h3 className="text-lg font-bold text-white mb-3">{heading}</h3>
+            <h3 className="text-lg font-bold text-(--fg) mb-3">{heading}</h3>
             <RichText
               as="p"
               text={paragraph}
-              className="block text-sm text-white leading-relaxed mb-5 max-w-sm mx-auto xl:mx-0"
+              className="block text-sm text-(--fg) leading-relaxed mb-5 max-w-sm mx-auto xl:mx-0"
             />
             <div className="flex justify-center xl:justify-start">
               <AnimatedButton href={buttonLink} size="sm">
@@ -90,10 +90,10 @@ export default function WhoWeAreBox({ content }) {
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-5 sm:gap-x-14">
               {STATS.map(({ value, label }, i) => (
                 <div key={`${label}-${i}`} className="text-center">
-                  <p className="text-2xl sm:text-4xl font-bold text-buzz">
+                  <p className="text-2xl sm:text-4xl font-bold text-(--fg)">
                     {value}
                   </p>
-                  <p className="text-[10px] sm:text-xs uppercase tracking-widest text-white mt-1 sm:whitespace-nowrap">
+                  <p className="text-[10px] sm:text-xs uppercase tracking-widest text-(--fg) mt-1 sm:whitespace-nowrap">
                     {label}
                   </p>
                 </div>
@@ -102,7 +102,7 @@ export default function WhoWeAreBox({ content }) {
             <RichText
               as="p"
               text={tagline}
-              className="block text-sm sm:text-base text-white max-w-md text-center px-4"
+              className="block text-sm sm:text-base text-(--fg) max-w-md text-center px-4"
             />
           </div>
 
@@ -112,9 +112,9 @@ export default function WhoWeAreBox({ content }) {
               <Link
                 key={`${label}-${i}`}
                 href={href}
-                className="group flex items-center gap-3 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:border-buzz/50 hover:bg-buzz hover:text-white"
+                className="group flex items-center gap-3 rounded-full border border-(--line) bg-(--fg)/5 backdrop-blur-sm px-5 py-3 text-sm font-semibold text-(--fg) transition-all duration-300 hover:border-(--fg)/40 hover:bg-buzz hover:text-(--fg)"
               >
-                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white/10 text-buzz transition-colors duration-300 group-hover:bg-white group-hover:text-ink">
+                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-(--fg)/5 text-(--fg) transition-colors duration-300 group-hover:bg-(--fg) group-hover:text-(--bg)">
                   <Icon size={15} />
                 </span>
                 {label}

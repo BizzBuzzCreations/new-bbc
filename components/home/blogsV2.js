@@ -2,20 +2,20 @@ import Link from "next/link";
 import he from "he";
 import { ArrowUpRight } from "lucide-react";
 import { getLatestThreeBlogsMongo } from "@/actions/blogActions";
-import { getFeaturedImage, optimizedImageUrl, imageSrcSet } from "@/lib/getFeaturedImage";
+import { getFeaturedImage, optimizedImageUrl } from "@/lib/getFeaturedImage";
 import Button from "@/components/brand/button";
 import SectionHead from "@/components/brand/sectionHead";
-import IndustrySignature from "@/components/brand/industrySignature";
 
-const excerpt = (html, limit = 140) => {
+const excerpt = (html, limit = 150) => {
   const text = he.decode(String(html || "").replace(/<[^>]*>/g, ""));
   return text.length > limit ? `${text.slice(0, limit).replace(/\s+\S*$/, "")}…` : text;
 };
 const date = (d) => (d ? new Date(d).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }) : "");
 
-// Insights (rebuild): the latest three posts — the newest large on the left,
-// the other two stacked on the right as rows. Whole card is the link. Same
-// fields as before (blogsEyebrow, blogsHeading, blogsButtonText/Link).
+// Insights: the latest three posts as plain rows — date, title, category,
+// an arrow (Pier Gorelli's blog list). On wide screens the post's own cover
+// appears beside the row you point at; posts without one show nothing.
+// Dashboard fields as before (blogsEyebrow, blogsHeading, blogsButtonText/Link).
 export default async function BlogsV2({ content }) {
   const eyebrow = content?.blogsEyebrow || "Insights";
   const heading = content?.blogsHeading || "Our Latest Blogs";
@@ -24,68 +24,40 @@ export default async function BlogsV2({ content }) {
   const res = await getLatestThreeBlogsMongo();
   const blogs = res?.data || [];
   if (!blogs.length) return null;
-  const [first, ...rest] = blogs;
-  const img = (b, w) => {
-    const src = getFeaturedImage(b);
-    return src ? { src: optimizedImageUrl(src, w), srcSet: imageSrcSet(src, [400, 640, 900, 1200]) } : null;
-  };
-  const f = img(first, 900);
-
   return (
-    <section aria-labelledby="blogs-heading" className="bg-ink text-white">
-      <div className="wrap py-24 md:py-40">
-        <SectionHead id="blogs-heading" no="09" kicker={eyebrow} heading={heading} aside={<Button href={buttonLink} variant="outline">{buttonText}</Button>} />
-        <div className="mt-16 grid gap-10 md:mt-24 lg:grid-cols-12 lg:gap-10">
-          <article className="group relative lg:col-span-7">
-            <div className="aspect-[16/10] overflow-hidden rounded-[20px] bg-ink-2">
-              {f ? (
-                // eslint-disable-next-line @next/next/no-img-element -- Cloudinary upload with its own srcset
-                <img src={f.src} srcSet={f.srcSet} sizes="(min-width: 1024px) 58vw, 100vw" loading="lazy" decoding="async" alt="" className="h-full w-full object-cover transition-transform duration-700 ease-out-soft group-hover:scale-[1.03]" />
-              ) : (
-                <IndustrySignature slug={first.slug} className="h-full w-full" />
-              )}
-            </div>
-            <p className="kicker mt-6 text-fog">
-              <span className="text-buzz">01</span> · {date(first.publishedAt)}
-            </p>
-            <h3 className="font-display mt-3 text-3xl leading-[1.05] md:text-[2.5rem]">
-              <Link href={`/blog/${first.slug}`} className="after:absolute after:inset-0 after:content-[''] group-hover:underline group-hover:decoration-buzz group-hover:decoration-2 group-hover:underline-offset-8">
-                {first.title}
-              </Link>
-            </h3>
-            <p className="mt-4 max-w-2xl leading-relaxed text-fog">{excerpt(first.excerpt, 200)}</p>
-          </article>
-          <div className="grid content-start gap-0 border-t border-white/10 lg:col-span-5">
-            {rest.map((b, i) => {
-              const im = img(b, 400);
-              return (
-                <article key={b.slug} className="group relative grid grid-cols-[1fr_7.5rem] gap-5 border-b border-white/10 py-7 sm:grid-cols-[1fr_10rem]">
-                  <div>
-                    <p className="kicker text-fog">
-                      <span className="text-buzz">{String(i + 2).padStart(2, "0")}</span> · {date(b.publishedAt)}
-                    </p>
-                    <h3 className="font-display mt-3 text-xl leading-snug md:text-2xl">
-                      <Link href={`/blog/${b.slug}`} className="after:absolute after:inset-0 after:content-[''] group-hover:underline group-hover:decoration-buzz group-hover:underline-offset-4">
+    <section aria-labelledby="blogs-heading" className="on-paper">
+      <div className="wrap">
+        <SectionHead id="blogs-heading" no="08" of="08" kicker={eyebrow} heading={heading} size="m" aside={<Button href={buttonLink} variant="outline">{buttonText}</Button>} />
+        <ol className="mt-8 border-t border-(--fg) md:mt-10">
+          {blogs.map((b, i) => {
+            const img = getFeaturedImage(b);
+            return (
+              <li key={b.slug} className="group relative border-b border-(--line)">
+                <article className="grid gap-3 py-8 transition-[padding] duration-500 ease-out-soft md:grid-cols-12 md:items-baseline md:gap-10 md:py-10 md:group-hover:pl-4">
+                  <p className="kicker text-(--mut) md:col-span-2">
+                    <span className="text-(--fg)">{String(i + 1).padStart(2, "0")}</span> · {date(b.publishedAt)}
+                  </p>
+                  <div className="md:col-span-7">
+                    <h3 className="font-display text-[clamp(1.5rem,2.8vw,2.6rem)] leading-[1.05] tracking-[-0.04em]">
+                      <Link href={`/blog/${b.slug}`} className="after:absolute after:inset-0 after:content-['']">
                         {b.title}
                       </Link>
                     </h3>
-                    <span aria-hidden="true" className="kicker mt-4 inline-flex items-center gap-1 text-fog transition-colors group-hover:text-buzz">
-                      Read <ArrowUpRight size={14} />
-                    </span>
+                    <p className="mt-3 max-w-2xl text-[0.9375rem] leading-relaxed text-(--mut)">{excerpt(b.excerpt)}</p>
                   </div>
-                  <div className="aspect-square overflow-hidden rounded-xl bg-ink-2">
-                    {im ? (
-                      // eslint-disable-next-line @next/next/no-img-element -- Cloudinary upload with its own srcset
-                      <img src={im.src} srcSet={im.srcSet} sizes="160px" loading="lazy" decoding="async" alt="" className="h-full w-full object-cover transition-transform duration-700 ease-out-soft group-hover:scale-[1.05]" />
-                    ) : (
-                      <IndustrySignature slug={b.slug} lines={14} className="h-full w-full" />
-                    )}
-                  </div>
+                  <p className="kicker flex items-center justify-between gap-2 text-(--mut) md:col-span-3 md:justify-end">
+                    {b.category}
+                    <ArrowUpRight aria-hidden="true" size={18} className="text-(--fg) transition-transform duration-500 ease-out-soft group-hover:-translate-y-1 group-hover:translate-x-1" />
+                  </p>
                 </article>
-              );
-            })}
-          </div>
-        </div>
+                {img && (
+                  // eslint-disable-next-line @next/next/no-img-element -- Cloudinary cover shown on hover
+                  <img src={optimizedImageUrl(img, 480)} alt="" loading="lazy" decoding="async" className="pointer-events-none absolute right-48 top-1/2 z-10 hidden aspect-[4/3] w-60 -translate-y-1/2 scale-95 object-cover opacity-0 shadow-2xl transition-[opacity,transform] duration-500 ease-out-soft group-hover:scale-100 group-hover:opacity-100 xl:block" />
+                )}
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </section>
   );

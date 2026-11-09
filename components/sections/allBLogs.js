@@ -153,13 +153,13 @@ export default function AllBLogs() {
     setPosts(9);
     setCurrPage((prev) => prev + step);
   };
-  const pagerButton = "flex h-10 w-10 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-white hover:bg-white hover:text-black disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-white";
+  const pagerButton = "flex h-10 w-10 items-center justify-center rounded-full border border-(--fg)/30 text-(--fg) transition-colors hover:border-(--fg) hover:bg-(--fg) hover:text-(--bg) disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-(--fg)";
   const pager = (
     <div className="flex items-center gap-3">
       <button type="button" aria-label="Previous page" disabled={currPage === 1 || loading} onClick={() => goToPage(-1)} className={pagerButton}>
         <ArrowLeft size={16} aria-hidden="true" />
       </button>
-      <p className="text-sm text-fog">
+      <p className="text-sm text-(--mut)">
         Page {currPage} of {totalPages}
       </p>
       <button type="button" aria-label="Next page" disabled={currPage == totalPages || loading} onClick={() => goToPage(1)} className={pagerButton}>
@@ -168,17 +168,17 @@ export default function AllBLogs() {
     </div>
   );
 
-  // Redesign (dark, like the homepage's latest posts): the heading with the
+  // The heading with the
   // category menu and pager beside it, then the posts as plain cards
   // (PostCard), the pager again underneath. Same fetching, paging, category
   // deep links and remembered selection as before.
   return (
-    <div className="wrap text-white md:px-10">
+    <div className="wrap text-(--fg)">
       {showAll && (
-        <div className="flex flex-wrap items-end justify-between gap-6 border-t border-white/10 pt-16 md:pt-20">
+        <div className="flex flex-wrap items-end justify-between gap-6 border-t border-(--line) pt-16 md:pt-20">
           <div>
-            <p className="kicker text-buzz">Every post</p>
-            <h2 className="font-display mt-6 text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98]">All Blogs</h2>
+            <p className="kicker text-(--fg)">Every post</p>
+            <h2 className="font-display mt-6 text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.05em]">All Blogs</h2>
           </div>
           <div className="flex flex-wrap items-center gap-4">
             <div className="relative w-64" ref={ref}>
@@ -187,7 +187,7 @@ export default function AllBLogs() {
                 onClick={() => setOpen((o) => !o)}
                 aria-haspopup="listbox"
                 aria-expanded={open}
-                className="flex w-full items-center justify-between gap-3 rounded-full border border-white/25 px-5 py-2.5 text-sm text-white transition-colors hover:border-white"
+                className="flex w-full items-center justify-between gap-3 rounded-full border border-(--fg)/30 px-5 py-2.5 text-sm text-(--fg) transition-colors hover:border-(--fg)"
               >
                 <span className="truncate">{decodeHTML(selected.name)}</span>
                 <ChevronDown size={16} aria-hidden="true" className={`shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
@@ -195,7 +195,7 @@ export default function AllBLogs() {
               {/* inert while closed: hidden from keyboards and screen readers */}
               <div
                 inert={!open}
-                className={`absolute z-50 mt-2 max-h-80 w-full origin-top overflow-y-auto rounded-2xl border border-white/10 bg-[#0c0d12] shadow-xl shadow-black/60 transition-all duration-200 ${
+                className={`absolute z-50 mt-2 max-h-80 w-full origin-top overflow-y-auto rounded-none border border-(--line) bg-(--bg) shadow-xl shadow-black/10 transition-all duration-200 ${
                   open ? "pointer-events-auto scale-100 opacity-100" : "pointer-events-none scale-95 opacity-0"
                 }`}
               >
@@ -205,12 +205,12 @@ export default function AllBLogs() {
                       <button
                         type="button"
                         onClick={() => handleSelect(cat)}
-                        className={`flex w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-left text-sm transition-colors duration-150 ${
-                          cat.name === selected.name ? "bg-buzz text-buzz-ink" : "text-white/80 hover:bg-white/5 hover:text-white"
+                        className={`flex w-full items-center justify-between gap-3 rounded-none px-3 py-2 text-left text-sm transition-colors duration-150 ${
+                          cat.name === selected.name ? "bg-(--fg) text-(--bg)" : "text-(--mut) hover:bg-(--fg)/5 hover:text-(--fg)"
                         }`}
                       >
                         <span>{decodeHTML(cat.name)}</span>
-                        <span className="rounded-full bg-white/10 px-2 py-0.5 text-xs">{cat.count}</span>
+                        <span className="rounded-full bg-(--fg)/5 px-2 py-0.5 text-xs">{cat.count}</span>
                       </button>
                     </li>
                   ))}
@@ -226,7 +226,7 @@ export default function AllBLogs() {
         <div className="grid gap-8 py-12 md:grid-cols-3">
           {[0, 1, 2].map((k) => (
             <div key={k} className="space-y-3">
-              <div className="aspect-[1.91/1] w-full rounded-2xl animate-shimmer" />
+              <div className="aspect-[1.91/1] w-full rounded-none animate-shimmer" />
               <div className="h-4 w-3/4 rounded animate-shimmer" />
               <div className="h-3 w-1/2 rounded animate-shimmer" />
             </div>
@@ -254,7 +254,7 @@ export default function AllBLogs() {
           </Pill>
         </div>
       )}
-      {showAll && !loading && <div className="mt-14 flex justify-center">{pager}</div>}
+      {showAll && !loading && <div className="mt-8 flex justify-center">{pager}</div>}
     </div>
   );
 }

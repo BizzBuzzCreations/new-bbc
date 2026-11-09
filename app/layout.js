@@ -5,7 +5,6 @@ import { ToastContainer, Bounce } from "react-toastify";
 import BizzBeeWidget from "@/components/bizzbee/BizzBeeWidget";
 import AllScripts from "@/components/sections/allScripts";
 import MotionPreferences from "@/components/ui/motionPreferences";
-import ScrollReveal from "@/components/sections/scrollReveal";
 
 // Self-hosted (public/fonts) instead of next/font/google: the Google loader
 // fetches fonts at build time, and the build server can't always reach
@@ -29,33 +28,18 @@ const ibmPlexSans = localFont({
   display: "swap",
 });
 
-// The rebuild's type (DESIGN_DIRECTION.md §4), self-hosted from
-// public/fonts (SIL Open Font License). Display + body are preloaded (they
-// paint the first screen); the accent serif and the mono labels are not.
-const bricolage = localFont({
-  src: [{ path: "../public/fonts/bricolage-grotesque-var.woff2", weight: "200 800", style: "normal" }],
-  variable: "--font-bricolage",
+// The site's type (DESIGN_DIRECTION.md §3): Geist for everything, Geist Mono
+// for labels and numbers — self-hosted from public/fonts (SIL Open Font
+// License). Both variable files are small (~29 KB / ~23 KB).
+const geist = localFont({
+  src: [{ path: "../public/fonts/geist-var.woff2", weight: "100 900", style: "normal" }],
+  variable: "--font-geist",
   display: "swap",
 });
-const instrumentSans = localFont({
-  src: [{ path: "../public/fonts/instrument-sans-var.woff2", weight: "400 700", style: "normal" }],
-  variable: "--font-instrument",
+const geistMono = localFont({
+  src: [{ path: "../public/fonts/geist-mono-var.woff2", weight: "100 900", style: "normal" }],
+  variable: "--font-geist-mono",
   display: "swap",
-});
-const newsreader = localFont({
-  src: [{ path: "../public/fonts/newsreader-400-italic.woff2", weight: "400", style: "italic" }],
-  variable: "--font-newsreader",
-  display: "swap",
-  preload: false,
-});
-const dmMono = localFont({
-  src: [
-    { path: "../public/fonts/dm-mono-400.woff2", weight: "400", style: "normal" },
-    { path: "../public/fonts/dm-mono-500.woff2", weight: "500", style: "normal" },
-  ],
-  variable: "--font-dm-mono",
-  display: "swap",
-  preload: false,
 });
 
 export const metadata = {
@@ -94,7 +78,7 @@ export default function RootLayout({ children }) {
         <AllScripts />
       </head>
       <body
-        className={`${firaSans.variable} ${ibmPlexSans.variable} ${bricolage.variable} ${instrumentSans.variable} ${newsreader.variable} ${dmMono.variable} antialiased`}
+        className={`${firaSans.variable} ${ibmPlexSans.variable} ${geist.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
         {/* No Flowbite JS (was FlowbiteInit, running initFlowbite() on
@@ -104,7 +88,6 @@ export default function RootLayout({ children }) {
             (globals.css) is still used and stays. */}
         <MotionPreferences>
           <BizzBeeWidget />
-          <ScrollReveal />
           <main id="main">{children}</main>
         </MotionPreferences>
         <ToastContainer

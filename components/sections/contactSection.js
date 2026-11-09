@@ -140,17 +140,17 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
   };
 
   const fieldCls = (name) =>
-    `mt-1 w-full border-0 border-b bg-transparent px-0 py-3 text-lg text-white placeholder:text-white/35 focus:outline-none focus:ring-0 ${errors[name] ? "border-[#ff8a7a]" : "border-white/20 focus:border-buzz"}`;
+    `mt-1 w-full border-0 border-b bg-transparent px-0 py-3 text-lg text-(--fg) placeholder:text-(--mut) focus:outline-none focus:ring-0 ${errors[name] ? "border-[#b3261e]" : "border-(--line) focus:border-(--fg)"}`;
   const err = (name) => errors[name] && (
-    <p id={`${name}-error`} className="mt-2 text-sm text-[#ff8a7a]">
+    <p id={`${name}-error`} className="mt-2 text-sm text-[#b3261e]">
       {errors[name]}
     </p>
   );
   const input = (name, label, props = {}) => (
     <label className="block">
-      <span className="kicker text-fog">
+      <span className="kicker text-(--mut)">
         {label}
-        {props.required && <span aria-hidden="true" className="text-buzz"> *</span>}
+        {props.required && <span aria-hidden="true" className="text-(--fg)"> *</span>}
       </span>
       <input
         name={name}
@@ -167,8 +167,8 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
   );
   const chips = (legend, options, selected, toggle, multi) => (
     <fieldset>
-      <legend className="kicker text-fog">
-        {legend} {multi && <span className="normal-case tracking-normal text-fog">(pick any)</span>}
+      <legend className="kicker text-(--mut)">
+        {legend} {multi && <span className="normal-case tracking-normal text-(--mut)">(pick any)</span>}
       </legend>
       <div className="mt-3 flex flex-wrap gap-2">
         {options.map((o) => {
@@ -180,7 +180,7 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
               aria-pressed={on}
               onClick={() => toggle(o)}
               className={`inline-flex h-10 items-center gap-1.5 rounded-full border px-4 text-sm transition-colors duration-200 ${
-                on ? "border-buzz bg-buzz text-buzz-ink" : "border-white/20 text-white/80 hover:border-white/60 hover:text-white"
+                on ? "border-(--fg) bg-(--fg) text-(--bg)" : "border-(--line) text-(--mut) hover:border-(--fg) hover:text-(--fg)"
               }`}
             >
               {on && <Check aria-hidden="true" size={14} strokeWidth={3} />}
@@ -193,66 +193,66 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
   );
 
   return (
-    <section className={`grain relative isolate overflow-hidden bg-ink text-white ${headingLevel === "h1" ? "pt-28 md:pt-36" : "border-t border-white/10 pt-24 md:pt-32"}`}>
-      <div className="wrap grid gap-14 pb-24 md:pb-32 lg:grid-cols-12 lg:gap-10">
+    <section className={`on-paper relative ${headingLevel === "h1" ? "pt-24 md:pt-32" : "border-t border-(--line) pt-7 md:pt-10"}`}>
+      <div className="wrap grid gap-14 pb-7 md:pb-10 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-5">
           {headingLevel === "h1" ? <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Contact" }]} /> : <Kicker>Contact</Kicker>}
-          <Heading className="font-display mt-10 text-balance text-[clamp(2.6rem,5.4vw,5.5rem)] leading-[0.93] md:mt-14">
+          <Heading className="font-display mt-12 text-balance text-[clamp(2.6rem,6vw,6.25rem)] leading-[0.93] tracking-[-0.055em] md:mt-10">
             <AccentText text={heading} />
           </Heading>
-          <RichText as="p" text={paragraph} className="mt-8 text-lg leading-relaxed text-fog" />
+          <RichText as="p" text={paragraph} className="mt-8 text-lg leading-relaxed text-(--mut)" />
 
-          <ol className="mt-12 border-t border-white/10">
+          <ol className="mt-12 border-t border-(--line)">
             {steps.map((s, i) => (
-              <li key={s.title} className="grid grid-cols-[3rem_1fr] gap-3 border-b border-white/10 py-5">
-                <span className="kicker pt-1 text-buzz">{String(i + 1).padStart(2, "0")}</span>
+              <li key={s.title} className="grid grid-cols-[3rem_1fr] gap-3 border-b border-(--line) py-5">
+                <span className="kicker pt-1 text-(--fg)">{String(i + 1).padStart(2, "0")}</span>
                 <div>
                   <Sub className="text-lg font-medium">{s.title}</Sub>
-                  <RichText as="p" text={s.description} className="mt-1 text-[0.9375rem] leading-relaxed text-fog" />
+                  <RichText as="p" text={s.description} className="mt-1 text-[0.9375rem] leading-relaxed text-(--mut)" />
                 </div>
               </li>
             ))}
           </ol>
 
-          <div className="mt-10 grid gap-3 sm:grid-cols-2">
-            <a href={CONTACT.phoneIndia.href} className="group rounded-2xl border border-white/10 p-4 transition-colors hover:border-white/30">
-              <span className="kicker flex items-center justify-between text-fog">
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            <a href={CONTACT.phoneIndia.href} className="group rounded-none border border-(--line) p-4 transition-colors hover:border-(--fg)/30">
+              <span className="kicker flex items-center justify-between text-(--mut)">
                 <span className="flex items-center gap-2"><Phone aria-hidden="true" size={13} /> India</span>
-                <Clock tz="Asia/Kolkata" zone="IST" className="text-buzz" />
+                <Clock tz="Asia/Kolkata" zone="IST" className="text-(--fg)" />
               </span>
               <span className="mt-2 block text-lg">{CONTACT.phoneIndia.display}</span>
             </a>
-            <a href={CONTACT.phoneUk.href} className="group rounded-2xl border border-white/10 p-4 transition-colors hover:border-white/30">
-              <span className="kicker flex items-center justify-between text-fog">
+            <a href={CONTACT.phoneUk.href} className="group rounded-none border border-(--line) p-4 transition-colors hover:border-(--fg)/30">
+              <span className="kicker flex items-center justify-between text-(--mut)">
                 <span className="flex items-center gap-2"><Phone aria-hidden="true" size={13} /> United Kingdom</span>
-                <Clock tz="Europe/London" zone="UK" className="text-buzz" />
+                <Clock tz="Europe/London" zone="UK" className="text-(--fg)" />
               </span>
               <span className="mt-2 block text-lg">{CONTACT.phoneUk.display}</span>
             </a>
-            <a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 p-4 transition-colors hover:border-white/30">
-              <span className="kicker flex items-center gap-2 text-fog"><MessageCircle aria-hidden="true" size={13} /> WhatsApp</span>
+            <a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" className="rounded-none border border-(--line) p-4 transition-colors hover:border-(--fg)/30">
+              <span className="kicker flex items-center gap-2 text-(--mut)"><MessageCircle aria-hidden="true" size={13} /> WhatsApp</span>
               <span className="mt-2 block text-lg">Message us</span>
               <span className="sr-only"> (opens in a new tab)</span>
             </a>
-            <a href={`mailto:${CONTACT.email}`} className="rounded-2xl border border-white/10 p-4 transition-colors hover:border-white/30">
-              <span className="kicker flex items-center gap-2 text-fog"><Mail aria-hidden="true" size={13} /> Email</span>
+            <a href={`mailto:${CONTACT.email}`} className="rounded-none border border-(--line) p-4 transition-colors hover:border-(--fg)/30">
+              <span className="kicker flex items-center gap-2 text-(--mut)"><Mail aria-hidden="true" size={13} /> Email</span>
               <span className="mt-2 block break-all text-lg">{CONTACT.email}</span>
             </a>
           </div>
         </div>
 
         <div className="lg:col-span-7 lg:col-start-6">
-          <div className="rounded-[20px] border border-white/10 bg-ink-2 p-6 md:p-10 lg:sticky lg:top-28">
+          <div className="border-t border-(--fg) pt-8 lg:sticky lg:top-28">
             {state === "sent" ? (
               <div role="status" className="py-10 md:py-16">
-                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-buzz text-buzz-ink">
+                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-(--fg) text-(--bg)">
                   <Check aria-hidden="true" size={26} strokeWidth={2.5} />
                 </span>
                 <p className="font-display mt-8 text-4xl leading-tight md:text-5xl">
                   Thanks{sentName ? `, ${sentName}` : ""} — it&rsquo;s with <span className="font-accent">us.</span>
                 </p>
-                <p className="mt-5 max-w-md text-lg text-fog">We reply within one working day with a first view of what we&rsquo;d do. Urgent? Call or WhatsApp us.</p>
-                <button type="button" onClick={() => setState("idle")} className="mt-8 text-white underline decoration-white/30 underline-offset-4 hover:decoration-buzz">
+                <p className="mt-5 max-w-md text-lg text-(--mut)">We reply within one working day with a first view of what we&rsquo;d do. Urgent? Call or WhatsApp us.</p>
+                <button type="button" onClick={() => setState("idle")} className="mt-8 text-(--fg) underline decoration-(--fg)/30 underline-offset-4 hover:decoration-(--fg)">
                   Send another message
                 </button>
               </div>
@@ -261,10 +261,10 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
                 <Sub className="font-display text-3xl leading-tight md:text-4xl">
                   <AccentText text={formHeading} />
                 </Sub>
-                <p className="mt-2 text-sm text-fog">
-                  Fields marked <span className="text-buzz">*</span> are required. We never share your details.
+                <p className="mt-2 text-sm text-(--mut)">
+                  Fields marked <span className="text-(--fg)">*</span> are required. We never share your details.
                 </p>
-                <div className="mt-10 grid gap-8 sm:grid-cols-2">
+                <div className="mt-6 grid gap-8 sm:grid-cols-2">
                   {input("name", "Your name", { type: "text", autoComplete: "name", placeholder: "Full name", required: true })}
                   {input("email", "Email", { type: "email", autoComplete: "email", placeholder: "you@company.com", required: true })}
                   {input("contact", "Phone (10 digits)", { type: "tel", inputMode: "numeric", autoComplete: "tel-national", placeholder: "Mobile number" })}
@@ -277,8 +277,8 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
                     {chips("Timeline", TIMELINES, timeline, (o) => setTimeline(timeline === o ? "" : o))}
                   </div>
                   <label className="block">
-                    <span className="kicker text-fog">
-                      About the project<span aria-hidden="true" className="text-buzz"> *</span>
+                    <span className="kicker text-(--mut)">
+                      About the project<span aria-hidden="true" className="text-(--fg)"> *</span>
                     </span>
                     <textarea
                       name="message"
@@ -294,7 +294,7 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
                     {err("message")}
                   </label>
                   <div>
-                    <label className="inline-flex cursor-pointer items-center gap-2 text-sm text-fog transition-colors hover:text-white">
+                    <label className="inline-flex cursor-pointer items-center gap-2 text-sm text-(--mut) transition-colors hover:text-(--fg)">
                       <Paperclip aria-hidden="true" size={16} />
                       <span>{file ? file.name : "Attach a brief (PDF, DOC, DOCX · up to 4MB)"}</span>
                       <input type="file" name="file" accept=".pdf,.doc,.docx" onChange={onFile} className="sr-only" />
@@ -303,14 +303,14 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
                   </div>
                 </div>
                 {serverError && (
-                  <p role="alert" className="mt-8 rounded-xl border border-[#ff8a7a]/40 bg-[#ff8a7a]/10 px-4 py-3 text-sm text-white">
+                  <p role="alert" className="mt-8 rounded-none border border-[#b3261e]/40 bg-[#b3261e]/10 px-4 py-3 text-sm text-(--fg)">
                     {serverError}
                   </p>
                 )}
                 <button
                   type="submit"
                   disabled={state === "sending"}
-                  className="group mt-10 flex h-14 w-full items-center justify-center gap-3 rounded-full bg-buzz text-base font-medium text-buzz-ink transition-colors hover:bg-[#ffe066] disabled:opacity-60 sm:w-auto sm:px-8"
+                  className="group mt-10 flex h-14 w-full items-center justify-center gap-3 rounded-full bg-(--fg) text-base font-medium text-(--bg) transition-opacity hover:opacity-85 disabled:opacity-60 sm:w-auto sm:px-8"
                 >
                   {state === "sending" ? "Sending…" : formButtonText}
                   <ArrowRight aria-hidden="true" size={18} className="transition-transform duration-300 group-hover:translate-x-1" />

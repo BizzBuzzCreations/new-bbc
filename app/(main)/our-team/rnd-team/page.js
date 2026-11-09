@@ -26,8 +26,8 @@ export default async function RndTeamPage() {
     <div data-no-reveal>
       <PageSeoScripts pageKey="rnd-team" />
       <PageHero label="R&D Team" parent={{ label: "Our Team", href: "/our-team" }} title={content?.rndTeamHeading || "Meet Our R&D Team"} />
-      <section className="bg-ink text-white">
-        <div className="wrap pb-24 md:px-10 md:pb-32">
+      <section className="on-ink">
+        <div className="wrap pb-24 md:px-10 md:pb-14">
           {/* LinkedIn only on the founders, as before */}
           <PeopleGrid people={team.map(({ linkedin, ...p }) => p)} headingLevel="h2" />
         </div>

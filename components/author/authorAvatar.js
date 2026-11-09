@@ -17,11 +17,11 @@ export default function AuthorAvatar({ name, photo = "", size = 96, className = 
       className={`relative inline-flex shrink-0 items-center justify-center rounded-full bg-linear-to-br from-buzz via-buzz to-[#c9a21a] ${className}`}
       style={{ width: size, height: size }}
     >
-      <span className="absolute inset-[3px] overflow-hidden rounded-full bg-ink-2">
+      <span className="absolute inset-[3px] overflow-hidden rounded-full bg-paper-2">
         {photo && <Image src={photo} alt="" fill sizes={`${size}px`} className="object-cover object-top" />}
       </span>
       {!photo && (
-        <span className="font-display relative leading-none tracking-wide text-white" style={{ fontSize: Math.round(size * 0.36) }}>
+        <span className="font-display relative leading-none tracking-wide text-(--fg)" style={{ fontSize: Math.round(size * 0.36) }}>
           {initials}
         </span>
       )}

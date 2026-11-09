@@ -94,7 +94,7 @@ function copy(text) {
   return Promise.resolve();
 }
 
-export default function ArticleBody({ html, defaultMode = "dark" }) {
+export default function ArticleBody({ html, defaultMode = "light" }) {
   const [mode, setMode] = useState(defaultMode);
   const [size, setSize] = useState("m");
   const [zoom, setZoom] = useState(null);
@@ -163,20 +163,20 @@ export default function ArticleBody({ html, defaultMode = "dark" }) {
   }, [zoom]);
 
   const dark = mode === "dark";
-  const pill = (active) => `rounded-full px-3.5 py-1.5 text-sm transition-colors ${active ? "bg-white text-black" : "text-fog hover:text-white"}`;
+  const pill = (active) => `rounded-full px-3.5 py-1.5 text-sm transition-colors ${active ? "bg-(--fg) text-(--bg)" : "text-(--mut) hover:text-(--fg)"}`;
   return (
     <div>
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-2 pl-4 text-sm text-white/60">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-none border border-(--line) bg-white/[0.03] p-2 pl-4 text-sm text-(--mut)">
         <span className="hidden sm:inline">Reading</span>
         <div className="flex flex-wrap items-center gap-2">
-          <div role="group" aria-label="Text size" className="flex gap-1 rounded-full border border-white/15 p-1">
+          <div role="group" aria-label="Text size" className="flex gap-1 rounded-full border border-(--line) p-1">
             {SIZES.map(([value, label, name, cls]) => (
               <button key={value} type="button" aria-pressed={size === value} aria-label={name} onClick={() => choose({ size: value })} className={`${pill(size === value)} ${cls} h-8 w-9 !px-0 font-medium leading-none`}>
                 {label}
               </button>
             ))}
           </div>
-          <div role="group" aria-label="Reading theme" className="flex gap-1 rounded-full border border-white/15 p-1">
+          <div role="group" aria-label="Reading theme" className="flex gap-1 rounded-full border border-(--line) p-1">
             <button type="button" aria-pressed={dark} onClick={() => choose({ mode: "dark" })} className={`${pill(dark)} inline-flex items-center gap-1.5`}>
               <Moon size={14} aria-hidden="true" /> Dark
             </button>
@@ -187,7 +187,7 @@ export default function ArticleBody({ html, defaultMode = "dark" }) {
         </div>
       </div>
 
-      <div className={dark ? "" : "rounded-[20px] bg-white p-6 shadow-2xl shadow-black/40 md:p-10"}>
+      <div className={dark ? "on-ink p-6 md:p-12" : ""}>
         <div id="post-article" ref={box} data-size={size} onClick={onClick} className={`article article-zoomable ${dark ? "article-dark" : ""}`} dangerouslySetInnerHTML={{ __html: html }} />
       </div>
 
@@ -197,11 +197,11 @@ export default function ArticleBody({ html, defaultMode = "dark" }) {
           aria-label="Image, enlarged"
           onClose={() => setZoom(null)}
           onClick={(e) => e.target === e.currentTarget && dialog.current?.close()}
-          className="m-auto max-h-[92vh] max-w-[94vw] overflow-visible rounded-2xl border border-white/10 bg-ink/90 p-0 backdrop:bg-ink/80 backdrop:backdrop-blur-sm"
+          className="m-auto max-h-[92vh] max-w-[94vw] overflow-visible rounded-none border border-(--line) bg-(--bg)/90 p-0 backdrop:bg-(--bg)/80 backdrop:backdrop-blur-sm"
         >
           {/* eslint-disable-next-line @next/next/no-img-element -- the article's own image, shown larger */}
-          <img src={zoom.src} alt={zoom.alt} className="max-h-[88vh] max-w-[92vw] rounded-2xl object-contain" />
-          <button type="button" onClick={() => dialog.current?.close()} aria-label="Close image" className="absolute -right-3 -top-3 flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-ink text-white hover:bg-white hover:text-black">
+          <img src={zoom.src} alt={zoom.alt} className="max-h-[88vh] max-w-[92vw] rounded-none object-contain" />
+          <button type="button" onClick={() => dialog.current?.close()} aria-label="Close image" className="absolute -right-3 -top-3 flex h-10 w-10 items-center justify-center rounded-full border border-(--fg)/30 on-ink hover:bg-(--fg) hover:text-(--bg)">
             <X size={18} aria-hidden="true" />
           </button>
         </dialog>

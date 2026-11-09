@@ -1,10 +1,14 @@
-// The instrument label above a heading: "[01] SERVICES" in DM Mono.
-// `no` optional; `tone` "light" (on ink) | "dark" (on paper).
-export default function Kicker({ no, children, tone = "light", className = "", as: Tag = "p" }) {
-  const color = tone === "dark" ? "text-stone" : "text-fog";
+// The small mono label above a heading: "01 / 08  Services". `no` is the
+// section's number (optional) and `of` how many there are on the page.
+export default function Kicker({ no, of, children, className = "", as: Tag = "p" }) {
   return (
-    <Tag className={`kicker flex items-center gap-2 ${color} ${className}`}>
-      {no && <span className={tone === "dark" ? "text-ink" : "text-buzz"}>[{no}]</span>}
+    <Tag className={`kicker flex items-center gap-3 text-(--mut) ${className}`}>
+      {no && (
+        <span className="text-(--fg)">
+          {no}
+          {of ? <span className="text-(--mut)"> / {of}</span> : null}
+        </span>
+      )}
       <span>{children}</span>
     </Tag>
   );

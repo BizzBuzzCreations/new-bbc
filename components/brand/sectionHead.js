@@ -2,33 +2,27 @@ import AccentText from "@/components/brand/accentText";
 import Kicker from "@/components/brand/kicker";
 import RichText from "@/components/ui/richText";
 
-// The standard section opening (DESIGN_DIRECTION.md §5): kicker + display
-// heading on the left, the supporting text on the right on the same
-// baseline (stacked on phones). `size` "xl" | "l" (default) | "m".
-// `tone` "light" (on ink) | "dark" (on paper). `aside` replaces the text
-// column (e.g. a button). `as` the heading tag.
+// The standard section opening: a mono kicker ("02 / 08  Services"), the
+// heading huge and two-tone on the left, the supporting text (and/or a
+// button) on the right, level with the heading's last line. Stacks on
+// phones. `size` "xl" | "l" (default) | "m".
 const SIZES = {
-  xl: "text-[clamp(3rem,8.5vw,8.5rem)] leading-[0.9]",
-  l: "text-[clamp(2.4rem,5.6vw,5.5rem)] leading-[0.95]",
-  m: "text-[clamp(2rem,4vw,3.75rem)] leading-[1]",
+  xl: "text-[clamp(3rem,8.4vw,9rem)] leading-[0.9]",
+  l: "text-[clamp(2.5rem,6vw,6.25rem)] leading-[0.94]",
+  m: "text-[clamp(2.1rem,4.2vw,4rem)] leading-[1]",
 };
-export default function SectionHead({ no, kicker, heading, text, aside, size = "l", tone = "light", as: H = "h2", accent = true, className = "", id }) {
-  const textColor = tone === "dark" ? "text-stone" : "text-fog";
+export default function SectionHead({ no, of, kicker, heading, text, aside, size = "l", as: H = "h2", accent = true, className = "", id }) {
   return (
     <div className={`grid gap-8 md:grid-cols-12 md:items-end md:gap-10 ${className}`}>
-      <div className="md:col-span-7">
-        {kicker && (
-          <Kicker no={no} tone={tone} className="mb-6">
-            {kicker}
-          </Kicker>
-        )}
+      <div className="md:col-span-8">
+        {kicker && <Kicker no={no} of={of} className="mb-8">{kicker}</Kicker>}
         <H id={id} className={`font-display text-balance ${SIZES[size] || SIZES.l}`}>
           <AccentText text={heading} accent={accent} />
         </H>
       </div>
       {(text || aside) && (
-        <div className="md:col-span-4 md:col-start-9 md:pb-2">
-          {text && <RichText as="p" text={text} className={`text-base leading-relaxed md:text-lg ${textColor}`} />}
+        <div className="md:col-span-3 md:col-start-10 md:pb-2">
+          {text && <RichText as="p" text={text} className="text-base leading-relaxed text-(--mut) md:text-[1.0625rem]" />}
           {aside && <div className={text ? "mt-6" : ""}>{aside}</div>}
         </div>
       )}

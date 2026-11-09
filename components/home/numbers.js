@@ -1,0 +1,52 @@
+import Image from "next/image";
+import CountUp from "@/components/brand/countUp";
+import { SERVICE_LINES, SUB_SERVICE_COUNT } from "@/lib/siteNav";
+
+const BADGES = [
+  { src: "/clutch.png", title: "Clutch", sub: "Verified partner" },
+  { src: "/CDL.png", title: "Google Partner", sub: "Certified" },
+  { src: "/GA.png", title: "Google Analytics", sub: "Certified" },
+  { src: "/iso.png", title: "ISO", sub: "Certified" },
+];
+
+// The numbers (Zirka, Tenity): up to four figures set enormous on ink, each
+// counting up as it arrives, with the real certifications underneath. The
+// figures are the dashboard's (zoomStats on the homepage) — nothing here is
+// invented. `stats`: { value, label }.
+export default function Numbers({ stats }) {
+  const list = (stats || []).filter((s) => s?.value).slice(0, 4);
+  if (!list.length) return null;
+  // facts about the business itself fill the row when the dashboard has fewer than four figures
+  const facts = [
+    { value: "3", label: "Offices — Prayagraj, Kanpur, London" },
+    { value: String(SUB_SERVICE_COUNT), label: `Services in ${SERVICE_LINES.length} lines of work` },
+  ];
+  for (const f of facts) if (list.length < 4) list.push(f);
+  return (
+    <section aria-label="BizzBuzz Creations in numbers" className="on-ink">
+      <div className="wrap py-7 md:py-10">
+        <dl className="grid border-t border-(--line) sm:grid-cols-2 lg:grid-cols-4">
+          {list.map(({ value, label }, i) => (
+            <div key={`${label}-${i}`} className="border-b border-(--line) py-10 sm:pr-8 lg:border-b-0 lg:border-r lg:px-8 lg:first:pl-0 lg:last:border-r-0">
+              <dd className="font-display text-[clamp(4rem,9vw,9.5rem)] leading-[0.9] tracking-[-0.06em]">
+                <CountUp value={value} />
+              </dd>
+              <dt className="kicker mt-5 text-(--mut)">{label}</dt>
+            </div>
+          ))}
+        </dl>
+        <ul aria-label="Certifications" className="mt-8 flex flex-wrap gap-x-10 gap-y-5">
+          {BADGES.map((b) => (
+            <li key={b.title} className="flex items-center gap-3">
+              <Image src={b.src} alt="" width={32} height={32} className="h-8 w-8 rounded-full bg-white object-contain p-0.5" />
+              <span className="text-sm leading-tight">
+                <span className="block font-medium">{b.title}</span>
+                <span className="text-(--mut)">{b.sub}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}

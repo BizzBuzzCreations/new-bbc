@@ -45,10 +45,10 @@ export default function BlogToc({ toc }) {
 
   return (
     <aside aria-label="Contents" className="sticky top-28 w-full self-start">
-      <div className="max-h-[calc(100vh-8rem)] overflow-y-auto rounded-[20px] border border-white/10 bg-ink-2 p-5 [scrollbar-color:rgba(255,255,255,0.2)_transparent] [scrollbar-width:thin]">
+      <div className="max-h-[calc(100vh-8rem)] overflow-y-auto rounded-[20px] border border-(--line) bg-paper-2 p-5 [scrollbar-color:rgba(255,255,255,0.2)_transparent] [scrollbar-width:thin]">
         {/* a label, not a heading: it sits between the title (h1) and the
             article's own h2s, so a heading here would skip a level */}
-        <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-white">Contents</p>
+        <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-(--fg)">Contents</p>
         <ol className="space-y-1">
           {toc.map((item) => {
             const active = item.id === activeId;
@@ -61,13 +61,13 @@ export default function BlogToc({ toc }) {
                     item.level === 3 ? "pl-5" : "pl-2"
                   } ${
                     active
-                      ? "bg-buzz/30 font-semibold text-white"
+                      ? "bg-buzz/30 font-semibold text-(--fg)"
                       : item.level === 3
-                        ? "text-white/55 hover:bg-white/5 hover:text-white"
-                        : "text-white/75 hover:bg-white/5 hover:text-white"
+                        ? "text-(--mut) hover:bg-(--fg)/5 hover:text-(--fg)"
+                        : "text-(--mut) hover:bg-(--fg)/5 hover:text-(--fg)"
                   }`}
                 >
-                  <span className={`shrink-0 ${item.level === 3 ? (active ? "text-buzz" : "text-fog") : "font-semibold text-buzz"}`}>
+                  <span className={`shrink-0 ${item.level === 3 ? (active ? "text-(--fg)" : "text-(--mut)") : "font-semibold text-(--fg)"}`}>
                     {item.level === 3 ? "–" : `${item.number}.`}
                   </span>
                   <span>{item.text}</span>

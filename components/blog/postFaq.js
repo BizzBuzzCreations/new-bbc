@@ -9,17 +9,17 @@ export default function PostFaq({ faqs }) {
   if (!items.length) return null;
   return (
     <section className="my-14">
-      <h2 className="font-display text-3xl leading-tight text-white md:text-4xl">Frequently Asked Questions</h2>
-      <div className="mt-6 border-t border-white/10">
+      <h2 className="font-display text-3xl leading-tight text-(--fg) md:text-4xl">Frequently Asked Questions</h2>
+      <div className="mt-6 border-t border-(--line)">
         {items.map((f, i) => (
-          <details key={i} className="group border-b border-white/10">
-            <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-left text-lg text-white transition-colors hover:text-buzz focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz [&::-webkit-details-marker]:hidden">
+          <details key={i} className="group border-b border-(--line)">
+            <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-left text-lg text-(--fg) transition-colors hover:text-(--fg) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz [&::-webkit-details-marker]:hidden">
               <span>{f.question}</span>
-              <span aria-hidden="true" className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/25 transition-transform duration-300 group-open:rotate-45">
+              <span aria-hidden="true" className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-(--fg)/30 transition-transform duration-300 group-open:rotate-45">
                 <Plus size={16} />
               </span>
             </summary>
-            <RichText as="div" text={f.answer} className="max-w-2xl pb-6 pr-12 text-base leading-relaxed text-fog" />
+            <RichText as="div" text={f.answer} className="max-w-2xl pb-6 pr-12 text-base leading-relaxed text-(--mut)" />
           </details>
         ))}
       </div>

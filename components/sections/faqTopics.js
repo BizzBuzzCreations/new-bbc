@@ -500,12 +500,12 @@ export default function FaqTopics({ content } = {}) {
   // line and its questions as the homepage FAQ's thin-line list (native
   // <details>, a plus that turns into a cross), no white cards.
   return (
-    <section className="bg-ink text-white">
+    <section className="on-paper">
       <div data-no-reveal className="mx-auto grid max-w-7xl gap-6 px-6 pb-16 md:px-10 md:pb-24 lg:grid-cols-[280px_1fr] lg:gap-16">
         {/* min-w-0: lets the phone pill row scroll inside the grid instead
             of widening the page */}
-        <nav aria-label="FAQ topics" className="sticky top-14 z-10 -mx-6 min-w-0 bg-ink/90 px-6 py-3 backdrop-blur-sm md:top-[72px] lg:top-28 lg:mx-0 lg:self-start lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
-          <p className="mb-4 hidden text-sm text-buzz lg:block">Topics</p>
+        <nav aria-label="FAQ topics" className="sticky top-14 z-10 -mx-6 min-w-0 bg-(--bg)/90 px-6 py-3 backdrop-blur-sm md:top-[72px] lg:top-28 lg:mx-0 lg:self-start lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
+          <p className="mb-4 hidden text-sm text-(--fg) lg:block">Topics</p>
           <div className="flex gap-1.5 overflow-x-auto snap-x snap-mandatory pb-1 lg:flex-col lg:gap-1 lg:overflow-visible lg:pb-0">
             {TOPICS.map((t, i) => {
               const Icon = t.icon;
@@ -516,8 +516,8 @@ export default function FaqTopics({ content } = {}) {
                   type="button"
                   onClick={() => scrollToTopic(i)}
                   aria-current={isActive ? "true" : undefined}
-                  className={`flex shrink-0 snap-start items-center gap-2.5 whitespace-nowrap rounded-full border px-4 py-2 text-left text-sm transition-colors duration-200 lg:whitespace-normal lg:rounded-xl lg:px-3 lg:py-2.5 ${
-                    isActive ? "border-buzz bg-buzz text-buzz-ink" : "border-white/15 text-white/80 hover:border-white/40 hover:text-white lg:border-transparent"
+                  className={`flex shrink-0 snap-start items-center gap-2.5 whitespace-nowrap rounded-full border px-4 py-2 text-left text-sm transition-colors duration-200 lg:whitespace-normal lg:rounded-none lg:px-3 lg:py-2.5 ${
+                    isActive ? "border-(--fg) bg-buzz text-buzz-ink" : "border-(--line) text-(--mut) hover:border-(--fg)/40 hover:text-(--fg) lg:border-transparent"
                   }`}
                 >
                   <Icon size={16} aria-hidden="true" className="shrink-0" />
@@ -532,17 +532,17 @@ export default function FaqTopics({ content } = {}) {
           {TOPICS.map((topic, i) => (
             <div key={topic.id} ref={(el) => (sectionRefs.current[i] = el)} data-index={i} id={topic.id} className="scroll-mt-40 lg:scroll-mt-28">
               <h2 className="font-display text-3xl leading-tight md:text-4xl">{topic.label}</h2>
-              {topic.description && <p className="mt-3 text-base text-fog">{topic.description}</p>}
-              <div className="mt-6 border-t border-white/10 md:mt-8">
+              {topic.description && <p className="mt-3 text-base text-(--mut)">{topic.description}</p>}
+              <div className="mt-6 border-t border-(--line) md:mt-8">
                 {(topic.faqs || []).filter((f) => f?.question).map((f, k) => (
-                  <details key={k} className="group border-b border-white/10" open={k === 0}>
-                    <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-6 text-left text-lg text-white transition-colors hover:text-buzz focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz [&::-webkit-details-marker]:hidden">
+                  <details key={k} className="group border-b border-(--line)" open={k === 0}>
+                    <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-6 text-left text-lg text-(--fg) transition-colors hover:text-(--fg) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz [&::-webkit-details-marker]:hidden">
                       <span>{f.question}</span>
-                      <span aria-hidden="true" className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/25 transition-transform duration-300 group-open:rotate-45">
+                      <span aria-hidden="true" className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-(--fg)/30 transition-transform duration-300 group-open:rotate-45">
                         <Plus size={16} />
                       </span>
                     </summary>
-                    <RichText as="div" text={f.answer} className="max-w-3xl pb-6 pr-12 text-base leading-relaxed text-fog" />
+                    <RichText as="div" text={f.answer} className="max-w-3xl pb-6 pr-12 text-base leading-relaxed text-(--mut)" />
                   </details>
                 ))}
               </div>

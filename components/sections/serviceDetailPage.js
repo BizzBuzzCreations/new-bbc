@@ -7,6 +7,7 @@ import LocalityBlock from "@/components/detail/localityBlock";
 import DetailCta from "@/components/detail/detailCta";
 import FaqV2 from "@/components/home/faqV2";
 import BeamsBlock from "@/components/home/band";
+import { SERVICE_LINES } from "@/lib/siteNav";
 
 // Shared template every /<service-hub>/<slug> sub-service page (all 44)
 // renders through, so they can't drift out of sync; each page plugs in its
@@ -63,6 +64,11 @@ export default function ServiceDetailPage({
   const showCapabilities = !hidden.has("capabilities") && capabilities?.length > 0;
   const showWhy = !hidden.has("differentiators") && differentiators?.length > 0;
   const showRoadmap = !hidden.has("roadmap") && roadmapCarouselSteps?.length > 0;
+  // the other services in the same line, for the hero's side list
+  const norm = (t) => String(t || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  const line = SERVICE_LINES.find((l) => l.href === PARENT_PAGES[sectionLabel]);
+  const current = line?.subs.find((sub) => norm(sub.label) === norm(label) || norm(sub.label).includes(norm(label)) || norm(label).includes(norm(sub.label)));
+  const siblings = line ? { title: `More in ${line.name}`, links: line.subs.filter((sub) => sub !== current).map((sub) => ({ label: sub.label, href: sub.href })) } : null;
 
   return (
     <div data-no-reveal>
@@ -78,6 +84,7 @@ export default function ServiceDetailPage({
           ctaText={heroCtaText}
           image={heroImage}
           secondaryHref={showCapabilities ? "#included" : null}
+          aside={siblings}
         />
       )}
       {showCapabilities && <WhoItsFor id="included" heading={capabilitiesHeading} items={capabilities} no="01" />}

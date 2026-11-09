@@ -1,27 +1,20 @@
 import Link from "next/link";
 import Image from "next/image";
-import {
-  Search,
-  Globe,
-  Share2,
-  MonitorSmartphone,
-  Sparkles,
-  BarChart3,
-  ArrowUpRight,
-  ShieldCheck,
-} from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import RichText from "@/components/ui/richText";
-import Pill from "@/components/home/pill";
+import Button from "@/components/brand/button";
+import Kicker from "@/components/brand/kicker";
+import AccentText from "@/components/brand/accentText";
 
 // Icons and hrefs stay code-driven (design/routing), matched positionally
 // to whichever cards are saved.
 const STAGE_LAYOUT = [
-  { icon: Search, href: "/search-engine-optimization" },
-  { icon: Globe, href: "/services" },
-  { icon: Share2, href: "/social-media-marketing" },
-  { icon: MonitorSmartphone, href: "/web-development" },
-  { icon: Sparkles, href: "/business-consultancy" },
-  { icon: BarChart3, href: "/industries" },
+  { href: "/search-engine-optimization" },
+  { href: "/services" },
+  { href: "/social-media-marketing" },
+  { href: "/web-development" },
+  { href: "/business-consultancy" },
+  { href: "/industries" },
 ];
 
 const DEFAULT_TRUST_LINES = [
@@ -63,43 +56,43 @@ export default function MarketingCTA({ content }) {
   // paths as a linked thin-line list (icon, title, line, link text). Phones:
   // one column.
   return (
-    <section className="overflow-x-clip bg-ink text-white">
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 md:px-10 py-24 md:py-32 lg:grid-cols-2 lg:gap-16">
-        <div>
-          <p className="kicker text-buzz">{eyebrow}</p>
-          <h2 className="font-display mt-6 text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98]">{heading}</h2>
-          <RichText as="p" text={paragraph} className="mt-6 max-w-xl text-base leading-relaxed text-fog md:text-lg" />
+    <section className="on-ink">
+      <div className="wrap grid gap-16 py-7 md:py-10 lg:grid-cols-12 lg:gap-10">
+        <div className="lg:col-span-6">
+          <Kicker>{eyebrow}</Kicker>
+          <h2 className="font-display mt-8 text-balance text-[clamp(2.4rem,5vw,5rem)] leading-[0.96] tracking-[-0.05em]">
+            <AccentText text={heading} />
+          </h2>
+          <RichText as="p" text={paragraph} className="mt-6 max-w-xl text-lg leading-relaxed text-(--mut)" />
           <div className="mt-8">
-            <Pill href="#contact-form" variant="solid" className="px-6 py-3 text-base">{buttonText}</Pill>
+            <Button href="#contact-form" variant="buzz">{buttonText}</Button>
           </div>
-          <div className="relative mt-10 hidden aspect-[16/9] overflow-hidden rounded-[20px] bg-ink-2 sm:block">
-            <Image src={backgroundImage} alt="" fill sizes="(min-width: 1280px) 600px, (min-width: 1024px) 46vw, 100vw" className="object-cover" />
+          <div className="group relative mt-12 hidden aspect-[16/9] overflow-hidden bg-ink-2 sm:block">
+            <Image src={backgroundImage} alt="The BizzBuzz Creations office" fill sizes="(min-width: 1280px) 600px, (min-width: 1024px) 46vw, 100vw" className="object-cover grayscale transition-[filter] duration-700 group-hover:grayscale-0" />
           </div>
-          <ul className="mt-8 space-y-4">
+          <ul className="mt-10 border-t border-(--line)">
             {trustLines.map((line, i) => (
-              <li key={i} className="flex items-start gap-3">
-                <ShieldCheck size={18} aria-hidden="true" className="mt-0.5 shrink-0 text-buzz" />
-                <RichText as="p" text={line} className="text-sm leading-relaxed text-white/80" />
+              <li key={i} className="grid grid-cols-[2rem_1fr] gap-2 border-b border-(--line) py-4">
+                <span className="kicker pt-0.5 text-(--mut)">{String(i + 1).padStart(2, "0")}</span>
+                <RichText as="p" text={line} className="text-[0.9375rem] leading-relaxed text-(--mut)" />
               </li>
             ))}
           </ul>
         </div>
 
-        <div>
-          <p className="text-sm text-white/60">{stagesEyebrow}</p>
-          <ul className="mt-6 border-t border-white/10">
-            {STAGES.map(({ icon: Icon, title, description, ctaText, href }) => (
-              <li key={title} className="border-b border-white/10">
-                <Link href={href} className="group flex gap-5 py-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz">
-                  <span aria-hidden="true" className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-buzz/15 text-buzz">
-                    <Icon size={18} />
-                  </span>
-                  <div className="flex-1">
-                    <h3 className="font-display text-xl leading-snug text-white transition-colors group-hover:text-buzz">{title}</h3>
-                    <RichText as="p" text={description} noLink className="mt-2 text-sm leading-relaxed text-fog" />
-                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-buzz">
+        <div className="lg:col-span-5 lg:col-start-8">
+          <p className="kicker text-(--mut)">{stagesEyebrow}</p>
+          <ul className="mt-6 border-t border-(--fg)">
+            {STAGES.map(({ title, description, ctaText, href }, i) => (
+              <li key={title} className="border-b border-(--line)">
+                <Link href={href} className="group grid grid-cols-[2.5rem_1fr] gap-2 py-6">
+                  <span className="kicker pt-1.5 text-(--mut)">{String(i + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3 className="font-display text-2xl leading-tight tracking-[-0.035em] group-hover:underline group-hover:decoration-1 group-hover:underline-offset-[6px]">{title}</h3>
+                    <RichText as="p" text={description} noLink className="mt-2 text-[0.9375rem] leading-relaxed text-(--mut)" />
+                    <span className="kicker mt-3 inline-flex items-center gap-1.5">
                       {ctaText}
-                      <ArrowUpRight size={16} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                      <ArrowUpRight size={14} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </span>
                   </div>
                 </Link>

@@ -81,17 +81,17 @@ export default async function AuthorPage({ params }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }} />
 
       <BeamsBlock>
-        <section className="text-white">
+        <section className="text-(--fg)">
           <div className="wrap pt-8 pb-16 md:px-10 md:pt-14 md:pb-24">
             <nav aria-label="Breadcrumb">
-              <ol className="flex flex-wrap items-center gap-1.5 text-sm text-white/60">
-                <li><Link href="/" className="text-buzz hover:text-white">Home</Link></li>
+              <ol className="flex flex-wrap items-center gap-1.5 text-sm text-(--mut)">
+                <li><Link href="/" className="text-(--fg) hover:text-(--fg)">Home</Link></li>
                 <li aria-hidden="true"><ChevronRight size={14} /></li>
-                <li><Link href="/blog" className="text-buzz hover:text-white">Blog</Link></li>
+                <li><Link href="/blog" className="text-(--fg) hover:text-(--fg)">Blog</Link></li>
                 <li aria-hidden="true"><ChevronRight size={14} /></li>
-                <li><Link href="/author" className="text-buzz hover:text-white">Authors</Link></li>
+                <li><Link href="/author" className="text-(--fg) hover:text-(--fg)">Authors</Link></li>
                 <li aria-hidden="true"><ChevronRight size={14} /></li>
-                <li aria-current="page" className="text-white/80">{author.name}</li>
+                <li aria-current="page" className="text-(--mut)">{author.name}</li>
               </ol>
             </nav>
 
@@ -100,29 +100,29 @@ export default async function AuthorPage({ params }) {
                 <div className="flex items-center gap-5">
                   <AuthorAvatar name={author.name} photo={member?.photo} size={member ? 112 : 88} />
                   <div className="text-sm">
-                    <p className="text-buzz">{member?.role ? `${member.role} at BizzBuzz Creations` : "Author at BizzBuzz Creations"}</p>
+                    <p className="text-(--fg)">{member?.role ? `${member.role} at BizzBuzz Creations` : "Author at BizzBuzz Creations"}</p>
                     {member && (
-                      <Link href={member.team.href} className="mt-1 inline-block text-white/60 underline decoration-white/25 underline-offset-4 transition-colors hover:text-white">
+                      <Link href={member.team.href} className="mt-1 inline-block text-(--mut) underline decoration-white/25 underline-offset-4 transition-colors hover:text-(--fg)">
                         Part of the {member.team.label}
                       </Link>
                     )}
                   </div>
                 </div>
                 <h1 className="font-display mt-6 text-[2.6rem] leading-[1.05] sm:text-6xl">{author.name}</h1>
-                {topics.length > 0 && <p className="mt-4 text-lg text-buzz">Writes about {topics.slice(0, 3).join(" · ")}</p>}
+                {topics.length > 0 && <p className="mt-4 text-lg text-(--fg)">Writes about {topics.slice(0, 3).join(" · ")}</p>}
                 {author.bio ? (
-                  <RichText as="div" text={author.bio} className="mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-white/75 md:text-lg" />
+                  <RichText as="div" text={author.bio} className="mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-(--mut) md:text-lg" />
                 ) : (
-                  <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/75 md:text-lg">
+                  <p className="mt-6 max-w-2xl text-base leading-relaxed text-(--mut) md:text-lg">
                     {first} writes for the BizzBuzz Creations blog. Every article {first} has published is below.
                   </p>
                 )}
 
-                <dl className="mt-9 grid max-w-md border-t border-white/10 pt-6" style={{ gridTemplateColumns: `repeat(${stats.length}, minmax(0, 1fr))` }}>
+                <dl className="mt-9 grid max-w-md border-t border-(--line) pt-6" style={{ gridTemplateColumns: `repeat(${stats.length}, minmax(0, 1fr))` }}>
                   {stats.map(({ value, label }) => (
-                    <div key={label} className="flex flex-col-reverse justify-end border-l border-white/10 px-4 first:border-l-0 first:pl-0 sm:px-6">
-                      <dt className="mt-1 text-[11px] uppercase leading-snug tracking-wider text-white/60 sm:text-xs">{label}</dt>
-                      <dd className="font-display text-4xl text-white md:text-5xl">{value}</dd>
+                    <div key={label} className="flex flex-col-reverse justify-end border-l border-(--line) px-4 first:border-l-0 first:pl-0 sm:px-6">
+                      <dt className="mt-1 text-[11px] uppercase leading-snug tracking-wider text-(--mut) sm:text-xs">{label}</dt>
+                      <dd className="font-display text-4xl text-(--fg) md:text-5xl">{value}</dd>
                     </div>
                   ))}
                 </dl>
@@ -134,8 +134,8 @@ export default async function AuthorPage({ params }) {
               </div>
 
               {latest && (
-                <Link href={`/blog/${latest.slug}`} className="group relative block rounded-[20px] border border-white/10 bg-ink-2 p-3 transition-colors duration-300 hover:border-buzz/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz">
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-ink-2">
+                <Link href={`/blog/${latest.slug}`} className="group relative block rounded-[20px] border border-(--line) bg-paper-2 p-3 transition-colors duration-300 hover:border-(--fg)/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz">
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-none bg-paper-2">
                     {latest.image && (
                       // eslint-disable-next-line @next/next/no-img-element -- dashboard-supplied URL (Cloudinary etc.), not a fixed host
                       <img
@@ -147,15 +147,15 @@ export default async function AuthorPage({ params }) {
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                       />
                     )}
-                    <span className="absolute left-3 top-3 rounded-full border border-white/15 bg-ink/60 px-3 py-1 text-xs text-white backdrop-blur-md">Latest article</span>
+                    <span className="absolute left-3 top-3 rounded-full border border-(--line) bg-(--bg)/60 px-3 py-1 text-xs text-(--fg) backdrop-blur-md">Latest article</span>
                   </div>
                   <div className="p-4 md:p-5">
-                    <p className="text-xs uppercase tracking-wider text-white/60">
+                    <p className="text-xs uppercase tracking-wider text-(--mut)">
                       {latest.category && <>{latest.category} &middot; </>}
                       {fmt(latest.date)} &middot; {latest.minutes} min read
                     </p>
-                    <h2 className="font-display mt-3 text-xl leading-snug text-white transition-colors group-hover:text-buzz md:text-2xl">{latest.title}</h2>
-                    {latest.excerpt && <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-white/60">{latest.excerpt}</p>}
+                    <h2 className="font-display mt-3 text-xl leading-snug text-(--fg) transition-colors group-hover:text-(--fg) md:text-2xl">{latest.title}</h2>
+                    {latest.excerpt && <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-(--mut)">{latest.excerpt}</p>}
                   </div>
                 </Link>
               )}
@@ -164,20 +164,20 @@ export default async function AuthorPage({ params }) {
         </section>
 
         {quotes.length > 0 && (
-          <section className="text-white">
+          <section className="text-(--fg)">
             <div className="wrap pb-16 md:px-10 md:pb-24">
-              <div className="reveal max-w-3xl">
-                <p className="kicker text-buzz">In their words</p>
+              <div className="max-w-3xl">
+                <p className="kicker text-(--fg)">In their words</p>
                 <h2 className="font-display mt-6 text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98]">What {first} has been saying</h2>
               </div>
-              <ul className="reveal-stagger mt-12 grid gap-4 md:mt-16 md:grid-cols-3 md:gap-5">
+              <ul className="mt-12 grid gap-4 md:mt-16 md:grid-cols-3 md:gap-5">
                 {quotes.map((q) => (
-                  <li key={q.slug} className="group relative flex flex-col rounded-[20px] border border-white/10 bg-ink-2/80 p-6 backdrop-blur-sm transition-colors duration-300 hover:border-buzz/50 md:p-8">
-                    <Quote aria-hidden="true" size={28} className="text-buzz" />
-                    <blockquote className="font-display mt-5 text-xl leading-snug text-white/90 md:text-2xl">{q.excerpt}</blockquote>
-                    <p className="mt-auto pt-8 text-sm text-white/60">
+                  <li key={q.slug} className="group relative flex flex-col rounded-[20px] border border-(--line) bg-paper-2 p-6 backdrop-blur-sm transition-colors duration-300 hover:border-(--fg)/40 md:p-8">
+                    <Quote aria-hidden="true" size={28} className="text-(--fg)" />
+                    <blockquote className="font-display mt-5 text-xl leading-snug text-(--fg)/85 md:text-2xl">{q.excerpt}</blockquote>
+                    <p className="mt-auto pt-8 text-sm text-(--mut)">
                       From{" "}
-                      <Link href={`/blog/${q.slug}`} className="text-buzz after:absolute after:inset-0 after:content-[''] hover:text-white focus-visible:underline focus-visible:outline-none">
+                      <Link href={`/blog/${q.slug}`} className="text-(--fg) after:absolute after:inset-0 after:content-[''] hover:text-(--fg) focus-visible:underline focus-visible:outline-none">
                         {q.title}
                       </Link>
                       <span className="block text-xs">{fmt(q.date)}</span>
@@ -190,10 +190,10 @@ export default async function AuthorPage({ params }) {
         )}
       </BeamsBlock>
 
-      <section id="articles" className="scroll-mt-20 bg-ink text-white">
+      <section id="articles" className="scroll-mt-10 on-paper">
         <div className="wrap py-16 md:px-10 md:py-20">
-          <div className="reveal max-w-3xl">
-            <p className="kicker text-buzz">All articles</p>
+          <div className="max-w-3xl">
+            <p className="kicker text-(--fg)">All articles</p>
             <h2 className="font-display mt-6 text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98]">Everything {first} has written</h2>
           </div>
           <div className="mt-10 md:mt-12">
@@ -203,17 +203,17 @@ export default async function AuthorPage({ params }) {
       </section>
 
       {others.length > 0 && (
-        <section className="bg-ink text-white">
+        <section className="on-paper">
           <div className="wrap pb-16 md:px-10 md:pb-20">
-            <div className="reveal flex flex-wrap items-end justify-between gap-6 border-t border-white/10 pt-16">
+            <div className="flex flex-wrap items-end justify-between gap-6 border-t border-(--line) pt-16">
               <div>
-                <p className="kicker text-buzz">More from our team</p>
+                <p className="kicker text-(--fg)">More from our team</p>
                 <h2 className="font-display mt-6 text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98]">Meet the other authors</h2>
               </div>
               <Pill href="/author">All authors</Pill>
             </div>
             {/* the columns follow how many authors there are, so the row is never half empty */}
-            <ul className={`reveal-stagger mt-12 grid gap-4 md:mt-16 ${others.length === 1 ? "max-w-md" : others.length === 2 ? "sm:grid-cols-2" : others.length === 3 ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2 lg:grid-cols-4"}`}>
+            <ul className={`mt-12 grid gap-4 md:mt-16 ${others.length === 1 ? "max-w-md" : others.length === 2 ? "sm:grid-cols-2" : others.length === 3 ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2 lg:grid-cols-4"}`}>
               {others.map((a) => (
                 <li key={a.slug}>
                   <AuthorCard author={a} />

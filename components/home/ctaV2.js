@@ -11,23 +11,21 @@ import { CONTACT } from "@/lib/siteNav";
 
 const toastOptions = { position: "top-right", autoClose: 5000, theme: "dark", transition: Bounce };
 
-// Closing call to action (rebuild): a full-bleed buzz-yellow section — the
-// page's one loud moment. Heading, paragraph, an email box (one field; the
-// enquiry goes to the same sendMail action as before), call and WhatsApp.
-// Same dashboard fields (ctaHeading, ctaParagraph, ctaEmailLabel,
-// ctaEmailPlaceholder). A sent enquiry stops the consultation popup asking.
+// The closing call to action — the one dark, loud moment: the dashboard's
+// heading set huge, a single email field (same sendMail action as before),
+// call and WhatsApp. Dashboard fields as before (ctaHeading, ctaParagraph,
+// ctaEmailLabel, ctaEmailPlaceholder). A sent enquiry stops the consultation
+// pop-up asking.
 export default function CtaV2({ content }) {
   const heading = content?.ctaHeading || "Get a Free Consultation";
-  const paragraph =
-    content?.ctaParagraph ||
-    "Ready to grow your business with trusted digital marketing services in UP? Contact BizzBuzz Creations today and let’s build your success story together.";
+  const paragraph = content?.ctaParagraph || "Ready to grow your business with trusted digital marketing services in UP? Contact BizzBuzz Creations today and let’s build your success story together.";
   const emailLabel = content?.ctaEmailLabel || "Email address";
-  const emailPlaceholder = content?.ctaEmailPlaceholder || "your@email.com";
+  const emailPlaceholder = content?.ctaEmailPlaceholder || "you@company.com";
   const [email, setEmail] = useState("");
   const [state, setState] = useState("idle"); // idle | sending | sent | error
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     setState("sending");
     setError("");
@@ -44,62 +42,54 @@ export default function CtaV2({ content }) {
   };
 
   return (
-    <section id="CTA" aria-labelledby="cta-heading" className="relative scroll-mt-20 overflow-hidden bg-buzz text-buzz-ink">
-      <div className="col-lines-dark pointer-events-none absolute inset-0" aria-hidden="true" />
-      <div className="wrap relative grid gap-14 py-24 md:py-36 lg:grid-cols-12 lg:items-end lg:gap-10">
-        <div className="lg:col-span-7">
-          <p className="kicker text-buzz-ink/70">[11] Let&rsquo;s talk</p>
-          <h2 id="cta-heading" className="font-display mt-6 text-balance text-[clamp(3rem,8vw,8rem)] leading-[0.9]">
-            <AccentText text={heading} />
-          </h2>
-        </div>
-        <div className="lg:col-span-5">
-          <RichText as="p" text={paragraph} className="text-lg leading-relaxed text-buzz-ink/80" />
-          {state === "sent" ? (
-            <p role="status" className="mt-10 rounded-2xl bg-buzz-ink px-6 py-5 text-white">
-              Thanks — we&rsquo;ve got your email and will reply within one working day.
-            </p>
-          ) : (
-            <form onSubmit={handleSubmit} className="mt-10" noValidate={false}>
-              <label htmlFor="cta-email" className="kicker text-buzz-ink/70">
-                {emailLabel}
-              </label>
-              <div className="mt-2 flex items-center gap-3 border-b-2 border-buzz-ink pb-2">
-                <input
-                  id="cta-email"
-                  name="email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder={emailPlaceholder}
-                  aria-invalid={state === "error" ? "true" : undefined}
-                  aria-describedby={state === "error" ? "cta-error" : undefined}
-                  className="min-w-0 flex-1 border-0 bg-transparent px-0 py-2 text-xl text-buzz-ink placeholder:text-buzz-ink/45 focus:outline-none focus:ring-0"
-                />
-                <button
-                  type="submit"
-                  disabled={state === "sending"}
-                  className="group flex h-12 shrink-0 items-center gap-2 rounded-full bg-buzz-ink pl-5 pr-4 font-medium text-white transition-colors hover:bg-ink-3 disabled:opacity-60"
-                >
-                  {state === "sending" ? "Sending…" : "Send"}
-                  <ArrowRight aria-hidden="true" size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
-                </button>
-              </div>
-              {state === "error" && (
-                <p id="cta-error" role="alert" className="mt-3 text-sm font-medium">
-                  {error}
-                </p>
-              )}
-            </form>
-          )}
-          <div className="mt-8 flex flex-wrap items-center gap-3 text-[0.9375rem] font-medium">
-            <a href={CONTACT.phoneIndia.href} className="inline-flex h-12 items-center gap-2 rounded-full border border-buzz-ink/30 px-5 transition-colors hover:bg-buzz-ink hover:text-white">
-              <Phone aria-hidden="true" size={16} /> {CONTACT.phoneIndia.display}
+    <section id="CTA" aria-labelledby="cta-heading" className="on-ink scroll-mt-10">
+      <div className="wrap py-7 md:py-10">
+        <p className="kicker text-(--mut)">Let’s talk</p>
+        <h2 id="cta-heading" className="font-display mt-8 max-w-[14ch] text-balance text-[clamp(3.2rem,10.5vw,11.5rem)] leading-[0.88] tracking-[-0.06em]">
+          <AccentText text={heading} />
+        </h2>
+        <div className="mt-8 grid gap-12 border-t border-(--line) pt-10 md:mt-10 lg:grid-cols-12 lg:gap-10 [&>*]:min-w-0">
+          <RichText as="p" text={paragraph} className="text-lg leading-relaxed text-(--mut) lg:col-span-4" />
+          <div className="lg:col-span-5 lg:col-start-6">
+            {state === "sent" ? (
+              <p role="status" className="font-display text-3xl leading-tight tracking-[-0.03em]">
+                Thanks — we’ve got your email and will reply within one working day.
+              </p>
+            ) : (
+              <form onSubmit={submit}>
+                <label htmlFor="cta-email" className="kicker text-(--mut)">{emailLabel}</label>
+                <div className="mt-3 flex items-center gap-3 border-b border-(--fg) pb-3">
+                  <input
+                    id="cta-email"
+                    name="email"
+                    type="email"
+                    required
+                    autoComplete="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder={emailPlaceholder}
+                    aria-invalid={state === "error" ? "true" : undefined}
+                    aria-describedby={state === "error" ? "cta-error" : undefined}
+                    className="font-display w-0 min-w-0 flex-1 border-0 bg-transparent px-0 py-1 text-2xl tracking-[-0.03em] text-(--fg) placeholder:text-(--mut)/70 focus:outline-none focus:ring-0 md:text-4xl"
+                  />
+                  <button type="submit" disabled={state === "sending"} aria-label="Send" className="group flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-buzz text-buzz-ink transition-transform duration-300 hover:scale-105 disabled:opacity-60">
+                    {state === "sending" ? <span className="text-xs">…</span> : <ArrowRight aria-hidden="true" size={22} className="transition-transform duration-300 group-hover:translate-x-0.5" />}
+                  </button>
+                </div>
+                {state === "error" && (
+                  <p id="cta-error" role="alert" className="mt-3 text-sm text-[#ff9a8a]">
+                    {error}
+                  </p>
+                )}
+              </form>
+            )}
+          </div>
+          <div className="flex flex-wrap items-start gap-3 text-[0.9375rem] lg:col-span-2 lg:flex-col lg:items-end">
+            <a href={CONTACT.phoneIndia.href} className="inline-flex items-center gap-2 underline decoration-(--fg)/30 underline-offset-4 hover:decoration-(--fg)">
+              <Phone aria-hidden="true" size={15} /> {CONTACT.phoneIndia.display}
             </a>
-            <a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 items-center gap-2 rounded-full border border-buzz-ink/30 px-5 transition-colors hover:bg-buzz-ink hover:text-white">
-              <MessageCircle aria-hidden="true" size={16} /> WhatsApp
+            <a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 underline decoration-(--fg)/30 underline-offset-4 hover:decoration-(--fg)">
+              <MessageCircle aria-hidden="true" size={15} /> WhatsApp
               <span className="sr-only"> (opens in a new tab)</span>
             </a>
           </div>

@@ -24,8 +24,6 @@ import CtaV2 from "@/components/home/ctaV2";
 import { getPageContent } from "@/actions/pageContentActions";
 import { buildPageMetadata } from "@/lib/pageMetadata";
 import PageSeoScripts from "@/components/sections/pageSeoScripts";
-import IndustrySignature from "@/components/brand/industrySignature";
-import { INDUSTRIES as SIGNATURE_INDUSTRIES } from "@/lib/siteNav";
 
 // Icons stay code-driven (design), matched positionally to whichever
 // industry cards are saved — same order as the default list below.
@@ -144,8 +142,7 @@ export default async function IndustriesIndexPage() {
     icon: INDUSTRY_ICONS[i % INDUSTRY_ICONS.length],
   }));
 
-  // Rebuild: hero (with industry signatures, no photo) → the 15 industries
-  // as signature cards (each links to its own industry page) → what we build (the
+  // Hero (type only, no photo) → the 15 industries as cells (each links to its own industry page) → what we build (the
   // in-house systems) → certifications → FAQ → closing CTA. Same dashboard
   // fields and "Remove section" switches as before.
   return (
@@ -159,18 +156,6 @@ export default async function IndustriesIndexPage() {
           title={heroHeading}
           description={heroParagraph}
           actions={[{ text: heroButtonText, href: "/services", variant: "solid" }]}
-          media={
-            // nine industry signatures instead of a photo (the old industry
-            // photos were low quality); the dashboard image field is unused
-            <ul aria-hidden="true" className="grid grid-cols-3 gap-2 sm:gap-3">
-              {SIGNATURE_INDUSTRIES.slice(0, 9).map((ind, i) => (
-                <li key={ind.slug} className={`relative aspect-square overflow-hidden rounded-2xl border border-white/10 bg-ink-2 ${i % 3 === 1 ? "translate-y-5" : ""}`}>
-                  <IndustrySignature slug={ind.slug} lines={14} className="absolute inset-0 h-full w-full" />
-                  <span className="kicker absolute bottom-2.5 left-3 text-[0.65rem] text-white/80">{ind.label}</span>
-                </li>
-              ))}
-            </ul>
-          }
         />
       )}
 

@@ -8,12 +8,12 @@ import Footer from "@/components/layout/footer";
 // 60s revalidate is just a safety net.
 export const revalidate = 60;
 
-// .site — the rebuild's base (fonts, ink background, focus ring; see
-// globals.css). The header is fixed and transparent: each page's first
-// section leaves room for it (pt-28 / md:pt-36 on the heroes).
+// .site / .on-paper: the paper surface and Geist (globals.css). The header is
+// fixed and transparent over each page's first section, which leaves room for
+// it at the top (pt-32 / md:pt-44).
 export default function MainLayout({ children }) {
   return (
-    <div className="site min-h-screen">
+    <div className="site on-paper min-h-screen">
       <Navbar />
       {children}
       <Footer />

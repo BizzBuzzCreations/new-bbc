@@ -26,13 +26,13 @@ export default function LocationAboutV2({ content, showGlance = true }) {
   const { stats, links } = whoWeAreContent(content);
 
   return (
-    <section className="relative overflow-x-clip bg-paper text-ink">
-      <div className="wrap py-24 md:py-32">
-        <div className="reveal-sides grid gap-10 md:grid-cols-[1.1fr_1fr] md:items-center md:gap-16">
+    <section className="relative overflow-x-clip on-paper">
+      <div className="wrap py-7 md:py-10">
+        <div className="grid gap-10 md:grid-cols-[1.1fr_1fr] md:items-center md:gap-16">
           <div>
-            <p className="kicker text-stone">{eyebrow}</p>
+            <p className="kicker text-(--mut)">{eyebrow}</p>
             <h2 className="font-display mt-6 text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98]">{heading}</h2>
-            <RichText as="div" text={paragraph} className="mt-6 space-y-4 text-lg leading-relaxed text-stone" />
+            <RichText as="div" text={paragraph} className="mt-6 space-y-4 text-lg leading-relaxed text-(--mut)" />
             <div className="mt-8">
               <Pill href={buttonLink} variant="ink" srText="about BizzBuzz Creations">{buttonText}</Pill>
             </div>
@@ -43,16 +43,16 @@ export default function LocationAboutV2({ content, showGlance = true }) {
         </div>
 
         {showGlance && (
-          <div className="reveal mt-14 grid gap-8 border-t border-ink/15 pt-10 md:mt-16 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:gap-16">
+          <div className="mt-8 grid gap-8 border-t border-ink/15 pt-10 md:mt-16 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:gap-16">
             <dl className="grid grid-cols-3">
               {stats.slice(0, 3).map(({ value, label }, i) => (
                 <div key={`${label}-${i}`} className="flex flex-col-reverse justify-end border-l border-ink/15 px-4 first:border-l-0 first:pl-0 sm:px-6">
-                  <dt className="kicker mt-2 text-stone">{label}</dt>
+                  <dt className="kicker mt-2 text-(--mut)">{label}</dt>
                   <dd className="font-display text-4xl md:text-5xl">{value}</dd>
                 </div>
               ))}
             </dl>
-            <ul className="grid gap-px overflow-hidden rounded-2xl border border-ink/15 bg-ink/15 sm:grid-cols-3">
+            <ul className="grid gap-px overflow-hidden rounded-none border border-ink/15 bg-(--bg)/15 sm:grid-cols-3">
               {links.map(({ label, href, icon: Icon }) => (
                 <li key={href} className="bg-paper">
                   <Link href={href} className="group flex items-center gap-3 px-5 py-4 text-sm text-ink transition-colors hover:bg-paper-2">

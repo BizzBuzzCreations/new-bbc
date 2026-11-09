@@ -11,7 +11,7 @@ import ClientVideosV2 from "@/components/home/clientVideosV2";
 import BlogsV2 from "@/components/home/blogsV2";
 import FaqV2 from "@/components/home/faqV2";
 import CtaV2 from "@/components/home/ctaV2";
-import SignalPath from "@/components/home/signalPath";
+import Numbers from "@/components/home/numbers";
 import ConsultationPopup from "@/components/sections/popupForm";
 import { getPageContent } from "@/actions/pageContentActions";
 import { buildPageMetadata } from "@/lib/pageMetadata";
@@ -54,21 +54,18 @@ export default async function Home() {
   // Sections switched off in the dashboard (Remove section).
   const hidden = new Set(content?.hiddenSections || []);
 
-  // The rebuild's homepage story (DESIGN_DIRECTION.md §9): who we are →
-  // what we do → how the pieces connect → what we build → who we do it
-  // for → proof → how we work → insights → questions → talk to us.
-  // data-no-reveal: these sections bring their own light motion, so the
-  // site-wide scroll fade-in (ScrollReveal) leaves them alone.
+  // The homepage (DESIGN_DIRECTION.md §7): hero → the team and what we are →
+  // the 8 services → our own products → the numbers → industries → client
+  // stories → reviews → process → insights → questions → talk to us.
+  // data-no-reveal: these sections bring their own light motion.
   return (
     <div data-no-reveal>
       <PageSeoScripts pageKey="home" />
-      {!hidden.has("hero") && (
-        <HeroHome content={content} stats={content?.zoomStats} secondaryCta={hidden.has("services") ? null : { text: "Explore our services", href: "#services" }} />
-      )}
+      {!hidden.has("hero") && <HeroHome content={content} secondaryCta={hidden.has("services") ? null : { text: "Explore our services", href: "#services" }} />}
       {!hidden.has("about") && <AboutV2 content={content} showStatement={!hidden.has("statement")} />}
       {!hidden.has("services") && <ServicesV2 content={content} />}
-      <SignalPath />
       <BuildV2 content={content} showClio={!hidden.has("aiShowcase")} showPraxistence={!hidden.has("praxistenceShowcase")} showBuilds={!hidden.has("caseStudies")} />
+      <Numbers stats={content?.zoomStats} />
       {!hidden.has("industries") && <IndustriesV2 content={content} />}
       {!hidden.has("clientVideos") && <ClientVideosV2 content={content} />}
       {!hidden.has("reviews") && <ReviewsV2 content={content} />}

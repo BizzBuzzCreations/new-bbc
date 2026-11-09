@@ -21,7 +21,7 @@ export default function Clock({ tz, zone, className = "" }) {
   }, [tz]);
   return (
     <span className={`tabular-nums ${className}`}>
-      {zone && <span className="opacity-60">{zone} </span>}
+      {zone && <span>{zone} </span>}
       <time suppressHydrationWarning>{time || "--:--"}</time>
     </span>
   );

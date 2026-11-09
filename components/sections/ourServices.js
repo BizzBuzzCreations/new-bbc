@@ -147,7 +147,7 @@ export default function OurServices({ content }) {
         `,
           backgroundSize: "40px 40px",
         }}
-        className="relative py-14 md:py-20 overflow-hidden scroll-mt-20"
+        className="relative py-14 md:py-20 overflow-hidden scroll-mt-10"
         id="services"
       >
 

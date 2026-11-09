@@ -1014,3 +1014,115 @@ of the clearer, conversion-focused structures from BD Emerson, Bitnomial
 and Velmax.
 
 ---
+
+---
+
+# Second round (2026-11-09) — the owner's final eight
+
+The owner rejected the first rebuild as "not clean" (it kept the old site's
+section structure and used generated line-art) and supplied these eight sites
+instead: *"forget the current site, take inspiration from these, use your
+mind and brainstorm."* Each was opened in Chromium at 1440 × 900 and
+390 × 844, scrolled top to bottom; fonts, colours and libraries read from the
+live pages. **Common thread: huge, tightly-set type; a great deal of white
+space; real photographs, real products and real numbers; no illustration.**
+
+## Reference 7 — Mira (trymira.com)
+AI smart glasses & ring. **Built with:** custom site, Geist, 8 `<video>`
+elements, one canvas. **Look:** a full-screen product film as the hero with
+one centred line ("Welcome to Your Second Brain"); a dark panel where a
+headline *types itself* ("The Glasses That…") and the next words ("Capture",
+"Act", "Translate", "Answer") sit in tiles — the selected tile gets green
+corner brackets; a bright orange "Order" button as the only accent; a minimal
+header (menu icon · logo centre · Order · bag). A discount pop-up appears
+immediately and covers everything — a reminder that **an early pop-up hurts**.
+**Take:** one real hero visual; a rotating/typed word as the interactive
+idea; corner-bracket "focus" detail; a single warm accent button.
+
+## Reference 8 — Tresmares Capital (tresmarescapital.com/en)
+Private-equity / SME financing. **Built with:** WordPress, Lenis,
+PP Neue Montreal. **Look:** the cleanest of the set — white page, a huge
+tightly-tracked grotesk headline broken into **three staggered lines**
+("Drive / to / grow", each indented further), a faint grayscale landscape
+behind, a tiny paragraph and an underlined link at the bottom right. Sections:
+a centred statement ("Our four strategies are…") → four strategies as a
+sticky list switching grayscale photographs → a **statement whose words fill
+from grey to ink (one name in red)** → a fan of rotating photos of the
+countries served → team portraits in a row of grayscale squares → one centred
+closing line with a single underlined "Contact us". Red `#E41613` is the only
+colour. **Take:** staggered hero lines, centred statements with word-fill,
+grayscale photography, links as plain underlines, extreme restraint.
+
+## Reference 9 — Kerna (kerna.studio)
+Brand studio for onchain startups. **Built with:** Astro, Lenis, Instrument
+Sans + a pixel font (OffBit). **Look:** cream and warm-black with one electric
+blue; a **giant wordmark** cropped by the screen edge; content in bordered
+grid cells where each benefit has a pattern of blue/cream dots; a 4-step
+process drawn as numbered tiles on a vertical line that fills; a manifesto
+whose lines light up as you read; a **booking calendar in the footer**.
+**Take:** visible grid cells with hairline borders, giant cropped wordmark,
+numbered steps on a filling line, booking built into the closing section.
+
+## Reference 10 — AIR business center (aircenter.space)
+Premium office building. **Look:** white, a huge letter-spaced wordmark
+"A  I  R" stretched edge to edge with a white sculptural form winding through
+it; tiny uppercase header text; one black pill. The experience is a **pinned,
+scroll-driven scene** (the page itself stays 900 px tall; scrolling advances a
+sequence). **Take:** one giant word across the whole width as a hero; a
+black pill as the only button.
+
+## Reference 11 — Tenity (tenity.com)
+Fintech innovation platform. **Built with:** WordPress, Lenis, Diagramm +
+IBM Plex. **Look:** alternating black and white bands; headlines with a
+**solid pill-shaped bar inline in the sentence** ("Fintech makers ▬ and");
+quarter-circle outlines as cards; huge coral numbers beside black-and-white
+photos ("250+", "$140M"); a coral/green/orange gradient glow; one coral
+button. **Take:** huge stats as the visual, the inline-bar headline device,
+black/white banding.
+
+## Reference 12 — Zirka (zrk.technology)
+Interceptor drone. **Built with:** Webflow, GSAP + ScrollTrigger, Lenis, Inter
+Display + Geist Mono; ≈ 35,000 px of scroll. **Look:** near-black,
+cinematic, one orange accent; a mono status bar across the top; the scene is a
+**pinned stage where one number counts up as you scroll** ("Max speed
+224 → 340 km/h") inside a thin dotted ring while 3D renders of the product
+turn behind it. **Take:** a counting number as a scroll-driven stage; mono
+status lines; the discipline of one idea per screen.
+
+## Reference 13 — Grail (grail-app.com)
+Real-world quests app. **Built with:** custom, Lenis, 4 canvases, PP Pangaia
+(a high-contrast serif in capitals) + Switzer. **Look:** a sequence of
+**chapters** ("Chapter 01…08"), each a full-bleed colour (black, lilac,
+brown, white) with a giant all-caps serif line and the app's real cards and
+phone floating through; a fixed pill CTA; a closing "YOUR EMAIL" field as
+huge underlined type. **Take:** chapters with a colour per chapter, a fixed
+pill CTA, the email field as the closing moment.
+
+## Reference 14 — Pier Gorelli (piergorelli.com)
+Freelance web & AI developer. **Built with:** Astro, Lenis, GSAP, Geist +
+Geist Mono. **Look:** warm paper `#F4F4F0`, ink `#0E0E0D`, one blue `#2F5BFF`
+for details; the hero ("**I do dev.**") draws a **blueprint of its own layout**
+(guides, box labels like `H1.HUMAN · 1388×153`) while the second line types
+itself; each project is a numbered stage "01 / 04" with an outlined next
+number, the case's stack in mono, a Plot / Build / Live tab strip; a 4-step
+process on a dotted line; the blog as plain dated rows; theme and colour
+switches in the header; a giant "I do dev." closing the footer. **Take:** the
+numbered "01 / 04" device, mono for meta, the Plot/Build/Live idea of showing
+a result in stages, blog as rows, a giant closing line.
+
+## Synthesis of the eight (what the new design takes)
+
+| Pattern | Seen in | Use |
+|---|---|---|
+| One huge, tightly-tracked grotesk; lines **staggered** | Tresmares, Air, Kerna | Hero headline in 3 indented lines |
+| Pure white / paper, ink text, **one** accent | Tresmares, Pier, Air | Paper default, ink for emphasis, one yellow |
+| Statement with words filling in; centred big sentences | Tresmares, Kerna | The about statement |
+| Hairline-bordered **grid cells**, hover inverts | Kerna, Tenity | The 8 service lines |
+| Numbered "01 / 04" stages, mono meta | Pier, Zirka | Section and service numbering |
+| A number as a scroll-driven stage | Zirka, Tenity | Proof numbers that count up |
+| Rotating / typed word | Mira, Pier | "Working with: clinics ▮" in the hero |
+| Giant cropped wordmark to close | Kerna, Pier | Footer wordmark |
+| Chapters with a colour each | Grail | One dark section for contrast, not many |
+| Booking in the closing section | Kerna | Contact: form + direct lines |
+| **No illustration**; photo only if real | all eight | Real team photo + real client videos only |
+| Pop-up that covers the page | Mira (bad) | Never on arrival |

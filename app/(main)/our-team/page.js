@@ -55,7 +55,7 @@ export default async function OurTeamPage() {
     title: g.title,
     tagline: g.tagline,
     body: g.desc,
-    img: g.image,
+    // (the team-group cover images are illustrations — not shown in this design)
     href: TEAM_GROUP_LINKS[i],
     linkText: "Our Team",
   }));

@@ -99,7 +99,7 @@ export default async function OutsideLocationPage({ pageKey }) {
       />
       {!hidden.has("stats") && <WhyUsV2 content={content} />}
       {/* these two have no background of their own (they're made for the beams block) */}
-      <div className="bg-ink">
+      <div className="bg-(--bg)">
         {!hidden.has("process") && <ProcessV2 content={content} />}
         {!hidden.has("industries") && <IndustriesV2 content={content} />}
       </div>

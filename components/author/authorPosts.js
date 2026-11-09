@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Search, X } from "lucide-react";
-import IndustrySignature from "@/components/brand/industrySignature";
 import Pill from "@/components/home/pill";
 import { optimizedImageUrl, imageSrcSet } from "@/lib/getFeaturedImage";
 
@@ -38,7 +37,7 @@ export default function AuthorPosts({ posts, categories, authorName }) {
   };
   const chip = (active) =>
     `rounded-full border px-4 py-2 text-sm transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz ${
-      active ? "border-buzz bg-buzz text-buzz-ink" : "border-white/20 text-white/80 hover:border-white/50 hover:text-white"
+      active ? "border-(--fg) bg-buzz text-buzz-ink" : "border-(--line) text-(--mut) hover:border-(--fg)/50 hover:text-(--fg)"
     }`;
 
   return (
@@ -47,7 +46,7 @@ export default function AuthorPosts({ posts, categories, authorName }) {
       <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
         <div className="relative w-full lg:max-w-sm">
           <label htmlFor="author-search" className="sr-only">Search {authorName}&rsquo;s articles</label>
-          <Search size={16} aria-hidden="true" className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/50" />
+          <Search size={16} aria-hidden="true" className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-(--mut)" />
           <input
             id="author-search"
             type="search"
@@ -57,15 +56,15 @@ export default function AuthorPosts({ posts, categories, authorName }) {
               setShown(PAGE);
             }}
             placeholder="Search these articles…"
-            className="w-full rounded-full border border-white/20 bg-white/[0.04] py-3 pl-11 pr-11 text-base text-white placeholder:text-white/50 focus:border-buzz focus:outline-none md:text-sm"
+            className="w-full rounded-full border border-(--line) bg-white/[0.04] py-3 pl-11 pr-11 text-base text-(--fg) placeholder:text-(--mut) focus:border-(--fg) focus:outline-none md:text-sm"
           />
           {query && (
-            <button type="button" onClick={() => setQuery("")} aria-label="Clear search" className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-white/60 hover:bg-white/10 hover:text-white">
+            <button type="button" onClick={() => setQuery("")} aria-label="Clear search" className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-(--mut) hover:bg-(--fg)/5 hover:text-(--fg)">
               <X size={16} aria-hidden="true" />
             </button>
           )}
         </div>
-        <div role="group" aria-label="Sort articles" className="flex w-fit gap-1 rounded-full border border-white/15 p-1">
+        <div role="group" aria-label="Sort articles" className="flex w-fit gap-1 rounded-full border border-(--line) p-1">
           {[
             [true, "Newest"],
             [false, "Oldest"],
@@ -75,7 +74,7 @@ export default function AuthorPosts({ posts, categories, authorName }) {
               type="button"
               aria-pressed={newestFirst === value}
               onClick={() => setNewestFirst(value)}
-              className={`rounded-full px-4 py-1.5 text-sm transition-colors ${newestFirst === value ? "bg-white text-black" : "text-fog hover:text-white"}`}
+              className={`rounded-full px-4 py-1.5 text-sm transition-colors ${newestFirst === value ? "bg-white text-black" : "text-(--mut) hover:text-(--fg)"}`}
             >
               {label}
             </button>
@@ -94,7 +93,7 @@ export default function AuthorPosts({ posts, categories, authorName }) {
             }}
             className={chip(topic === "all")}
           >
-            All <span className={topic === "all" ? "text-white/90" : "text-white/60"}>{posts.length}</span>
+            All <span className={topic === "all" ? "text-(--fg)/85" : "text-(--mut)"}>{posts.length}</span>
           </button>
           {categories.map((c) => (
             <button
@@ -107,19 +106,19 @@ export default function AuthorPosts({ posts, categories, authorName }) {
               }}
               className={chip(topic === c.name)}
             >
-              {c.name} <span className={topic === c.name ? "text-white/90" : "text-white/60"}>{c.count}</span>
+              {c.name} <span className={topic === c.name ? "text-(--fg)/85" : "text-(--mut)"}>{c.count}</span>
             </button>
           ))}
         </div>
       )}
 
-      <p aria-live="polite" className="mt-8 text-sm text-white/60">
+      <p aria-live="polite" className="mt-8 text-sm text-(--mut)">
         {list.length === 0 ? "No articles match." : `Showing ${Math.min(shown, list.length)} of ${list.length} article${list.length === 1 ? "" : "s"}`}
       </p>
 
       {list.length === 0 ? (
-        <div className="mt-6 flex flex-col items-start gap-4 border-y border-white/10 py-10">
-          <p className="text-base text-white/75">Nothing matches that search. Try a different word, or clear the filters.</p>
+        <div className="mt-6 flex flex-col items-start gap-4 border-y border-(--line) py-10">
+          <p className="text-base text-(--mut)">Nothing matches that search. Try a different word, or clear the filters.</p>
           <Pill onClick={reset}>Clear filters</Pill>
         </div>
       ) : (
@@ -128,7 +127,7 @@ export default function AuthorPosts({ posts, categories, authorName }) {
             {visible.map((p) => (
               <motion.li key={p.slug} layout initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.96 }} transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}>
                 <article className="group relative h-full">
-                  <div className="relative aspect-[1.91/1] overflow-hidden rounded-[20px] border border-white/10 bg-ink-2">
+                  <div className="relative aspect-[1.91/1] overflow-hidden rounded-[20px] border border-(--line) bg-paper-2">
                     {p.image ? (
                       // eslint-disable-next-line @next/next/no-img-element -- dashboard-supplied URL (Cloudinary etc.), not a fixed host
                       <img
@@ -141,20 +140,20 @@ export default function AuthorPosts({ posts, categories, authorName }) {
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                       />
                     ) : (
-                      <IndustrySignature slug={p.slug} lines={18} className="absolute inset-0 h-full w-full" />
+                      <span aria-hidden="true" className="kicker absolute inset-0 flex items-end p-4 text-(--mut)">{p.category}</span>
                     )}
-                    {p.category && <span className="absolute bottom-3 left-3 rounded-full border border-white/15 bg-ink/60 px-3 py-1 text-xs text-white backdrop-blur-md">{p.category}</span>}
+                    {p.category && <span className="absolute bottom-3 left-3 rounded-full border border-(--line) bg-(--bg)/60 px-3 py-1 text-xs text-(--fg) backdrop-blur-md">{p.category}</span>}
                   </div>
-                  <p className="kicker mt-5 text-fog">
+                  <p className="kicker mt-5 text-(--mut)">
                     {fmt(p.date)} &middot; {p.minutes} min read
                   </p>
-                  <h3 className="font-display mt-2 text-xl leading-snug text-white transition-colors duration-200 group-hover:text-buzz md:text-2xl">
+                  <h3 className="font-display mt-2 text-xl leading-snug text-(--fg) transition-colors duration-200 group-hover:text-(--fg) md:text-2xl">
                     <Link href={`/blog/${p.slug}`} className="after:absolute after:inset-0 after:content-[''] focus-visible:underline focus-visible:outline-none">
                       {p.title}
                     </Link>
                   </h3>
-                  {p.excerpt && <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-white/60">{p.excerpt}</p>}
-                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-buzz">
+                  {p.excerpt && <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-(--mut)">{p.excerpt}</p>}
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-(--fg)">
                     Read article
                     <ArrowUpRight size={16} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   </span>
@@ -166,7 +165,7 @@ export default function AuthorPosts({ posts, categories, authorName }) {
       )}
 
       {list.length > shown && (
-        <div className="mt-14 flex justify-center">
+        <div className="mt-8 flex justify-center">
           <Pill onClick={() => setShown((s) => s + PAGE)}>Show more articles</Pill>
         </div>
       )}

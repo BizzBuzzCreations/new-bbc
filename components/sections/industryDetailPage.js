@@ -7,6 +7,7 @@ import LocalityBlock from "@/components/detail/localityBlock";
 import DetailCta from "@/components/detail/detailCta";
 import FaqV2 from "@/components/home/faqV2";
 import BeamsBlock from "@/components/home/band";
+import { SERVICE_LINES } from "@/lib/siteNav";
 
 // Shared template every /industries/<slug> page (all 15) renders through;
 // each page plugs in its own content (lib/industryPageContent.js +
@@ -20,10 +21,6 @@ import BeamsBlock from "@/components/home/band";
 // choose us" statement (text only — these pages have no second photo) →
 // FAQ → closing CTA. Each section keeps its dashboard "Remove section"
 // switch (`hidden`).
-// the industry's slug from its label ("Fashion & Apparel" → fashion-apparel),
-// for its signature visual
-const industrySlug = (label) => String(label || "").toLowerCase().replace(/&/g, " ").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-
 export default function IndustryDetailPage({
   label,
   description,
@@ -67,9 +64,8 @@ export default function IndustryDetailPage({
           title={heroTitle || `Digital Marketing for ${label}`}
           description={heroDescription || description}
           ctaText={heroCtaText}
-          signature={industrySlug(label)}
-          imageShape="2.86"
           secondaryHref={showCapabilities ? "#included" : null}
+          aside={{ title: "What we do", links: SERVICE_LINES.map((s) => ({ label: s.name, href: s.href })) }}
         />
       )}
       {showCapabilities && <WhoItsFor id="included" heading={capabilitiesHeading} items={capabilities} no="01" />}

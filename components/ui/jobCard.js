@@ -20,11 +20,11 @@ export default function JobCard({ job, days }) {
   const preview = isLong ? `${description.slice(0, PREVIEW_LENGTH).trimEnd()}…` : description;
 
   return (
-    <div className="border-b border-white/10 py-8">
+    <div className="border-b border-(--line) py-8">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between mb-4">
         <div>
-          <h3 className="font-display text-2xl leading-snug text-white mb-1">{job.title}</h3>
-          <span className="text-sm text-white/60">
+          <h3 className="font-display text-2xl leading-snug text-(--fg) mb-1">{job.title}</h3>
+          <span className="text-sm text-(--mut)">
             Posted {days === 0 ? "today" : `${days} day${days === 1 ? "" : "s"} ago`}
           </span>
         </div>
@@ -35,14 +35,14 @@ export default function JobCard({ job, days }) {
         </div>
       </div>
 
-      <p className="max-w-3xl text-sm text-fog leading-relaxed whitespace-pre-line mb-2 md:text-base">
+      <p className="max-w-3xl text-sm text-(--mut) leading-relaxed whitespace-pre-line mb-2 md:text-base">
         {expanded ? description : preview}
       </p>
       {isLong && (
         <button
           type="button"
           onClick={() => setExpanded((e) => !e)}
-          className="inline-flex items-center gap-1 py-1.5 -my-1.5 text-xs font-semibold text-buzz hover:text-white mb-3 transition-colors duration-300"
+          className="inline-flex items-center gap-1 py-1.5 -my-1.5 text-xs font-semibold text-(--fg) hover:text-(--fg) mb-3 transition-colors duration-300"
         >
           {expanded ? "Read less" : "Read more"}
           <ChevronDown size={13} className={`transition-transform duration-300 ${expanded ? "rotate-180" : ""}`} />
@@ -50,15 +50,15 @@ export default function JobCard({ job, days }) {
       )}
 
       <div className="flex flex-wrap gap-2 mt-3">
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 text-white/80 px-3 py-1.5 text-xs">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-(--line) text-(--mut) px-3 py-1.5 text-xs">
           <Briefcase size={13} />
           {job.department}
         </span>
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 text-white/80 px-3 py-1.5 text-xs">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-(--line) text-(--mut) px-3 py-1.5 text-xs">
           <MapPin size={13} />
           {job.location}
         </span>
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 text-white/80 px-3 py-1.5 text-xs">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-(--line) text-(--mut) px-3 py-1.5 text-xs">
           <Clock size={13} />
           {job.experience}
         </span>
