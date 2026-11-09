@@ -158,7 +158,7 @@ export default function BizzBeeLeadForm({ onDone, onCancel, defaultService = "" 
         <button
           type="submit"
           disabled={status === "sending"}
-          className="inline-flex items-center gap-2 rounded-full bg-buzz px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#ffe066] focus:outline-none focus-visible:ring-2 focus-visible:ring-buzz disabled:opacity-60"
+          className="inline-flex items-center gap-2 rounded-full bg-buzz px-4 py-2 text-sm font-semibold text-buzz-ink transition hover:bg-[#ffe066] focus:outline-none focus-visible:ring-2 focus-visible:ring-buzz disabled:opacity-60"
         >
           {status === "sending" && <Loader2 size={14} className="animate-spin" aria-hidden="true" />}
           {status === "sending" ? "Sending…" : "Send enquiry"}

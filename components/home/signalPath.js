@@ -104,7 +104,7 @@ export default function SignalPath() {
           <text x={x} y={y + 4} textAnchor="middle" fontSize="11" fontFamily="var(--font-dm-mono)" fill={lit(i) ? "#1c1700" : "rgba(255,255,255,0.7)"}>
             {String(i + 1).padStart(2, "0")}
           </text>
-          <text x={x} y={y + 40} textAnchor="middle" fontSize="13" fontFamily="var(--font-dm-mono)" letterSpacing="1" fill={lit(i) ? "#fff" : "rgba(255,255,255,0.5)"}>
+          <text x={x} y={i === 3 ? y - 28 : y + 40} textAnchor="middle" fontSize="13" fontFamily="var(--font-dm-mono)" letterSpacing="1" fill={lit(i) ? "#fff" : "rgba(255,255,255,0.5)"}>
             {STEPS[i].label.toUpperCase()}
           </text>
         </g>

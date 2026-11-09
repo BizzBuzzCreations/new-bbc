@@ -117,7 +117,7 @@ export default function BlogContactForm() {
         <button
           type="submit"
           disabled={submitting}
-          className="inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-buzz bg-buzz px-5 py-3 text-sm font-medium text-white cursor-pointer transition-colors duration-200 hover:border-[#0d70cf] hover:bg-[#ffe066] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz disabled:opacity-60"
+          className="inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-buzz bg-buzz px-5 py-3 text-sm font-medium text-buzz-ink cursor-pointer transition-colors duration-200 hover:border-[#ffe066] hover:bg-[#ffe066] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz disabled:opacity-60"
         >
           <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-current opacity-80" />
           {submitting ? "Sending..." : "Submit"}

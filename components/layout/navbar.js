@@ -299,7 +299,7 @@ function IndustriesPanel({ open }) {
           {INDUSTRIES.map((ind, i) => (
             <li key={ind.href}>
               <Link href={ind.href} className="group flex items-baseline gap-3 border-b border-white/10 py-3.5 text-white/85 transition-colors hover:text-white">
-                <span className="kicker text-[0.7rem] text-white/35 transition-colors group-hover:text-buzz">{String(i + 1).padStart(2, "0")}</span>
+                <span className="kicker text-[0.7rem] text-white/55 transition-colors group-hover:text-buzz">{String(i + 1).padStart(2, "0")}</span>
                 {ind.label}
               </Link>
             </li>

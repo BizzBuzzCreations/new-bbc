@@ -74,10 +74,12 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
   const [focused, setFocused] = useState(false);
   const away = tucked && !expanded && !focused;
 
-  // Load the Lottie animation (lazy). It always plays.
+  // Load the Lottie animation (lazy). It plays — except for visitors who ask
+  // for reduced motion, who get the robot as a still frame.
   useEffect(() => {
     let anim;
     let cancelled = false;
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     import("lottie-web").then((mod) => {
       if (cancelled || !lottieBox.current) return;
@@ -85,13 +87,14 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
         container: lottieBox.current,
         renderer: "svg",
         loop: true,
-        autoplay: true,
+        autoplay: !still,
         path: "/bizzbee-robot.json?v=5", // ?v busts the browser cache when the artwork changes
         rendererSettings: { preserveAspectRatio: "xMidYMid meet", progressiveLoad: true },
       });
       anim.addEventListener("DOMLoaded", () => {
         if (cancelled) return;
-        anim.play();
+        if (still) anim.goToAndStop(0, true);
+        else anim.play();
         setReady(true);
       });
     });
@@ -146,7 +149,8 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
   const expandedRef = useRef(expanded);
   expandedRef.current = expanded;
   const wake = (ms) => {
-    if (expandedRef.current) return;
+    // reduced motion: the robot stays a still frame — never woken up
+    if (expandedRef.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     clearTimeout(restTimer.current);
     anims.current.forEach((a) => a.play());
     animRef.current?.play();

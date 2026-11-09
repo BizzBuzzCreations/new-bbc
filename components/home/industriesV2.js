@@ -38,7 +38,7 @@ export default function IndustriesV2({ content }) {
                   aria-current={i === active ? "true" : undefined}
                   className="group flex items-baseline gap-4 py-4 md:py-5"
                 >
-                  <span className={`kicker w-6 shrink-0 transition-colors ${i === active ? "text-buzz" : "text-white/35"}`}>{String(i + 1).padStart(2, "0")}</span>
+                  <span className={`kicker w-6 shrink-0 transition-colors ${i === active ? "text-buzz" : "text-white/55"}`}>{String(i + 1).padStart(2, "0")}</span>
                   <span className={`font-display text-2xl leading-tight transition-[color,transform] duration-500 ease-out-soft md:text-[1.9rem] ${i === active ? "translate-x-1 text-white" : "text-white/60 group-hover:text-white"}`}>
                     {ind.label}
                   </span>
