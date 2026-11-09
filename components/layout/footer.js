@@ -1,432 +1,151 @@
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, MapPin, Phone, Mail, Clock } from "lucide-react";
-import IndiaOfficeCard from "./indiaOfficeCard";
-import Pill from "@/components/home/pill";
-import OfficeSkyline from "./officeSkyline";
-import { UK_OFFICE, mapsUrl } from "@/lib/offices";
+import { ArrowUpRight } from "lucide-react";
+import Button from "@/components/brand/button";
+import SignalField from "@/components/brand/signalField";
+import Clock from "@/components/brand/clock";
+import { SERVICE_LINES, INDUSTRIES, COMPANY_LINKS, INSIGHT_LINKS, LEGAL_LINKS, CONTACT, SOCIALS, OFFICES, mapsUrl } from "@/lib/siteNav";
 
-// Same data as the navbar's dropdowns — duplicated here (rather than
-// imported from navbar.js, which is a client component with its own
-// unrelated state) so the footer always lists the same pages.
-// Capped to 5 per column (full lists live on the navbar / respective
-// pages) — "View More" sends people to see the rest.
-const CATEGORY_LINKS = [
-  { label: "About Us", href: "/about" },
-  { label: "Our Core Team", href: "/our-team" },
-  { label: "How We Work and Function", href: "/how-we-work" },
-  { label: "Start Your Career with Us", href: "/career" },
-  { label: "FAQ", href: "/faq" },
-];
-
-const SERVICE_LINKS = [
-  { label: "BPO Service", href: "/bpo-services" },
-  { label: "Website Development", href: "/web-development" },
-  {
-    label: "Search Engine Optimization (SEO)",
-    href: "/search-engine-optimization",
-  },
-  { label: "Social Media Marketing (SMM)", href: "/social-media-marketing" },
-  { label: "Google Ads & Paid Marketing", href: "/paid-marketing" },
-];
-
-// First 5 of the full 15-industry list (same set the navbar's mega-menu
-// and the homepage's Industries showcase use) — "View More" sends people
-// to the full scrolling showcase instead of listing all 15 here.
-const INDUSTRY_LINKS = [
-  { label: "Healthcare", href: "/industries/healthcare" },
-  { label: "Wearables", href: "/industries/wearables" },
-  { label: "Fitness", href: "/industries/fitness" },
-  { label: "ECommerce", href: "/industries/ecommerce" },
-  { label: "Construction", href: "/industries/construction" },
-];
-
-const RESOURCE_LINKS = [
-  { label: "Blogs", href: "/blog" },
-  { label: "Guides", href: "/guides" },
-];
-
-// Emoji flags render as plain two-letter codes on systems whose font has
-// no color-flag glyphs (common on Windows) — drawn as small inline SVGs
-// instead so the badge looks the same everywhere.
-function UKFlag() {
-  return (
-    <svg
-      viewBox="0 0 60 40"
-      className="w-full h-full"
-      preserveAspectRatio="xMidYMid slice"
-    >
-      <rect width="60" height="40" fill="#00247d" />
-      <g stroke="#fff" strokeWidth="6">
-        <path d="M0,0 L60,40 M60,0 L0,40" />
-      </g>
-      <g stroke="#cf142b" strokeWidth="2">
-        <path d="M0,0 L60,40 M60,0 L0,40" />
-      </g>
-      <g stroke="#fff" strokeWidth="10">
-        <path d="M30,0 V40 M0,20 H60" />
-      </g>
-      <g stroke="#cf142b" strokeWidth="6">
-        <path d="M30,0 V40 M0,20 H60" />
-      </g>
-    </svg>
-  );
-}
-
-// India's offices (Prayagraj HQ + Kanpur) live in <IndiaOfficeCard />,
-// a left/right switcher — only the UK card is listed here.
-const OFFICES = [
-  {
-    Flag: UKFlag,
-    country: UK_OFFICE.country,
-    href: "/en-uk/digital-marketing-services-in-uk",
-    city: UK_OFFICE.city,
-    skyline: "london",
-    maps: UK_OFFICE.maps,
-    address: UK_OFFICE.lines.map((line, i) => (
-      <React.Fragment key={line}>
-        {i > 0 && <br />}
-        {line}
-      </React.Fragment>
-    )),
-  },
-];
-
-const SOCIALS = [
-  {
-    name: "Instagram",
-    href: "https://www.instagram.com/bizzbuzzcreations",
-    path: "M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077",
-  },
-  {
-    name: "Facebook",
-    href: "https://www.facebook.com/bizzbuzzcreation/",
-    path: "M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z",
-  },
-  {
-    name: "X (Twitter)",
-    href: "https://x.com/BizzBuzzAgency",
-    path: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z",
-  },
-  {
-    name: "YouTube",
-    href: "https://www.youtube.com/@bizzbuzzcreations",
-    path: "M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z",
-  },
-  {
-    name: "LinkedIn",
-    href: "https://www.linkedin.com/company/bizz-buzz-creations",
-    viewBox: "0 0 16 16",
-    path: "M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z",
-  },
-];
-
-function FooterColumn({ title, links, viewMoreHref }) {
-  return (
-    <div className="min-w-0">
-      <h4 className="text-sm font-semibold text-white mb-5">{title}</h4>
-      <ul className="space-y-3">
-        {links.map((link) => (
-          <li key={link.href}>
-            <Link
-              href={link.href}
-              className="text-sm text-white hover:text-[#40A2D8] transition-colors"
-            >
-              {link.label}
+// The site footer (rebuild, DESIGN_DIRECTION.md §6): the brand sign-off over
+// a quiet Signal Field, the three offices with their live local time, link
+// columns, the real certifications (Clutch, Google Partner), socials and
+// the legal links. Server component; only the field and the clocks run on
+// the client.
+export default function Footer() {
+  const year = new Date().getFullYear();
+  const col = (title, items) => (
+    <div>
+      <p className="kicker mb-5 text-fog">{title}</p>
+      <ul className="space-y-2.5">
+        {items.map((l) => (
+          <li key={l.href}>
+            <Link href={l.href} className="text-[0.9375rem] text-white/80 transition-colors hover:text-white">
+              {l.label}
             </Link>
           </li>
         ))}
       </ul>
-      {viewMoreHref && (
-        <Link
-          href={viewMoreHref}
-          className="group inline-flex items-center gap-1.5 py-1 text-sm font-medium text-[#40A2D8] hover:text-white mt-4 transition-colors"
-        >
-          View More
-          <ArrowUpRight size={14} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-        </Link>
-      )}
     </div>
   );
-}
 
-export default function Footer() {
   return (
-    <footer
-      data-no-reveal
-      className="bg-black text-white pt-8 pb-6 px-6 md:px-8"
-    >
-      <div className="max-w-7xl mx-auto">
-        {/* Brand + social row */}
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8 mb-6">
-          <div className="max-w-md">
-            <Image
-              src="/bbc logo white.png"
-              alt="BizzBuzz Creations logo"
-              width={836}
-              height={189}
-              className="mb-4 h-10 w-auto"
-            />
-            <p className="text-sm text-white mb-5 leading-relaxed">
-              A full-service digital marketing and BPO company. Delivering
-              measurable growth for businesses worldwide.
-            </p>
-            <div className="flex items-center gap-3">
-              {SOCIALS.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.name}
-                  className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center hover:border-[#40A2D8] hover:bg-white/5 transition-colors"
-                >
-                  <svg
-                    role="img"
-                    viewBox={social.viewBox || "0 0 24 24"}
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="white"
-                    className="w-4 h-4"
-                  >
-                    <title>{social.name}</title>
-                    <path d={social.path} />
-                  </svg>
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Real certifications/partnerships — same verified badges used
-              in the homepage's Recognitions section, not invented ones. —
-              Get In Touch sits below, left-aligned to stay parallel with
-              these badges rather than off to the side. */}
-          <div className="flex flex-col gap-4 shrink-0">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3">
-                <Image
-                  src="/clutch.png"
-                  alt="Clutch — Verified Partner"
-                  width={32}
-                  height={32}
-                  className="object-contain shrink-0"
-                />
-                <div className="leading-tight">
-                  <p className="text-xs font-semibold text-white">Clutch</p>
-                  <p className="text-[11px] text-white">Verified Partner</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3">
-                <Image
-                  src="/CDL.png"
-                  alt="Certified Google Ads & Marketing Partner"
-                  width={32}
-                  height={32}
-                  className="object-contain shrink-0"
-                />
-                <div className="leading-tight">
-                  <p className="text-xs font-semibold text-white">
-                    Google Partner
-                  </p>
-                  <p className="text-[11px] text-white">Certified</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Quick contact — number, mail, timings only (no address,
-                the office card below already covers that). */}
-            <div>
-              <h3 className="text-xs font-semibold uppercase tracking-wide text-white mb-4 mt-2">
-                Get In Touch
-              </h3>
-              <div className="flex flex-col gap-4 text-sm">
-                <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
-                  <a
-                    href="tel:+918115585285"
-                    className="flex items-center gap-2 py-1 text-white hover:text-[#40A2D8] transition-colors"
-                  >
-                    <Phone size={15} className="text-[#40A2D8] shrink-0" />
-                    +91 8115585285,
-                  </a>
-                  <a
-                    href={UK_OFFICE.phone.href}
-                    className="py-1 text-white hover:text-[#40A2D8] transition-colors"
-                  >
-                    {UK_OFFICE.phone.display}
-                  </a>
-                </div>
-                <a
-                  href="mailto:info@bizzbuzzcreations.com"
-                  className="flex items-center gap-2 py-1 text-white hover:text-[#40A2D8] transition-colors"
-                >
-                  <Mail size={15} className="text-[#40A2D8] shrink-0" />
-                  info@bizzbuzzcreations.com
-                </a>
-                <div className="flex items-center gap-2 text-white">
-                  <Clock size={15} className="text-[#40A2D8] shrink-0" />
-                  Mon - Sat: 12:00 PM - 8:00 PM
-                </div>
-              </div>
-            </div>
-          </div>
+    <footer className="relative isolate overflow-hidden border-t border-white/10 bg-ink text-white">
+      {/* sign-off: the brand line over a quiet Signal Field */}
+      <div className="relative">
+        <div className="absolute inset-0 -z-10 opacity-70">
+          <SignalField variant="quiet" />
         </div>
-
-        {/* Office address cards — India + UK, side by side across the full
-            width from sm up (stacked on mobile). Each has a Get directions
-            link (Google Maps); the UK card's name also links to its
-            regional page. */}
-        <div className="grid gap-6 mb-6 sm:grid-cols-2">
-          <IndiaOfficeCard />
-          {OFFICES.map(({ Flag, country, tag, address, href, city, maps, skyline }) => (
-            <div
-              key={country}
-              className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/15 bg-white/[0.03] p-6 hover:border-[#40A2D8]/50 hover:bg-white/[0.05] transition-colors"
-            >
-              <div className="flex items-center gap-3 mb-1">
-                <span className="w-10 h-10 rounded-full overflow-hidden shrink-0 ring-1 ring-white/20">
-                  <Flag />
-                </span>
-                <span className="font-semibold text-white text-lg">
-                  {href ? (
-                    <Link href={href} className="after:absolute after:inset-0 after:rounded-2xl after:content-[''] hover:text-[#40A2D8] focus-visible:underline focus-visible:outline-none">
-                      {country}
-                    </Link>
-                  ) : (
-                    country
-                  )}
-                  {tag && (
-                    <>
-                      <span className="mx-2 text-white/40">|</span>
-                      <span className="font-medium text-[#8fd0f2]">({tag})</span>
-                    </>
-                  )}
-                </span>
-              </div>
-              {city && <p className="mb-4 pl-[3.25rem] text-xs text-white/50">{city}</p>}
-              <p className="text-sm text-white/80 leading-relaxed flex gap-2.5">
-                <MapPin size={16} className="shrink-0 mt-0.5 text-[#40A2D8]" />
-                <span>{address}</span>
-              </p>
-              {maps && (
-                <a
-                  href={mapsUrl(maps)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative z-10 mt-4 inline-flex self-start items-center gap-1.5 py-1 pl-[1.625rem] text-sm font-medium text-[#40A2D8] hover:text-white"
-                >
-                  Get directions <ArrowUpRight size={14} aria-hidden="true" />
-                </a>
-              )}
-              {skyline && <OfficeSkyline city={skyline} />}
-            </div>
-          ))}
-        </div>
-
-        <div className="border-t border-white/10 mb-12" />
-
-        {/* Link columns + CTA */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-8 items-start">
-          <FooterColumn
-            title="Our Category"
-            links={CATEGORY_LINKS}
-            viewMoreHref="/about"
-          />
-          <FooterColumn
-            title="Services"
-            links={SERVICE_LINKS}
-            viewMoreHref="/services"
-          />
-          <FooterColumn
-            title="Industries"
-            links={INDUSTRY_LINKS}
-            viewMoreHref="/industries"
-          />
-          <div>
-            <FooterColumn title="Resources" links={RESOURCE_LINKS} />
+        <div className="wrap flex flex-wrap items-end justify-between gap-8 py-20 md:py-28">
+          <p className="font-display text-[clamp(2.75rem,8vw,8rem)] leading-[0.88]" aria-hidden="true">
+            Signal from
+            <br />
+            the <span className="font-accent">noise.</span>
+          </p>
+          <div className="max-w-xs">
+            <p className="text-fog">Marketing, software, AI and the people to run it — one team.</p>
             <div className="mt-6">
-              <Pill href="/contact" variant="solid">Get a Free Consultation</Pill>
+              <Button href="/contact" variant="solid">
+                Start a project
+              </Button>
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="mt-16 pt-6 border-t border-zinc-800">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-            {/* 2x2 grid on mobile (was flex-wrap, which broke into an
-                odd 3-then-1 wrap depending on label widths) — a clean
-                2-per-row grid instead. Reverts to a plain inline row from
-                sm up, where all four labels comfortably fit on one line. */}
-            <div className="grid grid-cols-2 gap-x-6 gap-y-3 mb-4 sm:flex sm:flex-wrap sm:gap-y-2 md:mb-0">
-              <Link
-                href="/privacy-policy"
-                className="inline-block py-1 text-xs text-white hover:text-[#40A2D8]"
-              >
-                Privacy Policy
-              </Link>
-              <Link
-                href="/cookie-policy"
-                className="inline-block py-1 text-xs text-white hover:text-[#40A2D8]"
-              >
-                Cookie Policy
-              </Link>
-              <Link
-                href="/disclaimer"
-                className="inline-block py-1 text-xs text-white hover:text-[#40A2D8]"
-              >
-                Disclaimer
-              </Link>
-              <Link
-                href="/terms-and-conditions"
-                className="inline-block py-1 text-xs text-white hover:text-[#40A2D8]"
-              >
-                Terms &amp; Conditions
-              </Link>
-            </div>
-            <div className="text-xs text-white">
-              © {new Date().getFullYear()}, BizzBuzz Creations. All Rights
-              Reserved.
-            </div>
+      {/* offices */}
+      <div className="wrap">
+        <ul className="grid border-t border-white/10 md:grid-cols-3">
+          {OFFICES.map((o, i) => (
+            <li key={o.city} className={`py-8 md:px-8 ${i ? "border-t border-white/10 md:border-l md:border-t-0" : "md:pl-0"}`}>
+              <div className="flex items-baseline justify-between gap-4">
+                <p className="font-display text-2xl">{o.city}</p>
+                <Clock tz={o.tz} zone={o.zone} className="kicker text-buzz" />
+              </div>
+              <p className="kicker mt-1 text-fog">
+                {o.tag} · {o.country}
+              </p>
+              <address className="mt-5 text-[0.9375rem] not-italic leading-relaxed text-white/75">
+                {o.lines.map((l) => (
+                  <span key={l} className="block">
+                    {l}
+                  </span>
+                ))}
+              </address>
+              <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+                <a href={o.phone.href} className="text-white underline decoration-white/25 underline-offset-4 hover:decoration-buzz">
+                  {o.phone.display}
+                </a>
+                <a href={mapsUrl(o.maps)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-fog hover:text-white">
+                  Directions <ArrowUpRight aria-hidden="true" size={14} />
+                  <span className="sr-only"> to our {o.city} office (opens in a new tab)</span>
+                </a>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* links */}
+      <div className="wrap grid gap-12 border-t border-white/10 py-16 sm:grid-cols-2 lg:grid-cols-12">
+        <div className="lg:col-span-4">
+          <Link href="/" aria-label="BizzBuzz Creations — home" className="inline-block">
+            <Image src="/bbc logo white.png" alt="BizzBuzz Creations" width={447} height={143} className="h-10 w-auto" />
+          </Link>
+          <p className="mt-6 max-w-sm text-[0.9375rem] leading-relaxed text-fog">
+            Digital marketing, software, AI and BPO from one team in Prayagraj, Kanpur and London — for businesses in India, the UK and beyond.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <span className="inline-flex items-center gap-2.5 rounded-xl border border-white/10 px-3.5 py-2.5">
+              <Image src="/clutch.png" alt="" width={24} height={24} className="h-6 w-6 object-contain" />
+              <span className="text-xs leading-tight">
+                <span className="block font-semibold">Clutch</span>
+                <span className="text-fog">Verified partner</span>
+              </span>
+            </span>
+            <span className="inline-flex items-center gap-2.5 rounded-xl border border-white/10 px-3.5 py-2.5">
+              <Image src="/CDL.png" alt="" width={24} height={24} className="h-6 w-6 object-contain" />
+              <span className="text-xs leading-tight">
+                <span className="block font-semibold">Google Partner</span>
+                <span className="text-fog">Certified</span>
+              </span>
+            </span>
           </div>
         </div>
-
-        {/* Brand wordmark: the whole name, drawn as a fine outline in the
-            beams' blue-to-violet (like the hero's drawn wordmark), not cut
-            off by the page edge. A plain in-flow block, so it can never
-            overlap other footer content; the SVG scales with the width.
-            Font metrics (Fira Sans Bold): cap height ≈ 0.69em, so at
-            font-size 100 with the baseline at y=80 the caps span y≈11–80;
-            the viewBox keeps a little room above and below. */}
-        <div className="mt-12 select-none" aria-hidden="true">
-          <svg
-            viewBox="-16 -4 1032 92"
-            className="block w-full h-auto"
-            preserveAspectRatio="xMidYMid meet"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <linearGradient id="footerWordmarkStroke" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stopColor="#40A2D8" />
-                <stop offset="50%" stopColor="#7b74f7" />
-                <stop offset="100%" stopColor="#b57cff" />
-              </linearGradient>
-            </defs>
-            <text
-              x="0"
-              y="80"
-              fontSize="100"
-              fontWeight="700"
-              textLength="1000"
-              lengthAdjust="spacingAndGlyphs"
-              fill="none"
-              stroke="url(#footerWordmarkStroke)"
-              strokeWidth="1"
-              vectorEffect="non-scaling-stroke"
-              strokeOpacity="0.55"
-              style={{ fontFamily: "var(--font-fira), sans-serif" }}
-            >
-              BizzBuzz Creations
-            </text>
-          </svg>
+        <div className="lg:col-span-3">{col("Services", SERVICE_LINES.map((s) => ({ label: s.name, href: s.href })))}</div>
+        <div className="lg:col-span-2">{col("Industries", INDUSTRIES.slice(0, 7).concat([{ label: "All industries", href: "/industries" }]))}</div>
+        <div className="lg:col-span-3">
+          {col("Company", COMPANY_LINKS.concat(INSIGHT_LINKS))}
+          <div className="mt-8">
+            <p className="kicker mb-3 text-fog">Contact</p>
+            <a href={`mailto:${CONTACT.email}`} className="text-[0.9375rem] text-white underline decoration-white/25 underline-offset-4 hover:decoration-buzz">
+              {CONTACT.email}
+            </a>
+          </div>
         </div>
+      </div>
+
+      {/* base */}
+      <div className="wrap flex flex-col gap-6 border-t border-white/10 py-8 text-sm text-fog lg:flex-row lg:items-center lg:justify-between">
+        <ul className="flex flex-wrap gap-x-5 gap-y-2">
+          {SOCIALS.map((s) => (
+            <li key={s.href}>
+              <a href={s.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-6 items-center gap-1 hover:text-white">
+                {s.label}
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <ul className="flex flex-wrap gap-x-5 gap-y-2">
+          {LEGAL_LINKS.map((l) => (
+            <li key={l.href}>
+              <Link href={l.href} className="inline-flex min-h-6 items-center hover:text-white">
+                {l.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <p>© {year} BizzBuzz Creations</p>
       </div>
     </footer>
   );

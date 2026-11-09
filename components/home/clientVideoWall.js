@@ -126,7 +126,7 @@ export default function ClientVideoWall({ items }) {
                           else select(i);
                         }}
                         aria-label={center ? `Play the video testimonial from ${v.name}` : `Show the video from ${v.name}`}
-                        className="group absolute inset-0 block text-left focus-visible:outline-3 focus-visible:-outline-offset-4 focus-visible:outline-[#40A2D8]"
+                        className="group absolute inset-0 block text-left focus-visible:outline-3 focus-visible:-outline-offset-4 focus-visible:outline-buzz"
                       >
                         {v.cover.startsWith("/") ? (
                           <Image src={v.cover} alt="" fill sizes="(min-width: 1024px) 300px, (min-width: 640px) 34vw, 64vw" draggable={false} className="object-cover" />
@@ -136,7 +136,7 @@ export default function ClientVideoWall({ items }) {
                         )}
                         <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-black/85 to-transparent" />
                         {center ? (
-                          <span aria-hidden="true" className="absolute left-1/2 top-[58%] flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/35 bg-white/20 text-white backdrop-blur-md transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#40A2D8] group-hover:text-black">
+                          <span aria-hidden="true" className="absolute left-1/2 top-[58%] flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/35 bg-white/20 text-white backdrop-blur-md transition-transform duration-300 group-hover:scale-110 group-hover:bg-buzz group-hover:text-buzz-ink">
                             <Play size={24} fill="currentColor" className="ml-1" />
                           </span>
                         ) : (
@@ -158,7 +158,7 @@ export default function ClientVideoWall({ items }) {
       <div className="mx-auto mt-8 flex max-w-2xl flex-col items-center gap-5 text-center md:mt-10">
         <div aria-live="polite">
           <p className="font-display text-3xl leading-tight text-white md:text-4xl">{current.name}</p>
-          <p className="mt-2 text-sm text-white/65">
+          <p className="mt-2 text-sm text-fog">
             {current.role ? `${current.role} · ` : "Client testimonial · "}
             {active + 1} of {n}
           </p>
@@ -166,16 +166,16 @@ export default function ClientVideoWall({ items }) {
 
         <div className="flex items-center gap-3">
           {n > 1 && (
-            <button type="button" onClick={() => go(-1)} aria-label="Previous client" className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-white hover:bg-white hover:text-black focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8]">
+            <button type="button" onClick={() => go(-1)} aria-label="Previous client" className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-white hover:bg-white hover:text-black focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-buzz">
               <ChevronLeft size={20} aria-hidden="true" />
             </button>
           )}
-          <a href={`https://www.youtube.com/watch?v=${current.id}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-white/25 px-5 py-2.5 text-sm text-white transition-colors hover:border-[#40A2D8] hover:text-[#40A2D8] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8]">
+          <a href={`https://www.youtube.com/watch?v=${current.id}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-white/25 px-5 py-2.5 text-sm text-white transition-colors hover:border-buzz hover:text-buzz focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-buzz">
             Watch on YouTube <ArrowUpRight size={14} aria-hidden="true" />
             <span className="sr-only"> (opens in a new tab)</span>
           </a>
           {n > 1 && (
-            <button type="button" onClick={() => go(1)} aria-label="Next client" className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-white hover:bg-white hover:text-black focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8]">
+            <button type="button" onClick={() => go(1)} aria-label="Next client" className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-white hover:bg-white hover:text-black focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-buzz">
               <ChevronRight size={20} aria-hidden="true" />
             </button>
           )}

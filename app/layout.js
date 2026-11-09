@@ -29,6 +29,35 @@ const ibmPlexSans = localFont({
   display: "swap",
 });
 
+// The rebuild's type (DESIGN_DIRECTION.md §4), self-hosted from
+// public/fonts (SIL Open Font License). Display + body are preloaded (they
+// paint the first screen); the accent serif and the mono labels are not.
+const bricolage = localFont({
+  src: [{ path: "../public/fonts/bricolage-grotesque-var.woff2", weight: "200 800", style: "normal" }],
+  variable: "--font-bricolage",
+  display: "swap",
+});
+const instrumentSans = localFont({
+  src: [{ path: "../public/fonts/instrument-sans-var.woff2", weight: "400 700", style: "normal" }],
+  variable: "--font-instrument",
+  display: "swap",
+});
+const newsreader = localFont({
+  src: [{ path: "../public/fonts/newsreader-400-italic.woff2", weight: "400", style: "italic" }],
+  variable: "--font-newsreader",
+  display: "swap",
+  preload: false,
+});
+const dmMono = localFont({
+  src: [
+    { path: "../public/fonts/dm-mono-400.woff2", weight: "400", style: "normal" },
+    { path: "../public/fonts/dm-mono-500.woff2", weight: "500", style: "normal" },
+  ],
+  variable: "--font-dm-mono",
+  display: "swap",
+  preload: false,
+});
+
 export const metadata = {
   metadataBase: new URL("https://bizzbuzzcreations.com"),
   title: "Best Digital Marketing Agency in India | BizzBuzz Creations",
@@ -65,7 +94,7 @@ export default function RootLayout({ children }) {
         <AllScripts />
       </head>
       <body
-        className={`${firaSans.variable} ${ibmPlexSans.variable} antialiased`}
+        className={`${firaSans.variable} ${ibmPlexSans.variable} ${bricolage.variable} ${instrumentSans.variable} ${newsreader.variable} ${dmMono.variable} antialiased`}
         suppressHydrationWarning
       >
         {/* No Flowbite JS (was FlowbiteInit, running initFlowbite() on
@@ -76,7 +105,7 @@ export default function RootLayout({ children }) {
         <MotionPreferences>
           <BizzBeeWidget />
           <ScrollReveal />
-          <main>{children}</main>
+          <main id="main">{children}</main>
         </MotionPreferences>
         <ToastContainer
           position="top-right"

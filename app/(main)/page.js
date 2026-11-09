@@ -1,6 +1,5 @@
-// Homepage redesign (dark, GPG-style): its own sections in components/home/,
-// reading the same dashboard fields as before. Other pages keep using the
-// original components/sections/ versions.
+// Homepage (rebuild): its sections live in components/home/ and read the
+// same dashboard fields as before.
 import HeroHome from "@/components/home/heroHome";
 import AboutV2 from "@/components/home/aboutV2";
 import ServicesV2 from "@/components/home/servicesV2";
@@ -12,7 +11,7 @@ import ClientVideosV2 from "@/components/home/clientVideosV2";
 import BlogsV2 from "@/components/home/blogsV2";
 import FaqV2 from "@/components/home/faqV2";
 import CtaV2 from "@/components/home/ctaV2";
-import BeamsBlock from "@/components/home/band";
+import SignalPath from "@/components/home/signalPath";
 import ConsultationPopup from "@/components/sections/popupForm";
 import { getPageContent } from "@/actions/pageContentActions";
 import { buildPageMetadata } from "@/lib/pageMetadata";
@@ -55,56 +54,28 @@ export default async function Home() {
   // Sections switched off in the dashboard (Remove section).
   const hidden = new Set(content?.hiddenSections || []);
 
-  // data-no-reveal: the site-wide scroll fade-in (ScrollReveal) hides every
-  // heading and grid item below the fold until it scrolls into view. These
-  // sections are meant to be visible straight away (they have their own
-  // light scroll effects), so they opt out.
+  // The rebuild's homepage story (DESIGN_DIRECTION.md §9): who we are →
+  // what we do → how the pieces connect → what we build → who we do it
+  // for → proof → how we work → insights → questions → talk to us.
+  // data-no-reveal: these sections bring their own light motion, so the
+  // site-wide scroll fade-in (ScrollReveal) leaves them alone.
   return (
     <div data-no-reveal>
       <PageSeoScripts pageKey="home" />
-      {/* thin reading-progress line at the top (pure CSS, see globals.css) */}
-      <div aria-hidden="true" className="scroll-progress" />
-      {/* Hero: the BizzBuzz Creations wordmark over the background video,
-          stats and certification badges (homepage look; the shared HomeHero
-          stays as it is on the UK / location pages). */}
       {!hidden.has("hero") && (
-        <HeroHome
-          content={content}
-          stats={content?.zoomStats}
-          secondaryCta={hidden.has("services") ? null : { text: "Explore Our Services", href: "#services" }}
-        />
+        <HeroHome content={content} stats={content?.zoomStats} secondaryCta={hidden.has("services") ? null : { text: "Explore our services", href: "#services" }} />
       )}
-
-      {/* About + the statement line (the statement can be removed on its own) */}
       {!hidden.has("about") && <AboutV2 content={content} showStatement={!hidden.has("statement")} />}
-
       {!hidden.has("services") && <ServicesV2 content={content} />}
-
-      {/* What We Build: Clio AI + Praxistence, then the other in-house systems
-          (the old case-study wheel). Each part keeps its own Remove switch. */}
-      <BuildV2
-        content={content}
-        showClio={!hidden.has("aiShowcase")}
-        showPraxistence={!hidden.has("praxistenceShowcase")}
-        showBuilds={!hidden.has("caseStudies")}
-      />
-
-      {/* Process, Industries, Reviews and the client videos share one background (the beams) */}
-      {["process", "industries", "reviews", "clientVideos"].some((key) => !hidden.has(key)) && (
-        <BeamsBlock>
-          {!hidden.has("process") && <ProcessV2 content={content} />}
-          {!hidden.has("industries") && <IndustriesV2 content={content} />}
-          {!hidden.has("reviews") && <ReviewsV2 content={content} />}
-          {!hidden.has("clientVideos") && <ClientVideosV2 content={content} />}
-        </BeamsBlock>
-      )}
-
+      <SignalPath />
+      <BuildV2 content={content} showClio={!hidden.has("aiShowcase")} showPraxistence={!hidden.has("praxistenceShowcase")} showBuilds={!hidden.has("caseStudies")} />
+      {!hidden.has("industries") && <IndustriesV2 content={content} />}
+      {!hidden.has("clientVideos") && <ClientVideosV2 content={content} />}
+      {!hidden.has("reviews") && <ReviewsV2 content={content} />}
+      {!hidden.has("process") && <ProcessV2 content={content} />}
       {!hidden.has("latestBlogs") && <BlogsV2 content={content} />}
-
       {!hidden.has("faq") && <FaqV2 content={content} />}
-
       {!hidden.has("cta") && <CtaV2 content={content} />}
-
       {!hidden.has("popup") && <ConsultationPopup content={content} />}
     </div>
   );

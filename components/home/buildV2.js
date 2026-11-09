@@ -1,130 +1,81 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, BarChart3, Bot, Check, GitBranch, Globe, Headset, Server, Workflow } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
 import RichText from "@/components/ui/richText";
-import Pill from "@/components/home/pill";
+import Button from "@/components/brand/button";
+import SectionHead from "@/components/brand/sectionHead";
 import { productCards, CLIO_IMAGE, PRAXISTENCE_IMAGE } from "@/components/sections/aiProductsShowcase";
 import { IN_HOUSE_BUILDS } from "@/lib/inHouseBuilds";
 
-// The homepage's product pictures: transparent illustrations (Clio logo +
-// conversation; glossy CRM dashboard) with no frame or backdrop — they sit
-// straight on the card, shown whole, never cropped. Used while the
-// dashboard's card image is still one of the old defaults; an image
-// uploaded there instead still wins. `ratio` sizes the phone frame.
+// The products' own transparent artwork, used while the dashboard card image
+// is still one of the old defaults (an uploaded image wins).
 const PRODUCT_ART = {
-  clio: { src: "/clio-illustration.webp", ratio: "aspect-[1082/1282]", defaults: [CLIO_IMAGE] },
-  praxistence: { src: "/praxistence-crm.webp", ratio: "aspect-[1327/1155]", defaults: [PRAXISTENCE_IMAGE, CLIO_IMAGE] },
+  clio: { src: "/clio-illustration.webp", defaults: [CLIO_IMAGE] },
+  praxistence: { src: "/praxistence-crm.webp", defaults: [PRAXISTENCE_IMAGE, CLIO_IMAGE] },
 };
 
-// Same fallback icons as the old in-house cards (components/sections/
-// caseStudies.js), matched by position; a dashboard logo replaces the icon.
-const BUILD_ICONS = [Headset, Bot, Workflow, Server, Globe, GitBranch, BarChart3];
-
-// What We Build (redesign) — not another pair of columns:
-//  - The products (Clio AI, Praxistence) are full-width cards that stack:
-//    on screens at least 1280px wide and 760px tall (the stack-cards variant
-//    in globals.css) each card pins below the navbar (sticky, pure CSS) and
-//    the next one slides up over it. Smaller or shorter screens — where a
-//    card can be taller than the space below the navbar — get them one
-//    after another, so nothing is ever hidden under the next card. From lg
-//    up the cards zig-zag: text left / picture right, then picture left /
-//    text right (phones: always text first, picture below). Each card: label, heading, text, the
-//    features as a small 2x2 grid, the button, and the picture at about its
-//    real size.
-//  - The rest of the in-house systems are small icon tiles (4 across on
-//    desktop), ending with a highlighted "Need a system like these?" tile.
-// Same dashboard fields as before (the built-in systems list when none are
-// saved, like the old section). /industries shows the tiles on their own.
-// `clioPrefix`: the dashboard field prefix of the Clio card ("ai" on the
-// homepage, "clio" on the location pages). `compact` (location pages): the
-// two products side by side as shorter cards — picture, label, heading,
-// text, button; the feature lists stay on the homepage.
+// What we build (rebuild): proof, shown as specimens.
+//  - The two products (Clio AI, Praxistence) as large cards side by side
+//    (stacked on phones): tag, artwork, heading, text, features, button.
+//  - The other in-house systems as a numbered register (BBC-01…), one row
+//    each — name and what it does — ending with "need one like these?".
+// Same dashboard fields as before (caseStudies*, the ai*/clio* and
+// praxistence* product fields, caseStudyClients; the built-in systems when
+// none are saved). `clioPrefix` "ai" (home) | "clio" (location pages);
+// `compact` (location pages): the product cards without feature lists.
 export default function BuildV2({ content, showClio = true, showPraxistence = true, showBuilds = true, clioPrefix = "ai", compact = false }) {
-  const eyebrow = content?.caseStudiesEyebrow || "What We Build";
+  const eyebrow = content?.caseStudiesEyebrow || "What we build";
   const heading = content?.caseStudiesHeading || "Powered by What We Build";
-  const subtext = content?.caseStudiesSubtext || "";
+  const subtext =
+    content?.caseStudiesSubtext || "We don’t only advise on technology — we build it, run it every day, and put the same systems to work for clients.";
   const products = productCards(content, { clioPrefix, showClio, showPraxistence });
   const builds = showBuilds ? (content?.caseStudyClients?.length > 0 ? content.caseStudyClients : IN_HOUSE_BUILDS).filter((c) => c?.name) : [];
 
   if (!products.length && !builds.length) return null;
 
   return (
-    <section className="overflow-x-clip bg-black text-white">
-      <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-20">
-        <div className="reveal-stagger grid gap-6 md:grid-cols-2 md:gap-12">
-          <div>
-            <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
-            <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
-          </div>
-          {subtext && <RichText as="p" text={subtext} className="self-end text-base text-white/70 md:text-lg" />}
-        </div>
+    <section aria-labelledby="build-heading" className="relative bg-ink text-white">
+      <div className="wrap py-24 md:py-40">
+        <SectionHead id="build-heading" no="04" kicker={eyebrow} heading={heading} text={subtext} />
 
-        {compact && products.length > 0 && (
-          <div className={`reveal-stagger mt-12 grid gap-5 md:mt-16 ${products.length > 1 ? "lg:grid-cols-2" : ""}`}>
+        {products.length > 0 && (
+          <div className={`mt-16 grid gap-5 md:mt-24 ${products.length > 1 ? "lg:grid-cols-2" : ""}`}>
             {products.map((p, i) => {
               const art = PRODUCT_ART[p.key]?.defaults.includes(p.image) ? PRODUCT_ART[p.key] : null;
               return (
-                <article key={p.key} className="flex flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b0e16]">
-                  <div className="relative h-56 bg-linear-to-b from-[#0B60B0]/15 to-transparent sm:h-64">
+                <article key={p.key} className="group relative flex flex-col overflow-hidden rounded-[20px] border border-white/10 bg-ink-2 transition-colors duration-500 hover:border-white/25">
+                  <div className="relative aspect-[16/11] overflow-hidden border-b border-white/10 bg-[radial-gradient(70%_70%_at_50%_60%,rgba(255,212,59,0.10),transparent_70%)]">
+                    <p className="kicker absolute left-5 top-5 z-10 text-fog">
+                      <span className="text-buzz">PRD-0{i + 1}</span> · Our product
+                    </p>
                     {art ? (
-                      <Image src={art.src} alt="" fill sizes="(min-width: 1024px) 560px, 100vw" className="object-contain p-6" />
+                      <Image src={art.src} alt="" fill sizes="(min-width: 1024px) 640px, 100vw" className="object-contain p-10 transition-transform duration-700 ease-out-soft group-hover:scale-[1.03] md:p-14" />
                     ) : (
-                      <Image src={p.image} alt="" fill sizes="(min-width: 1024px) 560px, 100vw" className="object-cover" />
+                      <Image src={p.image} alt="" fill sizes="(min-width: 1024px) 640px, 100vw" className="object-cover transition-transform duration-700 ease-out-soft group-hover:scale-[1.03]" />
                     )}
                   </div>
-                  <div className="flex flex-1 flex-col p-6 sm:p-8">
-                    <h3 className="font-display text-2xl leading-tight md:text-3xl">{p.heading}</h3>
-                    <RichText as="div" text={p.paragraph} className="mt-4 line-clamp-4 text-base leading-relaxed text-white/70" />
-                    <div className="mt-auto pt-8">
-                      <Pill href={p.buttonLink}>{p.buttonText}</Pill>
+                  <div className="flex flex-1 flex-col p-6 md:p-10">
+                    <h3 className="font-display text-3xl leading-[1.02] md:text-[2.6rem]">{p.heading}</h3>
+                    <RichText as="div" text={p.paragraph} className={`mt-5 space-y-3 leading-relaxed text-fog ${compact ? "line-clamp-4" : ""}`} />
+                    {!compact && p.features?.length > 0 && (
+                      <ul className="mt-8 grid gap-x-8 gap-y-5 border-t border-white/10 pt-8 sm:grid-cols-2">
+                        {p.features.map((f, k) => (
+                          <li key={k} className="flex gap-3">
+                            <Check aria-hidden="true" size={16} strokeWidth={2.5} className="mt-0.5 shrink-0 text-buzz" />
+                            <span>
+                              <RichText as="p" text={f.title} className="text-[0.9375rem] font-medium text-white" />
+                              <RichText as="p" text={f.description} className="mt-1 text-sm leading-relaxed text-fog" />
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    <div className="mt-auto pt-10">
+                      <Button href={p.buttonLink} variant="outline">
+                        {p.buttonText}
+                      </Button>
                     </div>
                   </div>
-                </article>
-              );
-            })}
-          </div>
-        )}
-
-        {!compact && products.length > 0 && (
-          <div className="mt-14 space-y-6 md:mt-20 stack-cards:space-y-0">
-            {products.map((p, i) => {
-              const art = PRODUCT_ART[p.key]?.defaults.includes(p.image) ? PRODUCT_ART[p.key] : null;
-              const flip = i % 2 === 1; // zig-zag: every second card has its picture on the left
-              return (
-                <article
-                  key={p.key}
-                  className={`grid gap-8 overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b0e16] p-6 shadow-[0_-24px_60px_rgba(0,0,0,0.6)] sm:p-8 stack-cards:sticky lg:gap-12 lg:p-10 stack-cards:not-last:mb-[24vh] ${flip ? "lg:grid-cols-[1fr_1.15fr]" : "lg:grid-cols-[1.15fr_1fr]"}`}
-                  style={{ top: `calc(6.5rem + ${i * 1.5}rem)` }}
-                >
-                  <div className={`flex flex-col ${flip ? "lg:order-2" : ""}`}>
-                    <h3 className="font-display text-3xl leading-tight md:text-4xl">{p.heading}</h3>
-                    <RichText as="div" text={p.paragraph} className="mt-4 space-y-3 text-base leading-relaxed text-white/70" />
-                    <ul className="mt-8 grid gap-x-6 gap-y-5 sm:grid-cols-2">
-                      {p.features.map((f, k) => (
-                        <li key={k} className="flex gap-3">
-                          <span aria-hidden="true" className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#0B60B0]/25 text-[#40A2D8]">
-                            <Check size={12} strokeWidth={3} />
-                          </span>
-                          <span>
-                            <RichText as="p" text={f.title} className="text-sm text-white" />
-                            <RichText as="p" text={f.description} className="mt-1 text-sm leading-relaxed text-white/60" />
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="mt-8">
-                      <Pill href={p.buttonLink}>{p.buttonText}</Pill>
-                    </div>
-                  </div>
-                  {art ? (
-                    <div className={`relative mx-auto w-full max-w-[20rem] lg:aspect-auto lg:min-h-[20rem] lg:max-w-none ${art.ratio}`}>
-                      <Image src={art.src} alt="" fill sizes="(min-width: 1024px) 460px, 320px" className="object-contain" />
-                    </div>
-                  ) : (
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-black lg:aspect-auto lg:min-h-[20rem]">
-                      <Image src={p.image} alt="" fill sizes="(min-width: 1024px) 520px, 100vw" className="object-cover" />
-                    </div>
-                  )}
                 </article>
               );
             })}
@@ -132,35 +83,32 @@ export default function BuildV2({ content, showClio = true, showPraxistence = tr
         )}
 
         {builds.length > 0 && (
-          <div className={products.length ? "mt-24" : "mt-12 md:mt-16"}>
-            {products.length > 0 && <p className="mb-6 text-sm text-white/60">Also built and run in-house</p>}
-            <ul className="reveal-stagger grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {builds.map((b, i) => {
-                const Icon = BUILD_ICONS[i % BUILD_ICONS.length];
-                return (
-                  <li key={`${b.name}-${i}`} className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 transition-colors duration-300 hover:border-white/20">
-                    <span aria-hidden="true" className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-[#0B60B0]/15 text-[#40A2D8]">
-                      {b.logo ? <Image src={b.logo} alt="" fill sizes="40px" className="object-contain p-2" /> : <Icon size={18} />}
-                    </span>
-                    <h3 className="mt-4 text-base leading-snug text-white">{b.name}</h3>
-                    <RichText as="p" text={b.tagline} className="mt-2 text-sm leading-relaxed text-white/60" />
-                  </li>
-                );
-              })}
-              {/* Last tile: the same systems, offered to clients */}
-              <li className="group relative rounded-2xl border border-[#40A2D8]/40 bg-linear-to-br from-[#0B60B0]/25 to-transparent p-5 transition-colors duration-300 hover:border-[#40A2D8]">
-                <span aria-hidden="true" className="flex h-10 w-10 items-center justify-center rounded-full bg-[#40A2D8] text-black">
-                  <ArrowUpRight size={18} />
-                </span>
-                <h3 className="mt-4 text-base leading-snug text-white">
-                  <Link href="/contact" className="after:absolute after:inset-0 after:rounded-2xl after:content-[''] focus-visible:underline focus-visible:outline-none">
-                    Need a system like these for your business?
+          <div className={products.length ? "mt-24 md:mt-32" : "mt-16"}>
+            <div className="flex items-end justify-between gap-6 border-b border-white/10 pb-5">
+              <p className="kicker text-fog">
+                <span className="text-buzz">[{String(builds.length).padStart(2, "0")}]</span> Also built and run in-house
+              </p>
+              <p className="kicker hidden text-fog md:block">System · What it does</p>
+            </div>
+            <ol>
+              {builds.map((b, i) => (
+                <li key={`${b.name}-${i}`} className="group grid gap-3 border-b border-white/10 py-7 transition-colors duration-300 hover:bg-white/[0.02] md:grid-cols-12 md:gap-10 md:py-8">
+                  <span className="kicker pt-1 text-buzz md:col-span-2">BBC-{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="font-display text-2xl leading-tight md:col-span-4 md:text-[1.75rem]">{b.name}</h3>
+                  <RichText as="p" text={b.tagline} className="text-[0.9375rem] leading-relaxed text-fog md:col-span-6" />
+                </li>
+              ))}
+              <li className="group relative grid gap-3 py-8 md:grid-cols-12 md:gap-10">
+                <span className="kicker pt-1 text-buzz md:col-span-2">BBC-—</span>
+                <h3 className="font-display text-2xl leading-tight md:col-span-4 md:text-[1.75rem]">
+                  <Link href="/contact" className="inline-flex items-start gap-2 after:absolute after:inset-0 after:content-['']">
+                    Need a system like these?
+                    <ArrowUpRight aria-hidden="true" className="mt-1 h-6 w-6 text-buzz transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   </Link>
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/70">We build custom CRMs, dashboards and automations for clients too.</p>
-                <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-[#40A2D8]">Talk to us</span>
+                <p className="text-[0.9375rem] leading-relaxed text-fog md:col-span-6">We build custom CRMs, dashboards and automations for clients too — the same stack we run every day.</p>
               </li>
-            </ul>
+            </ol>
           </div>
         )}
       </div>

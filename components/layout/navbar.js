@@ -1,754 +1,482 @@
 "use client";
+
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import {
-  ChevronDown,
-  ArrowRight,
-  Phone,
-  Stethoscope,
-  Watch,
-  Dumbbell,
-  ShoppingCart,
-  HardHat,
-  PiggyBank,
-  Film,
-  GraduationCap,
-  CalendarDays,
-  Factory,
-  UtensilsCrossed,
-  Plane,
-  Home as HomeIcon,
-  Gamepad2,
-  Shirt,
-} from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { ArrowUpRight, ChevronDown, Mail, MessageCircle, Phone, X } from "lucide-react";
+import Button from "@/components/brand/button";
+import { ClockLine } from "@/components/brand/clock";
+import { SERVICE_LINES, SUB_SERVICE_COUNT, INDUSTRIES, COMPANY_LINKS, INSIGHT_LINKS, CONTACT } from "@/lib/siteNav";
 
-const ABOUT_LINKS = [
-  { label: "About Us", href: "/about" },
-  { label: "Our Core Team", href: "/our-team" },
-  { label: "How We Work and Function", href: "/how-we-work" },
-  { label: "Start Your Career with Us", href: "/career" },
-  { label: "FAQ", href: "/faq" },
-];
+// The site header (rebuild, DESIGN_DIRECTION.md §6).
+//  - Fixed; transparent over the page's hero, ink + blur once scrolled.
+//    Hides while scrolling down past the first screen, back on scroll up
+//    (and whenever something in it has focus).
+//  - Desktop (lg+): Services / Industries / Company mega panels — open on
+//    hover (short intent delay) or click, Esc / outside click / route change
+//    close them; arrow keys move between the 8 service lines.
+//  - Phone: a full-screen sheet with big numbered links, Services and
+//    Industries as accordions, and call / WhatsApp / email at the bottom.
+//    Body scroll is locked while it is open; Esc closes; focus returns to
+//    the menu button.
+const PANELS = ["services", "industries", "company"];
 
-const SERVICE_LINKS = [
-  {
-    label: "BPO Service",
-    href: "/bpo-services",
-    subItems: [
-      { label: "AI-Powered BPO & Call Center Solutions", href: "/bpo-services/ai-powered-bpo-call-center-solutions" },
-      { label: "Inbound & Outbound Call Center Services", href: "/bpo-services/inbound-outbound-call-center-services" },
-      { label: "Business Process Automation Services", href: "/bpo-services/business-process-automation-services" },
-      { label: "Data Entry & Back Office Outsourcing", href: "/bpo-services/data-entry-back-office-outsourcing" },
-      { label: "Virtual Assistant & Startup Outsourcing", href: "/bpo-services/virtual-assistant-startup-outsourcing" },
-      { label: "24/7 & E-commerce Customer Support", href: "/bpo-services/24-7-ecommerce-customer-support" },
-    ],
-  },
-  {
-    label: "Website Development",
-    href: "/web-development",
-    subItems: [
-      { label: "Custom Web Development & Design", href: "/web-development/custom-web-development" },
-      { label: "Shopify & Ecommerce Development", href: "/web-development/shopify-ecommerce-development" },
-      { label: "PHP Web Application Development", href: "/web-development/php-web-application-development" },
-      { label: "React & Next.js Development", href: "/web-development/react-nextjs-development" },
-      { label: "Website Redesign & Management", href: "/web-development/website-redesign-management" },
-      { label: "WordPress Development", href: "/web-development/wordpress-development" },
-    ],
-  },
-  {
-    label: "Search Engine Optimization (SEO)",
-    href: "/search-engine-optimization",
-    subItems: [
-      { label: "AI Search Optimization", href: "/search-engine-optimization/ai-search-optimization" },
-      { label: "Generative Engine Optimization (GEO)", href: "/search-engine-optimization/generative-engine-optimization" },
-      { label: "Answer Engine Optimization (AEO)", href: "/search-engine-optimization/answer-engine-optimization" },
-      { label: "Semantic SEO & Topical Authority", href: "/search-engine-optimization/semantic-seo-topical-authority" },
-      { label: "Agency Growth & White Label SEO", href: "/search-engine-optimization/ai-content-optimization" },
-      { label: "High-Intent & Local SEO", href: "/search-engine-optimization/high-intent-local-seo" },
-    ],
-  },
-  {
-    label: "Social Media Marketing (SMM)",
-    href: "/social-media-marketing",
-    subItems: [
-      { label: "Social Media Management Services", href: "/social-media-marketing/social-media-management-services" },
-      { label: "Instagram Marketing Agency", href: "/social-media-marketing/instagram-marketing-agency" },
-      { label: "Facebook & Meta Ads Agency", href: "/social-media-marketing/facebook-meta-ads-agency" },
-      { label: "LinkedIn Marketing for B2B Growth", href: "/social-media-marketing/linkedin-marketing-b2b-growth" },
-      { label: "AI Social Media Marketing", href: "/social-media-marketing/ai-social-media-marketing" },
-      { label: "Reels & Short Video Marketing", href: "/social-media-marketing/reels-short-video-marketing" },
-    ],
-  },
-  {
-    label: "Google Ads & Paid Marketing",
-    href: "/paid-marketing",
-    subItems: [
-      { label: "Google & Search Ads Management", href: "/paid-marketing/google-search-ads-management" },
-      { label: "Meta & Social Ads Management", href: "/paid-marketing/meta-social-ads-management" },
-      { label: "Performance Marketing & ROI Campaigns", href: "/paid-marketing/performance-marketing-roi-campaigns" },
-      { label: "Lead Generation Campaigns", href: "/paid-marketing/lead-generation-campaigns" },
-      { label: "E-commerce & Retargeting Ads", href: "/paid-marketing/ecommerce-retargeting-ads" },
-      { label: "ChatGPT & AI Platform Ads Service", href: "/paid-marketing/local-city-based-ad-campaigns" },
-    ],
-  },
-  {
-    label: "AI Solutions",
-    href: "/ai-solutions",
+export default function Navbar() {
+  const pathname = usePathname();
+  const [open, setOpen] = useState(null); // which desktop panel
+  const [sheet, setSheet] = useState(false); // phone menu
+  const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [line, setLine] = useState(0); // the service line shown in the Services panel
+  const headerRef = useRef(null);
+  const timer = useRef(null);
+  const menuBtn = useRef(null);
 
-    subItems: [
-      { label: "Custom AI Agents & Chatbots", href: "/ai-solutions/custom-ai-agents-chatbots" },
-      { label: "AI Content & Generative Engines", href: "/ai-solutions/ai-content-generative-engines" },
-      { label: "Workflow & Process Automation", href: "/ai-solutions/workflow-process-automation" },
-      { label: "AI Strategy & Implementation Consulting", href: "/ai-solutions/generative-engine-optimization" },
-    ],
-  },
-  {
-    label: "Marketing Automation",
-    href: "/marketing-automation",
-    subItems: [
-      { label: "CRM Marketing Automation", href: "/marketing-automation/crm-marketing-automation" },
-      { label: "Email Marketing Automation", href: "/marketing-automation/email-marketing-automation" },
-      { label: "WhatsApp Marketing Automation", href: "/marketing-automation/whatsapp-marketing-automation" },
-      { label: "Lead Nurturing Automation", href: "/marketing-automation/lead-nurturing-automation" },
-    ],
-  },
-  {
-    label: "Business Consultancy",
-    href: "/business-consultancy",
-    subItems: [
-      { label: "Business Strategy Consulting", href: "/business-consultancy/business-strategy-consulting" },
-      { label: "Startup & New Business Consulting", href: "/business-consultancy/startup-new-business-consulting" },
-      { label: "Business Growth & Scaling Consulting", href: "/business-consultancy/business-growth-scaling-consulting" },
-      { label: "Operations & Process Consulting", href: "/business-consultancy/operations-process-consulting" },
-      { label: "Business Development & Marketing Consulting", href: "/business-consultancy/business-development-marketing-consulting" },
-      { label: "Local & City-Based Business Advisory", href: "/business-consultancy/local-city-based-business-advisory" },
-    ],
-  },
-];
+  // close everything on navigation (adjusting state while rendering, the
+  // React-recommended way to reset on a prop change)
+  const [lastPath, setLastPath] = useState(pathname);
+  if (pathname !== lastPath) {
+    setLastPath(pathname);
+    setOpen(null);
+    setSheet(false);
+  }
 
-const INDUSTRY_COLUMNS = [
-  [
-    { label: "Healthcare", href: "/industries/healthcare", icon: Stethoscope },
-    { label: "Wearables", href: "/industries/wearables", icon: Watch },
-    { label: "Fitness", href: "/industries/fitness", icon: Dumbbell },
-    { label: "ECommerce", href: "/industries/ecommerce", icon: ShoppingCart },
-    { label: "Construction", href: "/industries/construction", icon: HardHat },
-  ],
-  [
-    { label: "Finance", href: "/industries/finance", icon: PiggyBank },
-    { label: "Entertainment", href: "/industries/entertainment", icon: Film },
-    { label: "Education", href: "/industries/education", icon: GraduationCap },
-    { label: "Events", href: "/industries/events", icon: CalendarDays },
-    {
-      label: "Manufacturing",
-      href: "/industries/manufacturing",
-      icon: Factory,
-    },
-  ],
-  [
-    {
-      label: "Restaurant",
-      href: "/industries/restaurant",
-      icon: UtensilsCrossed,
-    },
-    { label: "Travel", href: "/industries/travel", icon: Plane },
-    { label: "Real Estate", href: "/industries/real-estate", icon: HomeIcon },
-    { label: "Fashion & Apparel", href: "/industries/fashion-apparel", icon: Shirt },
-    { label: "Gaming", href: "/industries/gaming", icon: Gamepad2 },
-  ],
-];
+  // scrolled look + hide on scroll down
+  useEffect(() => {
+    let lastY = window.scrollY;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const y = window.scrollY;
+      setScrolled(y > 24);
+      const down = y > lastY + 4;
+      const up = y < lastY - 4;
+      if (down && y > window.innerHeight * 0.8) setHidden(true);
+      else if (up || y < 80) setHidden(false);
+      lastY = y;
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, []);
 
-const RESOURCE_LINKS = [
-  { label: "Blogs", href: "/blog" },
-  { label: "Guides", href: "/guides" },
-];
+  // Esc and outside clicks close the desktop panel
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => e.key === "Escape" && setOpen(null);
+    const onDown = (e) => headerRef.current && !headerRef.current.contains(e.target) && setOpen(null);
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onDown);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onDown);
+    };
+  }, [open]);
 
-function DesktopDropdown({ label, items, width = "w-72", href }) {
-  // JS-driven open state (not plain CSS group-hover) so every item link
-  // can close the panel immediately on click, on top of navigating —
-  // otherwise a click that doesn't move the mouse off the trigger leaves
-  // the dropdown visually open over the destination page.
-  const [open, setOpen] = useState(false);
-  const closeTimer = useRef(null);
+  // phone sheet: lock scroll, Esc closes, focus back to the button
+  useEffect(() => {
+    if (!sheet) return;
+    const prev = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = "hidden";
+    const onKey = (e) => e.key === "Escape" && setSheet(false);
+    document.addEventListener("keydown", onKey);
+    const btn = menuBtn.current;
+    return () => {
+      document.documentElement.style.overflow = prev;
+      document.removeEventListener("keydown", onKey);
+      btn?.focus();
+    };
+  }, [sheet]);
 
-  const openMenu = () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    setOpen(true);
-  };
-  const scheduleClose = () => {
-    closeTimer.current = setTimeout(() => setOpen(false), 250);
-  };
-  const closeNow = () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    setOpen(false);
-  };
+  const hoverOpen = useCallback((key) => {
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => setOpen(key), 90);
+  }, []);
+  const hoverClose = useCallback(() => {
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => setOpen(null), 180);
+  }, []);
+  useEffect(() => () => clearTimeout(timer.current), []);
+
+  const solid = scrolled || open || sheet;
+  const isActive = (href) => (href === "/" ? pathname === "/" : pathname === href || pathname?.startsWith(`${href}/`));
 
   return (
-    // h-[72px] matches the navbar's own desktop height exactly, so this
-    // wrapper's box spans the full navbar row instead of shrinking to
-    // just the trigger text's line-height. That was the actual bug: a
-    // shrunk wrapper made `top-full` land partway up the navbar instead
-    // of at its true bottom edge, so the panel opened overlapping into
-    // the navbar rather than sitting flush below it.
-    <div
-      className="relative h-[72px] flex items-center"
-      onMouseEnter={openMenu}
-      onMouseLeave={scheduleClose}
-    >
-      {href ? (
-        <Link
-          href={href}
-          onClick={closeNow}
-          className="text-white flex justify-center items-center gap-1 cursor-pointer hover:text-[#40A2D8] transition"
-        >
-          {label}
-          <ChevronDown
-            size={18}
-            className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`}
-          />
-        </Link>
-      ) : (
-        <div className="text-white flex justify-center items-center gap-1 cursor-pointer hover:text-[#40A2D8] transition">
-          {label}
-          <ChevronDown
-            size={18}
-            className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`}
-          />
-        </div>
-      )}
-      {/* top-full sits the panel flush against the navbar's true bottom
-          edge — no gap, no overlap. */}
-      {open && (
-        <div className="z-20 absolute left-1/2 -translate-x-1/2 top-full">
-          <div
-            className={`nav-panel rounded-xl ${width}`}
-          >
-            <ul className="p-2 text-sm text-white/85 font-medium">
-              {items.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    onClick={closeNow}
-                    className="inline-flex items-center w-full p-2.5 rounded transition-colors duration-150 hover:bg-white/[0.06] hover:text-white"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+    <>
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-full focus:bg-buzz focus:px-4 focus:py-2 focus:text-buzz-ink">
+        Skip to content
+      </a>
+      <header
+        ref={headerRef}
+        onFocusCapture={() => setHidden(false)}
+        onMouseLeave={hoverClose}
+        className={`fixed inset-x-0 top-0 z-50 transition-[transform,background-color,border-color] duration-500 ease-out-soft ${
+          hidden && !open && !sheet ? "-translate-y-full" : "translate-y-0"
+        } ${solid ? "border-b border-white/10 bg-ink/85 backdrop-blur-xl" : "border-b border-transparent bg-transparent"}`}
+      >
+        <div className="wrap flex h-16 items-center gap-6 md:h-[76px]">
+          <Link href="/" className="relative z-10 shrink-0" aria-label="BizzBuzz Creations — home">
+            <Image src="/bbc logo white.png" alt="BizzBuzz Creations" width={447} height={143} priority className="h-8 w-auto md:h-9" />
+          </Link>
+
+          {/* desktop navigation */}
+          <nav aria-label="Main" className="hidden flex-1 items-center gap-1 lg:flex">
+            {PANELS.map((key) => (
+              <button
+                key={key}
+                type="button"
+                aria-expanded={open === key}
+                aria-controls={`panel-${key}`}
+                onClick={() => setOpen(open === key ? null : key)}
+                onMouseEnter={() => hoverOpen(key)}
+                className={`group inline-flex h-10 items-center gap-1.5 rounded-full px-4 text-[0.9375rem] capitalize transition-colors ${
+                  open === key ? "bg-white/10 text-white" : "text-white/80 hover:text-white"
+                }`}
+              >
+                {key}
+                <ChevronDown aria-hidden="true" size={15} className={`transition-transform duration-300 ${open === key ? "rotate-180" : ""}`} />
+              </button>
+            ))}
+            <Link
+              href="/blog"
+              onMouseEnter={hoverClose}
+              aria-current={isActive("/blog") ? "page" : undefined}
+              className="inline-flex h-10 items-center rounded-full px-4 text-[0.9375rem] text-white/80 transition-colors hover:text-white aria-[current=page]:text-buzz"
+            >
+              Insights
+            </Link>
+            <Link
+              href="/contact"
+              onMouseEnter={hoverClose}
+              aria-current={isActive("/contact") ? "page" : undefined}
+              className="inline-flex h-10 items-center rounded-full px-4 text-[0.9375rem] text-white/80 transition-colors hover:text-white aria-[current=page]:text-buzz"
+            >
+              Contact
+            </Link>
+          </nav>
+
+          <div className="ml-auto flex items-center gap-4">
+            <ClockLine className="hidden text-fog 2xl:inline-flex" />
+            <div className="hidden lg:block">
+              <Button href="/contact" variant="solid">
+                Start a project
+              </Button>
+            </div>
+            <button
+              ref={menuBtn}
+              type="button"
+              onClick={() => setSheet(true)}
+              aria-expanded={sheet}
+              aria-controls="phone-menu"
+              className="flex h-11 items-center gap-2.5 rounded-full border border-white/20 pl-4 pr-3 text-sm text-white lg:hidden"
+            >
+              Menu
+              <span aria-hidden="true" className="flex flex-col gap-[5px]">
+                <span className="block h-px w-4 bg-current" />
+                <span className="block h-px w-4 bg-current" />
+              </span>
+            </button>
           </div>
         </div>
-      )}
+
+        {/* desktop panels */}
+        <div className="hidden lg:block" onMouseEnter={() => clearTimeout(timer.current)}>
+          <ServicesPanel open={open === "services"} line={line} setLine={setLine} />
+          <IndustriesPanel open={open === "industries"} />
+          <CompanyPanel open={open === "company"} />
+        </div>
+      </header>
+
+      <PhoneSheet open={sheet} onClose={() => setSheet(false)} />
+    </>
+  );
+}
+
+function Panel({ id, open, children, label }) {
+  return (
+    <div
+      id={`panel-${id}`}
+      role="region"
+      aria-label={label}
+      hidden={!open}
+      className="border-t border-white/10 bg-ink-2/95 backdrop-blur-xl motion-safe:animate-[panel-in_0.35s_var(--ease-out-soft)]"
+    >
+      <div className="wrap py-10">{children}</div>
     </div>
   );
 }
 
-function ServicesMegaMenu() {
-  // Left sidebar lists all 8 service categories; hovering (or clicking)
-  // one shows its sub-services on the right, IBM-menu style. Defaults to
-  // the first service so the panel is never empty on open.
-  const [active, setActive] = useState(SERVICE_LINKS[0]);
-
-  // The panel is `fixed` (see below) so it's no longer inside the
-  // trigger's own layout box — plain CSS group-hover briefly loses
-  // "hover" the instant the cursor leaves the small trigger link on its
-  // way down to the panel, closing the menu before it ever gets there.
-  // Tracking open state in JS with a short close-delay (cleared if the
-  // cursor lands on the panel in time) bridges that gap reliably.
-  const [open, setOpen] = useState(false);
-  const closeTimer = useRef(null);
-
-  const openMenu = () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    setOpen(true);
+function ServicesPanel({ open, line, setLine }) {
+  const current = SERVICE_LINES[line];
+  const onKey = (e) => {
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault();
+      const next = (line + (e.key === "ArrowDown" ? 1 : -1) + SERVICE_LINES.length) % SERVICE_LINES.length;
+      setLine(next);
+      e.currentTarget.querySelectorAll("[data-line]")[next]?.focus();
+    }
   };
-  const scheduleClose = () => {
-    closeTimer.current = setTimeout(() => {
-      setOpen(false);
-      setActive(SERVICE_LINKS[0]);
-    }, 250);
-  };
-  // Closes immediately on click (on top of navigating), instead of
-  // leaving the panel visually open over the destination page until the
-  // mouse happens to leave the trigger/panel area.
-  const closeNow = () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    setOpen(false);
-    setActive(SERVICE_LINKS[0]);
-  };
-
   return (
-    <div
-      className="relative"
-      onMouseEnter={openMenu}
-      onMouseLeave={scheduleClose}
-    >
-      <Link
-        href="/services"
-        onClick={closeNow}
-        className="text-white flex justify-center items-center gap-1 cursor-pointer hover:text-[#40A2D8] transition py-4 -my-4"
-      >
-        Services
-        <ChevronDown
-          size={18}
-          className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`}
-        />
-      </Link>
-      {/* Outer wrapper: `fixed` (not `absolute`) so this wide panel centers
-          on the header's full width — the header's own transform makes it
-          the containing block for fixed children — instead of centering
-          under this one trigger, which is what was pushing it past the
-          right edge of the screen and getting it clipped. top-full sits
-          it flush against the navbar's bottom edge — no gap. Shifted a
-          bit right of dead-center (translate-x-[calc(50%-110px)]) since
-          the Services trigger itself sits right of the nav's center. */}
-      {open && (
-        <div
-          className="z-20 fixed left-1/2 -translate-x-[calc(50%-110px)] top-full"
-          onMouseEnter={openMenu}
-          onMouseLeave={scheduleClose}
-        >
-          <div className="nav-panel flex rounded-xl w-[960px] max-w-[95vw] overflow-hidden">
-          {/* Left column — the 8 categories */}
-          <ul className="w-56 shrink-0 border-r border-white/10 p-2 text-sm font-medium text-white/85">
-            {SERVICE_LINKS.map((service) => (
-              <li key={service.href}>
-                <Link
-                  href={service.href}
-                  onMouseEnter={() => setActive(service)}
-                  onClick={closeNow}
-                  className={`flex items-center w-full p-2.5 rounded transition-colors duration-150 ${
-                    active.href === service.href
-                      ? "bg-[#0B60B0]/20 text-[#40A2D8]"
-                      : "hover:bg-white/[0.06] hover:text-white"
-                  }`}
-                >
-                  {service.label}
+    <Panel id="services" open={open} label="Services">
+      <div className="grid grid-cols-12 gap-10">
+        <ul className="col-span-4 border-l border-white/10" onKeyDown={onKey}>
+          {SERVICE_LINES.map((s, i) => (
+            <li key={s.href}>
+              <Link
+                href={s.href}
+                data-line
+                onMouseEnter={() => setLine(i)}
+                onFocus={() => setLine(i)}
+                aria-current={i === line ? "true" : undefined}
+                className={`-ml-px flex items-baseline gap-4 border-l py-2.5 pl-5 text-lg transition-colors duration-200 ${
+                  i === line ? "border-buzz text-white" : "border-transparent text-white/55 hover:text-white"
+                }`}
+              >
+                <span className="kicker text-[0.7rem] text-buzz">{s.no}</span>
+                {s.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <div className="col-span-8 col-start-5" key={current.href}>
+          <div className="flex items-end justify-between gap-8 border-b border-white/10 pb-6 motion-safe:animate-[panel-in_0.35s_var(--ease-out-soft)]">
+            <div>
+              <p className="kicker text-fog">
+                <span className="text-buzz">[{current.no}]</span> {current.subs.length} services
+              </p>
+              <p className="font-display mt-3 text-4xl">{current.name}</p>
+              <p className="mt-3 max-w-xl text-fog">{current.line}</p>
+            </div>
+            <Link href={current.href} className="group inline-flex shrink-0 items-center gap-1.5 text-sm text-white underline decoration-white/30 underline-offset-[6px] hover:decoration-buzz">
+              Overview <ArrowUpRight aria-hidden="true" size={15} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </Link>
+          </div>
+          <ul className="mt-2 grid grid-cols-2 gap-x-10">
+            {current.subs.map((sub) => (
+              <li key={sub.href}>
+                <Link href={sub.href} className="group flex items-center justify-between gap-4 border-b border-white/10 py-4 text-white/85 transition-colors hover:text-white">
+                  {sub.label}
+                  <ArrowUpRight aria-hidden="true" size={16} className="shrink-0 text-white/30 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-buzz" />
                 </Link>
               </li>
             ))}
           </ul>
-
-          {/* Right panel — the active category's sub-services, spans the
-              full remaining width. Sub-services are split into two columns
-              with a vertical divider between them and a horizontal divider
-              between each row, so every service's flyout reads as one
-              connected grid rather than floating text. */}
-          <div className="flex-1 min-w-0 w-full p-6">
-            <Link
-              href={active.href}
-              onClick={closeNow}
-              className="inline-flex items-center gap-1.5 text-lg font-semibold text-[#40A2D8] hover:underline mb-5"
-            >
-              {active.label}
-              <ArrowRight size={17} />
+          <p className="mt-8 text-sm text-fog">
+            {SERVICE_LINES.length} lines · {SUB_SERVICE_COUNT} services —{" "}
+            <Link href="/services" className="text-white underline decoration-white/30 underline-offset-4 hover:decoration-buzz">
+              see them all
             </Link>
-            {active.subItems && (
-              <div className="flex divide-x divide-white/10 w-full">
-                {[0, 1].map((col) => (
-                  <ul
-                    key={col}
-                    className={`flex-1 min-w-0 divide-y divide-white/10 ${
-                      col === 0 ? "pr-6" : "pl-6"
-                    }`}
-                  >
-                    {active.subItems
-                      .filter((_, i) => i % 2 === col)
-                      .map((sub) => (
-                        <li key={sub.label} className="py-3 first:pt-0">
-                          <Link
-                            href={sub.href}
-                            onClick={closeNow}
-                            className="block text-sm font-medium text-white/75 hover:text-white transition-colors duration-150 leading-snug"
-                          >
-                            {sub.label}
-                          </Link>
-                        </li>
-                      ))}
-                  </ul>
-                ))}
-              </div>
-            )}
-          </div>
+          </p>
         </div>
       </div>
-      )}
-    </div>
+    </Panel>
   );
 }
 
-function IndustriesMegaMenu() {
-  // Same fixed-panel + JS-driven hover-bridge fix as ServicesMegaMenu —
-  // see the comment there for why plain CSS group-hover isn't enough
-  // once the panel is `fixed` and no longer sits inside the trigger's own
-  // layout box.
-  const [open, setOpen] = useState(false);
-  const closeTimer = useRef(null);
+function IndustriesPanel({ open }) {
+  return (
+    <Panel id="industries" open={open} label="Industries">
+      <div className="grid grid-cols-12 gap-10">
+        <div className="col-span-4">
+          <p className="kicker text-fog">
+            <span className="text-buzz">[{String(INDUSTRIES.length).padStart(2, "0")}]</span> Industries
+          </p>
+          <p className="font-display mt-3 text-4xl leading-tight">
+            Marketing that speaks your <span className="font-accent">customers&rsquo;</span> language.
+          </p>
+          <Link href="/industries" className="group mt-6 inline-flex items-center gap-1.5 text-sm text-white underline decoration-white/30 underline-offset-[6px] hover:decoration-buzz">
+            All industries <ArrowUpRight aria-hidden="true" size={15} />
+          </Link>
+        </div>
+        <ul className="col-span-8 col-start-5 grid grid-cols-3 gap-x-10">
+          {INDUSTRIES.map((ind, i) => (
+            <li key={ind.href}>
+              <Link href={ind.href} className="group flex items-baseline gap-3 border-b border-white/10 py-3.5 text-white/85 transition-colors hover:text-white">
+                <span className="kicker text-[0.7rem] text-white/35 transition-colors group-hover:text-buzz">{String(i + 1).padStart(2, "0")}</span>
+                {ind.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Panel>
+  );
+}
 
-  const openMenu = () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    setOpen(true);
-  };
-  const scheduleClose = () => {
-    closeTimer.current = setTimeout(() => setOpen(false), 250);
-  };
-  // Closes immediately on click (on top of navigating), instead of
-  // leaving the panel visually open over the destination page until the
-  // mouse happens to leave the trigger/panel area.
-  const closeNow = () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    setOpen(false);
-  };
+function CompanyPanel({ open }) {
+  const col = (title, items) => (
+    <div>
+      <p className="kicker mb-3 text-fog">{title}</p>
+      <ul>
+        {items.map((l) => (
+          <li key={l.href}>
+            <Link href={l.href} className="group flex items-baseline justify-between gap-6 border-b border-white/10 py-4">
+              <span className="text-lg text-white">{l.label}</span>
+              <span className="text-sm text-fog transition-colors group-hover:text-white">{l.line}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+  return (
+    <Panel id="company" open={open} label="Company">
+      <div className="grid grid-cols-12 gap-10">
+        <div className="col-span-6">{col("Company", COMPANY_LINKS)}</div>
+        <div className="col-span-5 col-start-8">
+          {col("Insights", INSIGHT_LINKS)}
+          <div className="mt-10 rounded-2xl border border-white/10 p-6">
+            <p className="kicker text-fog">Talk to us</p>
+            <p className="mt-3 text-white">
+              <a href={`mailto:${CONTACT.email}`} className="underline decoration-white/30 underline-offset-4 hover:decoration-buzz">
+                {CONTACT.email}
+              </a>
+            </p>
+            <p className="mt-1 text-fog">
+              <a href={CONTACT.phoneIndia.href} className="hover:text-white">
+                {CONTACT.phoneIndia.display}
+              </a>{" "}
+              ·{" "}
+              <a href={CONTACT.phoneUk.href} className="hover:text-white">
+                {CONTACT.phoneUk.display}
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </Panel>
+  );
+}
+
+function PhoneSheet({ open, onClose }) {
+  const [section, setSection] = useState(null);
+  const closeBtn = useRef(null);
+  useEffect(() => {
+    if (open) closeBtn.current?.focus();
+  }, [open]);
+
+  const big = "font-display flex w-full items-baseline gap-4 py-4 text-left text-[2rem] leading-none";
+  const acc = (key, no, title, body) => (
+    <li className="border-b border-white/10">
+      <button type="button" aria-expanded={section === key} onClick={() => setSection(section === key ? null : key)} className={`${big} justify-between`}>
+        <span className="flex items-baseline gap-4">
+          <span className="kicker text-buzz">{no}</span>
+          {title}
+        </span>
+        <ChevronDown aria-hidden="true" size={22} className={`shrink-0 self-center transition-transform duration-300 ${section === key ? "rotate-180" : ""}`} />
+      </button>
+      {section === key && <div className="pb-5">{body}</div>}
+    </li>
+  );
+  const link = (no, title, href) => (
+    <li className="border-b border-white/10">
+      <Link href={href} onClick={onClose} className={big}>
+        <span className="kicker text-buzz">{no}</span>
+        {title}
+      </Link>
+    </li>
+  );
 
   return (
     <div
-      className="relative"
-      onMouseEnter={openMenu}
-      onMouseLeave={scheduleClose}
+      id="phone-menu"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu"
+      hidden={!open}
+      className="fixed inset-0 z-[60] overflow-y-auto bg-ink text-white motion-safe:animate-[sheet-in_0.4s_var(--ease-out-soft)] lg:hidden"
     >
-      <Link
-        href="/industries"
-        onClick={closeNow}
-        className="text-white flex justify-center items-center gap-1 cursor-pointer hover:text-[#40A2D8] transition py-4 -my-4"
-      >
-        Industries
-        <ChevronDown
-          size={18}
-          className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`}
-        />
-      </Link>
-      {/* Outer wrapper: `fixed` (not `absolute`) so this wide panel centers
-          on the header's full width — the header's own transform makes it
-          the containing block for fixed children — instead of centering
-          under this one trigger, which is what was pushing it past the
-          right edge of the screen and getting it clipped. top-full sits
-          it flush against the navbar's bottom edge — no gap. Shifted a
-          bit right of dead-center (translate-x-[calc(50%-110px)]) since
-          the Industries trigger itself sits right of the nav's center. */}
-      {open && (
-        <div
-          className="z-20 fixed left-1/2 -translate-x-[calc(50%-110px)] top-full"
-          onMouseEnter={openMenu}
-          onMouseLeave={scheduleClose}
-        >
-          <div className="nav-panel rounded-xl w-[960px] max-w-[95vw] overflow-hidden">
-            <div className="grid grid-cols-3 gap-x-8 p-6">
-              {INDUSTRY_COLUMNS.map((column, i) => (
-                <ul key={i} className="space-y-1 text-sm text-white/85 font-medium">
-                  {column.map((item) => {
-                    const Icon = item.icon;
-                    return (
-                      <li key={item.href}>
-                        <Link
-                          href={item.href}
-                          onClick={closeNow}
-                          className="group/item flex items-center gap-3 w-full p-2.5 rounded transition-colors duration-150 hover:bg-white/[0.06] hover:text-white"
-                        >
-                          <Icon
-                            size={18}
-                            className="text-[#40A2D8] shrink-0 group-hover/item:text-white"
-                          />
-                          {item.label}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              ))}
-            </div>
-
-            {/* Bottom CTA strip — doesn't touch the 15 industries above,
-                just a way out for visitors whose industry isn't listed. */}
-            <div className="flex items-center justify-between gap-4 bg-white/[0.03] px-6 py-4 border-t border-white/10">
-              <p className="text-sm text-white/70 max-w-md">
-                Didn&rsquo;t find what you&rsquo;re looking for? Let us
-                know your needs, and we&rsquo;ll tailor a solution just
-                for you.
-              </p>
-              <Link
-                href="/contact"
-                onClick={closeNow}
-                className="shrink-0 inline-flex items-center bg-[#0B60B0] hover:bg-[#0B60B0]/90 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition"
-              >
-                Schedule Free Consultation
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function MobileAccordion({
-  id,
-  label,
-  items,
-  open,
-  onToggle,
-  onNavigate,
-  columns = 1,
-  href,
-}) {
-  const [subOpen, setSubOpen] = useState(null);
-
-  return (
-    <div>
-      <div className="text-white flex items-center justify-between transition py-1">
-        {href ? (
-          <Link href={href} onClick={onNavigate} className="flex-1">
-            {label}
+      <div className="wrap flex min-h-full flex-col">
+        <div className="flex h-16 items-center justify-between">
+          <Link href="/" onClick={onClose} aria-label="BizzBuzz Creations — home">
+            <Image src="/bbc logo white.png" alt="BizzBuzz Creations" width={447} height={143} className="h-8 w-auto" />
           </Link>
-        ) : (
-          <span
-            onClick={() => onToggle(id)}
-            className="flex-1 cursor-pointer"
-          >
-            {label}
-          </span>
-        )}
-        <ChevronDown
-          size={20}
-          onClick={() => onToggle(id)}
-          className={`cursor-pointer shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
-        />
-      </div>
-      {open && (
-        <ul
-          className={`mt-2 mb-2 bg-white/5 border border-white/10 rounded-lg p-2 text-sm text-white font-medium ${
-            columns === 2 ? "grid grid-cols-2 gap-1" : "space-y-1"
-          }`}
-        >
-          {items.map((item) => {
-            const Icon = item.icon;
-
-            if (item.subItems) {
-              const isSubOpen = subOpen === item.label;
-              return (
-                <li key={item.href}>
-                  {/* Label navigates straight to the service's hub page
-                      (e.g. /bpo-services) — only the chevron toggles the
-                      sub-services accordion, instead of the whole row
-                      doing that and leaving the hub page unreachable from
-                      the mobile menu. */}
-                  <div className="flex items-center justify-between w-full hover:bg-white/10 rounded">
-                    <Link
-                      href={item.href}
-                      onClick={onNavigate}
-                      className="flex-1 p-2"
-                    >
-                      {item.label}
-                    </Link>
-                    <ChevronDown
-                      size={14}
-                      onClick={() => setSubOpen(isSubOpen ? null : item.label)}
-                      className={`shrink-0 mr-2 cursor-pointer transition-transform duration-300 ${isSubOpen ? "rotate-180" : ""}`}
-                    />
-                  </div>
-                  {isSubOpen && (
-                    <ul className="ml-3 mt-1 mb-1 space-y-1 border-l border-white/15 pl-3">
-                      {item.subItems.map((sub) => (
-                        <li key={sub.label}>
-                          <Link
-                            href={sub.href}
-                            onClick={onNavigate}
-                            className="block p-2 text-xs text-white hover:bg-white/10 hover:text-white rounded"
-                          >
-                            {sub.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+          <button ref={closeBtn} type="button" onClick={onClose} className="flex h-11 items-center gap-2 rounded-full border border-white/20 pl-4 pr-3 text-sm">
+            Close <X aria-hidden="true" size={18} />
+          </button>
+        </div>
+        <ul className="mt-6">
+          {acc(
+            "services",
+            "01",
+            "Services",
+            <ul className="grid gap-1">
+              {SERVICE_LINES.map((s) => (
+                <li key={s.href}>
+                  <Link href={s.href} onClick={onClose} className="flex items-baseline gap-3 py-2 text-lg text-white/85">
+                    <span className="kicker text-[0.7rem] text-white/40">{s.no}</span>
+                    {s.name}
+                  </Link>
                 </li>
-              );
-            }
-
-            return (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={onNavigate}
-                  className="inline-flex items-center gap-2 w-full p-2 hover:bg-white/10 rounded"
-                >
-                  {Icon && (
-                    <Icon size={16} className="text-[#40A2D8] shrink-0" />
-                  )}
-                  {item.label}
+              ))}
+              <li>
+                <Link href="/services" onClick={onClose} className="mt-2 inline-flex items-center gap-1.5 py-2 text-buzz">
+                  All {SUB_SERVICE_COUNT} services <ArrowUpRight aria-hidden="true" size={16} />
                 </Link>
               </li>
-            );
-          })}
+            </ul>,
+          )}
+          {acc(
+            "industries",
+            "02",
+            "Industries",
+            <ul className="grid grid-cols-2 gap-x-4">
+              {INDUSTRIES.map((ind) => (
+                <li key={ind.href}>
+                  <Link href={ind.href} onClick={onClose} className="block py-2 text-white/85">
+                    {ind.label}
+                  </Link>
+                </li>
+              ))}
+              <li className="col-span-2">
+                <Link href="/industries" onClick={onClose} className="mt-2 inline-flex items-center gap-1.5 py-2 text-buzz">
+                  All industries <ArrowUpRight aria-hidden="true" size={16} />
+                </Link>
+              </li>
+            </ul>,
+          )}
+          {acc(
+            "company",
+            "03",
+            "Company",
+            <ul>
+              {COMPANY_LINKS.concat(INSIGHT_LINKS.slice(1)).map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} onClick={onClose} className="block py-2 text-lg text-white/85">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>,
+          )}
+          {link("04", "Insights", "/blog")}
+          {link("05", "Contact", "/contact")}
         </ul>
-      )}
-    </div>
-  );
-}
-
-// White-content pages where the navbar is solid instead of glass.
-const SOLID_BAR_PAGES = new Set(["/privacy-policy", "/terms-and-conditions", "/disclaimer", "/cookie-policy"]);
-
-export default function Navbar() {
-  const [open, setOpen] = useState(false);
-  const [openSection, setOpenSection] = useState(null);
-  const [hidden, setHidden] = useState(false);
-  const lastScrollY = useRef(0);
-
-  const toggleSection = (name) =>
-    setOpenSection((prev) => (prev === name ? null : name));
-
-  const closeAll = () => {
-    setOpen(false);
-    setOpenSection(null);
-  };
-
-  const industriesFlat = INDUSTRY_COLUMNS.flat();
-
-  // Pages whose content is white: a glass bar over white text turns grey, so
-  // the bar is solid black there (same near-black as everywhere else).
-  const pathname = usePathname();
-  const solidBar = SOLID_BAR_PAGES.has(pathname?.replace(/\/+$/, "") || "/");
-
-  // Hide the bar on scroll-down, bring it back on scroll-up. Skipped while
-  // the mobile menu is open so it can't disappear mid-interaction.
-  useEffect(() => {
-    lastScrollY.current = window.scrollY;
-
-    const handleScroll = () => {
-      if (open) return;
-      const currentY = window.scrollY;
-      const scrolledDown = currentY > lastScrollY.current;
-      setHidden(scrolledDown && currentY > 80);
-      lastScrollY.current = currentY;
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [open]);
-
-  return (
-    <header
-      className={`nav sticky top-0 z-50 w-full border-b border-white/10 transition-transform duration-300 ${solidBar ? "nav-solid" : ""} ${
-        hidden ? "-translate-y-[150%]" : "translate-y-0"
-      }`}
-    >
-      <div className="px-6 md:px-10 md:h-[72px] h-14 flex justify-between items-center max-w-7xl mx-auto">
-        {/* Logo */}
-        <Link href="/" className="text-2xl font-semibold text-white shrink-0">
-          <Image
-            src="/bbc logo white.png"
-            alt="BizzBuzz Creations logo"
-            className="h-8 md:h-10 w-auto"
-            width={836}
-            height={189}
-            // Always above the fold — next/image's default lazy loading
-            // made it wait for layout before even being requested.
-            loading="eager"
-          />
-        </Link>
-
-        {/* Desktop Menu */}
-        <nav className="hidden md:flex items-center space-x-8 font-medium">
-          <DesktopDropdown label="About" items={ABOUT_LINKS} width="w-72" />
-          <ServicesMegaMenu />
-          <IndustriesMegaMenu />
-          <DesktopDropdown
-            label="Resources"
-            items={RESOURCE_LINKS}
-            width="w-56"
-          />
-
-          {/* CTA button */}
-          <Link
-            href="/contact"
-            className="flex items-center gap-2 bg-[#0B60B0] hover:bg-[#0B60B0]/90 text-white text-sm font-semibold rounded-full pl-4 pr-5 py-2.5 transition"
-          >
-            <Phone size={16} />
-            Contact Us
-          </Link>
-        </nav>
-
-        {/* Hamburger Button */}
-        {/* 40x40 hit area (the three bars alone were ~24x19px, under the
-            WCAG 2.2 minimum target size); -mr-2 keeps the bars where they
-            were visually. */}
-        <button
-          type="button"
-          className="md:hidden flex flex-col items-center justify-center space-y-[5px] w-10 h-10 -mr-2"
-          aria-label="Toggle mobile menu"
-          aria-expanded={open}
-          onClick={() => setOpen(!open)}
-        >
-          <span
-            className={`h-[3px] w-6 bg-white rounded transition-transform duration-300 ${
-              open ? "rotate-45 translate-y-[9px]" : ""
-            }`}
-          ></span>
-          <span
-            className={`h-[3px] w-6 bg-white rounded transition-opacity duration-300 ${
-              open ? "opacity-0" : "opacity-100"
-            }`}
-          ></span>
-          <span
-            className={`h-[3px] w-6 bg-white rounded transition-transform duration-300 ${
-              open ? "-rotate-45 -translate-y-[7px]" : ""
-            }`}
-          ></span>
-        </button>
+        <div className="mt-auto pb-8 pt-10">
+          <Button href="/contact" variant="solid" className="w-full" onClick={onClose}>
+            Start a project
+          </Button>
+          <div className="mt-4 grid grid-cols-3 gap-2 text-sm">
+            <a href={CONTACT.phoneIndia.href} className="flex h-12 items-center justify-center gap-2 rounded-full border border-white/15">
+              <Phone aria-hidden="true" size={16} /> Call
+            </a>
+            <a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" className="flex h-12 items-center justify-center gap-2 rounded-full border border-white/15">
+              <MessageCircle aria-hidden="true" size={16} /> WhatsApp
+            </a>
+            <a href={`mailto:${CONTACT.email}`} className="flex h-12 items-center justify-center gap-2 rounded-full border border-white/15">
+              <Mail aria-hidden="true" size={16} /> Email
+            </a>
+          </div>
+          <ClockLine className="mt-6 text-fog" />
+        </div>
       </div>
-
-      {/* Mobile Menu */}
-      {open && (
-        <nav className="md:hidden absolute top-full mt-2 left-1/2 -translate-x-1/2 w-full nav-panel rounded-3xl animate-slideDown max-h-[70vh] overflow-y-auto z-40">
-          <ul className="flex flex-col space-y-3 p-5 font-medium text-white">
-            <MobileAccordion
-              id="about"
-              label="About"
-              items={ABOUT_LINKS}
-              open={openSection === "about"}
-              onToggle={toggleSection}
-              onNavigate={closeAll}
-            />
-            <MobileAccordion
-              id="services"
-              label="Services"
-              items={SERVICE_LINKS}
-              open={openSection === "services"}
-              onToggle={toggleSection}
-              onNavigate={closeAll}
-              href="/services"
-            />
-            <MobileAccordion
-              id="industries"
-              label="Industries"
-              items={industriesFlat}
-              open={openSection === "industries"}
-              onToggle={toggleSection}
-              onNavigate={closeAll}
-              columns={2}
-              href="/industries"
-            />
-            <MobileAccordion
-              id="resources"
-              label="Resources"
-              items={RESOURCE_LINKS}
-              open={openSection === "resources"}
-              onToggle={toggleSection}
-              onNavigate={closeAll}
-            />
-            <Link
-              onClick={closeAll}
-              href="/contact"
-              className="flex items-center justify-center gap-2 bg-[#0B60B0] text-white text-sm font-semibold rounded-full py-2.5"
-            >
-              <Phone size={16} />
-              Contact Us
-            </Link>
-          </ul>
-        </nav>
-      )}
-    </header>
+    </div>
   );
 }

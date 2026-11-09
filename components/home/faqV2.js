@@ -1,53 +1,50 @@
 import { Plus } from "lucide-react";
 import RichText from "@/components/ui/richText";
+import Kicker from "@/components/brand/kicker";
+import AccentText from "@/components/brand/accentText";
 
-// FAQ (redesign) — GPG-style: the heading on the left, the questions on the
-// right as a thin-line list; each opens with a plus that turns into a cross.
-// Native <details>: keyboard and screen-reader friendly with no script, and
-// every answer stays in the page. The homepage FAQ structured data is built
-// from the same dashboard items (PageSeoScripts), unchanged.
-// From md up the left column holds an illustration (transparent WebP, 1x
-// and 2x so it's sharp on high-resolution screens) that stays beside the
-// questions as they scroll.
-// Lazy-loaded with a fixed size (no layout shift); not shown or downloaded
-// on phones.
-export default function FaqV2({ content }) {
-  const heading = content?.faqHeading || "FAQs";
+// FAQ (rebuild) — used by the homepage and every page template: a paper
+// section, heading left (sticky on desktop), numbered questions right as
+// native <details> (keyboard and screen-reader friendly with no script);
+// the answer opens smoothly where the browser supports it (globals.css,
+// .faq details). Same fields: faqEyebrow, faqHeading, faqSubheading,
+// faqItems. `tone` "paper" (default) | "ink". `no` the kicker number.
+export default function FaqV2({ content, tone = "paper", no = "10" }) {
+  const heading = content?.faqHeading || "Frequently asked questions";
   const subtext = content?.faqSubheading || "";
   const eyebrow = content?.faqEyebrow || "Questions";
   const items = (content?.faqItems || []).filter((f) => f?.question);
   if (!items.length) return null;
+  const dark = tone === "paper";
 
   return (
-    <section className="bg-black text-white">
-      <div className="reveal-stagger mx-auto grid max-w-7xl gap-10 px-6 md:px-10 py-16 md:grid-cols-[2fr_3fr] md:gap-16 md:py-20">
-        <div className="md:sticky md:top-28 md:self-start">
-          <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
-          <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
-          {subtext && <RichText as="p" text={subtext} className="mt-5 max-w-md text-base leading-relaxed text-white/70" />}
-          {/* eslint-disable-next-line @next/next/no-img-element -- pre-sized 1x / 2x files (31KB / 75KB); next/image would only recompress them */}
-          <img
-            src="/faq-question-336.webp"
-            srcSet="/faq-question-336.webp 336w, /faq-question-672.webp 672w"
-            sizes="336px"
-            alt=""
-            width={336}
-            height={378}
-            loading="lazy"
-            decoding="async"
-            className="mt-10 hidden h-auto w-full max-w-[21rem] md:block"
-          />
+    <section aria-labelledby="faq-heading" className={`faq ${dark ? "bg-paper text-ink" : "bg-ink text-white"}`}>
+      <div className="wrap grid gap-12 py-24 md:py-36 lg:grid-cols-12 lg:gap-10">
+        <div className="lg:sticky lg:top-28 lg:col-span-4 lg:self-start">
+          <Kicker no={no} tone={dark ? "dark" : "light"}>
+            {eyebrow}
+          </Kicker>
+          <h2 id="faq-heading" className="font-display mt-6 text-[clamp(2.2rem,4vw,3.75rem)] leading-[0.98]">
+            <AccentText text={heading} />
+          </h2>
+          {subtext && <RichText as="p" text={subtext} className={`mt-5 max-w-md text-lg leading-relaxed ${dark ? "text-stone" : "text-fog"}`} />}
         </div>
-        <div className="border-t border-white/10">
+        <div className={`border-t lg:col-span-7 lg:col-start-6 ${dark ? "border-ink/15" : "border-white/10"}`}>
           {items.map((f, i) => (
-            <details key={i} className="group border-b border-white/10">
-              <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-6 text-left text-lg text-white transition-colors hover:text-[#40A2D8] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#40A2D8] [&::-webkit-details-marker]:hidden">
-                <span>{f.question}</span>
-                <span aria-hidden="true" className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/25 transition-transform duration-300 group-open:rotate-45">
+            <details key={i} className={`group border-b ${dark ? "border-ink/15" : "border-white/10"}`}>
+              <summary className="flex cursor-pointer list-none items-start gap-5 py-6 text-left md:py-7 [&::-webkit-details-marker]:hidden">
+                <span className={`kicker w-7 shrink-0 pt-1.5 ${dark ? "text-stone" : "text-fog"}`}>{String(i + 1).padStart(2, "0")}</span>
+                <span className="flex-1 text-lg font-medium leading-snug md:text-xl">{f.question}</span>
+                <span
+                  aria-hidden="true"
+                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-[transform,background-color,color] duration-500 ease-out-soft group-open:rotate-45 ${
+                    dark ? "border-ink/20 group-open:bg-ink group-open:text-white" : "border-white/25 group-open:bg-buzz group-open:text-buzz-ink"
+                  }`}
+                >
                   <Plus size={16} />
                 </span>
               </summary>
-              <RichText as="div" text={f.answer} className="max-w-2xl pb-6 pr-12 text-base leading-relaxed text-white/65" />
+              <RichText as="div" text={f.answer} className={`max-w-2xl pb-8 pl-12 pr-14 text-base leading-relaxed ${dark ? "text-stone" : "text-fog"}`} />
             </details>
           ))}
         </div>

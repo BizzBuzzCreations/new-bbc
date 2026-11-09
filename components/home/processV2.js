@@ -1,59 +1,48 @@
 import ScrollSteps from "@/components/ui/scrollSteps";
 import RichText from "@/components/ui/richText";
-import Pill from "@/components/home/pill";
+import Button from "@/components/brand/button";
+import SectionHead from "@/components/brand/sectionHead";
 import { resolveSteps } from "@/components/sections/whatMakesUs";
 
-// How We Work (redesign) — on the shared beams background (BeamsBlock): the 4
-// steps as a timeline (GPG-style circles on a line, no boxes). Scrolling
-// through fills the line and lights each step's circle as the line reaches
-// it (ScrollSteps); on phones the steps stack and light up as they arrive.
+// Our process (rebuild): the four steps as columns on a line that fills in
+// buzz as the section scrolls past (ScrollSteps sets --steps-progress and
+// marks reached steps data-active). Phones: a vertical list. Same dashboard
+// fields as before (processEyebrow, processHeading, processSubtext,
+// processSteps).
 export default function ProcessV2({ content }) {
-  const eyebrow = content?.processEyebrow || "How We Work";
+  const eyebrow = content?.processEyebrow || "How we work";
   const heading = content?.processHeading || "Our Process";
-  const subtext = content?.processSubtext || "";
+  const subtext = content?.processSubtext || "Four steps, the same every time — so you always know what happens next and who is doing it.";
   const steps = resolveSteps(content);
 
   return (
-    <section className="relative overflow-hidden text-white">
-      <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-20">
-        {/* same split and gap as the steps, so the intro starts over step 3 */}
-        <div className="reveal-stagger grid gap-6 md:grid-cols-2 md:gap-8">
-          <div>
-            <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
-            <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
-          </div>
-          {subtext && <RichText as="p" text={subtext} className="self-end text-base text-white/70 md:text-lg" />}
-        </div>
-
+    <section aria-labelledby="process-heading" className="relative bg-ink text-white">
+      <div className="wrap py-24 md:py-40">
+        <SectionHead id="process-heading" no="08" kicker={eyebrow} heading={heading} text={subtext} />
         <ScrollSteps className="relative mt-16 md:mt-24">
-          {/* Phones: a still line down the left joining the circles. */}
-          <div aria-hidden="true" className="absolute left-5 top-5 bottom-5 w-px bg-white/15 md:hidden" />
-          {/* Desktop: a line across that fills as you scroll (--steps-progress, 0 → 1). */}
-          <div aria-hidden="true" className="absolute inset-x-5 top-5 hidden h-px bg-white/15 md:block">
-            <div
-              className="h-full origin-left bg-[#40A2D8] transition-transform duration-200 ease-out"
-              style={{ transform: "scaleX(var(--steps-progress, 0))" }}
-            />
+          <div aria-hidden="true" className="absolute inset-x-0 top-0 hidden h-px bg-white/15 md:block">
+            <div className="h-full origin-left bg-buzz transition-transform duration-200 ease-out" style={{ transform: "scaleX(var(--steps-progress, 0))" }} />
           </div>
-          <ol className="relative grid gap-12 md:grid-cols-4 md:gap-8">
-            {steps.map((step, i) => {
-              const Icon = step.icon;
-              return (
-                <li key={step.title} data-step={i} data-steps={steps.length} data-active="false" className="group relative pl-16 md:pl-0">
-                  <span className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-[#06101f] text-white/70 transition-colors duration-500 group-data-[active=true]:border-[#40A2D8] group-data-[active=true]:bg-[#40A2D8] group-data-[active=true]:text-black md:relative">
-                    {Icon ? <Icon size={16} /> : i + 1}
-                  </span>
-                  <p className="mt-0 text-xs text-white/50 md:mt-8">Step {String(i + 1).padStart(2, "0")}</p>
-                  <h3 className="font-display mt-2 text-2xl leading-snug">{step.title}</h3>
-                  <RichText as="p" text={step.description} className="mt-3 text-sm leading-relaxed text-white/65" />
-                </li>
-              );
-            })}
+          <ol className="grid md:grid-cols-4">
+            {steps.map((step, i) => (
+              <li
+                key={step.title}
+                data-step={i}
+                data-steps={steps.length}
+                data-active="false"
+                className="group border-t border-white/10 py-8 md:border-l md:border-t-0 md:px-6 md:pb-0 md:pt-10 md:first:border-l-0 md:first:pl-0"
+              >
+                <span className="kicker text-white/40 transition-colors duration-500 group-data-[active=true]:text-buzz">Step {String(i + 1).padStart(2, "0")}</span>
+                <h3 className="font-display mt-5 text-[1.75rem] leading-tight md:text-3xl">{step.title}</h3>
+                <RichText as="p" text={step.description} className="mt-4 text-[0.9375rem] leading-relaxed text-fog" />
+              </li>
+            ))}
           </ol>
         </ScrollSteps>
-
-        <div className="mt-16">
-          <Pill href="/contact" variant="solid">Book Your Free Audit</Pill>
+        <div className="mt-14">
+          <Button href="/contact" variant="solid">
+            Book your free audit
+          </Button>
         </div>
       </div>
     </section>

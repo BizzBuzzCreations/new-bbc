@@ -1,109 +1,70 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import RichText from "@/components/ui/richText";
+import SectionHead from "@/components/brand/sectionHead";
 import { resolveServices } from "@/components/sections/ourServices";
-import SpotlightList from "@/components/home/spotlightList";
+import { SERVICE_LINES, SUB_SERVICE_COUNT } from "@/lib/siteNav";
 
-// Services (redesign) — a bento grid of picture cards built around each
-// service's own illustration. On wide screens (xl): three rows — two wide
-// cards, four small ones, two wide — where a wide card shows the whole
-// illustration (its own 512×242 shape, so never cropped) with the text over
-// its dark left side, and a small card shows the illustrated part on top
-// with the text below. Below xl: a two-column grid of small cards (phones
-// show the name and one-line promise; the description joins from sm up).
-// Hover: the border lights up, a soft light follows the mouse, the picture
-// grows a touch, the arrow (bottom right, clear of the illustration; not on
-// phones) fills.
-// The whole card is the link. Same 8 services and dashboard text as before.
-const WIDE = new Set([0, 1, 6, 7]);
-const CARD_BG = "#080c18"; // the illustrations' own background, so they blend in
-
+// Services (rebuild): the 8 service lines as numbered rows (no card grid).
+// Each row: number, name (the link), the dashboard's one-line promise and
+// description, and (desktop) that line's sub-services as small links. Hover
+// sweeps a buzz line over the row and nudges the name — no height change,
+// so the list never jumps under the mouse. Phones show the count instead. Same dashboard fields as before (servicesEyebrow,
+// servicesHeading, servicesSubtext and the serviceCards list).
 export default function ServicesV2({ content }) {
-  const eyebrow = content?.servicesEyebrow || "Our Services";
+  const eyebrow = content?.servicesEyebrow || "Our services";
   const heading = content?.servicesHeading || "Digital Marketing & Business Solutions";
-  const subtext = content?.servicesSubtext || "";
+  const subtext =
+    content?.servicesSubtext ||
+    `${SERVICE_LINES.length} lines of work, ${SUB_SERVICE_COUNT} services — planned together, run by one team, reported in one place.`;
   const services = resolveServices(content);
+  const linesByHref = new Map(SERVICE_LINES.map((l) => [l.href, l]));
 
   return (
-    <section id="services" className="scroll-mt-20 bg-black text-white">
-      <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-20">
-        {/* same split and gap as the cards, so the intro starts over the third card */}
-        <div className="reveal-stagger grid gap-6 md:grid-cols-2 md:gap-4 xl:gap-5">
-          <div>
-            <p className="text-sm text-[#40A2D8]">{eyebrow}</p>
-            <h2 className="font-display mt-4 text-4xl leading-[1.08] md:text-5xl">{heading}</h2>
-          </div>
-          {subtext && <RichText as="p" text={subtext} className="self-end text-base text-white/70 md:text-lg" />}
-        </div>
-
-        <SpotlightList className="reveal-stagger mt-12 grid grid-cols-2 gap-3 sm:gap-4 md:mt-16 xl:grid-cols-4 xl:gap-5">
+    <section id="services" aria-labelledby="services-heading" className="scroll-mt-20 bg-ink text-white">
+      <div className="wrap py-24 md:py-40">
+        <SectionHead id="services-heading" no="02" kicker={eyebrow} heading={heading} text={subtext} />
+        <ol className="mt-16 border-t border-white/10 md:mt-24">
           {services.map((s, i) => {
-            const wide = WIDE.has(i);
-            const Icon = s.icon;
+            const line = linesByHref.get(s.href);
+            const subs = line?.subs || [];
             return (
-              <li
-                key={s.heading}
-                data-spotlight
-                className={`group relative overflow-hidden rounded-2xl border border-white/10 ring-[#40A2D8] transition-colors duration-300 hover:border-[#40A2D8]/50 has-[a:focus-visible]:ring-2 sm:rounded-3xl ${
-                  wide ? "xl:col-span-2 xl:aspect-[512/242]" : ""
-                }`}
-                style={{ backgroundColor: CARD_BG }}
-              >
-                <div
-                  className={`relative aspect-[4/3] overflow-hidden sm:aspect-[16/10] ${
-                    wide ? "xl:absolute xl:inset-0 xl:aspect-auto" : "xl:aspect-[4/3]"
-                  }`}
-                >
-                  {s.image ? (
-                    <Image
-                      src={s.image}
-                      alt=""
-                      fill
-                      sizes={wide ? "(min-width: 1280px) 600px, 50vw" : "(min-width: 1280px) 300px, 50vw"}
-                      className="object-cover object-right transition-transform duration-500 group-hover:scale-[1.04]"
-                    />
-                  ) : (
-                    Icon && <Icon aria-hidden="true" className="absolute inset-0 m-auto h-12 w-12 text-[#40A2D8]" />
-                  )}
-                  {/* the picture melts into the card where the text starts */}
-                  <div
-                    aria-hidden="true"
-                    className={`absolute inset-x-0 bottom-0 h-1/3 ${wide ? "xl:hidden" : ""}`}
-                    style={{ background: `linear-gradient(to top, ${CARD_BG}, transparent)` }}
-                  />
-                </div>
-
-                {/* the light that follows the mouse (SpotlightList sets --x / --y) */}
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  style={{ background: "radial-gradient(280px circle at var(--x, 50%) var(--y, 50%), rgba(64, 162, 216, 0.16), transparent 70%)" }}
-                />
-                <span
-                  aria-hidden="true"
-                  className="absolute bottom-5 right-5 hidden h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white backdrop-blur-sm transition-colors duration-300 group-hover:border-[#40A2D8] group-hover:bg-[#40A2D8] group-hover:text-black sm:flex"
-                >
-                  <ArrowUpRight size={16} />
-                </span>
-
-                <div className={`relative p-4 pt-1 sm:p-5 sm:pt-1 sm:pr-16 ${wide ? "xl:flex xl:h-full xl:w-1/2 xl:flex-col xl:justify-end xl:p-7" : ""}`}>
-                  <h3 className="font-display text-lg leading-snug text-white transition-colors duration-200 group-hover:text-[#40A2D8] sm:text-xl xl:text-2xl">
-                    <Link href={s.href} className="after:absolute after:inset-0 after:content-[''] focus:outline-none">
-                      {s.heading}
-                    </Link>
-                  </h3>
-                  {s.subheading && <p className="mt-1.5 text-xs leading-snug text-[#40A2D8] sm:text-sm">{s.subheading}</p>}
-                  <RichText
-                    as="p"
-                    text={s.description}
-                    className={`mt-3 hidden text-sm leading-relaxed text-white/65 sm:line-clamp-3 ${wide ? "xl:line-clamp-4" : ""}`}
-                  />
+              <li key={s.href || s.heading} className="group relative border-b border-white/10">
+                {/* the buzz line that sweeps in on hover */}
+                <span aria-hidden="true" className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-buzz transition-transform duration-700 ease-out-soft group-hover:scale-x-100 group-focus-within:scale-x-100" />
+                <div className="grid gap-4 py-8 md:grid-cols-12 md:gap-10 md:py-10">
+                  <span className="kicker text-buzz md:col-span-1 md:pt-3">{String(i + 1).padStart(2, "0")}</span>
+                  <div className="md:col-span-6">
+                    <h3 className="font-display text-[clamp(1.9rem,3.6vw,3.4rem)] leading-[1] transition-transform duration-500 ease-out-soft md:group-hover:translate-x-3">
+                      <Link href={s.href} className="inline-flex items-start gap-3 focus-visible:outline-none">
+                        {s.heading}
+                        <ArrowUpRight aria-hidden="true" className="mt-1 h-7 w-7 shrink-0 text-white/30 transition-all duration-500 ease-out-soft group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-buzz md:h-9 md:w-9" />
+                      </Link>
+                    </h3>
+                    {s.subheading && <p className="mt-3 text-fog">{s.subheading}</p>}
+                  </div>
+                  <div className="md:col-span-5">
+                    <RichText as="p" text={s.description} className="text-[0.9375rem] leading-relaxed text-white/70 md:line-clamp-3" />
+                    {subs.length > 0 && (
+                      <>
+                        <p className="kicker mt-4 text-fog md:hidden">{subs.length} services</p>
+                        <ul className="mt-5 hidden flex-wrap gap-x-4 gap-y-2 md:flex" aria-label={`${s.heading} services`}>
+                          {subs.map((sub) => (
+                            <li key={sub.href}>
+                              <Link href={sub.href} className="text-sm text-fog underline decoration-white/0 underline-offset-4 transition-colors hover:text-white hover:decoration-buzz">
+                                {sub.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    )}
+                  </div>
                 </div>
               </li>
             );
           })}
-        </SpotlightList>
+        </ol>
       </div>
     </section>
   );

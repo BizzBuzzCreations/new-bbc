@@ -2,92 +2,107 @@
 
 import { useState } from "react";
 import { toast, Bounce } from "react-toastify";
-import { Phone, MessageCircle } from "lucide-react";
+import { ArrowRight, MessageCircle, Phone } from "lucide-react";
 import { sendMail } from "@/actions/serverActions";
 import { markEnquired } from "@/lib/enquiryFlag";
 import RichText from "@/components/ui/richText";
-import Pill from "@/components/home/pill";
+import AccentText from "@/components/brand/accentText";
+import { CONTACT } from "@/lib/siteNav";
 
-const toastOptions = { position: "top-right", autoClose: 5000, theme: "light", transition: Bounce };
+const toastOptions = { position: "top-right", autoClose: 5000, theme: "dark", transition: Bounce };
 
-// Closing call to action (redesign) — a big, light headline, one line of
-// text, the email box with one submit pill, and Call / WhatsApp. Same
-// dashboard fields and the same enquiry handling as the old closing CTA
-// (sendMail; a successful enquiry also stops the consultation popup).
-// From md up an illustration sits on the right (the sections above
-// alternate: Reviews right, FAQ left, this one right). Lazy-loaded with a
-// fixed size; not shown or downloaded on phones.
+// Closing call to action (rebuild): a full-bleed buzz-yellow section — the
+// page's one loud moment. Heading, paragraph, an email box (one field; the
+// enquiry goes to the same sendMail action as before), call and WhatsApp.
+// Same dashboard fields (ctaHeading, ctaParagraph, ctaEmailLabel,
+// ctaEmailPlaceholder). A sent enquiry stops the consultation popup asking.
 export default function CtaV2({ content }) {
   const heading = content?.ctaHeading || "Get a Free Consultation";
   const paragraph =
     content?.ctaParagraph ||
     "Ready to grow your business with trusted digital marketing services in UP? Contact BizzBuzz Creations today and let’s build your success story together.";
-  const emailLabel = content?.ctaEmailLabel || "Email Address";
+  const emailLabel = content?.ctaEmailLabel || "Email address";
   const emailPlaceholder = content?.ctaEmailPlaceholder || "your@email.com";
   const [email, setEmail] = useState("");
-  const [sending, setSending] = useState(false);
+  const [state, setState] = useState("idle"); // idle | sending | sent | error
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSending(true);
+    setState("sending");
+    setError("");
     const response = await sendMail({ name: "not given", email, subject: "Request for consultancy", text: "Want to start a project", contact: null });
-    setSending(false);
     if (response?.success) {
-      markEnquired(); // the consultation popup won't ask again
+      markEnquired();
       setEmail("");
+      setState("sent");
       toast.success(response.message, toastOptions);
     } else {
-      toast.error(response?.message || "Something went wrong.", toastOptions);
+      setState("error");
+      setError(response?.message || "Something went wrong — please try again, or call us.");
     }
   };
 
   return (
-    <section id="CTA" className="scroll-mt-20 bg-black text-white">
-      <div className="mx-auto max-w-7xl px-6 md:px-10 pb-24 md:pb-32">
-        <div className="reveal-stagger grid gap-12 border-t border-white/10 pt-16 md:grid-cols-[3fr_2fr] md:items-center md:gap-16 md:pt-20">
-          <div>
-            <h2 className="font-display max-w-4xl text-5xl leading-[1.04] md:text-6xl xl:text-7xl">{heading}</h2>
-            <RichText as="p" text={paragraph} className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 md:text-lg" />
-
-            <form onSubmit={handleSubmit} className="mt-10 flex max-w-xl flex-col gap-3 sm:flex-row">
-              <label htmlFor="cta-email" className="sr-only">{emailLabel}</label>
-              <input
-                id="cta-email"
-                name="email"
-                type="email"
-                required
-                autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder={emailPlaceholder}
-                className="min-w-0 flex-1 rounded-full border border-white/20 bg-white/[0.04] px-5 py-3 text-base text-white placeholder:text-white/50 focus:border-[#40A2D8] focus:outline-none"
-              />
-              <Pill variant="solid" type="submit" className="justify-center">{sending ? "Sending…" : "Send"}</Pill>
+    <section id="CTA" aria-labelledby="cta-heading" className="relative scroll-mt-20 overflow-hidden bg-buzz text-buzz-ink">
+      <div className="col-lines-dark pointer-events-none absolute inset-0" aria-hidden="true" />
+      <div className="wrap relative grid gap-14 py-24 md:py-36 lg:grid-cols-12 lg:items-end lg:gap-10">
+        <div className="lg:col-span-7">
+          <p className="kicker text-buzz-ink/70">[11] Let&rsquo;s talk</p>
+          <h2 id="cta-heading" className="font-display mt-6 text-balance text-[clamp(3rem,8vw,8rem)] leading-[0.9]">
+            <AccentText text={heading} />
+          </h2>
+        </div>
+        <div className="lg:col-span-5">
+          <RichText as="p" text={paragraph} className="text-lg leading-relaxed text-buzz-ink/80" />
+          {state === "sent" ? (
+            <p role="status" className="mt-10 rounded-2xl bg-buzz-ink px-6 py-5 text-white">
+              Thanks — we&rsquo;ve got your email and will reply within one working day.
+            </p>
+          ) : (
+            <form onSubmit={handleSubmit} className="mt-10" noValidate={false}>
+              <label htmlFor="cta-email" className="kicker text-buzz-ink/70">
+                {emailLabel}
+              </label>
+              <div className="mt-2 flex items-center gap-3 border-b-2 border-buzz-ink pb-2">
+                <input
+                  id="cta-email"
+                  name="email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={emailPlaceholder}
+                  aria-invalid={state === "error" ? "true" : undefined}
+                  aria-describedby={state === "error" ? "cta-error" : undefined}
+                  className="min-w-0 flex-1 border-0 bg-transparent px-0 py-2 text-xl text-buzz-ink placeholder:text-buzz-ink/45 focus:outline-none focus:ring-0"
+                />
+                <button
+                  type="submit"
+                  disabled={state === "sending"}
+                  className="group flex h-12 shrink-0 items-center gap-2 rounded-full bg-buzz-ink pl-5 pr-4 font-medium text-white transition-colors hover:bg-ink-3 disabled:opacity-60"
+                >
+                  {state === "sending" ? "Sending…" : "Send"}
+                  <ArrowRight aria-hidden="true" size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
+                </button>
+              </div>
+              {state === "error" && (
+                <p id="cta-error" role="alert" className="mt-3 text-sm font-medium">
+                  {error}
+                </p>
+              )}
             </form>
-
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <span className="w-full text-sm text-white/60 sm:w-auto">or talk to us now:</span>
-              <a href="tel:+918115585285" className="inline-flex items-center gap-2 rounded-full border border-white/25 px-5 py-2.5 text-sm font-medium transition-colors hover:border-white hover:bg-white hover:text-black">
-                <Phone size={16} /> Call +91 81155 85285
-              </a>
-              <a href="https://wa.me/918115585285" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/25 px-5 py-2.5 text-sm font-medium transition-colors hover:border-[#25D366] hover:bg-[#25D366] hover:text-black">
-                <MessageCircle size={16} /> WhatsApp
-              </a>
-            </div>
+          )}
+          <div className="mt-8 flex flex-wrap items-center gap-3 text-[0.9375rem] font-medium">
+            <a href={CONTACT.phoneIndia.href} className="inline-flex h-12 items-center gap-2 rounded-full border border-buzz-ink/30 px-5 transition-colors hover:bg-buzz-ink hover:text-white">
+              <Phone aria-hidden="true" size={16} /> {CONTACT.phoneIndia.display}
+            </a>
+            <a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 items-center gap-2 rounded-full border border-buzz-ink/30 px-5 transition-colors hover:bg-buzz-ink hover:text-white">
+              <MessageCircle aria-hidden="true" size={16} /> WhatsApp
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
           </div>
-
-          {/* eslint-disable-next-line @next/next/no-img-element -- pre-sized 1x / 2x files (33KB / 75KB); next/image would only recompress them */}
-          <img
-            src="/cta-conversation-440.webp"
-            srcSet="/cta-conversation-440.webp 440w, /cta-conversation-880.webp 880w"
-            sizes="(min-width: 1280px) 440px, 36vw"
-            alt=""
-            width={440}
-            height={385}
-            loading="lazy"
-            decoding="async"
-            className="hidden h-auto w-full max-w-[28rem] justify-self-end md:block"
-          />
         </div>
       </div>
     </section>

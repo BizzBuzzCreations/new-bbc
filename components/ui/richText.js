@@ -6,7 +6,7 @@ import { sanitizeInlineRich } from "@/lib/sanitizeInlineRich";
 // which needs dangerouslySetInnerHTML applied to itself to keep its own
 // animation props, rather than being wrapped by another element).
 export const RICH_TEXT_CLASS =
-  "[&_a]:text-[#40A2D8] [&_a]:underline [&_a]:underline-offset-2 [&_a]:decoration-[#40A2D8]/40 [&_a:hover]:decoration-[#40A2D8] [&_b]:font-bold [&_strong]:font-bold";
+  "[&_a]:text-current [&_a]:underline [&_a]:underline-offset-4 [&_a]:decoration-buzz/70 [&_a:hover]:decoration-buzz [&_a]:decoration-2 [&_b]:font-semibold [&_strong]:font-semibold";
 
 // Small deterministic hash (djb2 variant) — same input string always
 // produces the same output, on the server render and the client hydration
