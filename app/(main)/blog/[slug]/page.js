@@ -18,7 +18,8 @@ import PostFaq from "@/components/blog/postFaq";
 import SuggestedPosts, { PrevNext } from "@/components/blog/suggestedPosts";
 import { getSuggestedPosts, getNeighbourPosts, readingMinutes } from "@/lib/relatedPosts";
 import Link from "next/link";
-import { ImageOff, ChevronLeft, ChevronRight } from "lucide-react";
+import Breadcrumb from "@/components/brand/breadcrumb";
+import IndustrySignature from "@/components/brand/industrySignature";
 import { notFound } from "next/navigation";
 
 // ISR: served from cache and regenerated at most every 60s. Dashboard
@@ -160,33 +161,20 @@ export default async function SingleBlog({ params }) {
       {/* Plain black behind the whole post (no beams): nothing moves behind
           the text while you read. */}
       <div className="bg-ink text-white">
-        <header className="text-white">
-          <div className="mx-auto max-w-[88rem] px-4 pt-8 pb-10 sm:px-6 md:pt-14 md:pb-14 lg:px-8">
-            <nav aria-label="Breadcrumb">
-              <ol className="flex flex-wrap items-center gap-1.5 text-sm text-white/60">
-                <li><Link href="/" className="text-buzz hover:text-white">Home</Link></li>
-                <li aria-hidden="true"><ChevronRight size={14} /></li>
-                <li><Link href="/blog" className="text-buzz hover:text-white">Blog</Link></li>
-                {post?.category && (
-                  <>
-                    <li aria-hidden="true"><ChevronRight size={14} /></li>
-                    <li><Link href={`/blog?category=${encodeURIComponent(post.category)}`} className="text-buzz hover:text-white">{post.category}</Link></li>
-                  </>
-                )}
-              </ol>
-            </nav>
-            <h1 className="font-display mt-6 max-w-5xl text-[2rem] leading-[1.1] sm:text-5xl xl:text-6xl">{post?.title}</h1>
-            <div className="mt-8 flex flex-wrap items-center justify-between gap-x-8 gap-y-5">
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+        <header className="grain relative isolate overflow-hidden pt-28 md:pt-36">
+          <div className="wrap pb-12 md:pb-16">
+            <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Insights", href: "/blog" }, post?.category ? { label: post.category, href: `/blog?category=${encodeURIComponent(post.category)}` } : null, { label: "Article" }].filter(Boolean)} />
+            <h1 className="font-display mt-10 max-w-[22ch] text-balance text-[clamp(2.4rem,5.4vw,5.25rem)] leading-[0.96] md:mt-14">{post?.title}</h1>
+            <div className="mt-10 flex flex-wrap items-center justify-between gap-x-8 gap-y-5 border-t border-white/10 pt-6">
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
                 <Link href={authorPath(post?.author)} className="group flex items-center gap-3">
                   <AuthorAvatar name={post?.author} photo={member?.photo} size={44} />
                   <span className="leading-tight">
-                    <span className="block text-sm text-white transition-colors group-hover:text-buzz">{post?.author}</span>
-                    <span className="block text-xs text-white/60">{member?.role || "Author"}</span>
+                    <span className="block text-white transition-colors group-hover:text-buzz">{post?.author}</span>
+                    <span className="kicker block text-fog">{member?.role || "Author"}</span>
                   </span>
                 </Link>
-                <span className="hidden h-6 w-px bg-white/15 sm:block" aria-hidden="true" />
-                <p className="text-sm text-white/60">
+                <p className="kicker text-fog">
                   <time dateTime={post?.publishedAt}>{formattedDate}</time>
                   <span className="mx-2 text-white/30" aria-hidden="true">·</span>
                   {minutes} min read
@@ -195,40 +183,36 @@ export default async function SingleBlog({ params }) {
               <ShareRow url={postUrl} title={post?.title} />
             </div>
           </div>
+          <div className="wrap">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-[20px] border border-white/10 bg-ink-2 md:aspect-[2.4/1]">
+              {featuredImage ? (
+                // eslint-disable-next-line @next/next/no-img-element -- Cloudinary upload with its own srcset
+                <img
+                  src={optimizedImageUrl(featuredImage, 1400)}
+                  srcSet={imageSrcSet(featuredImage)}
+                  sizes="(min-width: 1440px) 1360px, 100vw"
+                  alt={post?.title}
+                  fetchPriority="high"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              ) : (
+                <IndustrySignature slug={slug} lines={30} className="absolute inset-0 h-full w-full" />
+              )}
+            </div>
+          </div>
         </header>
 
-        <div className="mx-auto max-w-[88rem] gap-8 px-4 pb-16 sm:px-6 lg:flex lg:items-start lg:px-8">
+        <div className="wrap grid gap-12 pb-24 pt-14 md:pt-20 lg:grid-cols-12 lg:gap-10">
           {/* Contents: follows the reader (see blogToc.js) */}
-          {toc.length > 0 && <BlogToc toc={toc} />}
+          <div className="hidden lg:col-span-3 lg:block">{toc.length > 0 && <BlogToc toc={toc} />}</div>
 
-          <div className="mx-auto min-w-0 max-w-[52rem] flex-1 lg:mx-0">
-            {featuredImage ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={optimizedImageUrl(featuredImage, 1100)}
-                srcSet={imageSrcSet(featuredImage)}
-                sizes="(max-width: 768px) 100vw, 832px"
-                alt={post?.title}
-                fetchPriority="high"
-                decoding="async"
-                // Reserves a 16:9 box (what most featured images are) until the
-                // image loads, then switches to its real ratio. With no
-                // dimensions it rendered 0px tall first and pushed the whole
-                // article down on load — a 0.27 CLS on mobile.
-                className="mb-8 h-auto w-full rounded-[20px] border border-white/10 shadow-[0_20px_60px_-20px_rgba(11,96,176,0.45)] [aspect-ratio:auto_16/9]"
-              />
-            ) : (
-              <div className="mb-8 flex aspect-[1.91/1] w-full flex-col items-center justify-center gap-2 rounded-[20px] border border-white/10 bg-white/[0.03] text-white/60">
-                <ImageOff size={36} aria-hidden="true" />
-                <span className="text-sm">Image unavailable</span>
-              </div>
-            )}
-
+          <div className="min-w-0 lg:col-span-6">
             <ArticleBody html={filteredData} />
 
             <PostFaq faqs={post.faqs} />
 
-            <div className="my-12 flex flex-wrap items-center justify-between gap-5 rounded-[20px] border border-white/10 bg-white/[0.03] p-5 md:p-6">
+            <div className="my-12 flex flex-wrap items-center justify-between gap-5 border-y border-white/10 py-6">
               <p className="font-display text-xl text-white">Found this useful? Share it.</p>
               <ShareRow url={postUrl} title={post?.title} label="" />
             </div>
@@ -256,7 +240,7 @@ export default async function SingleBlog({ params }) {
           </div>
 
           {/* Contact form */}
-          <aside className="mt-8 shrink-0 self-start lg:sticky lg:top-28 lg:mt-0 lg:w-72">
+          <aside className="self-start lg:sticky lg:top-28 lg:col-span-3">
             <BlogContactForm />
           </aside>
         </div>

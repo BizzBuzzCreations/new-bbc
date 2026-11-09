@@ -1,65 +1,41 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import RichText from "@/components/ui/richText";
+import SectionHead from "@/components/brand/sectionHead";
 import { resolveStatCards } from "@/lib/statCards";
 
-// "Why Our Way of Working Is Different" (location pages, redesign) — the
-// same cards (number, title, text, photo, link) as the old StatsShowcase,
-// as quiet photo cards: 4 across on desktop, 2 on tablets, a swipe row on
-// phones. Each card's photo zooms a touch on hover; the title is the link.
-// Same dashboard fields as before ("statCards"); photos lazy-load.
-// However many cards are saved (the dashboard allows any number), the rows
-// fill evenly: the columns follow the count (5 cards = 5 across on wide
-// screens, 3 + 2 on tablets) and a shorter last row is centred, never left
-// as one card with an empty space beside it.
-function columns(n) {
-  return {
-    md: n <= 2 ? Math.max(n, 1) : n === 4 ? 2 : 3,
-    xl: n <= 5 ? Math.max(n, 1) : n === 6 ? 3 : 4,
-  };
-}
-const widthFor = (cols) => `calc((100% - ${(cols - 1) * 1.25}rem) / ${cols})`;
-
+// "Why our way of working is different" (UK / location pages) (rebuild):
+// the stat cards as numbered rows — name (the link), text, its button text
+// — no pictures (the old card art was the previous look). Same dashboard
+// fields (statsEyebrow, statsHeading, statCards).
 export default function WhyUsV2({ content }) {
   const heading = content?.statsHeading || "Here’s Why Our Way of Working Is Different";
-  const eyebrow = content?.statsEyebrow ?? "Why Us";
+  const eyebrow = content?.statsEyebrow ?? "Why us";
   const cards = resolveStatCards(content);
-  const cols = columns(cards.length);
+  if (!cards.length) return null;
 
   return (
-    <section className="overflow-hidden bg-ink text-white">
-      <div className="wrap py-24 md:py-32">
-        <div className="reveal max-w-3xl">
-          {eyebrow && <p className="kicker text-buzz">{eyebrow}</p>}
-          <h2 className="font-display mt-6 text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98]">{heading}</h2>
-        </div>
-        <ul
-          className="reveal-stagger no-scrollbar -mx-6 mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-6 px-6 pb-2 md:mx-0 md:mt-16 md:flex-wrap md:justify-center md:gap-5 md:overflow-visible md:px-0 md:pb-0"
-          style={{ "--w-md": widthFor(cols.md), "--w-xl": widthFor(cols.xl) }}
-        >
+    <section className="bg-ink text-white">
+      <div className="wrap py-24 md:py-36">
+        <SectionHead kicker={eyebrow} heading={heading} />
+        <ol className="mt-16 grid border-t border-white/10 md:mt-20 md:grid-cols-2 md:gap-x-10">
           {cards.map((c, i) => (
-            <li key={`${c.label}-${i}`} className="group relative w-[78%] shrink-0 snap-start overflow-hidden rounded-[20px] border border-white/10 bg-ink-2 md:w-(--w-md) xl:w-(--w-xl)">
-              {c.visual?.type === "image" && (
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image src={c.visual.src} alt="" fill sizes="(min-width: 1280px) 300px, (min-width: 768px) 45vw, 78vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
-                </div>
-              )}
-              <div className="p-5">
-                <h3 className="font-display text-xl leading-snug text-white">
-                  <Link href={c.buttonLink || "/about"} className="after:absolute after:inset-0 after:content-[''] focus-visible:underline focus-visible:outline-none">
+            <li key={`${c.label}-${i}`} className="group relative grid grid-cols-[3.5rem_1fr] gap-4 border-b border-white/10 py-8 md:py-10">
+              <span className="font-display text-3xl leading-none text-buzz">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <h3 className="font-display text-2xl leading-tight">
+                  <Link href={c.buttonLink || "/about"} className="after:absolute after:inset-0 after:content-[''] group-hover:underline group-hover:decoration-buzz group-hover:underline-offset-4">
                     {c.label}
                   </Link>
                 </h3>
-                <RichText as="p" text={c.description} className="mt-3 text-sm leading-relaxed text-fog" />
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-buzz">
-                  {c.buttonText || "Learn More"}
-                  <ArrowUpRight size={16} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                <RichText as="p" text={c.description} className="mt-3 leading-relaxed text-fog" />
+                <span aria-hidden="true" className="kicker mt-4 inline-flex items-center gap-1.5 text-white transition-colors group-hover:text-buzz">
+                  {c.buttonText || "Learn more"} <ArrowUpRight size={14} />
                 </span>
               </div>
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
     </section>
   );

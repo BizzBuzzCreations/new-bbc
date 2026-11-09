@@ -3,7 +3,8 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, ImageOff, Search, X } from "lucide-react";
+import { ArrowUpRight, Search, X } from "lucide-react";
+import IndustrySignature from "@/components/brand/industrySignature";
 import Pill from "@/components/home/pill";
 import { optimizedImageUrl, imageSrcSet } from "@/lib/getFeaturedImage";
 
@@ -127,7 +128,7 @@ export default function AuthorPosts({ posts, categories, authorName }) {
             {visible.map((p) => (
               <motion.li key={p.slug} layout initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.96 }} transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}>
                 <article className="group relative h-full">
-                  <div className="relative aspect-[1.91/1] overflow-hidden rounded-2xl bg-ink-2">
+                  <div className="relative aspect-[1.91/1] overflow-hidden rounded-[20px] border border-white/10 bg-ink-2">
                     {p.image ? (
                       // eslint-disable-next-line @next/next/no-img-element -- dashboard-supplied URL (Cloudinary etc.), not a fixed host
                       <img
@@ -140,14 +141,11 @@ export default function AuthorPosts({ posts, categories, authorName }) {
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                       />
                     ) : (
-                      <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-white/60">
-                        <ImageOff size={28} aria-hidden="true" />
-                        <span className="text-xs">Image unavailable</span>
-                      </div>
+                      <IndustrySignature slug={p.slug} lines={18} className="absolute inset-0 h-full w-full" />
                     )}
                     {p.category && <span className="absolute bottom-3 left-3 rounded-full border border-white/15 bg-ink/60 px-3 py-1 text-xs text-white backdrop-blur-md">{p.category}</span>}
                   </div>
-                  <p className="mt-5 text-xs uppercase tracking-wider text-white/60">
+                  <p className="kicker mt-5 text-fog">
                     {fmt(p.date)} &middot; {p.minutes} min read
                   </p>
                   <h3 className="font-display mt-2 text-xl leading-snug text-white transition-colors duration-200 group-hover:text-buzz md:text-2xl">

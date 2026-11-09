@@ -1,18 +1,15 @@
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
 import { getPageContent } from "@/actions/pageContentActions";
 import { sanitizeBlogContent } from "@/lib/sanitizeBlogContent";
 import { extractTableOfContents } from "@/lib/extractTableOfContents";
 import { legalPageKey, LEGAL_PAGES } from "@/lib/legalContentRegistry";
+import Breadcrumb from "@/components/brand/breadcrumb";
 
-// Shared renderer for the four legal pages. Title, "Last Updated" and the
-// body come from the dashboard's Legal Pages tab (defaults = the original
-// copy). Redesign, like a blog post: the title in the site's dark band
-// (breadcrumb, light headline, last updated), the text on white below it
-// for easy reading (the blog's .article typography, so whatever the rich-
-// text editor produces still looks right), a "Contents" list of its
-// sections beside it from lg up, and links to the other legal pages at the
-// end.
+// Privacy, terms, cookies, disclaimer (rebuild): an ink header (breadcrumb,
+// title, last updated) and the text on paper for comfortable reading, with
+// the numbered contents list beside it on wide screens and the other
+// policies at the end. Text from the dashboard (legalTitle, legalUpdated,
+// legalBody).
 export default async function LegalPage({ slug }) {
   const content = await getPageContent(legalPageKey(slug));
   const { html, toc } = extractTableOfContents(sanitizeBlogContent(content?.legalBody || ""));
@@ -21,34 +18,25 @@ export default async function LegalPage({ slug }) {
 
   return (
     <>
-      <header className="bg-ink text-white">
-        <div className="wrap pt-8 pb-12 md:px-10 md:pt-14 md:pb-16">
-          <nav aria-label="Breadcrumb">
-            <ol className="flex flex-wrap items-center gap-1.5 text-sm text-white/60">
-              <li>
-                <Link href="/" className="text-buzz hover:text-white">Home</Link>
-              </li>
-              <li aria-hidden="true">
-                <ChevronRight size={14} />
-              </li>
-              <li aria-current="page" className="text-white/80">{content?.legalTitle}</li>
-            </ol>
-          </nav>
-          <h1 className="font-display mt-6 max-w-4xl text-[2.3rem] leading-[1.06] sm:text-5xl md:mt-8">{content?.legalTitle}</h1>
-          {content?.legalUpdated && <p className="mt-5 text-sm text-white/60">Last Updated: {content.legalUpdated}</p>}
+      <header className="grain relative isolate overflow-hidden bg-ink pt-28 text-white md:pt-36">
+        <div className="wrap pb-16 md:pb-24">
+          <Breadcrumb items={[{ label: "Home", href: "/" }, { label: content?.legalTitle }]} />
+          <h1 className="font-display mt-12 max-w-4xl text-[clamp(2.6rem,6vw,6rem)] leading-[0.95] md:mt-16">{content?.legalTitle}</h1>
+          {content?.legalUpdated && <p className="kicker mt-8 text-fog">Last updated · {content.legalUpdated}</p>}
         </div>
       </header>
 
-      <div className="bg-white">
-        <div className="mx-auto max-w-7xl gap-12 px-6 pt-10 pb-20 md:px-10 md:pt-14 lg:flex lg:items-start">
+      <div className="bg-paper text-ink">
+        <div className="wrap grid gap-12 py-16 md:py-24 lg:grid-cols-12 lg:gap-10">
           {sections.length > 2 && (
-            <aside className="sticky top-28 hidden max-h-[calc(100vh-8rem)] w-60 shrink-0 self-start overflow-y-auto lg:block">
+            <aside className="sticky top-28 hidden max-h-[calc(100vh-8rem)] self-start overflow-y-auto lg:col-span-3 lg:block">
               {/* a label, not a heading: it sits between the h1 and the text's own h2s */}
-              <p className="mb-4 text-sm font-semibold uppercase tracking-wide text-gray-900">Contents</p>
-              <ol className="space-y-1.5 border-l border-gray-200">
-                {sections.map((item) => (
+              <p className="kicker mb-5 text-stone">Contents</p>
+              <ol className="border-t border-ink/15">
+                {sections.map((item, i) => (
                   <li key={item.id}>
-                    <a href={`#${item.id}`} className="-ml-px block border-l border-transparent py-0.5 pl-4 text-sm text-gray-600 transition-colors hover:border-buzz hover:text-ink">
+                    <a href={`#${item.id}`} className="flex gap-3 border-b border-ink/15 py-2.5 text-sm text-stone transition-colors hover:text-ink">
+                      <span className="kicker w-6 shrink-0">{String(i + 1).padStart(2, "0")}</span>
                       {item.text}
                     </a>
                   </li>
@@ -56,15 +44,15 @@ export default async function LegalPage({ slug }) {
               </ol>
             </aside>
           )}
-          <div className="min-w-0 flex-1">
+          <div className={`min-w-0 ${sections.length > 2 ? "lg:col-span-8 lg:col-start-5" : "lg:col-span-8 lg:col-start-3"}`}>
             {/* headings get their own line height (the body text's 1.8 left big gaps in wrapped headings) */}
-            <div className="article [&_h2]:scroll-mt-28 [&_h2]:leading-snug [&_h3]:scroll-mt-28 [&_h3]:leading-snug" dangerouslySetInnerHTML={{ __html: html }} />
-            <nav aria-label="Other policies" className="mx-auto mt-14 max-w-[750px] border-t border-gray-200 pt-8">
-              <p className="text-sm text-gray-500">Other policies</p>
-              <ul className="mt-4 flex flex-wrap gap-3">
+            <div className="article article-paper [&_h2]:scroll-mt-28 [&_h2]:leading-snug [&_h3]:scroll-mt-28 [&_h3]:leading-snug" dangerouslySetInnerHTML={{ __html: html }} />
+            <nav aria-label="Other policies" className="mt-16 border-t border-ink/15 pt-8">
+              <p className="kicker text-stone">Other policies</p>
+              <ul className="mt-5 flex flex-wrap gap-3">
                 {others.map((p) => (
                   <li key={p.slug}>
-                    <Link href={p.path} className="inline-flex rounded-full border border-gray-300 px-4 py-2 text-sm text-gray-800 transition-colors hover:border-buzz hover:bg-buzz hover:text-white">
+                    <Link href={p.path} className="inline-flex h-11 items-center rounded-full border border-ink/25 px-5 text-sm transition-colors hover:border-ink hover:bg-ink hover:text-white">
                       {p.label}
                     </Link>
                   </li>

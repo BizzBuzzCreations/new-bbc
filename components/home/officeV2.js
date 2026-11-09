@@ -1,65 +1,62 @@
-import { MapPin, Phone, ArrowUpRight } from "lucide-react";
-import Pill from "@/components/home/pill";
+import { ArrowUpRight } from "lucide-react";
+import Button from "@/components/brand/button";
+import Kicker from "@/components/brand/kicker";
+import Clock from "@/components/brand/clock";
 import { UK_OFFICE, mapsUrl } from "@/lib/offices";
 
-// "Our UK office" (UK location page, redesign) — the London address, phone
-// and time zone with Call / Get directions, with the London skyline (the
-// footer card's, larger) along the card's bottom edge (at most its own
-// 840px width, so it stays sharp). Shown just before the closing call to
-// action, so a UK visitor sees a local, reachable team. Office details come
-// from lib/offices.js (shared with the footer).
+// The UK office (UK page) (rebuild): a paper section — heading, the London
+// time live, address, phone, call / directions, and the London skyline as a
+// line drawing along the bottom.
 export default function OfficeV2() {
   const o = UK_OFFICE;
   return (
-    <section className="bg-ink text-white">
-      <div className="wrap py-24 md:py-32">
-        <div className="reveal relative overflow-hidden rounded-[2rem] border border-white/10 bg-ink-2 p-6 sm:p-10">
-          <div className="relative z-10 grid gap-8 md:grid-cols-2 md:gap-12">
-            <div>
-              <p className="kicker text-buzz">Our UK office</p>
-              <h2 className="font-display mt-6 text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98]">A team you can call in London</h2>
-              <p className="mt-4 text-sm text-white/60">{o.city}</p>
-            </div>
-            <div className="space-y-4 text-base text-white/80">
-              <p className="flex gap-3">
-                <MapPin size={18} aria-hidden="true" className="mt-1 shrink-0 text-buzz" />
-                <span>
-                  {o.lines.map((line) => (
-                    <span key={line} className="block">{line}</span>
-                  ))}
-                </span>
-              </p>
-              <p className="flex items-center gap-3">
-                <Phone size={18} aria-hidden="true" className="shrink-0 text-buzz" />
-                <a href={o.phone.href} className="hover:text-buzz">{o.phone.display}</a>
-              </p>
-              <div className="flex flex-wrap gap-3 pt-2">
-                <Pill href={o.phone.href} variant="solid">Call our UK team</Pill>
-                <a
-                  href={mapsUrl(o.maps)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-1.5 rounded-full border border-white/25 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:border-white hover:bg-white hover:text-black"
-                >
-                  Get directions <ArrowUpRight size={16} aria-hidden="true" />
-                </a>
-              </div>
-            </div>
+    <section className="relative overflow-hidden bg-paper text-ink">
+      <div className="wrap grid gap-12 pb-10 pt-24 md:pt-36 lg:grid-cols-12 lg:gap-10">
+        <div className="lg:col-span-6">
+          <Kicker tone="dark">Our UK office</Kicker>
+          <h2 className="font-display mt-6 text-[clamp(2.4rem,5vw,4.75rem)] leading-[0.95]">
+            A team you can call in <span className="font-accent">London</span>
+          </h2>
+          <p className="kicker mt-8 text-stone">
+            Local time · <Clock tz="Europe/London" className="text-ink" />
+          </p>
+        </div>
+        <div className="lg:col-span-5 lg:col-start-8 lg:pt-14">
+          <address className="text-xl not-italic leading-relaxed">
+            {o.lines.map((line) => (
+              <span key={line} className="block">
+                {line}
+              </span>
+            ))}
+          </address>
+          <p className="mt-4 text-lg">
+            <a href={o.phone.href} className="underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
+              {o.phone.display}
+            </a>
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button href={o.phone.href} variant="ink">
+              Call our UK team
+            </Button>
+            <a href={mapsUrl(o.maps)} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 items-center gap-1.5 rounded-full border border-ink/25 px-5 text-[0.9375rem] font-medium transition-colors hover:border-ink hover:bg-ink hover:text-white">
+              Get directions <ArrowUpRight size={16} aria-hidden="true" />
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
           </div>
-          {/* eslint-disable-next-line @next/next/no-img-element -- pre-sized 1x / 2x skyline files (footer's); decorative */}
-          <img
-            src="/skyline-london-840.webp"
-            srcSet="/skyline-london-420.webp 420w, /skyline-london-840.webp 840w"
-            sizes="(min-width: 900px) 840px, 100vw"
-            alt=""
-            width={840}
-            height={229}
-            loading="lazy"
-            decoding="async"
-            className="pointer-events-none relative -mx-6 -mb-6 mt-10 block h-auto w-[calc(100%+3rem)] max-w-none opacity-70 [mask-image:linear-gradient(to_right,transparent,#000_20%,#000_80%,transparent)] sm:-mx-10 sm:-mb-10 sm:w-[calc(100%+5rem)] md:mx-auto md:w-full md:max-w-[840px]"
-          />
         </div>
       </div>
+      {/* eslint-disable-next-line @next/next/no-img-element -- pre-sized skyline line drawing; decorative */}
+      <img
+        src="/skyline-london-840.webp"
+        srcSet="/skyline-london-420.webp 420w, /skyline-london-840.webp 840w"
+        sizes="(min-width: 900px) 840px, 100vw"
+        alt=""
+        width={840}
+        height={229}
+        loading="lazy"
+        decoding="async"
+        className="pointer-events-none mx-auto block h-auto w-full max-w-[1100px] opacity-60 invert [mask-image:linear-gradient(to_right,transparent,#000_15%,#000_85%,transparent)]"
+      />
     </section>
   );
 }

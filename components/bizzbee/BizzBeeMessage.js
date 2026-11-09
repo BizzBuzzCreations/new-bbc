@@ -23,7 +23,7 @@ function Inline({ text }) {
       const target = resolveLink(link[2]);
       if (!target) return <span key={i}>{link[1]}</span>;
       const cls =
-        "font-semibold text-[#6cc3ee] underline underline-offset-2 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-buzz rounded-sm";
+        "font-semibold text-buzz underline underline-offset-2 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-buzz rounded-sm";
       if (target.type === "internal") {
         return (
           <Link key={i} href={target.href} className={cls}>

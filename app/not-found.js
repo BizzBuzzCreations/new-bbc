@@ -1,32 +1,49 @@
 import Link from "next/link";
-import NotFoundAnimation from "@/components/sections/notFoundAnimation";
+import Button from "@/components/brand/button";
+import SignalField from "@/components/brand/signalField";
+import { SERVICE_LINES } from "@/lib/siteNav";
 
 export const metadata = {
   title: "Page Not Found | BizzBuzz Creations",
   robots: { index: false, follow: false },
 };
 
+// 404 (rebuild): outside the site layout, so it carries its own .site base —
+// the Signal Field behind a big 404, a plain sentence, and the ways back.
 export default function NotFound() {
   return (
-    <div
-      style={{
-        background:
-          "radial-gradient(130% 120% at 50% 35%, #ffffff 50%, #eef5ff 78%, #cfe3fb 100%)",
-      }}
-      className="min-h-screen flex flex-col justify-center items-center px-4 py-6 text-center"
-    >
-      <NotFoundAnimation />
-      <h2 className="mt-4 text-3xl font-bold text-slate-900 mb-2">Page Not Found!</h2>
-      <p className="mb-6 text-slate-700">
-        Oops! The page you&apos;re looking for doesn&apos;t exist. Don&apos;t
-        worry, return to the home page.
-      </p>
-      <Link href="/" className="inline-block">
-        <button className="relative cursor-pointer border-2 border-slate-900 text-slate-900 px-6 py-3 rounded-lg overflow-hidden group">
-          <span className="absolute inset-0 bg-slate-900 transform -translate-x-full group-hover:translate-x-0 transition duration-300"></span>
-          <span className="relative z-10 group-hover:text-white">Return Home</span>
-        </button>
-      </Link>
+    <div className="site grain relative isolate flex min-h-screen flex-col overflow-hidden">
+      <div className="absolute inset-0 -z-10">
+        <SignalField />
+      </div>
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(60%_70%_at_30%_50%,rgba(10,10,11,0.9),transparent)]" />
+      <div className="wrap flex flex-1 flex-col justify-center py-24">
+        <Link href="/" className="kicker text-fog hover:text-white">
+          <span className="text-buzz">[BBC]</span> BizzBuzz Creations
+        </Link>
+        <p className="font-display mt-10 text-[clamp(7rem,24vw,22rem)] leading-[0.8] text-white">404</p>
+        <h1 className="font-display mt-8 max-w-2xl text-[clamp(2rem,4vw,3.5rem)] leading-[1] text-white">
+          This page is just <span className="font-accent">noise.</span>
+        </h1>
+        <p className="mt-5 max-w-lg text-lg text-fog">The link may be old or mistyped. Here&rsquo;s where to find the signal:</p>
+        <div className="mt-10 flex flex-wrap gap-3">
+          <Button href="/" variant="solid" size="lg">
+            Back to the homepage
+          </Button>
+          <Button href="/contact" variant="outline" size="lg">
+            Talk to us
+          </Button>
+        </div>
+        <ul className="mt-14 flex max-w-3xl flex-wrap gap-x-6 gap-y-3 border-t border-white/10 pt-6">
+          {SERVICE_LINES.map((s) => (
+            <li key={s.href}>
+              <Link href={s.href} className="text-sm text-fog transition-colors hover:text-buzz">
+                {s.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

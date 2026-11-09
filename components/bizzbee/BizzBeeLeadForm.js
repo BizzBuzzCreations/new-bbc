@@ -148,7 +148,7 @@ export default function BizzBeeLeadForm({ onDone, onCancel, defaultService = "" 
         <input type="checkbox" checked={values.consent} onChange={set("consent")} className="mt-0.5 h-4 w-4 shrink-0 accent-buzz" />
         <span>
           I agree that BizzBuzz Creations may use these details to contact me about my enquiry, as described in the{" "}
-          <Link href="/privacy-policy" target="_blank" className="font-semibold text-[#6cc3ee] underline">Privacy Policy</Link>.
+          <Link href="/privacy-policy" target="_blank" className="font-semibold text-buzz underline">Privacy Policy</Link>.
         </span>
       </label>
 

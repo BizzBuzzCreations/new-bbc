@@ -209,14 +209,14 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
       {showTip && !away && (
         <div
           role="status"
-          className="bizzbee-enter absolute bottom-full right-1 mb-1 w-[190px] rounded-2xl rounded-br-md bg-white sm:bottom-auto sm:right-full sm:top-1/2 sm:mb-0 sm:mr-2 sm:w-[200px] sm:-translate-y-1/2 sm:rounded-br-2xl sm:rounded-r-md px-3.5 py-2.5 pr-8 text-xs font-medium text-[#0a2540] shadow-xl"
+          className="bizzbee-enter absolute bottom-full right-1 mb-1 w-[190px] rounded-2xl rounded-br-md bg-buzz sm:bottom-auto sm:right-full sm:top-1/2 sm:mb-0 sm:mr-2 sm:w-[200px] sm:-translate-y-1/2 sm:rounded-br-2xl sm:rounded-r-md px-3.5 py-2.5 pr-8 text-xs font-medium text-buzz-ink shadow-xl"
         >
           Hi! 👋 Not sure which service you need? Ask BizzBee.
           <button
             type="button"
             onClick={onDismissTip}
             aria-label="Dismiss tip"
-            className="absolute right-1 top-1 rounded-full p-1.5 text-[#0a2540]/60 hover:text-[#0a2540] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0B60B0]"
+            className="absolute right-1 top-1 rounded-full p-1.5 text-buzz-ink/60 hover:text-buzz-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-buzz-ink"
           >
             <X size={12} />
           </button>

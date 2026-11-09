@@ -183,168 +183,84 @@ export default function ConsultationPopup({ content }) {
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
-        aria-labelledby="consultation-popup-title"
-        className="relative mx-5 z-10 w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white rounded-xl shadow-xl"
+        aria-label={headerTitle}
+        className="relative z-10 mx-4 max-h-[92vh] w-full max-w-4xl overflow-y-auto rounded-[20px] border border-white/10 bg-ink-2 text-white shadow-2xl"
       >
-        {/* Header */}
-        <div className="relative bg-ink py-4 text-center">
-          <h2 id="consultation-popup-title" className="text-white text-sm  sm:text-lg font-semibold">
-            {headerTitle}
-          </h2>
-          <button
-            type="button"
-            onClick={() => close()}
-            className="cursor-pointer absolute right-3 top-2 p-2 text-white hover:scale-115 transition"
-            aria-label="Close"
-          >
-            <X size={20} />
-          </button>
-        </div>
-
-        {/* Content */}
-        <div className="grid md:grid-cols-2 gap-8 p-4 md:p-8">
-          {/* LEFT SECTION (Hidden on Mobile) */}
-          <div className="hidden md:block">
-            <h3 className="text-2xl font-bold mb-1">{title}</h3>
-            <p className="text-sm text-gray-600 mb-6">{tagline}</p>
-
-            <h4 className="font-semibold mb-2">Why Choose Us</h4>
-
-            <div className="bg-[#eef8fc] rounded-lg p-4 grid grid-cols-3 gap-4 text-sm font-semibold mb-6">
-              <div>
-                <p className="text-xl font-bold">50+</p>
-                <p>Projects Delivered</p>
-              </div>
-              <div>
-                <p className="text-xl font-bold">10000+</p>
-                <p>Leads Generated</p>
-              </div>
-              <div>
-                <p className="text-xl font-bold">4.9</p>
-                <p>Google Rating</p>
-              </div>
-            </div>
-
-            <ul className="flex items-center  space-y-2 text-sm text-gray-700 font-bold">
-              <li>
-                <Image
-                  src="/CDL.png"
-                  width={80}
-                  height={80}
-                  alt="Google Partner"
-                  className="inline mr-2"
-                />
-              </li>
-              <li>
-                <Image
-                  src="/clutch.png"
-                  width={80}
-                  height={80}
-                  alt="clutch Partner"
-                  className="inline mr-2"
-                />
-              </li>
-              <li>
-                <Image
-                  src="/iso.png"
-                  width={80}
-                  height={80}
-                  alt="ISO Partner"
-                  className="inline mr-2"
-                />
-              </li>
-              <li>
-                <Image
-                  src="/GA.png"
-                  width={80}
-                  height={80}
-                  alt="Google Analytics Partner"
-                  className="inline mr-2"
-                />
-              </li>
+        <button
+          type="button"
+          onClick={() => close()}
+          className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:border-white hover:bg-white hover:text-ink"
+          aria-label="Close"
+        >
+          <X size={18} />
+        </button>
+        <div className="grid md:grid-cols-2">
+          {/* left: who we are (hidden on phones to keep the form first) */}
+          <div className="relative hidden overflow-hidden border-r border-white/10 p-10 md:block">
+            <p className="kicker text-buzz">[—] {title}</p>
+            <h2 id="consultation-popup-title" className="font-display mt-6 text-5xl leading-[0.95]">
+              {headerTitle}
+            </h2>
+            <p className="mt-5 text-fog">{tagline}</p>
+            <p className="kicker mt-10 text-fog">Certified &amp; verified</p>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {[
+                ["/CDL.png", "Google Partner"],
+                ["/clutch.png", "Clutch"],
+                ["/GA.png", "Google Analytics"],
+                ["/iso.png", "ISO"],
+              ].map(([src, alt]) => (
+                <li key={alt} className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white">
+                  <Image src={src} width={40} height={40} alt={alt} className="h-9 w-9 object-contain" />
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* RIGHT SECTION */}
-          <div className="md:border-l md:border-dashed md:pl-8">
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <input
-                ref={firstFieldRef}
-                name="name"
-                type="text"
-                aria-label="Your name"
-                autoComplete="name"
-                placeholder="Your Name"
-                value={form.name}
-                onChange={handleChange}
-                className="w-full border rounded-md px-4 py-3 text-sm"
-                required
-              />
-
-              <input
-                name="contact"
-                type="tel"
-                inputMode="numeric"
-                pattern="[0-9]{10}"
-                maxLength={10}
-                aria-label="Mobile number (10 digits)"
-                autoComplete="tel-national"
-                placeholder="Enter 10 Digit Mobile Number"
-                value={form.contact}
-                onChange={handleChange}
-                onKeyDown={(e) => {
-                  // Block the minus/plus/decimal/exponent keys a numeric
-                  // keypad or physical keyboard can still send — the
-                  // onChange digit-stripping is the real guard, this just
-                  // stops them from visibly flashing into the field first.
-                  if (["-", "+", ".", "e", "E"].includes(e.key)) {
-                    e.preventDefault();
-                  }
-                }}
-                className="w-full border rounded-md px-4 py-3 text-sm"
-                title="Enter a valid 10 digit mobile number"
-                required
-              />
-
-              <input
-                name="email"
-                type="email"
-                aria-label="Email address"
-                autoComplete="email"
-                placeholder="Enter your Email"
-                value={form.email}
-                onChange={handleChange}
-                className="w-full border rounded-md px-4 py-3 text-sm"
-                title="Enter a valid email address"
-                required
-              />
-
-              <button
-                type="submit"
-                className="cursor-pointer w-full bg-ink text-white py-3 rounded-md font-medium"
-              >
-                Book Appointment
+          {/* right: the form */}
+          <div className="p-6 pt-16 md:p-10">
+            <p className="font-display text-3xl leading-tight md:hidden">{headerTitle}</p>
+            <form onSubmit={handleSubmit} className="mt-4 space-y-6 md:mt-0">
+              <label className="block">
+                <span className="kicker text-fog">Your name</span>
+                <input ref={firstFieldRef} name="name" type="text" autoComplete="name" placeholder="Full name" value={form.name} onChange={handleChange} className="w-full border-0 border-b border-white/25 bg-transparent px-0 py-3 text-base text-white placeholder:text-white/40 focus:border-buzz focus:outline-none focus:ring-0" required />
+              </label>
+              <label className="block">
+                <span className="kicker text-fog">Mobile number (10 digits)</span>
+                <input
+                  name="contact"
+                  type="tel"
+                  inputMode="numeric"
+                  pattern="[0-9]{10}"
+                  maxLength={10}
+                  autoComplete="tel-national"
+                  placeholder="10-digit mobile"
+                  value={form.contact}
+                  onChange={handleChange}
+                  onKeyDown={(e) => {
+                    // keep the minus/plus/decimal/exponent keys from flashing into the field
+                    if (["-", "+", ".", "e", "E"].includes(e.key)) e.preventDefault();
+                  }}
+                  className="w-full border-0 border-b border-white/25 bg-transparent px-0 py-3 text-base text-white placeholder:text-white/40 focus:border-buzz focus:outline-none focus:ring-0"
+                  title="Enter a valid 10 digit mobile number"
+                  required
+                />
+              </label>
+              <label className="block">
+                <span className="kicker text-fog">Email</span>
+                <input name="email" type="email" autoComplete="email" placeholder="you@company.com" value={form.email} onChange={handleChange} className="w-full border-0 border-b border-white/25 bg-transparent px-0 py-3 text-base text-white placeholder:text-white/40 focus:border-buzz focus:outline-none focus:ring-0" title="Enter a valid email address" required />
+              </label>
+              <button type="submit" className="group flex h-14 w-full items-center justify-center gap-2 rounded-full bg-buzz font-medium text-buzz-ink transition-colors hover:bg-[#ffe066]">
+                Book a free consultation
               </button>
             </form>
-
-            {/* Styled links (a <button> inside a link is invalid). */}
-            <div className="flex gap-4 mt-6">
-              <a
-                href="tel:+918115585285"
-                className="flex-1 flex items-center justify-center gap-2 border border-black py-3 rounded-md text-sm hover:bg-ink hover:text-white transition"
-              >
-                <Phone size={16} />
-                Call now
+            <div className="mt-5 grid grid-cols-2 gap-3 text-sm">
+              <a href="tel:+918115585285" className="flex h-12 items-center justify-center gap-2 rounded-full border border-white/20 transition-colors hover:bg-white hover:text-ink">
+                <Phone size={16} aria-hidden="true" /> Call now
               </a>
-
-              <a
-                href="https://wa.me/+918115585285"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2 border border-green-700 text-green-700 py-3 rounded-md text-sm hover:bg-green-700 hover:text-white transition"
-              >
-                <MessageCircle size={16} />
-                WhatsApp
+              <a href="https://wa.me/918115585285" target="_blank" rel="noopener noreferrer" className="flex h-12 items-center justify-center gap-2 rounded-full border border-white/20 transition-colors hover:bg-white hover:text-ink">
+                <MessageCircle size={16} aria-hidden="true" /> WhatsApp
+                <span className="sr-only"> (opens in a new tab)</span>
               </a>
             </div>
           </div>

@@ -44,7 +44,7 @@ export default function BlogToc({ toc }) {
   }, [toc]);
 
   return (
-    <aside aria-label="Contents" className="sticky top-28 hidden w-52 shrink-0 self-start xl:block">
+    <aside aria-label="Contents" className="sticky top-28 w-full self-start">
       <div className="max-h-[calc(100vh-8rem)] overflow-y-auto rounded-[20px] border border-white/10 bg-ink-2 p-5 [scrollbar-color:rgba(255,255,255,0.2)_transparent] [scrollbar-width:thin]">
         {/* a label, not a heading: it sits between the title (h1) and the
             article's own h2s, so a heading here would skip a level */}

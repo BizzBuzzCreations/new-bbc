@@ -1,59 +1,40 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { ArrowRight, Check, Mail, MessageCircle, Paperclip, Phone } from "lucide-react";
 import { sendMail } from "@/actions/serverActions";
-import { toast, Bounce } from "react-toastify";
-import Link from "next/link";
-import { ChevronRight, Phone, MessageCircle, Mail, Paperclip } from "lucide-react";
-import RichText from "@/components/ui/richText";
-import { AccentTitle } from "@/components/detail/detailHero";
 import { markEnquired } from "@/lib/enquiryFlag";
+import RichText from "@/components/ui/richText";
+import AccentText from "@/components/brand/accentText";
+import Breadcrumb from "@/components/brand/breadcrumb";
+import Kicker from "@/components/brand/kicker";
+import Clock from "@/components/brand/clock";
+import { CONTACT, SERVICE_LINES } from "@/lib/siteNav";
 
 const DEFAULT_STEPS = [
-  {
-    title: "Tell Us Your Challenge",
-    description:
-      "Share your goals, challenges, and what you want to achieve. We'll take the time to understand your business.",
-  },
-  {
-    title: "Get a Free Consultation",
-    description:
-      "Talk to our team about your goals, requirements, and priorities. We'll explore the right opportunities for your business.",
-  },
-  {
-    title: "Get a Clear Growth Roadmap",
-    description:
-      "Get a practical direction for your next steps, priorities, and opportunities. We'll help you move forward with confidence.",
-  },
+  { title: "Tell Us Your Challenge", description: "Share your goals, challenges, and what you want to achieve. We'll take the time to understand your business." },
+  { title: "Get a Free Consultation", description: "Talk to our team about your goals, requirements, and priorities. We'll explore the right opportunities for your business." },
+  { title: "Get a Clear Growth Roadmap", description: "Get a practical direction for your next steps, priorities, and opportunities. We'll help you move forward with confidence." },
 ];
-
-const toastOptions = {
-  position: "top-right",
-  autoClose: 5000,
-  hideProgressBar: false,
-  closeOnClick: false,
-  pauseOnHover: true,
-  draggable: true,
-  theme: "light",
-  transition: Bounce,
-};
-
+const NEEDS = SERVICE_LINES.map((s) => s.short).concat(["Not sure yet"]);
+const BUDGETS = ["Under ₹50k", "₹50k – ₹2L", "₹2L – ₹5L", "₹5L+", "Let’s discuss"];
+const TIMELINES = ["As soon as possible", "1–3 months", "3–6 months", "Just exploring"];
 const MAX_FILE_BYTES = 4 * 1024 * 1024;
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-const inputClasses =
-  "w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-base text-white placeholder:text-white/40 outline-none transition focus:border-buzz md:text-sm";
-const labelClasses = "mb-1.5 block text-sm text-white/80";
-
-// Redesign (dark, like the rest of the site): on the left the heading (a
-// breadcrumb above it on /contact), the text, the three steps as a
-// numbered thin-line list and the direct lines (call / WhatsApp / email);
-// on the right the form on a dark card. Same fields, checks and enquiry
-// handling as before (sendMail; a successful enquiry also stops the
-// consultation popup).
+// The contact section (rebuild) — /contact (as the page's H1) and /our-team.
+// Left: heading, text, the "what happens next" steps, direct lines with the
+// offices' local time. Right: the enquiry form — name, email, phone,
+// company, what you need (several), budget, timeline, project description,
+// optional attachment — checked as you go (errors under each field, focus
+// to the first problem on submit), then a success panel. Sent through the
+// same sendMail action as before: the extra answers are added to the
+// message, so the email and the dashboard's Submissions show everything.
+// Dashboard fields: contactHeroHeading, contactHeroParagraph,
+// contactFormHeading, contactFormButtonText, contactSteps.
 export default function ContactSection({ content, headingLevel = "h2" }) {
   const Heading = headingLevel;
-  // Sub-headings sit one level below whichever heading the section uses.
-  const SubHeading = headingLevel === "h1" ? "h2" : "h3";
+  const Sub = headingLevel === "h1" ? "h2" : "h3";
   const heading = content?.contactHeroHeading || "Let’s Turn Your Digital Goals Into a Growth Plan";
   const paragraph =
     content?.contactHeroParagraph ||
@@ -62,37 +43,50 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
   const formButtonText = content?.contactFormButtonText || "Send Message";
   const steps = content?.contactSteps?.length > 0 ? content.contactSteps : DEFAULT_STEPS;
 
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    contact: "",
-    message: "",
-  });
+  const empty = { name: "", email: "", contact: "", company: "", message: "" };
+  const [form, setForm] = useState(empty);
+  const [needs, setNeeds] = useState([]);
+  const [budget, setBudget] = useState("");
+  const [timeline, setTimeline] = useState("");
   const [file, setFile] = useState(null);
-  const fileName = file?.name || "";
-  const [submitting, setSubmitting] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [state, setState] = useState("idle"); // idle | sending | sent
+  const [serverError, setServerError] = useState("");
+  const [sentName, setSentName] = useState("");
+  const formRef = useRef(null);
 
-  const handleChange = (e) => {
+  const check = (f = form) => {
+    const e = {};
+    if (!f.name.trim()) e.name = "Please tell us your name.";
+    if (!f.email.trim()) e.email = "We need an email to reply to.";
+    else if (!EMAIL.test(f.email.trim())) e.email = "That email doesn’t look right — check for typos.";
+    if (f.contact && f.contact.length !== 10) e.contact = "Phone numbers here are 10 digits (no country code).";
+    if (f.message.trim().length < 10) e.message = "A sentence or two about the project, please (10+ characters).";
+    return e;
+  };
+  const onChange = (e) => {
     const { name } = e.target;
     let { value } = e.target;
-    // Phone: digits only, max 10 (no letters, "-", "+", spaces).
     if (name === "contact") value = value.replace(/\D/g, "").slice(0, 10);
-    setForm((f) => ({ ...f, [name]: value }));
+    const next = { ...form, [name]: value };
+    setForm(next);
+    if (errors[name]) setErrors((old) => ({ ...old, [name]: check(next)[name] }));
   };
-
-  const handleFile = (e) => {
+  const onBlur = (e) => {
+    const { name } = e.target;
+    setErrors((old) => ({ ...old, [name]: check()[name] }));
+  };
+  const onFile = (e) => {
     const picked = e.target.files?.[0] || null;
     if (picked && picked.size > MAX_FILE_BYTES) {
-      toast.error("Attachment must be 4MB or smaller.", toastOptions);
+      setErrors((old) => ({ ...old, file: "Attachments can be up to 4MB." }));
       e.target.value = "";
       setFile(null);
       return;
     }
+    setErrors((old) => ({ ...old, file: undefined }));
     setFile(picked);
   };
-
-  // File -> base64 (without the data: prefix) for the server action.
   const readAsBase64 = (f) =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -101,167 +95,229 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
       reader.readAsDataURL(f);
     });
 
-  const handleSubmit = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    setSubmitting(true);
-
+    setServerError("");
+    const found = check();
+    setErrors(found);
+    if (Object.keys(found).length) {
+      formRef.current?.querySelector(`[name="${Object.keys(found)[0]}"]`)?.focus();
+      return;
+    }
+    setState("sending");
     let attachment;
     if (file) {
       try {
         attachment = { name: file.name, base64: await readAsBase64(file) };
       } catch {
-        setSubmitting(false);
-        toast.error("Couldn't read the attached file.", toastOptions);
+        setState("idle");
+        setErrors((old) => ({ ...old, file: "Couldn’t read that file — try another." }));
         return;
       }
     }
-
-    const response = await sendMail({
-      name: form.name,
-      email: form.email,
-      subject: form.subject,
-      text: form.message,
-      contact: form.contact,
-      attachment,
-    });
-
-    setSubmitting(false);
-
+    const details = [
+      form.company && `Company: ${form.company}`,
+      needs.length && `Needs: ${needs.join(", ")}`,
+      budget && `Budget: ${budget}`,
+      timeline && `Timeline: ${timeline}`,
+    ].filter(Boolean);
+    const text = `${form.message.trim()}${details.length ? `\n\n— ${details.join("\n")}` : ""}`.slice(0, 5000);
+    const subject = `Enquiry${needs.length ? `: ${needs.join(", ")}` : ""}${form.company ? ` — ${form.company}` : ""}`.slice(0, 200);
+    const response = await sendMail({ name: form.name.trim(), email: form.email.trim(), subject, text, contact: form.contact, attachment });
     if (response?.success) {
       markEnquired(); // the consultation popup won't ask again
-      toast.success(response.message, toastOptions);
-      setForm({ name: "", email: "", subject: "", contact: "", message: "" });
+      setSentName(form.name.trim().split(/\s+/)[0]);
+      setForm(empty);
+      setNeeds([]);
+      setBudget("");
+      setTimeline("");
       setFile(null);
+      setState("sent");
     } else {
-      toast.error(response?.message || "Something went wrong.", toastOptions);
+      setState("idle");
+      setServerError(response?.message || "Something went wrong. Please try again, or call or WhatsApp us.");
     }
   };
 
-  const field = (id, label, input) => (
-    <div>
-      <label className={labelClasses} htmlFor={id}>{label}</label>
-      {input}
-    </div>
+  const fieldCls = (name) =>
+    `mt-1 w-full border-0 border-b bg-transparent px-0 py-3 text-lg text-white placeholder:text-white/35 focus:outline-none focus:ring-0 ${errors[name] ? "border-[#ff8a7a]" : "border-white/20 focus:border-buzz"}`;
+  const err = (name) => errors[name] && (
+    <p id={`${name}-error`} className="mt-2 text-sm text-[#ff8a7a]">
+      {errors[name]}
+    </p>
+  );
+  const input = (name, label, props = {}) => (
+    <label className="block">
+      <span className="kicker text-fog">
+        {label}
+        {props.required && <span aria-hidden="true" className="text-buzz"> *</span>}
+      </span>
+      <input
+        name={name}
+        value={form[name]}
+        onChange={onChange}
+        onBlur={onBlur}
+        aria-invalid={errors[name] ? "true" : undefined}
+        aria-describedby={errors[name] ? `${name}-error` : undefined}
+        className={fieldCls(name)}
+        {...props}
+      />
+      {err(name)}
+    </label>
+  );
+  const chips = (legend, options, selected, toggle, multi) => (
+    <fieldset>
+      <legend className="kicker text-fog">
+        {legend} {multi && <span className="normal-case tracking-normal text-white/40">(pick any)</span>}
+      </legend>
+      <div className="mt-3 flex flex-wrap gap-2">
+        {options.map((o) => {
+          const on = multi ? selected.includes(o) : selected === o;
+          return (
+            <button
+              key={o}
+              type="button"
+              aria-pressed={on}
+              onClick={() => toggle(o)}
+              className={`inline-flex h-10 items-center gap-1.5 rounded-full border px-4 text-sm transition-colors duration-200 ${
+                on ? "border-buzz bg-buzz text-buzz-ink" : "border-white/20 text-white/80 hover:border-white/60 hover:text-white"
+              }`}
+            >
+              {on && <Check aria-hidden="true" size={14} strokeWidth={3} />}
+              {o}
+            </button>
+          );
+        })}
+      </div>
+    </fieldset>
   );
 
   return (
-    <section id="contact-form" className="scroll-mt-20 bg-ink text-white">
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 pt-8 pb-16 md:px-10 md:pt-14 md:pb-20 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-        <div>
-          {headingLevel === "h1" && (
-            <nav aria-label="Breadcrumb" className="mb-6 md:mb-8">
-              <ol className="flex flex-wrap items-center gap-1.5 text-sm text-white/60">
-                <li>
-                  <Link href="/" className="text-buzz hover:text-white">Home</Link>
-                </li>
-                <li aria-hidden="true">
-                  <ChevronRight size={14} />
-                </li>
-                <li aria-current="page" className="text-white/80">Contact</li>
-              </ol>
-            </nav>
-          )}
-          <Heading className="font-display text-[2.3rem] leading-[1.06] sm:text-5xl">
-            <AccentTitle title={heading} />
+    <section className={`grain relative isolate overflow-hidden bg-ink text-white ${headingLevel === "h1" ? "pt-28 md:pt-36" : "border-t border-white/10 pt-24 md:pt-32"}`}>
+      <div className="wrap grid gap-14 pb-24 md:pb-32 lg:grid-cols-12 lg:gap-10">
+        <div className="lg:col-span-5">
+          {headingLevel === "h1" ? <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Contact" }]} /> : <Kicker>Contact</Kicker>}
+          <Heading className="font-display mt-10 text-balance text-[clamp(2.6rem,5.4vw,5.5rem)] leading-[0.93] md:mt-14">
+            <AccentText text={heading} />
           </Heading>
-          <RichText as="p" text={paragraph} className="mt-6 max-w-xl text-base leading-relaxed text-fog md:text-lg" />
+          <RichText as="p" text={paragraph} className="mt-8 text-lg leading-relaxed text-fog" />
 
-          <ol className="mt-10 border-t border-white/10">
-            {steps.map(({ title, description }, i) => (
-              <li key={i} className="flex gap-5 border-b border-white/10 py-5">
-                <span aria-hidden="true" className="font-display w-8 shrink-0 text-2xl text-buzz">{String(i + 1).padStart(2, "0")}</span>
+          <ol className="mt-12 border-t border-white/10">
+            {steps.map((s, i) => (
+              <li key={s.title} className="grid grid-cols-[3rem_1fr] gap-3 border-b border-white/10 py-5">
+                <span className="kicker pt-1 text-buzz">{String(i + 1).padStart(2, "0")}</span>
                 <div>
-                  <SubHeading className="text-base font-medium text-white">{title}</SubHeading>
-                  <RichText as="p" text={description} className="mt-1.5 text-sm leading-relaxed text-fog" />
+                  <Sub className="text-lg font-medium">{s.title}</Sub>
+                  <RichText as="p" text={s.description} className="mt-1 text-[0.9375rem] leading-relaxed text-fog" />
                 </div>
               </li>
             ))}
           </ol>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <span className="w-full text-sm text-white/60">or reach us directly:</span>
-            <a href="tel:+918115585285" className="inline-flex items-center gap-2 rounded-full border border-white/25 px-5 py-2.5 text-sm font-medium transition-colors hover:border-white hover:bg-white hover:text-black">
-              <Phone size={16} aria-hidden="true" /> +91 81155 85285
+          <div className="mt-10 grid gap-3 sm:grid-cols-2">
+            <a href={CONTACT.phoneIndia.href} className="group rounded-2xl border border-white/10 p-4 transition-colors hover:border-white/30">
+              <span className="kicker flex items-center justify-between text-fog">
+                <span className="flex items-center gap-2"><Phone aria-hidden="true" size={13} /> India</span>
+                <Clock tz="Asia/Kolkata" zone="IST" className="text-buzz" />
+              </span>
+              <span className="mt-2 block text-lg">{CONTACT.phoneIndia.display}</span>
             </a>
-            <a href="https://wa.me/918115585285" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/25 px-5 py-2.5 text-sm font-medium transition-colors hover:border-[#25D366] hover:bg-[#25D366] hover:text-black">
-              <MessageCircle size={16} aria-hidden="true" /> WhatsApp
+            <a href={CONTACT.phoneUk.href} className="group rounded-2xl border border-white/10 p-4 transition-colors hover:border-white/30">
+              <span className="kicker flex items-center justify-between text-fog">
+                <span className="flex items-center gap-2"><Phone aria-hidden="true" size={13} /> United Kingdom</span>
+                <Clock tz="Europe/London" zone="UK" className="text-buzz" />
+              </span>
+              <span className="mt-2 block text-lg">{CONTACT.phoneUk.display}</span>
             </a>
-            <a href="mailto:info@bizzbuzzcreations.com" className="inline-flex items-center gap-2 rounded-full border border-white/25 px-5 py-2.5 text-sm font-medium transition-colors hover:border-white hover:bg-white hover:text-black">
-              <Mail size={16} aria-hidden="true" /> info@bizzbuzzcreations.com
+            <a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 p-4 transition-colors hover:border-white/30">
+              <span className="kicker flex items-center gap-2 text-fog"><MessageCircle aria-hidden="true" size={13} /> WhatsApp</span>
+              <span className="mt-2 block text-lg">Message us</span>
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+            <a href={`mailto:${CONTACT.email}`} className="rounded-2xl border border-white/10 p-4 transition-colors hover:border-white/30">
+              <span className="kicker flex items-center gap-2 text-fog"><Mail aria-hidden="true" size={13} /> Email</span>
+              <span className="mt-2 block break-all text-lg">{CONTACT.email}</span>
             </a>
           </div>
         </div>
 
-        <div className="rounded-[20px] border border-white/10 bg-ink-2 p-6 sm:p-8 lg:p-10">
-          <SubHeading className="font-display text-2xl text-white">{formHeading}</SubHeading>
-          <form onSubmit={handleSubmit} className="mt-6 space-y-5">
-            <div className="grid gap-5 sm:grid-cols-2">
-              {field("name", "Full Name", (
-                <input id="name" name="name" autoComplete="name" value={form.name} onChange={handleChange} className={inputClasses} placeholder="Your name" required />
-              ))}
-              {field("email", "Email Address", (
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)*\.[a-zA-Z]{2,}"
-                  title="Enter a valid email address, e.g. name@example.com"
-                  value={form.email}
-                  onChange={handleChange}
-                  className={inputClasses}
-                  placeholder="your@email.com"
-                  required
-                />
-              ))}
-            </div>
-            {field("subject", "Subject", (
-              <input id="subject" name="subject" value={form.subject} onChange={handleChange} className={inputClasses} placeholder="What is this regarding?" required />
-            ))}
-            {field("contact", "Contact Number", (
-              <input
-                id="contact"
-                name="contact"
-                type="tel"
-                inputMode="numeric"
-                autoComplete="tel-national"
-                pattern="[0-9]{10}"
-                minLength={10}
-                maxLength={10}
-                title="Enter a 10-digit mobile number"
-                value={form.contact}
-                onChange={handleChange}
-                className={inputClasses}
-                placeholder="Your contact number"
-                required
-              />
-            ))}
-            {field("message", "Message", (
-              <textarea id="message" name="message" rows={4} value={form.message} onChange={handleChange} className={`${inputClasses} resize-none`} placeholder="Tell us about your project..." required />
-            ))}
-
-            {/* sr-only, not hidden: the input stays reachable by keyboard
-                (the label shows the focus ring) */}
-            <div>
-              <label
-                htmlFor="file"
-                className="flex cursor-pointer items-center justify-between gap-3 rounded-xl border border-dashed border-white/20 px-4 py-3 text-sm text-white/60 transition-colors hover:border-white/40 has-[+input:focus-visible]:border-buzz"
-              >
-                <span className="truncate">{fileName || "Attach PDF/Doc File (optional)"}</span>
-                <Paperclip size={16} aria-hidden="true" className="shrink-0" />
-              </label>
-              <input id="file" type="file" accept=".pdf,.doc,.docx" onChange={handleFile} className="sr-only" />
-            </div>
-
-            <button
-              type="submit"
-              disabled={submitting}
-              className="group inline-flex w-full cursor-pointer items-center justify-center gap-2.5 rounded-full border border-buzz bg-buzz px-6 py-3.5 text-base font-medium text-white transition-colors duration-200 hover:border-[#0d70cf] hover:bg-[#ffe066] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-buzz disabled:opacity-60"
-            >
-              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-current opacity-80 transition-transform duration-200 group-hover:scale-[1.7]" />
-              {submitting ? "Sending…" : formButtonText}
-            </button>
-          </form>
+        <div className="lg:col-span-7 lg:col-start-6">
+          <div className="rounded-[20px] border border-white/10 bg-ink-2 p-6 md:p-10 lg:sticky lg:top-28">
+            {state === "sent" ? (
+              <div role="status" className="py-10 md:py-16">
+                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-buzz text-buzz-ink">
+                  <Check aria-hidden="true" size={26} strokeWidth={2.5} />
+                </span>
+                <p className="font-display mt-8 text-4xl leading-tight md:text-5xl">
+                  Thanks{sentName ? `, ${sentName}` : ""} — it&rsquo;s with <span className="font-accent">us.</span>
+                </p>
+                <p className="mt-5 max-w-md text-lg text-fog">We reply within one working day with a first view of what we&rsquo;d do. Urgent? Call or WhatsApp us.</p>
+                <button type="button" onClick={() => setState("idle")} className="mt-8 text-white underline decoration-white/30 underline-offset-4 hover:decoration-buzz">
+                  Send another message
+                </button>
+              </div>
+            ) : (
+              <form ref={formRef} onSubmit={onSubmit} noValidate>
+                <Sub className="font-display text-3xl leading-tight md:text-4xl">
+                  <AccentText text={formHeading} />
+                </Sub>
+                <p className="mt-2 text-sm text-fog">
+                  Fields marked <span className="text-buzz">*</span> are required. We never share your details.
+                </p>
+                <div className="mt-10 grid gap-8 sm:grid-cols-2">
+                  {input("name", "Your name", { type: "text", autoComplete: "name", placeholder: "Full name", required: true })}
+                  {input("email", "Email", { type: "email", autoComplete: "email", placeholder: "you@company.com", required: true })}
+                  {input("contact", "Phone (10 digits)", { type: "tel", inputMode: "numeric", autoComplete: "tel-national", placeholder: "Mobile number" })}
+                  {input("company", "Company", { type: "text", autoComplete: "organization", placeholder: "Business name" })}
+                </div>
+                <div className="mt-10 space-y-8">
+                  {chips("What do you need?", NEEDS, needs, (o) => setNeeds((n) => (n.includes(o) ? n.filter((x) => x !== o) : [...n, o])), true)}
+                  <div className="grid gap-8 md:grid-cols-2">
+                    {chips("Budget", BUDGETS, budget, (o) => setBudget(budget === o ? "" : o))}
+                    {chips("Timeline", TIMELINES, timeline, (o) => setTimeline(timeline === o ? "" : o))}
+                  </div>
+                  <label className="block">
+                    <span className="kicker text-fog">
+                      About the project<span aria-hidden="true" className="text-buzz"> *</span>
+                    </span>
+                    <textarea
+                      name="message"
+                      rows={4}
+                      value={form.message}
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      placeholder="What are you selling, to whom, and what should change?"
+                      aria-invalid={errors.message ? "true" : undefined}
+                      aria-describedby={errors.message ? "message-error" : undefined}
+                      className={`${fieldCls("message")} resize-y`}
+                    />
+                    {err("message")}
+                  </label>
+                  <div>
+                    <label className="inline-flex cursor-pointer items-center gap-2 text-sm text-fog transition-colors hover:text-white">
+                      <Paperclip aria-hidden="true" size={16} />
+                      <span>{file ? file.name : "Attach a brief (PDF, DOC, DOCX · up to 4MB)"}</span>
+                      <input type="file" name="file" accept=".pdf,.doc,.docx" onChange={onFile} className="sr-only" />
+                    </label>
+                    {err("file")}
+                  </div>
+                </div>
+                {serverError && (
+                  <p role="alert" className="mt-8 rounded-xl border border-[#ff8a7a]/40 bg-[#ff8a7a]/10 px-4 py-3 text-sm text-white">
+                    {serverError}
+                  </p>
+                )}
+                <button
+                  type="submit"
+                  disabled={state === "sending"}
+                  className="group mt-10 flex h-14 w-full items-center justify-center gap-3 rounded-full bg-buzz text-base font-medium text-buzz-ink transition-colors hover:bg-[#ffe066] disabled:opacity-60 sm:w-auto sm:px-8"
+                >
+                  {state === "sending" ? "Sending…" : formButtonText}
+                  <ArrowRight aria-hidden="true" size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
+                </button>
+              </form>
+            )}
+          </div>
         </div>
       </div>
     </section>

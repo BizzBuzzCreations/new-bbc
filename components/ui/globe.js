@@ -340,7 +340,9 @@ export default function Globe({
       try {
         setIsLoading(true);
         const response = await fetch(
-          "https://raw.githubusercontent.com/martynafford/natural-earth-geojson/refs/heads/master/50m/physical/ne_50m_land.json"
+          // Natural Earth 50m land (public domain), self-hosted and trimmed to
+          // 2 decimals — it used to be fetched from GitHub at runtime.
+          "/geo/ne_50m_land.min.json"
         );
         if (!response.ok) throw new Error("Failed to load land data");
         const landFeatures = await response.json();

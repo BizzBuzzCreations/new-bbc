@@ -304,7 +304,7 @@ export default function BizzBeeChatWindow({ onClose, visible = true }) {
       className={`bizzbee-panel fixed inset-x-2 bottom-[7.5rem] mb-[env(safe-area-inset-bottom)] z-[10000] ${visible ? "flex" : "hidden"} h-[min(640px,calc(100dvh-9.5rem))] flex-col overflow-hidden rounded-2xl border border-white/10 bg-ink-2 text-white shadow-2xl shadow-black/60 sm:inset-x-auto sm:right-5 sm:bottom-[9.5rem] sm:h-[min(640px,calc(100dvh-12rem))] sm:w-[390px]`}
     >
       {/* Header */}
-      <div className="flex items-center gap-3 bg-linear-to-r from-[#0B60B0] to-buzz px-4 py-3">
+      <div className="flex items-center gap-3 border-b border-white/10 bg-ink px-4 py-3">
         <Image
           src="/bizzbee-logo.png"
           alt=""
@@ -385,7 +385,7 @@ export default function BizzBeeChatWindow({ onClose, visible = true }) {
                 type="button"
                 onClick={() => send(q)}
                 disabled={busy}
-                className="bizzbee-enter rounded-full border border-buzz/50 bg-buzz/10 px-3 py-1.5 text-left text-xs font-medium text-[#bfe6fa] transition hover:bg-buzz/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-buzz disabled:opacity-50"
+                className="bizzbee-enter rounded-full border border-buzz/50 bg-buzz/10 px-3 py-1.5 text-left text-xs font-medium text-white transition hover:bg-buzz/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-buzz disabled:opacity-50"
               >
                 {q}
               </button>
