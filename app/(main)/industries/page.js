@@ -24,6 +24,8 @@ import CtaV2 from "@/components/home/ctaV2";
 import { getPageContent } from "@/actions/pageContentActions";
 import { buildPageMetadata } from "@/lib/pageMetadata";
 import PageSeoScripts from "@/components/sections/pageSeoScripts";
+import IndustrySignature from "@/components/brand/industrySignature";
+import { INDUSTRIES as SIGNATURE_INDUSTRIES } from "@/lib/siteNav";
 
 // Icons stay code-driven (design), matched positionally to whichever
 // industry cards are saved — same order as the default list below.
@@ -128,7 +130,6 @@ export default async function IndustriesIndexPage() {
     content?.industriesHeroParagraph ||
     "Every industry has different goals, audiences, and challenges. We create tailored digital marketing, BPO, and web solutions that fit the way your business works.";
   const heroButtonText = content?.industriesHeroButtonText || "Explore Our Solutions";
-  const heroImage = content?.industriesHeroImage || "/industries.png";
 
   const gridEyebrow = content?.industriesGridEyebrow || "";
   const gridHeading = content?.industriesGridHeading || "Delivering Value Across Every Major Industry";
@@ -143,8 +144,8 @@ export default async function IndustriesIndexPage() {
     icon: INDUSTRY_ICONS[i % INDUSTRY_ICONS.length],
   }));
 
-  // Redesign, in the homepage's style: hero → the 15 industries as picture
-  // cards (each links to its own industry page) → what we build (the
+  // Rebuild: hero (with industry signatures, no photo) → the 15 industries
+  // as signature cards (each links to its own industry page) → what we build (the
   // in-house systems) → certifications → FAQ → closing CTA. Same dashboard
   // fields and "Remove section" switches as before.
   return (
@@ -158,9 +159,18 @@ export default async function IndustriesIndexPage() {
           title={heroHeading}
           description={heroParagraph}
           actions={[{ text: heroButtonText, href: "/services", variant: "solid" }]}
-          image={heroImage}
-          imageAspect="aspect-[4/3]"
-          imageClassName="object-[62%_50%]"
+          media={
+            // nine industry signatures instead of a photo (the old industry
+            // photos were low quality); the dashboard image field is unused
+            <ul aria-hidden="true" className="grid grid-cols-3 gap-2 sm:gap-3">
+              {SIGNATURE_INDUSTRIES.slice(0, 9).map((ind, i) => (
+                <li key={ind.slug} className={`relative aspect-square overflow-hidden rounded-2xl border border-white/10 bg-ink-2 ${i % 3 === 1 ? "translate-y-5" : ""}`}>
+                  <IndustrySignature slug={ind.slug} lines={14} className="absolute inset-0 h-full w-full" />
+                  <span className="kicker absolute bottom-2.5 left-3 text-[0.65rem] text-white/80">{ind.label}</span>
+                </li>
+              ))}
+            </ul>
+          }
         />
       )}
 

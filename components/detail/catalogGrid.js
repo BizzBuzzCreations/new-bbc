@@ -19,7 +19,7 @@ export default function CatalogGrid({ id, eyebrow, heading, subtext, items, cols
           {items.map(({ key, label, href, description, buttonText }, i) => (
             <li key={key || href} className="group relative flex flex-col bg-ink transition-colors duration-500 hover:bg-ink-2">
               <div className="relative aspect-[16/9] overflow-hidden border-b border-white/10">
-                <IndustrySignature slug={key || href} lines={18} className="absolute inset-0 h-full w-full opacity-80 transition-[opacity,transform] duration-700 ease-out-soft group-hover:scale-[1.04] group-hover:opacity-100" />
+                <IndustrySignature slug={String(href || key).split("/").filter(Boolean).pop()} lines={18} className="absolute inset-0 h-full w-full opacity-80 transition-[opacity,transform] duration-700 ease-out-soft group-hover:scale-[1.04] group-hover:opacity-100" />
                 <span className="kicker absolute left-4 top-4 text-fog">
                   <span className="text-buzz">{String(i + 1).padStart(2, "0")}</span>
                 </span>

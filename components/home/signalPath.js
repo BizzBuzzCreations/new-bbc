@@ -98,13 +98,13 @@ export default function SignalPath() {
         style={{ transition: "stroke-dashoffset 0.7s cubic-bezier(0.22,1,0.36,1)" }}
       />
       {NODES.map(([x, y], i) => (
-        <g key={STEPS[i].key} style={{ transition: "opacity 0.5s" }} opacity={lit(i) ? 1 : 0.45}>
+        <g key={STEPS[i].key} style={{ transition: "opacity 0.5s" }} opacity={lit(i) ? 1 : 0.8}>
           {i === active && pinned && <circle cx={x} cy={y} r="26" fill="none" stroke="var(--color-buzz)" strokeOpacity="0.35" className="motion-safe:animate-[sp-ping_1.6s_ease-out_infinite]" style={{ transformOrigin: `${x}px ${y}px` }} />}
           <circle cx={x} cy={y} r="16" fill={lit(i) ? "var(--color-buzz)" : "#1a1a1d"} stroke={lit(i) ? "var(--color-buzz)" : "rgba(255,255,255,0.25)"} />
-          <text x={x} y={y + 4} textAnchor="middle" fontSize="11" fontFamily="var(--font-dm-mono)" fill={lit(i) ? "#1c1700" : "rgba(255,255,255,0.7)"}>
+          <text x={x} y={y + 4} textAnchor="middle" fontSize="11" fontFamily="var(--font-dm-mono)" fill={lit(i) ? "#1c1700" : "rgba(255,255,255,0.85)"}>
             {String(i + 1).padStart(2, "0")}
           </text>
-          <text x={x} y={i === 3 ? y - 28 : y + 40} textAnchor="middle" fontSize="13" fontFamily="var(--font-dm-mono)" letterSpacing="1" fill={lit(i) ? "#fff" : "rgba(255,255,255,0.5)"}>
+          <text x={x} y={i === 3 ? y - 28 : y + 40} textAnchor="middle" fontSize="13" fontFamily="var(--font-dm-mono)" letterSpacing="1" fill={lit(i) ? "#fff" : "rgba(255,255,255,0.78)"}>
             {STEPS[i].label.toUpperCase()}
           </text>
         </g>
