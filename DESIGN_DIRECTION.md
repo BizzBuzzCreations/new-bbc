@@ -164,3 +164,41 @@ system card with tag `BBC-01`) · `ClockLine` · `Breadcrumb` · `Chips`
   after first paint and pauses off-screen; JS per page kept small.
 - Accessibility: WCAG 2.1 AA contrast, focus visible (buzz outline),
   keyboard for every interaction, one H1 per page, 24 px+ targets.
+
+---
+
+## 12. Build log (2026-11-09, branch `rebuild`)
+
+**What was rebuilt** — every public page, through the shared templates:
+home; the 8 service hubs; 44 sub-services; 15 industries; /services,
+/industries; about, our team (+ BPO, R&D), careers, how we work, FAQ,
+guides; contact; blog index, posts, authors; the 4 legal pages; the UK page
+and every Outside Location page; 404; header, footer, consultation popup,
+BizzBee chat. The admin dashboard is unchanged.
+
+**New pieces** (`components/brand/`): Button, Kicker, AccentText,
+SectionHead, Breadcrumb, SignalField, Clock / ClockLine, Statement,
+IndustrySignature. Site map in `lib/siteNav.js`. Signature section on the
+homepage: `components/home/signalPath.js`.
+
+**For editors (dashboard)**
+- Every field and "Remove section" switch works as before; saved text wins.
+- Headings: the **last word** is set in the italic accent serif. To choose
+  a different word, wrap it in stars: `Websites that *sell*`.
+- Industry pages no longer show a photo (a generated signature instead), so
+  their image fields are hidden. Service pages still show their hero /
+  overview images — replacing the old blue illustrations there with real
+  photos or simpler art will suit the new look better.
+
+**Checked** (local production build, desktop 1440 + phone 390, all 89
+routes): 0 script errors, 0 sideways scroll, one H1 per page, 0 broken
+images, axe WCAG 2.1 AA clean; 36/36 interaction checks (menus + keyboard,
+phone menu, Signal Path pinning, industries index, reviews, FAQ, tabs,
+closing CTA and contact form sending, reduced motion fully still);
+dashboard edit → live page verified. Lighthouse mobile (median of 3):
+home 86, sub-service 92, industry 91, UK 88, contact 93; accessibility,
+best practices and SEO 100.
+
+**Not built (needs real material):** a Work / case-study section — there
+are no verified client case studies in the codebase. Creative services
+(UI/UX, branding) were not added — not in the current service list.
