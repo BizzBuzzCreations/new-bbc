@@ -188,3 +188,13 @@ Rules: no `position` in `.glass` (an unlayered rule beats the utilities — give
 each surface relative/absolute/fixed in its markup); a header-like ancestor with
 its own `backdrop-filter` becomes the "backdrop root" and its descendants can no
 longer blur the page.
+
+**Header blob (2026-11-10, later).** The pill refracts across its whole height
+(bezel 30 px, little blur) and swells a touch under the pointer. Under the nav
+links lives a liquid-glass **blob**: a small lens of glass that slides to the
+link you point at / focus / whose panel is open, stretches while it travels and
+settles with an overshoot (a fixed-size box moved by transform, so its
+refraction filter is built once; the squash is a Web Animation), and magnifies
+the label under it. Fades away when the pointer leaves; still under reduced
+motion.
+

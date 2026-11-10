@@ -73,6 +73,9 @@ export default function Navbar() {
   const timer = useRef(0);
   const openedBy = useRef(""); // "hover" | "click" | "key" — a hover-opened panel closes when the pointer leaves
   const triggers = useRef({});
+  const navEl = useRef(null);
+  const blob = useRef(null);
+  const blobAt = useRef(null); // centre x of the item the glass blob is on, or null while it is hidden
 
   const [lastPath, setLastPath] = useState(pathname);
   if (pathname !== lastPath) {
@@ -198,6 +201,66 @@ export default function Navbar() {
     if (openedBy.current === "hover")
       timer.current = setTimeout(() => setPanel(""), 200);
   };
+  // The liquid blob under the nav links: a small lens of glass that slides to
+  // the link you point at (or focus, or whose panel is open), stretching along
+  // the way and settling with a little overshoot, and magnifying the label it
+  // sits on. Position and width come from transform (the box is a fixed size, so
+  // its refraction filter is built once); squash-and-stretch is a Web Animation.
+  const moveBlob = (el) => {
+    const b = blob.current;
+    const nav = navEl.current;
+    if (!b || !nav || !el) return;
+    const BASE = 124;
+    const nr = nav.getBoundingClientRect();
+    const r = el.getBoundingClientRect();
+    const cx = r.left - nr.left + r.width / 2;
+    const place = `translate3d(${(cx - BASE / 2).toFixed(1)}px, 0, 0) scale(${((r.width + 12) / BASE).toFixed(3)}, 1)`;
+    const prev = blobAt.current;
+    blobAt.current = cx;
+    if (prev == null) {
+      b.style.transition = "none";
+      b.style.transform = place;
+      void b.offsetWidth; // apply it in place, then let it fade in
+      b.style.transition = "";
+      b.style.opacity = "1";
+      b.style.scale = "1";
+      return;
+    }
+    b.style.opacity = "1";
+    b.style.transform = place;
+    if (
+      Math.abs(cx - prev) > 4 &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+      b.animate
+    ) {
+      const d = Math.min(Math.abs(cx - prev) / 240, 0.6);
+      b.animate(
+        [
+          { scale: "1 1" },
+          { scale: `${1 + d} ${1 - d * 0.32}`, offset: 0.38 },
+          { scale: "1 1" },
+        ],
+        { duration: 620, easing: "cubic-bezier(0.34, 1.56, 0.64, 1)" },
+      );
+    }
+  };
+  const hideBlob = () => {
+    const b = blob.current;
+    if (!b) return;
+    blobAt.current = null;
+    b.style.opacity = "0";
+    b.style.scale = "0.7";
+  };
+  // a panel stays "held" by the blob while it is open
+  useEffect(() => {
+    if (panel) moveBlob(triggers.current[panel]);
+    else if (
+      !navEl.current?.matches(":hover") &&
+      !navEl.current?.contains(document.activeElement)
+    )
+      hideBlob();
+  }, [panel]);
+
   const click = (key) => (e) => {
     clearTimeout(timer.current);
     const byKey = e.detail === 0;
@@ -269,8 +332,9 @@ export default function Navbar() {
           }}
           onPointerLeave={hoverLeave}
           onPointerEnter={() => clearTimeout(timer.current)}
-          data-lg-bezel="24"
-          data-lg-scale="1.1"
+          data-lg-bezel="30"
+          data-lg-scale="1.5"
+          style={{ "--lq-blur": "4px" }}
           className={`glass glass-bar glass-calm fixed inset-x-3 top-3 z-[70] mx-auto max-w-[1440px] rounded-full md:inset-x-6 md:top-4 ${
             hidden && !onInk && !panel
               ? "-translate-y-[calc(100%+1.5rem)]"
@@ -295,21 +359,32 @@ export default function Navbar() {
             </Link>
 
             <nav
+              ref={navEl}
               aria-label="Primary"
-              className="ml-4 hidden items-center gap-1 lg:flex"
+              onPointerLeave={() => !panel && hideBlob()}
+              onBlur={(e) =>
+                !panel &&
+                !e.currentTarget.contains(e.relatedTarget) &&
+                hideBlob()
+              }
+              className="relative ml-4 hidden items-center gap-1 lg:flex"
             >
               {NAV.map((n) => {
                 const here = section === n.key;
-                const mark = `pointer-events-none absolute inset-x-4 bottom-1.5 h-px origin-left bg-(--fg) transition-transform duration-300 ease-out-soft ${here || panel === n.key ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`;
+                const mark = `pointer-events-none absolute inset-x-4 bottom-1.5 h-px origin-left bg-(--fg) transition-transform duration-300 ease-out-soft ${here || panel === n.key ? "scale-x-100" : "scale-x-0"}`;
                 const cls =
-                  "group relative flex h-11 items-center gap-1.5 rounded-full px-4 text-[0.9375rem] font-medium transition-colors duration-300 hover:bg-(--fg)/[0.07]";
+                  "group relative flex h-11 items-center gap-1.5 rounded-full px-4 text-[0.9375rem] font-medium";
                 if (!n.panel) {
                   return (
                     <Link
                       key={n.key}
                       href={n.href}
                       onClick={goHome}
-                      onPointerEnter={hoverOpen("")}
+                      onPointerEnter={(e) => {
+                        hoverOpen("")(e);
+                        moveBlob(e.currentTarget);
+                      }}
+                      onFocus={(e) => moveBlob(e.currentTarget)}
                       aria-current={here ? "true" : undefined}
                       className={cls}
                     >
@@ -327,7 +402,11 @@ export default function Navbar() {
                     aria-expanded={panel === n.key}
                     aria-controls={`mega-${n.key}`}
                     aria-current={here ? "true" : undefined}
-                    onPointerEnter={hoverOpen(n.key)}
+                    onPointerEnter={(e) => {
+                      hoverOpen(n.key)(e);
+                      moveBlob(e.currentTarget);
+                    }}
+                    onFocus={(e) => moveBlob(e.currentTarget)}
                     onClick={click(n.key)}
                     onKeyDown={triggerKey(n.key)}
                     className={cls}
@@ -343,6 +422,24 @@ export default function Navbar() {
                   </button>
                 );
               })}
+              <span
+                ref={blob}
+                aria-hidden="true"
+                data-lg-lens=""
+                data-lg-bezel="20"
+                data-lg-scale="1.3"
+                data-lg-chroma="off"
+                className="glass pointer-events-none absolute left-0 top-1/2 z-10 h-[46px] w-[124px] -translate-y-1/2 rounded-full opacity-0 [scale:0.7]"
+                style={{
+                  "--lq-blur": "0px",
+                  "--lq-sat": "1.35",
+                  "--q-a": "0.1",
+                  "--q-a2": "0.03",
+                  transition:
+                    "opacity .35s ease, scale .6s cubic-bezier(.34,1.56,.64,1), transform .62s cubic-bezier(.22,1.3,.36,1)",
+                  willChange: "transform",
+                }}
+              />
             </nav>
 
             <div className="ml-auto flex items-center gap-3 md:gap-5">
