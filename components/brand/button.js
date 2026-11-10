@@ -7,12 +7,15 @@ import { ArrowUpRight } from "lucide-react";
 //             ink): the main action ("ink" is the same, kept for old callers)
 //   outline — a hairline pill: secondary ("line" is the same)
 //   buzz    — yellow: the one loud action on a page (use once)
+//   glass   — frosted: a secondary action over a textured background (the
+//             hero); lights up under the pointer
 // The label rolls up on hover and the arrow slides; both stay (instantly)
 // still with reduced motion. External links open in a new tab and say so.
 const LOOKS = {
   solid: "bg-(--fg) text-(--bg) hover:opacity-85",
   outline: "border border-(--fg)/30 text-(--fg) hover:border-(--fg) hover:bg-(--fg) hover:text-(--bg)",
   buzz: "bg-buzz text-buzz-ink hover:bg-[#ffe066]",
+  glass: "glass text-(--fg)",
 };
 const ALIAS = { ink: "solid", line: "outline" };
 

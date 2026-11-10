@@ -88,7 +88,7 @@ export default function HeroHome({ content, secondaryCta, mediaChoice = false, l
           <p className="kicker hidden text-(--mut) md:block">Prayagraj · Kanpur · London</p>
         </div>
 
-        <h1 className="font-display mt-6 text-[clamp(3rem,min(9.6vw,18.5svh),10.5rem)] leading-[0.9] tracking-[-0.055em] md:mt-8">
+        <h1 className="font-display mt-6 text-[clamp(3rem,min(9.6vw,17svh),10.5rem)] leading-[0.9] tracking-[-0.055em] md:mt-8">
           <span className="sr-only">{lines.flat().map((x) => x.w).join(" ")}</span>
           <span aria-hidden="true" className="block">
             {lines.map((row, i) => (
@@ -108,7 +108,7 @@ export default function HeroHome({ content, secondaryCta, mediaChoice = false, l
           </span>
         </h1>
 
-        <div className={`grid gap-8 border-t border-(--line) pt-6 md:grid-cols-12 md:items-end ${inFrame ? "mt-8" : "mt-auto md:mt-8"}`}>
+        <div data-tilt className={`glass grid gap-6 rounded-[28px] p-5 md:grid-cols-12 md:items-end md:gap-8 md:p-7 ${inFrame ? "mt-8" : "mt-auto md:mt-8"}`}>
           <p className="kicker text-(--mut) md:col-span-3">
             Working with
             <span className="font-display mt-2 block h-[1.2em] text-[1.6rem] normal-case leading-none tracking-[-0.03em] text-(--fg)">
@@ -124,7 +124,7 @@ export default function HeroHome({ content, secondaryCta, mediaChoice = false, l
               {ctaText}
             </Button>
             {secondaryCta?.text && (
-              <Button href={secondaryCta.href} data-bizzbee-avoid variant="outline" size="lg">
+              <Button href={secondaryCta.href} data-bizzbee-avoid variant="glass" size="lg">
                 {secondaryCta.text}
               </Button>
             )}

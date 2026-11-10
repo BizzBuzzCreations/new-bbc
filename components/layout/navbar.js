@@ -16,7 +16,7 @@ import { SERVICE_LINES, SUB_SERVICE_COUNT, INDUSTRIES, COMPANY_LINKS, INSIGHT_LI
 // click or Enter; ↓ moves into it; Esc closes it and returns to its button).
 // Below lg: "Menu" opens a full-screen sheet with the same links as
 // accordions. The header hides while reading down the page and comes back on
-// scroll up; while a panel or the sheet is open it turns onInk and solid, so
+// scroll up; while a panel or the sheet is open it is frosted, so
 // nothing scrolls underneath the logo.
 const NAV = [
   { key: "services", label: "Services", href: "/services", panel: true },
@@ -193,8 +193,8 @@ export default function Navbar() {
     }
   };
 
-  const onInk = sheet || Boolean(panel);
-  const solid = scrolled && !onInk;
+  const onInk = sheet; // the phone sheet is dark; the desktop panels float below a paper bar
+  const frosted = scrolled || sheet || Boolean(panel);
   const goHome = () => {
     setSheet(false);
     setPanel("");
@@ -217,9 +217,10 @@ export default function Navbar() {
         }}
         onPointerLeave={hoverLeave}
         onPointerEnter={() => clearTimeout(timer.current)}
-        className={`fixed inset-x-0 top-0 z-[70] transition-[transform,background-color,border-color,color] duration-500 ease-out-soft ${
-          hidden && !onInk ? "-translate-y-full" : "translate-y-0"
-        } text-(--fg) ${onInk ? "v-ink border-b border-(--line) bg-ink" : solid ? "v-paper border-b border-(--line) bg-paper/95 backdrop-blur-xl" : "v-paper border-b border-transparent bg-transparent"}`}
+        data-on={frosted}
+        className={`glass-bar fixed inset-x-0 top-0 z-[70] border-b border-transparent ${
+          hidden && !onInk && !panel ? "-translate-y-full" : "translate-y-0"
+        } text-(--fg) ${onInk ? "v-ink" : "v-paper"}`}
       >
         <div className="wrap flex h-16 items-center gap-6 md:h-20">
           <Link href="/" onClick={goHome} className="shrink-0" aria-label="BizzBuzz Creations — home">
@@ -296,9 +297,13 @@ export default function Navbar() {
             role="region"
             aria-labelledby={`nav-${n.key}`}
             hidden={panel !== n.key}
-            className="on-ink absolute inset-x-0 top-full hidden max-h-[calc(100svh-5rem)] overflow-y-auto overscroll-contain border-t border-(--line) shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] motion-safe:animate-[panel-in_0.3s_var(--ease-out-soft)] lg:block [&[hidden]]:hidden"
+            className="absolute inset-x-0 top-full hidden px-3 pt-3 md:px-6 lg:block [&[hidden]]:hidden"
           >
-            {panel === n.key && (n.key === "services" ? <MegaServices go={goHome} /> : n.key === "industries" ? <MegaIndustries go={goHome} /> : <MegaCompany go={goHome} />)}
+            <div data-bizzbee-avoid className="on-ink glass glass-dense mx-auto max-w-[1440px] overflow-hidden rounded-[28px] motion-safe:animate-[panel-in_0.35s_var(--ease-out-soft)]">
+              <div className="max-h-[calc(100svh-6.5rem)] overflow-y-auto overscroll-contain">
+                {panel === n.key && (n.key === "services" ? <MegaServices go={goHome} /> : n.key === "industries" ? <MegaIndustries go={goHome} /> : <MegaCompany go={goHome} />)}
+              </div>
+            </div>
           </div>
         ))}
       </header>
@@ -312,7 +317,7 @@ export default function Navbar() {
         aria-label="Site menu"
         hidden={!sheet}
         data-bizzbee-avoid
-        className="on-ink fixed inset-0 z-[60] overflow-y-auto overscroll-contain pt-16 motion-safe:animate-[curtain_0.6s_var(--ease-out-soft)] md:pt-20 lg:hidden"
+        className="on-ink glass-sheet fixed inset-0 z-[60] overflow-y-auto overscroll-contain pt-16 motion-safe:animate-[curtain_0.6s_var(--ease-out-soft)] md:pt-20 lg:hidden"
       >
         <div className="wrap flex min-h-full flex-col pb-8 pt-3">
           <ul>
@@ -364,7 +369,7 @@ const sub = "group/l flex items-center gap-2 py-[5px] text-[0.875rem] leading-5 
 
 function MegaServices({ go }) {
   return (
-    <div className="wrap py-6">
+    <div className="px-6 py-6 md:px-9">
       <div className="mb-5 flex items-end justify-between gap-6 border-b border-(--line) pb-3">
         <p className="kicker text-(--mut)">
           {SERVICE_LINES.length} lines · {SUB_SERVICE_COUNT} services — pick one, or start with a conversation
@@ -398,7 +403,7 @@ function MegaServices({ go }) {
 
 function MegaIndustries({ go }) {
   return (
-    <div className="wrap grid gap-10 py-8 lg:grid-cols-12">
+    <div className="grid gap-10 px-6 py-7 md:px-9 lg:grid-cols-12">
       <div className="lg:col-span-3">
         <p className="kicker text-(--mut)">{INDUSTRIES.length} industries</p>
         <p className="font-display mt-4 text-[1.75rem] leading-[1.05] tracking-[-0.035em]">
@@ -428,7 +433,7 @@ function MegaIndustries({ go }) {
 function MegaCompany({ go }) {
   const links = COMPANY_LINKS.concat(INSIGHT_LINKS.slice(1));
   return (
-    <div className="wrap grid gap-10 py-8 lg:grid-cols-12">
+    <div className="grid gap-10 px-6 py-7 md:px-9 lg:grid-cols-12">
       <div className="lg:col-span-4">
         <p className="kicker text-(--mut)">Say hello</p>
         <a href={`mailto:${CONTACT.email}`} className="font-display mt-4 block text-[1.5rem] leading-tight tracking-[-0.03em] underline decoration-(--fg)/30 underline-offset-[6px] hover:decoration-(--fg)">

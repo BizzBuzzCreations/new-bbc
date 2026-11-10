@@ -1,5 +1,6 @@
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
+import GlassPointer from "@/components/brand/glassPointer";
 
 // Every public page reads its text/images/videos from the dashboard's
 // database content. Pages are cached (ISR) so visitors get a fast response
@@ -14,6 +15,7 @@ export const revalidate = 60;
 export default function MainLayout({ children }) {
   return (
     <div className="site on-paper min-h-screen">
+      <GlassPointer />
       <Navbar />
       {children}
       <Footer />

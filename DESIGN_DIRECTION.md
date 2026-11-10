@@ -154,3 +154,22 @@ Built across every public page through the shared primitives in
   and break the CSS build ("Parsing CSS source code failed", every page 500
   in dev). The stylesheet now excludes `*.md` from scanning, and the
   navbar's variable is called `onInk`.
+
+## 11. Glass (2026-11-10)
+
+Frosted, translucent surfaces that blur what is behind them — used only where
+there is something worth blurring: the hero's dot field and yellow light, the
+page under the header and the menu panels, a video frame. `.glass` (globals.css)
+draws with the surface it sits on (paper = white frost, ink = smoke) and is
+interactive: a soft sheen and a yellow edge light follow the pointer
+(`components/brand/glassPointer.js` — one delegated listener, mouse/pen only),
+and `[data-tilt]` surfaces lean a few degrees toward it and settle flat when it
+leaves. Used on: the hero info card (and the glass button beside the main CTA),
+the header bar (clear at the top, frosted after a scroll or while a panel is
+open), the desktop mega panels (floating dense-smoke cards), the phone menu
+sheet, the video play buttons, and the reviews index and arrows.
+Fallbacks: solid surfaces without `backdrop-filter` and under "reduce
+transparency"; no tilt with reduced motion; nothing pointer-driven on touch.
+Rule: a header (or any ancestor) with its own `backdrop-filter` becomes the
+"backdrop root" and its descendants can no longer blur the page behind — the
+bar's frost therefore lives on a `::before`.

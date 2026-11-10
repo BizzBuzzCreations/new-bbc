@@ -1282,3 +1282,157 @@ a.animated-button {
     transform: none;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Glass (DESIGN_DIRECTION.md §11). Frosted, translucent surfaces that blur
+   what is behind them — the hero's dot field and light, the page under the
+   header and menu panels, a video frame. They draw with the surface they sit
+   on (paper = white frost, ink = smoke), light up where the pointer is (a soft
+   sheen + a yellow edge, driven by --mx/--my that components/brand/
+   glassPointer.js sets), and a few tilt a few degrees toward the pointer
+   ([data-tilt]). Solid fallbacks: no backdrop-filter support, "reduce
+   transparency", and no pointer effects on touch or with reduced motion.
+   --------------------------------------------------------------------------- */
+.v-paper,
+.on-paper {
+  --g-a: 0.52;
+  --g-a2: 0.2;
+  --g-edge: rgb(255 255 255 / 0.85);
+  --g-shadow: 0 1px 0 rgb(255 255 255 / 0.9) inset, 0 24px 56px -26px rgb(17 17 16 / 0.3), 0 2px 8px -2px rgb(17 17 16 / 0.08);
+  --g-light: rgb(255 255 255 / 0.9);
+}
+.v-ink,
+.on-ink {
+  --g-a: 0.1;
+  --g-a2: 0.03;
+  --g-edge: rgb(255 255 255 / 0.17);
+  --g-shadow: 0 1px 0 rgb(255 255 255 / 0.12) inset, 0 30px 70px -30px rgb(0 0 0 / 0.75);
+  --g-light: rgb(255 255 255 / 0.16);
+}
+
+.glass {
+  --mx: 50%;
+  --my: 0%;
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(145deg, rgb(255 255 255 / var(--g-a)), rgb(255 255 255 / var(--g-a2)));
+  -webkit-backdrop-filter: blur(var(--g-blur, 22px)) saturate(1.7);
+  backdrop-filter: blur(var(--g-blur, 22px)) saturate(1.7);
+  border: 1px solid var(--g-edge);
+  box-shadow: var(--g-shadow);
+  transition: transform 0.6s var(--ease-out-soft), box-shadow 0.5s var(--ease-out-soft), background-color 0.4s;
+}
+/* the sheen that follows the pointer */
+.glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(340px circle at var(--mx) var(--my), var(--g-light), transparent 62%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+/* a yellow light along the edge, nearest the pointer */
+.glass::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: 1;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: radial-gradient(230px circle at var(--mx) var(--my), rgb(255 212 59 / 0.95), rgb(255 212 59 / 0) 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.glass:hover::before,
+.glass:focus-within::before,
+.glass:hover::after,
+.glass:focus-within::after {
+  opacity: 1;
+}
+/* denser smoke for panels that carry a lot of text */
+.glass-dense {
+  --g-blur: 30px;
+  background: linear-gradient(150deg, rgb(26 26 24 / 0.8), rgb(17 17 16 / 0.7));
+}
+[data-tilt] {
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  will-change: transform;
+}
+
+/* the header bar: clear at the top of the page, frosted once it matters. The
+   frost lives on a pseudo-element, not on the header itself — a header with
+   its own backdrop-filter becomes the "backdrop root" and the panels hanging
+   from it could then only blur the header, not the page behind them. */
+.glass-bar {
+  transition: transform 0.5s var(--ease-out-soft), color 0.5s ease;
+}
+.glass-bar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: color-mix(in srgb, var(--bg) 58%, transparent);
+  -webkit-backdrop-filter: blur(26px) saturate(1.8);
+  backdrop-filter: blur(26px) saturate(1.8);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 14px 34px -18px rgb(17 17 16 / 0.22);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.glass-bar[data-on="true"]::before {
+  opacity: 1;
+}
+/* the phone menu sheet */
+.glass-sheet {
+  background: rgb(17 17 16 / 0.8);
+  -webkit-backdrop-filter: blur(30px) saturate(1.6);
+  backdrop-filter: blur(30px) saturate(1.6);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background: var(--bg);
+  }
+  .glass-dense,
+  .glass-sheet {
+    background: #111110;
+  }
+  .glass-bar::before {
+    background: var(--bg);
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .glass,
+  .glass-bar::before {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--bg);
+  }
+  .glass-dense,
+  .glass-sheet {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: #111110;
+  }
+  .glass::before {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .glass,
+  .glass::before,
+  .glass::after {
+    transition: none;
+  }
+  [data-tilt] {
+    transform: none;
+  }
+}
