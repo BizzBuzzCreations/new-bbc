@@ -12,6 +12,9 @@ import BlogsV2 from "@/components/home/blogsV2";
 import FaqV2 from "@/components/home/faqV2";
 import CtaV2 from "@/components/home/ctaV2";
 import Numbers from "@/components/home/numbers";
+import KineticMarquee from "@/components/home/kineticMarquee";
+import SectionRail from "@/components/home/sectionRail";
+import { SERVICE_LINES } from "@/lib/siteNav";
 import ConsultationPopup from "@/components/sections/popupForm";
 import { getPageContent } from "@/actions/pageContentActions";
 import { buildPageMetadata } from "@/lib/pageMetadata";
@@ -61,18 +64,62 @@ export default async function Home() {
   return (
     <div data-no-reveal>
       <PageSeoScripts pageKey="home" />
-      {!hidden.has("hero") && <HeroHome content={content} secondaryCta={hidden.has("services") ? null : { text: "Explore our services", href: "#services" }} />}
-      {!hidden.has("about") && <AboutV2 content={content} showStatement={!hidden.has("statement")} />}
-      {!hidden.has("services") && <ServicesV2 content={content} />}
-      <BuildV2 content={content} showClio={!hidden.has("aiShowcase")} showPraxistence={!hidden.has("praxistenceShowcase")} showBuilds={!hidden.has("caseStudies")} />
+      <SectionRail />
+      {!hidden.has("hero") && (
+        <div data-rail="Home">
+          <HeroHome content={content} secondaryCta={hidden.has("services") ? null : { text: "Explore our services", href: "#services" }} />
+        </div>
+      )}
+      {!hidden.has("about") && (
+        <div data-rail="About">
+          <AboutV2 content={content} showStatement={!hidden.has("statement")} />
+        </div>
+      )}
+      {!hidden.has("services") && (
+        <div data-rail="Services">
+          <ServicesV2 content={content} />
+        </div>
+      )}
+      {!hidden.has("services") && <KineticMarquee words={SERVICE_LINES.map((l) => l.name)} />}
+      <div data-rail="What we build">
+        <BuildV2 content={content} showClio={!hidden.has("aiShowcase")} showPraxistence={!hidden.has("praxistenceShowcase")} showBuilds={!hidden.has("caseStudies")} />
+      </div>
       <Numbers stats={content?.zoomStats} />
-      {!hidden.has("industries") && <IndustriesV2 content={content} />}
-      {!hidden.has("clientVideos") && <ClientVideosV2 content={content} />}
-      {!hidden.has("reviews") && <ReviewsV2 content={content} />}
-      {!hidden.has("process") && <ProcessV2 content={content} />}
-      {!hidden.has("latestBlogs") && <BlogsV2 content={content} />}
-      {!hidden.has("faq") && <FaqV2 content={content} />}
-      {!hidden.has("cta") && <CtaV2 content={content} />}
+      {!hidden.has("industries") && (
+        <div data-rail="Industries">
+          <IndustriesV2 content={content} />
+        </div>
+      )}
+      {!hidden.has("clientVideos") && (
+        <div data-rail="Client stories">
+          <ClientVideosV2 content={content} />
+        </div>
+      )}
+      {!hidden.has("reviews") && (
+        <div data-rail="Reviews">
+          <ReviewsV2 content={content} />
+        </div>
+      )}
+      {!hidden.has("process") && (
+        <div data-rail="Process">
+          <ProcessV2 content={content} />
+        </div>
+      )}
+      {!hidden.has("latestBlogs") && (
+        <div data-rail="Insights">
+          <BlogsV2 content={content} />
+        </div>
+      )}
+      {!hidden.has("faq") && (
+        <div data-rail="Questions">
+          <FaqV2 content={content} />
+        </div>
+      )}
+      {!hidden.has("cta") && (
+        <div data-rail="Contact">
+          <CtaV2 content={content} />
+        </div>
+      )}
       {!hidden.has("popup") && <ConsultationPopup content={content} />}
     </div>
   );

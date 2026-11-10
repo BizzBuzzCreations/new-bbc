@@ -13,18 +13,28 @@ export default function PhotoMosaic({ images, cols = 3, eager = false }) {
   const tiles = (images || []).filter((img) => img?.src).slice(0, cols * cols);
   if (!tiles.length) return null;
   return (
-    <ul aria-hidden="true" className={`grid gap-2 pb-6 sm:gap-3 ${cols === 2 ? "grid-cols-2" : "grid-cols-3"}`}>
+    <ul
+      aria-hidden="true"
+      className={`grid gap-2 pb-6 sm:gap-3 ${cols === 2 ? "grid-cols-2" : "grid-cols-3"}`}
+    >
       {tiles.map(({ src }, i) => (
-        <li key={`${src}-${i}`} className={`group relative aspect-square overflow-hidden bg-ink-2 ${i % cols === 1 ? "translate-y-4 sm:translate-y-6" : ""}`}>
+        <li
+          key={`${src}-${i}`}
+          className={`group relative aspect-square overflow-hidden bg-ink-2 ${i % cols === 1 ? "translate-y-4 sm:translate-y-6" : ""}`}
+        >
           <Image
             src={src}
             alt=""
             fill
-            sizes={cols === 2 ? "(min-width: 1440px) 680px, 49vw" : "(min-width: 1440px) 446px, 32vw"}
+            sizes={
+              cols === 2
+                ? "(min-width: 1440px) 680px, 49vw"
+                : "(min-width: 1440px) 446px, 32vw"
+            }
             quality={90}
             preload={eager && i === 0}
             loading={eager && i === 0 ? "eager" : "lazy"}
-            className="object-cover grayscale transition-[filter] duration-700 hover:grayscale-0"
+            className="object-cover "
           />
         </li>
       ))}

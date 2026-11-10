@@ -10,22 +10,46 @@ import { useEffect } from "react";
 // no tilt with reduced motion. Renders nothing.
 export default function GlassPointer() {
   useEffect(() => {
-    const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const fine = window.matchMedia(
+      "(hover: hover) and (pointer: fine)",
+    ).matches;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
     let last = null;
     let tilted = null;
 
     const settle = () => {
+      document.querySelectorAll("[data-mg]").forEach((m) => {
+        m.style.translate = "";
+        m.removeAttribute("data-mg");
+      });
       if (!tilted) return;
       tilted.style.setProperty("--rx", "0deg");
       tilted.style.setProperty("--ry", "0deg");
       tilted = null;
     };
+    // buttons in the page lean toward a nearby pointer (they ease back when it leaves)
+    const magnets = (e) => {
+      if (reduce.matches) return;
+      document.querySelectorAll("main [data-magnet]").forEach((m) => {
+        const r = m.getBoundingClientRect();
+        const near = r.bottom > -80 && r.top < window.innerHeight + 80;
+        const dx = e.clientX - (r.left + r.width / 2);
+        const dy = e.clientY - (r.top + r.height / 2);
+        if (near && Math.hypot(dx, dy) < Math.max(r.width, r.height) / 2 + 70) {
+          m.style.translate = `${(dx * 0.26).toFixed(1)}px ${(dy * 0.34).toFixed(1)}px`;
+          m.setAttribute("data-mg", "");
+        } else if (m.hasAttribute("data-mg")) {
+          m.style.translate = "";
+          m.removeAttribute("data-mg");
+        }
+      });
+    };
     const run = () => {
       frame = 0;
       const e = last;
       if (!e) return;
+      magnets(e);
       const t = e.target instanceof Element ? e.target : null;
       const glass = t?.closest(".glass");
       if (glass) {
@@ -33,7 +57,13 @@ export default function GlassPointer() {
         glass.style.setProperty("--mx", `${(e.clientX - r.left).toFixed(0)}px`);
         glass.style.setProperty("--my", `${(e.clientY - r.top).toFixed(0)}px`);
         // the rim's bright arc faces the pointer (conic angles run clockwise from 12 o'clock)
-        const ang = (Math.atan2(e.clientX - (r.left + r.width / 2), -(e.clientY - (r.top + r.height / 2))) * 180) / Math.PI;
+        const ang =
+          (Math.atan2(
+            e.clientX - (r.left + r.width / 2),
+            -(e.clientY - (r.top + r.height / 2)),
+          ) *
+            180) /
+          Math.PI;
         glass.style.setProperty("--ang", `${ang.toFixed(0)}deg`);
       }
       const tilt = reduce.matches ? null : t?.closest("[data-tilt]");
@@ -52,14 +82,16 @@ export default function GlassPointer() {
       last = e;
       if (!frame) frame = requestAnimationFrame(run);
     };
-    if (fine) document.addEventListener("pointermove", onMove, { passive: true });
+    if (fine)
+      document.addEventListener("pointermove", onMove, { passive: true });
     // while the page scrolls, liquid surfaces drop to plain frosted glass (an SVG
     // refraction over a moving backdrop is too costly to redo every frame) and
     // come back a moment after it stops
     const root = document.documentElement;
     let calm = 0;
     const onScroll = () => {
-      if (!root.hasAttribute("data-scrolling")) root.setAttribute("data-scrolling", "");
+      if (!root.hasAttribute("data-scrolling"))
+        root.setAttribute("data-scrolling", "");
       clearTimeout(calm);
       calm = setTimeout(() => root.removeAttribute("data-scrolling"), 160);
     };

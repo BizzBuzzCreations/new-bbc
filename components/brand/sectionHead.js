@@ -11,18 +11,45 @@ const SIZES = {
   l: "text-[clamp(2.5rem,6vw,6.25rem)] leading-[0.94]",
   m: "text-[clamp(2.1rem,4.2vw,4rem)] leading-[1]",
 };
-export default function SectionHead({ no, of, kicker, heading, text, aside, size = "l", as: H = "h2", accent = true, className = "", id }) {
+export default function SectionHead({
+  no,
+  of,
+  kicker,
+  heading,
+  text,
+  aside,
+  size = "l",
+  as: H = "h2",
+  accent = true,
+  className = "",
+  id,
+}) {
   return (
-    <div className={`grid gap-8 md:grid-cols-12 md:items-end md:gap-10 ${className}`}>
+    <div
+      className={`grid gap-8 md:grid-cols-12 md:items-end md:gap-10 ${className}`}
+    >
       <div className="md:col-span-8">
-        {kicker && <Kicker no={no} of={of} className="mb-8">{kicker}</Kicker>}
-        <H id={id} className={`font-display text-balance ${SIZES[size] || SIZES.l}`}>
+        {kicker && (
+          <Kicker no={no} of={of} className="mb-8">
+            {kicker}
+          </Kicker>
+        )}
+        <H
+          id={id}
+          className={`head-rise font-display text-balance ${SIZES[size] || SIZES.l}`}
+        >
           <AccentText text={heading} accent={accent} />
         </H>
       </div>
       {(text || aside) && (
         <div className="md:col-span-3 md:col-start-10 md:pb-2">
-          {text && <RichText as="p" text={text} className="text-base leading-relaxed text-(--mut) md:text-[1.0625rem]" />}
+          {text && (
+            <RichText
+              as="p"
+              text={text}
+              className="text-base leading-relaxed text-(--mut) md:text-[1.0625rem]"
+            />
+          )}
           {aside && <div className={text ? "mt-6" : ""}>{aside}</div>}
         </div>
       )}

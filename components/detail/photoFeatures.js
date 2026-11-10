@@ -7,7 +7,17 @@ import AccentText from "@/components/brand/accentText";
 // Heading + a list of reasons beside a real photograph / mosaic (about's
 // "Why businesses continue working with us", careers' "Grow beyond your job
 // description"). `features`: { title, description }. `media` replaces the photo.
-export default function PhotoFeatures({ eyebrow, heading, tagline, text, image, alt = "", media, features, action }) {
+export default function PhotoFeatures({
+  eyebrow,
+  heading,
+  tagline,
+  text,
+  image,
+  alt = "",
+  media,
+  features,
+  action,
+}) {
   if (!features?.length) return null;
   return (
     <section className="on-ink">
@@ -18,21 +28,40 @@ export default function PhotoFeatures({ eyebrow, heading, tagline, text, image, 
             <AccentText text={heading} />
           </h2>
           {tagline && <p className="mt-5 text-xl">{tagline}</p>}
-          {text && <RichText as="p" text={text} className="mt-4 max-w-xl text-lg leading-relaxed text-(--mut)" />}
+          {text && (
+            <RichText
+              as="p"
+              text={text}
+              className="mt-4 max-w-xl text-lg leading-relaxed text-(--mut)"
+            />
+          )}
           <ol className="mt-8 border-t border-(--fg)">
             {features.map(({ title, description }, i) => (
-              <li key={title} className="grid grid-cols-[2.5rem_1fr] gap-3 border-b border-(--line) py-5">
-                <span className="kicker pt-1 text-(--mut)">{String(i + 1).padStart(2, "0")}</span>
+              <li
+                key={title}
+                className="grid grid-cols-[2.5rem_1fr] gap-3 border-b border-(--line) py-5"
+              >
+                <span className="kicker pt-1 text-(--mut)">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 <div>
-                  <h3 className="font-display text-xl leading-snug tracking-[-0.03em]">{title}</h3>
-                  <RichText as="p" text={description} className="mt-1.5 leading-relaxed text-(--mut)" />
+                  <h3 className="font-display text-xl leading-snug tracking-[-0.03em]">
+                    {title}
+                  </h3>
+                  <RichText
+                    as="p"
+                    text={description}
+                    className="mt-1.5 leading-relaxed text-(--mut)"
+                  />
                 </div>
               </li>
             ))}
           </ol>
           {action?.text && action?.href && (
             <div className="mt-8">
-              <Button href={action.href} variant="solid">{action.text}</Button>
+              <Button href={action.href} variant="solid">
+                {action.text}
+              </Button>
             </div>
           )}
         </div>
@@ -40,7 +69,14 @@ export default function PhotoFeatures({ eyebrow, heading, tagline, text, image, 
           <div className="lg:col-span-6">
             {media || (
               <div className="group relative aspect-[4/3] overflow-hidden bg-ink-2">
-                <Image src={image} alt={alt} fill sizes="(min-width: 1024px) 48vw, 100vw" quality={90} className="object-cover grayscale transition-[filter] duration-700 group-hover:grayscale-0" />
+                <Image
+                  src={image}
+                  alt={alt}
+                  fill
+                  sizes="(min-width: 1024px) 48vw, 100vw"
+                  quality={90}
+                  className="object-cover "
+                />
               </div>
             )}
           </div>

@@ -13,15 +13,29 @@ import { ArrowUpRight } from "lucide-react";
 // still with reduced motion. External links open in a new tab and say so.
 const LOOKS = {
   solid: "bg-(--fg) text-(--bg) hover:opacity-85",
-  outline: "border border-(--fg)/30 text-(--fg) hover:border-(--fg) hover:bg-(--fg) hover:text-(--bg)",
+  outline:
+    "border border-(--fg)/30 text-(--fg) hover:border-(--fg) hover:bg-(--fg) hover:text-(--bg)",
   buzz: "bg-buzz text-buzz-ink hover:bg-[#ffe066]",
   glass: "glass glass-pop text-(--fg)",
 };
 const ALIAS = { ink: "solid", line: "outline" };
 
-export default function Button({ href, children, variant = "solid", size = "md", className = "", srText, onClick, type, disabled, icon = true, ...rest }) {
+export default function Button({
+  href,
+  children,
+  variant = "solid",
+  size = "md",
+  className = "",
+  srText,
+  onClick,
+  type,
+  disabled,
+  icon = true,
+  ...rest
+}) {
   const look = LOOKS[ALIAS[variant] || variant] || LOOKS.solid;
-  const dims = size === "lg" ? "h-14 px-7 text-base" : "h-12 px-6 text-[0.9375rem]";
+  const dims =
+    size === "lg" ? "h-14 px-7 text-base" : "h-12 px-6 text-[0.9375rem]";
   const classes = `group relative inline-flex select-none items-center justify-center gap-2.5 whitespace-nowrap rounded-full font-medium transition-[background-color,color,border-color,opacity] duration-300 ease-out-soft disabled:pointer-events-none disabled:opacity-50 ${dims} ${look} ${className}`;
   const label = typeof children === "string" ? children : null;
   const inner = (
@@ -35,12 +49,26 @@ export default function Button({ href, children, variant = "solid", size = "md",
         <span>{children}</span>
       )}
       {srText && <span className="sr-only"> {srText}</span>}
-      {icon && <ArrowUpRight aria-hidden="true" size={16} strokeWidth={2} className="shrink-0 transition-transform duration-300 ease-out-soft group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />}
+      {icon && (
+        <ArrowUpRight
+          aria-hidden="true"
+          size={16}
+          strokeWidth={2}
+          className="shrink-0 transition-transform duration-300 ease-out-soft group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+        />
+      )}
     </>
   );
   if (!href) {
     return (
-      <button type={type || "button"} onClick={onClick} disabled={disabled} className={classes} {...rest}>
+      <button
+        type={type || "button"}
+        onClick={onClick}
+        disabled={disabled}
+        className={classes}
+        data-magnet=""
+        {...rest}
+      >
         {inner}
       </button>
     );
@@ -48,14 +76,20 @@ export default function Button({ href, children, variant = "solid", size = "md",
   const newTab = /^https?:\/\//.test(href);
   if (newTab || href.startsWith("tel:") || href.startsWith("mailto:")) {
     return (
-      <a href={href} className={classes} {...(newTab ? { target: "_blank", rel: "noopener noreferrer" } : {})} {...rest}>
+      <a
+        href={href}
+        className={classes}
+        data-magnet=""
+        {...(newTab ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        {...rest}
+      >
         {inner}
         {newTab && <span className="sr-only"> (opens in a new tab)</span>}
       </a>
     );
   }
   return (
-    <Link href={href} className={classes} {...rest}>
+    <Link href={href} className={classes} data-magnet="" {...rest}>
       {inner}
     </Link>
   );
@@ -72,7 +106,11 @@ export function TextLink({ href, children, className = "" }) {
       className={`group inline-flex items-center gap-1.5 font-medium underline decoration-(--fg)/30 decoration-1 underline-offset-[6px] transition-colors duration-300 hover:decoration-(--fg) ${className}`}
     >
       {children}
-      <ArrowUpRight aria-hidden="true" size={16} className="transition-transform duration-300 ease-out-soft group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+      <ArrowUpRight
+        aria-hidden="true"
+        size={16}
+        className="transition-transform duration-300 ease-out-soft group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+      />
       {newTab && <span className="sr-only"> (opens in a new tab)</span>}
     </Comp>
   );

@@ -96,7 +96,7 @@ export default function HeroHome({
   }, [chosenVideo]);
 
   return (
-    <section className="on-paper relative isolate flex min-h-[92svh] flex-col pb-8 pt-24 md:pt-28">
+    <section className="on-paper relative isolate flex min-h-[92svh] flex-col overflow-x-clip pb-8 pt-24 md:pt-28">
       <HeroField />
       <div className="wrap relative z-10 flex flex-1 flex-col">
         <div className="flex flex-wrap items-center justify-between gap-4">
@@ -126,8 +126,8 @@ export default function HeroHome({
             {lines.map((row, i) => (
               <span
                 key={i}
-                className="-mb-[0.1em] block overflow-hidden pb-[0.1em]"
-                style={{ "--i": i }}
+                className="hero-split -mb-[0.1em] block overflow-hidden pb-[0.1em]"
+                style={{ "--i": i, "--dir": i % 2 ? 1 : -1 }}
               >
                 <span
                   className="block motion-safe:animate-[line-up_1.1s_var(--ease-out-soft)_both] lg:[margin-left:calc(var(--i)*7.5vw)]"

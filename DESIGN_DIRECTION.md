@@ -220,3 +220,29 @@ motion.
   needs `grid-cols-[minmax(0,1fr)]`, or the grid grows to the widest content and
   the whole page widens on phones.
 
+### 12b. Premium pass (2026-11-10, later)
+
+Owner brief: "make it look premium; the image under the home hero can go or move;
+and no black-and-white images."
+- **The photo under the hero is gone.** The built-in team picture
+  (`/about-home.png`) is a generic stock-style photo, which contradicts "real
+  photographs only", and a full-width picture right under the headline competed
+  with it. The About section is now pure type (statement, service-line chips,
+  copy). A photo the owner uploads in the dashboard (`aboutBackgroundImage`) still
+  shows, as a band that opens from a framed window as it scrolls in.
+- **No black-and-white anywhere:** every `grayscale` on images (team mosaic,
+  portraits, culture rows, photo features, journey years, CTAs) is removed — photos
+  are shown in colour.
+- **Scroll choreography** (compositor-driven CSS scroll animations, Chromium;
+  transform / clip-path only, never with reduced motion): the hero headline lines
+  slide apart as you scroll away; section headings rise into place as they enter.
+- **Kinetic type band** between Services and What we build
+  (`components/home/kineticMarquee.js`): the service-line names, one solid row, one
+  outlined, drifting in opposite directions; scrolling speeds it up and reverses
+  it, and it leans with the speed; pauses under the pointer.
+- **Section rail** (`components/home/sectionRail.js`, xl+): a hairline of dots down
+  the left edge, one per section, the current one a bar, labels on hover, click to
+  scroll; inverts itself over dark bands.
+- **Magnetic buttons** (page content only): buttons lean toward a nearby pointer and
+  ease back; **client videos** drag with the mouse and glide on release.
+
