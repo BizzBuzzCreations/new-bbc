@@ -146,9 +146,11 @@ Built across every public page through the shared primitives in
 - **BizzBee never sits on a CTA** — hero buttons and the form fields carry
   `data-bizzbee-avoid`, so the launcher steps aside while one is under it
   (the hero buttons used to sit right under it on laptops).
-- **Dev gotcha** — Tailwind reads every word in the source as a possible
-  class, and `!word` as that class with the old important prefix. `!dark`
-  (e.g. `hidden && !dark ? …`) matched flowbite's `.dark` apexcharts rules,
-  which carry a doubled `!important` and break the CSS build ("Parsing CSS
-  source code failed", every page 500). Don't name a variable after a
-  flowbite class and negate it (`onInk` is used instead).
+- **Dev gotcha** — Tailwind reads every word in every project file, this
+  one included, as a possible class, and a word with a "not" sign in front
+  as that class with the old important prefix. The negated form of the word
+  d-a-r-k, written with a space before it (as in a conditional), matched
+  flowbite's dark-mode apexcharts rules, which carry a doubled important flag
+  and break the CSS build ("Parsing CSS source code failed", every page 500
+  in dev). The stylesheet now excludes `*.md` from scanning, and the
+  navbar's variable is called `onInk`.

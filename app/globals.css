@@ -2,6 +2,8 @@
 @import "flowbite/src/themes/default";
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
+/* docs are not source: a stray "not-dark" snippet in a note once broke the whole stylesheet */
+@source not "../*.md";
 
 /* Desktop-width screens that aren't very tall (e.g. 1366×768 laptops at
    100% zoom, ~655px of page): the home hero tightens up so heading, buttons,
