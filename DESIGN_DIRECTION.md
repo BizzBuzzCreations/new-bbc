@@ -246,3 +246,20 @@ and no black-and-white images."
 - **Magnetic buttons** (page content only): buttons lean toward a nearby pointer and
   ease back; **client videos** drag with the mouse and glide on release.
 
+### 12c. 3D hero stack, uncropped covers (2026-11-10, later)
+
+- **A real 3D object beside the headline** (`components/home/heroDeck.js`, CSS 3D
+  only — no library, no WebGL): eight cards, one per service line, stacked in
+  depth and seen from above at an angle; the top card carries the logo and the
+  three offices. Smooth by construction: the stack leans toward the pointer with
+  an eased follow (rAF lerp, 7 % per frame), each card floats on its own rhythm,
+  and scrolling away fans the layers apart (a scroll-driven CSS animation).
+  Wide screens only (lg+), decorative (`aria-hidden`), still under reduced
+  motion. Sized and placed from the viewport (`--dw`, `top`) so its rim sits under
+  the header pill and its base above the hero card at 1024–1920 px; the
+  headline is capped at 8.25 rem on wide screens so the two never touch.
+  Measured in Playwright at eight sizes (`deckfit.mjs`).
+- **Blog covers are shown whole** on the home Insights rows (`h-auto`, no
+  `object-cover` / fixed aspect) — a 16:9 cover with text on the left was being
+  cut to 4:3.
+

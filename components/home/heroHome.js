@@ -10,6 +10,7 @@ import {
 import Button from "@/components/brand/button";
 import TypedWord from "@/components/brand/typedWord";
 import HeroField from "@/components/brand/heroField";
+import HeroDeck from "@/components/home/heroDeck";
 import { toneWords } from "@/components/brand/accentText";
 import { heroImageSource } from "@/components/sections/homeHero";
 import { INDUSTRIES } from "@/lib/siteNav";
@@ -96,8 +97,9 @@ export default function HeroHome({
   }, [chosenVideo]);
 
   return (
-    <section className="on-paper relative isolate flex min-h-[92svh] flex-col overflow-x-clip pb-8 pt-24 md:pt-28">
+    <section className="on-paper relative isolate flex min-h-[min(92svh,860px)] flex-col overflow-x-clip pb-8 pt-24 md:pt-28">
       <HeroField />
+      <HeroDeck />
       <div className="wrap relative z-10 flex flex-1 flex-col">
         <div className="flex flex-wrap items-center justify-between gap-4">
           {locationLine ? (
@@ -110,12 +112,12 @@ export default function HeroHome({
               Digital marketing · Software · AI · BPO
             </p>
           )}
-          <p className="kicker hidden text-(--mut) md:block">
+          <p className="kicker hidden text-(--mut) md:block lg:hidden">
             Prayagraj · Kanpur · London
           </p>
         </div>
 
-        <h1 className="font-display mt-6 text-[clamp(3rem,min(9.6vw,17svh),10.5rem)] leading-[0.9] tracking-[-0.055em] md:mt-8">
+        <h1 className="font-display mt-6 text-[clamp(3rem,min(9.6vw,17svh),10.5rem)] lg:text-[clamp(3rem,min(7.8vw,15.5svh),8.25rem)] leading-[0.9] tracking-[-0.055em] md:mt-8">
           <span className="sr-only">
             {lines
               .flat()

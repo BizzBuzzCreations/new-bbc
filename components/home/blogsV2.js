@@ -46,11 +46,11 @@ export default async function BlogsV2({ content }) {
                     </h3>
                     <p className="mt-3 max-w-2xl text-[0.9375rem] leading-relaxed text-(--mut)">{excerpt(b.excerpt)}</p>
                   </div>
-                  {/* the post's cover has its own cell, so it never covers the title: it fades in beside the category when the row is pointed at */}
+                  {/* the post's cover has its own cell, so it never covers the title: it fades in beside the category when the row is pointed at (shown whole, not cropped) */}
                   <div className="flex items-center justify-between gap-4 md:col-span-3 md:justify-end md:self-center xl:col-span-4 xl:gap-8">
                     {img && (
                       // eslint-disable-next-line @next/next/no-img-element -- Cloudinary cover shown on hover
-                      <img src={optimizedImageUrl(img, 480)} alt="" loading="lazy" decoding="async" className="pointer-events-none hidden aspect-[4/3] w-44 scale-95 object-cover opacity-0 shadow-xl transition-[opacity,transform] duration-500 ease-out-soft group-hover:scale-100 group-hover:opacity-100 xl:block" />
+                      <img src={optimizedImageUrl(img, 480)} alt="" loading="lazy" decoding="async" className="pointer-events-none hidden h-auto w-56 scale-95 rounded-sm opacity-0 shadow-xl transition-[opacity,transform] duration-500 ease-out-soft group-hover:scale-100 group-hover:opacity-100 xl:block" />
                     )}
                     <p className="kicker flex items-center gap-2 text-(--mut)">
                       {b.category}
