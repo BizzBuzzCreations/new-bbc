@@ -40,7 +40,7 @@ export default function PhotoFeatures({ eyebrow, heading, tagline, text, image, 
           <div className="lg:col-span-6">
             {media || (
               <div className="group relative aspect-[4/3] overflow-hidden bg-ink-2">
-                <Image src={image} alt={alt} fill sizes="(min-width: 1024px) 48vw, 100vw" className="object-cover grayscale transition-[filter] duration-700 group-hover:grayscale-0" />
+                <Image src={image} alt={alt} fill sizes="(min-width: 1024px) 48vw, 100vw" quality={90} className="object-cover grayscale transition-[filter] duration-700 group-hover:grayscale-0" />
               </div>
             )}
           </div>

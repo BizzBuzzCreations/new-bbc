@@ -17,7 +17,7 @@ function Portrait({ name, role, photo, sizes, ratio = "aspect-[4/5]" }) {
   if (!real) return null; // no photograph yet: just the name and role, no empty block
   return (
     <div aria-hidden="true" className={`relative w-full overflow-hidden bg-paper-2 ${ratio}`}>
-      <Image src={photo} alt="" fill sizes={sizes} className="object-cover object-top grayscale transition-[filter,transform] duration-700 ease-out-soft group-hover:scale-[1.03] group-hover:grayscale-0" />
+      <Image src={photo} alt="" fill sizes={sizes} quality={90} className="object-cover object-top grayscale transition-[filter,transform] duration-700 ease-out-soft group-hover:scale-[1.03] group-hover:grayscale-0" />
     </div>
   );
 }

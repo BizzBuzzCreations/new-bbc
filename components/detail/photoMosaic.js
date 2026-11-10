@@ -1,8 +1,12 @@
 import Image from "next/image";
 
-// A still mosaic of team / office photos (redesign): 3 × 3 beside the /about
+// A still mosaic of team / office photos (redesign): 3 × 3 under the /about
 // hero, 2 × 2 on /career (`cols` 2) — square tiles with small gaps, every
-// second column set a little lower so it doesn't read as a plain table.
+// second column set a little lower so it doesn't read as a plain table. The
+// mosaic spans the page width, so `sizes` is the real tile width (a third / a
+// half of it); it once said 190px, so the browser fetched a 256px-wide copy and
+// stretched it to ~430px (blurry, and worse still when zoomed out). Quality 90:
+// these photos are the point of the section.
 // `eager`: the first photo loads eagerly (when the mosaic is in the first
 // screen); otherwise all lazy. `images`: { src }.
 export default function PhotoMosaic({ images, cols = 3, eager = false }) {
@@ -16,7 +20,8 @@ export default function PhotoMosaic({ images, cols = 3, eager = false }) {
             src={src}
             alt=""
             fill
-            sizes={cols === 2 ? "(min-width: 1280px) 340px, (min-width: 768px) 28vw, 50vw" : "(min-width: 1280px) 190px, (min-width: 768px) 15vw, 30vw"}
+            sizes={cols === 2 ? "(min-width: 1440px) 680px, 49vw" : "(min-width: 1440px) 446px, 32vw"}
+            quality={90}
             preload={eager && i === 0}
             loading={eager && i === 0 ? "eager" : "lazy"}
             className="object-cover grayscale transition-[filter] duration-700 hover:grayscale-0"

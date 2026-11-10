@@ -54,7 +54,7 @@ export default function CultureRows({ id, eyebrow = "Our culture", heading, rows
                 {button}
               </div>
               <div className={`group relative aspect-[4/3] overflow-hidden bg-paper-2 lg:col-span-6 ${i % 2 ? "lg:order-1 lg:col-start-1" : "lg:col-start-7"}`}>
-                <Image src={img} alt={title || ""} fill sizes="(min-width: 1440px) 680px, (min-width: 1024px) 48vw, 100vw" className="object-cover grayscale transition-[filter,transform] duration-1000 ease-out-soft group-hover:scale-[1.02] group-hover:grayscale-0" />
+                <Image src={img} alt={title || ""} fill sizes="(min-width: 1440px) 680px, (min-width: 1024px) 48vw, 100vw" quality={90} className="object-cover grayscale transition-[filter,transform] duration-1000 ease-out-soft group-hover:scale-[1.02] group-hover:grayscale-0" />
               </div>
             </div>
           );

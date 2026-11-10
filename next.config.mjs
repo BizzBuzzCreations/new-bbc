@@ -3,6 +3,10 @@ import generateBlogRedirects from "./lib/blogRedirects.mjs";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    // Allowed `quality` values for next/image (Next 16 defaults to [75] only and
+    // coerces anything else to it): 90 is used for photo-led sections, e.g. the
+    // team mosaic on /about and /career.
+    qualities: [75, 90],
     // Dashboard-uploaded images/videos (hero images, media library, blog
     // covers, etc.) are all hosted on Cloudinary — without this, any
     // next/image using one of those URLs (e.g. services/sub-services hero
