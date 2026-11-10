@@ -251,6 +251,11 @@ export default function Navbar() {
     b.style.opacity = "0";
     b.style.scale = "0.7";
   };
+  // a panel opening or closing changes what the BizzBee launcher sits on top of; it re-checks on resize, so tell it
+  useEffect(() => {
+    const t = setTimeout(() => window.dispatchEvent(new Event("resize")), 420);
+    return () => clearTimeout(t);
+  }, [panel]);
   // a panel stays "held" by the blob while it is open
   useEffect(() => {
     if (panel) moveBlob(triggers.current[panel]);
@@ -497,7 +502,7 @@ export default function Navbar() {
               data-lg-scale="1.1"
               className="on-ink glass glass-calm glass-dense relative overflow-hidden rounded-[28px] motion-safe:animate-[panel-in_0.35s_var(--ease-out-soft)]"
             >
-              <div className="max-h-[calc(100svh-8rem)] overflow-y-auto overscroll-contain">
+              <div className="max-h-[calc(100svh-7rem)] overflow-y-auto overscroll-contain">
                 {panel === n.key &&
                   (n.key === "services" ? (
                     <MegaServices go={goHome} />
@@ -595,15 +600,14 @@ export default function Navbar() {
 }
 
 const sub =
-  "group/l flex items-center gap-2 py-[5px] text-[0.875rem] leading-5 text-(--mut) transition-[color,transform] duration-200 hover:translate-x-1 hover:text-(--fg) focus-visible:text-(--fg)";
+  "group/l flex items-center gap-2 py-[3px] text-[0.78rem] leading-5 xl:text-[0.84rem] text-(--mut) transition-[color,transform] duration-200 hover:translate-x-1 hover:text-(--fg) focus-visible:text-(--fg)";
 
 function MegaServices({ go }) {
   return (
-    <div className="px-6 py-6 md:px-9">
-      <div className="mb-5 flex items-end justify-between gap-6 border-b border-(--line) pb-3">
+    <div className="px-6 py-4 md:px-8">
+      <div className="mb-3.5 flex items-end justify-between gap-6 border-b border-(--line) pb-2.5">
         <p className="kicker text-(--mut)">
-          {SERVICE_LINES.length} lines · {SUB_SERVICE_COUNT} services — pick
-          one, or start with a conversation
+          {SERVICE_LINES.length} lines · {SUB_SERVICE_COUNT} services
         </p>
         <Link
           href="/services"
@@ -618,18 +622,18 @@ function MegaServices({ go }) {
           />
         </Link>
       </div>
-      <ul className="grid grid-cols-4 gap-x-8 gap-y-5">
+      <ul className="grid grid-cols-4 gap-x-5 gap-y-3.5 xl:gap-x-8">
         {SERVICE_LINES.map((s) => (
           <li key={s.href}>
             <Link
               href={s.href}
               onClick={go}
-              className="font-display flex items-baseline gap-2.5 border-b border-(--line) pb-2 text-[1.0625rem] leading-tight transition-opacity hover:opacity-70"
+              className="font-display flex items-baseline gap-2.5 border-b border-(--line) pb-1.5 text-base leading-tight transition-opacity hover:opacity-70"
             >
               <span className="kicker text-(--mut)">{s.no}</span>
               {s.name}
             </Link>
-            <ul className="mt-1.5">
+            <ul className="mt-1">
               {s.subs.map((x) => (
                 <li key={x.href}>
                   <Link href={x.href} onClick={go} className={sub}>
