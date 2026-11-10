@@ -97,6 +97,8 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
         else anim.play();
         setReady(true);
       });
+    }).catch(() => {
+      // the animation chunk could not load (offline, a stale tab after a deploy): the launcher simply stays a still picture
     });
 
     return () => {
