@@ -59,7 +59,7 @@ export default function ClientVideoWall({ items }) {
                       <img src={v.cover} alt="" loading="lazy" decoding="async" draggable={false} className="absolute inset-0 h-full w-full object-cover" />
                     )}
                     <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-black/60 to-transparent" />
-                    <span aria-hidden="true" className="absolute bottom-4 left-4 flex h-12 w-12 items-center justify-center rounded-full glass text-ink transition-transform duration-300 group-hover:scale-110">
+                    <span aria-hidden="true" className="absolute bottom-4 left-4 flex h-12 w-12 items-center justify-center rounded-full glass glass-pop text-ink">
                       <Play size={18} fill="currentColor" className="ml-0.5" />
                     </span>
                   </button>

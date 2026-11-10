@@ -18,7 +18,7 @@ export default function ReviewsV2({ content }) {
   if (!items.length) return null;
   const go = (d) => setActive((a) => (a + d + items.length) % items.length);
   const t = items[active];
-  const arrow = "glass flex h-12 w-12 items-center justify-center rounded-full text-(--fg)";
+  const arrow = "glass glass-pop relative flex h-12 w-12 items-center justify-center rounded-full text-(--fg)";
 
   return (
     <section id="reviews" aria-labelledby="reviews-heading" className="on-ink scroll-mt-10">
@@ -50,7 +50,7 @@ export default function ReviewsV2({ content }) {
           </figure>
         </div>
         <div className="lg:col-span-3 lg:pt-12">
-          <ol className="glass rounded-3xl px-4 py-2 [&>li:last-child_button]:border-b-0">
+          <ol className="glass glass-calm relative rounded-3xl px-4 py-2 [&>li:last-child_button]:border-b-0">
             {items.map((r, i) => (
               <li key={i}>
                 <button type="button" onClick={() => setActive(i)} aria-current={i === active ? "true" : undefined} className={`flex w-full items-baseline gap-3 border-b border-(--line) py-3 text-left transition-colors ${i === active ? "text-(--fg)" : "text-(--mut) hover:text-(--fg)"}`}>

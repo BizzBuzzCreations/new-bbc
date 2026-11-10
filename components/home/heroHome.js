@@ -6,6 +6,7 @@ import { RICH_TEXT_CLASS, richTextHTML, richTextScopeClass } from "@/components/
 import Button from "@/components/brand/button";
 import TypedWord from "@/components/brand/typedWord";
 import HeroField from "@/components/brand/heroField";
+import GlassLens from "@/components/brand/glassLens";
 import { toneWords } from "@/components/brand/accentText";
 import { heroImageSource } from "@/components/sections/homeHero";
 import { INDUSTRIES } from "@/lib/siteNav";
@@ -75,6 +76,7 @@ export default function HeroHome({ content, secondaryCta, mediaChoice = false, l
   return (
     <section className="on-paper relative isolate flex min-h-[92svh] flex-col pb-8 pt-24 md:pt-28">
       <HeroField />
+      <GlassLens />
       <div className="wrap relative z-10 flex flex-1 flex-col">
         <div className="flex flex-wrap items-center justify-between gap-4">
           {locationLine ? (
@@ -108,7 +110,7 @@ export default function HeroHome({ content, secondaryCta, mediaChoice = false, l
           </span>
         </h1>
 
-        <div data-tilt className={`glass grid gap-6 rounded-[28px] p-5 md:grid-cols-12 md:items-end md:gap-8 md:p-7 ${inFrame ? "mt-8" : "mt-auto md:mt-8"}`}>
+        <div data-tilt data-lg-off className={`glass glass-calm relative grid gap-6 rounded-[28px] p-5 md:grid-cols-12 md:items-end md:gap-8 md:p-7 ${inFrame ? "mt-8" : "mt-auto md:mt-8"}`}>
           <p className="kicker text-(--mut) md:col-span-3">
             Working with
             <span className="font-display mt-2 block h-[1.2em] text-[1.6rem] normal-case leading-none tracking-[-0.03em] text-(--fg)">

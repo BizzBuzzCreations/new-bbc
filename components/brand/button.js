@@ -15,7 +15,7 @@ const LOOKS = {
   solid: "bg-(--fg) text-(--bg) hover:opacity-85",
   outline: "border border-(--fg)/30 text-(--fg) hover:border-(--fg) hover:bg-(--fg) hover:text-(--bg)",
   buzz: "bg-buzz text-buzz-ink hover:bg-[#ffe066]",
-  glass: "glass text-(--fg)",
+  glass: "glass glass-pop text-(--fg)",
 };
 const ALIAS = { ink: "solid", line: "outline" };
 

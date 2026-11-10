@@ -14,7 +14,8 @@ const date = (d) => (d ? new Date(d).toLocaleDateString("en-GB", { day: "2-digit
 
 // Insights: the latest three posts as plain rows — date, title, category,
 // an arrow (Pier Gorelli's blog list). On wide screens the post's own cover
-// appears beside the row you point at; posts without one show nothing.
+// fades in, in its own cell beside the category, when you point at a row (it
+// never covers the title); posts without one show nothing.
 // Dashboard fields as before (blogsEyebrow, blogsHeading, blogsButtonText/Link).
 export default async function BlogsV2({ content }) {
   const eyebrow = content?.blogsEyebrow || "Insights";
@@ -37,7 +38,7 @@ export default async function BlogsV2({ content }) {
                   <p className="kicker text-(--mut) md:col-span-2">
                     <span className="text-(--fg)">{String(i + 1).padStart(2, "0")}</span> · {date(b.publishedAt)}
                   </p>
-                  <div className="md:col-span-7">
+                  <div className="md:col-span-7 xl:col-span-6">
                     <h3 className="font-display text-[clamp(1.5rem,2.8vw,2.6rem)] leading-[1.05] tracking-[-0.04em]">
                       <Link href={`/blog/${b.slug}`} className="after:absolute after:inset-0 after:content-['']">
                         {b.title}
@@ -45,15 +46,18 @@ export default async function BlogsV2({ content }) {
                     </h3>
                     <p className="mt-3 max-w-2xl text-[0.9375rem] leading-relaxed text-(--mut)">{excerpt(b.excerpt)}</p>
                   </div>
-                  <p className="kicker flex items-center justify-between gap-2 text-(--mut) md:col-span-3 md:justify-end">
-                    {b.category}
-                    <ArrowUpRight aria-hidden="true" size={18} className="text-(--fg) transition-transform duration-500 ease-out-soft group-hover:-translate-y-1 group-hover:translate-x-1" />
-                  </p>
+                  {/* the post's cover has its own cell, so it never covers the title: it fades in beside the category when the row is pointed at */}
+                  <div className="flex items-center justify-between gap-4 md:col-span-3 md:justify-end md:self-center xl:col-span-4 xl:gap-8">
+                    {img && (
+                      // eslint-disable-next-line @next/next/no-img-element -- Cloudinary cover shown on hover
+                      <img src={optimizedImageUrl(img, 480)} alt="" loading="lazy" decoding="async" className="pointer-events-none hidden aspect-[4/3] w-44 scale-95 object-cover opacity-0 shadow-xl transition-[opacity,transform] duration-500 ease-out-soft group-hover:scale-100 group-hover:opacity-100 xl:block" />
+                    )}
+                    <p className="kicker flex items-center gap-2 text-(--mut)">
+                      {b.category}
+                      <ArrowUpRight aria-hidden="true" size={18} className="text-(--fg) transition-transform duration-500 ease-out-soft group-hover:-translate-y-1 group-hover:translate-x-1" />
+                    </p>
+                  </div>
                 </article>
-                {img && (
-                  // eslint-disable-next-line @next/next/no-img-element -- Cloudinary cover shown on hover
-                  <img src={optimizedImageUrl(img, 480)} alt="" loading="lazy" decoding="async" className="pointer-events-none absolute right-48 top-1/2 z-10 hidden aspect-[4/3] w-60 -translate-y-1/2 scale-95 object-cover opacity-0 shadow-2xl transition-[opacity,transform] duration-500 ease-out-soft group-hover:scale-100 group-hover:opacity-100 xl:block" />
-                )}
               </li>
             );
           })}

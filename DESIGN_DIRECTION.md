@@ -155,21 +155,36 @@ Built across every public page through the shared primitives in
   in dev). The stylesheet now excludes `*.md` from scanning, and the
   navbar's variable is called `onInk`.
 
-## 11. Glass (2026-11-10)
+## 11. Liquid glass (2026-11-10)
 
-Frosted, translucent surfaces that blur what is behind them — used only where
-there is something worth blurring: the hero's dot field and yellow light, the
-page under the header and the menu panels, a video frame. `.glass` (globals.css)
-draws with the surface it sits on (paper = white frost, ink = smoke) and is
-interactive: a soft sheen and a yellow edge light follow the pointer
-(`components/brand/glassPointer.js` — one delegated listener, mouse/pen only),
-and `[data-tilt]` surfaces lean a few degrees toward it and settle flat when it
-leaves. Used on: the hero info card (and the glass button beside the main CTA),
-the header bar (clear at the top, frosted after a scroll or while a panel is
-open), the desktop mega panels (floating dense-smoke cards), the phone menu
-sheet, the video play buttons, and the reviews index and arrows.
-Fallbacks: solid surfaces without `backdrop-filter` and under "reduce
-transparency"; no tilt with reduced motion; nothing pointer-driven on touch.
-Rule: a header (or any ancestor) with its own `backdrop-filter` becomes the
-"backdrop root" and its descendants can no longer blur the page behind — the
-bar's frost therefore lives on a `::before`.
+Clear, bright-rimmed glass that *bends* what is behind it — not frosted
+translucency. Where the browser allows it (Chromium: `backdrop-filter` accepts
+an SVG filter) every `.glass` surface gets its own refraction filter:
+`lib/liquidGlass.js` draws a displacement map for the surface's exact size and
+corner radius (flat in the middle, pushing the backdrop outward along the
+curved rim; a lens also magnifies its centre), `components/brand/liquidGlass.js`
+builds an SVG `feDisplacementMap` filter from it (red/green/blue displaced by
+slightly different amounts on small surfaces = colour fringing at the rim) and
+hands it over via `--lg-url` + `data-liquid`. Elsewhere (Safari, Firefox) the
+same surfaces are frosted glass.
+
+On top of the refraction, in CSS: a specular rim whose bright arc turns toward
+the pointer (`--ang`), an inner sheen and a yellow edge light under it
+(`--mx/--my/--yl`, set by `components/brand/glassPointer.js`), springy
+hover / press on small controls (`.glass-pop`), and `[data-tilt]` surfaces that
+lean toward the pointer. Used on: the **header, now a floating glass pill**
+(its menu panels are siblings under it — a backdrop-filter ancestor would stop
+them blurring the page), the desktop menu panels (dark liquid cards), the hero
+(a **glass lens that follows the pointer**, bending and magnifying the headline;
+the info card stays frosted), the glass button, video play buttons, review
+list and arrows.
+
+Cost control: liquid drops to plain frosted glass while the page scrolls; a
+frame-rate governor (`liquidGlass.js`, re-checked on each page change) steps a
+struggling machine down liquid → frost → flat (`html[data-glass]`) and never
+back up. Fallbacks: solid surfaces without `backdrop-filter` and under "reduce
+transparency"; no tilt / lens with reduced motion; no pointer effects on touch.
+Rules: no `position` in `.glass` (an unlayered rule beats the utilities — give
+each surface relative/absolute/fixed in its markup); a header-like ancestor with
+its own `backdrop-filter` becomes the "backdrop root" and its descendants can no
+longer blur the page.

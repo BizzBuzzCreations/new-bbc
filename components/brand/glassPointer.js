@@ -10,7 +10,7 @@ import { useEffect } from "react";
 // no tilt with reduced motion. Renders nothing.
 export default function GlassPointer() {
   useEffect(() => {
-    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
     let last = null;
@@ -32,6 +32,9 @@ export default function GlassPointer() {
         const r = glass.getBoundingClientRect();
         glass.style.setProperty("--mx", `${(e.clientX - r.left).toFixed(0)}px`);
         glass.style.setProperty("--my", `${(e.clientY - r.top).toFixed(0)}px`);
+        // the rim's bright arc faces the pointer (conic angles run clockwise from 12 o'clock)
+        const ang = (Math.atan2(e.clientX - (r.left + r.width / 2), -(e.clientY - (r.top + r.height / 2))) * 180) / Math.PI;
+        glass.style.setProperty("--ang", `${ang.toFixed(0)}deg`);
       }
       const tilt = reduce.matches ? null : t?.closest("[data-tilt]");
       if (tilted && tilted !== tilt) settle();
@@ -49,10 +52,24 @@ export default function GlassPointer() {
       last = e;
       if (!frame) frame = requestAnimationFrame(run);
     };
-    document.addEventListener("pointermove", onMove, { passive: true });
-    document.documentElement.addEventListener("pointerleave", settle);
+    if (fine) document.addEventListener("pointermove", onMove, { passive: true });
+    // while the page scrolls, liquid surfaces drop to plain frosted glass (an SVG
+    // refraction over a moving backdrop is too costly to redo every frame) and
+    // come back a moment after it stops
+    const root = document.documentElement;
+    let calm = 0;
+    const onScroll = () => {
+      if (!root.hasAttribute("data-scrolling")) root.setAttribute("data-scrolling", "");
+      clearTimeout(calm);
+      calm = setTimeout(() => root.removeAttribute("data-scrolling"), 160);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    if (fine) document.documentElement.addEventListener("pointerleave", settle);
     return () => {
       document.removeEventListener("pointermove", onMove);
+      window.removeEventListener("scroll", onScroll);
+      clearTimeout(calm);
+      root.removeAttribute("data-scrolling");
       document.documentElement.removeEventListener("pointerleave", settle);
       if (frame) cancelAnimationFrame(frame);
     };
