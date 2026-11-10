@@ -5,6 +5,7 @@ import { ToastContainer, Bounce } from "react-toastify";
 import BizzBeeWidget from "@/components/bizzbee/BizzBeeWidget";
 import AllScripts from "@/components/sections/allScripts";
 import MotionPreferences from "@/components/ui/motionPreferences";
+import IntroGate from "@/components/home/introGate";
 
 // Self-hosted (public/fonts) instead of next/font/google: the Google loader
 // fetches fonts at build time, and the build server can't always reach
@@ -75,6 +76,7 @@ export default function RootLayout({ children }) {
             LCP. A plain tag, not ReactDOM.preconnect(): that becomes an HTTP
             Link header, which is dropped on cached (ISR) pages. */}
         <link rel="preconnect" href="https://res.cloudinary.com" />
+        <IntroGate />
         <AllScripts />
       </head>
       <body

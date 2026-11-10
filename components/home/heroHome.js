@@ -100,7 +100,7 @@ export default function HeroHome({
     <section className="on-paper relative isolate flex min-h-[min(92svh,860px)] flex-col overflow-x-clip pb-8 pt-24 md:pt-28">
       <HeroField />
       <HeroDeck />
-      <div className="wrap relative z-10 flex flex-1 flex-col">
+      <div className="intro-settle wrap relative z-10 flex flex-1 flex-col">
         <div className="flex flex-wrap items-center justify-between gap-4">
           {locationLine ? (
             <p className="kicker flex items-center gap-2 text-(--fg)">
@@ -131,10 +131,7 @@ export default function HeroHome({
                 className="hero-split -mb-[0.1em] block overflow-hidden pb-[0.1em]"
                 style={{ "--i": i, "--dir": i % 2 ? 1 : -1 }}
               >
-                <span
-                  className="block motion-safe:animate-[line-up_1.1s_var(--ease-out-soft)_both] lg:[margin-left:calc(var(--i)*7.5vw)]"
-                  style={{ animationDelay: `${i * 90}ms` }}
-                >
+                <span className="hero-line block lg:[margin-left:calc(var(--i)*7.5vw)]">
                   {row.map((x, k) => (
                     <span key={k} className={x.grey ? "text-current/50" : ""}>
                       {x.w}{" "}
@@ -147,7 +144,6 @@ export default function HeroHome({
         </h1>
 
         <div
-          data-tilt
           data-lg-off
           className={`glass glass-calm relative grid gap-6 rounded-[28px] p-5 md:grid-cols-12 md:items-end md:gap-8 md:p-7 ${inFrame ? "mt-8" : "mt-auto md:mt-8"}`}
         >

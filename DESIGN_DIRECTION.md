@@ -243,8 +243,9 @@ and no black-and-white images."
 - **Section rail** (`components/home/sectionRail.js`, xl+): a hairline of dots down
   the left edge, one per section, the current one a bar, labels on hover, click to
   scroll; inverts itself over dark bands.
-- **Magnetic buttons** (page content only): buttons lean toward a nearby pointer and
-  ease back; **client videos** drag with the mouse and glide on release.
+- **Client videos** drag with the mouse and glide on release. (Magnetic buttons —
+  buttons leaning toward a nearby pointer — were tried and removed on request:
+  buttons must stay where they are.)
 
 ### 12c. 3D hero stack, uncropped covers (2026-11-10, later)
 
@@ -262,4 +263,30 @@ and no black-and-white images."
 - **Blog covers are shown whole** on the home Insights rows (`h-auto`, no
   `object-cover` / fixed aspect) — a 16:9 cover with text on the left was being
   cut to 4:3.
+
+### 13. Landing animation, calmer buttons (2026-11-10, later)
+
+- **Buttons never move.** Removed on request: the magnetic lean toward the
+  pointer, the header pill's hover swell (it moved the nav buttons inside it),
+  the hero card's tilt (it moved the two hero buttons), and the hover swell on
+  glass buttons (a small press remains). Rule: a button is a fixed target —
+  feedback is colour / label roll / press, never position.
+- **Landing animation** (`components/home/intro.js`, `introGate.js`, globals.css
+  ".intro"): first hard load of the homepage in a tab, ~2.8 s, pure HTML + CSS —
+  a dark screen, the wordmark split across a seam ("BizzBuzz" rises from the seam,
+  "Creations" falls from it), a yellow hairline fills along the seam while a
+  counter runs 00 → 100 (a registered integer custom property, `@property
+  --intro-n`, which must be `inherits: true` because the digits live on a
+  pseudo-element), then the halves slide apart and the hero's headline replays as
+  they part, the hero settles, the 3D stack arrives last. Gate: an inline script
+  in `<head>` sets `html[data-intro]` before first paint — homepage only,
+  once per tab session (`sessionStorage["bbc-intro"]`), never with reduced motion
+  or Data Saver, never replayed by client-side navigation; the scroll lock is
+  released by a timer inside the same script. Without that attribute the loader
+  does not exist (`display: none`), so JS-off and every other page are unaffected.
+  Costs nothing: no images (the wordmark is type), no client JS, no layout;
+  measured phone LCP (4× CPU, Slow 4G, median of 5): 780 ms without, 840 ms with —
+  the LCP element is unchanged (the hero text underneath is painted from the first
+  frame; the first headline animation is untouched, the second one only replays
+  the rise after the halves part).
 

@@ -19,37 +19,15 @@ export default function GlassPointer() {
     let tilted = null;
 
     const settle = () => {
-      document.querySelectorAll("[data-mg]").forEach((m) => {
-        m.style.translate = "";
-        m.removeAttribute("data-mg");
-      });
       if (!tilted) return;
       tilted.style.setProperty("--rx", "0deg");
       tilted.style.setProperty("--ry", "0deg");
       tilted = null;
     };
-    // buttons in the page lean toward a nearby pointer (they ease back when it leaves)
-    const magnets = (e) => {
-      if (reduce.matches) return;
-      document.querySelectorAll("main [data-magnet]").forEach((m) => {
-        const r = m.getBoundingClientRect();
-        const near = r.bottom > -80 && r.top < window.innerHeight + 80;
-        const dx = e.clientX - (r.left + r.width / 2);
-        const dy = e.clientY - (r.top + r.height / 2);
-        if (near && Math.hypot(dx, dy) < Math.max(r.width, r.height) / 2 + 70) {
-          m.style.translate = `${(dx * 0.26).toFixed(1)}px ${(dy * 0.34).toFixed(1)}px`;
-          m.setAttribute("data-mg", "");
-        } else if (m.hasAttribute("data-mg")) {
-          m.style.translate = "";
-          m.removeAttribute("data-mg");
-        }
-      });
-    };
     const run = () => {
       frame = 0;
       const e = last;
       if (!e) return;
-      magnets(e);
       const t = e.target instanceof Element ? e.target : null;
       const glass = t?.closest(".glass");
       if (glass) {

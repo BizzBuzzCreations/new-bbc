@@ -14,6 +14,7 @@ import CtaV2 from "@/components/home/ctaV2";
 import Numbers from "@/components/home/numbers";
 import KineticMarquee from "@/components/home/kineticMarquee";
 import SectionRail from "@/components/home/sectionRail";
+import Intro from "@/components/home/intro";
 import { SERVICE_LINES } from "@/lib/siteNav";
 import ConsultationPopup from "@/components/sections/popupForm";
 import { getPageContent } from "@/actions/pageContentActions";
@@ -64,6 +65,7 @@ export default async function Home() {
   return (
     <div data-no-reveal>
       <PageSeoScripts pageKey="home" />
+      <Intro />
       <SectionRail />
       {!hidden.has("hero") && (
         <div data-rail="Home">

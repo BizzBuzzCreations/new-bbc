@@ -1284,6 +1284,238 @@ a.animated-button {
 }
 
 /* ---------------------------------------------------------------------------
+   Landing animation (components/home/intro.js, introGate.js). Shown only when
+   the inline gate sets html[data-intro="play"]; otherwise it does not exist.
+   Timeline (2.8 s): wordmark letters rise from the seam (0.1–1.0 s) · hairline
+   fills and the counter runs 00→100 (0.1–1.7 s) · the corner text and counter
+   fade (1.75 s) · the halves slide apart (1.95–2.8 s) · the hero settles in
+   behind them (2.0 s →). Everything is transform / opacity.
+   --------------------------------------------------------------------------- */
+@property --intro-n {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: true; /* the counter text is on a pseudo-element, which only sees inherited values */
+}
+.hero-line {
+  display: block;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-line {
+    animation: line-up 1.1s var(--ease-out-soft) calc(var(--i, 0) * 90ms) both;
+  }
+}
+.intro {
+  display: none;
+}
+html[data-intro="play"] .intro {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 10000; /* above the header, menus and the BizzBee launcher (9990) */
+  overflow: hidden;
+  color: #f5f4f0;
+  animation: intro-gone 1ms linear 2.85s forwards;
+}
+@keyframes intro-gone {
+  from {
+    visibility: visible;
+  }
+  to {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+.intro-half {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: calc(50% + 1px);
+  overflow: hidden;
+  background: #111110;
+  will-change: transform;
+}
+.intro-top {
+  top: 0;
+  display: flex;
+  align-items: flex-end;
+  animation: intro-up 0.85s cubic-bezier(0.76, 0, 0.24, 1) 1.95s forwards;
+}
+.intro-bot {
+  bottom: 0;
+  display: flex;
+  align-items: flex-start;
+  animation: intro-down 0.85s cubic-bezier(0.76, 0, 0.24, 1) 1.95s forwards;
+}
+@keyframes intro-up {
+  to {
+    transform: translateY(-101%);
+  }
+}
+@keyframes intro-down {
+  to {
+    transform: translateY(101%);
+  }
+}
+.intro-word {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  font-size: clamp(3.1rem, min(11.5vw, 20svh), 9.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.055em;
+  padding-bottom: 0.08em;
+}
+.intro-word-low {
+  padding: 0.04em 0 0;
+  color: #a3a29a;
+}
+.intro-word > span {
+  display: inline-block;
+  transform: translateY(110%);
+  animation: intro-rise 0.95s var(--ease-out-soft) calc(0.1s + var(--k, 0) * 0.05s) forwards;
+}
+.intro-word-low > span {
+  transform: translateY(-110%);
+  animation-name: intro-fall;
+}
+@keyframes intro-rise {
+  to {
+    transform: none;
+  }
+}
+@keyframes intro-fall {
+  to {
+    transform: none;
+  }
+}
+.intro-seam {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  margin-top: -1px;
+  background: rgb(245 244 240 / 0.14);
+  animation: intro-fade 0.3s ease-in 1.7s forwards;
+}
+.intro-bar {
+  display: block;
+  height: 100%;
+  background: var(--color-buzz);
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: intro-bar 1.6s cubic-bezier(0.65, 0, 0.35, 1) 0.1s forwards;
+}
+@keyframes intro-bar {
+  to {
+    transform: scaleX(1);
+  }
+}
+.intro-hud {
+  position: absolute;
+  inset: 0;
+  animation: intro-fade 0.3s ease-in 1.7s forwards;
+}
+@keyframes intro-fade {
+  to {
+    opacity: 0;
+  }
+}
+.intro-k {
+  position: absolute;
+  margin: 0;
+  color: #a3a29a;
+  font-size: 0.6875rem;
+  opacity: 0;
+  animation: intro-in 0.6s ease-out 0.35s forwards;
+}
+.intro-k-tl {
+  left: 20px;
+  top: 22px;
+}
+.intro-k-tr {
+  display: none;
+  right: 20px;
+  top: 22px;
+  text-align: right;
+}
+.intro-k-bl {
+  left: 20px;
+  bottom: 24px;
+}
+@media (min-width: 768px) {
+  .intro-k-tl,
+  .intro-k-bl {
+    left: 40px;
+  }
+  .intro-k-tr {
+    display: block;
+    right: 40px;
+  }
+}
+@keyframes intro-in {
+  to {
+    opacity: 1;
+  }
+}
+.intro-count {
+  position: absolute;
+  right: 20px;
+  bottom: 14px;
+  margin: 0;
+  font-size: clamp(3.4rem, 11vw, 9rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+  font-variant-numeric: tabular-nums;
+  animation: intro-n 1.6s cubic-bezier(0.65, 0, 0.35, 1) 0.1s forwards;
+}
+@media (min-width: 768px) {
+  .intro-count {
+    right: 40px;
+  }
+}
+.intro-count::before {
+  counter-reset: intro-n var(--intro-n);
+  content: counter(intro-n, decimal-leading-zero);
+}
+.intro-count::after {
+  content: "%";
+  margin-left: 0.08em;
+  font-size: 0.32em;
+  letter-spacing: 0;
+  color: var(--color-buzz);
+  vertical-align: 0.9em;
+}
+@keyframes intro-n {
+  to {
+    --intro-n: 100;
+  }
+}
+/* the page behind: the hero's headline replays as the halves part, the hero
+   settles, the 3D stack arrives last */
+html[data-intro="play"] .hero-line {
+  animation: line-up 1.1s var(--ease-out-soft) calc(var(--i, 0) * 90ms) both, line-up 1.15s var(--ease-out-soft) calc(2.1s + var(--i, 0) * 100ms) forwards;
+}
+html[data-intro="play"] .intro-settle {
+  animation: intro-settle 1.6s var(--ease-out-soft) 2s backwards;
+}
+@keyframes intro-settle {
+  from {
+    translate: 0 26px;
+    scale: 1.03;
+    transform-origin: 50% 0;
+  }
+}
+html[data-intro="play"] .hero-deck {
+  animation-delay: 2.5s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro {
+    display: none !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
    Scroll choreography (DESIGN_DIRECTION.md §12). Scroll-driven CSS animations
    — they run on the compositor, tied to the scrollbar, and only where the
    browser supports them (Chromium; elsewhere the page is simply still) and
@@ -1433,11 +1665,6 @@ a.animated-button {
   }
 }
 
-/* buttons in the page lean toward the pointer (components/brand/glassPointer.js) */
-[data-magnet] {
-  transition: translate 0.55s cubic-bezier(0.22, 1.3, 0.36, 1), background-color 0.3s ease-out, color 0.3s ease-out, border-color 0.3s ease-out, opacity 0.3s ease-out;
-}
-
 /* ---------------------------------------------------------------------------
    Liquid glass (DESIGN_DIRECTION.md §11). A `.glass` surface is clear, bright-
    rimmed glass: where the browser allows (Chromium — components/brand/
@@ -1500,7 +1727,7 @@ a.animated-button {
   -webkit-backdrop-filter: blur(var(--g-blur, 22px)) saturate(1.7);
   backdrop-filter: blur(var(--g-blur, 22px)) saturate(1.7);
   box-shadow: var(--g-shadow); /* (no CSS border: the one rim is ::after, so there is never a double line) */
-  transition: transform 0.6s var(--ease-out-soft), translate 0.55s cubic-bezier(0.22, 1.3, 0.36, 1), scale 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s var(--ease-out-soft), background-color 0.4s, --ang 0.45s ease-out, --yl 0.5s ease;
+  transition: transform 0.6s var(--ease-out-soft), scale 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s var(--ease-out-soft), background-color 0.4s, --ang 0.45s ease-out, --yl 0.5s ease;
 }
 /* liquid: clear glass, refracted backdrop, a whisper of tint */
 .glass[data-liquid] {
@@ -1574,12 +1801,9 @@ html[data-glass="frost"] .glass-dense[data-liquid] {
 .glass:focus-within {
   --yl: 1;
 }
-/* small controls swell and squish like a drop of liquid */
-.glass-pop:hover {
-  scale: 1.045;
-}
+/* small glass controls give a small press (no movement on hover) */
 .glass-pop:active {
-  scale: 0.95;
+  scale: 0.96;
 }
 [data-tilt] {
   transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
@@ -1591,10 +1815,6 @@ html[data-glass="frost"] .glass-dense[data-liquid] {
    hang below it */
 .glass-bar {
   transition: translate 0.6s var(--ease-out-soft), transform 0.6s var(--ease-out-soft), color 0.5s ease, scale 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s var(--ease-out-soft), --ang 0.45s ease-out, --yl 0.5s ease;
-}
-/* the pill swells a touch toward you, like a drop of liquid */
-.glass-bar:hover {
-  scale: 1.005 1.07;
 }
 /* the phone menu sheet */
 .glass-sheet {
@@ -1649,9 +1869,7 @@ html[data-glass="flat"] .glass-sheet {
   .glass-bar {
     transition: none;
   }
-  .glass-pop:hover,
-  .glass-pop:active,
-  .glass-bar:hover {
+  .glass-pop:active {
     scale: 1;
   }
   [data-tilt] {

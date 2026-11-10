@@ -66,7 +66,7 @@ export default function Button({
         onClick={onClick}
         disabled={disabled}
         className={classes}
-        data-magnet=""
+
         {...rest}
       >
         {inner}
@@ -79,7 +79,7 @@ export default function Button({
       <a
         href={href}
         className={classes}
-        data-magnet=""
+
         {...(newTab ? { target: "_blank", rel: "noopener noreferrer" } : {})}
         {...rest}
       >
@@ -89,7 +89,7 @@ export default function Button({
     );
   }
   return (
-    <Link href={href} className={classes} data-magnet="" {...rest}>
+    <Link href={href} className={classes} {...rest}>
       {inner}
     </Link>
   );
