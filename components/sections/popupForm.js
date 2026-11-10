@@ -220,7 +220,7 @@ export default function ConsultationPopup({ content }) {
           {/* right: the form */}
           <div className="p-6 pt-16 md:p-10">
             <p className="font-display text-3xl leading-tight md:hidden">{headerTitle}</p>
-            <form onSubmit={handleSubmit} className="mt-4 space-y-6 md:mt-0">
+            <form onSubmit={handleSubmit} data-bizzbee-avoid className="mt-4 space-y-6 md:mt-0">
               <label className="block">
                 <span className="kicker text-fog">Your name</span>
                 <input ref={firstFieldRef} name="name" type="text" autoComplete="name" placeholder="Full name" value={form.name} onChange={handleChange} className="w-full border-0 border-b border-white/25 bg-transparent px-0 py-3 text-base text-white placeholder:text-white/40 focus:border-buzz focus:outline-none focus:ring-0" required />

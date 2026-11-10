@@ -44,9 +44,9 @@ export default function PageHero({ label, parent, title, tagline, description, a
             {children}
           </div>
           {buttons.length > 0 && (
-            <div className="flex flex-wrap items-start gap-3 md:col-span-4 md:justify-end">
+            <div className="flex flex-wrap items-start gap-3 md:col-span-4">
               {buttons.map(({ text, href, variant }, i) => (
-                <Button key={text} href={href} size="lg" variant={variant === "outline" || i > 0 ? "outline" : "solid"}>
+                <Button key={text} href={href} data-bizzbee-avoid size="lg" variant={variant === "outline" || i > 0 ? "outline" : "solid"}>
                   {text}
                 </Button>
               ))}
@@ -56,7 +56,7 @@ export default function PageHero({ label, parent, title, tagline, description, a
         {(media || showPhoto) && (
           <div className="mt-6 md:mt-8">
             {media || (
-              <div className="relative aspect-[16/9] overflow-hidden bg-paper-2 md:aspect-[21/9]">
+              <div style={{ position: "relative" }} className="relative aspect-[16/9] overflow-hidden bg-paper-2 md:aspect-[21/9]">
                 <Image src={image} alt={imageAlt} fill preload fetchPriority="high" sizes="(min-width: 1440px) 1360px, 100vw" className="object-cover" />
               </div>
             )}

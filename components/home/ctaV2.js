@@ -56,7 +56,7 @@ export default function CtaV2({ content }) {
                 Thanks — we’ve got your email and will reply within one working day.
               </p>
             ) : (
-              <form onSubmit={submit}>
+              <form onSubmit={submit} data-bizzbee-avoid>
                 <label htmlFor="cta-email" className="kicker text-(--mut)">{emailLabel}</label>
                 <div className="mt-3 flex items-center gap-3 border-b border-(--fg) pb-3">
                   <input

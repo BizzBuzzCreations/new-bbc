@@ -5,7 +5,7 @@ import { MapPin } from "lucide-react";
 import { RICH_TEXT_CLASS, richTextHTML, richTextScopeClass } from "@/components/ui/richText";
 import Button from "@/components/brand/button";
 import TypedWord from "@/components/brand/typedWord";
-import { ClockLine } from "@/components/brand/clock";
+import HeroField from "@/components/brand/heroField";
 import { toneWords } from "@/components/brand/accentText";
 import { heroImageSource } from "@/components/sections/homeHero";
 import { INDUSTRIES } from "@/lib/siteNav";
@@ -73,8 +73,9 @@ export default function HeroHome({ content, secondaryCta, mediaChoice = false, l
   }, [chosenVideo]);
 
   return (
-    <section className="on-paper relative flex min-h-[92svh] flex-col pb-10 pt-24 md:pt-32">
-      <div className="wrap flex flex-1 flex-col">
+    <section className="on-paper relative isolate flex min-h-[92svh] flex-col pb-8 pt-24 md:pt-28">
+      <HeroField />
+      <div className="wrap relative z-10 flex flex-1 flex-col">
         <div className="flex flex-wrap items-center justify-between gap-4">
           {locationLine ? (
             <p className="kicker flex items-center gap-2 text-(--fg)">
@@ -84,10 +85,10 @@ export default function HeroHome({ content, secondaryCta, mediaChoice = false, l
           ) : (
             <p className="kicker text-(--mut)">Digital marketing · Software · AI · BPO</p>
           )}
-          <ClockLine className="hidden text-(--mut) md:inline-flex" />
+          <p className="kicker hidden text-(--mut) md:block">Prayagraj · Kanpur · London</p>
         </div>
 
-        <h1 className="font-display mt-8 text-[clamp(3rem,9.6vw,10.5rem)] leading-[0.9] tracking-[-0.055em] md:mt-12">
+        <h1 className="font-display mt-6 text-[clamp(3rem,min(9.6vw,18.5svh),10.5rem)] leading-[0.9] tracking-[-0.055em] md:mt-8">
           <span className="sr-only">{lines.flat().map((x) => x.w).join(" ")}</span>
           <span aria-hidden="true" className="block">
             {lines.map((row, i) => (
@@ -107,24 +108,7 @@ export default function HeroHome({ content, secondaryCta, mediaChoice = false, l
           </span>
         </h1>
 
-        {inFrame && (
-          <div className="relative mt-12 aspect-[16/8] overflow-hidden bg-paper-2 md:mt-16">
-            {chosenVideo ? (
-              videoReady && <video key={chosenVideo} src={chosenVideo} autoPlay muted loop playsInline preload="metadata" className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden" />
-            ) : (
-              // eslint-disable-next-line @next/next/no-img-element -- dashboard upload with its own srcset (Cloudinary)
-              <img src={image.src} srcSet={image.srcSet} sizes="100vw" alt="" decoding="async" fetchPriority="high" className="absolute inset-0 h-full w-full object-cover" />
-            )}
-            {office && (
-              <p className="kicker absolute bottom-4 left-4 flex items-center gap-2 bg-paper px-3 py-2 text-ink">
-                <MapPin size={13} aria-hidden="true" className="shrink-0" />
-                {office.label} <span className="text-stone">· {office.line}</span>
-              </p>
-            )}
-          </div>
-        )}
-
-        <div className="mt-auto grid gap-8 border-t border-(--line) pt-8 md:mt-12 md:grid-cols-12 md:items-end">
+        <div className={`grid gap-8 border-t border-(--line) pt-6 md:grid-cols-12 md:items-end ${inFrame ? "mt-8" : "mt-auto md:mt-8"}`}>
           <p className="kicker text-(--mut) md:col-span-3">
             Working with
             <span className="font-display mt-2 block h-[1.2em] text-[1.6rem] normal-case leading-none tracking-[-0.03em] text-(--fg)">
@@ -136,16 +120,33 @@ export default function HeroHome({ content, secondaryCta, mediaChoice = false, l
             <div className={`mt-3 max-w-md text-[0.9375rem] leading-relaxed text-(--mut) ${RICH_TEXT_CLASS} ${richTextScopeClass(subtext)}`} dangerouslySetInnerHTML={richTextHTML(subtext)} />
           </div>
           <div className="flex flex-wrap gap-3 md:col-span-4">
-            <Button href={ctaLink} variant="solid" size="lg">
+            <Button href={ctaLink} data-bizzbee-avoid variant="solid" size="lg">
               {ctaText}
             </Button>
             {secondaryCta?.text && (
-              <Button href={secondaryCta.href} variant="outline" size="lg">
+              <Button href={secondaryCta.href} data-bizzbee-avoid variant="outline" size="lg">
                 {secondaryCta.text}
               </Button>
             )}
           </div>
         </div>
+
+        {inFrame && (
+          <div className="relative mt-8 aspect-[16/8] overflow-hidden bg-paper-2 md:mt-10">
+            {chosenVideo ? (
+              videoReady && <video key={chosenVideo} src={chosenVideo} autoPlay muted loop playsInline preload="metadata" className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden" />
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element -- dashboard upload with its own srcset (Cloudinary)
+              <img src={image.src} srcSet={image.srcSet} sizes="100vw" alt="" decoding="async" loading="eager" fetchPriority="high" className="absolute inset-0 h-full w-full object-cover" />
+            )}
+            {office && (
+              <p className="kicker absolute bottom-4 left-4 flex items-center gap-2 bg-paper px-3 py-2 text-ink">
+                <MapPin size={13} aria-hidden="true" className="shrink-0" />
+                {office.label} <span className="text-stone">· {office.line}</span>
+              </p>
+            )}
+          </div>
+        )}
       </div>
     </section>
   );

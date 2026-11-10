@@ -60,19 +60,35 @@ hairlines and 128–224 px of air, not by boxes or shadows. Corners are sharp
 
 ## 5. Navigation
 
-Header: logo · live time · **Menu** · "Start a project" — nothing else.
-**Menu** opens a full-screen overlay on every screen size (Mira / Kerna):
-left, huge links (Services, Industries, Company, Insights, Contact); right,
-the links of the one you hover (the 8 service lines with their 44
-sub-services; the 15 industries; company pages). Phones: the same as
-accordions. Esc closes; focus is trapped and returned.
+*(Revised 2026-11-10 — the single "Menu" button hid everything behind a
+click; on a 1350 px laptop the full-screen menu also ran under the logo.)*
+
+Desktop (≥ 1024 px): the logo, four links in the bar — **Services,
+Industries, Company, Insights** — the live time (≥ 1280 px) and **Start a
+project**. Services, Industries and Company hang a full-width ink panel from
+the bar: Services shows the 8 lines with their 44 services in four columns,
+Industries the 15 sectors as large type, Company the company pages with the
+contact details and clocks. Opens on hover after a short delay (a mouse
+passing through does nothing), on click (which pins it) and on Enter / ↓
+(which moves focus into it); Esc closes it and returns focus to its button; a
+veil dims the page behind. The current section carries an underline.
+Phones and tablets (< 1024 px): **Menu** opens a full-screen sheet beneath the
+solid bar (no collisions): the same links as accordions (Services → 8 lines →
+their services), "Start a project", contacts and clocks. The header hides on
+the way down and returns on the way up; it turns ink-coloured and solid while
+a panel or the sheet is open.
 
 ## 6. Motion (purposeful, never required to read)
 
 Hero lines rise from a mask on load (transform only); statement words fill on
 scroll; numbers count up when they arrive; service cells invert on hover with
 a cursor-following label; the hero's last line types through the industries
-we serve; the menu opens as a curtain. No auto-playing carousels, no
+we serve; the phone menu opens as a curtain; the home hero sits on a **dot
+field** (`components/brand/heroField.js`): a grid of small dots over which a
+warm yellow light follows the pointer — the dots near it swell, darken and
+part, a click sends a ring across — and, with nobody touching it, drifts on
+its own path (so phones see it too). One 2D canvas, started when the browser
+is idle, paused off-screen, a still frame under reduced motion / Data Saver. No auto-playing carousels, no
 scroll-jacking, no pop-up on arrival (Mira's pop-up was the one thing to
 avoid); everything is still under `prefers-reduced-motion`.
 
@@ -116,3 +132,23 @@ Built across every public page through the shared primitives in
   hover, counting numbers, industries dimming, inline video playback and
   one-at-a-time, reviews, FAQ, CTA and contact forms sending, phone menu,
   reduced motion fully still).
+
+## 10. Revision 2026-11-10 (owner feedback: "so many bugs", navbar, hero)
+
+- **Menu overlap fixed** — the full-screen menu started under the fixed logo
+  and its rows collided with the header. Replaced by the inline nav + panels
+  (desktop) and a sheet that starts below a solid bar (phones).
+- **Hero** — type size follows the viewport height as well as its width
+  (`min(9.6vw, 18.5svh)`), so "Get a Free Consultation" is above the fold on
+  1350 × 655 / 1366 × 768 laptops; location pages put the framed video
+  *after* the CTA row (it pushed the CTA 1,300 px down); the second clock
+  that duplicated the header's is gone from the hero and detail heroes.
+- **BizzBee never sits on a CTA** — hero buttons and the form fields carry
+  `data-bizzbee-avoid`, so the launcher steps aside while one is under it
+  (the hero buttons used to sit right under it on laptops).
+- **Dev gotcha** — Tailwind reads every word in the source as a possible
+  class, and `!word` as that class with the old important prefix. `!dark`
+  (e.g. `hidden && !dark ? …`) matched flowbite's `.dark` apexcharts rules,
+  which carry a doubled `!important` and break the CSS build ("Parsing CSS
+  source code failed", every page 500). Don't name a variable after a
+  flowbite class and negate it (`onInk` is used instead).

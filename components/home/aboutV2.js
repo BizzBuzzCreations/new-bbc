@@ -1,9 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
 import RichText from "@/components/ui/richText";
 import Button from "@/components/brand/button";
 import Kicker from "@/components/brand/kicker";
 import AccentText from "@/components/brand/accentText";
 import Statement from "@/components/brand/statement";
+import { SERVICE_LINES } from "@/lib/siteNav";
 
 // About: the team's real photograph across the full width (grayscale, colour
 // on hover), the statement (zoomTagline) filling in word by word, then the
@@ -26,7 +28,7 @@ export default function AboutV2({ content, showStatement = true }) {
     <section aria-labelledby="about-heading" className="on-paper relative">
       <div className="wrap">
         <figure>
-          <div className="group relative aspect-[16/9] overflow-hidden bg-paper-2 md:aspect-[21/9]">
+          <div style={{ position: "relative" }} className="group relative aspect-[16/9] overflow-hidden bg-paper-2 md:aspect-[21/9]">
             <Image src={photo} alt="The BizzBuzz Creations team at work" fill sizes="(min-width: 1440px) 1360px, 100vw" className="object-cover grayscale transition-[filter,transform] duration-1000 ease-out-soft group-hover:scale-[1.02] group-hover:grayscale-0" />
           </div>
           <figcaption className="kicker mt-3 flex justify-between text-(--mut)">
@@ -36,8 +38,17 @@ export default function AboutV2({ content, showStatement = true }) {
         </figure>
 
         <div className="grid gap-10 border-t border-(--line) py-7 md:py-10 lg:grid-cols-12 lg:gap-10">
-          <div className="lg:col-span-7">
+          <div className="lg:sticky lg:top-28 lg:col-span-7 lg:self-start">
             {showStatement && <Statement text={statement} className="max-w-[16ch] text-[clamp(2.4rem,5.6vw,6rem)] leading-[0.96] tracking-[-0.045em]" />}
+            <ul aria-label="Our service lines" className="mt-8 flex flex-wrap gap-2">
+              {SERVICE_LINES.map((s) => (
+                <li key={s.href}>
+                  <Link href={s.href} className="inline-flex items-center rounded-full border border-(--fg)/25 px-3.5 py-1.5 text-sm transition-colors duration-200 hover:border-(--fg) hover:bg-(--fg) hover:text-(--bg)">
+                    {s.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
           <div className="lg:col-span-4 lg:col-start-9">
             <Kicker>{eyebrow}</Kicker>

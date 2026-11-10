@@ -51,7 +51,7 @@ export default function ClientVideoWall({ items }) {
                     className="absolute inset-0 h-full w-full"
                   />
                 ) : (
-                  <button type="button" onClick={() => setPlaying(v.id)} aria-label={`Play the video testimonial from ${v.name}`} className="group absolute inset-0 block text-left">
+                  <button type="button" onClick={() => setPlaying(v.id)} aria-label={`Play the video testimonial from ${v.name}`} style={{ position: "absolute" }} className="group absolute inset-0 block text-left">
                     {v.cover.startsWith("/") ? (
                       <Image src={v.cover} alt="" fill sizes="(min-width: 1024px) 304px, 68vw" className="object-cover transition-transform duration-700 ease-out-soft group-hover:scale-[1.03]" draggable={false} />
                     ) : (

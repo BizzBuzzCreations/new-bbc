@@ -37,7 +37,7 @@ export default function LocationAboutV2({ content, showGlance = true }) {
               <Pill href={buttonLink} variant="ink" srText="about BizzBuzz Creations">{buttonText}</Pill>
             </div>
           </div>
-          <div className="relative mx-auto aspect-[4/3] w-full max-w-[560px] overflow-hidden rounded-[20px] bg-paper-2">
+          <div style={{ position: "relative" }} className="relative mx-auto aspect-[4/3] w-full max-w-[560px] overflow-hidden rounded-[20px] bg-paper-2">
             <Image src={photo} alt="The BizzBuzz Creations team at work" fill sizes="(min-width: 1280px) 560px, (min-width: 768px) 45vw, 100vw" className="object-cover" />
           </div>
         </div>

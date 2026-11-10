@@ -257,7 +257,7 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
                 </button>
               </div>
             ) : (
-              <form ref={formRef} onSubmit={onSubmit} noValidate>
+              <form ref={formRef} onSubmit={onSubmit} noValidate data-bizzbee-avoid>
                 <Sub className="font-display text-3xl leading-tight md:text-4xl">
                   <AccentText text={formHeading} />
                 </Sub>
