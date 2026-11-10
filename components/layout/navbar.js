@@ -367,11 +367,11 @@ export default function Navbar() {
                 !e.currentTarget.contains(e.relatedTarget) &&
                 hideBlob()
               }
-              className="relative ml-4 hidden items-center gap-1 lg:flex"
+              className="group/nav relative ml-4 hidden items-center gap-1 lg:flex"
             >
               {NAV.map((n) => {
                 const here = section === n.key;
-                const mark = `pointer-events-none absolute inset-x-4 bottom-1.5 h-px origin-left bg-(--fg) transition-transform duration-300 ease-out-soft ${here || panel === n.key ? "scale-x-100" : "scale-x-0"}`;
+                const mark = `pointer-events-none absolute inset-x-4 bottom-1.5 h-px origin-left bg-(--fg) transition-transform duration-300 ease-out-soft ${here && !panel ? "scale-x-100 group-hover/nav:opacity-0 group-focus-within/nav:opacity-0" : "scale-x-0"}`;
                 const cls =
                   "group relative flex h-11 items-center gap-1.5 rounded-full px-4 text-[0.9375rem] font-medium";
                 if (!n.panel) {
@@ -425,9 +425,9 @@ export default function Navbar() {
               <span
                 ref={blob}
                 aria-hidden="true"
-                data-lg-lens=""
-                data-lg-bezel="20"
-                data-lg-scale="1.3"
+                data-lg-blob=""
+                data-lg-bezel="12"
+                data-lg-scale="1.1"
                 data-lg-chroma="off"
                 className="glass pointer-events-none absolute left-0 top-1/2 z-10 h-[46px] w-[124px] -translate-y-1/2 rounded-full opacity-0 [scale:0.7]"
                 style={{
