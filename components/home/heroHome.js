@@ -2,11 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { MapPin } from "lucide-react";
-import { RICH_TEXT_CLASS, richTextHTML, richTextScopeClass } from "@/components/ui/richText";
+import {
+  RICH_TEXT_CLASS,
+  richTextHTML,
+  richTextScopeClass,
+} from "@/components/ui/richText";
 import Button from "@/components/brand/button";
 import TypedWord from "@/components/brand/typedWord";
 import HeroField from "@/components/brand/heroField";
-import GlassLens from "@/components/brand/glassLens";
 import { toneWords } from "@/components/brand/accentText";
 import { heroImageSource } from "@/components/sections/homeHero";
 import { INDUSTRIES } from "@/lib/siteNav";
@@ -19,7 +22,12 @@ function toLines(words, count = 3) {
   let len = 0;
   words.forEach((x, i) => {
     const row = lines[lines.length - 1];
-    if (row.length && len + (x.w.length + 1) / 2 > target && lines.length < count && words.length - i >= 1) {
+    if (
+      row.length &&
+      len + (x.w.length + 1) / 2 > target &&
+      lines.length < count &&
+      words.length - i >= 1
+    ) {
       lines.push([]);
       len = 0;
     }
@@ -40,16 +48,27 @@ function toLines(words, count = 3) {
 // Background Video (or Image) as a wide frame under the headline, with
 // `office` ({ label, line }) as its tag. `stats` etc. are accepted for the
 // old call sites (numbers have their own section now).
-export default function HeroHome({ content, secondaryCta, mediaChoice = false, locationLine = "", framed = false, office = null }) {
-  const heading = content?.heroHeading || "India’s Trusted Digital Marketing Agency";
-  const subheading = content?.heroSubheading || "Turn Clicks Into Customers With Data-Driven Digital Marketing";
+export default function HeroHome({
+  content,
+  secondaryCta,
+  mediaChoice = false,
+  locationLine = "",
+  framed = false,
+  office = null,
+}) {
+  const heading =
+    content?.heroHeading || "India’s Trusted Digital Marketing Agency";
+  const subheading =
+    content?.heroSubheading ||
+    "Turn Clicks Into Customers With Data-Driven Digital Marketing";
   const subtext =
     content?.heroSubtext ||
     "Looking for a trusted digital marketing agency in Prayagraj that helps your business generate more leads, increase website traffic, and grow revenue? Welcome to BizzBuzz Creations.";
   const ctaText = content?.heroCtaText || "Get a Free Consultation";
   const ctaLink = content?.heroCtaLink || "/contact";
   const chosenVideo = mediaChoice ? content?.heroVideo : "";
-  const chosenImage = mediaChoice && !chosenVideo ? content?.heroPosterImage : "";
+  const chosenImage =
+    mediaChoice && !chosenVideo ? content?.heroPosterImage : "";
   const image = heroImageSource(chosenImage);
   const inFrame = framed && Boolean(chosenVideo || chosenImage);
   const lines = toLines(toneWords(heading));
@@ -62,7 +81,10 @@ export default function HeroHome({ content, secondaryCta, mediaChoice = false, l
     let id;
     const start = () => {
       const run = () => setVideoReady(true);
-      id = "requestIdleCallback" in window ? window.requestIdleCallback(run, { timeout: 2500 }) : window.setTimeout(run, 1200);
+      id =
+        "requestIdleCallback" in window
+          ? window.requestIdleCallback(run, { timeout: 2500 })
+          : window.setTimeout(run, 1200);
     };
     if (document.readyState === "complete") start();
     else window.addEventListener("load", start, { once: true });
@@ -76,7 +98,6 @@ export default function HeroHome({ content, secondaryCta, mediaChoice = false, l
   return (
     <section className="on-paper relative isolate flex min-h-[92svh] flex-col pb-8 pt-24 md:pt-28">
       <HeroField />
-      <GlassLens />
       <div className="wrap relative z-10 flex flex-1 flex-col">
         <div className="flex flex-wrap items-center justify-between gap-4">
           {locationLine ? (
@@ -85,16 +106,29 @@ export default function HeroHome({ content, secondaryCta, mediaChoice = false, l
               {locationLine}
             </p>
           ) : (
-            <p className="kicker text-(--mut)">Digital marketing · Software · AI · BPO</p>
+            <p className="kicker text-(--mut)">
+              Digital marketing · Software · AI · BPO
+            </p>
           )}
-          <p className="kicker hidden text-(--mut) md:block">Prayagraj · Kanpur · London</p>
+          <p className="kicker hidden text-(--mut) md:block">
+            Prayagraj · Kanpur · London
+          </p>
         </div>
 
         <h1 className="font-display mt-6 text-[clamp(3rem,min(9.6vw,17svh),10.5rem)] leading-[0.9] tracking-[-0.055em] md:mt-8">
-          <span className="sr-only">{lines.flat().map((x) => x.w).join(" ")}</span>
+          <span className="sr-only">
+            {lines
+              .flat()
+              .map((x) => x.w)
+              .join(" ")}
+          </span>
           <span aria-hidden="true" className="block">
             {lines.map((row, i) => (
-              <span key={i} className="-mb-[0.1em] block overflow-hidden pb-[0.1em]" style={{ "--i": i }}>
+              <span
+                key={i}
+                className="-mb-[0.1em] block overflow-hidden pb-[0.1em]"
+                style={{ "--i": i }}
+              >
                 <span
                   className="block motion-safe:animate-[line-up_1.1s_var(--ease-out-soft)_both] lg:[margin-left:calc(var(--i)*7.5vw)]"
                   style={{ animationDelay: `${i * 90}ms` }}
@@ -110,7 +144,11 @@ export default function HeroHome({ content, secondaryCta, mediaChoice = false, l
           </span>
         </h1>
 
-        <div data-tilt data-lg-off className={`glass glass-calm relative grid gap-6 rounded-[28px] p-5 md:grid-cols-12 md:items-end md:gap-8 md:p-7 ${inFrame ? "mt-8" : "mt-auto md:mt-8"}`}>
+        <div
+          data-tilt
+          data-lg-off
+          className={`glass glass-calm relative grid gap-6 rounded-[28px] p-5 md:grid-cols-12 md:items-end md:gap-8 md:p-7 ${inFrame ? "mt-8" : "mt-auto md:mt-8"}`}
+        >
           <p className="kicker text-(--mut) md:col-span-3">
             Working with
             <span className="font-display mt-2 block h-[1.2em] text-[1.6rem] normal-case leading-none tracking-[-0.03em] text-(--fg)">
@@ -118,15 +156,25 @@ export default function HeroHome({ content, secondaryCta, mediaChoice = false, l
             </span>
           </p>
           <div className="md:col-span-5">
-            <p className="text-lg font-medium leading-snug md:text-xl">{subheading}</p>
-            <div className={`mt-3 max-w-md text-[0.9375rem] leading-relaxed text-(--mut) ${RICH_TEXT_CLASS} ${richTextScopeClass(subtext)}`} dangerouslySetInnerHTML={richTextHTML(subtext)} />
+            <p className="text-lg font-medium leading-snug md:text-xl">
+              {subheading}
+            </p>
+            <div
+              className={`mt-3 max-w-md text-[0.9375rem] leading-relaxed text-(--mut) ${RICH_TEXT_CLASS} ${richTextScopeClass(subtext)}`}
+              dangerouslySetInnerHTML={richTextHTML(subtext)}
+            />
           </div>
           <div className="flex flex-wrap gap-3 md:col-span-4">
             <Button href={ctaLink} data-bizzbee-avoid variant="solid" size="lg">
               {ctaText}
             </Button>
             {secondaryCta?.text && (
-              <Button href={secondaryCta.href} data-bizzbee-avoid variant="glass" size="lg">
+              <Button
+                href={secondaryCta.href}
+                data-bizzbee-avoid
+                variant="glass"
+                size="lg"
+              >
                 {secondaryCta.text}
               </Button>
             )}
@@ -136,15 +184,36 @@ export default function HeroHome({ content, secondaryCta, mediaChoice = false, l
         {inFrame && (
           <div className="relative mt-8 aspect-[16/8] overflow-hidden bg-paper-2 md:mt-10">
             {chosenVideo ? (
-              videoReady && <video key={chosenVideo} src={chosenVideo} autoPlay muted loop playsInline preload="metadata" className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden" />
+              videoReady && (
+                <video
+                  key={chosenVideo}
+                  src={chosenVideo}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
+                />
+              )
             ) : (
               // eslint-disable-next-line @next/next/no-img-element -- dashboard upload with its own srcset (Cloudinary)
-              <img src={image.src} srcSet={image.srcSet} sizes="100vw" alt="" decoding="async" loading="eager" fetchPriority="high" className="absolute inset-0 h-full w-full object-cover" />
+              <img
+                src={image.src}
+                srcSet={image.srcSet}
+                sizes="100vw"
+                alt=""
+                decoding="async"
+                loading="eager"
+                fetchPriority="high"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
             )}
             {office && (
               <p className="kicker absolute bottom-4 left-4 flex items-center gap-2 bg-paper px-3 py-2 text-ink">
                 <MapPin size={13} aria-hidden="true" className="shrink-0" />
-                {office.label} <span className="text-stone">· {office.line}</span>
+                {office.label}{" "}
+                <span className="text-stone">· {office.line}</span>
               </p>
             )}
           </div>

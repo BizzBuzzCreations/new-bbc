@@ -198,3 +198,25 @@ refraction filter is built once; the squash is a Web Animation), and magnifies
 the label under it. Fades away when the pointer leaves; still under reduced
 motion.
 
+## 12. Homepage interaction round (2026-11-10)
+
+- **Services is a selector, not a grid** (`components/home/servicesExplorer.js`,
+  `servicesV2.js`): the 8 lines as large rows; a liquid-glass highlight slides
+  to the one you point at / focus / (phones) tap, stretching on the way, and the
+  right-hand panel shows that line's name, dashboard text, its services and an
+  "Explore" button. All panels stay in the page (inactive ones `inert`), so all
+  44 sub-service links remain crawlable; rows still link to their hub pages;
+  keyboard: focus or ↑ ↓ selects. Phones: the rows become a scrolling strip of
+  chips above the panel (the strip scrolls itself, never the page).
+- **Numbers** are four liquid-glass tiles (tilt toward the pointer) and glass
+  certification chips on the dark band.
+- **Tried and removed on request:** a pointer-following liquid cursor lens (with
+  "Play" / "View" bubbles) and a yellow metaball field behind the numbers. Lesson
+  kept: an SVG refraction filter is drawn for an element's exact size and does
+  **not** scale with a CSS transform — use real sizes (one element per size),
+  never `scale()`, for a lens.
+- Layout fix found on the way: a flex strip with `overflow-x: auto` inside a CSS
+  grid item needs `min-w-0` on the item, and a stack of `grid-area: 1/1` panels
+  needs `grid-cols-[minmax(0,1fr)]`, or the grid grows to the widest content and
+  the whole page widens on phones.
+

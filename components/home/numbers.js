@@ -19,29 +19,49 @@ export default function Numbers({ stats }) {
   // facts about the business itself fill the row when the dashboard has fewer than four figures
   const facts = [
     { value: "3", label: "Offices — Prayagraj, Kanpur, London" },
-    { value: String(SUB_SERVICE_COUNT), label: `Services in ${SERVICE_LINES.length} lines of work` },
+    {
+      value: String(SUB_SERVICE_COUNT),
+      label: `Services in ${SERVICE_LINES.length} lines of work`,
+    },
   ];
   for (const f of facts) if (list.length < 4) list.push(f);
   return (
     <section aria-label="BizzBuzz Creations in numbers" className="on-ink">
       <div className="wrap py-7 md:py-10">
-        <dl className="grid border-t border-(--line) sm:grid-cols-2 lg:grid-cols-4">
+        <dl className="grid gap-3 sm:grid-cols-2 md:gap-4 lg:grid-cols-4">
           {list.map(({ value, label }, i) => (
-            <div key={`${label}-${i}`} className="border-b border-(--line) py-10 sm:pr-8 lg:border-b-0 lg:border-r lg:px-8 lg:first:pl-0 lg:last:border-r-0">
-              <dd className="font-display text-[clamp(4rem,9vw,9.5rem)] leading-[0.9] tracking-[-0.06em]">
+            <div
+              key={`${label}-${i}`}
+              data-tilt
+              data-lg-bezel="30"
+              data-lg-scale="1.3"
+              className="glass glass-calm relative rounded-[28px] p-6 md:p-8"
+            >
+              <dd className="font-display text-[clamp(3.4rem,7vw,7.5rem)] leading-[0.9] tracking-[-0.06em]">
                 <CountUp value={value} />
               </dd>
-              <dt className="kicker mt-5 text-(--mut)">{label}</dt>
+              <dt className="kicker mt-5 text-(--fg)/80">{label}</dt>
             </div>
           ))}
         </dl>
-        <ul aria-label="Certifications" className="mt-8 flex flex-wrap gap-x-10 gap-y-5">
+        <ul aria-label="Certifications" className="mt-6 flex flex-wrap gap-3">
           {BADGES.map((b) => (
-            <li key={b.title} className="flex items-center gap-3">
-              <Image src={b.src} alt="" width={32} height={32} className="h-8 w-8 rounded-full bg-white object-contain p-0.5" />
+            <li
+              key={b.title}
+              className="glass glass-calm relative flex items-center gap-3 rounded-full py-2 pl-2 pr-5"
+              data-lg-bezel="14"
+              data-lg-scale="1"
+            >
+              <Image
+                src={b.src}
+                alt=""
+                width={32}
+                height={32}
+                className="h-8 w-8 rounded-full bg-white object-contain p-0.5"
+              />
               <span className="text-sm leading-tight">
                 <span className="block font-medium">{b.title}</span>
-                <span className="text-(--mut)">{b.sub}</span>
+                <span className="text-(--fg)/75">{b.sub}</span>
               </span>
             </li>
           ))}
