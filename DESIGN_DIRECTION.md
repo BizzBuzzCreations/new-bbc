@@ -498,9 +498,9 @@ post header is capped at 60 rem so a 1.91:1 picture is not 700 px tall. `blogcov
 **No codes.** "BBC-01" / "PRD-01" are gone from the build section: plain 01, 02… (and
 a "+" on the closing "Need a system like these?" row).
 
-Note for the owner: every `team-*.jpeg` carries Google's visible Gemini ✦ mark in its
-bottom-right corner (some twice) — they are AI-made or AI-edited images. Better: swap
-in the original camera photos (or say they are illustrative).
+Note for the owner: every `team-*.jpeg` carried Google's visible Gemini ✦ mark in its
+bottom-right corner (some twice) — see 15g: the corner is now trimmed off the files.
+Better still: swap in the original camera photos.
 
 ### 15f. Header glass: a pane behind the content; the register in ink (2026-11-11)
 
@@ -526,3 +526,77 @@ while the rest settle to the quiet grey, and an ink hairline is drawn under it f
 the left (nothing until the row is well in the light, so no stubs); hover = a 4 % ink
 tint + the same full-ink reading. Only under scroll-timeline support (else plain
 ink); the closing action row is never dimmed. `regfx.mjs`.
+
+### 15g. The "what else" round (2026-11-11)
+
+- **Team photos, watermark gone.** The Gemini ✦ sat within ~260 px of the bottom-right
+  corner of the twelve `team-1…14.jpeg` (a second, larger ghost on some). Those 270 px
+  are trimmed off the *files* (both edges; 2400×1792 → 2130×1522, JPEG q94), so it is
+  gone everywhere the photos are used (team film, career, about, locality blocks), not
+  just in one crop. The originals are in git history. `team-bpo/rnd.jpeg` carried no
+  mark and were left alone. Photos saved in the dashboard (Cloudinary) are untouched —
+  swap those for the camera originals if they carry the mark too.
+- **/career has the film strip** (`PhotoFilm`, label "Life at BizzBuzz Creations"); the
+  small slideshow is no longer used by any page. Default photos changed so the strip
+  does not repeat the photo further down the page (saved `careerHeroSlides` still win).
+- **Phones and tablets get the stack** (`components/home/heroLayers.js`, "layers" in
+  globals.css; `lg:hidden`, so it never shows with the 3D stack): the brand card
+  (ink, the real "44 services in 8 lines") plus the eight service lines as a swipe row —
+  paper slabs a shade darker down the row, the yellow rim, the yellow dot, real links
+  with the full service name as their label, press = the face turns yellow, bleed to the
+  screen edges, scroll-snap, a fade at the right edge. Cards land one after another with
+  the page and ease up to full size as they swipe in (`view(inline)`, `scale` only);
+  nothing animates under reduced motion. The "Recognised by" badges are a 2×2 grid on
+  phones (they wrapped raggedly before). `layers.mjs`: 58 checks on `/` and the UK page
+  at 360/390/820 (+ hidden at 1100/1440, tap navigates, reduced motion).
+- **Section heads on tablets** (`SectionHead`): the supporting text was squeezed into a
+  ~150 px column at the far right between 768 and 1023 px. The two-column layout now
+  starts at `lg` (1024); below it the text sits under the heading (max 36rem). Laptops
+  and up are unchanged.
+
+### 15h. Speed check, local build only (2026-11-12)
+
+Lighthouse 13.6 (mobile, simulated Slow-4G + 4× CPU, median of 3, local production build
+— never the live site). The two columns are the earlier run on 2026-11-09 and now:
+
+| page | perf | LCP | CLS | TBT |
+|---|---|---|---|---|
+| home | 86 → **79** | 1.67 → 1.60 s | 0.005 → 0.001 | 519 → 577 ms |
+| UK | 88 → 91 | 1.53 → 1.56 s | 0.005 → 0 | 443 → 350 ms |
+| a sub-service | 92 → 93 | 1.34 → 1.27 s | 0.004 → 0 | 348 → 324 ms |
+| an industry | 91 → 92 | 1.45 → 1.27 s | 0.004 → 0 | 358 → 358 ms |
+| contact | 93 → 94 | 1.34 → 1.33 s | 0.004 → 0 | 324 → 295 ms |
+| career / team | 97 / 96 | 1.34 / 1.35 s | 0 / 0 | 210 / 236 ms |
+
+LCP, CLS (the Core Web Vitals) are fine everywhere, under Google's "good" lines (2.5 s,
+0.1). The home score fell only because of **Speed Index** (2.1 s → 5.9 s), and that is
+the landing animation: with `--force-prefers-reduced-motion` (the intro is skipped) the
+same page scores **86**, SI 1.8 s. The curtain plays on a visitor's first page of a
+session only (`sessionStorage "bbc-intro"`), and LCP is unaffected by it. Lighthouse
+always counts as a first visit. Options if it matters: shorten the curtain, or play it
+once per browser (localStorage) instead of once per session.
+
+### 16. Before this branch goes to `main` (nothing here is done — notes only)
+
+What the branch changes relative to `main` (37 commits, 134 files): components and page
+shells under `app/(main)`, `app/globals.css`, `app/layout.js`, `app/not-found.js`, 12
+photos, and ONE config line (`images.qualities: [75, 90]` in `next.config.mjs`). No new
+dependencies, no change to `actions/`, `models/`, `app/api/`, routes, redirects,
+sitemap, metadata, or dashboard fields.
+
+1. **Hostinger builds from `main`.** The 64-CPU build box needs `experimental.cpus` in
+   `next.config.mjs` — it is on `main` already; keep it through the merge.
+2. **Saved dashboard content wins over the built-in defaults.** The production database
+   can override team lists, hero slides, CTA text, the home hero and more, so the live
+   result will differ from this local build wherever content was saved. Check on a
+   deploy preview (or right after the merge): home, /our-team, /career (saved
+   `teamHeroSlides` / `careerHeroSlides` — Cloudinary photos may still carry the Gemini
+   mark), UK page, blog covers.
+3. **Local `main` has one unpushed commit** (the five-employee removal, cc72598) —
+   push it first, then branch-merge `rebuild`, so the two are not tangled.
+4. **After deploy**: view-source for the new chunk hashes (Hostinger does not always
+   rebuild on merge), run Search Console "Validate fix" if LCP flags return, and watch
+   the 28-day CrUX window.
+5. **Not covered locally**: real-GPU rendering of the header glass, Safari/Firefox (they
+   fall back to the frosted pane), real phones' scroll-snap feel.
+
