@@ -340,3 +340,19 @@ surfaces that scroll *with* their backdrop (number tiles, small glass buttons, t
 blob — which samples only the header's own content). The cursor lens and the
 header-blob tuning notes above still apply.
 
+### 14c. One look for the header pill (2026-11-11, later)
+
+Owner, after 14b: "when I scroll I see the glass, when I don't there's no liquidity —
+two different morphisms". A frosted bar over a plain background (page top) just reads
+as a white pill, while over scrolled text it reads as glass. So the bar now has the
+**same liquid-glass recipe in every state**: a *gentle* SVG refraction (bezel 24 px,
+strength 0.5 → a few px of shift at the rim; the original 63 px warp was what
+shimmered over moving content) + a light tint (34 %/18 %) + a 7 px blur + soft inner
+light pooled along the top and bottom edges and a soft shadow (thickness cues that
+work even with nothing behind it) + the single pointer-facing rim. No swap at scroll
+start/stop, ever. Fallbacks: browsers without SVG backdrop filters and the governor's
+"frost"/"flat" steps give the same bar as a plain 20 px blur — the bar is excluded
+from "flat" (one cheap element must never become an opaque slab). If the rim still
+shimmers on someone's GPU the one knob is `data-lg-scale` on the `<header>` (0 = no
+refraction).
+
