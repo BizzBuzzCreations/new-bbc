@@ -309,3 +309,19 @@ text (insert it into the *test* DB; `herofit.mjs` / `btnfit.mjs` do the measurin
   card is the logo only. It now always sits between the header pill and the hero
   card (measured at 11 laptop/desktop sizes, 1024 → 1920).
 
+### 14. BizzBee launcher, calmed (2026-11-11)
+
+The animated blue robot (Lottie, floating icons, a drop shadow, a yellow tip bubble
+with an emoji) fought the rest of the site. It is now an **ink pill with a yellow
+mark** — `components/bizzbee/BizzBeeLauncher.js`, `BizzBeeMark.js` (inline SVG robot
+face on a yellow disc, also used as the chat window's avatar): "Ask BizzBee" on
+desktop, just the round mark on phones, 52 px tall, bottom-right. Calm by rule: a
+yellow ring breathes out three times then stops (none with reduced motion), hover
+only changes colour (nothing moves), no animation library is loaded for it any more
+(the old CSS that made it float / scale / tilt is deleted). The one-time tip is a
+small paper card with no emoji. It still steps aside over anything marked
+`data-bizzbee-avoid` (2 px margin now, and lowered to 16 px from the bottom so it
+clears the hero buttons on a 1366 × 655 laptop). The chat window sits above it with a
+clear gap under the header at every height (`100dvh − 11.5rem`, phones
+`− 10.5rem`); it used to run up under the header pill and cover "Start a project".
+

@@ -12,7 +12,7 @@ import {
   Phone,
   MessageCircle,
 } from "lucide-react";
-import Image from "next/image";
+import BizzBeeMark from "./BizzBeeMark";
 import BizzBeeMessage, { splitLeadToken } from "./BizzBeeMessage";
 import BizzBeeLeadForm from "./BizzBeeLeadForm";
 import { BIZZBEE, CONTACT, LEAD_FORM_TOKEN } from "@/lib/bizzbee/config";
@@ -301,18 +301,11 @@ export default function BizzBeeChatWindow({ onClose, visible = true }) {
       role="dialog"
       aria-label="BizzBee AI website assistant"
       onKeyDown={onKeyDown}
-      className={`bizzbee-panel fixed inset-x-2 bottom-[7.5rem] mb-[env(safe-area-inset-bottom)] z-[10000] ${visible ? "flex" : "hidden"} h-[min(640px,calc(100dvh-9.5rem))] flex-col overflow-hidden rounded-2xl border border-white/10 bg-ink-2 text-white shadow-2xl shadow-black/60 sm:inset-x-auto sm:right-5 sm:bottom-[9.5rem] sm:h-[min(640px,calc(100dvh-12rem))] sm:w-[390px]`}
+      className={`bizzbee-panel fixed inset-x-3 bottom-[5rem] mb-[env(safe-area-inset-bottom)] z-[10000] ${visible ? "flex" : "hidden"} h-[min(640px,calc(100dvh-10.5rem))] flex-col overflow-hidden rounded-[24px] border border-white/10 bg-ink-2 text-white shadow-2xl shadow-black/60 sm:inset-x-auto sm:right-6 sm:bottom-[5.25rem] sm:h-[min(640px,calc(100dvh-11.5rem))] sm:w-[390px]`}
     >
       {/* Header */}
       <div className="flex items-center gap-3 border-b border-white/10 bg-ink px-4 py-3">
-        <Image
-          src="/bizzbee-logo.png"
-          alt=""
-          width={88}
-          height={88}
-          sizes="44px"
-          className="h-11 w-11 shrink-0 rounded-full object-cover"
-        />
+        <BizzBeeMark className="h-11 w-11" />
         <div className="min-w-0 flex-1 leading-tight">
           <p className="text-base font-bold">BizzBee AI</p>
           <p className="text-xs text-white/90">AI Assistant</p>

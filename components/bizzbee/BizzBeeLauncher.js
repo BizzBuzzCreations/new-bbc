@@ -1,48 +1,31 @@
 "use client";
 
 import { forwardRef, useEffect, useRef, useState } from "react";
-import { X } from "lucide-react";
-import Image from "next/image";
+import { ChevronDown, X } from "lucide-react";
+import BizzBeeMark from "./BizzBeeMark";
 
-// Floating BizzBee button: the animated BizzBee robot from
-// /bizzbee-robot.json (a Lottie file) as a clickable button fixed in the
-// bottom-right corner. (/bizzbee-support.json — a chat-bubble version —
-// was tried and is kept in /public, unused.)
+// The BizzBee launcher: a quiet ink pill in the bottom-right corner — the
+// yellow mark and "Ask BizzBee" (phones: just the round mark). It replaced an
+// animated blue robot with floating icons, which fought the rest of the site
+// (one accent colour, type-led, still).
 //
-// - lottie-web is imported dynamically (after the page is idle), so it is not
-//   part of the initial bundle; until it loads, the static logo shows.
-// - The robot's own animation (hovering, blinking, the shadow breathing)
-//   ALWAYS plays — it is small and is the button's identity.
-// - On top of that, the robot floats gently up and down (4px), leans a
-//   little, and tilts slightly toward a mouse pointer — kept small on
-//   purpose, so it doesn't distract. Those extra movements are driven from script
-//   (Web Animations API), not from stylesheet keyframes, and are switched off
-//   for visitors who ask their system for reduced motion.
-// - Rests most of the time, to save battery / processor time on phones: it
-//   moves for the first 10 seconds, then holds still, with a short 4-second
-//   "nudge" every 30 seconds; hovering it (mouse) wakes it while the pointer
-//   is on it. All motion stops while the chat is open.
-// - Not draggable: it stays in its corner. A click opens / minimizes the chat.
+// - Calm: the only motion is a short yellow ring around the mark for the first
+//   few seconds, and none with reduced motion. Nothing floats, nothing follows
+//   the pointer, and no animation library is loaded. Hover changes colour only.
+// - A one-time tip (desktop, after a few seconds, once per tab session) sits
+//   above it as a small paper card — no emoji, easy to dismiss.
 // - Steps aside: while it would sit on top of anything marked
-//   `data-bizzbee-avoid` (e.g. the blog sidebar form's Submit button), it
-//   fades out and can't be tapped; it comes back once that has scrolled
-//   away. Never while the chat is open, or while it has keyboard focus.
-// - While the chat is open it is static.
-const REST_FRAME = 40; // shown while the chat is open
-
+//   `data-bizzbee-avoid` (hero buttons, form fields, open menus) it fades out
+//   and can't be tapped; it comes back once that has scrolled away. Never
+//   while the chat is open, or while it has keyboard focus.
+// - A click opens / minimises the chat (the pill then reads "Minimize").
 const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
   { onOpen, expanded = false, showTip, onDismissTip },
   ref,
 ) {
-  const stageRef = useRef(null);
-  const lottieBox = useRef(null);
-  const roamEl = useRef(null);
-  const animRef = useRef(null); // the Lottie instance
-  const anims = useRef([]); // Web Animations (roam + lean), so hover can speed them up
-  const [ready, setReady] = useState(false);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const hitRef = useRef(null); // the tappable circle around the robot
+  const box = useRef(null);
   const [tucked, setTucked] = useState(false);
+  const [focused, setFocused] = useState(false);
 
   // Step aside while overlapping a [data-bizzbee-avoid] element. Checked on
   // scroll / resize (once per frame at most) — just a few rect reads.
@@ -50,13 +33,21 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
     let frame = 0;
     const check = () => {
       frame = 0;
-      const hit = hitRef.current?.getBoundingClientRect();
+      const hit = box.current?.getBoundingClientRect();
       if (!hit) return;
-      const pad = 12;
-      const over = [...document.querySelectorAll("[data-bizzbee-avoid]")].some((el) => {
-        const r = el.getBoundingClientRect();
-        return r.width > 0 && r.left < hit.right + pad && r.right > hit.left - pad && r.top < hit.bottom + pad && r.bottom > hit.top - pad;
-      });
+      const pad = 2;
+      const over = [...document.querySelectorAll("[data-bizzbee-avoid]")].some(
+        (el) => {
+          const r = el.getBoundingClientRect();
+          return (
+            r.width > 0 &&
+            r.left < hit.right + pad &&
+            r.right > hit.left - pad &&
+            r.top < hit.bottom + pad &&
+            r.bottom > hit.top - pad
+          );
+        },
+      );
       setTucked(over);
     };
     const schedule = () => {
@@ -71,160 +62,31 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
       window.removeEventListener("resize", schedule);
     };
   }, []);
-  const [focused, setFocused] = useState(false);
   const away = tucked && !expanded && !focused;
-
-  // Load the Lottie animation (lazy). It plays — except for visitors who ask
-  // for reduced motion, who get the robot as a still frame.
-  useEffect(() => {
-    let anim;
-    let cancelled = false;
-    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    import("lottie-web").then((mod) => {
-      if (cancelled || !lottieBox.current) return;
-      anim = animRef.current = mod.default.loadAnimation({
-        container: lottieBox.current,
-        renderer: "svg",
-        loop: true,
-        autoplay: !still,
-        path: "/bizzbee-robot.json?v=5", // ?v busts the browser cache when the artwork changes
-        rendererSettings: { preserveAspectRatio: "xMidYMid meet", progressiveLoad: true },
-      });
-      anim.addEventListener("DOMLoaded", () => {
-        if (cancelled) return;
-        if (still) anim.goToAndStop(0, true);
-        else anim.play();
-        setReady(true);
-      });
-    }).catch(() => {
-      // the animation chunk could not load (offline, a stale tab after a deploy): the launcher simply stays a still picture
-    });
-
-    return () => {
-      cancelled = true;
-      anim?.destroy();
-      animRef.current = null;
-    };
-  }, []);
-
-  // Extra motion (a gentle float, and a small lean) via the Web Animations API.
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const list = [];
-    if (roamEl.current?.animate) {
-      list.push(
-        roamEl.current.animate(
-          [
-            { transform: "translate3d(0,0,0)" },
-            { transform: "translate3d(0,-4px,0)" },
-            { transform: "translate3d(0,0,0)" },
-          ],
-          { duration: 4000, iterations: Infinity, easing: "ease-in-out" },
-        ),
-      );
-    }
-    if (lottieBox.current?.animate) {
-      list.push(
-        lottieBox.current.animate(
-          [
-            { transform: "rotate(-1.5deg)" },
-            { transform: "rotate(1.5deg)" },
-            { transform: "rotate(-1.5deg)" },
-          ],
-          { duration: 5200, iterations: Infinity, easing: "ease-in-out" },
-        ),
-      );
-    }
-    anims.current = list;
-    return () => {
-      list.forEach((a) => a.cancel());
-      anims.current = [];
-    };
-  }, []);
-
-  const setSpeed = (rate) => anims.current.forEach((a) => (a.playbackRate = rate));
-
-  // Awake / resting. wake(ms) plays everything and schedules a rest after
-  // `ms` (no rest while `ms` is Infinity, e.g. under the mouse).
-  const restTimer = useRef(0);
-  const expandedRef = useRef(expanded);
-  expandedRef.current = expanded;
-  const wake = (ms) => {
-    // reduced motion: the robot stays a still frame — never woken up
-    if (expandedRef.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    clearTimeout(restTimer.current);
-    anims.current.forEach((a) => a.play());
-    animRef.current?.play();
-    if (Number.isFinite(ms)) {
-      restTimer.current = setTimeout(() => {
-        anims.current.forEach((a) => a.pause());
-        animRef.current?.pause();
-      }, ms);
-    }
-  };
-  const wakeRef = useRef(wake);
-  wakeRef.current = wake;
-  // 10 s once it has loaded, then a 4 s nudge every 30 s while the tab is visible.
-  useEffect(() => {
-    if (!ready) return;
-    wakeRef.current(10000);
-    const nudge = setInterval(() => {
-      if (document.visibilityState === "visible") wakeRef.current(4000);
-    }, 30000);
-    return () => {
-      clearInterval(nudge);
-      clearTimeout(restTimer.current);
-    };
-  }, [ready]);
-
-  // While the chat is open the robot is static: all motion stops (it rests at
-  // a neutral pose) and it doesn't tilt. Minimizing the chat brings the
-  // motion back.
-  useEffect(() => {
-    if (expanded) {
-      anims.current.forEach((a) => {
-        a.pause();
-        a.currentTime = 0;
-      });
-      clearTimeout(restTimer.current);
-      animRef.current?.goToAndStop(REST_FRAME, true);
-      setTilt({ x: 0, y: 0 });
-    } else if (ready) {
-      wakeRef.current(6000);
-    }
-  }, [expanded, ready]);
-
-  const onMove = (e) => {
-    if (e.pointerType !== "mouse") return; // tilt toward a mouse pointer only
-    if (expanded || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const r = stageRef.current?.getBoundingClientRect();
-    if (!r) return;
-    const px = (e.clientX - r.left) / r.width - 0.5; // -0.5 … 0.5
-    const py = (e.clientY - r.top) / r.height - 0.5;
-    setTilt({ x: -py * 8, y: px * 10 });
-  };
-  const resetTilt = () => setTilt({ x: 0, y: 0 });
 
   return (
     <div
-      className={`fixed bottom-2 right-2 z-[9990] pb-[env(safe-area-inset-bottom)] transition-opacity duration-300 sm:right-3 ${
+      ref={box}
+      className={`fixed bottom-4 right-4 z-[9990] mb-[env(safe-area-inset-bottom)] transition-opacity duration-300 sm:bottom-4 sm:right-6 ${
         away ? "opacity-0 [&_*]:!pointer-events-none" : "opacity-100"
       }`}
     >
       {showTip && !away && (
         <div
           role="status"
-          className="bizzbee-enter absolute bottom-full right-1 mb-1 w-[190px] rounded-2xl rounded-br-md bg-buzz sm:bottom-auto sm:right-full sm:top-1/2 sm:mb-0 sm:mr-2 sm:w-[200px] sm:-translate-y-1/2 sm:rounded-br-2xl sm:rounded-r-md px-3.5 py-2.5 pr-8 text-xs font-medium text-buzz-ink shadow-xl"
+          className="bizzbee-enter absolute bottom-full right-0 mb-3 w-[270px] rounded-[20px] border border-ink/15 bg-paper p-4 pr-10 text-[0.9375rem] leading-snug text-ink shadow-[0_18px_40px_-18px_rgba(17,17,16,0.45)]"
         >
-          Hi! 👋 Not sure which service you need? Ask BizzBee.
+          <span className="font-medium">Not sure which service you need?</span>
+          <span className="mt-0.5 block text-stone">
+            Ask BizzBee, our AI assistant.
+          </span>
           <button
             type="button"
             onClick={onDismissTip}
             aria-label="Dismiss tip"
-            className="absolute right-1 top-1 rounded-full p-1.5 text-buzz-ink/60 hover:text-buzz-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-buzz-ink"
+            className="absolute right-1.5 top-1.5 flex h-8 w-8 items-center justify-center rounded-full text-stone transition-colors hover:bg-ink/10 hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink"
           >
-            <X size={12} />
+            <X size={14} aria-hidden="true" />
           </button>
         </div>
       )}
@@ -232,68 +94,38 @@ const BizzBeeLauncher = forwardRef(function BizzBeeLauncher(
         ref={ref}
         type="button"
         onClick={onOpen}
-        onPointerMove={onMove}
-        onPointerEnter={(e) => {
-          if (expanded || e.pointerType !== "mouse") return;
-          setSpeed(2.2);
-          wake(Infinity);
-        }}
-        onPointerLeave={(e) => {
-          if (e.pointerType === "mouse") wake(3000);
-          resetTilt();
-          setSpeed(1);
-        }}
         onFocus={() => setFocused(true)}
-        onBlur={() => {
-          resetTilt();
-          setFocused(false);
-        }}
-        aria-label={expanded ? "Minimize BizzBee AI assistant" : "Open BizzBee AI assistant"}
+        onBlur={() => setFocused(false)}
+        aria-label={
+          expanded
+            ? "Minimize BizzBee AI assistant"
+            : "Open BizzBee AI assistant"
+        }
         aria-expanded={expanded}
         title={expanded ? "Minimize BizzBee AI" : "Ask BizzBee AI"}
         aria-haspopup="dialog"
-        className={`bizzbee-fab pointer-events-none relative block h-[84px] w-[102px] sm:h-[104px] sm:w-[126px] select-none cursor-pointer focus:outline-none focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-buzz [perspective:520px]`}
+        className="bizzbee-fab group flex h-[52px] items-center gap-3 rounded-full bg-ink p-1 text-paper shadow-[0_16px_34px_-14px_rgba(17,17,16,0.6),0_0_0_1px_rgba(245,244,240,0.14)_inset] transition-colors duration-300 hover:bg-[#262624] focus:outline-none focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-buzz sm:pr-5"
       >
-        <span
-          ref={stageRef}
-          className="bizzbee-fab-stage block h-full w-full"
-          style={{ transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }}
-        >
-          {/* Just the robot (no background shape), floating gently, with a
-              soft drop shadow. */}
-          <span ref={roamEl} className="relative block h-full w-full [transform-style:preserve-3d]">
-            {/* The only part that takes taps/clicks (the button itself is
-                pointer-events-none): a circle around the robot that floats
-                with it, so the box's empty corners never swallow taps meant
-                for buttons underneath, e.g. a hero CTA on a phone. */}
+        <span className="relative">
+          {expanded ? (
             <span
-              ref={hitRef}
               aria-hidden="true"
-              className="pointer-events-auto absolute left-1/2 top-1/2 h-[60px] w-[60px] -translate-x-1/2 -translate-y-1/2 rounded-full sm:h-[72px] sm:w-[72px]"
-            />
-            {/* Static logo until the animation has loaded */}
-            {!ready && (
-              <Image
-                src="/bizzbee-logo.png"
-                alt=""
-                width={160}
-                height={160}
-                sizes="96px"
-                priority
-                className="absolute left-1/2 top-1/2 h-14 w-14 -translate-x-1/2 -translate-y-1/2 rounded-full object-cover sm:h-16 sm:w-16"
-                draggable={false}
-              />
-            )}
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-buzz text-buzz-ink"
+            >
+              <ChevronDown size={20} strokeWidth={2.2} />
+            </span>
+          ) : (
+            <BizzBeeMark className="h-11 w-11" />
+          )}
+          {!expanded && (
             <span
-              ref={lottieBox}
               aria-hidden="true"
-              className={`pointer-events-none absolute inset-0 block transition-opacity duration-300 ${ready ? "opacity-100" : "opacity-0"}`}
-              style={{
-                filter:
-                  "drop-shadow(0 10px 10px rgba(0,0,0,0.5))",
-              }}
+              className="bizzbee-ring pointer-events-none absolute inset-0 rounded-full"
             />
-          </span>
+          )}
+        </span>
+        <span className="hidden text-[0.9375rem] font-medium sm:inline">
+          {expanded ? "Minimize" : "Ask BizzBee"}
         </span>
       </button>
     </div>

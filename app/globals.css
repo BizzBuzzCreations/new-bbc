@@ -1002,15 +1002,6 @@ a.animated-button {
       transform: none;
     }
   }
-  @keyframes bizzbee-float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-3px);
-    }
-  }
   @keyframes bizzbee-dots {
     0%,
     80%,
@@ -1026,49 +1017,34 @@ a.animated-button {
   .bizzbee-enter {
     animation: bizzbee-pop 0.45s ease-out both;
   }
+  /* a yellow ring that breathes out from the launcher's mark, three times, then stops */
+  @keyframes bizzbee-ring {
+    from {
+      box-shadow: 0 0 0 0 rgb(255 212 59 / 0.7);
+    }
+    to {
+      box-shadow: 0 0 0 14px rgb(255 212 59 / 0);
+    }
+  }
+  .bizzbee-ring {
+    animation: bizzbee-ring 1.6s ease-out 3s 3 both;
+  }
   .bizzbee-panel {
     animation: bizzbee-pop 0.25s ease-out both;
-  }
-  .bizzbee-float {
-    animation: bizzbee-pop 0.45s ease-out both, bizzbee-float 3.2s ease-in-out 1s infinite;
-  }
-  .bizzbee-float:hover {
-    animation-play-state: paused;
   }
   .bizzbee-dot {
     animation: bizzbee-dots 1s infinite ease-in-out;
   }
 }
 
-/* BizzBee launcher: just the round logo image (transparent PNG) — no
-   button background, ring or edge behind it. A soft drop-shadow follows the
-   circle's shape. Hover grows it slightly, press shrinks it. */
+/* BizzBee launcher (components/bizzbee/BizzBeeLauncher.js): an ink pill with the
+   yellow mark. The press is a small shrink; hover only changes the colour (set
+   with utilities on the button) — nothing moves toward or away from the pointer. */
 .bizzbee-fab {
-  background: transparent;
-  border: 0;
-  padding: 0;
-  transition: transform 0.15s ease;
-}
-.bizzbee-fab:hover {
-  transform: scale(1.08);
+  transition: background-color 0.3s ease, scale 0.15s ease;
 }
 .bizzbee-fab:active {
-  transform: scale(0.95);
-}
-/* The robot tilts toward the pointer (rotation is set from JS). */
-.bizzbee-fab-stage {
-  transform-style: preserve-3d;
-  transition: transform 0.12s ease-out;
-  will-change: transform;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .bizzbee-fab {
-    animation: bizzbee-pop 0.45s ease-out both, bizzbee-float 3.2s ease-in-out 1s infinite;
-  }
-  .bizzbee-fab:hover,
-  .bizzbee-fab:active {
-    animation: none;
-  }
+  scale: 0.96;
 }
 
 /* Visitors who ask their device for less motion: no looping or long CSS
