@@ -12,6 +12,14 @@ import { SERVICE_LINES } from "@/lib/siteNav";
 // layers apart. Wide screens only; decorative (aria-hidden); still under
 // reduced motion (the pose is static, nothing floats, nothing follows).
 const LAYERS = SERVICE_LINES;
+// short names for the layer edges (the full names are linked everywhere else)
+const SHORT = {
+  "Search Engine Optimisation": "SEO",
+  "Social Media Marketing": "Social Media",
+  "Website Development": "Web Development",
+  "Marketing Automation": "Automation",
+  "Business Consultancy": "Consultancy",
+};
 
 export default function HeroDeck() {
   const root = useRef(null);
@@ -65,7 +73,7 @@ export default function HeroDeck() {
     <div
       ref={root}
       aria-hidden="true"
-      className="hero-deck pointer-events-none absolute right-[2.5vw] top-[17%] z-[1] hidden lg:block"
+      className="hero-deck pointer-events-none absolute right-[2.5vw] z-[1] hidden lg:block"
     >
       <div ref={stage} className="deck-stage">
         {LAYERS.map((l, i) => {
@@ -79,22 +87,19 @@ export default function HeroDeck() {
               <div className="deck-face">
                 <span className="deck-dot" />
                 {top ? (
-                  <div className="flex h-full flex-col justify-between pb-9">
-                    <Image
-                      src="/bbc-logo-ink.png"
-                      alt=""
-                      width={447}
-                      height={143}
-                      className="h-9 w-auto"
-                    />
-                    <p className="kicker text-(--mut)">
-                      Prayagraj · Kanpur · London
-                    </p>
-                  </div>
+                  <Image
+                    src="/bbc-logo-ink.png"
+                    alt=""
+                    width={447}
+                    height={143}
+                    className="h-9 w-auto"
+                  />
                 ) : null}
                 <p className="deck-label">
                   <span className="kicker">{l.no}</span>
-                  <span className="font-display">{l.name}</span>
+                  <span className="font-display">
+                    {SHORT[l.name] || l.name}
+                  </span>
                 </p>
               </div>
             </div>

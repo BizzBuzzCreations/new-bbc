@@ -97,7 +97,7 @@ export default function HeroHome({
   }, [chosenVideo]);
 
   return (
-    <section className="on-paper relative isolate flex min-h-[min(92svh,860px)] flex-col overflow-x-clip pb-8 pt-24 md:pt-28">
+    <section className="on-paper relative isolate flex min-h-[min(92svh,860px)] md:min-h-0 flex-col overflow-x-clip pb-6 pt-24 md:pt-[6.5rem] md:pb-8">
       <HeroField />
       <HeroDeck />
       <div className="intro-settle wrap relative z-10 flex flex-1 flex-col">
@@ -117,7 +117,7 @@ export default function HeroHome({
           </p>
         </div>
 
-        <h1 className="font-display mt-6 text-[clamp(3rem,min(9.6vw,17svh),10.5rem)] lg:text-[clamp(3rem,min(7.8vw,15.5svh),8.25rem)] leading-[0.9] tracking-[-0.055em] md:mt-8">
+        <h1 className="font-display mt-6 text-[clamp(3rem,min(9.6vw,17svh),10.5rem)] lg:text-[clamp(3rem,min(7.8vw,12.8svh),8.25rem)] leading-[0.9] tracking-[-0.055em] md:mt-8">
           <span className="sr-only">
             {lines
               .flat()
@@ -145,24 +145,24 @@ export default function HeroHome({
 
         <div
           data-lg-off
-          className={`glass glass-calm relative grid gap-6 rounded-[28px] p-5 md:grid-cols-12 md:items-end md:gap-8 md:p-7 ${inFrame ? "mt-8" : "mt-auto md:mt-8"}`}
+          className={`glass glass-calm relative grid gap-5 rounded-[28px] p-5 md:grid-cols-12 md:items-end md:gap-8 md:p-6 xl:grid-cols-[12.5rem_minmax(0,1fr)_auto] xl:gap-9 xl:px-7 xl:py-5 ${inFrame ? "mt-8" : "mt-auto md:mt-6"}`}
         >
-          <p className="kicker text-(--mut) md:col-span-3">
+          <p className="kicker text-(--mut) md:col-span-4 lg:col-span-3 xl:col-span-1">
             Working with
-            <span className="font-display mt-2 block h-[1.2em] text-[1.6rem] normal-case leading-none tracking-[-0.03em] text-(--fg)">
+            <span className="font-display mt-2 block h-[1.2em] whitespace-nowrap text-[1.45rem] normal-case leading-none tracking-[-0.03em] text-(--fg)">
               <TypedWord words={INDUSTRIES.map((i) => i.label)} />
             </span>
           </p>
-          <div className="md:col-span-5">
+          <div className="md:col-span-8 lg:col-span-5 xl:col-span-1">
             <p className="text-lg font-medium leading-snug md:text-xl">
               {subheading}
             </p>
             <div
-              className={`mt-3 max-w-md text-[0.9375rem] leading-relaxed text-(--mut) ${RICH_TEXT_CLASS} ${richTextScopeClass(subtext)}`}
+              className={`mt-2.5 line-clamp-3 max-w-[46rem] text-[0.9375rem] leading-relaxed text-(--mut) md:line-clamp-none ${RICH_TEXT_CLASS} ${richTextScopeClass(subtext)}`}
               dangerouslySetInnerHTML={richTextHTML(subtext)}
             />
           </div>
-          <div className="flex flex-wrap gap-3 md:col-span-4">
+          <div className="flex flex-wrap gap-3 md:col-span-12 lg:col-span-4 xl:col-span-1 xl:flex-nowrap">
             <Button href={ctaLink} data-bizzbee-avoid variant="solid" size="lg">
               {ctaText}
             </Button>

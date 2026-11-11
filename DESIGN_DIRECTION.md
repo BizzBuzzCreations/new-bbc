@@ -290,3 +290,22 @@ and no black-and-white images."
   frame; the first headline animation is untouched, the second one only replays
   the rise after the halves part).
 
+### 13b. Hero fit, with the owner's real text (2026-11-11)
+
+The saved hero copy is longer than the defaults ("Get More ROI with a Marketing
+Agency You Can Trust" + a 3-sentence paragraph), which pushed the card's buttons
+below the fold on a 1366 × 655 laptop. Always test the hero with the owner's real
+text (insert it into the *test* DB; `herofit.mjs` / `btnfit.mjs` do the measuring):
+- **Card = one compact row on ≥ 1280 px** (working-with | text | both buttons side
+  by side), two rows on tablets (text beside "working with", buttons under), a
+  stack on phones (the paragraph clamps to 3 lines so the main button is above
+  the fold at 360 × 640). The headline height follows the viewport height
+  (`min(7.8vw, 12.8svh)`), so headline + card always fit.
+- **The hero sizes to its content on ≥ 768 px** (no `min-height`): a min-height
+  left a blank band under the card on tall screens.
+- **3D stack, rebuilt to be proportional:** everything inside scales from one
+  variable (`--dw`, from the viewport width and height), layer gap `--dz` = 11.5 %
+  of it, labels are single-line short names ("SEO", "Web Development", …), the top
+  card is the logo only. It now always sits between the header pill and the hero
+  card (measured at 11 laptop/desktop sizes, 1024 → 1920).
+
