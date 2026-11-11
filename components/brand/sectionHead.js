@@ -26,9 +26,9 @@ export default function SectionHead({
 }) {
   return (
     <div
-      className={`sec-head grid gap-8 md:grid-cols-12 md:items-end md:gap-10 ${className}`}
+      className={`sec-head grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-10 ${className}`}
     >
-      <div className="md:col-span-8">
+      <div className="lg:col-span-8">
         <div
           aria-hidden="true"
           className="rule-draw mb-5 h-px w-full bg-(--fg)"
@@ -46,7 +46,7 @@ export default function SectionHead({
         </H>
       </div>
       {(text || aside) && (
-        <div className="md:col-span-3 md:col-start-10 md:pb-2">
+        <div className="max-w-[36rem] lg:col-span-3 lg:col-start-10 lg:max-w-none lg:pb-2">
           {text && (
             <RichText
               as="p"

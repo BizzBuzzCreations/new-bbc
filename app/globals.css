@@ -1749,6 +1749,182 @@ html[data-intro="play"] .hero-deck {
     }
   }
 }
+/* The hero's stack on phones / tablets (components/home/heroLayers.js): the
+   brand card and the eight service cards as a swipe row, bleeding to the
+   screen edges. Same slab language as the 3D stack: a paper face that gets a
+   shade darker down the row, a yellow rim underneath, a yellow dot; the brand
+   card is ink with the real service count. Press = the face turns yellow. */
+.layers {
+  margin-top: 1.25rem;
+  margin-inline: -1.25rem;
+}
+@media (min-width: 48rem) {
+  .layers {
+    margin-inline: -2.5rem;
+  }
+}
+.layers-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 48rem) {
+  .layers-head {
+    padding-inline: 2.5rem;
+  }
+}
+@media (hover: hover) {
+  .layers-hint {
+    display: none;
+  }
+}
+.layers-track {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: 1.25rem;
+  padding: 0.875rem 1.25rem 1.25rem;
+  /* the row runs off the right edge: a soft fade says "there is more" */
+  mask-image: linear-gradient(to right, #000 calc(100% - 2.25rem), transparent);
+}
+@media (min-width: 48rem) {
+  .layers-track {
+    padding-inline: 2.5rem;
+    scroll-padding-inline: 2.5rem;
+  }
+}
+.layers-track > li {
+  flex: none;
+  scroll-snap-align: start;
+}
+.layers-card {
+  --shade: calc(var(--k, 0) * 1.6%);
+  position: relative;
+  display: flex;
+  width: 9.75rem;
+  height: 7.25rem;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 1.125rem;
+  padding: 0.9rem 1rem 0.85rem;
+  background: linear-gradient(
+    150deg,
+    color-mix(in srgb, #111110 var(--shade), #fff) 0%,
+    color-mix(in srgb, #111110 calc(var(--shade) + 4%), #f6f5ef) 100%
+  );
+  border: 1px solid rgb(17 17 16 / 0.2);
+  /* the slab's thickness: the yellow rim along the bottom edge */
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 4px 0 -1px var(--color-buzz),
+    0 5px 0 -1px rgb(17 17 16 / 0.28),
+    0 16px 22px -14px rgb(17 17 16 / 0.45);
+  color: #111110;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.layers-brand {
+  background: linear-gradient(150deg, #1d1d1b 0%, #0f0f0e 100%);
+  border-color: rgb(255 255 255 / 0.18);
+  color: #f5f4f0;
+  justify-content: flex-end;
+  gap: 0.35rem;
+}
+.layers-dot {
+  position: absolute;
+  top: 0.9rem;
+  right: 1rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--color-buzz);
+}
+.layers-fig {
+  color: var(--color-buzz);
+  font-size: 3rem;
+  line-height: 0.8;
+  letter-spacing: -0.06em;
+}
+.layers-sub {
+  color: #b4b3aa;
+  font-size: 0.6875rem;
+}
+.layers-no {
+  color: #55544e;
+}
+.layers-name {
+  display: block;
+  max-width: 85%;
+  font-size: 1.1875rem;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+.layers-arrow {
+  position: absolute;
+  right: 0.85rem;
+  bottom: 0.8rem;
+  color: #55544e;
+}
+.layers-link:active {
+  background: var(--color-buzz);
+  border-color: #111110;
+}
+.layers-link:active .layers-dot {
+  background: #111110;
+}
+.layers-link:active .layers-no,
+.layers-link:active .layers-arrow {
+  color: #111110;
+}
+@media (hover: hover) {
+  .layers-link:hover {
+    background: var(--color-buzz);
+    border-color: #111110;
+  }
+  .layers-link:hover .layers-dot {
+    background: #111110;
+  }
+  .layers-link:hover .layers-no,
+  .layers-link:hover .layers-arrow {
+    color: #111110;
+  }
+}
+.layers-link:focus-visible {
+  outline: 2px solid #111110;
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* landing: the cards slide in one after another, with the stack's peel */
+  @keyframes layers-in {
+    from {
+      translate: 3.5rem 0;
+    }
+  }
+  .layers-track > li {
+    animation: layers-in 0.9s cubic-bezier(0.2, 0.9, 0.25, 1.06) calc(0.5s + var(--k) * 0.07s) backwards;
+  }
+  html[data-intro="play"] .layers-track > li {
+    animation-delay: calc(2.3s + var(--k) * 0.07s);
+  }
+  @supports (animation-timeline: view()) {
+    /* swiping: a card eases up to full size as it comes in from the right */
+    .layers-card {
+      animation: layers-ease linear both;
+      animation-timeline: view(inline);
+      animation-range: entry 0% entry 100%;
+    }
+    @keyframes layers-ease {
+      from {
+        scale: 0.9;
+      }
+      to {
+        scale: 1;
+      }
+    }
+  }
+}
 /* The team page's film strip (components/detail/photoFilm.js). Base = a plain
    grid of the photos (no scroll-linked animation / reduced motion). Enhanced:
    the section is tall, its inner stage sticks to the screen, and the strip
