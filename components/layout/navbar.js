@@ -337,9 +337,7 @@ export default function Navbar() {
           }}
           onPointerLeave={hoverLeave}
           onPointerEnter={() => clearTimeout(timer.current)}
-          data-lg-bezel="30"
-          data-lg-scale="1.5"
-          style={{ "--lq-blur": "4px" }}
+          data-lg-off
           className={`glass glass-bar glass-calm fixed inset-x-3 top-3 z-[70] mx-auto max-w-[1440px] rounded-full md:inset-x-6 md:top-4 ${
             hidden && !onInk && !panel
               ? "-translate-y-[calc(100%+1.5rem)]"

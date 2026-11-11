@@ -325,3 +325,18 @@ clears the hero buttons on a 1366 × 655 laptop). The chat window sits above it 
 clear gap under the header at every height (`100dvh − 11.5rem`, phones
 `− 10.5rem`); it used to run up under the header pill and cover "Start a project".
 
+### 14b. The header pill is frosted, not refracted (2026-11-11)
+
+Owner: "whatever is behind the navbar glitches". Cause: the pill was *refracting* (an
+SVG displacement `backdrop-filter`) a backdrop that is never still — the page scrolls
+under a fixed header, the hero's dot field and light animate behind it, the 3D stack
+floats — so the warped band along its rim shimmered, and my scroll-time swap
+(liquid ↔ frosted, to save work) made the whole look pop at every scroll start and
+stop. Rules now: **a fixed element over moving content never refracts** — the header
+pill is a denser frost (blur 26 px, 66 % tint) with one rim, in a single look at all
+times; the **per-scroll swap is removed** (the frame-rate governor, which steps a
+struggling machine down once and never back up, stays); refraction is kept only on
+surfaces that scroll *with* their backdrop (number tiles, small glass buttons, the nav
+blob — which samples only the header's own content). The cursor lens and the
+header-blob tuning notes above still apply.
+

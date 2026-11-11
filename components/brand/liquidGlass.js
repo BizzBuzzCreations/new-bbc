@@ -2,7 +2,11 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { buildFilter, displacementMap, supportsLiquid } from "@/lib/liquidGlass";
+import {
+  buildFilter,
+  displacementMap,
+  supportsLiquid,
+} from "@/lib/liquidGlass";
 
 // Turns every `.glass` surface into liquid glass where the browser allows it
 // (Chromium: backdrop-filter accepts an SVG filter). For each surface it draws
@@ -23,13 +27,18 @@ const NS = "http://www.w3.org/2000/svg";
 export default function LiquidGlass() {
   const pathname = usePathname();
   useEffect(() => {
-    if (!supportsLiquid() || window.matchMedia("(prefers-reduced-transparency: reduce)").matches) return;
+    if (
+      !supportsLiquid() ||
+      window.matchMedia("(prefers-reduced-transparency: reduce)").matches
+    )
+      return;
     document.documentElement.setAttribute("data-liquid-ready", "");
     const svg = document.createElementNS(NS, "svg");
     svg.setAttribute("aria-hidden", "true");
     svg.setAttribute("width", "0");
     svg.setAttribute("height", "0");
-    svg.style.cssText = "position:absolute;width:0;height:0;overflow:hidden;pointer-events:none";
+    svg.style.cssText =
+      "position:absolute;width:0;height:0;overflow:hidden;pointer-events:none";
     const defs = document.createElementNS(NS, "defs");
     svg.appendChild(defs);
     document.body.appendChild(svg);
@@ -46,24 +55,51 @@ export default function LiquidGlass() {
       const radius = parseFloat(getComputedStyle(el).borderTopLeftRadius) || 0;
       const lens = el.hasAttribute("data-lg-lens");
       const small = Math.min(w, h) <= 120;
-      const chroma = el.getAttribute("data-lg-chroma") === "off" ? false : el.hasAttribute("data-lg-chroma") || small;
-      const bezel = Number(el.getAttribute("data-lg-bezel")) || Math.min(26, Math.min(w, h) * 0.32);
+      const chroma =
+        el.getAttribute("data-lg-chroma") === "off"
+          ? false
+          : el.hasAttribute("data-lg-chroma") || small;
+      const bezel =
+        Number(el.getAttribute("data-lg-bezel")) ||
+        Math.min(26, Math.min(w, h) * 0.32);
       const k = Number(el.getAttribute("data-lg-scale")) || 1.25;
-      const key = [w, h, Math.round(Math.min(radius, w / 2, h / 2)), bezel, lens, chroma, k].join("|");
+      const key = [
+        w,
+        h,
+        Math.round(Math.min(radius, w / 2, h / 2)),
+        bezel,
+        lens,
+        chroma,
+        k,
+      ].join("|");
       const cur = state.get(el) || { id: `lg${++count}`, key: "" };
       if (cur.key === key) return;
       cur.key = key;
       defs.querySelector(`#${cur.id}`)?.remove();
-      defs.appendChild(buildFilter({ id: cur.id, w, h, scale: bezel * k * 1.4, map: displacementMap({ w, h, radius, bezel, lens }), chroma }));
+      defs.appendChild(
+        buildFilter({
+          id: cur.id,
+          w,
+          h,
+          scale: bezel * k * 1.4,
+          map: displacementMap({ w, h, radius, bezel, lens }),
+          chroma,
+        }),
+      );
       el.style.setProperty("--lg-url", `url(#${cur.id})`);
       el.setAttribute("data-liquid", "");
       state.set(el, cur);
     };
     const later = (el, ms) => {
       clearTimeout(timers.get(el));
-      timers.set(el, setTimeout(() => build(el), ms));
+      timers.set(
+        el,
+        setTimeout(() => build(el), ms),
+      );
     };
-    const ro = new ResizeObserver((entries) => entries.forEach((e) => later(e.target, state.has(e.target) ? 90 : 0)));
+    const ro = new ResizeObserver((entries) =>
+      entries.forEach((e) => later(e.target, state.has(e.target) ? 90 : 0)),
+    );
     const attach = (el) => {
       if (timers.has(el)) return;
       timers.set(el, 0);
@@ -121,7 +157,7 @@ export default function LiquidGlass() {
       const t0 = performance.now();
       const tick = (t) => {
         if (stop) return;
-        if (document.visibilityState === "visible" && !root.hasAttribute("data-scrolling")) {
+        if (document.visibilityState === "visible") {
           if (last) d.push(t - last);
         }
         last = t;

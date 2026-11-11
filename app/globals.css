@@ -1714,14 +1714,12 @@ html[data-intro="play"] .hero-deck {
   backdrop-filter: var(--lg-url) blur(var(--lq-blur, 3px)) saturate(var(--lq-sat, 1.85)) brightness(1.05);
   box-shadow: var(--q-shadow);
 }
-/* while the page scrolls, or when the frame-rate governor (liquidGlass.js) has
-   stepped down to "frost": plain frosted glass */
-html[data-scrolling] .glass[data-liquid],
+/* when the frame-rate governor (liquidGlass.js) has stepped a struggling machine
+   down to "frost": plain frosted glass */
 html[data-glass="frost"] .glass[data-liquid] {
   -webkit-backdrop-filter: blur(var(--lq-blur, 3px)) saturate(1.5);
   backdrop-filter: blur(var(--lq-blur, 3px)) saturate(1.5);
 }
-html[data-scrolling] .glass-dense[data-liquid],
 html[data-glass="frost"] .glass-dense[data-liquid] {
   -webkit-backdrop-filter: blur(14px) saturate(1.4) brightness(0.42);
   backdrop-filter: blur(14px) saturate(1.4) brightness(0.42);
@@ -1792,6 +1790,9 @@ html[data-glass="frost"] .glass-dense[data-liquid] {
    children — a backdrop-filter ancestor would stop them blurring the page)
    hang below it */
 .glass-bar {
+  --g-blur: 26px;
+  --g-a: 0.66;
+  --g-a2: 0.4;
   transition: translate 0.6s var(--ease-out-soft), transform 0.6s var(--ease-out-soft), color 0.5s ease, scale 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s var(--ease-out-soft), --ang 0.45s ease-out, --yl 0.5s ease;
 }
 /* the phone menu sheet */

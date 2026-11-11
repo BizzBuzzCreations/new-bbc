@@ -62,24 +62,9 @@ export default function GlassPointer() {
     };
     if (fine)
       document.addEventListener("pointermove", onMove, { passive: true });
-    // while the page scrolls, liquid surfaces drop to plain frosted glass (an SVG
-    // refraction over a moving backdrop is too costly to redo every frame) and
-    // come back a moment after it stops
-    const root = document.documentElement;
-    let calm = 0;
-    const onScroll = () => {
-      if (!root.hasAttribute("data-scrolling"))
-        root.setAttribute("data-scrolling", "");
-      clearTimeout(calm);
-      calm = setTimeout(() => root.removeAttribute("data-scrolling"), 160);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
     if (fine) document.documentElement.addEventListener("pointerleave", settle);
     return () => {
       document.removeEventListener("pointermove", onMove);
-      window.removeEventListener("scroll", onScroll);
-      clearTimeout(calm);
-      root.removeAttribute("data-scrolling");
       document.documentElement.removeEventListener("pointerleave", settle);
       if (frame) cancelAnimationFrame(frame);
     };
