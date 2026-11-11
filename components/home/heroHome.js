@@ -8,12 +8,14 @@ import {
   richTextScopeClass,
 } from "@/components/ui/richText";
 import Button from "@/components/brand/button";
-import TypedWord from "@/components/brand/typedWord";
+import IndustryWheel from "@/components/home/industryWheel";
 import HeroField from "@/components/brand/heroField";
 import HeroDeck from "@/components/home/heroDeck";
 import { toneWords } from "@/components/brand/accentText";
 import { heroImageSource } from "@/components/sections/homeHero";
+import Image from "next/image";
 import { INDUSTRIES } from "@/lib/siteNav";
+import { TRUST_BADGES } from "@/lib/trustBadges";
 
 // Split the heading's words into (up to) three balanced lines.
 function toLines(words, count = 3) {
@@ -132,7 +134,7 @@ export default function HeroHome({
               >
                 <span className="hero-line block lg:[margin-left:calc(var(--i)*7.5vw)]">
                   {row.map((x, k) => (
-                    <span key={k} className={x.grey ? "text-current/50" : ""}>
+                    <span key={k} className={x.grey ? "text-current/65" : ""}>
                       {x.w}{" "}
                     </span>
                   ))}
@@ -146,18 +148,15 @@ export default function HeroHome({
           data-lg-off
           className={`glass glass-calm relative grid gap-5 rounded-[28px] p-5 md:grid-cols-12 md:items-end md:gap-8 md:p-6 xl:grid-cols-[12.5rem_minmax(0,1fr)_auto] xl:gap-9 xl:px-7 xl:py-5 ${inFrame ? "mt-8" : "mt-auto md:mt-6"}`}
         >
-          <p className="kicker text-(--mut) md:col-span-4 lg:col-span-3 xl:col-span-1">
-            Working with
-            <span className="font-display mt-2 block h-[1.2em] whitespace-nowrap text-[1.45rem] normal-case leading-none tracking-[-0.03em] text-(--fg)">
-              <TypedWord words={INDUSTRIES.map((i) => i.label)} />
-            </span>
-          </p>
+          <div className="md:col-span-4 lg:col-span-3 xl:col-span-1 xl:border-r xl:border-(--fg)/10 xl:pr-4">
+            <IndustryWheel items={INDUSTRIES} />
+          </div>
           <div className="md:col-span-8 lg:col-span-5 xl:col-span-1">
-            <p className="text-lg font-medium leading-snug md:text-xl">
+            <p className="text-balance text-base font-medium leading-snug tracking-[-0.01em] md:text-lg">
               {subheading}
             </p>
             <div
-              className={`mt-2.5 line-clamp-3 max-w-[46rem] text-[0.9375rem] leading-relaxed text-(--mut) md:line-clamp-none ${RICH_TEXT_CLASS} ${richTextScopeClass(subtext)}`}
+              className={`mt-2.5 line-clamp-3 max-w-[46rem] text-pretty text-[0.9375rem] leading-relaxed text-(--mut) md:line-clamp-none ${RICH_TEXT_CLASS} ${richTextScopeClass(subtext)}`}
               dangerouslySetInnerHTML={richTextHTML(subtext)}
             />
           </div>
@@ -177,6 +176,29 @@ export default function HeroHome({
             )}
           </div>
         </div>
+
+        {/* proof for "India's Trusted": the real certifications, right under the buttons */}
+        <ul
+          aria-label="Certifications and partnerships"
+          className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2.5 px-1"
+        >
+          <li className="kicker text-(--mut)">Recognised by</li>
+          {TRUST_BADGES.map((b) => (
+            <li key={b.title} className="flex items-center gap-2.5">
+              <Image
+                src={b.src}
+                alt=""
+                width={28}
+                height={28}
+                className="h-7 w-7 rounded-full bg-white object-contain p-0.5 ring-1 ring-(--fg)/10"
+              />
+              <span className="text-sm leading-tight">
+                <span className="block font-medium">{b.title}</span>
+                <span className="text-xs text-(--mut)">{b.sub}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
 
         {inFrame && (
           <div className="relative mt-8 aspect-[16/8] overflow-hidden bg-paper-2 md:mt-10">

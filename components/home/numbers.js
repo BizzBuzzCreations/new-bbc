@@ -1,13 +1,7 @@
 import Image from "next/image";
 import CountUp from "@/components/brand/countUp";
 import { SERVICE_LINES, SUB_SERVICE_COUNT } from "@/lib/siteNav";
-
-const BADGES = [
-  { src: "/clutch.png", title: "Clutch", sub: "Verified partner" },
-  { src: "/CDL.png", title: "Google Partner", sub: "Certified" },
-  { src: "/GA.png", title: "Google Analytics", sub: "Certified" },
-  { src: "/iso.png", title: "ISO", sub: "Certified" },
-];
+import { TRUST_BADGES } from "@/lib/trustBadges";
 
 // The numbers (Zirka, Tenity): up to four figures set enormous on ink, each
 // counting up as it arrives, with the real certifications underneath. The
@@ -48,7 +42,7 @@ export default function Numbers({ stats }) {
           ))}
         </dl>
         <ul aria-label="Certifications" className="mt-6 flex flex-wrap gap-3">
-          {BADGES.map((b) => (
+          {TRUST_BADGES.map((b) => (
             <li
               key={b.title}
               className="glass glass-calm relative flex items-center gap-3 rounded-full py-2 pl-2 pr-5"

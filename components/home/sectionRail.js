@@ -74,7 +74,7 @@ export default function SectionRail() {
               >
                 <span
                   aria-hidden="true"
-                  className={`block rounded-full bg-white transition-all duration-500 ease-out-soft ${on ? "h-5 w-[3px]" : "h-1.5 w-1.5 opacity-60 group-hover:scale-150 group-hover:opacity-100"}`}
+                  className={`block rounded-full bg-white transition-all duration-500 ease-out-soft ${on ? "h-6 w-[4px]" : "h-2 w-2 opacity-90 group-hover:scale-150 group-hover:opacity-100"}`}
                 />
                 <span
                   aria-hidden="true"

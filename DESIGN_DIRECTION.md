@@ -434,3 +434,27 @@ it. (3) `box-shadow` paints only outside the box: a "floor shadow" made that way
 shows as a pale plate; use a blurred filled shape. (4) An element that is always
 moving is never "stable" for Playwright's actionability — use `force` and a fresh
 bounding box, and check the position over time (`deckmove.mjs`).
+
+### 15c. The hero card and a review pass (2026-11-11)
+
+**Industry wheel** (`components/home/industryWheel.js`, replaces the typed word):
+"Working with" now shows the 15 industries as a wheel that rolls up every 2.6 s —
+the one before and after faded, the current one in full ink and a link to its page
+(arrow on hover), a `01 / 15` counter, a hairline divider on wide screens. It holds
+while the pointer or focus is on it (the link never changes under the pointer), is
+still under reduced motion, and shows one row on phones (first screen is tight). The
+list is repeated 3× and snaps back from the third copy to the second, so looping has
+no long rewind. Tested: `wheel.mjs` (order, loop, hold, counter, click).
+
+**Review notes applied** (an outside design review of the hero): the muted half of
+the headline is darker (65 % ink, was 50 %); the card's sub-heading is smaller so it
+stops competing with the h1; the header CTA is an outline pill so "Get Free
+Consultation" is the one solid action in the first screen; the stack's "N services"
+micro-text is gone (unreadable at that size — the layers are a hook, the names carry
+the meaning) and the names are larger; the section-rail dots are bigger and darker;
+the wheel's faded rows are lighter-faded; a "Recognised by" strip of the REAL
+certifications (`lib/trustBadges.js`, also used by the numbers band) sits under the
+buttons as proof for "India's Trusted". Not done, and why: moving the buttons above
+the card (adds ~80 px and breaks the first-screen fit with the owner's long text);
+client count / rating / years in that strip (no verified figures to hand — add them
+from the dashboard's stats when the owner confirms the numbers).

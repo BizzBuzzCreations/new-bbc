@@ -453,7 +453,7 @@ export default function Navbar() {
               <div className="hidden sm:block">
                 <Button
                   href="/contact"
-                  variant={onInk ? "buzz" : "solid"}
+                  variant="outline"
                   size="md"
                   onClick={goHome}
                 >

@@ -1647,6 +1647,55 @@ html[data-intro="play"] .hero-deck {
     }
   }
 }
+/* the hero card's industry wheel (components/home/industryWheel.js): rows of
+   one --row each; the viewport shows the current row (phones) or the one
+   before it and the one after it too (--rows 3, --c 1); the list slides so
+   row --p sits at the centre */
+.wheel {
+  --row: 2.05rem;
+  --rows: 1;
+  --c: 0;
+  height: calc(var(--row) * var(--rows));
+  overflow: clip;
+  font-size: 1.45rem;
+  line-height: var(--row);
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+@media (min-width: 768px) {
+  .wheel {
+    --rows: 3;
+    --c: 1;
+    mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.4) 0%, #000 32%, #000 68%, rgb(0 0 0 / 0.4) 100%);
+  }
+}
+.wheel-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transform: translateY(calc((var(--c) - var(--p)) * var(--row)));
+}
+.wheel-list li {
+  height: var(--row);
+  color: var(--mut);
+  opacity: 0.72;
+}
+.wheel-list li[data-cur] {
+  color: var(--fg);
+  opacity: 1;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .wheel-list {
+    transition: transform 0.7s cubic-bezier(0.3, 0.8, 0.25, 1);
+  }
+  .wheel-list li {
+    transition: opacity 0.5s ease, color 0.5s ease;
+  }
+  .wheel-list[data-snap],
+  .wheel-list[data-snap] li {
+    transition: none;
+  }
+}
 /* the hero's 3D stack of layers (components/home/heroDeck.js) — pure CSS 3D.
    Everything inside scales from --dw (the stack's width, set from the viewport
    width and height); --dz is the gap between layers; --i a layer's depth (the
@@ -1800,7 +1849,6 @@ a.deck-face:focus-visible {
 }
 .deck-dot,
 .deck-label,
-.deck-count,
 .deck-figure {
   z-index: 1;
 }
@@ -1823,7 +1871,7 @@ a.deck-face:hover .deck-dot {
   display: flex;
   align-items: baseline;
   gap: 0.6em;
-  font-size: clamp(11px, calc(var(--dw) * 0.054), 16px);
+  font-size: clamp(12px, calc(var(--dw) * 0.062), 18px);
   line-height: 1;
   letter-spacing: -0.03em;
   white-space: nowrap;
@@ -1833,17 +1881,6 @@ a.deck-face:hover .deck-dot {
   font-size: 0.74em;
 }
 a.deck-face:hover .deck-label .kicker {
-  color: #111110;
-}
-.deck-count {
-  position: absolute;
-  right: calc(var(--dw) * 0.065);
-  bottom: calc(var(--dw) * 0.042);
-  font-size: clamp(8px, calc(var(--dw) * 0.027), 10px);
-  color: #55544e;
-  white-space: nowrap;
-}
-a.deck-face:hover .deck-count {
   color: #111110;
 }
 @media (prefers-reduced-motion: no-preference) {

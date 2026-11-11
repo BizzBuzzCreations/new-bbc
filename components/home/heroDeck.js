@@ -110,9 +110,6 @@ export default function HeroDeck() {
                         {SHORT[l.name] || l.name}
                       </span>
                     </span>
-                    <span className="deck-count kicker" aria-hidden="true">
-                      {l.subs.length} services
-                    </span>
                     <span className="sr-only">{l.name}</span>
                   </Link>
                 </li>
