@@ -402,3 +402,34 @@ of a scroll-linked range and look like nothing happens; use a gentle curve
 "arrived" (`scrollfx.mjs`), not only by eye. Measured: scrolling the whole page
 median 16.7 ms/frame with the effects on and off.
 
+
+### 15b. The stack, second pass: slabs, life at rest, and a pointer bug (2026-11-11)
+
+The first stack read as thin white sheets on a near-white page that "just sat
+there". Now: each layer is a **slab** — its face, a yellow edge set back in depth
+(`::before`, translateZ −0.012 × width, seen along the lower rims; ink on hover),
+the shadow of the layer above on its strip (`::after`), a per-layer tone from
+`color-mix` (not `filter`), and a soft floor shadow (`.deck-ground`, one more layer
+under the stack). The brand card carries the real count — "44 services in 8 lines"
+(`SUB_SERVICE_COUNT`) — and a larger logo.
+
+Alive at rest, all compositor-only and off under reduced motion: the stack turns
+±7° like a showpiece (`deck-sway`, on the `ul`, because the pointer lean owns the
+stage's transform) and every 6.5 s a yellow light runs down the layers — each slides
+out along its length and glows in turn (`deck-scan` on `translate`, `deck-glow` on
+`opacity`), starting after the loader (+2 s while it plays). Pointer: the lean is
+stronger, and the layer under it slides out (`transform`, a different property from
+the idle `translate`, so the two never fight) and goes yellow — it slides along its
+own length, never toward the pointer. It sits a little further left (`right` grows
+from 3vw to 7vw with width, so the headline clearance holds at 1024–1100).
+
+Lessons: (1) **Check that a decorative layer actually receives the pointer.** The
+headline's `display:block` lines span the full width of the h1 and sat above the
+stack (z-10 vs 5): hover and click never reached the layers — `elementFromPoint` at
+each label (`dbghover.mjs`) found the headline. The stack is now above the content
+(`z-[12]`), its container still `pointer-events:none`, only the faces `auto`.
+(2) `filter` forces `transform-style: flat`, so a face with a back plate can't use
+it. (3) `box-shadow` paints only outside the box: a "floor shadow" made that way
+shows as a pale plate; use a blurred filled shape. (4) An element that is always
+moving is never "stable" for Playwright's actionability — use `force` and a fresh
+bounding box, and check the position over time (`deckmove.mjs`).

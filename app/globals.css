@@ -1655,10 +1655,10 @@ html[data-intro="play"] .hero-deck {
    .deck-card (landing: peel from one card · scroll: explode) > .deck-face
    (idle: float). */
 .hero-deck {
-  --dw: min(24vw, 360px, 40svh);
+  --dw: min(23vw, 350px, 38svh);
   --dz: calc(var(--dw) * 0.088);
   width: var(--dw);
-  right: 2.6vw;
+  right: clamp(3vw, calc(3vw + (100vw - 1100px) * 0.12), 7vw);
   top: calc(5.2rem + var(--dw) * 0.1 + 14px);
   aspect-ratio: 1.15;
   perspective: 1700px;
@@ -1691,45 +1691,125 @@ html[data-intro="play"] .hero-deck {
   transform: translateZ(calc((var(--i) - 4) * var(--dz)));
 }
 .deck-face {
+  /* each layer is a slab: its own face, a thick edge behind it (::before, set
+     back in depth, seen as a yellow rim along the lower sides) and the shadow
+     of the layer above falling on it (::after). --s darkens the lower layers. */
+  --s: calc((8 - var(--i)) * 1.2%);
+  --edge: var(--color-buzz);
+  --t: calc(var(--dw) * 0.012);
   position: relative;
   display: block;
   height: 100%;
   padding: calc(var(--dw) * 0.06);
   border-radius: calc(var(--dw) * 0.075);
-  background: linear-gradient(150deg, #ffffff 0%, #f3f2ec 100%);
-  border: 1px solid rgb(17 17 16 / 0.16);
-  box-shadow: inset 0 1px 0 #fff, 0 18px 28px -18px rgb(17 17 16 / 0.45), 0 2px 0 rgb(17 17 16 / 0.06);
-  filter: brightness(calc(0.92 + var(--i) * 0.01));
+  background: linear-gradient(150deg, color-mix(in srgb, #111110 var(--s), #ffffff) 0%, color-mix(in srgb, #111110 calc(var(--s) + 4%), #f6f5ef) 100%);
+  border: 1px solid rgb(17 17 16 / 0.2);
+  box-shadow: inset 0 1px 0 #fff, 0 18px 28px -18px rgb(17 17 16 / 0.45);
   color: #111110;
   pointer-events: auto;
-  transition: background 0.35s ease, border-color 0.35s ease;
+  transform-style: preserve-3d;
+  transition: background 0.35s ease, border-color 0.35s ease, transform 0.45s cubic-bezier(0.2, 0.9, 0.25, 1.2);
+}
+.deck-face::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: var(--edge);
+  border: 1px solid rgb(17 17 16 / 0.28);
+  transform: translateZ(calc(var(--t) * -1));
+  transition: background 0.35s ease;
+  pointer-events: none;
+}
+.deck-face::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, transparent 0%, transparent 62%, rgb(17 17 16 / 0.13) 74%, transparent 90%);
+  pointer-events: none;
 }
 a.deck-face:hover,
 a.deck-face:focus-visible {
+  --edge: #111110;
   background: var(--color-buzz);
-  border-color: rgb(17 17 16 / 0.35);
+  border-color: rgb(17 17 16 / 0.4);
+  transform: translateX(calc(var(--dw) * 0.06));
+}
+/* the wash of yellow light that runs down the layers */
+.deck-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--color-buzz);
+  opacity: 0;
+  pointer-events: none;
 }
 a.deck-face:focus-visible {
   outline: 2px solid #111110;
   outline-offset: 3px;
 }
 .deck-brand .deck-face {
-  background: linear-gradient(150deg, #1c1c1a 0%, #111110 100%);
-  border-color: rgb(255 255 255 / 0.14);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.16), 0 24px 34px -18px rgb(17 17 16 / 0.6);
+  background: linear-gradient(150deg, #1d1d1b 0%, #0f0f0e 100%);
+  border-color: rgb(255 255 255 / 0.18);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.2), 0 24px 34px -18px rgb(17 17 16 / 0.6);
   color: #f5f4f0;
-  filter: none;
   pointer-events: none;
 }
+.deck-brand .deck-face::after {
+  background: radial-gradient(120% 90% at 100% 0%, rgb(255 212 59 / 0.16), transparent 55%);
+}
 .deck-brand .deck-label .kicker {
-  color: #a3a29a;
+  color: #b4b3aa;
+}
+/* the number set big on the brand card — the real count of services */
+.deck-figure {
+  position: absolute;
+  left: calc(var(--dw) * 0.065);
+  bottom: calc(var(--dw) * 0.17);
+  display: flex;
+  align-items: flex-end;
+  gap: 0.55em;
+  font-size: calc(var(--dw) * 0.2);
+  line-height: 0.8;
+}
+.deck-figure .font-display {
+  color: var(--color-buzz);
+  letter-spacing: -0.06em;
+}
+.deck-figure .kicker {
+  font-size: clamp(8px, calc(var(--dw) * 0.03), 11px);
+  line-height: 1.35;
+  color: #b4b3aa;
+  padding-bottom: 0.2em;
+}
+/* the shadow the stack throws on the page below it: a soft dark plate on the
+   floor, just under the lowest layer (a box-shadow would only paint outside it) */
+.deck-ground .deck-face {
+  background: rgb(17 17 16 / 0.3);
+  border: 0;
+  box-shadow: none;
+  filter: blur(calc(var(--dw) * 0.05));
+  scale: 0.92;
+  pointer-events: none;
+  animation: none;
+}
+.deck-ground .deck-face::before,
+.deck-ground .deck-face::after {
+  display: none;
+}
+.deck-dot,
+.deck-label,
+.deck-count,
+.deck-figure {
+  z-index: 1;
 }
 .deck-dot {
   position: absolute;
   right: calc(var(--dw) * 0.06);
   top: calc(var(--dw) * 0.06);
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
   border-radius: 999px;
   background: var(--color-buzz);
 }
@@ -1743,14 +1823,14 @@ a.deck-face:hover .deck-dot {
   display: flex;
   align-items: baseline;
   gap: 0.6em;
-  font-size: clamp(11px, calc(var(--dw) * 0.056), 16px);
+  font-size: clamp(11px, calc(var(--dw) * 0.054), 16px);
   line-height: 1;
   letter-spacing: -0.03em;
   white-space: nowrap;
 }
 .deck-label .kicker {
-  color: #6a6962;
-  font-size: 0.78em;
+  color: #55544e;
+  font-size: 0.74em;
 }
 a.deck-face:hover .deck-label .kicker {
   color: #111110;
@@ -1758,9 +1838,9 @@ a.deck-face:hover .deck-label .kicker {
 .deck-count {
   position: absolute;
   right: calc(var(--dw) * 0.065);
-  bottom: calc(var(--dw) * 0.04);
-  font-size: clamp(8px, calc(var(--dw) * 0.026), 10px);
-  color: #6a6962;
+  bottom: calc(var(--dw) * 0.042);
+  font-size: clamp(8px, calc(var(--dw) * 0.027), 10px);
+  color: #55544e;
   white-space: nowrap;
 }
 a.deck-face:hover .deck-count {
@@ -1780,13 +1860,56 @@ a.deck-face:hover .deck-count {
   html[data-intro="play"] .deck-card {
     animation-delay: calc(2.2s + var(--n) * 0.05s);
   }
-  .deck-face {
-    animation: deck-float 7s ease-in-out infinite;
-    animation-delay: var(--d, 0s);
+  /* alive at rest: the whole stack turns slowly like a showpiece on a
+     turntable, and every few seconds a yellow light runs down the layers —
+     each one slides out a little and glows in turn, reading "01 … 08" */
+  .deck-stage ul {
+    animation: deck-sway 13s ease-in-out infinite alternate;
   }
-  @keyframes deck-float {
-    50% {
-      translate: 0 0 calc(var(--dz) * 0.3);
+  @keyframes deck-sway {
+    from {
+      transform: rotateZ(-7deg);
+    }
+    to {
+      transform: rotateZ(7deg);
+    }
+  }
+  .deck-face {
+    animation: deck-scan 6.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation-delay: calc(3.2s + var(--n) * 0.17s);
+  }
+  html[data-intro="play"] .deck-face {
+    animation-delay: calc(5.2s + var(--n) * 0.17s);
+  }
+  .deck-glow {
+    animation: deck-glow 6.5s ease-out infinite;
+    animation-delay: calc(3.2s + var(--n) * 0.17s);
+  }
+  html[data-intro="play"] .deck-glow {
+    animation-delay: calc(5.2s + var(--n) * 0.17s);
+  }
+  .deck-brand .deck-face,
+  .deck-ground .deck-face {
+    animation: none;
+  }
+  @keyframes deck-scan {
+    0%,
+    26%,
+    100% {
+      translate: 0 0 0;
+    }
+    11% {
+      translate: calc(var(--dw) * 0.075) 0 calc(var(--dz) * 0.2);
+    }
+  }
+  @keyframes deck-glow {
+    0%,
+    30%,
+    100% {
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.9;
     }
   }
   @supports (animation-timeline: view()) {

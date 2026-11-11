@@ -3,14 +3,17 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { SERVICE_LINES } from "@/lib/siteNav";
+import { SERVICE_LINES, SUB_SERVICE_COUNT } from "@/lib/siteNav";
 
 // The hero's 3D object — "one team, every layer": the brand card on top of the
 // eight service lines, stacked in depth and seen from above at an angle. Pure
 // CSS 3D (no library), and it is part of the page's choreography:
 //   • landing — the layers start as ONE card (the brand card) and peel apart
 //     into the stack just as the loader's curtain opens (globals.css, "deck");
-//   • pointer — the whole stack leans toward the pointer with an eased follow;
+//   • at rest — the stack turns slowly, and every few seconds a yellow light
+//     runs down the layers, each sliding out a little and glowing in turn;
+//   • pointer — the whole stack leans toward the pointer with an eased follow,
+//     and the layer under it slides out and goes yellow;
 //   • scroll — scrolling away spins the stack and pulls the layers far apart
 //     (an exploded view) while it rises faster than the page;
 //   • every layer is a real link to its service page (they go yellow under the
@@ -49,10 +52,10 @@ export default function HeroDeck() {
     let raf = 0;
     const frame = () => {
       raf = 0;
-      x += (tx - x) * 0.07;
-      y += (ty - y) * 0.07;
-      st.style.setProperty("--drx", `${(58 + y * -9).toFixed(2)}deg`);
-      st.style.setProperty("--drz", `${(-34 + x * 16).toFixed(2)}deg`);
+      x += (tx - x) * 0.09;
+      y += (ty - y) * 0.09;
+      st.style.setProperty("--drx", `${(58 + y * -12).toFixed(2)}deg`);
+      st.style.setProperty("--drz", `${(-34 + x * 24).toFixed(2)}deg`);
       if (Math.abs(tx - x) > 0.002 || Math.abs(ty - y) > 0.002)
         raf = requestAnimationFrame(frame);
     };
@@ -80,7 +83,7 @@ export default function HeroDeck() {
   return (
     <div
       ref={root}
-      className="hero-deck pointer-events-none absolute z-[5] hidden lg:block"
+      className="hero-deck pointer-events-none absolute z-[12] hidden lg:block"
     >
       <div className="deck-scroll">
         <nav
@@ -99,6 +102,7 @@ export default function HeroDeck() {
                   style={{ "--i": depth, "--n": k + 1, "--d": `${-k * 0.9}s` }}
                 >
                   <Link href={l.href} className="deck-face" tabIndex={0}>
+                    <span className="deck-glow" aria-hidden="true" />
                     <span className="deck-dot" aria-hidden="true" />
                     <span className="deck-label">
                       <span className="kicker">{l.no}</span>
@@ -126,13 +130,29 @@ export default function HeroDeck() {
                   alt=""
                   width={447}
                   height={143}
-                  className="h-[calc(var(--dw)*0.1)] w-auto"
+                  className="h-[calc(var(--dw)*0.13)] w-auto"
                 />
+                <span className="deck-figure">
+                  <span className="font-display">{SUB_SERVICE_COUNT}</span>
+                  <span className="kicker">
+                    services in
+                    <br />
+                    {LAYERS.length} lines
+                  </span>
+                </span>
                 <span className="deck-label">
                   <span className="kicker">One team</span>
                   <span className="font-display">Every layer</span>
                 </span>
               </div>
+            </li>
+            {/* the shadow on the page below — one more layer under the stack */}
+            <li
+              aria-hidden="true"
+              className="deck-card deck-ground"
+              style={{ "--i": -0.7, "--n": total, "--d": "0s" }}
+            >
+              <div className="deck-face" />
             </li>
           </ul>
         </nav>
