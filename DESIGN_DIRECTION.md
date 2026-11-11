@@ -473,3 +473,31 @@ motion / no scroll-timeline support: plain rows, hairlines present. Tested numer
 Lessons: the description renders as a `div`, not a `p` (RichText) — target
 `:last-child`, not `p`; re-centre twice when testing a row in a list whose rows rise in
 (positions move while the rise finishes).
+
+### 15e. Photos: the team film strip, whole blog covers, plain numbers (2026-11-11)
+
+**Team page photos** (`components/detail/photoFilm.js`, replaces the small fading
+slideshow there; /career still uses `HeroSlideshow`). The old frame was a ~680 px box
+fed a 640 px file at quality 75 (`sizes` said 580) — upscaled and compressed, hence
+"low quality" — and the presentation was a rectangle with four dashes. Now a film
+strip: the section is tall, its stage sticks to the screen, and the photos run sideways
+as you scroll (translate from 0 to `calc(-100% + 100vw)` on the strip, so no widths
+need computing), frames alternate big/small and high/low, each image drifts slower than
+its frame, a yellow line fills, big numerals under each. Photos are served at the size
+they show (`quality 90`, `sizes` = frame width); on phones the frames are portrait.
+Without scroll timelines or with reduced motion: a plain grid of the same photos.
+Tested numerically in `filmtest.mjs` (pinned, strip start/middle/end, line fill,
+served width ≥ shown width × DPR, no overflow, reduced motion).
+
+**Whole covers.** Blog covers are 1.91:1 graphics with text near their edges. The
+list card (16:10, cover), the author list (hover zoom) and the post header (2.4:1 on
+desktop — a fifth of the picture gone) all cropped them. Now every frame is 1.91:1,
+`object-contain`, no hover zoom; another shape gets quiet bars, never a crop. The
+post header is capped at 60 rem so a 1.91:1 picture is not 700 px tall. `blogcover.mjs`.
+
+**No codes.** "BBC-01" / "PRD-01" are gone from the build section: plain 01, 02… (and
+a "+" on the closing "Need a system like these?" row).
+
+Note for the owner: every `team-*.jpeg` carries Google's visible Gemini ✦ mark in its
+bottom-right corner (some twice) — they are AI-made or AI-edited images. Better: swap
+in the original camera photos (or say they are illustrative).

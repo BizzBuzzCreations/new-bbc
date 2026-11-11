@@ -9,7 +9,7 @@ import { IN_HOUSE_BUILDS } from "@/lib/inHouseBuilds";
 // What we build: proof, set as a register — no pictures. The two products
 // (Clio AI, Praxistence) as large rows (tag, name and text, the features as
 // a hairline list, the button); then the other in-house systems as a plain
-// table (BBC-01…), ending with "Need one like these?". Same dashboard fields
+// table (numbered 01, 02…), ending with "Need one like these?". Same dashboard fields
 // as before (caseStudies*, the ai* / clio* and praxistence* product fields,
 // caseStudyClients — the built-in list when none are saved). `clioPrefix`
 // "ai" (home) | "clio" (location pages); `compact`: no feature lists.
@@ -59,7 +59,7 @@ export default function BuildV2({
                 className="row-in grid gap-8 border-b border-(--line) py-12 md:grid-cols-12 md:gap-10 md:py-16"
               >
                 <p className="kicker text-(--mut) md:col-span-2">
-                  <span className="text-(--fg)">PRD-0{i + 1}</span>
+                  <span className="text-(--fg)">0{i + 1}</span>
                   <br />
                   Our product
                 </p>
@@ -130,7 +130,7 @@ export default function BuildV2({
                   className="reg-row grid gap-2 py-6 md:grid-cols-12 md:gap-10"
                 >
                   <span className="reg-no kicker text-(--mut) md:col-span-2">
-                    BBC-{String(i + 1).padStart(2, "0")}
+                    {String(i + 1).padStart(2, "0")}
                   </span>
                   <h3 className="font-display text-xl leading-snug tracking-[-0.03em] md:col-span-4 md:text-2xl">
                     {b.name}
@@ -146,8 +146,11 @@ export default function BuildV2({
                 data-last=""
                 className="reg-row group grid gap-2 py-6 md:grid-cols-12 md:gap-10"
               >
-                <span className="reg-no kicker text-(--mut) md:col-span-2">
-                  BBC-—
+                <span
+                  aria-hidden="true"
+                  className="reg-no kicker text-(--mut) md:col-span-2"
+                >
+                  +
                 </span>
                 <h3 className="font-display text-xl leading-snug tracking-[-0.03em] md:col-span-4 md:text-2xl">
                   <Link
