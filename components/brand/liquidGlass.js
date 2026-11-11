@@ -17,7 +17,7 @@ import {
 // popups). Elsewhere (Safari, Firefox) nothing happens and the surfaces stay
 // frosted glass. Per-surface tuning: data-lg-bezel (px of curved rim),
 // data-lg-scale (strength, default 1.25), data-lg-lens (also magnify the
-// middle), data-lg-chroma="off" (no colour fringing; small surfaces get it by
+// middle; a number is the strength, default 0.22), data-lg-chroma="off" (no colour fringing; small surfaces get it by
 // default; data-lg-off keeps a surface frosted). A small governor watches the
 // frame rate and, on a machine that struggles with backdrop filters, steps
 // down liquid → frosted → flat (html[data-glass]) and never back up.
@@ -53,7 +53,8 @@ export default function LiquidGlass() {
       const h = el.offsetHeight;
       if (w < 8 || h < 8) return;
       const radius = parseFloat(getComputedStyle(el).borderTopLeftRadius) || 0;
-      const lens = el.hasAttribute("data-lg-lens");
+      const lensAttr = el.getAttribute("data-lg-lens");
+      const lens = lensAttr === null ? 0 : parseFloat(lensAttr) || 0.22; // how strongly the middle is magnified
       const small = Math.min(w, h) <= 120;
       const chroma =
         el.getAttribute("data-lg-chroma") === "off"

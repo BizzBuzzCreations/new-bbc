@@ -29,7 +29,11 @@ export default function GlassPointer() {
       const e = last;
       if (!e) return;
       const t = e.target instanceof Element ? e.target : null;
-      const glass = t?.closest(".glass");
+      // (the header's glass is a pane inside `[data-glass-host]`, so the pointer
+      // is over the host's links, not over the pane itself)
+      const glass =
+        t?.closest(".glass") ||
+        t?.closest("[data-glass-host]")?.querySelector(":scope > .glass");
       if (glass) {
         const r = glass.getBoundingClientRect();
         glass.style.setProperty("--mx", `${(e.clientX - r.left).toFixed(0)}px`);

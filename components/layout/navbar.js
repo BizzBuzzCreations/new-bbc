@@ -203,8 +203,9 @@ export default function Navbar() {
   };
   // The liquid blob under the nav links: a small lens of glass that slides to
   // the link you point at (or focus, or whose panel is open), stretching along
-  // the way and settling with a little overshoot, and magnifying the label it
-  // sits on. Position and width come from transform (the box is a fixed size, so
+  // the way and settling with a little overshoot, and magnifying the glass (and
+  // the page behind it) — the labels stay ABOVE it, crisp: an SVG displacement
+  // filter samples without smoothing, so text seen through it would shimmer. Position and width come from transform (the box is a fixed size, so
   // its refraction filter is built once); squash-and-stretch is a Web Animation.
   const moveBlob = (el) => {
     const b = blob.current;
@@ -337,17 +338,28 @@ export default function Navbar() {
           }}
           onPointerLeave={hoverLeave}
           onPointerEnter={() => clearTimeout(timer.current)}
-          data-lg-bezel="24"
-          data-lg-scale="0.5"
-          data-lg-chroma="off"
-          style={{ "--lq-blur": "7px" }}
-          className={`glass glass-bar glass-calm fixed inset-x-3 top-3 z-[70] mx-auto max-w-[1440px] rounded-full md:inset-x-6 md:top-4 ${
+          data-glass-host=""
+          className={`fixed inset-x-3 top-3 z-[70] mx-auto max-w-[1440px] rounded-full md:inset-x-6 md:top-4 ${
             hidden && !onInk && !panel
               ? "-translate-y-[calc(100%+1.5rem)]"
               : "translate-y-0"
           } text-(--fg) ${onInk ? "v-ink" : "v-paper"}`}
         >
-          <div className="flex h-14 items-center gap-4 px-4 md:h-[4.25rem] md:gap-6 md:px-6">
+          {/* The glass is its own pane BEHIND the content, not the header itself: a
+              backdrop-filter element becomes the "backdrop root" for everything inside
+              it, so the liquid blob under the links (a glass of its own) used to see
+              only the header's own pixels — never the page — and warped them oddly.
+              With the pane separate, the blob sees the page, the pane and the labels,
+              and magnifies them properly. */}
+          <span
+            aria-hidden="true"
+            data-lg-bezel="28"
+            data-lg-scale="1.05"
+            data-lg-chroma="off"
+            style={{ "--lq-blur": "2px" }}
+            className="glass glass-bar pointer-events-none absolute inset-0 rounded-full"
+          />
+          <div className="relative flex h-14 items-center gap-4 px-4 md:h-[4.25rem] md:gap-6 md:px-6">
             <Link
               href="/"
               onClick={goHome}
@@ -379,7 +391,7 @@ export default function Navbar() {
                 const here = section === n.key;
                 const mark = `pointer-events-none absolute inset-x-4 bottom-1.5 h-px origin-left bg-(--fg) transition-transform duration-300 ease-out-soft ${here && !panel ? "scale-x-100 group-hover/nav:opacity-0 group-focus-within/nav:opacity-0" : "scale-x-0"}`;
                 const cls =
-                  "group relative flex h-11 items-center gap-1.5 rounded-full px-4 text-[0.9375rem] font-medium";
+                  "group relative z-[1] flex h-11 items-center gap-1.5 rounded-full px-4 text-[0.9375rem] font-medium";
                 if (!n.panel) {
                   return (
                     <Link
@@ -432,10 +444,11 @@ export default function Navbar() {
                 ref={blob}
                 aria-hidden="true"
                 data-lg-blob=""
-                data-lg-bezel="12"
+                data-lg-bezel="14"
                 data-lg-scale="1.1"
+                data-lg-lens="0.55"
                 data-lg-chroma="off"
-                className="glass pointer-events-none absolute left-0 top-1/2 z-10 h-[46px] w-[124px] -translate-y-1/2 rounded-full opacity-0 [scale:0.7]"
+                className="glass pointer-events-none absolute left-0 top-1/2 z-0 h-[46px] w-[124px] -translate-y-1/2 rounded-full opacity-0 [scale:0.7]"
                 style={{
                   "--lq-blur": "0px",
                   "--lq-sat": "1.35",
