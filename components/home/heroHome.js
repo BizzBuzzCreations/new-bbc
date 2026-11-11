@@ -11,6 +11,7 @@ import Button from "@/components/brand/button";
 import IndustryWheel from "@/components/home/industryWheel";
 import HeroField from "@/components/brand/heroField";
 import HeroDeck from "@/components/home/heroDeck";
+import HeroLayers from "@/components/home/heroLayers";
 import { toneWords } from "@/components/brand/accentText";
 import { heroImageSource } from "@/components/sections/homeHero";
 import Image from "next/image";
@@ -180,9 +181,11 @@ export default function HeroHome({
         {/* proof for "India's Trusted": the real certifications, right under the buttons */}
         <ul
           aria-label="Certifications and partnerships"
-          className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2.5 px-1"
+          className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 px-1 sm:flex sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-2.5"
         >
-          <li className="kicker text-(--mut)">Recognised by</li>
+          <li className="kicker col-span-2 text-(--mut) sm:col-span-1">
+            Recognised by
+          </li>
           {TRUST_BADGES.map((b) => (
             <li key={b.title} className="flex items-center gap-2.5">
               <Image
@@ -199,6 +202,9 @@ export default function HeroHome({
             </li>
           ))}
         </ul>
+
+        {/* the stack's cards as a swipe row where the 3D stack is not shown */}
+        <HeroLayers />
 
         {inFrame && (
           <div className="relative mt-8 aspect-[16/8] overflow-hidden bg-paper-2 md:mt-10">
