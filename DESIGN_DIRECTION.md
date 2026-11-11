@@ -458,3 +458,18 @@ buttons as proof for "India's Trusted". Not done, and why: moving the buttons ab
 the card (adds ~80 px and breaks the first-screen fit with the owner's long text);
 client count / rating / years in that strip (no verified figures to hand — add them
 from the dashboard's stats when the owner confirms the numbers).
+
+### 15d. The in-house register (BBC-01…) comes alive (2026-11-11)
+
+The "also built and run in-house" table is no longer static. Scroll: the row at the
+middle of the screen is lit — a yellow sweep grows from the left edge behind it (with a
+3 px bar) and its number goes to full ink; the light travels down the table as you read
+(`--act`, a registered number animated 0→1→0 across the row's own `view()` timeline,
+narrow window 39–61 % so it is ONE row, not a smear of five). The hairline under each row
+draws itself as the row arrives (`::after`, named timeline `--reg` on the row). Hover: a
+yellow wash sweeps across the row and its text goes to full ink — colour only. Reduced
+motion / no scroll-timeline support: plain rows, hairlines present. Tested numerically in
+`regfx.mjs` (lit row, falloff, hairline partial → complete, hover, reduced motion).
+Lessons: the description renders as a `div`, not a `p` (RichText) — target
+`:last-child`, not `p`; re-centre twice when testing a row in a list whose rows rise in
+(positions move while the rise finishes).

@@ -127,9 +127,9 @@ export default function BuildV2({
                 <li
                   key={`${b.name}-${i}`}
                   style={{ "--k": i % 4 }}
-                  className="row-in grid gap-2 border-b border-(--line) py-6 md:grid-cols-12 md:gap-10"
+                  className="reg-row grid gap-2 py-6 md:grid-cols-12 md:gap-10"
                 >
-                  <span className="kicker text-(--mut) md:col-span-2">
+                  <span className="reg-no kicker text-(--mut) md:col-span-2">
                     BBC-{String(i + 1).padStart(2, "0")}
                   </span>
                   <h3 className="font-display text-xl leading-snug tracking-[-0.03em] md:col-span-4 md:text-2xl">
@@ -142,8 +142,13 @@ export default function BuildV2({
                   />
                 </li>
               ))}
-              <li className="group relative grid gap-2 py-6 md:grid-cols-12 md:gap-10">
-                <span className="kicker text-(--mut) md:col-span-2">BBC-—</span>
+              <li
+                data-last=""
+                className="reg-row group grid gap-2 py-6 md:grid-cols-12 md:gap-10"
+              >
+                <span className="reg-no kicker text-(--mut) md:col-span-2">
+                  BBC-—
+                </span>
                 <h3 className="font-display text-xl leading-snug tracking-[-0.03em] md:col-span-4 md:text-2xl">
                   <Link
                     href="/contact"
