@@ -1731,6 +1731,176 @@ html[data-intro="play"] .hero-deck {
     transition: color 0.4s ease;
   }
 }
+/* The team page's film strip (components/detail/photoFilm.js). Base = a plain
+   grid of the photos (no scroll-linked animation / reduced motion). Enhanced:
+   the section is tall, its inner stage sticks to the screen, and the strip
+   slides sideways along the page's scroll — frames alternate big/small, each
+   image drifts a little slower than its frame, and a yellow line fills. */
+.film {
+  --ar: 0.75; /* a frame's height / width */
+  --fw: clamp(15rem, min(74vw, 56svh * 1.3333), 47rem);
+  --gap: clamp(1rem, 3.2vw, 3rem);
+  --pad: clamp(1.25rem, 6vw, 6rem);
+}
+.film-pin {
+  padding: 2rem 0 3.5rem;
+}
+.film-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.film-hint {
+  display: none;
+}
+.film-rail {
+  margin: 0.75rem 0 1.25rem;
+  height: 2px;
+  background: var(--line);
+}
+.film-progress {
+  display: block;
+  height: 100%;
+  background: var(--color-buzz);
+}
+.film-strip {
+  list-style: none;
+  margin: 2.5rem 0 0;
+  padding: 0 var(--pad);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.5rem var(--gap);
+}
+@media (min-width: 700px) {
+  .film-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.film-frame figure {
+  margin: 0;
+}
+@media (max-width: 699px) {
+  .film {
+    --ar: 1.3334;
+    --fw: 80vw;
+  }
+  .film-img {
+    aspect-ratio: 3 / 4;
+  }
+}
+.film-img {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: clip;
+  border-radius: 1.25rem;
+  background: var(--color-paper-2, #ebeae4);
+}
+.film-img img {
+  scale: 1.001;
+  transition: scale 0.9s cubic-bezier(0.3, 0.8, 0.25, 1);
+}
+@media (hover: hover) {
+  .film-frame:hover .film-img img {
+    scale: 1.045;
+  }
+}
+.film-cap {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-top: 0.9rem;
+  font-size: 2rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.film-cap .kicker {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .film {
+      height: calc(100svh + var(--n) * 32vw);
+      view-timeline: --film block;
+    }
+    .film-pin {
+      position: sticky;
+      top: 0;
+      height: 100svh;
+      padding: 6.25rem 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      overflow: clip;
+    }
+    .film-hint {
+      display: block;
+    }
+    .film-progress {
+      width: 100%;
+      transform-origin: 0 50%;
+      scale: 0 1;
+      animation: film-fill linear both;
+      animation-timeline: --film;
+      animation-range: contain 0% contain 100%;
+    }
+    @keyframes film-fill {
+      to {
+        scale: 1 1;
+      }
+    }
+    .film-strip {
+      flex: 1 1 auto;
+      min-height: 0;
+      max-height: calc(var(--fw) * var(--ar) + 6rem);
+      width: max-content;
+      margin-block: auto;
+      display: flex;
+      align-items: center;
+      gap: var(--gap);
+      animation: film-run linear both;
+      animation-timeline: --film;
+      animation-range: contain 0% contain 100%;
+    }
+    @keyframes film-run {
+      to {
+        translate: calc(-100% + 100vw) 0;
+      }
+    }
+    .film-frame {
+      flex: none;
+      width: var(--fw);
+    }
+    @media (min-width: 700px) {
+      .film-frame:nth-child(even) {
+        width: calc(var(--fw) * 0.78);
+        align-self: flex-start;
+      }
+      .film-frame:nth-child(odd) {
+        align-self: flex-end;
+      }
+    }
+    .film-img img {
+      scale: 1.16;
+      animation: film-drift linear both;
+      animation-timeline: --film;
+      animation-range: contain 0% contain 100%;
+    }
+    @keyframes film-drift {
+      from {
+        translate: 4.5% 0;
+      }
+      to {
+        translate: -4.5% 0;
+      }
+    }
+    @media (hover: hover) {
+      .film-frame:hover .film-img img {
+        scale: 1.22;
+      }
+    }
+  }
+}
 /* the hero card's industry wheel (components/home/industryWheel.js): rows of
    one --row each; the viewport shows the current row (phones) or the one
    before it and the one after it too (--rows 3, --c 1); the list slides so

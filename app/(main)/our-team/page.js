@@ -1,6 +1,6 @@
 import { Megaphone, Palette, Code2, Target, Headset, FlaskConical } from "lucide-react";
 import PageHero from "@/components/detail/pageHero";
-import HeroSlideshow from "@/components/detail/heroSlideshow";
+import PhotoFilm from "@/components/detail/photoFilm";
 import TitledSection from "@/components/detail/titledSection";
 import PeopleGrid from "@/components/detail/peopleGrid";
 import CultureRows from "@/components/detail/cultureRows";
@@ -81,14 +81,16 @@ export default async function OurTeamPage() {
       {/* thin reading-progress line at the top (pure CSS, see globals.css) */}
       <div aria-hidden="true" className="scroll-progress" />
       {!hidden.has("teamHero") && (
-        <PageHero
-          label="Our Team"
-          title={heroHeading}
-          tagline={heroTagline}
-          description={heroParagraph}
-          actions={[{ text: heroCtaText, href: "#meet-our-team", variant: "solid" }]}
-          media={<HeroSlideshow slides={heroSlides} />}
-        />
+        <>
+          <PageHero
+            label="Our Team"
+            title={heroHeading}
+            tagline={heroTagline}
+            description={heroParagraph}
+            actions={[{ text: heroCtaText, href: "#meet-our-team", variant: "solid" }]}
+          />
+          <PhotoFilm slides={heroSlides} />
+        </>
       )}
 
       {!hidden.has("founders") && (
