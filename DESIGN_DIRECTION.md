@@ -420,8 +420,9 @@ out along its length and glows in turn (`deck-scan` on `translate`, `deck-glow` 
 `opacity`), starting after the loader (+2 s while it plays). Pointer: the lean is
 stronger, and the layer under it slides out (`transform`, a different property from
 the idle `translate`, so the two never fight) and goes yellow — it slides along its
-own length, never toward the pointer. It sits a little further left (`right` grows
-from 3vw to 7vw with width, so the headline clearance holds at 1024–1100).
+own length, never toward the pointer. It sits well to the left (`right` grows from 6vw at 1024 to 8.4vw
+by ~1280, so the headline clearance holds at every width: ≥27px in every sway pose at
+1024–1920, tested by `deckmove.mjs`; the headline's second line is what limits it).
 
 Lessons: (1) **Check that a decorative layer actually receives the pointer.** The
 headline's `display:block` lines span the full width of the h1 and sat above the

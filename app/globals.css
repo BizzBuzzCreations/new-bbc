@@ -1658,7 +1658,7 @@ html[data-intro="play"] .hero-deck {
   --dw: min(23vw, 350px, 38svh);
   --dz: calc(var(--dw) * 0.088);
   width: var(--dw);
-  right: clamp(3vw, calc(3vw + (100vw - 1100px) * 0.12), 7vw);
+  right: clamp(6vw, calc(6vw + (100vw - 1024px) * 0.12), 8.4vw);
   top: calc(5.2rem + var(--dw) * 0.1 + 14px);
   aspect-ratio: 1.15;
   perspective: 1700px;
