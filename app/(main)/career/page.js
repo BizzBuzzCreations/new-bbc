@@ -1,7 +1,7 @@
 import { Briefcase } from "lucide-react";
 import { getAllJobs } from "@/actions/serverActions";
 import PageHero from "@/components/detail/pageHero";
-import HeroSlideshow from "@/components/detail/heroSlideshow";
+import PhotoFilm from "@/components/detail/photoFilm";
 import LocalityBlock from "@/components/detail/localityBlock";
 import TitledSection from "@/components/detail/titledSection";
 import PhotoFeatures from "@/components/detail/photoFeatures";
@@ -14,7 +14,7 @@ import { buildPageMetadata } from "@/lib/pageMetadata";
 import PageSeoScripts from "@/components/sections/pageSeoScripts";
 
 // The hero's photos until others are saved (real team / office photos).
-const HERO_SLIDES = ["/team-images/team-5.jpeg", "/team-images/team-13.jpeg", "/team-images/team-8.jpeg", "/team-images/team-2.jpeg"];
+const HERO_SLIDES = ["/team-images/team-13.jpeg", "/team-images/team-7.jpeg", "/team-images/team-8.jpeg", "/team-images/team-2.jpeg"];
 
 const DEFAULT_JOIN_TEAM_POINTS = [
   { title: "Learn by Doing", desc: "Work on real campaigns and business challenges." },
@@ -67,20 +67,22 @@ export default async function Career() {
       {/* thin reading-progress line at the top (pure CSS, see globals.css) */}
       <div aria-hidden="true" className="scroll-progress" />
       {!hidden.has("careerHero") && (
-        <PageHero
-          label="Careers"
-          title={content?.careerHeroHeading || "Work Where Your Ideas Matter"}
-          tagline={content?.careerHeroSubheading || "Learn by Doing. Grow by Owning."}
-          description={
-            content?.careerHeroParagraph ||
-            "At BizzBuzz Creations, we believe great work comes from trust, ownership, and collaboration. Our flat structure means fewer layers, faster decisions, and more room to turn your ideas into real outcomes."
-          }
-          actions={[
-            { text: content?.careerHeroCtaText || "Apply Now", href: "/contact", variant: "solid" },
-            !hidden.has("openPositions") && { text: "See Open Roles", href: "#open-positions" },
-          ]}
-          media={<HeroSlideshow slides={heroSlides} />}
-        />
+        <>
+          <PageHero
+            label="Careers"
+            title={content?.careerHeroHeading || "Work Where Your Ideas Matter"}
+            tagline={content?.careerHeroSubheading || "Learn by Doing. Grow by Owning."}
+            description={
+              content?.careerHeroParagraph ||
+              "At BizzBuzz Creations, we believe great work comes from trust, ownership, and collaboration. Our flat structure means fewer layers, faster decisions, and more room to turn your ideas into real outcomes."
+            }
+            actions={[
+              { text: content?.careerHeroCtaText || "Apply Now", href: "/contact", variant: "solid" },
+              !hidden.has("openPositions") && { text: "See Open Roles", href: "#open-positions" },
+            ]}
+          />
+          <PhotoFilm slides={heroSlides} label="Life at BizzBuzz Creations" />
+        </>
       )}
 
       {!hidden.has("careerWhyUs") && (
