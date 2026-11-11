@@ -137,7 +137,7 @@ export default function AuthorPosts({ posts, categories, authorName }) {
                         loading="lazy"
                         decoding="async"
                         alt=""
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                        className="h-full w-full object-contain"
                       />
                     ) : (
                       <span aria-hidden="true" className="kicker absolute inset-0 flex items-end p-4 text-(--mut)">{p.category}</span>

@@ -184,16 +184,16 @@ export default async function SingleBlog({ params }) {
           </div>
           {featuredImage && (
             <div className="wrap">
-              <div className="relative aspect-[16/9] overflow-hidden bg-paper-2 md:aspect-[2.4/1]">
+              <div className="relative aspect-[1.91/1] max-w-[60rem] overflow-hidden bg-paper-2">
                 {/* eslint-disable-next-line @next/next/no-img-element -- Cloudinary upload with its own srcset */}
                 <img
                   src={optimizedImageUrl(featuredImage, 1400)}
                   srcSet={imageSrcSet(featuredImage)}
-                  sizes="(min-width: 1440px) 1360px, 100vw"
+                  sizes="(min-width: 1024px) 960px, 100vw"
                   alt={post?.title}
                   fetchPriority="high"
                   decoding="async"
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className="absolute inset-0 h-full w-full object-contain"
                 />
               </div>
             </div>

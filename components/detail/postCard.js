@@ -6,7 +6,10 @@ import { getFeaturedImage, optimizedImageUrl, imageSrcSet } from "@/lib/getFeatu
 // One blog post as a card (/blog, suggested posts): the cover when the post
 // has one (nothing in its place when it doesn't — no placeholder), the date,
 // category and author in mono, the title and a line of the excerpt; the whole
-// card links to the post, the author's name to their page. `eager`: the first
+// card links to the post, the author's name to their page. The cover is shown
+// WHOLE: the covers are 1.91:1 graphics with text near their edges, so the frame
+// is 1.91:1 and nothing is cropped (object-contain, no zoom on hover — a zoom
+// would cut the edges); another shape gets quiet bars, never a crop. `eager`: the first
 // card on /blog (can be the phone's LCP).
 export default function PostCard({ post, excerpt, headingLevel = "h3", eager = false }) {
   const Title = headingLevel;
@@ -15,7 +18,7 @@ export default function PostCard({ post, excerpt, headingLevel = "h3", eager = f
   return (
     <article className="group relative flex h-full flex-col border-t border-(--fg) pt-5">
       {img && (
-        <div className="relative mb-6 aspect-[16/10] overflow-hidden bg-paper-2">
+        <div className="relative mb-6 aspect-[1.91/1] overflow-hidden bg-paper-2">
           {/* eslint-disable-next-line @next/next/no-img-element -- Cloudinary upload with its own srcset */}
           <img
             src={optimizedImageUrl(img, 640)}
@@ -25,7 +28,7 @@ export default function PostCard({ post, excerpt, headingLevel = "h3", eager = f
             fetchPriority={eager ? "high" : "low"}
             decoding="async"
             alt=""
-            className="h-full w-full object-cover transition-transform duration-700 ease-out-soft group-hover:scale-[1.03]"
+            className="h-full w-full object-contain"
           />
         </div>
       )}
