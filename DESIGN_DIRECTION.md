@@ -501,3 +501,28 @@ a "+" on the closing "Need a system like these?" row).
 Note for the owner: every `team-*.jpeg` carries Google's visible Gemini ✦ mark in its
 bottom-right corner (some twice) — they are AI-made or AI-edited images. Better: swap
 in the original camera photos (or say they are illustrative).
+
+### 15f. Header glass: a pane behind the content; the register in ink (2026-11-11)
+
+**The "illusion" on the nav buttons was structural.** The header WAS the glass
+(`backdrop-filter`), and a `backdrop-filter` element is the *backdrop root* for its
+whole subtree — so the liquid blob under the links (its own glass, nested inside)
+could not see the page: it refracted only the header's own pixels, and warped the
+labels. Now the glass is a pane (`header > .glass.glass-bar`, `absolute inset-0`)
+*behind* the content, the header itself has no filter, and nothing between the blob
+and the page is a backdrop root (`glassbar.mjs` walks the ancestors). The blob sits
+BELOW the labels (`z-0` vs the links' `z-[1]`): an SVG displacement filter samples
+without smoothing, so text seen through it shimmers — the lens now magnifies only the
+glass and the page, and the words stay crisp on top. The pane carries clearer glass
+than before (2 px blur instead of 7, lighter tint, stronger refraction 1.05 / bezel 28);
+the governor's "frost" step no longer takes the bar down (only "flat" does), so the bar
+stays liquid on a struggling machine; `data-lg-lens` is now a strength (the falloff
+follows the pill's shape, the blob uses 0.55); `GlassPointer` finds a host's pane
+(`[data-glass-host]`), so its light and rim still follow the pointer.
+
+**The register, no yellow.** The lit-row wash is gone. A neutral reading focus
+instead: the row at the middle of the screen goes to full ink (title, number, text)
+while the rest settle to the quiet grey, and an ink hairline is drawn under it from
+the left (nothing until the row is well in the light, so no stubs); hover = a 4 % ink
+tint + the same full-ink reading. Only under scroll-timeline support (else plain
+ink); the closing action row is never dimmed. `regfx.mjs`.

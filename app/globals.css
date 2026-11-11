@@ -1602,8 +1602,8 @@ html[data-intro="play"] .hero-deck {
     }
     @keyframes reg-act {
       0%,
-      39%,
-      61%,
+      27%,
+      73%,
       100% {
         --act: 0;
       }
@@ -1672,12 +1672,14 @@ html[data-intro="play"] .hero-deck {
   }
 }
 /* The in-house register (components/home/buildV2.js): each row is a line of
-   the table. Scroll: the row near the middle of the screen is lit — a yellow
-   sweep grows from the left edge behind it and its number goes to full ink
-   (--act, 0…1, driven by the row's own scroll position, so the light travels
-   down the table as you read); the hairline under each row draws itself as it
-   arrives. Hover: a yellow wash sweeps across the row and its text goes to
-   full ink (colour only — nothing moves toward the pointer). */
+   the table, set in ink — no colour. Scroll: a reading focus travels down the
+   table — the row near the middle of the screen goes to full ink (its title,
+   number and text) and its hairline is drawn in ink from the left, while the
+   rows away from it settle back to the quiet grey (--act, 0…1, driven by the
+   row's own scroll position); the hairline under each row also draws itself as
+   the row arrives. Hover: a faint ink tint and the same full-ink reading, no
+   movement. (Where scroll-linked animation is missing, or with reduced motion,
+   the table is plain.) */
 @property --act {
   syntax: "<number>";
   inherits: true;
@@ -1686,17 +1688,15 @@ html[data-intro="play"] .hero-deck {
 .reg-row {
   position: relative;
   isolation: isolate;
-  background-image: linear-gradient(90deg, rgb(255 212 59 / 0.3), rgb(255 212 59 / 0) 85%);
-  background-repeat: no-repeat;
-  background-size: 0% 100%;
 }
 .reg-row::before {
   content: "";
   position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(90deg, var(--color-buzz) 0 3px, rgb(255 212 59 / 0.28) 3px, rgb(255 212 59 / 0.07) 55%, rgb(255 212 59 / 0) 92%);
-  transform: scaleX(var(--act));
+  inset: auto 0 0 0;
+  z-index: 1;
+  height: 1px;
+  background: var(--fg);
+  transform: scaleX(max(0, calc(var(--act) * 1.6 - 0.6))); /* nothing drawn until the row is well into the light: no stubs */
   transform-origin: 0 50%;
   pointer-events: none;
 }
@@ -1708,6 +1708,7 @@ html[data-intro="play"] .hero-deck {
   background: var(--line);
   pointer-events: none;
 }
+.reg-row[data-last]::before,
 .reg-row[data-last]::after {
   display: none;
 }
@@ -1716,19 +1717,36 @@ html[data-intro="play"] .hero-deck {
 }
 @media (hover: hover) {
   .reg-row:hover {
-    background-size: 100% 100%;
+    background-color: color-mix(in srgb, var(--fg) 4%, transparent);
+  }
+  .reg-row:hover::before {
+    transform: scaleX(1);
   }
   .reg-row:hover > :last-child,
+  .reg-row:hover > h3,
   .reg-row:hover .reg-no {
     color: var(--fg);
   }
 }
 @media (prefers-reduced-motion: no-preference) {
   .reg-row {
-    transition: background-size 0.7s cubic-bezier(0.3, 0.8, 0.25, 1);
+    transition: background-color 0.6s ease;
   }
-  .reg-row > :last-child {
+  .reg-row > :last-child,
+  .reg-row > h3 {
     transition: color 0.4s ease;
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reg-row > h3,
+    .reg-row > :last-child {
+      color: color-mix(in srgb, var(--mut), var(--fg) calc(var(--act) * 100%));
+    }
+    /* the closing "Need a system like these?" is an action, never dimmed */
+    .reg-row[data-last] > h3 {
+      color: var(--fg);
+    }
   }
 }
 /* The team page's film strip (components/detail/photoFilm.js). Base = a plain
@@ -2365,7 +2383,9 @@ html[data-glass="frost"] .glass-dense[data-liquid] {
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
 }
 .glass:hover,
-.glass:focus-within {
+.glass:focus-within,
+[data-glass-host]:hover > .glass,
+[data-glass-host]:focus-within > .glass {
   --yl: 1;
 }
 /* small glass controls give a small press (no movement on hover) */
@@ -2388,8 +2408,8 @@ html[data-glass="frost"] .glass-dense[data-liquid] {
   --g-blur: 20px;
   --g-a: 0.5;
   --g-a2: 0.26;
-  --q-a: 0.34;
-  --q-a2: 0.18;
+  --q-a: 0.26;
+  --q-a2: 0.12;
   /* thickness: soft light pooling inside the top and bottom edges (no hairlines —
      the one rim line is the ::after) and a soft shadow under the bar */
   --g-shadow: inset 0 12px 18px -12px rgb(255 255 255 / 0.95), inset 0 -12px 18px -12px rgb(17 17 16 / 0.07), inset 0 0 26px rgb(255 255 255 / 0.4), 0 20px 40px -22px rgb(17 17 16 / 0.34), 0 2px 8px -2px rgb(17 17 16 / 0.1);
@@ -2403,7 +2423,6 @@ html[data-glass="frost"] .glass-dense[data-liquid] {
   backdrop-filter: blur(34px) saturate(1.7);
 }
 
-html[data-glass="frost"] .glass-bar[data-liquid],
 html[data-glass="flat"] .glass-bar[data-liquid] {
   -webkit-backdrop-filter: blur(20px) saturate(1.7);
   backdrop-filter: blur(20px) saturate(1.7);
