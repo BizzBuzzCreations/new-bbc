@@ -23,34 +23,34 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 
 export async function generateMetadata() {
   return buildPageMetadata("home", {
-  title: "Digital Marketing Agency in India | BizzBuzz Creations",
-  description:
-    "Full-stack digital marketing agency in Prayagraj, India. SEO, Google Ads, social media & web development for clients across India and worldwide.",
-  keywords:
-    "best digital marketing agency in allahabad, best digital marketing agency in prayagraj, best digital marketing company in prayagraj, professional digital marketing, Best SEO Service in prayagraj, Expert SEO service, SMM services in prayagraj, Best SMM agency in prayagraj, local SEO services in prayagraj, Best Paid Ads services in prayagraj, Professional SEO Services in Prayagraj",
-  alternates: {
-    canonical: "https://bizzbuzzcreations.com/",
-  },
-  openGraph: {
-    title:
-      "Best Digital Marketing Agency in Prayagraj | Best SEO Service Company in Prayagraj | Best SMM Service In Prayagraj",
+    title: "Digital Marketing Agency in India | BizzBuzz Creations",
     description:
-      "Grow your business with BizzBuzz Creations, a trusted digital marketing agency in Prayagraj offering SEO, Google Ads, web development & social media.",
-    url: "https://bizzbuzzcreations.com/",
-    type: "website",
-    siteName: "Digital Marketing Agency",
-    locale: "en_US",
-    images: ["https://bizzbuzzcreations.com/Industry Authority (1).png"],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title:
-      "Best Digital Marketing Agency in Prayagraj| SEO and SMM Service Company | BizzBuzz Creations",
-    description:
-      "Searching for the best SEO and SMM service company in Prayagraj? We help businesses rank higher, increase visibility, and get more leads with proven digital marketing strategies.",
-    images: ["https://bizzbuzzcreations.com/Industry Authority (1).png"],
-  },
-});
+      "Full-stack digital marketing agency in Prayagraj, India. SEO, Google Ads, social media & web development for clients across India and worldwide.",
+    keywords:
+      "best digital marketing agency in allahabad, best digital marketing agency in prayagraj, best digital marketing company in prayagraj, professional digital marketing, Best SEO Service in prayagraj, Expert SEO service, SMM services in prayagraj, Best SMM agency in prayagraj, local SEO services in prayagraj, Best Paid Ads services in prayagraj, Professional SEO Services in Prayagraj",
+    alternates: {
+      canonical: "https://bizzbuzzcreations.com/",
+    },
+    openGraph: {
+      title:
+        "Best Digital Marketing Agency in Prayagraj | Best SEO Service Company in Prayagraj | Best SMM Service In Prayagraj",
+      description:
+        "Grow your business with BizzBuzz Creations, a trusted digital marketing agency in Prayagraj offering SEO, Google Ads, web development & social media.",
+      url: "https://bizzbuzzcreations.com/",
+      type: "website",
+      siteName: "Digital Marketing Agency",
+      locale: "en_US",
+      images: ["https://bizzbuzzcreations.com/Industry Authority (1).png"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title:
+        "Best Digital Marketing Agency in Prayagraj| SEO and SMM Service Company | BizzBuzz Creations",
+      description:
+        "Searching for the best SEO and SMM service company in Prayagraj? We help businesses rank higher, increase visibility, and get more leads with proven digital marketing strategies.",
+      images: ["https://bizzbuzzcreations.com/Industry Authority (1).png"],
+    },
+  });
 }
 
 export default async function Home() {
@@ -66,10 +66,18 @@ export default async function Home() {
     <div data-no-reveal>
       <PageSeoScripts pageKey="home" />
       <Intro />
+      <div aria-hidden="true" className="scroll-progress" />
       <SectionRail />
       {!hidden.has("hero") && (
         <div data-rail="Home">
-          <HeroHome content={content} secondaryCta={hidden.has("services") ? null : { text: "Explore our services", href: "#services" }} />
+          <HeroHome
+            content={content}
+            secondaryCta={
+              hidden.has("services")
+                ? null
+                : { text: "Explore our services", href: "#services" }
+            }
+          />
         </div>
       )}
       {!hidden.has("about") && (
@@ -82,9 +90,16 @@ export default async function Home() {
           <ServicesV2 content={content} />
         </div>
       )}
-      {!hidden.has("services") && <KineticMarquee words={SERVICE_LINES.map((l) => l.name)} />}
+      {!hidden.has("services") && (
+        <KineticMarquee words={SERVICE_LINES.map((l) => l.name)} />
+      )}
       <div data-rail="What we build">
-        <BuildV2 content={content} showClio={!hidden.has("aiShowcase")} showPraxistence={!hidden.has("praxistenceShowcase")} showBuilds={!hidden.has("caseStudies")} />
+        <BuildV2
+          content={content}
+          showClio={!hidden.has("aiShowcase")}
+          showPraxistence={!hidden.has("praxistenceShowcase")}
+          showBuilds={!hidden.has("caseStudies")}
+        />
       </div>
       <Numbers stats={content?.zoomStats} />
       {!hidden.has("industries") && (

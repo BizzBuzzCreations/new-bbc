@@ -356,3 +356,49 @@ from "flat" (one cheap element must never become an opaque slab). If the rim sti
 shimmers on someone's GPU the one knob is `data-lg-scale` on the `<header>` (0 = no
 refraction).
 
+## 15. Hero v3 and the page's scroll choreography (2026-11-11)
+
+Owner: "make the hero more unique, sync the layers with the loader, and I don't see
+any effects when I scroll." The page now has one motion language, taken from the
+landing: **type rising out of a mask, a hairline that draws itself, a dark band that
+opens like the curtain, one yellow accent.** Every effect is a CSS scroll-driven
+animation (compositor, no JS, Chromium/Safari 26; elsewhere the page is simply
+still), uses transform / clip-path only — **never opacity**, so nothing can be stuck
+invisible and contrast never changes mid-scroll — and is off with reduced motion.
+
+**The hero stack, rebuilt** (`components/home/heroDeck.js`): nine layers — a dark
+**brand card** on top ("One team · Every layer", white logo) over the eight service
+lines, each a **real link** to its hub page (it turns yellow under the pointer;
+nothing moves toward you) with its service count; 01 sits just under the brand card.
+Placed after the hero content (so it is last in tab order), above the dot field and
+below the content (`pointer-events` pass through the content wrapper). Sized from the
+viewport (`--dw: min(24vw, 360px, 40svh)`) so all nine labels sit between the header
+and the hero card at 1024–1920 px (`herofit.mjs`).
+- *Landing sync:* the layers start as ONE card (the brand card) and peel apart as the
+  loader's curtain opens (`deck-peel`, delayed 2.2 s only when `html[data-intro="play"]`,
+  0.45 s otherwise). The peel is ordered **top card first** (`--n`) — the other way
+  round the top card dips under the others mid-peel.
+- *Pointer:* the stack leans toward it (unchanged). *Scroll:* three nested layers keep
+  the motions apart — `.deck-scroll` (spin −28°, rise 15 vh, scale 1.1), `.deck-stage`
+  (pointer lean, from JS), `.deck-card` (peel on `transform`; explode on `translate`,
+  ×2.7 gap) > `.deck-face` (idle float).
+
+**Scroll vocabulary** (globals.css "scroll choreography"): `.head-rise` (headings rise
+out of a mask) · `.rule-draw` (a hairline above every section's kicker draws across —
+the loader's seam; bound to the section head's own named timeline `--sec`, because a
+1 px element has no scroll distance of its own) · `.row-in` (rows, product blocks, number
+tiles, blog rows and FAQ items rise, staggered by their own position / `--k`) ·
+`.band-open` (the dark bands — numbers, reviews, closing CTA — open from a rounded
+card to full width) · `.word-drift` (the industries run slides sideways as one block;
+per-word alternating directions made neighbours overlap) · `.hero-parallax` (dots and
+light lag behind the page) · `.wordmark-rise` (the footer wordmark) · a yellow
+progress hairline across the top (`.scroll-progress`).
+
+Lessons: (1) `overflow: hidden` makes an element a *scroll container*, and a `view()`
+timeline binds to the nearest one — an ancestor with `overflow-hidden` silently freezes
+the effect; use `overflow-clip`. (2) Expo-out easings finish in the first few percent
+of a scroll-linked range and look like nothing happens; use a gentle curve
+(`cubic-bezier(.25,.6,.35,1)`). (3) Test each effect numerically at "just entering" vs
+"arrived" (`scrollfx.mjs`), not only by eye. Measured: scrolling the whole page
+median 16.7 ms/frame with the effects on and off.
+

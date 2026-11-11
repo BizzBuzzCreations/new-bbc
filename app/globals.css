@@ -1538,15 +1538,108 @@ html[data-intro="play"] .hero-deck {
         transform: scale(1);
       }
     }
-    /* section headings rise into place as they enter */
+    /* ---- the page's scroll vocabulary (every effect is transform / clip only —
+       nothing ever fades out of sight, so text keeps its contrast and a page that
+       is never scrolled still shows everything). Same language as the landing:
+       type rising out of a mask, a hairline that draws itself, a dark band that
+       opens like the curtain. ---- */
+    /* headings rise out of a mask */
     .head-rise {
-      animation: head-rise linear both;
+      animation: head-rise cubic-bezier(0.25, 0.6, 0.35, 1) both;
       animation-timeline: view();
-      animation-range: entry 0% entry 48%;
+      animation-range: entry 6% entry 88%;
     }
     @keyframes head-rise {
       from {
-        translate: 0 38px;
+        clip-path: inset(104% 0 -18% 0);
+        translate: 0 46px;
+      }
+      to {
+        clip-path: inset(-6% 0 -18% 0);
+        translate: 0 0;
+      }
+    }
+    /* the seam: a hairline draws itself above every section's kicker */
+    .sec-head {
+      view-timeline: --sec block;
+    }
+    .rule-draw {
+      animation: rule-draw cubic-bezier(0.3, 0.55, 0.4, 1) both;
+      animation-timeline: --sec;
+      animation-range: entry 0% entry 85%;
+    }
+    @keyframes rule-draw {
+      from {
+        clip-path: inset(0 100% 0 0);
+      }
+      to {
+        clip-path: inset(0 0 0 0);
+      }
+    }
+    /* rows, tiles and cards rise into place, staggered by their own position */
+    .row-in {
+      animation: row-in cubic-bezier(0.25, 0.6, 0.35, 1) both;
+      animation-timeline: view();
+      animation-range: entry calc(var(--k, 0) * 5%) entry calc(78% + var(--k, 0) * 5%);
+    }
+    @keyframes row-in {
+      from {
+        translate: 0 58px;
+        scale: 0.985;
+      }
+      to {
+        translate: 0 0;
+        scale: 1;
+      }
+    }
+    /* a dark band opens like the curtain: from a rounded card to full width */
+    .band-open {
+      animation: band-open cubic-bezier(0.3, 0.55, 0.4, 1) both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 34%;
+    }
+    @keyframes band-open {
+      from {
+        clip-path: inset(7% 3% 7% 3% round 44px);
+      }
+      to {
+        clip-path: inset(0 0 0 0 round 0px);
+      }
+    }
+    /* the whole run of industries slides sideways as the section crosses the screen */
+    .word-drift {
+      animation: word-drift linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+    @keyframes word-drift {
+      from {
+        translate: 5vw 0;
+      }
+      to {
+        translate: -5vw 0;
+      }
+    }
+    /* the hero's dots and light lag behind the page — depth */
+    .hero-parallax {
+      animation: hero-parallax linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0px 100vh;
+    }
+    @keyframes hero-parallax {
+      to {
+        translate: 0 22vh;
+      }
+    }
+    /* the closing wordmark rises out of the footer */
+    .wordmark-rise {
+      animation: wordmark-rise cubic-bezier(0.3, 0.55, 0.4, 1) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
+    }
+    @keyframes wordmark-rise {
+      from {
+        translate: 0 42%;
       }
       to {
         translate: 0 0;
@@ -1556,41 +1649,80 @@ html[data-intro="play"] .hero-deck {
 }
 /* the hero's 3D stack of layers (components/home/heroDeck.js) — pure CSS 3D.
    Everything inside scales from --dw (the stack's width, set from the viewport
-   height and width), so at any laptop height the whole stack sits between the
-   header pill and the hero card: --dz is the gap between layers. */
+   width and height); --dz is the gap between layers; --i a layer's depth (the
+   brand card is the top). Three nested layers keep the motions apart:
+   .deck-scroll (scroll: spin + rise), .deck-stage (pointer: lean, set from JS),
+   .deck-card (landing: peel from one card · scroll: explode) > .deck-face
+   (idle: float). */
 .hero-deck {
-  --dw: min(21vw, 340px, 33svh);
-  --dz: calc(var(--dw) * 0.115);
+  --dw: min(24vw, 360px, 40svh);
+  --dz: calc(var(--dw) * 0.088);
   width: var(--dw);
-  top: calc(5rem + var(--dw) * var(--dtop, 0.3)) !important;
+  right: 2.6vw;
+  top: calc(5.2rem + var(--dw) * 0.1 + 14px);
   aspect-ratio: 1.15;
-  perspective: 1600px;
-  animation: fade-up 1.1s var(--ease-out-soft) 0.35s both;
+  perspective: 1700px;
+}
+.deck-scroll {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
 }
 .deck-stage {
   --drx: 58deg;
   --drz: -34deg;
-  position: relative;
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  inset: 0;
   transform-style: preserve-3d;
   transform: rotateX(var(--drx)) rotateZ(var(--drz));
+}
+.deck-stage ul {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transform-style: preserve-3d;
 }
 .deck-card {
   position: absolute;
   inset: 12% 8%;
   transform-style: preserve-3d;
-  transform: translateZ(calc((var(--i) - 3.5) * var(--dz)));
+  transform: translateZ(calc((var(--i) - 4) * var(--dz)));
 }
 .deck-face {
   position: relative;
+  display: block;
   height: 100%;
   padding: calc(var(--dw) * 0.06);
   border-radius: calc(var(--dw) * 0.075);
   background: linear-gradient(150deg, #ffffff 0%, #f3f2ec 100%);
   border: 1px solid rgb(17 17 16 / 0.16);
   box-shadow: inset 0 1px 0 #fff, 0 18px 28px -18px rgb(17 17 16 / 0.45), 0 2px 0 rgb(17 17 16 / 0.06);
-  filter: brightness(calc(0.92 + var(--i) * 0.016));
+  filter: brightness(calc(0.92 + var(--i) * 0.01));
+  color: #111110;
+  pointer-events: auto;
+  transition: background 0.35s ease, border-color 0.35s ease;
+}
+a.deck-face:hover,
+a.deck-face:focus-visible {
+  background: var(--color-buzz);
+  border-color: rgb(17 17 16 / 0.35);
+}
+a.deck-face:focus-visible {
+  outline: 2px solid #111110;
+  outline-offset: 3px;
+}
+.deck-brand .deck-face {
+  background: linear-gradient(150deg, #1c1c1a 0%, #111110 100%);
+  border-color: rgb(255 255 255 / 0.14);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.16), 0 24px 34px -18px rgb(17 17 16 / 0.6);
+  color: #f5f4f0;
+  filter: none;
+  pointer-events: none;
+}
+.deck-brand .deck-label .kicker {
+  color: #a3a29a;
 }
 .deck-dot {
   position: absolute;
@@ -1601,6 +1733,9 @@ html[data-intro="play"] .hero-deck {
   border-radius: 999px;
   background: var(--color-buzz);
 }
+a.deck-face:hover .deck-dot {
+  background: #111110;
+}
 .deck-label {
   position: absolute;
   left: calc(var(--dw) * 0.065);
@@ -1608,17 +1743,43 @@ html[data-intro="play"] .hero-deck {
   display: flex;
   align-items: baseline;
   gap: 0.6em;
-  font-size: clamp(11px, calc(var(--dw) * 0.056), 15px);
+  font-size: clamp(11px, calc(var(--dw) * 0.056), 16px);
   line-height: 1;
   letter-spacing: -0.03em;
   white-space: nowrap;
-  color: #111110;
 }
 .deck-label .kicker {
   color: #6a6962;
   font-size: 0.78em;
 }
+a.deck-face:hover .deck-label .kicker {
+  color: #111110;
+}
+.deck-count {
+  position: absolute;
+  right: calc(var(--dw) * 0.065);
+  bottom: calc(var(--dw) * 0.04);
+  font-size: clamp(8px, calc(var(--dw) * 0.026), 10px);
+  color: #6a6962;
+  white-space: nowrap;
+}
+a.deck-face:hover .deck-count {
+  color: #111110;
+}
 @media (prefers-reduced-motion: no-preference) {
+  /* landing: the layers start as ONE card and peel apart — in step with the
+     loader's curtain (html[data-intro="play"] holds them until it opens) */
+  @keyframes deck-peel {
+    from {
+      transform: translateZ(0px);
+    }
+  }
+  .deck-card {
+    animation: deck-peel 1.3s cubic-bezier(0.2, 0.9, 0.25, 1.06) calc(0.45s + var(--n) * 0.05s) backwards;
+  }
+  html[data-intro="play"] .deck-card {
+    animation-delay: calc(2.2s + var(--n) * 0.05s);
+  }
   .deck-face {
     animation: deck-float 7s ease-in-out infinite;
     animation-delay: var(--d, 0s);
@@ -1629,15 +1790,31 @@ html[data-intro="play"] .hero-deck {
     }
   }
   @supports (animation-timeline: view()) {
-    /* scrolling away fans the layers apart */
-    .deck-card {
-      animation: deck-spread linear both;
+    /* scroll: the stack spins and rises faster than the page, and the layers
+       pull far apart — an exploded view of the eight lines */
+    .deck-scroll {
+      animation: deck-rise linear both;
       animation-timeline: scroll(root block);
-      animation-range: 0px 75vh;
+      animation-range: 0px 90vh;
+    }
+    @keyframes deck-rise {
+      to {
+        translate: 2vw -15vh;
+        rotate: z -28deg;
+        scale: 1.1;
+      }
+    }
+    .deck-card {
+      animation: deck-peel 1.3s cubic-bezier(0.2, 0.9, 0.25, 1.06) calc(0.45s + var(--n) * 0.05s) backwards, deck-spread linear both;
+      animation-timeline: auto, scroll(root block);
+      animation-range: normal, 0px 90vh;
+    }
+    html[data-intro="play"] .deck-card {
+      animation-delay: calc(2.2s + var(--n) * 0.05s), 0s;
     }
     @keyframes deck-spread {
       to {
-        translate: 0 0 calc(var(--i) * var(--dz) * 1.2);
+        translate: 0 0 calc((var(--i) - 4) * var(--dz) * 1.7);
       }
     }
   }

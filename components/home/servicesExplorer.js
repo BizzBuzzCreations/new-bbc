@@ -81,10 +81,7 @@ export default function ServicesExplorer({ rows }) {
   };
 
   return (
-    <div
-     
-      className="mt-6 grid gap-6 md:mt-8 lg:grid-cols-12 lg:gap-12"
-    >
+    <div className="mt-6 grid gap-6 md:mt-8 lg:grid-cols-12 lg:gap-12">
       <div className="min-w-0 lg:col-span-5">
         <div className="relative">
           {/* the blob (desktop only) */}
@@ -115,7 +112,8 @@ export default function ServicesExplorer({ rows }) {
             {rows.map((r, i) => (
               <li
                 key={r.href}
-                className="shrink-0 lg:h-[76px] lg:border-b lg:border-(--line) lg:first:border-t lg:first:border-(--fg)"
+                style={{ "--k": i }}
+                className="row-in shrink-0 lg:h-[76px] lg:border-b lg:border-(--line) lg:first:border-t lg:first:border-(--fg)"
               >
                 <Link
                   href={r.href}

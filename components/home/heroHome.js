@@ -98,9 +98,8 @@ export default function HeroHome({
 
   return (
     <section className="on-paper relative isolate flex min-h-[min(92svh,860px)] md:min-h-0 flex-col overflow-x-clip pb-6 pt-24 md:pt-[6.5rem] md:pb-8">
-      <HeroField />
-      <HeroDeck />
-      <div className="intro-settle wrap relative z-10 flex flex-1 flex-col">
+      <HeroField className="hero-parallax" />
+      <div className="intro-settle wrap pointer-events-none relative z-10 flex flex-1 flex-col [&>*]:pointer-events-auto">
         <div className="flex flex-wrap items-center justify-between gap-4">
           {locationLine ? (
             <p className="kicker flex items-center gap-2 text-(--fg)">
@@ -217,6 +216,7 @@ export default function HeroHome({
           </div>
         )}
       </div>
+      <HeroDeck />
     </section>
   );
 }

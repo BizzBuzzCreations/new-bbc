@@ -1,16 +1,23 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { SERVICE_LINES } from "@/lib/siteNav";
 
-// A 3D stack of layers beside the hero headline — "one team, every layer": six
-// cards, one per service line, stacked in depth and seen from above at an
-// angle, the top one carrying the brand and the three offices. Pure CSS 3D (no
-// library): the stack leans toward the pointer with an eased, springy follow,
-// every card floats a little on its own rhythm, and scrolling away fans the
-// layers apart. Wide screens only; decorative (aria-hidden); still under
-// reduced motion (the pose is static, nothing floats, nothing follows).
+// The hero's 3D object — "one team, every layer": the brand card on top of the
+// eight service lines, stacked in depth and seen from above at an angle. Pure
+// CSS 3D (no library), and it is part of the page's choreography:
+//   • landing — the layers start as ONE card (the brand card) and peel apart
+//     into the stack just as the loader's curtain opens (globals.css, "deck");
+//   • pointer — the whole stack leans toward the pointer with an eased follow;
+//   • scroll — scrolling away spins the stack and pulls the layers far apart
+//     (an exploded view) while it rises faster than the page;
+//   • every layer is a real link to its service page (they go yellow under the
+//     pointer; nothing moves toward you), and they come last in tab order.
+// Wide screens only. Under reduced motion it is a still stack, still linked.
+// `--i` is the layer's depth (the brand card is the top, 01 is just under it);
+// `--n` orders the peel: the top card moves first, so it never dips below the others.
 const LAYERS = SERVICE_LINES;
 // short names for the layer edges (the full names are linked everywhere else)
 const SHORT = {
@@ -69,42 +76,66 @@ export default function HeroDeck() {
     };
   }, []);
 
+  const total = LAYERS.length + 1;
   return (
     <div
       ref={root}
-      aria-hidden="true"
-      className="hero-deck pointer-events-none absolute right-[2.5vw] z-[1] hidden lg:block"
+      className="hero-deck pointer-events-none absolute z-[5] hidden lg:block"
     >
-      <div ref={stage} className="deck-stage">
-        {LAYERS.map((l, i) => {
-          const top = i === LAYERS.length - 1;
-          return (
-            <div
-              key={l.href}
-              className="deck-card"
-              style={{ "--i": i, "--d": `${-i * 0.9}s` }}
+      <div className="deck-scroll">
+        <nav
+          ref={stage}
+          aria-label="The eight service lines"
+          className="deck-stage"
+        >
+          <ul>
+            {/* the brand card: the top of the stack — and, while the page lands, the single card the layers peel from */}
+            {LAYERS.map((l, k) => {
+              const depth = total - 2 - k; // 01 is just under the brand card
+              return (
+                <li
+                  key={l.href}
+                  className="deck-card"
+                  style={{ "--i": depth, "--n": k + 1, "--d": `${-k * 0.9}s` }}
+                >
+                  <Link href={l.href} className="deck-face" tabIndex={0}>
+                    <span className="deck-dot" aria-hidden="true" />
+                    <span className="deck-label">
+                      <span className="kicker">{l.no}</span>
+                      <span className="font-display">
+                        {SHORT[l.name] || l.name}
+                      </span>
+                    </span>
+                    <span className="deck-count kicker" aria-hidden="true">
+                      {l.subs.length} services
+                    </span>
+                    <span className="sr-only">{l.name}</span>
+                  </Link>
+                </li>
+              );
+            })}
+            <li
+              aria-hidden="true"
+              className="deck-card deck-brand"
+              style={{ "--i": total - 1, "--n": 0, "--d": "0s" }}
             >
               <div className="deck-face">
                 <span className="deck-dot" />
-                {top ? (
-                  <Image
-                    src="/bbc-logo-ink.png"
-                    alt=""
-                    width={447}
-                    height={143}
-                    className="h-9 w-auto"
-                  />
-                ) : null}
-                <p className="deck-label">
-                  <span className="kicker">{l.no}</span>
-                  <span className="font-display">
-                    {SHORT[l.name] || l.name}
-                  </span>
-                </p>
+                <Image
+                  src="/bbc logo white.png"
+                  alt=""
+                  width={447}
+                  height={143}
+                  className="h-[calc(var(--dw)*0.1)] w-auto"
+                />
+                <span className="deck-label">
+                  <span className="kicker">One team</span>
+                  <span className="font-display">Every layer</span>
+                </span>
               </div>
-            </div>
-          );
-        })}
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   );

@@ -26,9 +26,13 @@ export default function SectionHead({
 }) {
   return (
     <div
-      className={`grid gap-8 md:grid-cols-12 md:items-end md:gap-10 ${className}`}
+      className={`sec-head grid gap-8 md:grid-cols-12 md:items-end md:gap-10 ${className}`}
     >
       <div className="md:col-span-8">
+        <div
+          aria-hidden="true"
+          className="rule-draw mb-5 h-px w-full bg-(--fg)"
+        />
         {kicker && (
           <Kicker no={no} of={of} className="mb-8">
             {kicker}

@@ -26,16 +26,19 @@ export default function Numbers({ stats }) {
   ];
   for (const f of facts) if (list.length < 4) list.push(f);
   return (
-    <section aria-label="BizzBuzz Creations in numbers" className="on-ink">
+    <section
+      aria-label="BizzBuzz Creations in numbers"
+      className="band-open on-ink"
+    >
       <div className="wrap py-7 md:py-10">
         <dl className="grid gap-3 sm:grid-cols-2 md:gap-4 lg:grid-cols-4">
           {list.map(({ value, label }, i) => (
             <div
               key={`${label}-${i}`}
-              data-tilt
+              style={{ "--k": i }}
               data-lg-bezel="30"
               data-lg-scale="1.3"
-              className="glass glass-calm relative rounded-[28px] p-6 md:p-8"
+              className="row-in glass glass-calm relative rounded-[28px] p-6 md:p-8"
             >
               <dd className="font-display text-[clamp(3.4rem,7vw,7.5rem)] leading-[0.9] tracking-[-0.06em]">
                 <CountUp value={value} />
