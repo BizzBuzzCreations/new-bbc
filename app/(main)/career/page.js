@@ -11,7 +11,6 @@ import { getPageContent } from "@/actions/pageContentActions";
 import JobCard from "@/components/ui/jobCard";
 import { SERVICE_LINES } from "@/lib/siteNav";
 import { buildPageMetadata } from "@/lib/pageMetadata";
-import { careerApplyHref } from "@/lib/careerApply";
 import PageSeoScripts from "@/components/sections/pageSeoScripts";
 
 // The hero's photos until others are saved (real team / office photos).
@@ -49,8 +48,6 @@ export default async function Career() {
 
   const response = await getAllJobs();
   const jobsData = response?.success ? response?.data : [];
-  // "Apply Now" goes to the role's own apply link from the dashboard, not to /contact
-  const applyHref = careerApplyHref(jobsData, { listVisible: !hidden.has("openPositions") });
 
   const heroSlides = content?.careerHeroSlides?.length > 0 ? content.careerHeroSlides.map((s) => s.image) : HERO_SLIDES;
   const joinPoints = content?.careerJoinPoints?.length > 0 ? content.careerJoinPoints : DEFAULT_JOIN_TEAM_POINTS;
@@ -80,8 +77,7 @@ export default async function Career() {
               "At BizzBuzz Creations, we believe great work comes from trust, ownership, and collaboration. Our flat structure means fewer layers, faster decisions, and more room to turn your ideas into real outcomes."
             }
             actions={[
-              { text: content?.careerHeroCtaText || "Apply Now", href: applyHref, variant: "solid" },
-              !hidden.has("openPositions") && { text: "See Open Roles", href: "#open-positions" },
+              !hidden.has("openPositions") && { text: "See Open Roles", href: "#open-positions", variant: "solid" },
             ]}
           />
           <PhotoFilm slides={heroSlides} label="Life at BizzBuzz Creations" />
@@ -156,7 +152,7 @@ export default async function Career() {
           }
           media={<PhotoMosaic images={joinImages} cols={2} />}
           features={joinPoints.map(({ title, desc }) => ({ title, description: desc }))}
-          action={{ text: content?.careerJoinCtaText || "Apply Now", href: applyHref }}
+          action={{ text: content?.careerJoinCtaText || "Apply Now", href: hidden.has("openPositions") ? "/contact" : "#open-positions" }}
         />
       )}
 
