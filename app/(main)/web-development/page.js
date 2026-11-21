@@ -7,7 +7,7 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 
 export async function generateMetadata() {
   return buildPageMetadata("service-web-development", {
-  title: "Top Website Development Company | BizzBuzz Creations",
+  title: "Website Development Company, Prayagraj | BizzBuzz Creations",
   description:
     "BizzBuzz Creations builds fast, secure, high-converting websites — custom, WordPress, Shopify — for businesses in Prayagraj, Allahabad, India and worldwide.",
   alternates: {

@@ -7,7 +7,7 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 
 export async function generateMetadata() {
   return buildPageMetadata("service-ai-solutions", {
-  title: "Top AI Solutions Company | BizzBuzz Creations",
+  title: "AI Solutions & AI Agents for Business | BizzBuzz Creations",
   description:
     "BizzBuzz Creations is an AI solutions company building AI agents, content, and automation that save time for businesses in India and worldwide.",
   alternates: {

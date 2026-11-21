@@ -1,3 +1,4 @@
+import PostServiceLinks from "@/components/detail/postServiceLinks";
 import { getBlogBySlugMongo } from "@/actions/blogActions";
 import { cache } from "react";
 import { getFeaturedImage, optimizedImageUrl, imageSrcSet } from "@/lib/getFeaturedImage";
@@ -224,9 +225,13 @@ export default async function SingleBlog({ params }) {
               </div>
             )}
 
+            <PostServiceLinks post={post} compact />
+
             <ArticleBody html={filteredData} />
 
             <PostFaq faqs={post.faqs} />
+
+            <PostServiceLinks post={post} />
 
             <div className="my-12 flex flex-wrap items-center justify-between gap-5 rounded-3xl border border-white/10 bg-white/[0.03] p-5 md:p-6">
               <p className="font-display text-xl text-white">Found this useful? Share it.</p>

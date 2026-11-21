@@ -7,7 +7,7 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 
 export async function generateMetadata() {
   return buildPageMetadata("service-social-media-marketing", {
-  title: "Top Social Media Marketing Agency | BizzBuzz Creations",
+  title: "Social Media Marketing Agency in India | BizzBuzz Creations",
   description:
     "BizzBuzz Creations is a social media marketing agency managing strategy, ads, and content for businesses in India and worldwide.",
   alternates: {
