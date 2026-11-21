@@ -8,7 +8,7 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 export async function generateMetadata() {
   return buildPageMetadata("subservice-bpo-services-inbound-outbound-call-center-services", {
   title: "Inbound & Outbound Call Center | BizzBuzz Creations",
-  description: "BizzBuzz Creations provides inbound and outbound call center services, handling customer calls and outreach for businesses across India and worldwide.",
+  description: "BizzBuzz Creations provides inbound and outbound call center services for businesses across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/bpo-services/inbound-outbound-call-center-services"
   }

@@ -4,7 +4,7 @@ import { buildPageMetadata } from "@/lib/pageMetadata";
 export async function generateMetadata() {
   return buildPageMetadata("legal-disclaimer", {
   title: "Disclaimer | BizzBuzz Creations",
-  description: "Disclaimer covering the information, services, and results published on the BizzBuzz Creations website, and the limits of what we can promise.",
+  description: "Disclaimer covering the information, services, and results published on the BizzBuzz Creations website.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/disclaimer",
   },

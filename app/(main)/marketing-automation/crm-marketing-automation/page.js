@@ -8,7 +8,7 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 export async function generateMetadata() {
   return buildPageMetadata("subservice-marketing-automation-crm-marketing-automation", {
   title: "CRM Marketing Automation Services | BizzBuzz Creations",
-  description: "BizzBuzz Creations provides CRM marketing automation that connects your customer data to your campaigns, across India and worldwide.",
+  description: "BizzBuzz Creations provides CRM marketing automation that connects your data and campaigns across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/marketing-automation/crm-marketing-automation"
   }

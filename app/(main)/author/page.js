@@ -7,7 +7,7 @@ export const revalidate = 60;
 
 export const metadata = {
   title: "Authors | BizzBuzz Creations Blog",
-  description: "Meet the people who write the BizzBuzz Creations blog, and read everything each of them has published on SEO, AI, ads and digital marketing.",
+  description: "Meet the people who write the BizzBuzz Creations blog, and read everything each of them has published.",
   alternates: { canonical: "https://bizzbuzzcreations.com/author" },
 };
 

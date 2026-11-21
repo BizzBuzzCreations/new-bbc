@@ -7,7 +7,7 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 
 export async function generateMetadata() {
   return buildPageMetadata("service-search-engine-optimization", {
-  title: "SEO Company in Prayagraj & India | BizzBuzz Creations",
+  title: "Top SEO Services & Agency | BizzBuzz Creations",
   description:
     "BizzBuzz Creations is an SEO agency delivering search engine optimization services for businesses in India and worldwide.",
   alternates: {

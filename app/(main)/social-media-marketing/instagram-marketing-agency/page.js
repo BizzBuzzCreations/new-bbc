@@ -8,7 +8,7 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 export async function generateMetadata() {
   return buildPageMetadata("subservice-social-media-marketing-instagram-marketing-agency", {
   title: "Instagram Marketing Agency | BizzBuzz Creations",
-  description: "BizzBuzz Creations is an Instagram marketing agency helping brands grow followers, engagement and sales across India and worldwide.",
+  description: "BizzBuzz Creations is an Instagram marketing agency helping brands grow followers and sales across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/social-media-marketing/instagram-marketing-agency"
   }

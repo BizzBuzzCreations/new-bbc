@@ -8,7 +8,7 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 export async function generateMetadata() {
   return buildPageMetadata("subservice-paid-marketing-lead-generation-campaigns", {
   title: "Lead Generation Agency | BizzBuzz Creations",
-  description: "BizzBuzz Creations is a lead generation agency running campaigns that deliver qualified leads for businesses across India and worldwide.",
+  description: "BizzBuzz Creations is a lead generation agency delivering qualified leads for businesses across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/paid-marketing/lead-generation-campaigns"
   }

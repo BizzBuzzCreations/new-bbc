@@ -8,7 +8,7 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 export async function generateMetadata() {
   return buildPageMetadata("subservice-ai-solutions-generative-engine-optimization", {
   title: "AI Strategy Consulting Services | BizzBuzz Creations",
-  description: "BizzBuzz Creations provides AI strategy consulting that helps businesses adopt AI properly and get found by AI search, across India and worldwide.",
+  description: "BizzBuzz Creations provides AI strategy consulting that helps businesses adopt AI properly across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/ai-solutions/generative-engine-optimization"
   }

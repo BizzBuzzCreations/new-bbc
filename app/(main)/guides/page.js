@@ -26,7 +26,7 @@ export async function generateMetadata() {
   return buildPageMetadata("guides", {
   title: "Digital Marketing Guides & Resources | BizzBuzz Creations",
   description:
-    "Explore practical digital marketing guides from BizzBuzz Creations on SEO, AI, social media, Google Ads, websites, content marketing, and more.",
+    "Explore practical digital marketing guides on SEO, AI, social media, Google Ads, websites, content marketing, and more.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/guides",
   },

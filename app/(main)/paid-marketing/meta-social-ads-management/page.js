@@ -8,7 +8,7 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 export async function generateMetadata() {
   return buildPageMetadata("subservice-paid-marketing-meta-social-ads-management", {
   title: "Meta & Social Ads Management Agency | BizzBuzz Creations",
-  description: "BizzBuzz Creations is a social media ads management agency running paid Meta campaigns that bring leads and sales across India and worldwide.",
+  description: "BizzBuzz Creations is a social media ads management agency running paid campaigns across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/paid-marketing/meta-social-ads-management"
   }

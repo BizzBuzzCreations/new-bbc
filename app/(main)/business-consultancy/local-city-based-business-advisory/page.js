@@ -8,7 +8,7 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 export async function generateMetadata() {
   return buildPageMetadata("subservice-business-consultancy-local-city-based-business-advisory", {
   title: "Local Business Advisor & Consultant | BizzBuzz Creations",
-  description: "BizzBuzz Creations is a local business advisor helping small businesses in Prayagraj and worldwide plan, improve operations and grow steadily.",
+  description: "BizzBuzz Creations is a local business advisor helping small businesses in Prayagraj and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/business-consultancy/local-city-based-business-advisory"
   }
