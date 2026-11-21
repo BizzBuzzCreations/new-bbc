@@ -68,10 +68,34 @@ export default function AllScripts() {
         </>
       )}
 
+      {/* The site name Google shows above the result: WebSite data, with the spellings people type (the UK page's own graph already has one) */}
+      {!skipLocalBusiness && (
+      <script
+        id="website-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "BizzBuzz Creations",
+            alternateName: ["BizzBuzz", "Bizz Buzz Creations"],
+            url: "https://bizzbuzzcreations.com/",
+          }),
+        }}
+      />
+      )}
+
       {!skipLocalBusiness && !pageHasCustomSchema && (
-        <Script id="local-business-schema" type="application/ld+json">
-          {JSON.stringify(localBusinessSchema)}
-        </Script>
+        // A plain tag (not next/script): next/script only adds it after the
+        // page loads in a browser, so crawlers that read the raw HTML —
+        // Bing's, and the AI search bots — never saw it. This is in the HTML.
+        <script
+          id="local-business-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(localBusinessSchema).replace(/</g, "\\u003c"),
+          }}
+        />
       )}
     </>
   );

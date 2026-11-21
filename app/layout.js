@@ -38,7 +38,7 @@ export const metadata = {
   // favicon in search results (og:site_name) — every page inherits this
   // unless its own generateMetadata sets its own `openGraph.siteName`.
   openGraph: {
-    siteName: "Digital Marketing Agency",
+    siteName: "BizzBuzz Creations",
   },
   icons: {
     icon: "/favicon.png",

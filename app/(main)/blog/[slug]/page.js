@@ -125,7 +125,7 @@ export default async function SingleBlog({ params }) {
     author: { "@type": "Person", name: post.author, url: `https://bizzbuzzcreations.com${authorPath(post.author)}` },
     publisher: {
       "@type": "Organization",
-      name: "Digital Marketing Agency",
+      name: "BizzBuzz Creations",
       logo: {
         "@type": "ImageObject",
         url: "https://bizzbuzzcreations.com/favicon.png",
