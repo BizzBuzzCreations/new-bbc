@@ -9,7 +9,7 @@ export async function generateMetadata() {
   return buildPageMetadata("service-ai-solutions", {
   title: "Top AI Solutions Company | BizzBuzz Creations",
   description:
-    "BizzBuzz Creations is an AI solutions company building agents, content, and automation for India and worldwide.",
+    "BizzBuzz Creations is an AI solutions company building AI agents, content, and automation that save time for businesses in India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/ai-solutions",
   },

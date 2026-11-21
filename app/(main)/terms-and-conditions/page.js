@@ -4,7 +4,7 @@ import { buildPageMetadata } from "@/lib/pageMetadata";
 export async function generateMetadata() {
   return buildPageMetadata("legal-terms-and-conditions", {
   title: "Terms & Conditions | BizzBuzz Creations",
-  description: "The terms and conditions governing use of the BizzBuzz Creations website and its digital marketing services.",
+  description: "The terms and conditions governing use of the BizzBuzz Creations website and its digital marketing services, including your rights and ours.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/terms-and-conditions",
   },

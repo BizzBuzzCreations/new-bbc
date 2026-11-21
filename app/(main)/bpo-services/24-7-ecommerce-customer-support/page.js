@@ -8,7 +8,7 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 export async function generateMetadata() {
   return buildPageMetadata("subservice-bpo-services-24-7-ecommerce-customer-support", {
   title: "24/7 & Ecommerce Customer Support | BizzBuzz Creations",
-  description: "BizzBuzz Creations provides 24/7 e-commerce customer support outsourcing for online stores across India and worldwide.",
+  description: "BizzBuzz Creations provides 24/7 e-commerce customer support outsourcing, answering shoppers for online stores across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/bpo-services/24-7-ecommerce-customer-support"
   }

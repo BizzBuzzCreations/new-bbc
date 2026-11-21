@@ -8,7 +8,7 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 export async function generateMetadata() {
   return buildPageMetadata("subservice-bpo-services-ai-powered-bpo-call-center-solutions", {
   title: "AI-Powered BPO & Call Center Solutions | BizzBuzz Creations",
-  description: "BizzBuzz Creations delivers AI-powered BPO and call center solutions for businesses across India and worldwide.",
+  description: "BizzBuzz Creations delivers AI-powered BPO and call center solutions that handle customer conversations for businesses across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/bpo-services/ai-powered-bpo-call-center-solutions"
   }
