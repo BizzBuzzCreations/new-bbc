@@ -63,6 +63,15 @@ const nextConfig = {
         destination: "https://bizzbuzzcreations.com/:path*",
         permanent: true,
       },
+      // Old WordPress-era URLs that blog posts still link to (the blog's
+      // "Contact Us" buttons and an SEO-services link) — they were 404s, so
+      // readers who clicked them hit a dead end. They now land on the right page.
+      { source: "/contact-us", destination: "/contact", permanent: true },
+      {
+        source: "/search-engine-optimization-seo",
+        destination: "/search-engine-optimization",
+        permanent: true,
+      },
       // Service pages renamed for clarity — 301s preserve existing SEO
       // rankings/backlinks and any bookmarked or Google-indexed old URLs.
       {
