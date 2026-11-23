@@ -41,7 +41,7 @@ export default function CTA({ content, white = false } = {}) {
     });
 
     if (response?.success) {
-      markEnquired(); // the consultation popup won't ask again
+      markEnquired("closing_cta"); // the consultation popup won't ask again
       toast.success(response.message, {
         position: "top-right",
         autoClose: 5000,

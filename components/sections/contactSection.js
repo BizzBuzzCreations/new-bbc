@@ -128,7 +128,7 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
     setSubmitting(false);
 
     if (response?.success) {
-      markEnquired(); // the consultation popup won't ask again
+      markEnquired("contact_page"); // the consultation popup won't ask again
       toast.success(response.message, toastOptions);
       setForm({ name: "", email: "", subject: "", contact: "", message: "" });
       setFile(null);

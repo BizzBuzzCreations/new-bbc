@@ -31,7 +31,7 @@ export default function BlogContactForm() {
     setSubmitting(false);
 
     if (response?.success) {
-      markEnquired(); // the consultation popup won't ask again
+      markEnquired("blog_form"); // the consultation popup won't ask again
       toast.success(response.message, {
         position: "top-right",
         autoClose: 5000,

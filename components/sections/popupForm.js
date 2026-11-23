@@ -151,7 +151,7 @@ export default function ConsultationPopup({ content }) {
       // Mail still sends as normal — the "Message sent!" toast itself is
       // what's being removed here, per request. The form just quietly
       // resets and the popup closes instead of announcing success.
-      markEnquired();
+      markEnquired("popup");
       setForm({ name: "", contact: "", email: "" });
       close({ dismissed: false });
     } else {

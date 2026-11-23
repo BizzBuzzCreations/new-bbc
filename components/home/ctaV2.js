@@ -33,7 +33,7 @@ export default function CtaV2({ content }) {
     const response = await sendMail({ name: "not given", email, subject: "Request for consultancy", text: "Want to start a project", contact: null });
     setSending(false);
     if (response?.success) {
-      markEnquired(); // the consultation popup won't ask again
+      markEnquired("closing_cta"); // the consultation popup won't ask again
       setEmail("");
       toast.success(response.message, toastOptions);
     } else {

@@ -57,7 +57,7 @@ export default function BizzBeeLeadForm({ onDone, onCancel, defaultService = "" 
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.success) {
-        markEnquired(); // the consultation popup won't ask again
+        markEnquired("bizzbee_chat"); // the consultation popup won't ask again
         setDoneMessage(data.message || "Thanks! Your enquiry has been sent.");
         setStatus("done");
         onDone?.(data.message);
