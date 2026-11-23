@@ -1,4 +1,6 @@
 "use server";
+import { submitToIndexNow, blogUrl } from "@/lib/indexNow";
+import { SITE_URL } from "@/lib/pagePaths";
 import connectDB from "@/db/connect";
 import Blog from "@/models/blog";
 import cloudinary from "@/lib/cloudinary";
@@ -46,6 +48,7 @@ export async function publishDueScheduledPosts() {
       post.publishedAt = post.scheduledAt;
       await post.save();
     }
+    if (due.length) void submitToIndexNow([...due.map((p) => blogUrl(p.slug)), `${SITE_URL}/blog`]);
 
     return { success: true, publishedCount: due.length };
   } catch (error) {
@@ -94,6 +97,7 @@ export async function createBlog(data) {
       publishedAt: data.status === "published" ? new Date() : null,
     });
     await blog.save();
+    if (blog.status === "published") void submitToIndexNow([blogUrl(slug), `${SITE_URL}/blog`]);
 
     // The blog list, the home page's "latest posts" strip, and this
     // post's own page are all plain async Server Components reading the
@@ -120,6 +124,7 @@ export async function updateBlog(id, data) {
       return { success: false, message: "Blog post not found." };
     }
 
+    const oldSlug = existingDoc.slug;
     let slug = existingDoc.slug;
     if (data.slug?.trim()) {
       const newSlug = slugify(data.slug, { lower: true, strict: true });
@@ -159,6 +164,12 @@ export async function updateBlog(id, data) {
     }
 
     await existingDoc.save();
+    // tell Bing & co. about a post that is (or just stopped being) live, incl. an old URL it left
+    if (wasPublished || willBePublished) {
+      const urls = [blogUrl(slug), `${SITE_URL}/blog`];
+      if (slug !== oldSlug && wasPublished) urls.push(blogUrl(oldSlug));
+      void submitToIndexNow(urls);
+    }
 
     revalidatePath("/", "layout");
 
@@ -175,7 +186,8 @@ export async function deleteBlog(id) {
 
   await connectDB();
   try {
-    await Blog.findByIdAndDelete(id);
+    const gone = await Blog.findByIdAndDelete(id).lean();
+    if (gone?.status === "published") void submitToIndexNow([blogUrl(gone.slug), `${SITE_URL}/blog`]);
     revalidatePath("/", "layout");
     return { success: true, message: "Blog post deleted." };
   } catch (error) {
