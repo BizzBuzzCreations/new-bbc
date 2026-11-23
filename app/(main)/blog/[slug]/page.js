@@ -101,7 +101,12 @@ export default async function SingleBlog({ params }) {
     day: "numeric",
   });
 
-  const rawContent = removeDeadWordpressImages(sanitizeBlogContent(post?.content));
+  // Old posts have a "Contact Us" button that points at a template placeholder
+  // address (hello@example.com) — send those readers to the contact page instead.
+  const rawContent = removeDeadWordpressImages(sanitizeBlogContent(post?.content)).replace(
+    /href=(["'])mailto:hello@example\.com\1/gi,
+    'href="/contact"',
+  );
   const { html: extractedHtml, toc: headings } = extractTableOfContents(rawContent);
   // number the main sections only (a post that has no h2 numbers its h3s)
   const hasH2 = headings.some((h) => h.level === 2);
