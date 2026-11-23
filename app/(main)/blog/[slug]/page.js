@@ -139,6 +139,16 @@ export default async function SingleBlog({ params }) {
     },
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://bizzbuzzcreations.com" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://bizzbuzzcreations.com/blog" },
+      { "@type": "ListItem", position: 3, name: post.title, item: postUrl },
+    ],
+  };
+
   const faqSchema = post.faqs?.length
     ? {
         "@context": "https://schema.org",
@@ -156,6 +166,7 @@ export default async function SingleBlog({ params }) {
       {/* thin reading-progress line at the top (pure CSS, see globals.css) */}
       <div aria-hidden="true" className="scroll-progress" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }} />
       {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
 
       {/* Plain black behind the whole post (no beams): nothing moves behind

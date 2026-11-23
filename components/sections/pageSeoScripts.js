@@ -1,5 +1,6 @@
 import { getPageContent } from "@/actions/pageContentActions";
-import { hasCustomSchema, isTrue, parseSchemaJson } from "@/lib/seo";
+import { hasCustomSchema, isTrue, parseSchemaJson, publicPathFor } from "@/lib/seo";
+import { buildAutoSchema } from "@/lib/autoSchema";
 import ImageAltPatcher from "@/components/sections/imageAltPatcher";
 
 // Rendered once near the top of every dashboard-editable page. Outputs
@@ -22,7 +23,12 @@ export default async function PageSeoScripts({ pageKey }) {
   const alts = content?.imageAlts || {};
   const hasAlts = Object.keys(alts).length > 0;
 
-  if (!jsonLd && !hasAlts) return null;
+  // No schema of its own saved for this page: give it the automatic
+  // breadcrumb (and Service) data. A page with its own always wins, untouched.
+  const slug = content?.seoSlug && /^[a-z0-9-]+$/i.test(content.seoSlug) ? content.seoSlug : "";
+  const auto = jsonLd ? [] : buildAutoSchema(pageKey, slug ? publicPathFor(pageKey, slug) : undefined);
+
+  if (!jsonLd && !hasAlts && auto.length === 0) return null;
 
   return (
     <>
@@ -37,6 +43,13 @@ export default async function PageSeoScripts({ pageKey }) {
           }}
         />
       )}
+      {auto.map((o, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(o).replace(/</g, "\\u003c") }}
+        />
+      ))}
       {hasAlts && <ImageAltPatcher alts={alts} />}
     </>
   );
