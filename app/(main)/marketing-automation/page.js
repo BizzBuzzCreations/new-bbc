@@ -7,9 +7,9 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 
 export async function generateMetadata() {
   return buildPageMetadata("service-marketing-automation", {
-  title: "Top Marketing Automation Agency | BizzBuzz Creations",
+  title: "Marketing Automation Agency in India | BizzBuzz Creations",
   description:
-    "BizzBuzz Creations is a marketing automation agency connecting email, CRM and WhatsApp for India and worldwide.",
+    "BizzBuzz Creations is a marketing automation agency connecting email, CRM and WhatsApp so leads are followed up on time, in India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/marketing-automation",
   },

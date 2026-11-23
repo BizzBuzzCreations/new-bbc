@@ -8,7 +8,7 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 export async function generateMetadata() {
   return buildPageMetadata("subservice-bpo-services-data-entry-back-office-outsourcing", {
   title: "Data Entry & Back-Office Outsourcing | BizzBuzz Creations",
-  description: "BizzBuzz Creations provides data entry and back-office outsourcing services for businesses across India and worldwide.",
+  description: "BizzBuzz Creations provides data entry and back-office outsourcing services that keep records accurate for businesses across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/bpo-services/data-entry-back-office-outsourcing"
   }

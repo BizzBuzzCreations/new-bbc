@@ -7,7 +7,7 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 
 export async function generateMetadata() {
   return buildPageMetadata("service-paid-marketing", {
-  title: "Top Paid Marketing Agency | BizzBuzz Creations",
+  title: "Google & Meta Ads Agency in India | BizzBuzz Creations",
   description:
     "BizzBuzz Creations is a paid marketing agency running Google, Meta, and e-commerce ad campaigns for India and worldwide.",
   alternates: {

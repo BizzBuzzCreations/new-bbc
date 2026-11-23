@@ -7,9 +7,9 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 
 export async function generateMetadata() {
   return buildPageMetadata("service-business-consultancy", {
-  title: "Top Business Consulting Firm | BizzBuzz Creations",
+  title: "Business Consulting Firm in India | BizzBuzz Creations",
   description:
-    "BizzBuzz Creations is a business consulting firm advising on strategy, growth and operations for India and worldwide.",
+    "BizzBuzz Creations is a business consulting firm advising on strategy, growth and day-to-day operations for companies in India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/business-consultancy",
   },

@@ -29,8 +29,7 @@ export async function generateMetadata() {
     canonical: "https://bizzbuzzcreations.com/",
   },
   openGraph: {
-    title:
-      "Best Digital Marketing Agency in Prayagraj | Best SEO Service Company in Prayagraj | Best SMM Service In Prayagraj",
+    title: "Digital Marketing Agency in Prayagraj, India | BizzBuzz Creations",
     description:
       "Grow your business with BizzBuzz Creations, a trusted digital marketing agency in Prayagraj offering SEO, Google Ads, web development & social media.",
     url: "https://bizzbuzzcreations.com/",
@@ -41,10 +40,9 @@ export async function generateMetadata() {
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Best Digital Marketing Agency in Prayagraj| SEO and SMM Service Company | BizzBuzz Creations",
+    title: "Digital Marketing Agency in Prayagraj, India | BizzBuzz Creations",
     description:
-      "Searching for the best SEO and SMM service company in Prayagraj? We help businesses rank higher, increase visibility, and get more leads with proven digital marketing strategies.",
+      "SEO, Google Ads, social media and web development from a Prayagraj digital marketing agency, for clients across India and worldwide.",
     images: ["https://bizzbuzzcreations.com/Industry Authority (1).png"],
   },
 });

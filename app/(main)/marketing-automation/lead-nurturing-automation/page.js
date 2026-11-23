@@ -8,7 +8,7 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 export async function generateMetadata() {
   return buildPageMetadata("subservice-marketing-automation-lead-nurturing-automation", {
   title: "Lead Nurturing Automation Services | BizzBuzz Creations",
-  description: "BizzBuzz Creations provides lead nurturing automation that moves prospects toward sales across India and worldwide.",
+  description: "BizzBuzz Creations provides lead nurturing automation that follows up with prospects and moves them toward a sale, across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/marketing-automation/lead-nurturing-automation"
   }

@@ -8,7 +8,7 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 export async function generateMetadata() {
   return buildPageMetadata("subservice-bpo-services-virtual-assistant-startup-outsourcing", {
   title: "Virtual Assistant Services | BizzBuzz Creations",
-  description: "BizzBuzz Creations provides dedicated virtual assistant services for startups",
+  description: "BizzBuzz Creations provides dedicated virtual assistant services for startups, taking on admin and support work so founders can focus on growth.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/bpo-services/virtual-assistant-startup-outsourcing"
   }

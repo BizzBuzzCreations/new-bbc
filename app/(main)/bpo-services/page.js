@@ -7,9 +7,9 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 
 export async function generateMetadata() {
   return buildPageMetadata("service-bpo-services", {
-  title: "Top BPO & Outsourcing Company | BizzBuzz Creations",
+  title: "BPO & Call Center Outsourcing Company | BizzBuzz Creations",
   description:
-    "BizzBuzz Creations is a BPO and outsourcing company providing call center, automation, and support services worldwide.",
+    "BizzBuzz Creations is a BPO and outsourcing company providing call center, process automation, and customer support services to businesses worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/bpo-services",
   },

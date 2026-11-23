@@ -8,7 +8,7 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 export async function generateMetadata() {
   return buildPageMetadata("subservice-business-consultancy-startup-new-business-consulting", {
   title: "Startup & New Business Consultant | BizzBuzz Creations",
-  description: "BizzBuzz Creations is a startup business consultant helping founders launch and grow across India and worldwide.",
+  description: "BizzBuzz Creations is a startup business consultant helping founders validate ideas, launch and grow across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/business-consultancy/startup-new-business-consulting"
   }

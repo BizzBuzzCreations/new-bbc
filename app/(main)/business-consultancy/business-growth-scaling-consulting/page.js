@@ -8,7 +8,7 @@ import PageSeoScripts from "@/components/sections/pageSeoScripts";
 export async function generateMetadata() {
   return buildPageMetadata("subservice-business-consultancy-business-growth-scaling-consulting", {
   title: "Business Growth & Scaling Consultant | BizzBuzz Creations",
-  description: "BizzBuzz Creations is a business growth consultant helping companies scale sustainably across India and worldwide.",
+  description: "BizzBuzz Creations is a business growth consultant helping companies scale sustainably, with clear plans and steady execution across India and worldwide.",
   alternates: {
     canonical: "https://bizzbuzzcreations.com/business-consultancy/business-growth-scaling-consulting"
   }
