@@ -28,6 +28,7 @@ export default async function WebDevelopment() {
       <ServiceHubPage
         content={content}
         label="Website Development"
+        localLinks={[{ href: "/website-development-company-prayagraj", label: "Website Development in Prayagraj" }, { href: "/digital-marketing-agency-kanpur", label: "Digital Marketing Agency in Kanpur" }]}
         introAlt="BizzBuzz Creations web development team at work"
         trustAlt="Why businesses choose BizzBuzz Creations"
       />

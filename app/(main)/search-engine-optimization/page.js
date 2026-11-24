@@ -28,6 +28,7 @@ export default async function SearchEngineOptimization() {
       <ServiceHubPage
         content={content}
         label="Search Engine Optimization"
+        localLinks={[{ href: "/seo-company-prayagraj", label: "SEO Company in Prayagraj" }, { href: "/digital-marketing-agency-kanpur", label: "Digital Marketing Agency in Kanpur" }]}
         introAlt="BizzBuzz Creations SEO team at work"
         trustAlt="Why businesses trust BizzBuzz Creations to rank"
       />

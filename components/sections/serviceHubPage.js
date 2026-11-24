@@ -7,6 +7,8 @@ import LocalityBlock from "@/components/detail/localityBlock";
 import DetailCta from "@/components/detail/detailCta";
 import FaqV2 from "@/components/home/faqV2";
 import BeamsBlock from "@/components/home/band";
+import LinkChips from "@/components/detail/linkChips";
+import { MapPin } from "lucide-react";
 
 // Shared template for the 8 service pages (/search-engine-optimization,
 // /bpo-services, /web-development, …). Each page.js keeps its own metadata
@@ -19,7 +21,9 @@ import BeamsBlock from "@/components/home/band";
 // sub-services as linked cards → how it works + who we are (on the beams
 // background) → FAQ → why businesses trust us (photo + text) → closing CTA.
 // Same dashboard fields and "Remove section" switches (`hidden`) as before.
-export default function ServiceHubPage({ content, label, introAlt = "", trustAlt = "" }) {
+// `localLinks`: [{ href, label }] — the local landing pages (lib/localPages.js)
+// that belong to this service, shown as a short "near you" row before the CTA.
+export default function ServiceHubPage({ content, label, introAlt = "", trustAlt = "", localLinks }) {
   const c = content || {};
   const hidden = new Set(c.hiddenSections || []);
   const showServices = !hidden.has("servicesGrid") && c.services?.length > 0;
@@ -76,6 +80,14 @@ export default function ServiceHubPage({ content, label, introAlt = "", trustAlt
           text={[c.trustParagraphOne, c.trustParagraphTwo]}
           image={c.trustImage}
           alt={trustAlt}
+        />
+      )}
+      {localLinks?.length > 0 && (
+        <LinkChips
+          eyebrow="Near you"
+          heading="Looking for a local team?"
+          text="We work from Civil Lines, Prayagraj and from Kanpur. These pages show how we help businesses in each city."
+          links={localLinks.map((l) => ({ ...l, icon: MapPin }))}
         />
       )}
       {!hidden.has("cta") && (

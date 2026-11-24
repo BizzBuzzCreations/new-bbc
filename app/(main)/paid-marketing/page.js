@@ -28,6 +28,7 @@ export default async function PaidMarketing() {
       <ServiceHubPage
         content={content}
         label="Google Ads & Paid Marketing"
+        localLinks={[{ href: "/google-ads-agency-prayagraj", label: "Google Ads Agency in Prayagraj" }, { href: "/digital-marketing-agency-kanpur", label: "Digital Marketing Agency in Kanpur" }]}
         introAlt="BizzBuzz Creations paid ads team at work"
         trustAlt="Why businesses trust BizzBuzz Creations with their ad spend"
       />
