@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { pickLocalPage } from "@/lib/localLinks";
 
 // Under every blog post: the service pages that fit what it is about. The
 // blog is where most visitors (and most of the site's search standing) come
@@ -31,7 +32,10 @@ export function pickServices(post, count = 3) {
 }
 
 export default function PostServiceLinks({ post, compact = false }) {
-  const picks = pickServices(post, compact ? 1 : 3);
+  // A post about a place and a service we have a local page for (e.g. "SEO in
+  // Prayagraj") gets that page first; see lib/localLinks.js.
+  const local = pickLocalPage(post);
+  const picks = [...(local ? [local] : []), ...pickServices(post, 3).filter((s) => !local || s.href !== local.href)].slice(0, compact ? 1 : 3);
   if (compact) {
     const s = picks[0];
     return (
