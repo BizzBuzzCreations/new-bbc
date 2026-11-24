@@ -37,7 +37,7 @@ const INDIA_OFFICES = [
     maps: "43/33, Tej Bahadur Sapru Rd, Civil Lines, Prayagraj, Uttar Pradesh 211001",
     address: (
       <>
-        43/33, Tej Bahdur Sapru Rd,
+        43/33, Tej Bahadur Sapru Rd,
         <br />
         Agnipath Colony, Civil Lines,
         <br />
