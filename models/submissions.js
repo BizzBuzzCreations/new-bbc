@@ -8,6 +8,9 @@ const submissionSchema = new Schema(
     subject: { type: String },
     phone: { type: Number },
     message: { type: String },
+    // true when the form's hidden honeypot field was filled (a bot): kept for
+    // the dashboard's Submissions tab, never emailed. See sendMail.
+    spam: { type: Boolean, default: false },
     // Optional PDF/Doc uploaded through the contact form. The file bytes
     // live in `data` (select: false, so list queries never load them) and
     // are served to the dashboard via /api/submissions/[id]/attachment.

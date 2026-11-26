@@ -6,6 +6,7 @@ import { toast, Bounce } from "react-toastify";
 import RichText from "@/components/ui/richText";
 import CtaSideImage from "@/components/ui/ctaSideImage";
 import { markEnquired } from "@/lib/enquiryFlag";
+import Honeypot from "@/components/ui/honeypot";
 
 // `white` — used only on individual blog post pages
 // (app/(main)/blog/[slug]/page.js): the section around the card stays white,
@@ -22,6 +23,7 @@ export default function CTA({ content, white = false } = {}) {
 
   const [formData, setFormData] = useState({
     email: "",
+    website_url: "", // honeypot, see components/ui/honeypot.js
   });
 
   const handleChange = (e) => {
@@ -38,10 +40,11 @@ export default function CTA({ content, white = false } = {}) {
       subject: "Request for consultancy",
       text: "Want to start a project",
       contact: null,
+      website_url: formData?.website_url,
     });
 
     if (response?.success) {
-      markEnquired("closing_cta"); // the consultation popup won't ask again
+      if (!response.dropped) markEnquired("closing_cta"); // the consultation popup won't ask again
       toast.success(response.message, {
         position: "top-right",
         autoClose: 5000,
@@ -118,6 +121,7 @@ export default function CTA({ content, white = false } = {}) {
                   </span>
                 </button>
               </div>
+              <Honeypot value={formData.website_url} onChange={handleChange} />
             </form>
 
             {/* Or skip the form: call or WhatsApp straight away. */}

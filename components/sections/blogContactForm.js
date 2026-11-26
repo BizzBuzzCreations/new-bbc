@@ -3,12 +3,14 @@ import { sendMail } from "@/actions/serverActions";
 import React, { useState } from "react";
 import { toast, Bounce } from "react-toastify";
 import { markEnquired } from "@/lib/enquiryFlag";
+import Honeypot from "@/components/ui/honeypot";
 
 export default function BlogContactForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
+    website_url: "", // honeypot, see components/ui/honeypot.js
   });
   const [submitting, setSubmitting] = useState(false);
 
@@ -27,18 +29,19 @@ export default function BlogContactForm() {
       subject: "New Enquiry from Blog",
       text: formData?.message,
       contact: "",
+      website_url: formData?.website_url,
     });
     setSubmitting(false);
 
     if (response?.success) {
-      markEnquired("blog_form"); // the consultation popup won't ask again
+      if (!response.dropped) markEnquired("blog_form"); // the consultation popup won't ask again
       toast.success(response.message, {
         position: "top-right",
         autoClose: 5000,
         theme: "dark",
         transition: Bounce,
       });
-      setFormData({ name: "", email: "", message: "" });
+      setFormData({ name: "", email: "", message: "", website_url: "" });
     } else {
       toast.error(response.message, {
         position: "top-right",
@@ -122,6 +125,7 @@ export default function BlogContactForm() {
           <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-current opacity-80" />
           {submitting ? "Sending..." : "Submit"}
         </button>
+        <Honeypot value={formData.website_url} onChange={handleChange} />
       </form>
     </div>
   );

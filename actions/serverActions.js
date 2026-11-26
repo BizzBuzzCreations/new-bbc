@@ -78,17 +78,12 @@ async function isGenuineEmail(email) {
 // `attachment` (optional) = { name, base64 } from the contact form.
 // `website_url` is the form's hidden honeypot field (see
 // components/ui/honeypot.js): people never see it so it stays empty; a bot
-// that fills in every field fills it too. Those submissions are dropped
-// (nothing saved, no email) but answered with the normal "sent" reply so the
-// bot doesn't learn it was caught. Every enquiry that reaches the dashboard
-// or the inbox therefore got past the trap.
+// that fills in every field fills it too. Those submissions are saved with
+// `spam: true` (the dashboard's Submissions tab marks them "Bot") but never
+// emailed, and answered with the normal "sent" reply so the bot doesn't learn
+// it was caught. Every enquiry email therefore got past the trap.
 export async function sendMail({ name, email, subject, text, contact, attachment, website_url }) {
   const now = Date.now();
-
-  if (website_url) {
-    console.warn("[spam] contact form honeypot filled, submission dropped", await visitorIp());
-    return { success: true, message: "Message sent!", dropped: true };
-  }
 
   const limit = checkRateLimit(`contact:${await visitorIp()}`, [
     { windowMs: 60_000, max: 3 },
@@ -96,6 +91,28 @@ export async function sendMail({ name, email, subject, text, contact, attachment
   ]);
   if (!limit.ok) {
     return { success: false, message: "Too many messages. Please try again a little later." };
+  }
+
+  // Honeypot filled = a bot. Keep what it sent (cut down to size, no checks
+  // since bots send junk) flagged as spam so it shows in the dashboard, send
+  // no email, and give it the normal-looking reply.
+  if (website_url) {
+    try {
+      const digits = String(contact || "").trim();
+      await connectDB();
+      await Submission.create({
+        name: String(name || "").slice(0, 100),
+        email: String(email || "").slice(0, 150),
+        subject: String(subject || "").slice(0, 200),
+        phone: /^\d{10}$/.test(digits) ? digits : undefined,
+        message: String(text || "").slice(0, 5000),
+        spam: true,
+      });
+    } catch (error) {
+      console.error("Spam submission not saved:", error);
+    }
+    console.warn("[spam] contact form honeypot filled, saved as spam", await visitorIp());
+    return { success: true, message: "Message sent!", dropped: true };
   }
 
   name = String(name || "").trim();

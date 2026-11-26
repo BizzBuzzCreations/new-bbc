@@ -7,6 +7,7 @@ import { toast, Bounce } from "react-toastify";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { markEnquired, markPopupDismissed, markPopupShown, popupAllowed } from "@/lib/enquiryFlag";
+import Honeypot from "@/components/ui/honeypot";
 
 // The real homepage and the Outside Location page both render this
 // component (see their own page.js files). Module-level so its reference
@@ -32,6 +33,7 @@ export default function ConsultationPopup({ content }) {
     name: "",
     contact: "",
     email: "",
+    website_url: "", // honeypot, see components/ui/honeypot.js
   });
 
   const pathname = usePathname();
@@ -145,14 +147,15 @@ export default function ConsultationPopup({ content }) {
       subject: "Request for consultancy",
       text: "Want to start a project",
       contact: form.contact,
+      website_url: form.website_url,
     });
 
     if (response?.success) {
       // Mail still sends as normal — the "Message sent!" toast itself is
       // what's being removed here, per request. The form just quietly
       // resets and the popup closes instead of announcing success.
-      markEnquired("popup");
-      setForm({ name: "", contact: "", email: "" });
+      if (!response.dropped) markEnquired("popup");
+      setForm({ name: "", contact: "", email: "", website_url: "" });
       close({ dismissed: false });
     } else {
       toast.error(response.message, {
@@ -325,6 +328,7 @@ export default function ConsultationPopup({ content }) {
               >
                 Book Appointment
               </button>
+              <Honeypot value={form.website_url} onChange={handleChange} />
             </form>
 
             {/* Styled links (a <button> inside a link is invalid). */}

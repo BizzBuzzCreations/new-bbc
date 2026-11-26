@@ -88,6 +88,7 @@ export default function Dashboard({ role = "user", name = "" }) {
   const [jobs, setJobs] = useState([]);
   const [comments, setComments] = useState([]);
   const [submissions, setSubmissions] = useState([]);
+  const [submissionView, setSubmissionView] = useState("all"); // all | real | bots
   const [searchQuery, setSearchQuery] = useState("");
   const [showAddJob, setShowAddJob] = useState(false);
   // null while adding a new job; set to the job's _id while editing an
@@ -254,6 +255,13 @@ export default function Dashboard({ role = "user", name = "" }) {
     [submissions],
   );
 
+  // Bot attempts (hidden honeypot field filled) are kept but kept apart:
+  // the "Form Submissions" number counts real enquiries only.
+  const botCount = submissions.filter((s) => s.spam).length;
+  const visibleSubmissions = sortedSubmissions.filter((s) =>
+    submissionView === "all" ? true : submissionView === "bots" ? s.spam : !s.spam,
+  );
+
   const stats = [
     {
       label: "Posted Jobs",
@@ -273,8 +281,8 @@ export default function Dashboard({ role = "user", name = "" }) {
     },
     {
       label: "Form Submissions",
-      value: submissions.length,
-      sub: "Entries submitted by users",
+      value: submissions.length - botCount,
+      sub: botCount ? `Real enquiries (${botCount} caught as bots)` : "Entries submitted by users",
       icon: InboxIcon,
       color: "#f59e0b",
       bg: "#fef3c7",
@@ -534,14 +542,45 @@ export default function Dashboard({ role = "user", name = "" }) {
               Form Submissions
             </h2>
 
+            <div className="mb-4 flex flex-wrap gap-2" role="tablist" aria-label="Filter submissions">
+              {[
+                ["all", `All (${submissions.length})`],
+                ["real", `Real (${submissions.length - botCount})`],
+                ["bots", `Bots (${botCount})`],
+              ].map(([key, label]) => (
+                <button
+                  key={key}
+                  type="button"
+                  role="tab"
+                  aria-selected={submissionView === key}
+                  onClick={() => setSubmissionView(key)}
+                  className={`rounded-md px-3 py-1.5 text-sm font-medium ${
+                    submissionView === key ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+
             <div className="flex flex-col gap-3">
-              {sortedSubmissions.map((submission) => (
+              {visibleSubmissions.length === 0 && (
+                <p className="text-sm text-slate-500">Nothing here.</p>
+              )}
+              {visibleSubmissions.map((submission) => (
                 <div
                   key={submission._id}
-                  className="rounded-xl border border-slate-100 bg-slate-50 px-4 py-3"
+                  className={`rounded-xl border px-4 py-3 ${
+                    submission.spam ? "border-red-200 bg-red-50" : "border-slate-100 bg-slate-50"
+                  }`}
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
+                      {submission.spam && (
+                        <p className="mb-1 inline-block rounded-md bg-red-600 px-2 py-0.5 text-xs font-bold text-white">
+                          BOT — hidden field was filled, no email sent
+                        </p>
+                      )}
                       <p className="text-sm font-bold text-slate-800">
                         Name: {submission.name}
                       </p>

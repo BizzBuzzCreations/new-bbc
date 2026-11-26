@@ -5,6 +5,7 @@ import { toast, Bounce } from "react-toastify";
 import { Phone, MessageCircle } from "lucide-react";
 import { sendMail } from "@/actions/serverActions";
 import { markEnquired } from "@/lib/enquiryFlag";
+import Honeypot from "@/components/ui/honeypot";
 import RichText from "@/components/ui/richText";
 import Pill from "@/components/home/pill";
 
@@ -25,15 +26,16 @@ export default function CtaV2({ content }) {
   const emailLabel = content?.ctaEmailLabel || "Email Address";
   const emailPlaceholder = content?.ctaEmailPlaceholder || "your@email.com";
   const [email, setEmail] = useState("");
+  const [trap, setTrap] = useState(""); // honeypot, see components/ui/honeypot.js
   const [sending, setSending] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSending(true);
-    const response = await sendMail({ name: "not given", email, subject: "Request for consultancy", text: "Want to start a project", contact: null });
+    const response = await sendMail({ name: "not given", email, subject: "Request for consultancy", text: "Want to start a project", contact: null, website_url: trap });
     setSending(false);
     if (response?.success) {
-      markEnquired("closing_cta"); // the consultation popup won't ask again
+      if (!response.dropped) markEnquired("closing_cta"); // the consultation popup won't ask again
       setEmail("");
       toast.success(response.message, toastOptions);
     } else {
@@ -63,6 +65,7 @@ export default function CtaV2({ content }) {
                 className="min-w-0 flex-1 rounded-full border border-white/20 bg-white/[0.04] px-5 py-3 text-base text-white placeholder:text-white/50 focus:border-[#40A2D8] focus:outline-none"
               />
               <Pill variant="solid" type="submit" className="justify-center">{sending ? "Sending…" : "Send"}</Pill>
+              <Honeypot value={trap} onChange={(e) => setTrap(e.target.value)} />
             </form>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
