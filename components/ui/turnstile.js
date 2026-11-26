@@ -2,12 +2,12 @@
 
 import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
 
-// Cloudflare Turnstile for the enquiry forms. Invisible to visitors in almost
-// every case ("interaction-only": a box only appears if Cloudflare is unsure).
+// Cloudflare Turnstile for the enquiry forms. The "I'm human" box is always
+// visible in the form, and it finishes by itself in most cases (a tick appears
+// without the visitor doing anything).
 //
-// Nothing loads until it is needed, so pages stay fast: the Cloudflare script
-// is fetched the first time someone focuses a field in the form (or at submit
-// at the latest), and the check runs when they press Send.
+// To keep pages fast the Cloudflare script is only fetched when the form is
+// about to come into view (or is focused / submitted, whichever is first).
 //
 //   const turnstile = useRef(null);
 //   <Turnstile ref={turnstile} action="contact" />
@@ -42,6 +42,7 @@ function loadScript() {
 const Turnstile = forwardRef(function Turnstile({ action }, ref) {
   const box = useRef(null);
   const widget = useRef(null);
+  const token = useRef("");
   const waiting = useRef(null);
 
   const ensureWidget = async () => {
@@ -50,11 +51,25 @@ const Turnstile = forwardRef(function Turnstile({ action }, ref) {
       widget.current = ts.render(box.current, {
         sitekey: SITE_KEY,
         action,
-        appearance: "interaction-only",
-        execution: "execute",
-        callback: (token) => waiting.current?.(token),
-        "error-callback": () => waiting.current?.(""),
-        "timeout-callback": () => waiting.current?.(""),
+        theme: "auto",
+        appearance: "always",
+        callback: (t) => {
+          token.current = t;
+          waiting.current?.(t);
+        },
+        "expired-callback": () => {
+          token.current = "";
+        },
+        "error-callback": (code) => {
+          // Cloudflare's reason (e.g. 110200 = this domain isn't in the widget's
+          // Hostnames list), so a misconfiguration is visible in the console.
+          console.warn(`[turnstile] check failed, error code ${code} on ${window.location.hostname}`);
+          token.current = "";
+          waiting.current?.("");
+        },
+        "timeout-callback": () => {
+          token.current = "";
+        },
       });
     }
     return ts;
@@ -65,11 +80,21 @@ const Turnstile = forwardRef(function Turnstile({ action }, ref) {
       if (!SITE_KEY) return "";
       try {
         const ts = await ensureWidget();
+        // A token works once: take it, then ask for a fresh one for any retry.
+        const consume = (t) => {
+          token.current = "";
+          setTimeout(() => { try { ts.reset(widget.current); } catch {} }, 0);
+          return t;
+        };
+        if (token.current) return consume(token.current);
+        // Not finished yet (slow connection, or the visitor still has to tick the box).
         return await new Promise((resolve) => {
-          const timer = setTimeout(() => { waiting.current = null; resolve(""); }, 20000);
-          waiting.current = (token) => { clearTimeout(timer); waiting.current = null; resolve(token); };
-          ts.reset(widget.current); // a token works once, so start fresh each time
-          ts.execute(widget.current);
+          const timer = setTimeout(() => { waiting.current = null; resolve(""); }, 30000);
+          waiting.current = (t) => {
+            clearTimeout(timer);
+            waiting.current = null;
+            resolve(t ? consume(t) : "");
+          };
         });
       } catch {
         return "";
@@ -77,15 +102,28 @@ const Turnstile = forwardRef(function Turnstile({ action }, ref) {
     },
   }));
 
-  // Start loading the script the first time someone touches the form.
+  // Load and show the box when the form is about to scroll into view (or is
+  // focused, if the browser has no IntersectionObserver).
   useEffect(() => {
     if (!SITE_KEY) return undefined;
-    const area = box.current?.parentElement;
-    if (!area) return undefined;
-    const warm = () => ensureWidget().catch(() => {});
-    area.addEventListener("focusin", warm, { once: true });
+    const el = box.current;
+    if (!el) return undefined;
+    const start = () => ensureWidget().catch(() => {});
+    let observer = null;
+    if ("IntersectionObserver" in window) {
+      observer = new IntersectionObserver((entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          observer.disconnect();
+          start();
+        }
+      }, { rootMargin: "300px" });
+      observer.observe(el);
+    } else {
+      el.parentElement?.addEventListener("focusin", start, { once: true });
+    }
     return () => {
-      area.removeEventListener("focusin", warm);
+      observer?.disconnect();
+      el.parentElement?.removeEventListener("focusin", start);
       if (widget.current != null && window.turnstile) {
         try { window.turnstile.remove(widget.current); } catch {}
         widget.current = null;
@@ -95,7 +133,8 @@ const Turnstile = forwardRef(function Turnstile({ action }, ref) {
   }, []);
 
   if (!SITE_KEY) return null;
-  return <div ref={box} className="flex justify-center" />;
+  // min-h keeps the form from jumping when the box appears (the widget is 65px tall).
+  return <div ref={box} className="flex min-h-[65px] justify-center" />;
 });
 
 export default Turnstile;
