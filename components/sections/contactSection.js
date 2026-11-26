@@ -8,6 +8,7 @@ import { ChevronRight, Phone, MessageCircle, Mail, Paperclip } from "lucide-reac
 import RichText from "@/components/ui/richText";
 import { AccentTitle } from "@/components/detail/detailHero";
 import { markEnquired } from "@/lib/enquiryFlag";
+import Honeypot from "@/components/ui/honeypot";
 
 const DEFAULT_STEPS = [
   {
@@ -68,6 +69,7 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
     subject: "",
     contact: "",
     message: "",
+    website_url: "", // honeypot, see components/ui/honeypot.js
   });
   const [file, setFile] = useState(null);
   const fileName = file?.name || "";
@@ -123,14 +125,16 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
       text: form.message,
       contact: form.contact,
       attachment,
+      website_url: form.website_url,
     });
 
     setSubmitting(false);
 
     if (response?.success) {
-      markEnquired("contact_page"); // the consultation popup won't ask again
+      // A trapped bot gets the normal reply but is not counted as a lead.
+      if (!response.dropped) markEnquired("contact_page"); // the consultation popup won't ask again
       toast.success(response.message, toastOptions);
-      setForm({ name: "", email: "", subject: "", contact: "", message: "" });
+      setForm({ name: "", email: "", subject: "", contact: "", message: "", website_url: "" });
       setFile(null);
     } else {
       toast.error(response?.message || "Something went wrong.", toastOptions);
@@ -194,7 +198,7 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
 
         <div className="rounded-3xl border border-white/10 bg-[#0b0e16] p-6 sm:p-8 lg:p-10">
           <SubHeading className="font-display text-2xl text-white">{formHeading}</SubHeading>
-          <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+          <form onSubmit={handleSubmit} className="relative mt-6 space-y-5">
             <div className="grid gap-5 sm:grid-cols-2">
               {field("name", "Full Name", (
                 <input id="name" name="name" autoComplete="name" value={form.name} onChange={handleChange} className={inputClasses} placeholder="Your name" required />
@@ -261,6 +265,7 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
               <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-current opacity-80 transition-transform duration-200 group-hover:scale-[1.7]" />
               {submitting ? "Sending…" : formButtonText}
             </button>
+            <Honeypot value={form.website_url} onChange={handleChange} />
           </form>
         </div>
       </div>

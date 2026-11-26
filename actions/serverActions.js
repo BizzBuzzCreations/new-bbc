@@ -76,8 +76,19 @@ async function isGenuineEmail(email) {
 }
 
 // `attachment` (optional) = { name, base64 } from the contact form.
-export async function sendMail({ name, email, subject, text, contact, attachment }) {
+// `website_url` is the form's hidden honeypot field (see
+// components/ui/honeypot.js): people never see it so it stays empty; a bot
+// that fills in every field fills it too. Those submissions are dropped
+// (nothing saved, no email) but answered with the normal "sent" reply so the
+// bot doesn't learn it was caught. Every enquiry that reaches the dashboard
+// or the inbox therefore got past the trap.
+export async function sendMail({ name, email, subject, text, contact, attachment, website_url }) {
   const now = Date.now();
+
+  if (website_url) {
+    console.warn("[spam] contact form honeypot filled, submission dropped", await visitorIp());
+    return { success: true, message: "Message sent!", dropped: true };
+  }
 
   const limit = checkRateLimit(`contact:${await visitorIp()}`, [
     { windowMs: 60_000, max: 3 },
