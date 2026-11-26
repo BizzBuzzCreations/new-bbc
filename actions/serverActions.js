@@ -9,6 +9,7 @@ import { getSession } from "@/actions/authActions";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { checkRateLimit, clientIp } from "@/lib/bizzbee/rateLimit";
+import { verifyTurnstile, TURNSTILE_MESSAGE } from "@/lib/turnstile";
 
 const lastRequestMap = new Map();
 
@@ -82,7 +83,7 @@ async function isGenuineEmail(email) {
 // `spam: true` (the dashboard's Submissions tab marks them "Bot") but never
 // emailed, and answered with the normal "sent" reply so the bot doesn't learn
 // it was caught. Every enquiry email therefore got past the trap.
-export async function sendMail({ name, email, subject, text, contact, attachment, website_url }) {
+export async function sendMail({ name, email, subject, text, contact, attachment, website_url, turnstileToken }) {
   const now = Date.now();
 
   const limit = checkRateLimit(`contact:${await visitorIp()}`, [
@@ -113,6 +114,12 @@ export async function sendMail({ name, email, subject, text, contact, attachment
     }
     console.warn("[spam] contact form honeypot filled, saved as spam", await visitorIp());
     return { success: true, message: "Message sent!", dropped: true };
+  }
+
+  // Cloudflare Turnstile (off until its keys are set, see lib/turnstile.js).
+  if (!(await verifyTurnstile(turnstileToken, await visitorIp())).ok) {
+    console.warn("[turnstile] contact form rejected", await visitorIp());
+    return { success: false, message: TURNSTILE_MESSAGE };
   }
 
   name = String(name || "").trim();
@@ -439,7 +446,7 @@ export async function deleteSubmission({ id }) {
 }
 
 // Function to post comment
-export async function postComment(name, message, blog) {
+export async function postComment(name, message, blog, turnstileToken) {
   name = String(name || "").trim();
   message = String(message || "").trim();
   blog = String(blog || "").trim();
@@ -460,6 +467,11 @@ export async function postComment(name, message, blog) {
   ]);
   if (!limit.ok) {
     return { success: false, message: "Too many comments. Please try again a little later." };
+  }
+
+  if (!(await verifyTurnstile(turnstileToken, await visitorIp())).ok) {
+    console.warn("[turnstile] comment rejected", await visitorIp());
+    return { success: false, message: TURNSTILE_MESSAGE };
   }
 
   await connectDB();

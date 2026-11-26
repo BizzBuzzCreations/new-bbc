@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { markEnquired, markPopupDismissed, markPopupShown, popupAllowed } from "@/lib/enquiryFlag";
 import Honeypot from "@/components/ui/honeypot";
+import Turnstile from "@/components/ui/turnstile";
 
 // The real homepage and the Outside Location page both render this
 // component (see their own page.js files). Module-level so its reference
@@ -28,6 +29,8 @@ export default function ConsultationPopup({ content }) {
   const dialogRef = useRef(null);
   const firstFieldRef = useRef(null);
   const returnFocusRef = useRef(null);
+  const turnstile = useRef(null); // Cloudflare Turnstile, see components/ui/turnstile.js
+  const sendingRef = useRef(false);
 
   const [form, setForm] = useState({
     name: "",
@@ -122,6 +125,7 @@ export default function ConsultationPopup({ content }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (sendingRef.current) return;
 
     if (form.contact.length !== 10) {
       toast.error("Please enter a valid 10 digit mobile number.", {
@@ -141,14 +145,22 @@ export default function ConsultationPopup({ content }) {
       return;
     }
 
-    const response = await sendMail({
-      name: form.name,
-      email: form.email,
-      subject: "Request for consultancy",
-      text: "Want to start a project",
-      contact: form.contact,
-      website_url: form.website_url,
-    });
+    let response;
+    sendingRef.current = true;
+    try {
+      const turnstileToken = await turnstile.current?.getToken();
+      response = await sendMail({
+        name: form.name,
+        email: form.email,
+        subject: "Request for consultancy",
+        text: "Want to start a project",
+        contact: form.contact,
+        website_url: form.website_url,
+        turnstileToken,
+      });
+    } finally {
+      sendingRef.current = false;
+    }
 
     if (response?.success) {
       // Mail still sends as normal — the "Message sent!" toast itself is
@@ -329,6 +341,7 @@ export default function ConsultationPopup({ content }) {
                 Book Appointment
               </button>
               <Honeypot value={form.website_url} onChange={handleChange} />
+              <Turnstile ref={turnstile} action="popup" />
             </form>
 
             {/* Styled links (a <button> inside a link is invalid). */}

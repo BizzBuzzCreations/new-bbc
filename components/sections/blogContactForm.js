@@ -1,9 +1,10 @@
 "use client";
 import { sendMail } from "@/actions/serverActions";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { toast, Bounce } from "react-toastify";
 import { markEnquired } from "@/lib/enquiryFlag";
 import Honeypot from "@/components/ui/honeypot";
+import Turnstile from "@/components/ui/turnstile";
 
 export default function BlogContactForm() {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ export default function BlogContactForm() {
     website_url: "", // honeypot, see components/ui/honeypot.js
   });
   const [submitting, setSubmitting] = useState(false);
+  const turnstile = useRef(null); // Cloudflare Turnstile, see components/ui/turnstile.js
 
   const handleChange = (e) => {
     setFormData({
@@ -23,6 +25,7 @@ export default function BlogContactForm() {
 
   const handleSubmit = async () => {
     setSubmitting(true);
+    const turnstileToken = await turnstile.current?.getToken();
     const response = await sendMail({
       name: formData?.name,
       email: formData?.email,
@@ -30,6 +33,7 @@ export default function BlogContactForm() {
       text: formData?.message,
       contact: "",
       website_url: formData?.website_url,
+      turnstileToken,
     });
     setSubmitting(false);
 
@@ -126,6 +130,7 @@ export default function BlogContactForm() {
           {submitting ? "Sending..." : "Submit"}
         </button>
         <Honeypot value={formData.website_url} onChange={handleChange} />
+        <Turnstile ref={turnstile} action="blog" />
       </form>
     </div>
   );

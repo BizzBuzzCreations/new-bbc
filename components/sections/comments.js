@@ -2,8 +2,9 @@
 
 import { getAllComments, postComment } from "@/actions/serverActions";
 import { Rocket } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast, Bounce } from "react-toastify";
+import Turnstile from "@/components/ui/turnstile";
 
 function initials(name) {
   return name
@@ -55,6 +56,8 @@ export default function CommentSidebar({ slug }) {
   const [text, setText] = useState("");
   const [error, setError] = useState(false);
   const [posted, setPosted] = useState(false);
+  const turnstile = useRef(null); // Cloudflare Turnstile, see components/ui/turnstile.js
+  const postingRef = useRef(false);
 
   useEffect(() => {
     const fetchAllComments = async () => {
@@ -70,8 +73,12 @@ export default function CommentSidebar({ slug }) {
       return;
     }
     setError(false);
+    if (postingRef.current) return;
+    postingRef.current = true;
 
-    const res = await postComment(name, text, slug);
+    const turnstileToken = await turnstile.current?.getToken();
+    const res = await postComment(name, text, slug, turnstileToken);
+    postingRef.current = false;
     if (res?.success) {
       setComments((prev) => [res?.data, ...prev]);
       setName("");
@@ -155,6 +162,7 @@ export default function CommentSidebar({ slug }) {
             }}
             className="w-full px-2.5 py-1.5 text-[13px] border border-[#e0e0dc] rounded-md text-gray-900 placeholder-gray-300 outline-none focus:border-gray-400 resize-none leading-relaxed bg-white"
           />
+          <Turnstile ref={turnstile} action="comment" />
           <div className="flex items-center justify-end gap-2">
             {error && (
               <span className="flex-1 text-[11px] text-gray-600">

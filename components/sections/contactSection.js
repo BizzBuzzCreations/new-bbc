@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { sendMail } from "@/actions/serverActions";
 import { toast, Bounce } from "react-toastify";
 import Link from "next/link";
@@ -9,6 +9,7 @@ import RichText from "@/components/ui/richText";
 import { AccentTitle } from "@/components/detail/detailHero";
 import { markEnquired } from "@/lib/enquiryFlag";
 import Honeypot from "@/components/ui/honeypot";
+import Turnstile from "@/components/ui/turnstile";
 
 const DEFAULT_STEPS = [
   {
@@ -72,6 +73,7 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
     website_url: "", // honeypot, see components/ui/honeypot.js
   });
   const [file, setFile] = useState(null);
+  const turnstile = useRef(null); // Cloudflare Turnstile, see components/ui/turnstile.js
   const fileName = file?.name || "";
   const [submitting, setSubmitting] = useState(false);
 
@@ -118,6 +120,7 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
       }
     }
 
+    const turnstileToken = await turnstile.current?.getToken();
     const response = await sendMail({
       name: form.name,
       email: form.email,
@@ -126,6 +129,7 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
       contact: form.contact,
       attachment,
       website_url: form.website_url,
+      turnstileToken,
     });
 
     setSubmitting(false);
@@ -266,6 +270,7 @@ export default function ContactSection({ content, headingLevel = "h2" }) {
               {submitting ? "Sending…" : formButtonText}
             </button>
             <Honeypot value={form.website_url} onChange={handleChange} />
+            <Turnstile ref={turnstile} action="contact" />
           </form>
         </div>
       </div>

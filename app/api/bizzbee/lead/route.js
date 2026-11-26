@@ -6,6 +6,7 @@ import { BIZZBEE, SERVICES_FOR_LEAD_FORM } from "@/lib/bizzbee/config";
 import { cleanText } from "@/lib/bizzbee/sanitize";
 import { emailProblem, phoneProblem } from "@/lib/bizzbee/leadValidation";
 import { checkRateLimit, clientIp, isSameOrigin } from "@/lib/bizzbee/rateLimit";
+import { verifyTurnstile, TURNSTILE_MESSAGE } from "@/lib/turnstile";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -78,6 +79,11 @@ export async function POST(request) {
 
   // Honeypot: real visitors never see or fill this field. Pretend success.
   if (body?.website) return json({ success: true, message: "Thanks!" });
+
+  // Cloudflare Turnstile (off until its keys are set, see lib/turnstile.js).
+  if (!(await verifyTurnstile(body?.turnstileToken, clientIp(request))).ok) {
+    return json({ success: false, message: TURNSTILE_MESSAGE }, 403);
+  }
 
   const name = cleanText(body?.name, 100);
   const email = cleanText(body?.email, 150).toLowerCase();

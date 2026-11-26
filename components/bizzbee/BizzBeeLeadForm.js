@@ -1,11 +1,12 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId, useRef, useState } from "react";
 import Link from "next/link";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { SERVICES_FOR_LEAD_FORM } from "@/lib/bizzbee/config";
 import { emailProblem, phoneProblem } from "@/lib/bizzbee/leadValidation";
 import { markEnquired } from "@/lib/enquiryFlag";
+import Turnstile from "@/components/ui/turnstile";
 
 const field =
   "w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-base sm:text-sm text-white placeholder:text-white/40 focus:border-[#40A2D8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#40A2D8]/60";
@@ -30,6 +31,7 @@ export default function BizzBeeLeadForm({ onDone, onCancel, defaultService = "" 
   const [status, setStatus] = useState("idle"); // idle | sending | done
   const [error, setError] = useState("");
   const [doneMessage, setDoneMessage] = useState("");
+  const turnstile = useRef(null); // Cloudflare Turnstile, see components/ui/turnstile.js
 
   const set = (key) => (e) =>
     setValues((v) => ({ ...v, [key]: e.target.type === "checkbox" ? e.target.checked : e.target.value }));
@@ -50,10 +52,11 @@ export default function BizzBeeLeadForm({ onDone, onCancel, defaultService = "" 
 
     setStatus("sending");
     try {
+      const turnstileToken = await turnstile.current?.getToken();
       const res = await fetch("/api/bizzbee/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...values, turnstileToken }),
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.success) {
@@ -143,6 +146,7 @@ export default function BizzBeeLeadForm({ onDone, onCancel, defaultService = "" 
         <label htmlFor={`${uid}-web`}>Website</label>
         <input id={`${uid}-web`} tabIndex={-1} autoComplete="off" value={values.website} onChange={set("website")} />
       </div>
+      <Turnstile ref={turnstile} action="bizzbee_chat" />
 
       <label className="flex items-start gap-2 text-xs text-white/80">
         <input type="checkbox" checked={values.consent} onChange={set("consent")} className="mt-0.5 h-4 w-4 shrink-0 accent-[#40A2D8]" />

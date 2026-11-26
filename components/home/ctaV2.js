@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { toast, Bounce } from "react-toastify";
 import { Phone, MessageCircle } from "lucide-react";
 import { sendMail } from "@/actions/serverActions";
 import { markEnquired } from "@/lib/enquiryFlag";
 import Honeypot from "@/components/ui/honeypot";
+import Turnstile from "@/components/ui/turnstile";
 import RichText from "@/components/ui/richText";
 import Pill from "@/components/home/pill";
 
@@ -28,11 +29,13 @@ export default function CtaV2({ content }) {
   const [email, setEmail] = useState("");
   const [trap, setTrap] = useState(""); // honeypot, see components/ui/honeypot.js
   const [sending, setSending] = useState(false);
+  const turnstile = useRef(null); // Cloudflare Turnstile, see components/ui/turnstile.js
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSending(true);
-    const response = await sendMail({ name: "not given", email, subject: "Request for consultancy", text: "Want to start a project", contact: null, website_url: trap });
+    const turnstileToken = await turnstile.current?.getToken();
+    const response = await sendMail({ name: "not given", email, subject: "Request for consultancy", text: "Want to start a project", contact: null, website_url: trap, turnstileToken });
     setSending(false);
     if (response?.success) {
       if (!response.dropped) markEnquired("closing_cta"); // the consultation popup won't ask again
@@ -66,6 +69,7 @@ export default function CtaV2({ content }) {
               />
               <Pill variant="solid" type="submit" className="justify-center">{sending ? "Sending…" : "Send"}</Pill>
               <Honeypot value={trap} onChange={(e) => setTrap(e.target.value)} />
+              <Turnstile ref={turnstile} action="closing_cta" />
             </form>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">

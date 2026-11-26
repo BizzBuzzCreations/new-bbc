@@ -1,12 +1,13 @@
 "use client";
 import { sendMail } from "@/actions/serverActions";
 import { SendHorizontal, Phone, MessageCircle } from "lucide-react";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { toast, Bounce } from "react-toastify";
 import RichText from "@/components/ui/richText";
 import CtaSideImage from "@/components/ui/ctaSideImage";
 import { markEnquired } from "@/lib/enquiryFlag";
 import Honeypot from "@/components/ui/honeypot";
+import Turnstile from "@/components/ui/turnstile";
 
 // `white` — used only on individual blog post pages
 // (app/(main)/blog/[slug]/page.js): the section around the card stays white,
@@ -33,7 +34,13 @@ export default function CTA({ content, white = false } = {}) {
     });
   };
 
+  const turnstile = useRef(null); // Cloudflare Turnstile, see components/ui/turnstile.js
+  const sendingRef = useRef(false);
+
   const handleSubmit = async () => {
+    if (sendingRef.current) return;
+    sendingRef.current = true;
+    const turnstileToken = await turnstile.current?.getToken();
     const response = await sendMail({
       name: "not given",
       email: formData?.email,
@@ -41,7 +48,9 @@ export default function CTA({ content, white = false } = {}) {
       text: "Want to start a project",
       contact: null,
       website_url: formData?.website_url,
+      turnstileToken,
     });
+    sendingRef.current = false;
 
     if (response?.success) {
       if (!response.dropped) markEnquired("closing_cta"); // the consultation popup won't ask again
@@ -122,6 +131,7 @@ export default function CTA({ content, white = false } = {}) {
                 </button>
               </div>
               <Honeypot value={formData.website_url} onChange={handleChange} />
+              <Turnstile ref={turnstile} action="closing_cta" />
             </form>
 
             {/* Or skip the form: call or WhatsApp straight away. */}
